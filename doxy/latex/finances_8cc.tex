@@ -1,0 +1,163 @@
+\section{finances.cc File Reference}
+\label{finances_8cc}\index{finances.cc@{finances.cc}}
+{\tt \#include \char`\"{}dil2al.hh\char`\"{}}\par
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+bool {\bf read\_\-financial\_\-notes\_\-file} ({\bf PLLRoot}$<$ {\bf Financial\_\-Note} $>$ \&fnotes, {\bf String} \&finnotestop, {\bf String} \&finnotesend)
+\item 
+bool {\bf write\_\-financial\_\-notes\_\-file} ({\bf PLLRoot}$<$ {\bf Financial\_\-Note} $>$ \&fnotes, {\bf String} \&finnotestop, {\bf String} \&finnotesend)
+\item 
+bool {\bf financial\_\-notes} ()
+\item 
+bool {\bf financial\_\-monthly} ()
+\end{CompactItemize}
+
+
+\subsection{Function Documentation}
+\index{finances.cc@{finances.cc}!financial_monthly@{financial\_\-monthly}}
+\index{financial_monthly@{financial\_\-monthly}!finances.cc@{finances.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool financial\_\-monthly ()}\label{finances_8cc_a3}
+
+
+
+
+Definition at line 263 of file finances.cc.
+
+References Financial\_\-Monthly\_\-Root::add(), PLLRoot$<$ PLLType $>$::head(), PLL\_\-LOOP\_\-FORWARD, Financial\_\-Monthly\_\-Root::put\_\-results(), read\_\-financial\_\-notes\_\-file(), and VOUT.
+
+Referenced by formalizer\_\-commands().
+
+
+
+\footnotesize\begin{verbatim}263                          {
+264   // Compute results from <A HREF="../../doc/html/financial-notes.html">financial-notes.html</A>.
+265   PLLRoot<Financial_Note> fnotes; String finnotestop, finnotesend;
+266   if (!read_financial_notes_file(fnotes,finnotestop,finnotesend)) return false;
+267   // compute sums of categorized expenses that have not previously been handled
+268   Financial_Monthly_Root fmonthly;
+269   if (verbose) VOUT << "If you wish to rely on monthly results from the Financial Notes, please\nverify that all non-variable expenses listed in bank statements are\naccounted for in the Financial Notes.\n\n";
+270   PLL_LOOP_FORWARD(Financial_Note,fnotes.head(),1) {
+271     if (!e->Handled()) fmonthly.add(*e);
+272   }
+273   VOUT << fmonthly.put_results();
+274 }
+\end{verbatim}\normalsize 
+\index{finances.cc@{finances.cc}!financial_notes@{financial\_\-notes}}
+\index{financial_notes@{financial\_\-notes}!finances.cc@{finances.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool financial\_\-notes ()}\label{finances_8cc_a2}
+
+
+
+
+Definition at line 117 of file finances.cc.
+
+References confirmation(), String::del(), String::empty(), String::length(), Financial\_\-Note::link\_\-sorted(), read\_\-financial\_\-notes\_\-file(), time\_\-stamp\_\-time\_\-date(), VOUT, and write\_\-financial\_\-notes\_\-file().
+
+Referenced by formalizer\_\-commands().
+
+
+
+\footnotesize\begin{verbatim}117                        {
+118   // Edit notes in <A HREF="../../doc/html/financial-notes.html">financial-notes.html</A>.
+119   PLLRoot<Financial_Note> fnotes; String finnotestop, finnotesend;
+120   if (!read_financial_notes_file(fnotes,finnotestop,finnotesend)) return false;
+121   // add new notes (currently just by hand)
+122   Financial_Note * f;
+123   time_t d; double e; bool h; String dstr(curdate), t, n, c;
+124   const int LLEN = 10240;
+125   char lbuf[LLEN];
+126   d = time_stamp_time_date(dstr+"0000");
+127   while (1) {
+128     VOUT << "date [" << dstr << "] (done=exit): ";
+129     cin.getline(lbuf,LLEN); n = lbuf;
+130     if (!n.empty()) {
+131       if (n=="done") break;
+132       dstr = n;
+133       n += "0000"; n.del(12,n.length()-12);
+134       d = time_stamp_time_date(n);
+135     }
+136     VOUT << "expense: ";
+137     cin.getline(lbuf,LLEN);
+138     e = atof(lbuf);
+139     VOUT << "type [variable]: ";
+140     cin.getline(lbuf,LLEN); t = lbuf;
+141     if (t.empty()) t = "variable";
+142     if (t==String("variable")) h = true;
+143     else h = !confirmation("handled [n]: ",'y');
+144     VOUT << "note: ";
+145     cin.getline(lbuf,LLEN); n = lbuf;
+146     VOUT << "comment: ";
+147     cin.getline(lbuf,LLEN); c = lbuf;
+148     f = new Financial_Note(d,e,t,h,n,c);
+149     f->link_sorted(fnotes);
+150   }
+151   // write financial notes file
+152   return write_financial_notes_file(fnotes,finnotestop,finnotesend);
+153 }
+\end{verbatim}\normalsize 
+\index{finances.cc@{finances.cc}!read_financial_notes_file@{read\_\-financial\_\-notes\_\-file}}
+\index{read_financial_notes_file@{read\_\-financial\_\-notes\_\-file}!finances.cc@{finances.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool read\_\-financial\_\-notes\_\-file ({\bf PLLRoot}$<$ {\bf Financial\_\-Note} $>$ \& {\em fnotes}, {\bf String} \& {\em finnotestop}, {\bf String} \& {\em finnotesend})}\label{finances_8cc_a0}
+
+
+
+
+Definition at line 82 of file finances.cc.
+
+References String::before(), String::del(), EOUT, String::from(), String::index(), String::length(), Financial\_\-Note::link\_\-sorted(), read\_\-file\_\-into\_\-String(), String::SEARCH\_\-END, Time(), and VOUT.
+
+Referenced by financial\_\-monthly(), and financial\_\-notes().
+
+
+
+\footnotesize\begin{verbatim}82                                                                                                              {
+83   String finnotesstr;
+84   // read financial notes file
+85   if (!read_file_into_String(finnotesfile,finnotesstr)) return false;
+86   // extract financial notes table
+87   if (verbose) VOUT << "Parsing Financial Notes file\n";
+88   int i, j;
+89   if ((i=finnotesstr.index("<!-- dil2al: start items -->",String::SEARCH_END,0))<0) {
+90     EOUT << "formalizer: Missing start of financial notes items table\n";
+91     return false;
+92   }
+93   if ((j=finnotesstr.index("<!-- dil2al: end items -->",0))<0) {
+94     EOUT << "formalizer: Missing end of financial notes items table\n";
+95     return false;
+96   }
+97   finnotestop = finnotesstr.before(i)+'\n';
+98   finnotesend = finnotesstr.from(j);
+99   finnotesstr.del(j,finnotesstr.length()-j);
+100   finnotesstr.del(0,i); // finnotesstr contains table
+101   // extract financial notes items while keeping track of dates and sorting by date
+102   time_t notedate = Time(NULL);
+103   for (i=0; i>=0; ) {
+104     Financial_Note * fn = new Financial_Note(finnotesstr,notedate,i);
+105     if (i<0) delete fn;
+106     else fn->link_sorted(fnotes);
+107   }
+108   return true;
+109 }
+\end{verbatim}\normalsize 
+\index{finances.cc@{finances.cc}!write_financial_notes_file@{write\_\-financial\_\-notes\_\-file}}
+\index{write_financial_notes_file@{write\_\-financial\_\-notes\_\-file}!finances.cc@{finances.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool write\_\-financial\_\-notes\_\-file ({\bf PLLRoot}$<$ {\bf Financial\_\-Note} $>$ \& {\em fnotes}, {\bf String} \& {\em finnotestop}, {\bf String} \& {\em finnotesend})}\label{finances_8cc_a1}
+
+
+
+
+Definition at line 111 of file finances.cc.
+
+References PLLRoot$<$ PLLType $>$::head(), PLL\_\-LOOP\_\-FORWARD, and write\_\-file\_\-from\_\-String().
+
+Referenced by financial\_\-notes().
+
+
+
+\footnotesize\begin{verbatim}111                                                                                                               {
+112   PLL_LOOP_FORWARD(Financial_Note,fnotes.head(),1) finnotestop += e->put();
+113   finnotestop += finnotesend;
+114   return write_file_from_String(finnotesfile,finnotestop,"Financial notes");
+115 }
+\end{verbatim}\normalsize 

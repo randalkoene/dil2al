@@ -1,0 +1,85 @@
+\section{Directory\_\-Access  Class Reference}
+\label{classDirectory__Access}\index{Directory_Access@{Directory\_\-Access}}
+{\tt \#include $<$dil2al.hh$>$}
+
+\subsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf Directory\_\-Access} ({\bf String} dp)
+\item 
+int {\bf read} ({\bf String} \&filenames, char separator='/')
+\end{CompactItemize}
+\subsection*{Protected Attributes}
+\begin{CompactItemize}
+\item 
+{\bf String} {\bf dirpath}
+\end{CompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Directory_Access@{Directory\_\-Access}!Directory_Access@{Directory\_\-Access}}
+\index{Directory_Access@{Directory\_\-Access}!Directory_Access@{Directory\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Directory\_\-Access::Directory\_\-Access ({\bf String} {\em dp})\hspace{0.3cm}{\tt  [inline]}}\label{classDirectory__Access_a0}
+
+
+
+
+Definition at line 219 of file dil2al.hh.
+
+
+
+\footnotesize\begin{verbatim}219 : dirpath(dp) {}
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Function Documentation}
+\index{Directory_Access@{Directory\_\-Access}!read@{read}}
+\index{read@{read}!Directory_Access@{Directory\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Directory\_\-Access::read ({\bf String} \& {\em filenames}, char {\em separator} = '/')}\label{classDirectory__Access_a1}
+
+
+
+
+Definition at line 305 of file utilities.cc.
+
+References dirpath.
+
+Referenced by Get\_\-Target\_\-Directory().
+
+
+
+\footnotesize\begin{verbatim}305                                                                    {
+306         // reads the directory into a String
+307         // (using String as the buffer keeps Directory_Access independent
+308         // of more specialized classes, such as StringList)
+309         // note: the separator character is placed at the start of each
+310         // filename - calls to read can therefore concatenate directories
+311         // into one String
+312         // returns -1 if an error occurred, otherwise returns number of
+313         // filenames found
+314         struct dirent *d;
+315         DIR * D = opendir(dirpath);
+316         if (!D) return -1;
+317         int num;
+318         for (num = 0; (d = readdir(D)); num++) filenames += separator+String(d->d_name);
+319         return num;
+320 }
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Data Documentation}
+\index{Directory_Access@{Directory\_\-Access}!dirpath@{dirpath}}
+\index{dirpath@{dirpath}!Directory_Access@{Directory\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} Directory\_\-Access::dirpath\hspace{0.3cm}{\tt  [protected]}}\label{classDirectory__Access_n0}
+
+
+
+
+Definition at line 216 of file dil2al.hh.
+
+Referenced by read().
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf dil2al.hh}\item 
+{\bf utilities.cc}\end{CompactItemize}

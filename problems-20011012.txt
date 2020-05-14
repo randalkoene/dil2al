@@ -1,0 +1,78 @@
+Problems with dil2al:
+
+A whole bunch of IDs in DIL-by-ID (and maybe also in other files) was output
+with an appended space, which makes it impossible to target them as NAME tags
+(also in HREFs) Where and how is this happening?
+Note that this has only just happened, now that I used the newly compiled
+version of dil2al to update the target dates of DIL entries. The files
+marked .200011011.bak have no such problem.
+Fortunately, the current operation only affected the detailed-items-by-id
+file and the active list files.
+The processes that should be checked are obviously those involved in the
+the rescheduling of DIL entries. Check starting at
+modify_DIL_group_target_dates() in diladmin.cc.
+Begin searching at the dilist.Write_to_File() statement at the end of the
+function. If the error does not occur in there, then the tags must have been
+wrong already upon entry into the call.
+The table in the file is generated entirely from scratch in that call, so
+it is likely that the error occurs there!
+It happens to all NAME tags, hence that is a good place to look.
+Where a table row is written, the nested call HTML_put_table_cell(...
+HTML_put_name(...)...) is made. Perhaps the use of e->chars() within is
+wrong, since there is now e->str() and there appears to be a more strict
+usage in the new gcc. If this is the case, then more of the ->chars() calls
+should be checked to avoid further (perhaps less easily spotted) errors.
+It is a case of parameters "String s" being initialized from ->chars() output.
+Question: Why does the error not occur when creating the cumulative
+schedule? Oh, yes it does, just not consistently!
+Note the occurrence of TDCHKBX or TD repeated in the cumulative list created!
+And, it looks like spaces (character 32) are really created at the ends of
+the strings.
+It appears that the printing of the strings produced by DIL_ID::str() is
+correct (when sent to cout as strings), while the converted versions
+produced by DIL_ID::chars() sometimes have the extra space characters.
+Since the DIL_ID::chars() function simply calls str().chars(), the problem
+may lie in the conversion in String::chars(). The conversion is simply
+the return of the rep->s[0] address, so the error must lie elsewher. Perhaps
+when using String variables, the length variable of the string is used, while
+the returned rep->s[0] may have a different length that depends on the
+location of the '\0' character. If so, the difference must have appeared
+when the string in rep->s[0] was created, for instance during the final
+addition of the converted idminor number in DIL_ID::str().
+There are no apparent problems in the "+" or "+=" operations of the last
+line in the creation of str() that is sent to rep->s[0]. The error must
+occur after this place in the program. The error does not even occur at
+the end of the str() function, if idstr.chars() is tested.
+Strangely, the problem seems inconsistent, occurring less if the function
+DIL_ID::chars() also contains some code that copes str() to a local String
+varaible. It may therefore be that the results of a direct str().chars()
+call are unpredictable, seeing as chars() returns the address of the
+character array in "rep", which is a part of a temporary variable used
+when str() was called. Perhaps that sort of str().chars() call would only
+be properly defined if str() were a static function. This possibility
+should be checked, and other calls of that nature should be discouraged
+as a precautionary measure.
+I could just program a new version of DIL_ID::chars() that uses only tried
+and tested means of converting the numbers to a character string, and I could
+then obtain DIL_ID::str() from that. While that is possible, the above
+precautions and further investigation are valuable, since other cases of
+similar results from the same sort of coding construct may occur.
+
+This particular danger is described in "Programming in C++, Rules and
+Recommendations - Portable Code" (recently found at
+http://www.doc.ic.ac.uk/lab/cplus/c++.rules/chap18.html#sect7).
+After str() is converted to chars(), the representation of str() may be
+deallocated, so that rep->s[0] is no longer a reliable pointer for the
+character string.
+
+Using static variables in the functions, the problem with appended spaces
+was solved, although the functions are probably still quite a bit less
+efficient than they could be.
+
+(For safety's sake I have copied the original detailed-items-by-id file from
+.20011011.bak to .safe.)
+
+There were occurrences of TDTDTDTDTD and TDCHKBXTDCHKBX in the generated
+cumulative scheduling form. These also appear to have been solved with the
+solution of the previous problem. This file will be added as a reference to
+the collection of programming hints.

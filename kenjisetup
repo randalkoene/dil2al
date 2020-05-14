@@ -1,0 +1,7 @@
+#! /bin/sh
+
+#cp -f Makefile.kenji Makefile
+/bin/rm -f regex.h regex.c
+ln -s regex-gnu.h regex.h
+ln -s regex-gnu.c regex.c
+

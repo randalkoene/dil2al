@@ -1,0 +1,83 @@
+\section{templates.old.hh File Reference}
+\label{templates_8old_8hh}\index{templates.old.hh@{templates.old.hh}}
+\subsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define {\bf Protected\_\-Linked\_\-List}({\bf PLLType})
+\item 
+\#define {\bf Protected\_\-Linked\_\-List\_\-destructor}\ delete next
+\item 
+\#define {\bf Protected\_\-Linked\_\-List\_\-constructor}\ prev(NULL), next(NULL)
+\item 
+\#define {\bf Protected\_\-Linked\_\-List\_\-functions}({\bf PLLType})
+\item 
+\#define {\bf Protected\_\-Linked\_\-List\_\-Indexed\_\-Access}({\bf PLLType}, Here, There)
+\item 
+\#define {\bf PLL\_\-LOOP\_\-FORWARD}({\bf PLLType}, Init\_\-El, Extra\_\-Test)\ for ({\bf PLLType} $\ast$ e = Init\_\-El; ((e) \&\& (Extra\_\-Test)); e = e $\rightarrow$ Next())
+\end{CompactItemize}
+
+
+\subsection{Define Documentation}
+\index{templates.old.hh@{templates.old.hh}!PLL_LOOP_FORWARD@{PLL\_\-LOOP\_\-FORWARD}}
+\index{PLL_LOOP_FORWARD@{PLL\_\-LOOP\_\-FORWARD}!templates.old.hh@{templates.old.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define PLL\_\-LOOP\_\-FORWARD({\bf PLLType}, Init\_\-El, Extra\_\-Test)\ for ({\bf PLLType} $\ast$ e = Init\_\-El; ((e) \&\& (Extra\_\-Test)); e = e $\rightarrow$ Next())}\label{templates_8old_8hh_a5}
+
+
+
+
+Definition at line 119 of file templates.old.hh.\index{templates.old.hh@{templates.old.hh}!Protected_Linked_List@{Protected\_\-Linked\_\-List}}
+\index{Protected_Linked_List@{Protected\_\-Linked\_\-List}!templates.old.hh@{templates.old.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define Protected\_\-Linked\_\-List({\bf PLLType})}\label{templates_8old_8hh_a0}
+
+
+{\bf Value:}
+
+\footnotesize\begin{verbatim}protected: \
+                PLLType * next, * prev; \
+        public: \
+                PLLType * Next() { return next; } \
+                PLLType * Prev() { return prev; } \
+                inline bool insert_this_after(PLLType * pred); \
+                inline bool insert_this_before(PLLType * succ); \
+                inline bool insert_after_this(PLLType * nsrt); \
+                inline bool insert_before_this(PLLType * nsrt); \
+                inline PLLType * el(int n); \
+                inline PLLType * PLLType::head(); \
+                inline PLLType * PLLType::tail(); \
+                inline int length(); \
+                inline int fulllength()\end{verbatim}\normalsize 
+
+
+Definition at line 18 of file templates.old.hh.\index{templates.old.hh@{templates.old.hh}!Protected_Linked_List_constructor@{Protected\_\-Linked\_\-List\_\-constructor}}
+\index{Protected_Linked_List_constructor@{Protected\_\-Linked\_\-List\_\-constructor}!templates.old.hh@{templates.old.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define Protected\_\-Linked\_\-List\_\-constructor\ prev(NULL), next(NULL)}\label{templates_8old_8hh_a2}
+
+
+
+
+Definition at line 39 of file templates.old.hh.\index{templates.old.hh@{templates.old.hh}!Protected_Linked_List_destructor@{Protected\_\-Linked\_\-List\_\-destructor}}
+\index{Protected_Linked_List_destructor@{Protected\_\-Linked\_\-List\_\-destructor}!templates.old.hh@{templates.old.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define Protected\_\-Linked\_\-List\_\-destructor\ delete next}\label{templates_8old_8hh_a1}
+
+
+
+
+Definition at line 35 of file templates.old.hh.\index{templates.old.hh@{templates.old.hh}!Protected_Linked_List_functions@{Protected\_\-Linked\_\-List\_\-functions}}
+\index{Protected_Linked_List_functions@{Protected\_\-Linked\_\-List\_\-functions}!templates.old.hh@{templates.old.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define Protected\_\-Linked\_\-List\_\-functions({\bf PLLType})}\label{templates_8old_8hh_a3}
+
+
+
+
+Definition at line 46 of file templates.old.hh.\index{templates.old.hh@{templates.old.hh}!Protected_Linked_List_Indexed_Access@{Protected\_\-Linked\_\-List\_\-Indexed\_\-Access}}
+\index{Protected_Linked_List_Indexed_Access@{Protected\_\-Linked\_\-List\_\-Indexed\_\-Access}!templates.old.hh@{templates.old.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define Protected\_\-Linked\_\-List\_\-Indexed\_\-Access({\bf PLLType}, Here, There)}\label{templates_8old_8hh_a4}
+
+
+{\bf Value:}
+
+\footnotesize\begin{verbatim}if (!n) return Here; \
+        if (PLLType * e = el(n)) return e->There; else return NULL\end{verbatim}\normalsize 
+
+
+Definition at line 111 of file templates.old.hh.

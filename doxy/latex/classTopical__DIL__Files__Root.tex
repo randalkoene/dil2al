@@ -1,0 +1,154 @@
+\section{Topical\_\-DIL\_\-Files\_\-Root  Class Reference}
+\label{classTopical__DIL__Files__Root}\index{Topical_DIL_Files_Root@{Topical\_\-DIL\_\-Files\_\-Root}}
+{\tt \#include $<$dil2al.hh$>$}
+
+\subsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf Topical\_\-DIL\_\-Files\_\-Root} ()
+\item 
+{\bf String} $\ast$ {\bf operator[$\,$]} (int n)
+\item 
+{\bf String} $\ast$ {\bf File} (int n=0)
+\item 
+{\bf String} $\ast$ {\bf Title} (int n=0)
+\item 
+{\bf filetitle\_\-t} $\ast$ {\bf Topic} (int n=0)
+\item 
+void {\bf Invalidate} ()
+\item 
+int {\bf Refresh} ()
+\end{CompactItemize}
+\subsection*{Public Attributes}
+\begin{CompactItemize}
+\item 
+{\bf PLLRoot}$<$ {\bf Topical\_\-DIL\_\-Files} $>$ {\bf dil}
+\end{CompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Topical_DIL_Files_Root@{Topical\_\-DIL\_\-Files\_\-Root}!Topical_DIL_Files_Root@{Topical\_\-DIL\_\-Files\_\-Root}}
+\index{Topical_DIL_Files_Root@{Topical\_\-DIL\_\-Files\_\-Root}!Topical_DIL_Files_Root@{Topical\_\-DIL\_\-Files\_\-Root}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Topical\_\-DIL\_\-Files\_\-Root::Topical\_\-DIL\_\-Files\_\-Root ()\hspace{0.3cm}{\tt  [inline]}}\label{classTopical__DIL__Files__Root_a0}
+
+
+
+
+Definition at line 343 of file dil2al.hh.
+
+References dil, and PLLRoot$<$ Topical\_\-DIL\_\-Files $>$::link\_\-before().
+
+
+
+\footnotesize\begin{verbatim}343 { Topical_DIL_Files * tdf = new Topical_DIL_Files(); dil.link_before(tdf); }
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Function Documentation}
+\index{Topical_DIL_Files_Root@{Topical\_\-DIL\_\-Files\_\-Root}!File@{File}}
+\index{File@{File}!Topical_DIL_Files_Root@{Topical\_\-DIL\_\-Files\_\-Root}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String}$\ast$ Topical\_\-DIL\_\-Files\_\-Root::File (int {\em n} = 0)\hspace{0.3cm}{\tt  [inline]}}\label{classTopical__DIL__Files__Root_a2}
+
+
+
+
+Definition at line 348 of file dil2al.hh.
+
+References PLLRoot$<$ PLLType $>$::head().
+
+
+
+\footnotesize\begin{verbatim}348 { if (dil.head()) return dil.head()->File(n); return NULL; }
+\end{verbatim}\normalsize 
+\index{Topical_DIL_Files_Root@{Topical\_\-DIL\_\-Files\_\-Root}!Invalidate@{Invalidate}}
+\index{Invalidate@{Invalidate}!Topical_DIL_Files_Root@{Topical\_\-DIL\_\-Files\_\-Root}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Topical\_\-DIL\_\-Files\_\-Root::Invalidate ()\hspace{0.3cm}{\tt  [inline]}}\label{classTopical__DIL__Files__Root_a5}
+
+
+
+
+Definition at line 351 of file dil2al.hh.
+
+References PLLRoot$<$ PLLType $>$::head().
+
+
+
+\footnotesize\begin{verbatim}351 { if (dil.head()) dil.head()->Invalidate(); }
+\end{verbatim}\normalsize 
+\index{Topical_DIL_Files_Root@{Topical\_\-DIL\_\-Files\_\-Root}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!Topical_DIL_Files_Root@{Topical\_\-DIL\_\-Files\_\-Root}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String}$\ast$ Topical\_\-DIL\_\-Files\_\-Root::operator[$\,$] (int {\em n})\hspace{0.3cm}{\tt  [inline]}}\label{classTopical__DIL__Files__Root_a1}
+
+
+
+
+Definition at line 347 of file dil2al.hh.
+
+References PLLRoot$<$ PLLType $>$::head().
+
+
+
+\footnotesize\begin{verbatim}347 { if (dil.head()) return (*dil.head())[n]; return NULL; }
+\end{verbatim}\normalsize 
+\index{Topical_DIL_Files_Root@{Topical\_\-DIL\_\-Files\_\-Root}!Refresh@{Refresh}}
+\index{Refresh@{Refresh}!Topical_DIL_Files_Root@{Topical\_\-DIL\_\-Files\_\-Root}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Topical\_\-DIL\_\-Files\_\-Root::Refresh ()\hspace{0.3cm}{\tt  [inline]}}\label{classTopical__DIL__Files__Root_a6}
+
+
+
+
+Definition at line 352 of file dil2al.hh.
+
+References PLLRoot$<$ PLLType $>$::head().
+
+
+
+\footnotesize\begin{verbatim}352 { if (dil.head()) return dil.head()->Refresh(); return 0; }
+\end{verbatim}\normalsize 
+\index{Topical_DIL_Files_Root@{Topical\_\-DIL\_\-Files\_\-Root}!Title@{Title}}
+\index{Title@{Title}!Topical_DIL_Files_Root@{Topical\_\-DIL\_\-Files\_\-Root}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String}$\ast$ Topical\_\-DIL\_\-Files\_\-Root::Title (int {\em n} = 0)\hspace{0.3cm}{\tt  [inline]}}\label{classTopical__DIL__Files__Root_a3}
+
+
+
+
+Definition at line 349 of file dil2al.hh.
+
+References PLLRoot$<$ PLLType $>$::head().
+
+
+
+\footnotesize\begin{verbatim}349 { if (dil.head()) return dil.head()->Title(n); return NULL; }
+\end{verbatim}\normalsize 
+\index{Topical_DIL_Files_Root@{Topical\_\-DIL\_\-Files\_\-Root}!Topic@{Topic}}
+\index{Topic@{Topic}!Topical_DIL_Files_Root@{Topical\_\-DIL\_\-Files\_\-Root}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf filetitle\_\-t}$\ast$ Topical\_\-DIL\_\-Files\_\-Root::Topic (int {\em n} = 0)\hspace{0.3cm}{\tt  [inline]}}\label{classTopical__DIL__Files__Root_a4}
+
+
+
+
+Definition at line 350 of file dil2al.hh.
+
+References PLLRoot$<$ PLLType $>$::head().
+
+
+
+\footnotesize\begin{verbatim}350 { if (dil.head()) return dil.head()->Topic(n); return NULL; }
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Data Documentation}
+\index{Topical_DIL_Files_Root@{Topical\_\-DIL\_\-Files\_\-Root}!dil@{dil}}
+\index{dil@{dil}!Topical_DIL_Files_Root@{Topical\_\-DIL\_\-Files\_\-Root}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf PLLRoot}$<${\bf Topical\_\-DIL\_\-Files}$>$ Topical\_\-DIL\_\-Files\_\-Root::dil}\label{classTopical__DIL__Files__Root_m0}
+
+
+
+
+Definition at line 345 of file dil2al.hh.
+
+Referenced by Topical\_\-DIL\_\-Files\_\-Root().
+
+The documentation for this class was generated from the following file:\begin{CompactItemize}
+\item 
+{\bf dil2al.hh}\end{CompactItemize}

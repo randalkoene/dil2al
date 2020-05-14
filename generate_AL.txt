@@ -1,0 +1,172 @@
+alcomp.cc:generate_AL()
+========================
+
+[This description was first drafted in 2004, updated in 2015.]
+
+This function generates an Active List (AL) composed of task chunks (TC)
+with suggested dates and order. The function is called with a sorted
+array of pointers to DIL entries and with a pointer to a superior DIL entry.
+If the latter is NULL then the AL is generated for the complete set of
+DIL entries. Otherwise the AL will contain only tasks for DIL entries that
+are dependencies of the superior DIL entry.
+The size of the AL to generate is indicated in terms of the
+number of TCs in the parameter "generatealtcs". If generatealtcs==0 then
+as many TCs are assigned as are necessary to complete all DIL entry tasks.
+
+1. determine available time per day
+a) default amount
+The "algenregular" generic number of hours in a regular AL-day is used to
+determine how much time is available per day in seconds.
+b) if a complete AL is requested
+The "algenall" generic number of hours to be allocated in an AL-day when
+considering all DIL entries is used to determine how much time is available
+per day inseconds.
+c) if an AL is requested for a specific superior DIL entry
+A non-generic (DIL entry specific) number of hours per AL-day should be
+used --- but this code is not yet done.
+
+2. determine how much has already been worked this day
+This (alworked) may be given directly on the command line through the "W"
+parameter of the "A" command. Otherwise, it is determined in one of three
+ways as specified by the "alcurdayworkedstrategy" configuration parameter:
+"ACW_TIME" uses the (possibly simulated) current time stamp and the
+configuration parameter "alworkdaystart" to determine hours worked; "ACW_TL"
+should obtain an estimate by using task log entried --- but this is not
+yet implemented; "ACW_ASK" should ask for an estimate --- but is also not
+yet implemented. The default is to assume that no hours of work have been
+done.
+
+3. call to DIL_Required_Task_Chunks
+The number of TCs needed to complete the task for each DIL entry in the
+sorted array is obtained as an array of type long.
+Note that calling DIL_Required_Task_Chunks() for every DIL entry in the
+sorted array is the method used when dil2al is compiled without support for
+periodic tasks.
+When compiled with support for periodic tasks, a DIL_Virtual_Matrix is
+created instead that includes information for all tasks and for a limited
+number of virtual copies of periodic tasks. Using virtual copies is an
+effective and simple way to implement scheduling with periodic tasks.
+
+4. an Active_List object is generated with the information from steps 1-3
+If there is a specific superior DIL entry then some descriptive and AL file
+reference strings are assigned. The "allength" is determined through the
+member function Initialize_AL_Length. The default is allength==generatealtcs.
+Using "alworked" and the work hours intended per day (see 2), as well as the
+current time of day and the hours in a day, both preferred and maximum values
+are calculated for the number of TCs that can be allocated this day
+(obviously, the preferred number is not allowed to exceed the maximum number).
+The "allength" and number of days ("aldays") are determined in one of three
+ways. If generatealtcs==0 (option: generate a complete AL) then all the
+required task chunks in the array obtained above (see 1) are summed into
+"generatealtcs", which is copied to "allength". The number of days in "aldays"
+is calculated accordingly. Otherwise, if a maximum date "generatealmaxt" was
+given through configuration parameters then time available on this day, on
+the last day before "generatealmaxt" and on days in between is combined to
+determine allength in terms of TCs and "aldays" accordingly. Finally, if
+there is no maximum date then the default setting allength==generatealtcs
+remains valid and "aldays" is set accordingly.
+A protected linked list (PLL) of AL_Day objects is initialized with sufficient
+days for the length of the AL as computed above. Current and last days are
+initialized differently than the days in between by taking into account a
+possible reduction of the time available on those days. The TCs in each day
+are initially all marked available. The "allength" is cautiously set to the
+number of TCs actually made available in the initialized days and that is
+returned by the initialization function.
+
+5. values are initialized for iterative AL generation
+The pseudo random generator is initialized, t_current is set to an expected
+time at the completion of the AL generation and t_start and t_limit are
+initialized according to information from the linked list of AL_Day objects.
+Notice that since t_current is supplied to the pseudo random generator,
+using the same t_current value guarantees the same AL is generated, which
+can be a useful feature.
+
+6. information is initialized for the Cumulative Required Time form
+The call to generate_AL_CRT() comes in two forms, one used when compiled
+with periodic tasks and one when compiled without that support.
+
+7. EXACT target date DIL entries
+For periodic tasks, the VIRTUALOVERLAPSFILE keeps track of periodic tasks with insufficient time between each to complete each periodic occurrence.
+For exact target date tasks, teh EXACTCONFLICTSFILE keeps track of tasks with exact target dates where the task chunks that should be allocated overlap.
+For each DIL entry with exact target date:
+  if its target date < t_current then skip it
+  otherwise add a target date reference for it to the AL
+  allocate task chunks for the DIL entry in the AL at time block directly
+  preceding the exact target date
+  overlapping periodic tasks with exact target dates are not given extra
+  task chunks to make up for the overlap
+  for other overlapping tasks with exact target dates, an immediate warning
+  is displayed and the remaining task chunks required are allocated in 8
+
+8. non-EXACT target date DIL entries
+For each DIl entry:
+  if its target date < t_current then skip it
+  otherwise add a target date reference for it to the AL
+  determine if enough task chunks are available before TD or how many missing
+  [... Cutting this analysis of the function short for the moment...]
+
+9. DIL entries in the array of pointers are dealt with iteratively
+Information about the DIL entry is formatted for the Cumulative Required Time
+form.
+If the DIL entry's target date has passed then it is added to a list of such
+DIL entries --- no TCs are then allocated.
+Otherwise, a reference to the DIL entry is added to a list within the AL_Day
+that contains the target date of the DIL entry.
+AL_Days and tasks due on target dates within each day:
+DAY1 DAY2 DAY3 DAY4 DAY5 DAY6 DAY7 DAY8 DAY9 ...
+dil1 dil4 dil5 dil7 dil8 dil9 ...
+dil2      dil6           dil10
+dil3                     dil11
+The number of TCs that are still available (unallocated) up to the target
+date is compared to the number of TCs required for the DIL entry to determine
+a necessary expansion "expandn".
+If expansion is permitted by the configuration parameter "alautoexpand" then
+the AL is expanded as necessary.
+
+10. for each DIL entry, mark task chunks in a uniform distribution
+For all days and task chunks that precede the target date of the DIL entry,
+every day and every task chunk (though not necessarily preallocated) receives
+a start (i_start) value, linearly computed on a range from [0,i_limit], where
+i_limit is initially set to the number of availabel TCs (deavail). The values
+are computed as v = 1.0 - (0.9*i)/i_limit (with i set to the i_start value of
+each segment). This way, a value is associated with each available slot. The
+differences between the values are equal, so the distribution is uniform with
+values between 1.0 (for i_start=0) and 0.1 (for i_start=deavail).
+All of the values are summed (sumval).
+(For each iteration to a new DIL entry, the TC values are set again.)
+
+11. allocate with EXPONENTIALLY decaying probability
+If there are TCs available before the DIL entry's target date then the
+required number of task chunks are allocated by obtaining numbers in a
+uniform random distribution between 0.0 and sumval. Even though the
+pseudo random function delivers random numbers in a uniform distribution,
+the actual allocation is done in an expoentially decaying probability
+distribution, since values from large to small are added to indicate
+cumulative values. And those cumulative values are used to compare with
+the random value and pick a TC.
+
+So, the generate_AL method is clearly already using a non-uniform
+probability distribution that favors early task chunks (implemented in a
+manner that differs somewhat from the example tested in testALprobdist.m).
+
+2-pass AL generation:
+====================
+
+Using a linear decreasing probability distribution for DIL entries with
+target dates will certainly improve the likelihood that early task chunks
+will refer to those DIL entries and not to DIL entries without target dates.
+But if you want specific DIL entries (e.g. at the focus for output) to have
+a greater chance to fill early slots than other DIL entries with earlier
+target dates then there must be a 2-pass approach to AL generation. The
+DIL entries are then given AL priority values and two arrays will be given
+with the DIL entries sorted by target date in one and by AL priority value
+in the other. On the first pass, target dates and required amounts of time
+are used to create a list of target dates, each of which specifies how
+many task chunks are reserved up to that date. On the second pass, the AL
+priority indicates the order in which DIL entries are given task chunks.
+Task chunks are allocated according to the chosen probability distribution,
+but an allocation is vetoed if its slot falls into a segment in which all
+available slots are needed for reserved space. Testing for the veto is done
+from the latest target date to the earliest. And before allocating, a
+DIL entry removes its own reservation from the reserved variable at its
+target date.

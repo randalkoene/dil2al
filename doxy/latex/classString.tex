@@ -1,0 +1,3664 @@
+\section{String  Class Reference}
+\label{classString}\index{String@{String}}
+{\tt \#include $<$Big\-String.hh$>$}
+
+\subsection*{Public Types}
+\begin{CompactItemize}
+\item 
+enum {\bf Big\-String\_\-Search\_\-t} \{ {\bf SEARCH\_\-START}, 
+{\bf SEARCH\_\-END}
+ \}
+\end{CompactItemize}
+\subsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf String} ()
+\item 
+{\bf String} (const String \&x)
+\item 
+{\bf String} (const {\bf Sub\-String} \&x)
+\item 
+{\bf String} (const char $\ast$t)
+\item 
+{\bf String} (const char $\ast$t, {\bf \_\-BIGSTRING\_\-SIZE} len)
+\item 
+{\bf String} (char c)
+\item 
+{\bf String} (istream \&ist)
+\item 
+{\bf String} (long l)
+\item 
+{\bf String} (double d, const char $\ast$format)
+\item 
+{\bf $\sim$String} ()
+\item 
+String \& {\bf operator=} (const String \&y)
+\item 
+String \& {\bf operator=} (const char $\ast$y)
+\item 
+String \& {\bf operator=} (char c)
+\item 
+String \& {\bf operator=} (const {\bf Sub\-String} \&y)
+\item 
+String \& {\bf operator=} (istream \&y)
+\item 
+String \& {\bf readnoseek} (istream \&y)
+\item 
+String \& {\bf readtotag} (istream \&y, const char $\ast$t, char terminator='$\backslash$n')
+\item 
+String \& {\bf operator+=} (const String \&y)
+\item 
+String \& {\bf operator+=} (const {\bf Sub\-String} \&y)
+\item 
+String \& {\bf operator+=} (const char $\ast$y)
+\item 
+String \& {\bf operator+=} (char c)
+\item 
+String \& {\bf operator+=} (istream \&y)
+\item 
+void {\bf prepend} (const String \&y)
+\item 
+void {\bf prepend} (const {\bf Sub\-String} \&y)
+\item 
+void {\bf prepend} (const char $\ast$t)
+\item 
+void {\bf prepend} (char c)
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf index} (char c, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0) const
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf index} (const String \&y, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0) const
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf index} (const {\bf Sub\-String} \&y, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0) const
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf index} (const char $\ast$t, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0) const
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf index} (const {\bf Big\-Regex} \&r, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0) const
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf index} (const {\bf Big\-Regex} \&r, {\bf Big\-String\_\-Search\_\-t} \_\-st, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0) const
+\item 
+int {\bf contains} (char c) const
+\item 
+int {\bf contains} (const String \&y) const
+\item 
+int {\bf contains} (const {\bf Sub\-String} \&y) const
+\item 
+int {\bf contains} (const char $\ast$t) const
+\item 
+int {\bf contains} (const {\bf Big\-Regex} \&r) const
+\item 
+int {\bf contains} (char c, {\bf \_\-BIGSTRING\_\-SIZE} pos) const
+\item 
+int {\bf contains} (const String \&y, {\bf \_\-BIGSTRING\_\-SIZE} pos) const
+\item 
+int {\bf contains} (const {\bf Sub\-String} \&y, {\bf \_\-BIGSTRING\_\-SIZE} pos) const
+\item 
+int {\bf contains} (const char $\ast$t, {\bf \_\-BIGSTRING\_\-SIZE} pos) const
+\item 
+int {\bf contains} (const {\bf Big\-Regex} \&r, {\bf \_\-BIGSTRING\_\-SIZE} pos) const
+\item 
+int {\bf matches} (char c, {\bf \_\-BIGSTRING\_\-SIZE} pos=0) const
+\item 
+int {\bf matches} (const String \&y, {\bf \_\-BIGSTRING\_\-SIZE} pos=0) const
+\item 
+int {\bf matches} (const {\bf Sub\-String} \&y, {\bf \_\-BIGSTRING\_\-SIZE} pos=0) const
+\item 
+int {\bf matches} (const char $\ast$t, {\bf \_\-BIGSTRING\_\-SIZE} pos=0) const
+\item 
+int {\bf matches} (const {\bf Big\-Regex} \&r, {\bf \_\-BIGSTRING\_\-SIZE} pos=0) const
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf freq} (char c) const
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf freq} (const String \&y) const
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf freq} (const {\bf Sub\-String} \&y) const
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf freq} (const char $\ast$t) const
+\item 
+{\bf Sub\-String} {\bf at} ({\bf \_\-BIGSTRING\_\-SIZE} pos, {\bf \_\-BIGSTRING\_\-SIZE} len)
+\item 
+{\bf Sub\-String} {\bf operator()} ({\bf \_\-BIGSTRING\_\-SIZE} pos, {\bf \_\-BIGSTRING\_\-SIZE} len)
+\item 
+{\bf Sub\-String} {\bf at} (const String \&x, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0)
+\item 
+{\bf Sub\-String} {\bf at} (const {\bf Sub\-String} \&x, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0)
+\item 
+{\bf Sub\-String} {\bf at} (const char $\ast$t, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0)
+\item 
+{\bf Sub\-String} {\bf at} (char c, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0)
+\item 
+{\bf Sub\-String} {\bf at} (const {\bf Big\-Regex} \&r, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0)
+\item 
+{\bf Sub\-String} {\bf before} ({\bf \_\-BIGSTRING\_\-SIZE} pos)
+\item 
+{\bf Sub\-String} {\bf before} (const String \&x, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0)
+\item 
+{\bf Sub\-String} {\bf before} (const {\bf Sub\-String} \&x, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0)
+\item 
+{\bf Sub\-String} {\bf before} (const char $\ast$t, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0)
+\item 
+{\bf Sub\-String} {\bf before} (char c, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0)
+\item 
+{\bf Sub\-String} {\bf before} (const {\bf Big\-Regex} \&r, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0)
+\item 
+{\bf Sub\-String} {\bf through} ({\bf \_\-BIGSTRING\_\-SIZE} pos)
+\item 
+{\bf Sub\-String} {\bf through} (const String \&x, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0)
+\item 
+{\bf Sub\-String} {\bf through} (const {\bf Sub\-String} \&x, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0)
+\item 
+{\bf Sub\-String} {\bf through} (const char $\ast$t, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0)
+\item 
+{\bf Sub\-String} {\bf through} (char c, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0)
+\item 
+{\bf Sub\-String} {\bf through} (const {\bf Big\-Regex} \&r, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0)
+\item 
+{\bf Sub\-String} {\bf from} ({\bf \_\-BIGSTRING\_\-SIZE} pos)
+\item 
+{\bf Sub\-String} {\bf from} (const String \&x, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0)
+\item 
+{\bf Sub\-String} {\bf from} (const {\bf Sub\-String} \&x, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0)
+\item 
+{\bf Sub\-String} {\bf from} (const char $\ast$t, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0)
+\item 
+{\bf Sub\-String} {\bf from} (char c, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0)
+\item 
+{\bf Sub\-String} {\bf from} (const {\bf Big\-Regex} \&r, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0)
+\item 
+{\bf Sub\-String} {\bf after} ({\bf \_\-BIGSTRING\_\-SIZE} pos)
+\item 
+{\bf Sub\-String} {\bf after} (const String \&x, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0)
+\item 
+{\bf Sub\-String} {\bf after} (const {\bf Sub\-String} \&x, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0)
+\item 
+{\bf Sub\-String} {\bf after} (const char $\ast$t, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0)
+\item 
+{\bf Sub\-String} {\bf after} (char c, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0)
+\item 
+{\bf Sub\-String} {\bf after} (const {\bf Big\-Regex} \&r, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0)
+\item 
+String {\bf sub} (const {\bf Big\-Regex} \&r, int nth)
+\item 
+void {\bf del} ({\bf \_\-BIGSTRING\_\-SIZE} pos, {\bf \_\-BIGSTRING\_\-SIZE} len)
+\item 
+void {\bf del} (const String \&y, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0)
+\item 
+void {\bf del} (const {\bf Sub\-String} \&y, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0)
+\item 
+void {\bf del} (const char $\ast$t, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0)
+\item 
+void {\bf del} (char c, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0)
+\item 
+void {\bf del} (const {\bf Big\-Regex} \&r, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0)
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf gsub} (const String \&pat, const String \&repl)
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf gsub} (const {\bf Sub\-String} \&pat, const String \&repl)
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf gsub} (const char $\ast$pat, const String \&repl)
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf gsub} (const char $\ast$pat, const char $\ast$repl)
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf gsub} (const {\bf Big\-Regex} \&pat, const String \&repl, char substrs='$\backslash$0')
+\item 
+void {\bf reverse} ()
+\item 
+void {\bf upcase} ()
+\item 
+void {\bf downcase} ()
+\item 
+void {\bf capitalize} ()
+\item 
+char \& {\bf operator[$\,$]} ({\bf \_\-BIGSTRING\_\-ITERATOR} i)
+\item 
+const char \& {\bf operator[$\,$]} ({\bf \_\-BIGSTRING\_\-ITERATOR} i) const
+\item 
+char {\bf elem} ({\bf \_\-BIGSTRING\_\-ITERATOR} i) const
+\item 
+char {\bf firstchar} () const
+\item 
+char {\bf lastchar} () const
+\item 
+{\bf operator const char $\ast$} () const
+\item 
+const char $\ast$ {\bf chars} () const
+\item 
+{\bf \_\-BIGSTRING\_\-LENGTH} {\bf length} () const
+\item 
+int {\bf empty} () const
+\item 
+void {\bf alloc} ({\bf \_\-BIGSTRING\_\-SIZE} newsize)
+\item 
+{\bf \_\-BIGSTRING\_\-ALLOC} {\bf allocation} () const
+\item 
+void {\bf error} (const char $\ast$msg) const
+\item 
+int {\bf OK} () const
+\end{CompactItemize}
+\subsection*{Protected Methods}
+\begin{CompactItemize}
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf search} ({\bf \_\-BIGSTRING\_\-SIZE}, {\bf \_\-BIGSTRING\_\-SIZE}, const char $\ast$, {\bf \_\-BIGSTRING\_\-SIZE}=-1) const
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf search} ({\bf \_\-BIGSTRING\_\-SIZE}, {\bf \_\-BIGSTRING\_\-SIZE}, char) const
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf match} ({\bf \_\-BIGSTRING\_\-SIZE}, {\bf \_\-BIGSTRING\_\-SIZE}, int, const char $\ast$, {\bf \_\-BIGSTRING\_\-SIZE}=-1) const
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf \_\-gsub} (const char $\ast$, {\bf \_\-BIGSTRING\_\-SIZE}, const char $\ast$,{\bf \_\-BIGSTRING\_\-SIZE})
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf \_\-gsub} (const {\bf Big\-Regex} \&, const char $\ast$, {\bf \_\-BIGSTRING\_\-SIZE}, char substrs='$\backslash$0')
+\item 
+{\bf Sub\-String} {\bf \_\-substr} (int, int)
+\end{CompactItemize}
+\subsection*{Protected Attributes}
+\begin{CompactItemize}
+\item 
+{\bf Str\-Rep} $\ast$ {\bf rep}
+\end{CompactItemize}
+\subsection*{Friends}
+\begin{CompactItemize}
+\item 
+class {\bf Sub\-String}
+\item 
+void {\bf cat} (const String \&, const String \&, String \&)
+\item 
+void {\bf cat} (const String \&, const {\bf Sub\-String} \&, String \&)
+\item 
+void {\bf cat} (const String \&, const char $\ast$, String \&)
+\item 
+void {\bf cat} (const String \&, char, String \&)
+\item 
+void {\bf cat} (const {\bf Sub\-String} \&, const String \&, String \&)
+\item 
+void {\bf cat} (const {\bf Sub\-String} \&, const {\bf Sub\-String} \&, String \&)
+\item 
+void {\bf cat} (const {\bf Sub\-String} \&, const char $\ast$, String \&)
+\item 
+void {\bf cat} (const {\bf Sub\-String} \&, char, String \&)
+\item 
+void {\bf cat} (const char $\ast$, const String \&, String \&)
+\item 
+void {\bf cat} (const char $\ast$, const {\bf Sub\-String} \&, String \&)
+\item 
+void {\bf cat} (const char $\ast$, const char $\ast$, String \&)
+\item 
+void {\bf cat} (const char $\ast$, char, String \&)
+\item 
+void {\bf cat} (const String \&, const String \&, const String \&, String \&)
+\item 
+void {\bf cat} (const String \&, const String \&, const {\bf Sub\-String} \&, String \&)
+\item 
+void {\bf cat} (const String \&, const String \&, const char $\ast$, String \&)
+\item 
+void {\bf cat} (const String \&, const String \&, char, String \&)
+\item 
+void {\bf cat} (const String \&, const {\bf Sub\-String} \&, const String \&, String \&)
+\item 
+void {\bf cat} (const String \&, const {\bf Sub\-String} \&, const {\bf Sub\-String} \&, String \&)
+\item 
+void {\bf cat} (const String \&, const {\bf Sub\-String} \&, const char $\ast$, String \&)
+\item 
+void {\bf cat} (const String \&, const {\bf Sub\-String} \&, char, String \&)
+\item 
+void {\bf cat} (const String \&, const char $\ast$, const String \&, String \&)
+\item 
+void {\bf cat} (const String \&, const char $\ast$, const {\bf Sub\-String} \&, String \&)
+\item 
+void {\bf cat} (const String \&, const char $\ast$, const char $\ast$, String \&)
+\item 
+void {\bf cat} (const String \&, const char $\ast$, char, String \&)
+\item 
+void {\bf cat} (const char $\ast$, const String \&, const String \&, String \&)
+\item 
+void {\bf cat} (const char $\ast$, const String \&, const {\bf Sub\-String} \&, String \&)
+\item 
+void {\bf cat} (const char $\ast$, const String \&, const char $\ast$, String \&)
+\item 
+void {\bf cat} (const char $\ast$, const String \&, char, String \&)
+\item 
+void {\bf cat} (const char $\ast$, const {\bf Sub\-String} \&, const String \&, String \&)
+\item 
+void {\bf cat} (const char $\ast$, const {\bf Sub\-String} \&, const {\bf Sub\-String} \&, String \&)
+\item 
+void {\bf cat} (const char $\ast$, const {\bf Sub\-String} \&, const char $\ast$, String \&)
+\item 
+void {\bf cat} (const char $\ast$, const {\bf Sub\-String} \&, char, String \&)
+\item 
+void {\bf cat} (const char $\ast$, const char $\ast$, const String \&, String \&)
+\item 
+void {\bf cat} (const char $\ast$, const char $\ast$, const {\bf Sub\-String} \&, String \&)
+\item 
+void {\bf cat} (const char $\ast$, const char $\ast$, const char $\ast$, String \&)
+\item 
+void {\bf cat} (const char $\ast$, const char $\ast$, char, String \&)
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf split} (const String \&x, String {\bf res}[$\,$], {\bf \_\-BIGSTRING\_\-SIZE} maxn, const String \&sep)
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf split} (const String \&x, String {\bf res}[$\,$], {\bf \_\-BIGSTRING\_\-SIZE} maxn, const {\bf Big\-Regex} \&sep)
+\item 
+String {\bf common\_\-prefix} (const String \&x, const String \&y, {\bf \_\-BIGSTRING\_\-SIZE} startpos=0)
+\item 
+String {\bf common\_\-suffix} (const String \&x, const String \&y, {\bf \_\-BIGSTRING\_\-SIZE} startpos=-1)
+\item 
+String {\bf replicate} (char c, {\bf \_\-BIGSTRING\_\-SIZE} n)
+\item 
+String {\bf replicate} (const String \&y, {\bf \_\-BIGSTRING\_\-SIZE} n)
+\item 
+String {\bf join} (String src[$\,$], {\bf \_\-BIGSTRING\_\-SIZE} n, const String \&sep)
+\item 
+String {\bf reverse} (const String \&x)
+\item 
+String {\bf upcase} (const String \&x)
+\item 
+String {\bf downcase} (const String \&x)
+\item 
+String {\bf capitalize} (const String \&x)
+\item 
+ostream \& {\bf operator$<$$<$} (ostream \&s, const String \&x)
+\item 
+ostream \& {\bf operator$<$$<$} (ostream \&s, const {\bf Sub\-String} \&x)
+\item 
+istream \& {\bf operator$>$$>$} (istream \&s, String \&x)
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf readline} (istream \&s, String \&x, char terminator='$\backslash$n', int discard\_\-terminator=1)
+\end{CompactItemize}
+
+
+\subsection{Member Enumeration Documentation}
+\index{String@{String}!BigString_Search_t@{BigString\_\-Search\_\-t}}
+\index{BigString_Search_t@{BigString\_\-Search\_\-t}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}enum String::Big\-String\_\-Search\_\-t}\label{classString_s2}
+
+
+\begin{Desc}
+\item[Enumeration values:]\par
+\begin{description}
+\index{SEARCH_START@{SEARCH\_\-START}!String@{String}}\index{String@{String}!SEARCH_START@{SEARCH\_\-START}}\item[{\em 
+{\em SEARCH\_\-START}\label{classString_s2s0}
+}]\index{SEARCH_END@{SEARCH\_\-END}!String@{String}}\index{String@{String}!SEARCH_END@{SEARCH\_\-END}}\item[{\em 
+{\em SEARCH\_\-END}\label{classString_s2s1}
+}]\end{description}
+\end{Desc}
+
+
+
+Definition at line 288 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}288 { SEARCH_START, SEARCH_END };
+\end{verbatim}\normalsize 
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{String@{String}!String@{String}}
+\index{String@{String}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String::String ()\hspace{0.3cm}{\tt  [inline]}}\label{classString_a0}
+
+
+
+
+Definition at line 507 of file Big\-String.hh.
+
+Referenced by sub().
+
+
+
+\footnotesize\begin{verbatim}508   : rep(&_nilStrRep) {}
+\end{verbatim}\normalsize 
+\index{String@{String}!String@{String}}
+\index{String@{String}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String::String (const String \& {\em x})\hspace{0.3cm}{\tt  [inline]}}\label{classString_a1}
+
+
+
+
+Definition at line 509 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}510   : rep(Scopy(0, x.rep)) {}
+\end{verbatim}\normalsize 
+\index{String@{String}!String@{String}}
+\index{String@{String}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String::String (const {\bf Sub\-String} \& {\em x})\hspace{0.3cm}{\tt  [inline]}}\label{classString_a2}
+
+
+
+
+Definition at line 522 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}523   : rep(Salloc(0, y.chars(), y.length(), y.length())) {}
+\end{verbatim}\normalsize 
+\index{String@{String}!String@{String}}
+\index{String@{String}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String::String (const char $\ast$ {\em t})\hspace{0.3cm}{\tt  [inline]}}\label{classString_a3}
+
+
+
+
+Definition at line 511 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}512   : rep(Salloc(0, t, -1, -1)) {
+513 #ifdef CONSTCHAR_INITIALIZE_TEST
+514         cout << "dil2al: Debug CONSTCHAR_INITIALIZE_TEST: ";
+515         for (char * tp = (char *) t; *tp!='\0'; tp++) cout << (*tp) << '[' << (int) (*tp) << ']';
+516         cout << '\n';
+517         cout << '{' << (*this) << "}\n";
+518 #endif
+519 }
+\end{verbatim}\normalsize 
+\index{String@{String}!String@{String}}
+\index{String@{String}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String::String (const char $\ast$ {\em t}, {\bf \_\-BIGSTRING\_\-SIZE} {\em len})\hspace{0.3cm}{\tt  [inline]}}\label{classString_a4}
+
+
+
+
+Definition at line 520 of file Big\-String.hh.
+
+References \_\-BIGSTRING\_\-SIZE.
+
+
+
+\footnotesize\begin{verbatim}521   : rep(Salloc(0, t, tlen, tlen)) {}
+\end{verbatim}\normalsize 
+\index{String@{String}!String@{String}}
+\index{String@{String}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String::String (char {\em c})\hspace{0.3cm}{\tt  [inline]}}\label{classString_a5}
+
+
+
+
+Definition at line 524 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}525   : rep(Salloc(0, &c, 1, 1)) {}
+\end{verbatim}\normalsize 
+\index{String@{String}!String@{String}}
+\index{String@{String}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String::String (istream \& {\em ist})\hspace{0.3cm}{\tt  [inline]}}\label{classString_a6}
+
+
+
+
+Definition at line 527 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}528   : rep(Salloc_istream(0,ist,-1,-1)) {}
+\end{verbatim}\normalsize 
+\index{String@{String}!String@{String}}
+\index{String@{String}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String::String (long {\em l})\hspace{0.3cm}{\tt  [inline]}}\label{classString_a7}
+
+
+
+
+Definition at line 531 of file Big\-String.hh.
+
+References rep, and Salloc().
+
+
+
+\footnotesize\begin{verbatim}531 { char s[12]; sprintf(s,"%ld",l); rep = Salloc(0,s,-1,-1); }
+\end{verbatim}\normalsize 
+\index{String@{String}!String@{String}}
+\index{String@{String}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String::String (double {\em d}, const char $\ast$ {\em format})\hspace{0.3cm}{\tt  [inline]}}\label{classString_a8}
+
+
+
+
+Definition at line 534 of file Big\-String.hh.
+
+References rep, and Salloc().
+
+
+
+\footnotesize\begin{verbatim}534 { char s[30]; sprintf(s,format,d); rep = Salloc(0,s,-1,-1); }
+\end{verbatim}\normalsize 
+\index{String@{String}!~String@{$\sim$String}}
+\index{~String@{$\sim$String}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String::$\sim$String ()\hspace{0.3cm}{\tt  [inline]}}\label{classString_a9}
+
+
+
+
+Definition at line 537 of file Big\-String.hh.
+
+References rep.
+
+
+
+\footnotesize\begin{verbatim}537 { if (rep != &_nilStrRep) delete rep; }
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Function Documentation}
+\index{String@{String}!_gsub@{\_\-gsub}}
+\index{_gsub@{\_\-gsub}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} String::\_\-gsub (const {\bf Big\-Regex} \&, const char $\ast$, {\bf \_\-BIGSTRING\_\-SIZE}, char {\em substrs} = '$\backslash$0')\hspace{0.3cm}{\tt  [protected]}}\label{classString_b4}
+
+
+
+
+Definition at line 709 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-ITERATOR, \_\-BIGSTRING\_\-SIZE, BIGREGEX\_\-MAX\_\-SUBEXPRESSIONS, chars(), Str\-Rep::len, length(), Big\-Regex::match\_\-info(), Str\-Rep::s, Big\-Regex::search(), and Str\-Rep::sz.
+
+
+
+\footnotesize\begin{verbatim}709                                                                                                          { 
+710 // when substrs is not '\0', substring identifiers
+711 // 'substrs'1,'substrs'2, etc. can be used in the replace string
+712   char * rloc;
+713   _BIGSTRING_SIZE nsubstrs = 0, *substrrl, subrl = 0;
+714   int * substrid;
+715   char ** substridx;
+716   _BIGSTRING_SIZE nmatches = 0;
+717   _BIGSTRING_SIZE sl = length();
+718   if (sl <= 0)
+719     return nmatches;
+720 
+721   if (rl < 0) rl = slen(r);
+722   if (substrs!='\0') {
+723                 // (* could increase array lengths, since the number
+724                 // of times a subexpression can occur in the replacement
+725                 // string is not dependent on the maximum number of
+726                 // subexpressions)
+727                 substridx = new (char *)[BIGREGEX_MAX_SUBEXPRESSIONS];
+728                 substrrl = new _BIGSTRING_SIZE[BIGREGEX_MAX_SUBEXPRESSIONS];
+729                 substrid = new int[BIGREGEX_MAX_SUBEXPRESSIONS]; // we don't use substrid[0]
+730                 // copy replacement string
+731                 rloc = new char[rl+1];
+732                 ncopy(r,rloc,rl+1);
+733                 // create substrings and store indices
+734                 substridx[0] = rloc;
+735                 for (int i=0; i<rl; i++) if ((rloc[i]==substrs) && (nsubstrs<(BIGREGEX_MAX_SUBEXPRESSIONS-1))) {
+736                         long a = strtol(&rloc[i+1],&(substridx[nsubstrs+1]),10);
+737                         if ((a>=0) && (a<BIGREGEX_MAX_SUBEXPRESSIONS)) {
+738                                 rloc[i] = '\0';
+739                                 substrrl[nsubstrs] = (_BIGSTRING_SIZE) (&(rloc[i]) - substridx[nsubstrs]);
+740                                 subrl += substrrl[nsubstrs];
+741                                 nsubstrs++;
+742                                 substrid[nsubstrs] = a;
+743                         } else rloc[i] = r[i];
+744                 } else rloc[i] = r[i];
+745                 substrrl[nsubstrs] = (_BIGSTRING_SIZE) (&(rloc[rl]) - substridx[nsubstrs]);
+746                 subrl += substrrl[nsubstrs];
+747   }
+748   const char* s = chars();
+749 
+750   StrRep* nrep = 0;
+751   _BIGSTRING_SIZE nsz = 0;
+752 
+753   char* x = 0;
+754 
+755   _BIGSTRING_ITERATOR si = 0;
+756   _BIGSTRING_ITERATOR xi = 0;
+757   _BIGSTRING_SIZE remaining = sl;
+758   _BIGSTRING_SIZE  pos, pl = 0;   // how long is a regular expression?
+759   int start, length;
+760 
+761   while (remaining > 0)
+762   {
+763     pos = pat.search(s, sl, pl, si); // unlike string search, the pos returned here is absolute
+764     if (pos < 0 || pl <= 0)
+765       break;    // done if not found
+766     else
+767     {   // found match
+768       ++nmatches;
+769          if (substrs!='\0') { // rl depends on matched substring sizes
+770                 rl = subrl;
+771                 for (int i=1; i<=nsubstrs; i++) if (pat.match_info(start,length,substrid[i])) rl += length;
+772          }
+773       _BIGSTRING_SIZE mustfit = xi + remaining + rl - pl;
+774       if (mustfit >= nsz)
+775       { // resize destination if necessary
+776         if (nrep != 0) nrep->len = xi;
+777         nrep = Sresize(nrep, mustfit);
+778         x = nrep->s;
+779         nsz = nrep->sz;
+780       }
+781       pos -= si;        // length to copy before match
+782       ncopy(&(s[si]), &(x[xi]), pos);   // copy unmatched part
+783       si += pos + pl;   // advance source index
+784       remaining -= pos + pl;    // subtract amount searched and matched
+785          xi += pos;     // advance destination index
+786          if (substrs=='\0') {
+787                 ncopy(r, &(x[xi]), rl); // paste replacement string
+788                 xi += rl;       // advance destination index
+789         } else {
+790                 ncopy(substridx[0], &(x[xi]), substrrl[0]); xi += substrrl[0];
+791                 for (int i=1; i<=nsubstrs; i++) {
+792                         if (pat.match_info(start,length,substrid[i])) {
+793                                 ncopy(&(s[start]),&(x[xi]),length);
+794                                 xi += length;
+795                         }
+796                         ncopy(substridx[i],&(x[xi]), substrrl[i]); xi += substrrl[i];
+797                 }
+798          }
+799     }
+800   }
+801 
+802   if (substrs!='\0') {
+803         delete[] substridx;
+804         delete[] substrrl;
+805         delete[] substrid;
+806         delete[] rloc;
+807   }
+808 
+809   if (nrep == 0)
+810   {
+811     if (nmatches == 0)
+812       return nmatches;
+813     else
+814       nrep = Sresize(nrep, xi+remaining); // allocate to fit remaining
+815   }
+816 
+817   ncopy0(&(s[si]), &(x[xi]), remaining);        // copy remainder of source
+818   nrep->len = xi + remaining;
+819 
+820 #ifndef BIGSTRING_MAXIMIZE_SPEED
+821   if (nrep->len <= rep->sz)
+822   {
+823     rep->len = nrep->len;
+824     ncopy0(nrep->s, rep->s, rep->len);
+825     delete(nrep);
+826   }
+827   else
+828   {
+829 #endif
+830     delete(rep);
+831     rep = nrep;
+832 #ifndef BIGSTRING_MAXIMIZE_SPEED
+833   }
+834 #endif
+835   return nmatches;
+836 }
+\end{verbatim}\normalsize 
+\index{String@{String}!_gsub@{\_\-gsub}}
+\index{_gsub@{\_\-gsub}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} String::\_\-gsub (const char $\ast$, {\bf \_\-BIGSTRING\_\-SIZE}, const char $\ast$, {\bf \_\-BIGSTRING\_\-SIZE})\hspace{0.3cm}{\tt  [protected]}}\label{classString_b3}
+
+
+
+
+Definition at line 639 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-ITERATOR, \_\-BIGSTRING\_\-SIZE, chars(), Str\-Rep::len, length(), Str\-Rep::s, search(), and Str\-Rep::sz.
+
+Referenced by gsub().
+
+
+
+\footnotesize\begin{verbatim}640 {
+641   _BIGSTRING_SIZE nmatches = 0;
+642   if (pl < 0) pl = slen(pat);
+643   if (rl < 0) rl = slen(r);
+644   _BIGSTRING_SIZE sl = length();
+645   if (sl <= 0 || pl <= 0 || sl < pl)
+646     return nmatches;
+647   
+648   const char* s = chars();
+649 
+650   // prepare to make new rep
+651   StrRep* nrep = 0;
+652   _BIGSTRING_SIZE nsz = 0;
+653   char* x = 0;
+654 
+655   _BIGSTRING_ITERATOR si = 0;
+656   _BIGSTRING_ITERATOR xi = 0;
+657   _BIGSTRING_SIZE remaining = sl;
+658 
+659   while (remaining >= pl)
+660   {
+661     _BIGSTRING_SIZE pos = search(si, sl, pat, pl);
+662     if (pos < 0)
+663       break;
+664     else
+665     {
+666       ++nmatches;
+667       _BIGSTRING_SIZE mustfit = xi + remaining + rl - pl;
+668       if (mustfit >= nsz)
+669       {
+670         if (nrep != 0) nrep->len = xi;
+671         nrep = Sresize(nrep, mustfit);
+672         nsz = nrep->sz;
+673         x = nrep->s;
+674       }
+675       pos -= si;
+676       ncopy(&(s[si]), &(x[xi]), pos);
+677       ncopy(r, &(x[xi + pos]), rl);
+678       si += pos + pl;
+679       remaining -= pos + pl;
+680       xi += pos + rl;
+681     }
+682   }
+683 
+684   if (nrep == 0)
+685   {
+686     if (nmatches == 0)
+687       return nmatches;
+688     else
+689       nrep = Sresize(nrep, xi+remaining);
+690   }
+691 
+692   ncopy0(&(s[si]), &(x[xi]), remaining);
+693   nrep->len = xi + remaining;
+694 
+695   if (nrep->len <= rep->sz)   // fit back in if possible
+696   {
+697     rep->len = nrep->len;
+698     ncopy0(nrep->s, rep->s, rep->len);
+699     delete(nrep);
+700   }
+701   else
+702   {
+703     delete(rep);
+704     rep = nrep;
+705   }
+706   return nmatches;
+707 }
+\end{verbatim}\normalsize 
+\index{String@{String}!_substr@{\_\-substr}}
+\index{_substr@{\_\-substr}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Sub\-String} String::\_\-substr (int, int)\hspace{0.3cm}{\tt  [protected]}}\label{classString_b5}
+
+
+
+
+Referenced by after(), at(), before(), from(), operator()(), sub(), and through().\index{String@{String}!after@{after}}
+\index{after@{after}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Sub\-String} String::after (const {\bf Big\-Regex} \& {\em r}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0)}\label{classString_a81}
+
+
+
+
+Definition at line 1038 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, \_\-substr(), chars(), length(), and Big\-Regex::search().
+
+
+
+\footnotesize\begin{verbatim}1039 {
+1040   _BIGSTRING_SIZE mlen;
+1041   _BIGSTRING_SIZE first = r.search(chars(), length(), mlen, startpos);
+1042   if (first >= 0) first += mlen;
+1043   return _substr(first, length() - first);
+1044 }
+\end{verbatim}\normalsize 
+\index{String@{String}!after@{after}}
+\index{after@{after}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Sub\-String} String::after (char {\em c}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0)}\label{classString_a80}
+
+
+
+
+Definition at line 1031 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, \_\-substr(), length(), and search().
+
+
+
+\footnotesize\begin{verbatim}1032 {
+1033   _BIGSTRING_SIZE first = search(startpos, length(), c);
+1034   if (first >= 0) first += 1;
+1035   return _substr(first, length() - first);
+1036 }
+\end{verbatim}\normalsize 
+\index{String@{String}!after@{after}}
+\index{after@{after}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Sub\-String} String::after (const char $\ast$ {\em t}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0)}\label{classString_a79}
+
+
+
+
+Definition at line 1046 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, \_\-substr(), length(), and search().
+
+
+
+\footnotesize\begin{verbatim}1047 {
+1048   _BIGSTRING_SIZE tlen = slen(t);
+1049   _BIGSTRING_SIZE first = search(startpos, length(), t, tlen);
+1050   if (first >= 0) first += tlen;
+1051   return _substr(first, length() - first);
+1052 }
+\end{verbatim}\normalsize 
+\index{String@{String}!after@{after}}
+\index{after@{after}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Sub\-String} String::after (const {\bf Sub\-String} \& {\em x}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0)}\label{classString_a78}
+
+
+
+
+Definition at line 1024 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, \_\-substr(), Sub\-String::chars(), Sub\-String::length(), length(), and search().
+
+
+
+\footnotesize\begin{verbatim}1025 {
+1026   _BIGSTRING_SIZE first = search(startpos, length(), y.chars(), y.length());
+1027   if (first >= 0) first += y.length();
+1028   return _substr(first, length() - first);
+1029 }
+\end{verbatim}\normalsize 
+\index{String@{String}!after@{after}}
+\index{after@{after}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Sub\-String} String::after (const String \& {\em x}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0)}\label{classString_a77}
+
+
+
+
+Definition at line 1017 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, \_\-substr(), chars(), length(), and search().
+
+
+
+\footnotesize\begin{verbatim}1018 {
+1019   _BIGSTRING_SIZE first = search(startpos, length(), y.chars(), y.length());
+1020   if (first >= 0) first += y.length();
+1021   return _substr(first, length() - first);
+1022 }
+\end{verbatim}\normalsize 
+\index{String@{String}!after@{after}}
+\index{after@{after}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Sub\-String} String::after ({\bf \_\-BIGSTRING\_\-SIZE} {\em pos})}\label{classString_a76}
+
+
+
+
+Definition at line 906 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, \_\-substr(), and length().
+
+Referenced by absurl(), Financial\_\-Monthly::add(), add\_\-TL\_\-chunk\_\-or\_\-entry(), cmdline\_\-extract\_\-paper\_\-novelties(), cmdline\_\-extract\_\-paper\_\-plan\_\-to\_\-paper(), DIL\_\-Hierarchy\_\-cmd(), extract\_\-hierarchy\_\-depth\_\-decrease\_\-to\_\-paper(), extract\_\-paper\_\-novelties(), extract\_\-paper\_\-plan\_\-to\_\-paper(), extract\_\-recursively(), generate\_\-AL\_\-entry(), generate\_\-Figures\_\-Directory\_\-entry(), generate\_\-TL\_\-chunk\_\-header(), generate\_\-TL\_\-entry\_\-header(), DIL\_\-entry::Get\_\-Entry\_\-Parameters(), get\_\-figure\_\-data(), Novelty\_\-Marker::Get\_\-Novelty\_\-from\_\-Paper\_\-Plan(), get\_\-Paper\_\-Plans\_\-Section\_\-IDs(), include\_\-article\_\-head\_\-template(), include\_\-article\_\-section\_\-head\_\-template(), include\_\-article\_\-section\_\-tail\_\-template(), include\_\-article\_\-tail\_\-template(), include\_\-protected\_\-text(), DIL\_\-ID::init(), initialize(), main(), make\_\-note(), max\_\-chunk\_\-entry(), Modify\_\-Element(), process\_\-HTML(), process\_\-note\_\-CC(), process\_\-note\_\-generic(), process\_\-note\_\-HTML(), process\_\-note\_\-Te\-X(), relurl(), RX\_\-Search\_\-Safe(), search\_\-cmd(), select\_\-TL\_\-AL\_\-refs(), select\_\-TL\_\-DIL\_\-refs(), Target\_\-Access::set\_\-target(), Long\-List::split(), String\-List::split(), stop\_\-TL\_\-chunk(), Tabbed\_\-DIL\_\-Hierarchy(), Tabbed\_\-FORM\_\-DIL\_\-Hierarchy(), Tabbed\_\-HTML\_\-DIL\_\-Hierarchy(), and update\_\-DIL\_\-entry\_\-elements().
+
+
+
+\footnotesize\begin{verbatim}907 {
+908   return _substr(pos + 1, length() - (pos + 1));
+909 }
+\end{verbatim}\normalsize 
+\index{String@{String}!alloc@{alloc}}
+\index{alloc@{alloc}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void String::alloc ({\bf \_\-BIGSTRING\_\-SIZE} {\em newsize})}\label{classString_a107}
+
+
+
+
+Definition at line 253 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-LENGTH, \_\-BIGSTRING\_\-SIZE, Str\-Rep::len, and rep.
+
+Referenced by HTML\_\-remove\_\-comments(), and remove\_\-AL\_\-TC().
+
+
+
+\footnotesize\begin{verbatim}254 {
+255   _BIGSTRING_LENGTH old_len = rep->len;
+256   rep = Sresize(rep, newsize);
+257   rep->len = old_len;
+258 }
+\end{verbatim}\normalsize 
+\index{String@{String}!allocation@{allocation}}
+\index{allocation@{allocation}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-ALLOC} String::allocation () const\hspace{0.3cm}{\tt  [inline]}}\label{classString_a108}
+
+
+
+
+Definition at line 496 of file Big\-String.hh.
+
+References \_\-BIGSTRING\_\-ALLOC, rep, and Str\-Rep::sz.
+
+
+
+\footnotesize\begin{verbatim}496 { return rep->sz; }
+\end{verbatim}\normalsize 
+\index{String@{String}!at@{at}}
+\index{at@{at}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Sub\-String} String::at (const {\bf Big\-Regex} \& {\em r}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0)}\label{classString_a57}
+
+
+
+
+Definition at line 928 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, \_\-substr(), chars(), length(), and Big\-Regex::search().
+
+
+
+\footnotesize\begin{verbatim}929 {
+930   _BIGSTRING_SIZE mlen;
+931   _BIGSTRING_SIZE first = r.search(chars(), length(), mlen, startpos);
+932   return _substr(first, mlen); // INVOLVED in lfstr.at(...) = ...
+933 }
+\end{verbatim}\normalsize 
+\index{String@{String}!at@{at}}
+\index{at@{at}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Sub\-String} String::at (char {\em c}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0)}\label{classString_a56}
+
+
+
+
+Definition at line 942 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, \_\-substr(), length(), and search().
+
+
+
+\footnotesize\begin{verbatim}943 {
+944   _BIGSTRING_SIZE first = search(startpos, length(), c);
+945   return _substr(first, 1);
+946 }
+\end{verbatim}\normalsize 
+\index{String@{String}!at@{at}}
+\index{at@{at}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Sub\-String} String::at (const char $\ast$ {\em t}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0)}\label{classString_a55}
+
+
+
+
+Definition at line 935 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, \_\-substr(), length(), and search().
+
+
+
+\footnotesize\begin{verbatim}936 {
+937   _BIGSTRING_SIZE tlen = slen(t);
+938   _BIGSTRING_SIZE first = search(startpos, length(), t, tlen);
+939   return _substr(first, tlen);
+940 }
+\end{verbatim}\normalsize 
+\index{String@{String}!at@{at}}
+\index{at@{at}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Sub\-String} String::at (const {\bf Sub\-String} \& {\em x}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0)}\label{classString_a54}
+
+
+
+
+Definition at line 922 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, \_\-substr(), Sub\-String::chars(), Sub\-String::length(), length(), and search().
+
+
+
+\footnotesize\begin{verbatim}923 {
+924   _BIGSTRING_SIZE first = search(startpos, length(), y.chars(), y.length());
+925   return _substr(first, y.length());
+926 }
+\end{verbatim}\normalsize 
+\index{String@{String}!at@{at}}
+\index{at@{at}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Sub\-String} String::at (const String \& {\em x}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0)}\label{classString_a53}
+
+
+
+
+Definition at line 916 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, \_\-substr(), chars(), length(), and search().
+
+
+
+\footnotesize\begin{verbatim}917 {
+918   _BIGSTRING_SIZE first = search(startpos, length(), y.chars(), y.length());
+919   return _substr(first,  y.length());
+920 }
+\end{verbatim}\normalsize 
+\index{String@{String}!at@{at}}
+\index{at@{at}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Sub\-String} String::at ({\bf \_\-BIGSTRING\_\-SIZE} {\em pos}, {\bf \_\-BIGSTRING\_\-SIZE} {\em len})}\label{classString_a51}
+
+
+
+
+Definition at line 886 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, and \_\-substr().
+
+Referenced by add\_\-protected\_\-text(), add\_\-TL\_\-chunk\_\-or\_\-entry(), add\_\-TL\_\-section(), Assess\_\-Paper\_\-Correction\_\-Time(), clean\_\-paper\_\-outline(), D2A\_\-get\_\-tag(), Detect\_\-Form\_\-Input(), dil2al\_\-commands(), extract\_\-hierarchy\_\-depth\_\-decrease\_\-to\_\-paper(), extract\_\-hierarchy\_\-depth\_\-increase\_\-to\_\-paper(), extract\_\-paper\_\-novelties(), extract\_\-paper\_\-plan\_\-to\_\-paper(), extract\_\-recursively(), extract\_\-required\_\-item\_\-to\_\-paper(), generate\_\-AL\_\-entry(), generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-entry\_\-content(), Financial\_\-Note::get(), Detailed\_\-Items\_\-List::Get\_\-All\_\-DIL\_\-ID\_\-File\_\-Parameters(), get\_\-figure\_\-data(), get\_\-most\_\-recent\_\-TC\_\-AL(), get\_\-most\_\-recent\_\-TC\_\-DE(), Novelty\_\-Marker::Get\_\-Novelty\_\-from\_\-Paper\_\-Plan(), get\_\-Paper\_\-Plans\_\-Section\_\-IDs(), Detailed\_\-Items\_\-List::Get\_\-Project\_\-Data(), HTML\_\-get\_\-href(), HTML\_\-get\_\-marker(), HTML\_\-get\_\-name(), HTML\_\-get\_\-tagged\_\-environment(), HTML\_\-remove\_\-comments(), include\_\-article\_\-head\_\-template(), include\_\-article\_\-section\_\-head\_\-template(), include\_\-article\_\-section\_\-tail\_\-template(), include\_\-article\_\-tail\_\-template(), include\_\-protected\_\-text(), DIL\_\-ID::init(), DIL\_\-entry\_\-content::Is\_\-Plan\_\-Entry(), item\_\-content\_\-between\_\-range\_\-tags(), item\_\-content\_\-within\_\-DIL\_\-entry(), item\_\-content\_\-within\_\-paragraph(), item\_\-content\_\-within\_\-TL\_\-chunk(), locate\_\-most\_\-recent\_\-TL\_\-chunk(), modify\_\-DIL\_\-group\_\-target\_\-dates\_\-cmd(), Modify\_\-Element(), post\_\-process\_\-note(), process\_\-HTML(), process\_\-note\_\-CC(), process\_\-note\_\-generic(), process\_\-note\_\-HTML(), process\_\-note\_\-Te\-X(), remove\_\-AL\_\-TC(), search\_\-cmd(), Search\_\-Result::Search\_\-Result(), select\_\-TL\_\-DIL\_\-refs(), send\_\-dil\_\-to\_\-DIL(), Target\_\-Access::set\_\-target(), Te\-X\_\-format\_\-corrections(), Te\-X\_\-get\_\-command(), Te\-X\_\-get\_\-scope(), Te\-X\_\-safe\_\-text(), time\_\-stamp\_\-time(), time\_\-stamp\_\-time\_\-of\_\-day(), and Detailed\_\-Items\_\-List::Write\_\-to\_\-File().
+
+
+
+\footnotesize\begin{verbatim}887 {
+888   return _substr(first, len);
+889 }
+\end{verbatim}\normalsize 
+\index{String@{String}!before@{before}}
+\index{before@{before}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Sub\-String} String::before (const {\bf Big\-Regex} \& {\em r}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0)}\label{classString_a63}
+
+
+
+
+Definition at line 960 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, \_\-substr(), chars(), length(), and Big\-Regex::search().
+
+
+
+\footnotesize\begin{verbatim}961 {
+962   _BIGSTRING_SIZE mlen;
+963   _BIGSTRING_SIZE first = r.search(chars(), length(), mlen, startpos);
+964   return _substr(0, first);
+965 }
+\end{verbatim}\normalsize 
+\index{String@{String}!before@{before}}
+\index{before@{before}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Sub\-String} String::before (char {\em c}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0)}\label{classString_a62}
+
+
+
+
+Definition at line 967 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, \_\-substr(), length(), and search().
+
+
+
+\footnotesize\begin{verbatim}968 {
+969   _BIGSTRING_SIZE last = search(startpos, length(), c);
+970   return _substr(0, last);
+971 }
+\end{verbatim}\normalsize 
+\index{String@{String}!before@{before}}
+\index{before@{before}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Sub\-String} String::before (const char $\ast$ {\em t}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0)}\label{classString_a61}
+
+
+
+
+Definition at line 973 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, \_\-substr(), length(), and search().
+
+
+
+\footnotesize\begin{verbatim}974 {
+975   _BIGSTRING_SIZE tlen = slen(t);
+976   _BIGSTRING_SIZE last = search(startpos, length(), t, tlen);
+977   return _substr(0, last);
+978 }
+\end{verbatim}\normalsize 
+\index{String@{String}!before@{before}}
+\index{before@{before}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Sub\-String} String::before (const {\bf Sub\-String} \& {\em x}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0)}\label{classString_a60}
+
+
+
+
+Definition at line 954 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, \_\-substr(), Sub\-String::chars(), Sub\-String::length(), length(), and search().
+
+
+
+\footnotesize\begin{verbatim}955 {
+956   _BIGSTRING_SIZE last = search(startpos, length(), y.chars(), y.length());
+957   return _substr(0, last);
+958 }
+\end{verbatim}\normalsize 
+\index{String@{String}!before@{before}}
+\index{before@{before}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Sub\-String} String::before (const String \& {\em x}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0)}\label{classString_a59}
+
+
+
+
+Definition at line 948 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, \_\-substr(), chars(), length(), and search().
+
+
+
+\footnotesize\begin{verbatim}949 {
+950   _BIGSTRING_SIZE last = search(startpos, length(), y.chars(), y.length());
+951   return _substr(0, last);
+952 }
+\end{verbatim}\normalsize 
+\index{String@{String}!before@{before}}
+\index{before@{before}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Sub\-String} String::before ({\bf \_\-BIGSTRING\_\-SIZE} {\em pos})}\label{classString_a58}
+
+
+
+
+Definition at line 896 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, and \_\-substr().
+
+Referenced by absurl(), add\_\-protected\_\-text(), add\_\-TL\_\-chunk\_\-or\_\-entry(), add\_\-TL\_\-section(), cmdline\_\-extract\_\-paper\_\-novelties(), cmdline\_\-extract\_\-paper\_\-plan\_\-to\_\-paper(), DIL\_\-Hierarchy\_\-cmd(), Elipsis\_\-At(), extract\_\-hierarchy\_\-depth\_\-decrease\_\-to\_\-paper(), extract\_\-paper\_\-plan\_\-to\_\-paper(), extract\_\-recursively(), generate\_\-AL\_\-entry(), generate\_\-Figures\_\-Directory\_\-entry(), Financial\_\-Note::get(), get\_\-figure\_\-data(), Novelty\_\-Marker::Get\_\-Novelty\_\-from\_\-Paper\_\-Plan(), get\_\-Paper\_\-Plans\_\-Section\_\-IDs(), Get\_\-Target\_\-Regex(), HTML\_\-marker\_\-arguments(), include\_\-article\_\-head\_\-template(), include\_\-article\_\-section\_\-head\_\-template(), include\_\-article\_\-section\_\-tail\_\-template(), include\_\-article\_\-tail\_\-template(), include\_\-protected\_\-text(), DIL\_\-ID::init(), make\_\-note(), max\_\-chunk\_\-entry(), modify\_\-DIL\_\-group\_\-target\_\-dates\_\-cmd(), Modify\_\-Element(), process\_\-HTML(), process\_\-note\_\-CC(), process\_\-note\_\-generic(), process\_\-note\_\-HTML(), process\_\-note\_\-Te\-X(), read\_\-financial\_\-notes\_\-file(), relurl(), search\_\-cmd(), Search\_\-Result::Search\_\-Result(), select\_\-TL\_\-AL\_\-refs(), select\_\-TL\_\-DIL\_\-refs(), Target\_\-Access::set\_\-target(), Long\-List::split(), String\-List::split(), stop\_\-TL\_\-chunk(), Tabbed\_\-DIL\_\-Hierarchy(), Tabbed\_\-FORM\_\-DIL\_\-Hierarchy(), Tabbed\_\-HTML\_\-DIL\_\-Hierarchy(), Te\-X\_\-format\_\-corrections(), time\_\-stamp\_\-time\_\-date(), Target\_\-Access::transformed\_\-name(), update\_\-DIL\_\-entry\_\-elements(), update\_\-main\_\-ALs(), and Detailed\_\-Items\_\-List::Write\_\-to\_\-File().
+
+
+
+\footnotesize\begin{verbatim}897 {
+898   return _substr(0, pos);
+899 }
+\end{verbatim}\normalsize 
+\index{String@{String}!capitalize@{capitalize}}
+\index{capitalize@{capitalize}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void String::capitalize ()\hspace{0.3cm}{\tt  [inline]}}\label{classString_a97}
+
+
+
+
+Definition at line 1056 of file Big\-String.hh.
+
+References rep, and Scapitalize().
+
+
+
+\footnotesize\begin{verbatim}1057 {
+1058   rep = Scapitalize(rep, rep);
+1059 }
+\end{verbatim}\normalsize 
+\index{String@{String}!chars@{chars}}
+\index{chars@{chars}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ String::chars () const\hspace{0.3cm}{\tt  [inline]}}\label{classString_a104}
+
+
+
+
+Definition at line 495 of file Big\-String.hh.
+
+References rep, and Str\-Rep::s.
+
+Referenced by \_\-gsub(), after(), at(), before(), cat(), DIL\_\-ID::chars(), common\_\-prefix(), common\_\-suffix(), compare(), Sub\-String::contains(), contains(), del(), Detect\_\-Form\_\-Input(), dil2al\_\-commands(), exit\_\-report(), fcompare(), freq(), from(), gsub(), index(), join(), matches(), operator const char $\ast$(), operator$<$$<$(), Sub\-String::operator=(), prepend(), replicate(), search(), Long\-List::split(), split(), through(), time\_\-stamp\_\-time\_\-of\_\-day(), DIL\_\-AL\_\-List::Write\_\-to\_\-Binary\_\-Cache(), DIL\_\-Topical\_\-List::Write\_\-to\_\-Binary\_\-Cache(), Detailed\_\-Items\_\-List::Write\_\-to\_\-File(), and DIL\_\-entry\_\-content::Write\_\-Topical\_\-to\_\-Binary\_\-Cache().
+
+
+
+\footnotesize\begin{verbatim}495 { return &(rep->s[0]); }
+\end{verbatim}\normalsize 
+\index{String@{String}!contains@{contains}}
+\index{contains@{contains}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int String::contains (const {\bf Big\-Regex} \& {\em r}, {\bf \_\-BIGSTRING\_\-SIZE} {\em pos}) const\hspace{0.3cm}{\tt  [inline]}}\label{classString_a41}
+
+
+
+
+Definition at line 1171 of file Big\-String.hh.
+
+References \_\-BIGSTRING\_\-SIZE, chars(), length(), and Big\-Regex::match().
+
+
+
+\footnotesize\begin{verbatim}1172 {
+1173   return r.match(chars(), length(), p) >= 0;
+1174 }
+\end{verbatim}\normalsize 
+\index{String@{String}!contains@{contains}}
+\index{contains@{contains}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int String::contains (const char $\ast$ {\em t}, {\bf \_\-BIGSTRING\_\-SIZE} {\em pos}) const\hspace{0.3cm}{\tt  [inline]}}\label{classString_a40}
+
+
+
+
+Definition at line 1151 of file Big\-String.hh.
+
+References \_\-BIGSTRING\_\-SIZE, length(), and match().
+
+
+
+\footnotesize\begin{verbatim}1152 {
+1153   return match(p, length(), 0, t) >= 0;
+1154 }
+\end{verbatim}\normalsize 
+\index{String@{String}!contains@{contains}}
+\index{contains@{contains}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int String::contains (const {\bf Sub\-String} \& {\em y}, {\bf \_\-BIGSTRING\_\-SIZE} {\em pos}) const\hspace{0.3cm}{\tt  [inline]}}\label{classString_a39}
+
+
+
+
+Definition at line 1161 of file Big\-String.hh.
+
+References \_\-BIGSTRING\_\-SIZE, Sub\-String::chars(), Sub\-String::length(), length(), and match().
+
+
+
+\footnotesize\begin{verbatim}1162 {
+1163   return match(p, length(), 0, y.chars(), y.length()) >= 0;
+1164 }
+\end{verbatim}\normalsize 
+\index{String@{String}!contains@{contains}}
+\index{contains@{contains}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int String::contains (const String \& {\em y}, {\bf \_\-BIGSTRING\_\-SIZE} {\em pos}) const\hspace{0.3cm}{\tt  [inline]}}\label{classString_a38}
+
+
+
+
+Definition at line 1156 of file Big\-String.hh.
+
+References \_\-BIGSTRING\_\-SIZE, chars(), length(), and match().
+
+
+
+\footnotesize\begin{verbatim}1157 {
+1158   return match(p, length(), 0, y.chars(), y.length()) >= 0;
+1159 }
+\end{verbatim}\normalsize 
+\index{String@{String}!contains@{contains}}
+\index{contains@{contains}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int String::contains (char {\em c}, {\bf \_\-BIGSTRING\_\-SIZE} {\em pos}) const\hspace{0.3cm}{\tt  [inline]}}\label{classString_a37}
+
+
+
+
+Definition at line 1146 of file Big\-String.hh.
+
+References \_\-BIGSTRING\_\-SIZE, length(), and match().
+
+
+
+\footnotesize\begin{verbatim}1147 {
+1148   return match(p, length(), 0, &c, 1) >= 0;
+1149 }
+\end{verbatim}\normalsize 
+\index{String@{String}!contains@{contains}}
+\index{contains@{contains}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int String::contains (const {\bf Big\-Regex} \& {\em r}) const\hspace{0.3cm}{\tt  [inline]}}\label{classString_a36}
+
+
+
+
+Definition at line 1166 of file Big\-String.hh.
+
+References chars(), length(), and Big\-Regex::search().
+
+
+
+\footnotesize\begin{verbatim}1167 {
+1168   int unused;  return r.search(chars(), length(), unused, 0) >= 0;
+1169 }
+\end{verbatim}\normalsize 
+\index{String@{String}!contains@{contains}}
+\index{contains@{contains}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int String::contains (const char $\ast$ {\em t}) const\hspace{0.3cm}{\tt  [inline]}}\label{classString_a35}
+
+
+
+
+Definition at line 1131 of file Big\-String.hh.
+
+References length(), and search().
+
+
+
+\footnotesize\begin{verbatim}1132 {   
+1133   return search(0, length(), t) >= 0;
+1134 }
+\end{verbatim}\normalsize 
+\index{String@{String}!contains@{contains}}
+\index{contains@{contains}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int String::contains (const {\bf Sub\-String} \& {\em y}) const\hspace{0.3cm}{\tt  [inline]}}\label{classString_a34}
+
+
+
+
+Definition at line 1141 of file Big\-String.hh.
+
+References Sub\-String::chars(), Sub\-String::length(), length(), and search().
+
+
+
+\footnotesize\begin{verbatim}1142 {   
+1143   return search(0, length(), y.chars(), y.length()) >= 0;
+1144 }
+\end{verbatim}\normalsize 
+\index{String@{String}!contains@{contains}}
+\index{contains@{contains}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int String::contains (const String \& {\em y}) const\hspace{0.3cm}{\tt  [inline]}}\label{classString_a33}
+
+
+
+
+Definition at line 1136 of file Big\-String.hh.
+
+References chars(), length(), and search().
+
+
+
+\footnotesize\begin{verbatim}1137 {   
+1138   return search(0, length(), y.chars(), y.length()) >= 0;
+1139 }
+\end{verbatim}\normalsize 
+\index{String@{String}!contains@{contains}}
+\index{contains@{contains}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int String::contains (char {\em c}) const\hspace{0.3cm}{\tt  [inline]}}\label{classString_a32}
+
+
+
+
+Definition at line 1126 of file Big\-String.hh.
+
+References length(), and search().
+
+Referenced by absurl(), add\_\-TL\_\-chunk\_\-or\_\-entry(), Assess\_\-Paper\_\-Correction\_\-Time(), Target\_\-Access::cleartext\_\-conversion(), String\-List::contains(), extract\_\-DIL\_\-IDs\_\-from\_\-form(), extract\_\-paper\_\-plan\_\-to\_\-paper(), extract\_\-recursively(), extraction\_\-put\_\-figure(), String\-List::first\_\-contained\_\-in(), Financial\_\-Note::get(), get\_\-AL\_\-entry(), Novelty\_\-Marker::Get\_\-Novelty\_\-from\_\-Paper\_\-Plan(), Get\_\-Target\_\-Regex(), item\_\-content\_\-within\_\-DIL\_\-entry(), item\_\-content\_\-within\_\-TL\_\-chunk(), Search\_\-Target::links(), main(), Plan\_\-entry\_\-content::Parse\_\-Entry\_\-Content(), process\_\-HTML(), readtotag(), Search\_\-Result::Search\_\-Result(), select\_\-TL\_\-AL\_\-refs(), select\_\-TL\_\-DIL\_\-refs(), and Target\_\-Access::uncompress().
+
+
+
+\footnotesize\begin{verbatim}1127 {
+1128   return search(0, length(), c) >= 0;
+1129 }
+\end{verbatim}\normalsize 
+\index{String@{String}!del@{del}}
+\index{del@{del}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void String::del (const {\bf Big\-Regex} \& {\em r}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0)}\label{classString_a88}
+
+
+
+
+Definition at line 852 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, chars(), del(), length(), and Big\-Regex::search().
+
+
+
+\footnotesize\begin{verbatim}853 {
+854   _BIGSTRING_SIZE mlen;
+855   _BIGSTRING_SIZE first = r.search(chars(), length(), mlen, startpos);
+856   del(first, mlen);
+857 }
+\end{verbatim}\normalsize 
+\index{String@{String}!del@{del}}
+\index{del@{del}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void String::del (char {\em c}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0)}\label{classString_a87}
+
+
+
+
+Definition at line 876 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, del(), length(), and search().
+
+
+
+\footnotesize\begin{verbatim}877 {
+878   del(search(startpos, length(), c), 1);
+879 }
+\end{verbatim}\normalsize 
+\index{String@{String}!del@{del}}
+\index{del@{del}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void String::del (const char $\ast$ {\em t}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0)}\label{classString_a86}
+
+
+
+
+Definition at line 859 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, del(), length(), and search().
+
+
+
+\footnotesize\begin{verbatim}860 {
+861   _BIGSTRING_SIZE tlen = slen(t);
+862   _BIGSTRING_SIZE p = search(startpos, length(), t, tlen);
+863   del(p, tlen);
+864 }
+\end{verbatim}\normalsize 
+\index{String@{String}!del@{del}}
+\index{del@{del}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void String::del (const {\bf Sub\-String} \& {\em y}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0)}\label{classString_a85}
+
+
+
+
+Definition at line 871 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, Sub\-String::chars(), del(), Sub\-String::length(), length(), and search().
+
+
+
+\footnotesize\begin{verbatim}872 {
+873   del(search(startpos, length(), y.chars(), y.length()), y.length());
+874 }
+\end{verbatim}\normalsize 
+\index{String@{String}!del@{del}}
+\index{del@{del}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void String::del (const String \& {\em y}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0)}\label{classString_a84}
+
+
+
+
+Definition at line 866 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, chars(), del(), length(), and search().
+
+
+
+\footnotesize\begin{verbatim}867 {
+868   del(search(startpos, length(), y.chars(), y.length()), y.length());
+869 }
+\end{verbatim}\normalsize 
+\index{String@{String}!del@{del}}
+\index{del@{del}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void String::del ({\bf \_\-BIGSTRING\_\-SIZE} {\em pos}, {\bf \_\-BIGSTRING\_\-SIZE} {\em len})}\label{classString_a83}
+
+
+
+
+Definition at line 843 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-LENGTH, \_\-BIGSTRING\_\-SIZE, Str\-Rep::len, length(), and Str\-Rep::s.
+
+Referenced by add\_\-TL\_\-chunk\_\-or\_\-entry(), Assess\_\-Paper\_\-Correction\_\-Time(), auto\_\-interactive(), del(), Detect\_\-Form\_\-Input(), dil2al\_\-commands(), DIL\_\-Hierarchy\_\-cmd(), extract\_\-hierarchy\_\-depth\_\-decrease\_\-to\_\-paper(), extract\_\-paper\_\-plan\_\-to\_\-paper(), extraction\_\-put\_\-figure(), financial\_\-notes(), generate\_\-Figures\_\-Directory\_\-entry(), generic\_\-remove\_\-name\_\-reference(), Financial\_\-Note::get(), get\_\-figure\_\-data(), get\_\-most\_\-recent\_\-TC\_\-AL(), get\_\-most\_\-recent\_\-TC\_\-DE(), Novelty\_\-Marker::Get\_\-Novelty\_\-from\_\-Paper\_\-Plan(), get\_\-Paper\_\-Plans\_\-Section\_\-IDs(), Detailed\_\-Items\_\-List::Get\_\-Project\_\-Data(), Get\_\-Target\_\-Directory(), Get\_\-Target\_\-Regex(), include\_\-protected\_\-text(), locate\_\-most\_\-recent\_\-TL\_\-chunk(), make\_\-note(), Modify\_\-Element(), read\_\-financial\_\-notes\_\-file(), remove\_\-AL\_\-TC(), Target\_\-Access::remove\_\-back\_\-references(), search\_\-cmd(), select\_\-TL\_\-AL\_\-refs(), select\_\-TL\_\-DIL\_\-refs(), send\_\-dil\_\-to\_\-DIL(), and Text\_\-limit\_\-line\_\-length().
+
+
+
+\footnotesize\begin{verbatim}844 {
+845   if (pos < 0 || len <= 0 || (unsigned)(pos + len) > length()) return;
+846   _BIGSTRING_LENGTH nlen = length() - len;
+847   _BIGSTRING_SIZE first = pos + len;
+848   ncopy0(&(rep->s[first]), &(rep->s[pos]), length() - first);
+849   rep->len = nlen;
+850 }
+\end{verbatim}\normalsize 
+\index{String@{String}!downcase@{downcase}}
+\index{downcase@{downcase}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void String::downcase ()\hspace{0.3cm}{\tt  [inline]}}\label{classString_a96}
+
+
+
+
+Definition at line 1050 of file Big\-String.hh.
+
+References rep, and Sdowncase().
+
+
+
+\footnotesize\begin{verbatim}1051 {
+1052   rep = Sdowncase(rep, rep);
+1053 }
+\end{verbatim}\normalsize 
+\index{String@{String}!elem@{elem}}
+\index{elem@{elem}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}char String::elem ({\bf \_\-BIGSTRING\_\-ITERATOR} {\em i}) const\hspace{0.3cm}{\tt  [inline]}}\label{classString_a100}
+
+
+
+
+Definition at line 1075 of file Big\-String.hh.
+
+References \_\-BIGSTRING\_\-ITERATOR, error(), length(), rep, and Str\-Rep::s.
+
+Referenced by firstchar(), get\_\-figure\_\-data(), lastchar(), Te\-X\_\-format\_\-corrections(), Te\-X\_\-get\_\-argument(), Te\-X\_\-get\_\-scope(), and Te\-X\_\-safe\_\-text().
+
+
+
+\footnotesize\begin{verbatim}1076 { 
+1077   if (((unsigned)i) >= length()) error("invalid index");
+1078   return rep->s[i];
+1079 }
+\end{verbatim}\normalsize 
+\index{String@{String}!empty@{empty}}
+\index{empty@{empty}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int String::empty () const\hspace{0.3cm}{\tt  [inline]}}\label{classString_a106}
+
+
+
+
+Definition at line 494 of file Big\-String.hh.
+
+References Str\-Rep::len, and rep.
+
+Referenced by Target\_\-Access::cleartext\_\-conversion(), Detect\_\-Form\_\-Input(), DIL\_\-Hierarchy\_\-cmd(), extraction\_\-put\_\-figure(), financial\_\-notes(), Financial\_\-Note::get(), get\_\-double(), get\_\-figure\_\-data(), Search\_\-Target::links(), Target\_\-Access::make\_\-local\_\-copy(), modify\_\-element\_\-through\_\-FORM\_\-interface\_\-DIL\_\-Superiors(), relurl(), Target\_\-Access::remove\_\-cleartext(), Target\_\-Access::remove\_\-local\_\-copy(), Target\_\-Access::remove\_\-uncompressed(), search\_\-cmd(), search\_\-FORM\_\-cmd(), Target\_\-Access::set\_\-target(), Tabbed\_\-DIL\_\-Hierarchy(), Tabbed\_\-FORM\_\-DIL\_\-Hierarchy(), Tabbed\_\-HTML\_\-DIL\_\-Hierarchy(), Target\_\-Access::transformed\_\-name(), Target\_\-Access::uncompress(), and write\_\-file\_\-from\_\-String().
+
+
+
+\footnotesize\begin{verbatim}494 { return rep->len == 0; }
+\end{verbatim}\normalsize 
+\index{String@{String}!error@{error}}
+\index{error@{error}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void String::error (const char $\ast$ {\em msg}) const}\label{classString_a109}
+
+
+
+
+Definition at line 39 of file Big\-String.cc.
+
+Referenced by elem(), Sub\-String::OK(), OK(), and operator[$\,$]().
+
+
+
+\footnotesize\begin{verbatim}40 {
+41 cerr << "Error in String: " << msg << '\n';
+42 //  (*lib_error_handler)("String", msg);
+43 }
+\end{verbatim}\normalsize 
+\index{String@{String}!firstchar@{firstchar}}
+\index{firstchar@{firstchar}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}char String::firstchar () const\hspace{0.3cm}{\tt  [inline]}}\label{classString_a101}
+
+
+
+
+Definition at line 1081 of file Big\-String.hh.
+
+References elem().
+
+Referenced by Target\_\-Access::remove\_\-back\_\-references(), and Target\_\-Access::set\_\-target().
+
+
+
+\footnotesize\begin{verbatim}1082 { 
+1083   return elem(0);
+1084 }
+\end{verbatim}\normalsize 
+\index{String@{String}!freq@{freq}}
+\index{freq@{freq}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} String::freq (const char $\ast$ {\em t}) const}\label{classString_a50}
+
+
+
+
+Definition at line 1442 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-LENGTH, \_\-BIGSTRING\_\-SIZE, length(), and match().
+
+
+
+\footnotesize\begin{verbatim}1443 {
+1444   _BIGSTRING_SIZE found = 0;
+1445   for (_BIGSTRING_LENGTH i = 0; i < length(); i++) 
+1446     if (match(i,length(),0,t) >= 0) found++;
+1447   return(found);
+1448 }
+\end{verbatim}\normalsize 
+\index{String@{String}!freq@{freq}}
+\index{freq@{freq}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} String::freq (const {\bf Sub\-String} \& {\em y}) const}\label{classString_a49}
+
+
+
+
+Definition at line 1426 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-LENGTH, \_\-BIGSTRING\_\-SIZE, Sub\-String::chars(), Sub\-String::length(), length(), and match().
+
+
+
+\footnotesize\begin{verbatim}1427 {
+1428   _BIGSTRING_SIZE found = 0;
+1429   for (_BIGSTRING_LENGTH i = 0; i < length(); i++) 
+1430     if (match(i,length(),0,y.chars(), y.length())>= 0) found++;
+1431   return(found);
+1432 }
+\end{verbatim}\normalsize 
+\index{String@{String}!freq@{freq}}
+\index{freq@{freq}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} String::freq (const String \& {\em y}) const}\label{classString_a48}
+
+
+
+
+Definition at line 1434 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-LENGTH, \_\-BIGSTRING\_\-SIZE, chars(), length(), and match().
+
+
+
+\footnotesize\begin{verbatim}1435 {
+1436   _BIGSTRING_SIZE found = 0;
+1437   for (_BIGSTRING_LENGTH i = 0; i < length(); i++) 
+1438     if (match(i,length(),0,y.chars(),y.length()) >= 0) found++;
+1439   return(found);
+1440 }
+\end{verbatim}\normalsize 
+\index{String@{String}!freq@{freq}}
+\index{freq@{freq}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} String::freq (char {\em c}) const}\label{classString_a47}
+
+
+
+
+Definition at line 1450 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-LENGTH, \_\-BIGSTRING\_\-SIZE, length(), and match().
+
+Referenced by absurl().
+
+
+
+\footnotesize\begin{verbatim}1451 {
+1452   _BIGSTRING_SIZE found = 0;
+1453   for (_BIGSTRING_LENGTH i = 0; i < length(); i++) 
+1454     if (match(i,length(),0,&c,1) >= 0) found++;
+1455   return(found);
+1456 }
+\end{verbatim}\normalsize 
+\index{String@{String}!from@{from}}
+\index{from@{from}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Sub\-String} String::from (const {\bf Big\-Regex} \& {\em r}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0)}\label{classString_a75}
+
+
+
+
+Definition at line 1066 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, \_\-substr(), chars(), length(), and Big\-Regex::search().
+
+
+
+\footnotesize\begin{verbatim}1067 {
+1068   _BIGSTRING_SIZE mlen;
+1069   _BIGSTRING_SIZE first = r.search(chars(), length(), mlen, startpos);
+1070   return _substr(first, length() - first);
+1071 }
+\end{verbatim}\normalsize 
+\index{String@{String}!from@{from}}
+\index{from@{from}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Sub\-String} String::from (char {\em c}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0)}\label{classString_a74}
+
+
+
+
+Definition at line 1073 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, \_\-substr(), length(), and search().
+
+
+
+\footnotesize\begin{verbatim}1074 {
+1075   _BIGSTRING_SIZE first = search(startpos, length(), c);
+1076   return _substr(first, length() - first);
+1077 }
+\end{verbatim}\normalsize 
+\index{String@{String}!from@{from}}
+\index{from@{from}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Sub\-String} String::from (const char $\ast$ {\em t}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0)}\label{classString_a73}
+
+
+
+
+Definition at line 1079 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, \_\-substr(), length(), and search().
+
+
+
+\footnotesize\begin{verbatim}1080 {
+1081   _BIGSTRING_SIZE tlen = slen(t);
+1082   _BIGSTRING_SIZE first = search(startpos, length(), t, tlen);
+1083   return _substr(first, length() - first);
+1084 }
+\end{verbatim}\normalsize 
+\index{String@{String}!from@{from}}
+\index{from@{from}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Sub\-String} String::from (const {\bf Sub\-String} \& {\em x}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0)}\label{classString_a72}
+
+
+
+
+Definition at line 1060 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, \_\-substr(), Sub\-String::chars(), Sub\-String::length(), length(), and search().
+
+
+
+\footnotesize\begin{verbatim}1061 {
+1062   _BIGSTRING_SIZE first = search(startpos, length(), y.chars(), y.length());
+1063   return _substr(first, length() - first);
+1064 }
+\end{verbatim}\normalsize 
+\index{String@{String}!from@{from}}
+\index{from@{from}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Sub\-String} String::from (const String \& {\em x}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0)}\label{classString_a71}
+
+
+
+
+Definition at line 1054 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, \_\-substr(), chars(), length(), and search().
+
+
+
+\footnotesize\begin{verbatim}1055 {
+1056   _BIGSTRING_SIZE first = search(startpos, length(), y.chars(), y.length());
+1057   return _substr(first, length() - first);
+1058 }
+\end{verbatim}\normalsize 
+\index{String@{String}!from@{from}}
+\index{from@{from}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Sub\-String} String::from ({\bf \_\-BIGSTRING\_\-SIZE} {\em pos})}\label{classString_a70}
+
+
+
+
+Definition at line 911 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, \_\-substr(), and length().
+
+Referenced by add\_\-protected\_\-text(), add\_\-TL\_\-chunk\_\-or\_\-entry(), Assess\_\-Paper\_\-Correction\_\-Time(), clean\_\-paper\_\-outline(), DIL\_\-Hierarchy\_\-cmd(), extract\_\-paper\_\-plan\_\-to\_\-paper(), extract\_\-recursively(), HTML\_\-marker\_\-arguments(), include\_\-article\_\-section\_\-tail\_\-template(), DIL\_\-ID::init(), Modify\_\-Element(), process\_\-note\_\-Te\-X(), read\_\-financial\_\-notes\_\-file(), relurl(), Search\_\-Result::Search\_\-Result(), Target\_\-Access::set\_\-target(), Te\-X\_\-format\_\-corrections(), Te\-X\_\-safe\_\-text(), Text\_\-limit\_\-line\_\-length(), update\_\-DIL\_\-entry\_\-elements(), and update\_\-main\_\-ALs().
+
+
+
+\footnotesize\begin{verbatim}912 {
+913   return _substr(pos, length() - pos);
+914 }
+\end{verbatim}\normalsize 
+\index{String@{String}!gsub@{gsub}}
+\index{gsub@{gsub}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} String::gsub (const {\bf Big\-Regex} \& {\em pat}, const String \& {\em repl}, char {\em substrs} = '$\backslash$0')\hspace{0.3cm}{\tt  [inline]}}\label{classString_a93}
+
+
+
+
+Definition at line 1244 of file Big\-String.hh.
+
+References \_\-BIGSTRING\_\-SIZE, \_\-gsub(), chars(), and length().
+
+
+
+\footnotesize\begin{verbatim}1245 {
+1246   return _gsub(pat, r.chars(), r.length(), substrs);
+1247 }
+\end{verbatim}\normalsize 
+\index{String@{String}!gsub@{gsub}}
+\index{gsub@{gsub}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} String::gsub (const char $\ast$ {\em pat}, const char $\ast$ {\em repl})\hspace{0.3cm}{\tt  [inline]}}\label{classString_a92}
+
+
+
+
+Definition at line 1254 of file Big\-String.hh.
+
+References \_\-BIGSTRING\_\-SIZE, and \_\-gsub().
+
+
+
+\footnotesize\begin{verbatim}1255 {
+1256   return _gsub(pat, -1, r, -1);
+1257 }
+\end{verbatim}\normalsize 
+\index{String@{String}!gsub@{gsub}}
+\index{gsub@{gsub}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} String::gsub (const char $\ast$ {\em pat}, const String \& {\em repl})\hspace{0.3cm}{\tt  [inline]}}\label{classString_a91}
+
+
+
+
+Definition at line 1249 of file Big\-String.hh.
+
+References \_\-BIGSTRING\_\-SIZE, \_\-gsub(), chars(), and length().
+
+
+
+\footnotesize\begin{verbatim}1250 {
+1251   return _gsub(pat, -1, r.chars(), r.length());
+1252 }
+\end{verbatim}\normalsize 
+\index{String@{String}!gsub@{gsub}}
+\index{gsub@{gsub}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} String::gsub (const {\bf Sub\-String} \& {\em pat}, const String \& {\em repl})\hspace{0.3cm}{\tt  [inline]}}\label{classString_a90}
+
+
+
+
+Definition at line 1239 of file Big\-String.hh.
+
+References \_\-BIGSTRING\_\-SIZE, \_\-gsub(), chars(), Sub\-String::chars(), length(), and Sub\-String::length().
+
+
+
+\footnotesize\begin{verbatim}1240 {
+1241   return _gsub(pat.chars(), pat.length(), r.chars(), r.length());
+1242 }
+\end{verbatim}\normalsize 
+\index{String@{String}!gsub@{gsub}}
+\index{gsub@{gsub}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} String::gsub (const String \& {\em pat}, const String \& {\em repl})\hspace{0.3cm}{\tt  [inline]}}\label{classString_a89}
+
+
+
+
+Definition at line 1234 of file Big\-String.hh.
+
+References \_\-BIGSTRING\_\-SIZE, \_\-gsub(), chars(), and length().
+
+Referenced by absurl(), add\_\-TL\_\-chunk\_\-or\_\-entry(), Assess\_\-Paper\_\-Correction\_\-Time(), clean\_\-paper\_\-outline(), convert\_\-item\_\-content\_\-to\_\-Te\-X(), extract\_\-hierarchy\_\-depth\_\-decrease\_\-to\_\-paper(), extract\_\-paper\_\-novelties(), extract\_\-paper\_\-plan\_\-to\_\-paper(), extraction\_\-put\_\-figure(), generate\_\-AL(), generate\_\-AL\_\-entry(), generate\_\-EPS\_\-cells(), Active\_\-List::generate\_\-focused\_\-AL(), generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-entry\_\-parameters(), Active\_\-List::generate\_\-wide\_\-AL(), get\_\-figure\_\-data(), get\_\-most\_\-recent\_\-TC\_\-DE(), Novelty\_\-Marker::Get\_\-Novelty\_\-from\_\-Paper\_\-Plan(), get\_\-Paper\_\-Plans\_\-Section\_\-IDs(), HTML\_\-remove\_\-tags(), HTML\_\-safe(), include\_\-article\_\-head\_\-template(), include\_\-article\_\-tail\_\-template(), item\_\-content\_\-within\_\-TL\_\-chunk(), make\_\-note(), modify\_\-DIL\_\-group\_\-target\_\-dates\_\-cmd(), modify\_\-element\_\-through\_\-FORM\_\-interface(), process\_\-HTML(), process\_\-note(), process\_\-note\_\-CC(), process\_\-note\_\-generic(), process\_\-note\_\-Te\-X(), Target\_\-Access::remove\_\-back\_\-references(), remove\_\-whitespace(), RX\_\-Search\_\-Safe(), search\_\-cmd(), search\_\-FORM\_\-cmd(), select\_\-TL\_\-AL\_\-refs(), select\_\-TL\_\-DIL\_\-refs(), send\_\-dil\_\-to\_\-DIL(), stop\_\-TL\_\-chunk(), Te\-X\_\-format\_\-corrections(), Te\-X\_\-safe\_\-text(), Target\_\-Access::transformed\_\-name(), unconvert\_\-item\_\-content\_\-from\_\-Te\-X(), update\_\-DIL\_\-entry\_\-elements(), DIL\_\-Visualize\_\-with\_\-FORM\_\-Tabs::Visualize\_\-Element(), and DIL\_\-Visualize\_\-with\_\-HTML\_\-Tabs::Visualize\_\-Element().
+
+
+
+\footnotesize\begin{verbatim}1235 {
+1236   return _gsub(pat.chars(), pat.length(), r.chars(), r.length());
+1237 }
+\end{verbatim}\normalsize 
+\index{String@{String}!index@{index}}
+\index{index@{index}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} String::index (const {\bf Big\-Regex} \& {\em r}, {\bf Big\-String\_\-Search\_\-t} {\em \_\-st}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0) const\hspace{0.3cm}{\tt  [inline]}}\label{classString_a31}
+
+
+
+
+Definition at line 1118 of file Big\-String.hh.
+
+References \_\-BIGSTRING\_\-SIZE, chars(), length(), Big\-Regex::search(), and SEARCH\_\-START.
+
+
+
+\footnotesize\begin{verbatim}1119 {
+1120   int matchlen;
+1121   int matchstart = r.search(chars(), length(), matchlen, startpos);
+1122   if ((matchstart<0) || (_st==SEARCH_START)) return matchstart;
+1123   else return (matchstart+matchlen);
+1124 }
+\end{verbatim}\normalsize 
+\index{String@{String}!index@{index}}
+\index{index@{index}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} String::index (const {\bf Big\-Regex} \& {\em r}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0) const\hspace{0.3cm}{\tt  [inline]}}\label{classString_a30}
+
+
+
+
+Definition at line 1113 of file Big\-String.hh.
+
+References \_\-BIGSTRING\_\-SIZE, chars(), length(), and Big\-Regex::search().
+
+
+
+\footnotesize\begin{verbatim}1114 {
+1115   int unused;  return r.search(chars(), length(), unused, startpos);
+1116 }
+\end{verbatim}\normalsize 
+\index{String@{String}!index@{index}}
+\index{index@{index}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} String::index (const char $\ast$ {\em t}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0) const\hspace{0.3cm}{\tt  [inline]}}\label{classString_a29}
+
+
+
+
+Definition at line 1098 of file Big\-String.hh.
+
+References \_\-BIGSTRING\_\-SIZE, length(), and search().
+
+
+
+\footnotesize\begin{verbatim}1099 {   
+1100   return search(startpos, length(), t);
+1101 }
+\end{verbatim}\normalsize 
+\index{String@{String}!index@{index}}
+\index{index@{index}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} String::index (const {\bf Sub\-String} \& {\em y}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0) const\hspace{0.3cm}{\tt  [inline]}}\label{classString_a28}
+
+
+
+
+Definition at line 1108 of file Big\-String.hh.
+
+References \_\-BIGSTRING\_\-SIZE, Sub\-String::chars(), Sub\-String::length(), length(), and search().
+
+
+
+\footnotesize\begin{verbatim}1109 {   
+1110   return search(startpos, length(), y.chars(), y.length());
+1111 }
+\end{verbatim}\normalsize 
+\index{String@{String}!index@{index}}
+\index{index@{index}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} String::index (const String \& {\em y}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0) const\hspace{0.3cm}{\tt  [inline]}}\label{classString_a27}
+
+
+
+
+Definition at line 1103 of file Big\-String.hh.
+
+References \_\-BIGSTRING\_\-SIZE, chars(), length(), and search().
+
+
+
+\footnotesize\begin{verbatim}1104 {   
+1105   return search(startpos, length(), y.chars(), y.length());
+1106 }
+\end{verbatim}\normalsize 
+\index{String@{String}!index@{index}}
+\index{index@{index}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} String::index (char {\em c}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0) const\hspace{0.3cm}{\tt  [inline]}}\label{classString_a26}
+
+
+
+
+Definition at line 1093 of file Big\-String.hh.
+
+References \_\-BIGSTRING\_\-SIZE, length(), and search().
+
+Referenced by Financial\_\-Monthly::add(), Financial\_\-Monthly\_\-Category::add(), add\_\-protected\_\-text(), add\_\-TL\_\-chunk\_\-or\_\-entry(), add\_\-TL\_\-section(), Assess\_\-Paper\_\-Correction\_\-Time(), Big\-Regex\_\-freq(), clean\_\-paper\_\-outline(), D2A\_\-get\_\-tag(), extract\_\-hierarchy\_\-depth\_\-decrease\_\-to\_\-paper(), extract\_\-hierarchy\_\-depth\_\-increase\_\-to\_\-paper(), extract\_\-paper\_\-novelties(), extract\_\-paper\_\-plan\_\-to\_\-paper(), extract\_\-recursively(), extract\_\-required\_\-item\_\-to\_\-paper(), find\_\-delimiter(), generate\_\-AL\_\-entry(), generic\_\-remove\_\-name\_\-reference(), Financial\_\-Note::get(), Detailed\_\-Items\_\-List::Get\_\-All\_\-DIL\_\-ID\_\-File\_\-Parameters(), DIL\_\-entry::Get\_\-Entry\_\-Parameters(), get\_\-figure\_\-data(), Novelty\_\-Marker::Get\_\-Novelty\_\-from\_\-Paper\_\-Plan(), get\_\-Paper\_\-Plans\_\-Section\_\-IDs(), Detailed\_\-Items\_\-List::Get\_\-Project\_\-Data(), HTML\_\-get\_\-href(), HTML\_\-get\_\-marker(), HTML\_\-get\_\-name(), HTML\_\-get\_\-tagged\_\-environment(), HTML\_\-remove\_\-comments(), include\_\-article\_\-head\_\-template(), include\_\-article\_\-section\_\-head\_\-template(), include\_\-article\_\-section\_\-tail\_\-template(), include\_\-article\_\-tail\_\-template(), include\_\-protected\_\-text(), DIL\_\-entry\_\-content::Is\_\-Plan\_\-Entry(), item\_\-content\_\-between\_\-range\_\-tags(), item\_\-content\_\-within\_\-DIL\_\-entry(), item\_\-content\_\-within\_\-paragraph(), item\_\-content\_\-within\_\-TL\_\-chunk(), Search\_\-Target::links(), locate\_\-most\_\-recent\_\-TL\_\-chunk(), max\_\-chunk\_\-entry(), modify\_\-DIL\_\-group\_\-target\_\-dates\_\-cmd(), Plan\_\-entry\_\-content::Parse\_\-Entry\_\-Content(), process\_\-HTML(), process\_\-note\_\-CC(), process\_\-note\_\-generic(), process\_\-note\_\-HTML(), process\_\-note\_\-Te\-X(), process\_\-note\_\-TL(), read\_\-financial\_\-notes\_\-file(), Target\_\-Access::remove\_\-back\_\-references(), Search\_\-Target::search(), search\_\-cmd(), Search\_\-Result::Search\_\-Result(), select\_\-TL\_\-DIL\_\-refs(), send\_\-dil\_\-to\_\-DIL(), Target\_\-Access::set\_\-target(), Long\-List::split(), String\-List::split(), Te\-X\_\-format\_\-corrections(), Te\-X\_\-get\_\-argument(), Te\-X\_\-get\_\-scope(), Te\-X\_\-safe\_\-text(), Text\_\-find\_\-line\_\-end(), Text\_\-limit\_\-line\_\-length(), and update\_\-DIL\_\-entry\_\-elements().
+
+
+
+\footnotesize\begin{verbatim}1094 {
+1095   return search(startpos, length(), c);
+1096 }
+\end{verbatim}\normalsize 
+\index{String@{String}!lastchar@{lastchar}}
+\index{lastchar@{lastchar}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}char String::lastchar () const\hspace{0.3cm}{\tt  [inline]}}\label{classString_a102}
+
+
+
+
+Definition at line 1086 of file Big\-String.hh.
+
+References elem(), and length().
+
+Referenced by extraction\_\-put\_\-figure(), Financial\_\-Note::get(), Get\_\-Target\_\-Directory(), and relurl().
+
+
+
+\footnotesize\begin{verbatim}1087 { 
+1088   return elem(length() - 1);
+1089 }
+\end{verbatim}\normalsize 
+\index{String@{String}!length@{length}}
+\index{length@{length}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-LENGTH} String::length () const\hspace{0.3cm}{\tt  [inline]}}\label{classString_a105}
+
+
+
+
+Definition at line 493 of file Big\-String.hh.
+
+References \_\-BIGSTRING\_\-LENGTH, Str\-Rep::len, and rep.
+
+Referenced by \_\-gsub(), add\_\-protected\_\-text(), add\_\-TL\_\-chunk\_\-or\_\-entry(), after(), at(), before(), DIL\_\-entry\_\-content::Binary\_\-Cache\_\-Diagnostic(), cat(), clean\_\-paper\_\-outline(), common\_\-prefix(), common\_\-suffix(), compare(), Sub\-String::contains(), contains(), del(), Detect\_\-Form\_\-Input(), dil2al\_\-commands(), DIL\_\-Hierarchy\_\-cmd(), elem(), Elipsis\_\-At(), extract\_\-paper\_\-plan\_\-to\_\-paper(), extract\_\-recursively(), extraction\_\-put\_\-figure(), fcompare(), financial\_\-notes(), freq(), from(), generate\_\-AL\_\-entry(), generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-entry\_\-content(), generic\_\-remove\_\-name\_\-reference(), Financial\_\-Note::get(), Detailed\_\-Items\_\-List::Get\_\-All\_\-DIL\_\-ID\_\-File\_\-Parameters(), get\_\-figure\_\-data(), Novelty\_\-Marker::Get\_\-Novelty\_\-from\_\-Paper\_\-Plan(), Detailed\_\-Items\_\-List::Get\_\-Project\_\-Data(), Get\_\-Target\_\-Directory(), Get\_\-Target\_\-Regex(), gsub(), HTML\_\-get\_\-marker(), HTML\_\-get\_\-tagged\_\-environment(), HTML\_\-marker\_\-arguments(), HTML\_\-put\_\-form\_\-input(), HTML\_\-put\_\-form\_\-text(), HTML\_\-remove\_\-comments(), include\_\-article\_\-head\_\-template(), index(), DIL\_\-ID::init(), item\_\-content\_\-between\_\-range\_\-tags(), item\_\-content\_\-within\_\-DIL\_\-entry(), item\_\-content\_\-within\_\-paragraph(), item\_\-content\_\-within\_\-TL\_\-chunk(), join(), lastchar(), matches(), modify\_\-DIL\_\-group\_\-target\_\-dates\_\-cmd(), Modify\_\-Element(), Sub\-String::operator=(), operator[$\,$](), post\_\-process\_\-note(), prepend(), process\_\-HTML(), process\_\-note\_\-CC(), process\_\-note\_\-TL(), read\_\-financial\_\-notes\_\-file(), relurl(), remove\_\-AL\_\-TC(), Target\_\-Access::remove\_\-back\_\-references(), replicate(), RX\_\-Search\_\-Safe(), search\_\-cmd(), Search\_\-Result::Search\_\-Result(), select\_\-TL\_\-DIL\_\-refs(), Target\_\-Access::set\_\-target(), Long\-List::split(), String\-List::split(), split(), DIL\_\-ID::str(), Te\-X\_\-format\_\-corrections(), Text\_\-find\_\-line\_\-end(), Text\_\-limit\_\-line\_\-length(), through(), time\_\-stamp\_\-time(), time\_\-stamp\_\-time\_\-date(), time\_\-stamp\_\-time\_\-of\_\-day(), URI\_\-unescape(), DIL\_\-AL\_\-List::Write\_\-to\_\-Binary\_\-Cache(), DIL\_\-Topical\_\-List::Write\_\-to\_\-Binary\_\-Cache(), Detailed\_\-Items\_\-List::Write\_\-to\_\-File(), and DIL\_\-entry\_\-content::Write\_\-Topical\_\-to\_\-Binary\_\-Cache().
+
+
+
+\footnotesize\begin{verbatim}493 {  return rep->len; }
+\end{verbatim}\normalsize 
+\index{String@{String}!match@{match}}
+\index{match@{match}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} String::match ({\bf \_\-BIGSTRING\_\-SIZE}, {\bf \_\-BIGSTRING\_\-SIZE}, int, const char $\ast$, {\bf \_\-BIGSTRING\_\-SIZE} = -1) const\hspace{0.3cm}{\tt  [protected]}}\label{classString_b2}
+
+
+
+
+Definition at line 555 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, and Str\-Rep::s.
+
+Referenced by contains(), freq(), and matches().
+
+
+
+\footnotesize\begin{verbatim}556 {
+557   if (tl < 0) tl = slen(t);
+558 
+559   if (start < 0)
+560   {
+561     start = sl + start - tl + 1;
+562     if (start < 0 || (exact && start != 0))
+563       return -1;
+564   }
+565   else if (exact && sl - start != tl)
+566     return -1;
+567 
+568   if (sl == 0 || tl == 0 || sl - start < tl || start >= sl)
+569     return -1;
+570 
+571   _BIGSTRING_SIZE n = tl;
+572   const char* s = &(rep->s[start]);
+573   while (--n >= 0) if (*s++ != *t++) return -1;
+574   return tl;
+575 }
+\end{verbatim}\normalsize 
+\index{String@{String}!matches@{matches}}
+\index{matches@{matches}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int String::matches (const {\bf Big\-Regex} \& {\em r}, {\bf \_\-BIGSTRING\_\-SIZE} {\em pos} = 0) const\hspace{0.3cm}{\tt  [inline]}}\label{classString_a46}
+
+
+
+
+Definition at line 1197 of file Big\-String.hh.
+
+References \_\-BIGSTRING\_\-SIZE, chars(), length(), and Big\-Regex::match().
+
+
+
+\footnotesize\begin{verbatim}1198 {
+1199   _BIGSTRING_SIZE l = (p < 0)? -p : length() - p;
+1200   return r.match(chars(), length(), p) == l;
+1201 }
+\end{verbatim}\normalsize 
+\index{String@{String}!matches@{matches}}
+\index{matches@{matches}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int String::matches (const char $\ast$ {\em t}, {\bf \_\-BIGSTRING\_\-SIZE} {\em pos} = 0) const\hspace{0.3cm}{\tt  [inline]}}\label{classString_a45}
+
+
+
+
+Definition at line 1187 of file Big\-String.hh.
+
+References \_\-BIGSTRING\_\-SIZE, length(), and match().
+
+
+
+\footnotesize\begin{verbatim}1188 {
+1189   return match(p, length(), 1, t) >= 0;
+1190 }
+\end{verbatim}\normalsize 
+\index{String@{String}!matches@{matches}}
+\index{matches@{matches}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int String::matches (const {\bf Sub\-String} \& {\em y}, {\bf \_\-BIGSTRING\_\-SIZE} {\em pos} = 0) const\hspace{0.3cm}{\tt  [inline]}}\label{classString_a44}
+
+
+
+
+Definition at line 1177 of file Big\-String.hh.
+
+References \_\-BIGSTRING\_\-SIZE, Sub\-String::chars(), Sub\-String::length(), length(), and match().
+
+
+
+\footnotesize\begin{verbatim}1178 {
+1179   return match(p, length(), 1, y.chars(), y.length()) >= 0;
+1180 }
+\end{verbatim}\normalsize 
+\index{String@{String}!matches@{matches}}
+\index{matches@{matches}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int String::matches (const String \& {\em y}, {\bf \_\-BIGSTRING\_\-SIZE} {\em pos} = 0) const\hspace{0.3cm}{\tt  [inline]}}\label{classString_a43}
+
+
+
+
+Definition at line 1182 of file Big\-String.hh.
+
+References \_\-BIGSTRING\_\-SIZE, chars(), length(), and match().
+
+
+
+\footnotesize\begin{verbatim}1183 {
+1184   return match(p, length(), 1, y.chars(), y.length()) >= 0;
+1185 }
+\end{verbatim}\normalsize 
+\index{String@{String}!matches@{matches}}
+\index{matches@{matches}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int String::matches (char {\em c}, {\bf \_\-BIGSTRING\_\-SIZE} {\em pos} = 0) const\hspace{0.3cm}{\tt  [inline]}}\label{classString_a42}
+
+
+
+
+Definition at line 1192 of file Big\-String.hh.
+
+References \_\-BIGSTRING\_\-SIZE, length(), and match().
+
+Referenced by get\_\-double(), Get\_\-Target\_\-Regex(), make\_\-note(), max\_\-chunk\_\-entry(), modify\_\-element\_\-through\_\-FORM\_\-interface\_\-DIL\_\-Superiors(), process\_\-note(), select\_\-TL\_\-AL\_\-refs(), select\_\-TL\_\-DIL\_\-refs(), Set\_\-Parameter(), stop\_\-TL\_\-chunk(), Te\-X\_\-format\_\-corrections(), Te\-X\_\-get\_\-command(), and Te\-X\_\-safe\_\-text().
+
+
+
+\footnotesize\begin{verbatim}1193 {
+1194   return match(p, length(), 1, &c, 1) >= 0;
+1195 }
+\end{verbatim}\normalsize 
+\index{String@{String}!OK@{OK}}
+\index{OK@{OK}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int String::OK () const}\label{classString_a110}
+
+
+
+
+Definition at line 1459 of file Big\-String.cc.
+
+References error(), Str\-Rep::len, Str\-Rep::s, and Str\-Rep::sz.
+
+Referenced by Sub\-String::OK().
+
+
+
+\footnotesize\begin{verbatim}1460 {
+1461   if (rep == 0             // don't have a rep
+1462     || rep->len > rep->sz     // string oustide bounds
+1463     || rep->s[rep->len] != 0)   // not null-terminated
+1464       error("invariant failure");
+1465   return 1;
+1466 }
+\end{verbatim}\normalsize 
+\index{String@{String}!operator const char *@{operator const char $\ast$}}
+\index{operator const char *@{operator const char $\ast$}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String::operator const char $\ast$ () const}\label{classString_a103}
+
+
+
+
+Definition at line 45 of file Big\-String.cc.
+
+References chars().
+
+
+
+\footnotesize\begin{verbatim}46 { 
+47   return (const char*)chars();
+48 }
+\end{verbatim}\normalsize 
+\index{String@{String}!operator()@{operator()}}
+\index{operator()@{operator()}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Sub\-String} String::operator() ({\bf \_\-BIGSTRING\_\-SIZE} {\em pos}, {\bf \_\-BIGSTRING\_\-SIZE} {\em len})}\label{classString_a52}
+
+
+
+
+Definition at line 891 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, and \_\-substr().
+
+
+
+\footnotesize\begin{verbatim}892 {
+893   return _substr(first, len);
+894 }
+\end{verbatim}\normalsize 
+\index{String@{String}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String\& String::operator+= (istream \& {\em y})}\label{classString_a21}
+
+
+\index{String@{String}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String \& String::operator+= (char {\em c})\hspace{0.3cm}{\tt  [inline]}}\label{classString_a20}
+
+
+
+
+Definition at line 834 of file Big\-String.hh.
+
+References cat.
+
+
+
+\footnotesize\begin{verbatim}835 {
+836   cat(*this, y, *this);
+837   return *this;
+838 }
+\end{verbatim}\normalsize 
+\index{String@{String}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String \& String::operator+= (const char $\ast$ {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{classString_a19}
+
+
+
+
+Definition at line 828 of file Big\-String.hh.
+
+References cat.
+
+
+
+\footnotesize\begin{verbatim}829 {
+830   cat(*this, y, *this);
+831   return *this;
+832 }
+\end{verbatim}\normalsize 
+\index{String@{String}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String \& String::operator+= (const {\bf Sub\-String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{classString_a18}
+
+
+
+
+Definition at line 822 of file Big\-String.hh.
+
+References cat.
+
+
+
+\footnotesize\begin{verbatim}823 {
+824   cat(*this, y, *this);
+825   return *this;
+826 }
+\end{verbatim}\normalsize 
+\index{String@{String}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String \& String::operator+= (const String \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{classString_a17}
+
+
+
+
+Definition at line 816 of file Big\-String.hh.
+
+References cat.
+
+
+
+\footnotesize\begin{verbatim}817 {
+818   cat(*this, y, *this);
+819   return *this;
+820 }
+\end{verbatim}\normalsize 
+\index{String@{String}!operator=@{operator=}}
+\index{operator=@{operator=}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String \& String::operator= (istream \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{classString_a14}
+
+
+
+
+Definition at line 573 of file Big\-String.hh.
+
+References rep, and Salloc\_\-istream().
+
+
+
+\footnotesize\begin{verbatim}573                                             {
+574         rep = Salloc_istream(rep, y, -1, -1);
+575         return *this;
+576 }
+\end{verbatim}\normalsize 
+\index{String@{String}!operator=@{operator=}}
+\index{operator=@{operator=}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String \& String::operator= (const {\bf Sub\-String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{classString_a13}
+
+
+
+
+Definition at line 560 of file Big\-String.hh.
+
+References Sub\-String::chars(), Sub\-String::length(), rep, and Salloc().
+
+
+
+\footnotesize\begin{verbatim}561 {
+562   rep = Salloc(rep, y.chars(), y.length(), y.length());
+563   return *this;
+564 }
+\end{verbatim}\normalsize 
+\index{String@{String}!operator=@{operator=}}
+\index{operator=@{operator=}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String \& String::operator= (char {\em c})\hspace{0.3cm}{\tt  [inline]}}\label{classString_a12}
+
+
+
+
+Definition at line 566 of file Big\-String.hh.
+
+References rep, and Salloc().
+
+
+
+\footnotesize\begin{verbatim}567 {
+568   rep = Salloc(rep, &c, 1, 1);
+569   return *this;
+570 }
+\end{verbatim}\normalsize 
+\index{String@{String}!operator=@{operator=}}
+\index{operator=@{operator=}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String \& String::operator= (const char $\ast$ {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{classString_a11}
+
+
+
+
+Definition at line 554 of file Big\-String.hh.
+
+References rep, and Salloc().
+
+
+
+\footnotesize\begin{verbatim}555 {
+556   rep = Salloc(rep, t, -1, -1);
+557   return *this;
+558 }
+\end{verbatim}\normalsize 
+\index{String@{String}!operator=@{operator=}}
+\index{operator=@{operator=}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String \& String::operator= (const String \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{classString_a10}
+
+
+
+
+Definition at line 548 of file Big\-String.hh.
+
+References rep, and Scopy().
+
+
+
+\footnotesize\begin{verbatim}549 { 
+550   rep = Scopy(rep, y.rep);
+551   return *this;
+552 }
+\end{verbatim}\normalsize 
+\index{String@{String}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}const char \& String::operator[$\,$] ({\bf \_\-BIGSTRING\_\-ITERATOR} {\em i}) const\hspace{0.3cm}{\tt  [inline]}}\label{classString_a99}
+
+
+
+
+Definition at line 1069 of file Big\-String.hh.
+
+References \_\-BIGSTRING\_\-ITERATOR, error(), length(), rep, and Str\-Rep::s.
+
+
+
+\footnotesize\begin{verbatim}1070 { 
+1071   if (((unsigned)i) >= length()) error("invalid index");
+1072   return rep->s[i];
+1073 }
+\end{verbatim}\normalsize 
+\index{String@{String}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}char \& String::operator[$\,$] ({\bf \_\-BIGSTRING\_\-ITERATOR} {\em i})\hspace{0.3cm}{\tt  [inline]}}\label{classString_a98}
+
+
+
+
+Definition at line 1063 of file Big\-String.hh.
+
+References \_\-BIGSTRING\_\-ITERATOR, error(), length(), rep, and Str\-Rep::s.
+
+
+
+\footnotesize\begin{verbatim}1064 { 
+1065   if (((unsigned)i) >= length()) error("invalid index");
+1066   return rep->s[i];
+1067 }
+\end{verbatim}\normalsize 
+\index{String@{String}!prepend@{prepend}}
+\index{prepend@{prepend}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void String::prepend (char {\em c})\hspace{0.3cm}{\tt  [inline]}}\label{classString_a25}
+
+
+
+
+Definition at line 859 of file Big\-String.hh.
+
+References rep, and Sprepend().
+
+
+
+\footnotesize\begin{verbatim}860 {
+861   rep = Sprepend(rep, &y, 1); 
+862 }
+\end{verbatim}\normalsize 
+\index{String@{String}!prepend@{prepend}}
+\index{prepend@{prepend}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void String::prepend (const char $\ast$ {\em t})\hspace{0.3cm}{\tt  [inline]}}\label{classString_a24}
+
+
+
+
+Definition at line 854 of file Big\-String.hh.
+
+References rep, and Sprepend().
+
+
+
+\footnotesize\begin{verbatim}855 {
+856   rep = Sprepend(rep, y, -1); 
+857 }
+\end{verbatim}\normalsize 
+\index{String@{String}!prepend@{prepend}}
+\index{prepend@{prepend}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void String::prepend (const {\bf Sub\-String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{classString_a23}
+
+
+
+
+Definition at line 864 of file Big\-String.hh.
+
+References Sub\-String::chars(), Sub\-String::length(), rep, and Sprepend().
+
+
+
+\footnotesize\begin{verbatim}865 {
+866   rep = Sprepend(rep, y.chars(), y.length());
+867 }
+\end{verbatim}\normalsize 
+\index{String@{String}!prepend@{prepend}}
+\index{prepend@{prepend}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void String::prepend (const String \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{classString_a22}
+
+
+
+
+Definition at line 849 of file Big\-String.hh.
+
+References chars(), length(), rep, and Sprepend().
+
+Referenced by add\_\-TL\_\-chunk\_\-or\_\-entry(), cmdline\_\-extract\_\-paper\_\-novelties(), cmdline\_\-extract\_\-paper\_\-plan\_\-to\_\-paper(), extract\_\-required\_\-item\_\-to\_\-paper(), extraction\_\-put\_\-figure(), Active\_\-List::generate\_\-focused\_\-AL(), get\_\-figure\_\-data(), get\_\-most\_\-recent\_\-TC\_\-AL(), HTML\_\-put\_\-structure(), initialize(), Int2Hex\-Str(), make\_\-note(), operator+(), relurl(), Search\_\-Result::Search\_\-Result(), select\_\-TL\_\-AL\_\-refs(), select\_\-TL\_\-DIL\_\-refs(), Set\_\-Parameter(), Target\_\-Access::set\_\-target(), DIL\_\-ID::str(), and Target\_\-Access::transformed\_\-name().
+
+
+
+\footnotesize\begin{verbatim}850 {
+851   rep = Sprepend(rep, y.chars(), y.length());
+852 }
+\end{verbatim}\normalsize 
+\index{String@{String}!readnoseek@{readnoseek}}
+\index{readnoseek@{readnoseek}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String \& String::readnoseek (istream \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{classString_a15}
+
+
+
+
+Definition at line 578 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}578                                              {
+579         char buf[4097]; int bufread;
+580         do {
+581                 y.read(buf,4096);
+582                 bufread = y.gcount();
+583                 if (bufread>0) {
+584                         buf[bufread] = '\0';
+585                         (*this) += buf;
+586                 }
+587         } while (bufread==4096);
+588         return *this;
+589 }
+\end{verbatim}\normalsize 
+\index{String@{String}!readtotag@{readtotag}}
+\index{readtotag@{readtotag}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String \& String::readtotag (istream \& {\em y}, const char $\ast$ {\em t}, char {\em terminator} = '$\backslash$n')\hspace{0.3cm}{\tt  [inline]}}\label{classString_a16}
+
+
+
+
+Definition at line 591 of file Big\-String.hh.
+
+References contains(), and readline.
+
+
+
+\footnotesize\begin{verbatim}591                                                                                     {
+592   String buf;
+593   while (readline(y,buf,terminator,0)>0) {
+594     if (buf.contains(t)) break;
+595     else (*this) += buf;
+596   }
+597 }
+\end{verbatim}\normalsize 
+\index{String@{String}!reverse@{reverse}}
+\index{reverse@{reverse}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void String::reverse ()\hspace{0.3cm}{\tt  [inline]}}\label{classString_a94}
+
+
+
+
+Definition at line 1038 of file Big\-String.hh.
+
+References rep, and Sreverse().
+
+
+
+\footnotesize\begin{verbatim}1039 {
+1040   rep = Sreverse(rep, rep);
+1041 }
+\end{verbatim}\normalsize 
+\index{String@{String}!search@{search}}
+\index{search@{search}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} String::search ({\bf \_\-BIGSTRING\_\-SIZE}, {\bf \_\-BIGSTRING\_\-SIZE}, char) const\hspace{0.3cm}{\tt  [protected]}}\label{classString_b1}
+
+
+
+
+Definition at line 499 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, and chars().
+
+
+
+\footnotesize\begin{verbatim}500 {
+501   const char* s = chars();
+502   if (sl > 0)
+503   {
+504     if (start >= 0)
+505     {
+506       const char* a = &(s[start]);
+507       const char* lasta = &(s[sl]);
+508       while (a < lasta) if (*a++ == c) return --a - s;
+509     }
+510     else
+511     {
+512       const char* a = &(s[sl + start + 1]);
+513       while (--a >= s) if (*a == c) return a - s;
+514     }
+515   }
+516   return -1;
+517 }
+\end{verbatim}\normalsize 
+\index{String@{String}!search@{search}}
+\index{search@{search}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} String::search ({\bf \_\-BIGSTRING\_\-SIZE}, {\bf \_\-BIGSTRING\_\-SIZE}, const char $\ast$, {\bf \_\-BIGSTRING\_\-SIZE} = -1) const\hspace{0.3cm}{\tt  [protected]}}\label{classString_b0}
+
+
+
+
+Definition at line 519 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, and chars().
+
+Referenced by \_\-gsub(), after(), at(), before(), Sub\-String::contains(), contains(), del(), from(), index(), split(), and through().
+
+
+
+\footnotesize\begin{verbatim}520 {
+521   const char* s = chars();
+522   if (tl < 0) tl = slen(t);
+523   if (sl > 0 && tl > 0)
+524   {
+525     if (start >= 0)
+526     {
+527       const char* lasts = &(s[sl - tl]);
+528       const char* lastt = &(t[tl]);
+529       const char* p = &(s[start]);
+530 
+531       while (p <= lasts)
+532       {
+533         const char* x = p++;
+534         const char* y = t;
+535         while (*x++ == *y++) if (y >= lastt) return --p - s;
+536       }
+537     }
+538     else
+539     {
+540       const char* firsts = &(s[tl - 1]);
+541       const char* lastt =  &(t[tl - 1]);
+542       const char* p = &(s[sl + start + 1]); 
+543 
+544       while (--p >= firsts)
+545       {
+546         const char* x = p;
+547         const char* y = lastt;
+548         while (*x-- == *y--) if (y < t) return ++x - s;
+549       }
+550     }
+551   }
+552   return -1;
+553 }
+\end{verbatim}\normalsize 
+\index{String@{String}!sub@{sub}}
+\index{sub@{sub}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String String::sub (const {\bf Big\-Regex} \& {\em r}, int {\em nth})}\label{classString_a82}
+
+
+
+
+Definition at line 1086 of file Big\-String.cc.
+
+References \_\-substr(), Big\-Regex::match\_\-info(), and String().
+
+Referenced by Financial\_\-Monthly::add(), Financial\_\-Monthly\_\-Category::add(), extract\_\-paper\_\-plan\_\-to\_\-paper(), Financial\_\-Note::get(), get\_\-figure\_\-data(), Get\_\-Target\_\-Regex(), Search\_\-Result::Search\_\-Result(), Te\-X\_\-format\_\-corrections(), and Te\-X\_\-safe\_\-text().
+
+
+
+\footnotesize\begin{verbatim}1086                                               {
+1087         int s,l;
+1088         if (!r.match_info(s,l,nth)) return String("");
+1089         return String(_substr(s,l));
+1090 }
+\end{verbatim}\normalsize 
+\index{String@{String}!through@{through}}
+\index{through@{through}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Sub\-String} String::through (const {\bf Big\-Regex} \& {\em r}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0)}\label{classString_a69}
+
+
+
+
+Definition at line 994 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, \_\-substr(), chars(), length(), and Big\-Regex::search().
+
+
+
+\footnotesize\begin{verbatim}995 {
+996   _BIGSTRING_SIZE mlen;
+997   _BIGSTRING_SIZE first = r.search(chars(), length(), mlen, startpos);
+998   if (first >= 0) first += mlen;
+999   return _substr(0, first);
+1000 }
+\end{verbatim}\normalsize 
+\index{String@{String}!through@{through}}
+\index{through@{through}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Sub\-String} String::through (char {\em c}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0)}\label{classString_a68}
+
+
+
+
+Definition at line 1002 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, \_\-substr(), length(), and search().
+
+
+
+\footnotesize\begin{verbatim}1003 {
+1004   _BIGSTRING_SIZE last = search(startpos, length(), c);
+1005   if (last >= 0) last += 1;
+1006   return _substr(0, last);
+1007 }
+\end{verbatim}\normalsize 
+\index{String@{String}!through@{through}}
+\index{through@{through}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Sub\-String} String::through (const char $\ast$ {\em t}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0)}\label{classString_a67}
+
+
+
+
+Definition at line 1009 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, \_\-substr(), length(), and search().
+
+
+
+\footnotesize\begin{verbatim}1010 {
+1011   _BIGSTRING_SIZE tlen = slen(t);
+1012   _BIGSTRING_SIZE last = search(startpos, length(), t, tlen);
+1013   if (last >= 0) last += tlen;
+1014   return _substr(0, last);
+1015 }
+\end{verbatim}\normalsize 
+\index{String@{String}!through@{through}}
+\index{through@{through}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Sub\-String} String::through (const {\bf Sub\-String} \& {\em x}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0)}\label{classString_a66}
+
+
+
+
+Definition at line 987 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, \_\-substr(), Sub\-String::chars(), Sub\-String::length(), length(), and search().
+
+
+
+\footnotesize\begin{verbatim}988 {
+989   _BIGSTRING_SIZE last = search(startpos, length(), y.chars(), y.length());
+990   if (last >= 0) last += y.length();
+991   return _substr(0, last);
+992 }
+\end{verbatim}\normalsize 
+\index{String@{String}!through@{through}}
+\index{through@{through}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Sub\-String} String::through (const String \& {\em x}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0)}\label{classString_a65}
+
+
+
+
+Definition at line 980 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, \_\-substr(), chars(), length(), and search().
+
+
+
+\footnotesize\begin{verbatim}981 {
+982   _BIGSTRING_SIZE last = search(startpos, length(), y.chars(), y.length());
+983   if (last >= 0) last += y.length();
+984   return _substr(0, last);
+985 }
+\end{verbatim}\normalsize 
+\index{String@{String}!through@{through}}
+\index{through@{through}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Sub\-String} String::through ({\bf \_\-BIGSTRING\_\-SIZE} {\em pos})}\label{classString_a64}
+
+
+
+
+Definition at line 901 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, and \_\-substr().
+
+Referenced by extract\_\-recursively(), extraction\_\-put\_\-figure(), include\_\-article\_\-section\_\-head\_\-template(), and relurl().
+
+
+
+\footnotesize\begin{verbatim}902 {
+903   return _substr(0, pos+1);
+904 }
+\end{verbatim}\normalsize 
+\index{String@{String}!upcase@{upcase}}
+\index{upcase@{upcase}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void String::upcase ()\hspace{0.3cm}{\tt  [inline]}}\label{classString_a95}
+
+
+
+
+Definition at line 1044 of file Big\-String.hh.
+
+References rep, and Supcase().
+
+
+
+\footnotesize\begin{verbatim}1045 {
+1046   rep = Supcase(rep, rep);
+1047 }
+\end{verbatim}\normalsize 
+
+
+\subsection{Friends And Related Function Documentation}
+\index{String@{String}!capitalize@{capitalize}}
+\index{capitalize@{capitalize}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String capitalize (const String \& {\em x})\hspace{0.3cm}{\tt  [friend]}}\label{classString_l47}
+
+
+
+
+Definition at line 1028 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}1029 {
+1030   String r; r.rep = Scapitalize(x.rep, r.rep); return r;
+1031 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const char $\ast$, const char $\ast$, char, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l36}
+
+
+
+
+Definition at line 809 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}810 {
+811   r.rep = Scat(r.rep, a, -1, x, -1, &y, 1);
+812 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const char $\ast$, const char $\ast$, const char $\ast$, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l35}
+
+
+
+
+Definition at line 804 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}805 {
+806   r.rep = Scat(r.rep, a, -1, x, -1, y, -1);
+807 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const char $\ast$, const char $\ast$, const {\bf Sub\-String} \&, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l34}
+
+
+
+
+Definition at line 799 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}800 {
+801   r.rep = Scat(r.rep, a, -1, x, -1, y.chars(), y.length());
+802 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const char $\ast$, const char $\ast$, const String \&, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l33}
+
+
+
+
+Definition at line 794 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}795 {
+796   r.rep = Scat(r.rep, a, -1, x, -1, y.chars(), y.length());
+797 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const char $\ast$, const {\bf Sub\-String} \&, char, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l32}
+
+
+
+
+Definition at line 789 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}790 {
+791   r.rep = Scat(r.rep, a, -1, x.chars(), x.length(), &y, 1);
+792 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const char $\ast$, const {\bf Sub\-String} \&, const char $\ast$, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l31}
+
+
+
+
+Definition at line 784 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}785 {
+786   r.rep = Scat(r.rep, a, -1, x.chars(), x.length(), y, -1);
+787 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const char $\ast$, const {\bf Sub\-String} \&, const {\bf Sub\-String} \&, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l30}
+
+
+
+
+Definition at line 779 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}780 {
+781   r.rep = Scat(r.rep, a, -1, x.chars(), x.length(), y.chars(), y.length());
+782 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const char $\ast$, const {\bf Sub\-String} \&, const String \&, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l29}
+
+
+
+
+Definition at line 774 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}775 {
+776   r.rep = Scat(r.rep, a, -1, x.chars(), x.length(), y.chars(), y.length());
+777 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const char $\ast$, const String \&, char, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l28}
+
+
+
+
+Definition at line 769 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}770 {
+771   r.rep = Scat(r.rep, a, -1, x.chars(), x.length(), &y, 1);
+772 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const char $\ast$, const String \&, const char $\ast$, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l27}
+
+
+
+
+Definition at line 764 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}765 {
+766   r.rep = Scat(r.rep, a, -1, x.chars(), x.length(), y, -1);
+767 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const char $\ast$, const String \&, const {\bf Sub\-String} \&, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l26}
+
+
+
+
+Definition at line 759 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}760 {
+761   r.rep = Scat(r.rep, a, -1, x.chars(), x.length(), y.chars(), y.length());
+762 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const char $\ast$, const String \&, const String \&, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l25}
+
+
+
+
+Definition at line 754 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}755 {
+756   r.rep = Scat(r.rep, a, -1, x.chars(), x.length(), y.chars(), y.length());
+757 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const String \&, const char $\ast$, char, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l24}
+
+
+
+
+Definition at line 748 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}749 {
+750   r.rep = Scat(r.rep, a.chars(), a.length(), x, -1, &y, 1);
+751 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const String \&, const char $\ast$, const char $\ast$, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l23}
+
+
+
+
+Definition at line 743 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}744 {
+745   r.rep = Scat(r.rep, a.chars(), a.length(), x, -1, y, -1);
+746 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const String \&, const char $\ast$, const {\bf Sub\-String} \&, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l22}
+
+
+
+
+Definition at line 738 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}739 {
+740   r.rep = Scat(r.rep, a.chars(), a.length(), x, -1, y.chars(), y.length());
+741 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const String \&, const char $\ast$, const String \&, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l21}
+
+
+
+
+Definition at line 733 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}734 {
+735   r.rep = Scat(r.rep, a.chars(), a.length(), x, -1, y.chars(), y.length());
+736 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const String \&, const {\bf Sub\-String} \&, char, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l20}
+
+
+
+
+Definition at line 728 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}729 {
+730   r.rep = Scat(r.rep, a.chars(), a.length(), x.chars(), x.length(), &y, 1);
+731 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const String \&, const {\bf Sub\-String} \&, const char $\ast$, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l19}
+
+
+
+
+Definition at line 723 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}724 {
+725   r.rep = Scat(r.rep, a.chars(), a.length(), x.chars(), x.length(), y, -1);
+726 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const String \&, const {\bf Sub\-String} \&, const {\bf Sub\-String} \&, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l18}
+
+
+
+
+Definition at line 718 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}719 {
+720   r.rep = Scat(r.rep, a.chars(), a.length(), x.chars(), x.length(), y.chars(), y.length());
+721 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const String \&, const {\bf Sub\-String} \&, const String \&, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l17}
+
+
+
+
+Definition at line 713 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}714 {
+715   r.rep = Scat(r.rep, a.chars(), a.length(), x.chars(), x.length(), y.chars(), y.length());
+716 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const String \&, const String \&, char, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l16}
+
+
+
+
+Definition at line 708 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}709 {
+710   r.rep = Scat(r.rep, a.chars(), a.length(), x.chars(), x.length(), &y, 1);
+711 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const String \&, const String \&, const char $\ast$, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l15}
+
+
+
+
+Definition at line 703 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}704 {
+705   r.rep = Scat(r.rep, a.chars(), a.length(), x.chars(), x.length(), y, -1);
+706 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const String \&, const String \&, const {\bf Sub\-String} \&, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l14}
+
+
+
+
+Definition at line 698 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}699 {
+700   r.rep = Scat(r.rep, a.chars(), a.length(), x.chars(), x.length(), y.chars(), y.length());
+701 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const String \&, const String \&, const String \&, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l13}
+
+
+
+
+Definition at line 693 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}694 {
+695   r.rep = Scat(r.rep, a.chars(), a.length(), x.chars(), x.length(), y.chars(), y.length());
+696 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const char $\ast$, char, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l12}
+
+
+
+
+Definition at line 688 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}689 {
+690   r.rep = Scat(r.rep, x, -1, &y, 1);
+691 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const char $\ast$, const char $\ast$, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l11}
+
+
+
+
+Definition at line 683 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}684 {
+685   r.rep = Scat(r.rep, x, -1, y, -1);
+686 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const char $\ast$, const {\bf Sub\-String} \&, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l10}
+
+
+
+
+Definition at line 678 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}679 {
+680   r.rep = Scat(r.rep, x, -1, y.chars(), y.length());
+681 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const char $\ast$, const String \&, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l9}
+
+
+
+
+Definition at line 673 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}674 {
+675   r.rep = Scat(r.rep, x, -1, y.chars(), y.length());
+676 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const {\bf Sub\-String} \&, char, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l8}
+
+
+
+
+Definition at line 668 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}669 {
+670   r.rep = Scat(r.rep, x.chars(), x.length(), &y, 1);
+671 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const {\bf Sub\-String} \&, const char $\ast$, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l7}
+
+
+
+
+Definition at line 663 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}664 {
+665   r.rep = Scat(r.rep, x.chars(), x.length(), y, -1);
+666 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const {\bf Sub\-String} \&, const {\bf Sub\-String} \&, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l6}
+
+
+
+
+Definition at line 658 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}659 {
+660   r.rep = Scat(r.rep, x.chars(), x.length(), y.chars(), y.length());
+661 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const {\bf Sub\-String} \&, const String \&, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l5}
+
+
+
+
+Definition at line 653 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}654 {
+655   r.rep = Scat(r.rep, x.chars(), x.length(), y.chars(), y.length());
+656 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const String \&, char, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l4}
+
+
+
+
+Definition at line 648 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}649 {
+650   r.rep = Scat(r.rep, x.chars(), x.length(), &y, 1);
+651 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const String \&, const char $\ast$, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l3}
+
+
+
+
+Definition at line 643 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}644 {
+645   r.rep = Scat(r.rep, x.chars(), x.length(), y, -1);
+646 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const String \&, const {\bf Sub\-String} \&, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l2}
+
+
+
+
+Definition at line 638 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}639 {
+640   r.rep = Scat(r.rep, x.chars(), x.length(), y.chars(), y.length());
+641 }
+\end{verbatim}\normalsize 
+\index{String@{String}!cat@{cat}}
+\index{cat@{cat}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const String \&, const String \&, String \&)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l1}
+
+
+
+
+Definition at line 633 of file Big\-String.hh.
+
+Referenced by operator+=().
+
+
+
+\footnotesize\begin{verbatim}634 {
+635   r.rep = Scat(r.rep, x.chars(), x.length(), y.chars(), y.length());
+636 }
+\end{verbatim}\normalsize 
+\index{String@{String}!common_prefix@{common\_\-prefix}}
+\index{common_prefix@{common\_\-prefix}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String common\_\-prefix (const String \& {\em x}, const String \& {\em y}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l39}
+
+
+
+
+Definition at line 1326 of file Big\-String.cc.
+
+
+
+\footnotesize\begin{verbatim}1327 {
+1328   String r;
+1329   const char* xchars = x.chars();
+1330   const char* ychars = y.chars();
+1331   const char* xs = &(xchars[startpos]);
+1332   const char* ss = xs;
+1333   const char* topx = &(xchars[x.length()]);
+1334   const char* ys = &(ychars[startpos]);
+1335   const char* topy = &(ychars[y.length()]);
+1336   _BIGSTRING_LENGTH l;
+1337   for (l = 0; xs < topx && ys < topy && *xs++ == *ys++; ++l);
+1338   r.rep = Salloc(r.rep, ss, l, l);
+1339   return r;
+1340 }
+\end{verbatim}\normalsize 
+\index{String@{String}!common_suffix@{common\_\-suffix}}
+\index{common_suffix@{common\_\-suffix}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String common\_\-suffix (const String \& {\em x}, const String \& {\em y}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = -1)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l40}
+
+
+
+
+Definition at line 1342 of file Big\-String.cc.
+
+
+
+\footnotesize\begin{verbatim}1343 {
+1344   String r;
+1345   const char* xchars = x.chars();
+1346   const char* ychars = y.chars();
+1347   const char* xs = &(xchars[x.length() + startpos]);
+1348   const char* botx = xchars;
+1349   const char* ys = &(ychars[y.length() + startpos]);
+1350   const char* boty = ychars;
+1351   _BIGSTRING_LENGTH l;
+1352   for (l = 0; xs >= botx && ys >= boty && *xs == *ys ; --xs, --ys, ++l);
+1353   r.rep = Salloc(r.rep, ++xs, l, l);
+1354   return r;
+1355 }
+\end{verbatim}\normalsize 
+\index{String@{String}!downcase@{downcase}}
+\index{downcase@{downcase}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String downcase (const String \& {\em x})\hspace{0.3cm}{\tt  [friend]}}\label{classString_l46}
+
+
+
+
+Definition at line 1023 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}1024 {
+1025   String r; r.rep = Sdowncase(x.rep, r.rep); return r;
+1026 }
+\end{verbatim}\normalsize 
+\index{String@{String}!join@{join}}
+\index{join@{join}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String join (String {\em src}[$\,$], {\bf \_\-BIGSTRING\_\-SIZE} {\em n}, const String \& {\em sep})\hspace{0.3cm}{\tt  [friend]}}\label{classString_l43}
+
+
+
+
+Definition at line 1148 of file Big\-String.cc.
+
+
+
+\footnotesize\begin{verbatim}1149 {
+1150   RETURN_OBJECT(String,x)
+1151   String sep = separator;
+1152   _BIGSTRING_SIZE xlen = 0;
+1153   _BIGSTRING_ITERATOR i;
+1154   for (i = 0; i < n; ++i)
+1155     xlen += src[i].length();
+1156   xlen += (n - 1) * sep.length();
+1157 
+1158   x.rep = Sresize (x.rep, xlen);
+1159 
+1160   _BIGSTRING_ITERATOR j = 0;
+1161   
+1162   for (i = 0; i < n - 1; ++i)
+1163   {
+1164     ncopy(src[i].chars(), &(x.rep->s[j]), src[i].length());
+1165     j += src[i].length();
+1166     ncopy(sep.chars(), &(x.rep->s[j]), sep.length());
+1167     j += sep.length();
+1168   }
+1169   ncopy0(src[i].chars(), &(x.rep->s[j]), src[i].length());
+1170   RETURN(x);
+1171 }
+\end{verbatim}\normalsize 
+\index{String@{String}!operator<<@{operator$<$$<$}}
+\index{operator<<@{operator$<$$<$}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}ostream\& operator$<$$<$ (ostream \& {\em s}, const {\bf Sub\-String} \& {\em x})\hspace{0.3cm}{\tt  [friend]}}\label{classString_l49}
+
+
+
+
+Definition at line 1415 of file Big\-String.cc.
+
+
+
+\footnotesize\begin{verbatim}1416 { 
+1417   const char* a = x.chars();
+1418   const char* lasta = &(a[x.length()]);
+1419   while (a < lasta)
+1420     s.put(*a++);
+1421   return(s);
+1422 }
+\end{verbatim}\normalsize 
+\index{String@{String}!operator<<@{operator$<$$<$}}
+\index{operator<<@{operator$<$$<$}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}ostream\& operator$<$$<$ (ostream \& {\em s}, const String \& {\em x})\hspace{0.3cm}{\tt  [friend]}}\label{classString_l48}
+
+
+
+
+Definition at line 1261 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}1262 {
+1263    s << x.chars(); return s;
+1264 }
+\end{verbatim}\normalsize 
+\index{String@{String}!operator>>@{operator$>$$>$}}
+\index{operator>>@{operator$>$$>$}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}istream\& operator$>$$>$ (istream \& {\em s}, String \& {\em x})\hspace{0.3cm}{\tt  [friend]}}\label{classString_l50}
+
+
+
+
+Definition at line 1361 of file Big\-String.cc.
+
+
+
+\footnotesize\begin{verbatim}1362 {
+1363   if (!s.ipfx(0) || (!(s.flags() & ios::skipws) && !ws(s)))
+1364   {
+1365     s.clear(ios::failbit|s.rdstate()); // Redundant if using GNU iostreams.
+1366     return s;
+1367   }
+1368   int ch;
+1369   _BIGSTRING_ITERATOR i = 0;
+1370   x.rep = Sresize(x.rep, 20);
+1371   register streambuf *sb = s.rdbuf();
+1372   while ((ch = sb->sbumpc()) != EOF)
+1373   {
+1374     if (isspace(ch))
+1375       break;
+1376     if (i >= x.rep->sz - 1)
+1377       x.rep = Sresize(x.rep, i+1);
+1378     x.rep->s[i++] = ch;
+1379   }
+1380   x.rep->s[i] = 0;
+1381   x.rep->len = i;
+1382   int new_state = s.rdstate();
+1383   if (i == 0) new_state |= ios::failbit;
+1384   if (ch == EOF) new_state |= ios::eofbit;
+1385   s.clear(new_state);
+1386   return s;
+1387 }
+\end{verbatim}\normalsize 
+\index{String@{String}!readline@{readline}}
+\index{readline@{readline}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} readline (istream \& {\em s}, String \& {\em x}, char {\em terminator} = '$\backslash$n', int {\em discard\_\-terminator} = 1)\hspace{0.3cm}{\tt  [friend]}}\label{classString_l51}
+
+
+
+
+Definition at line 1389 of file Big\-String.cc.
+
+Referenced by readtotag().
+
+
+
+\footnotesize\begin{verbatim}1390 {
+1391   if (!s.ipfx(0))
+1392     return 0;
+1393   int ch;
+1394   _BIGSTRING_ITERATOR i = 0;
+1395   x.rep = Sresize(x.rep, 80);
+1396   register streambuf *sb = s.rdbuf();
+1397   while ((ch = sb->sbumpc()) != EOF)
+1398   {
+1399     if (ch != terminator || !discard)
+1400     {
+1401       if (i >= x.rep->sz - 1)
+1402         x.rep = Sresize(x.rep, i+1);
+1403       x.rep->s[i++] = ch;
+1404     }
+1405     if (ch == terminator)
+1406       break;
+1407   }
+1408   x.rep->s[i] = 0;
+1409   x.rep->len = i;
+1410   if (ch == EOF) s.clear(ios::eofbit|s.rdstate());
+1411   return i;
+1412 }
+\end{verbatim}\normalsize 
+\index{String@{String}!replicate@{replicate}}
+\index{replicate@{replicate}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String replicate (const String \& {\em y}, {\bf \_\-BIGSTRING\_\-SIZE} {\em n})\hspace{0.3cm}{\tt  [friend]}}\label{classString_l42}
+
+
+
+
+Definition at line 1311 of file Big\-String.cc.
+
+
+
+\footnotesize\begin{verbatim}1312 {
+1313   String w;
+1314   _BIGSTRING_SIZE len = y.length();
+1315   w.rep = Sresize(w.rep, n * len);
+1316   char* p = w.rep->s;
+1317   while (n-- > 0)
+1318   {
+1319     ncopy(y.chars(), p, len);
+1320     p += len;
+1321   }
+1322   *p = 0;
+1323   return w;
+1324 }
+\end{verbatim}\normalsize 
+\index{String@{String}!replicate@{replicate}}
+\index{replicate@{replicate}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String replicate (char {\em c}, {\bf \_\-BIGSTRING\_\-SIZE} {\em n})\hspace{0.3cm}{\tt  [friend]}}\label{classString_l41}
+
+
+
+
+Definition at line 1301 of file Big\-String.cc.
+
+
+
+\footnotesize\begin{verbatim}1302 {
+1303   String w;
+1304   w.rep = Sresize(w.rep, n);
+1305   char* p = w.rep->s;
+1306   while (n-- > 0) *p++ = c;
+1307   *p = 0;
+1308   return w;
+1309 }
+\end{verbatim}\normalsize 
+\index{String@{String}!reverse@{reverse}}
+\index{reverse@{reverse}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String reverse (const String \& {\em x})\hspace{0.3cm}{\tt  [friend]}}\label{classString_l44}
+
+
+
+
+Definition at line 1013 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}1014 {
+1015   String r; r.rep = Sreverse(x.rep, r.rep); return r;
+1016 }
+\end{verbatim}\normalsize 
+\index{String@{String}!split@{split}}
+\index{split@{split}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} split (const String \& {\em x}, String {\em res}[$\,$], {\bf \_\-BIGSTRING\_\-SIZE} {\em maxn}, const {\bf Big\-Regex} \& {\em sep})\hspace{0.3cm}{\tt  [friend]}}\label{classString_l38}
+
+
+
+
+Definition at line 1117 of file Big\-String.cc.
+
+
+
+\footnotesize\begin{verbatim}1118 {
+1119   String x = src;
+1120   const char* s = x.chars();
+1121   _BIGSTRING_SIZE sl = x.length();
+1122   _BIGSTRING_ITERATOR i = 0;
+1123   _BIGSTRING_SIZE pos = 0;
+1124   _BIGSTRING_SIZE p, matchlen;
+1125   while (i < n && pos < sl)
+1126   {
+1127     p = r.search(s, sl, matchlen, pos);
+1128     if (p < 0)
+1129       p = sl;
+1130     results[i].rep = Salloc(results[i].rep, &(s[pos]), p - pos, p - pos);
+1131     i++;
+1132     pos = p + matchlen;
+1133   }
+1134   return i;
+1135 }
+\end{verbatim}\normalsize 
+\index{String@{String}!split@{split}}
+\index{split@{split}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} split (const String \& {\em x}, String {\em res}[$\,$], {\bf \_\-BIGSTRING\_\-SIZE} {\em maxn}, const String \& {\em sep})\hspace{0.3cm}{\tt  [friend]}}\label{classString_l37}
+
+
+
+
+Definition at line 1098 of file Big\-String.cc.
+
+
+
+\footnotesize\begin{verbatim}1099 {
+1100   String x = src;
+1101   const char* s = x.chars();
+1102   _BIGSTRING_SIZE sl = x.length();
+1103   _BIGSTRING_ITERATOR i = 0;
+1104   _BIGSTRING_SIZE pos = 0;
+1105   while (i < n && pos < sl)
+1106   {
+1107     _BIGSTRING_SIZE p = x.search(pos, sl, sep.chars(), sep.length());
+1108     if (p < 0)
+1109       p = sl;
+1110     results[i].rep = Salloc(results[i].rep, &(s[pos]), p - pos, p - pos);
+1111     i++;
+1112     pos = p + sep.length();
+1113   }
+1114   return i;
+1115 }
+\end{verbatim}\normalsize 
+\index{String@{String}!SubString@{SubString}}
+\index{SubString@{SubString}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}friend class Sub\-String\hspace{0.3cm}{\tt  [friend]}}\label{classString_l0}
+
+
+
+
+Definition at line 165 of file Big\-String.hh.\index{String@{String}!upcase@{upcase}}
+\index{upcase@{upcase}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String upcase (const String \& {\em x})\hspace{0.3cm}{\tt  [friend]}}\label{classString_l45}
+
+
+
+
+Definition at line 1018 of file Big\-String.hh.
+
+Referenced by extract\_\-paper\_\-plan\_\-to\_\-paper(), Financial\_\-Note::get(), get\_\-Paper\_\-Plans\_\-Section\_\-IDs(), include\_\-protected\_\-text(), and Target\_\-Access::set\_\-target().
+
+
+
+\footnotesize\begin{verbatim}1019 {
+1020   String r; r.rep = Supcase(x.rep, r.rep); return r;
+1021 }
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Data Documentation}
+\index{String@{String}!rep@{rep}}
+\index{rep@{rep}!String@{String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Str\-Rep}$\ast$ String::rep\hspace{0.3cm}{\tt  [protected]}}\label{classString_n0}
+
+
+
+
+Definition at line 168 of file Big\-String.hh.
+
+Referenced by alloc(), allocation(), Sub\-String::assign(), capitalize(), capitalize(), cat(), Sub\-String::chars(), chars(), common\_\-prefix(), common\_\-suffix(), downcase(), downcase(), elem(), empty(), length(), Sub\-String::OK(), Sub\-String::operator=(), operator=(), operator$>$$>$(), operator[$\,$](), prepend(), readline(), replicate(), reverse(), reverse(), split(), String(), upcase(), upcase(), and $\sim$String().
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf Big\-String.hh}\item 
+{\bf Big\-String.cc}\end{CompactItemize}

@@ -1,0 +1,2343 @@
+\section{Big\-String.hh File Reference}
+\label{BigString_8hh}\index{BigString.hh@{Big\-String.hh}}
+{\tt \#include \char`\"{}Big\-Regex.hh\char`\"{}}\par
+{\tt \#include $<$iostream.h$>$}\par
+{\tt \#include $<$stdlib.h$>$}\par
+{\tt \#include $<$stdio.h$>$}\par
+\subsection*{Compounds}
+\begin{CompactItemize}
+\item 
+class {\bf String}
+\item 
+struct {\bf Str\-Rep}
+\item 
+class {\bf Sub\-String}
+\end{CompactItemize}
+\subsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define {\bf \_\-Big\-String\_\-hh}\ 1
+\item 
+\#define {\bf \_\-String\_\-hh}\ 1
+\item 
+\#define {\bf \_\-G\_\-NO\_\-NRV}
+\item 
+\#define {\bf BIGSTRING\_\-MAXIMIZE\_\-SPEED}
+\item 
+\#define {\bf BIGSTRING\_\-ISTREAM\_\-INITIALIZATION}
+\item 
+\#define {\bf BIGSTRING\_\-LONGLONG\_\-INITIALIZATION}
+\item 
+\#define {\bf BIGSTRING\_\-DOUBLE\_\-INITIALIZATION}
+\end{CompactItemize}
+\subsection*{Typedefs}
+\begin{CompactItemize}
+\item 
+typedef unsigned int {\bf \_\-BIGSTRING\_\-ALLOC}
+\item 
+typedef unsigned int {\bf \_\-BIGSTRING\_\-LENGTH}
+\item 
+typedef int {\bf \_\-BIGSTRING\_\-SIZE}
+\item 
+typedef int {\bf \_\-BIGSTRING\_\-ITERATOR}
+\item 
+typedef int {\bf \_\-BIGSTRING\_\-REVERSE}
+\item 
+typedef unsigned long {\bf \_\-BIGSTRING\_\-ALLOCMANIP}
+\item 
+typedef {\bf String} {\bf Str\-Tmp}
+\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+{\bf Str\-Rep} $\ast$ {\bf Salloc} ({\bf Str\-Rep} $\ast$old, const char $\ast$src, {\bf \_\-BIGSTRING\_\-SIZE} srclen, {\bf \_\-BIGSTRING\_\-SIZE} newlen)
+\item 
+{\bf Str\-Rep} $\ast$ {\bf Scopy} ({\bf Str\-Rep} $\ast$, const {\bf Str\-Rep} $\ast$)
+\item 
+{\bf Str\-Rep} $\ast$ {\bf Scat} ({\bf Str\-Rep} $\ast$, const char $\ast$, {\bf \_\-BIGSTRING\_\-SIZE}, const char $\ast$, {\bf \_\-BIGSTRING\_\-SIZE})
+\item 
+{\bf Str\-Rep} $\ast$ {\bf Scat} ({\bf Str\-Rep} $\ast$, const char $\ast$, {\bf \_\-BIGSTRING\_\-SIZE}, const char $\ast$, {\bf \_\-BIGSTRING\_\-SIZE}, const char $\ast$, {\bf \_\-BIGSTRING\_\-SIZE})
+\item 
+{\bf Str\-Rep} $\ast$ {\bf Sprepend} ({\bf Str\-Rep} $\ast$, const char $\ast$, {\bf \_\-BIGSTRING\_\-SIZE})
+\item 
+{\bf Str\-Rep} $\ast$ {\bf Sreverse} (const {\bf Str\-Rep} $\ast$, {\bf Str\-Rep} $\ast$)
+\item 
+{\bf Str\-Rep} $\ast$ {\bf Supcase} (const {\bf Str\-Rep} $\ast$, {\bf Str\-Rep} $\ast$)
+\item 
+{\bf Str\-Rep} $\ast$ {\bf Sdowncase} (const {\bf Str\-Rep} $\ast$, {\bf Str\-Rep} $\ast$)
+\item 
+{\bf Str\-Rep} $\ast$ {\bf Scapitalize} (const {\bf Str\-Rep} $\ast$, {\bf Str\-Rep} $\ast$)
+\item 
+{\bf Str\-Rep} $\ast$ {\bf Salloc\_\-istream} ({\bf Str\-Rep} $\ast$old, istream \&src, {\bf \_\-BIGSTRING\_\-SIZE} srclen, {\bf \_\-BIGSTRING\_\-SIZE} newlen)
+\item 
+{\bf Str\-Rep} $\ast$ {\bf Scat\_\-istream} ({\bf Str\-Rep} $\ast$, const char $\ast$, {\bf \_\-BIGSTRING\_\-SIZE}, istream \&, {\bf \_\-BIGSTRING\_\-SIZE})
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf compare} (const {\bf String} \&x, const {\bf String} \&y)
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf compare} (const {\bf String} \&x, const {\bf Sub\-String} \&y)
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf compare} (const {\bf String} \&x, const char $\ast$y)
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf compare} (const {\bf Sub\-String} \&x, const {\bf String} \&y)
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf compare} (const {\bf Sub\-String} \&x, const {\bf Sub\-String} \&y)
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf compare} (const {\bf Sub\-String} \&x, const char $\ast$y)
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf fcompare} (const {\bf String} \&x, const {\bf String} \&y)
+\item 
+void {\bf cat} (const {\bf String} \&x, const {\bf String} \&y, {\bf String} \&r)
+\item 
+void {\bf cat} (const {\bf String} \&x, const {\bf Sub\-String} \&y, {\bf String} \&r)
+\item 
+void {\bf cat} (const {\bf String} \&x, const char $\ast$y, {\bf String} \&r)
+\item 
+void {\bf cat} (const {\bf String} \&x, char y, {\bf String} \&r)
+\item 
+void {\bf cat} (const {\bf Sub\-String} \&x, const {\bf String} \&y, {\bf String} \&r)
+\item 
+void {\bf cat} (const {\bf Sub\-String} \&x, const {\bf Sub\-String} \&y, {\bf String} \&r)
+\item 
+void {\bf cat} (const {\bf Sub\-String} \&x, const char $\ast$y, {\bf String} \&r)
+\item 
+void {\bf cat} (const {\bf Sub\-String} \&x, char y, {\bf String} \&r)
+\item 
+void {\bf cat} (const char $\ast$x, const {\bf String} \&y, {\bf String} \&r)
+\item 
+void {\bf cat} (const char $\ast$x, const {\bf Sub\-String} \&y, {\bf String} \&r)
+\item 
+void {\bf cat} (const char $\ast$x, const char $\ast$y, {\bf String} \&r)
+\item 
+void {\bf cat} (const char $\ast$x, char y, {\bf String} \&r)
+\item 
+void {\bf cat} (const {\bf String} \&a, const {\bf String} \&x, const {\bf String} \&y, {\bf String} \&r)
+\item 
+void {\bf cat} (const {\bf String} \&a, const {\bf String} \&x, const {\bf Sub\-String} \&y, {\bf String} \&r)
+\item 
+void {\bf cat} (const {\bf String} \&a, const {\bf String} \&x, const char $\ast$y, {\bf String} \&r)
+\item 
+void {\bf cat} (const {\bf String} \&a, const {\bf String} \&x, char y, {\bf String} \&r)
+\item 
+void {\bf cat} (const {\bf String} \&a, const {\bf Sub\-String} \&x, const {\bf String} \&y, {\bf String} \&r)
+\item 
+void {\bf cat} (const {\bf String} \&a, const {\bf Sub\-String} \&x, const {\bf Sub\-String} \&y, {\bf String} \&r)
+\item 
+void {\bf cat} (const {\bf String} \&a, const {\bf Sub\-String} \&x, const char $\ast$y, {\bf String} \&r)
+\item 
+void {\bf cat} (const {\bf String} \&a, const {\bf Sub\-String} \&x, char y, {\bf String} \&r)
+\item 
+void {\bf cat} (const {\bf String} \&a, const char $\ast$x, const {\bf String} \&y, {\bf String} \&r)
+\item 
+void {\bf cat} (const {\bf String} \&a, const char $\ast$x, const {\bf Sub\-String} \&y, {\bf String} \&r)
+\item 
+void {\bf cat} (const {\bf String} \&a, const char $\ast$x, const char $\ast$y, {\bf String} \&r)
+\item 
+void {\bf cat} (const {\bf String} \&a, const char $\ast$x, char y, {\bf String} \&r)
+\item 
+void {\bf cat} (const char $\ast$a, const {\bf String} \&x, const {\bf String} \&y, {\bf String} \&r)
+\item 
+void {\bf cat} (const char $\ast$a, const {\bf String} \&x, const {\bf Sub\-String} \&y, {\bf String} \&r)
+\item 
+void {\bf cat} (const char $\ast$a, const {\bf String} \&x, const char $\ast$y, {\bf String} \&r)
+\item 
+void {\bf cat} (const char $\ast$a, const {\bf String} \&x, char y, {\bf String} \&r)
+\item 
+void {\bf cat} (const char $\ast$a, const {\bf Sub\-String} \&x, const {\bf String} \&y, {\bf String} \&r)
+\item 
+void {\bf cat} (const char $\ast$a, const {\bf Sub\-String} \&x, const {\bf Sub\-String} \&y, {\bf String} \&r)
+\item 
+void {\bf cat} (const char $\ast$a, const {\bf Sub\-String} \&x, const char $\ast$y, {\bf String} \&r)
+\item 
+void {\bf cat} (const char $\ast$a, const {\bf Sub\-String} \&x, char y, {\bf String} \&r)
+\item 
+void {\bf cat} (const char $\ast$a, const char $\ast$x, const {\bf String} \&y, {\bf String} \&r)
+\item 
+void {\bf cat} (const char $\ast$a, const char $\ast$x, const {\bf Sub\-String} \&y, {\bf String} \&r)
+\item 
+void {\bf cat} (const char $\ast$a, const char $\ast$x, const char $\ast$y, {\bf String} \&r)
+\item 
+void {\bf cat} (const char $\ast$a, const char $\ast$x, char y, {\bf String} \&r)
+\item 
+{\bf String} {\bf operator+} (const {\bf String} \&x, const {\bf String} \&y)
+\item 
+{\bf String} {\bf operator+} (const {\bf String} \&x, const {\bf Sub\-String} \&y)
+\item 
+{\bf String} {\bf operator+} (const {\bf String} \&x, const char $\ast$y)
+\item 
+{\bf String} {\bf operator+} (const {\bf String} \&x, char y)
+\item 
+{\bf String} {\bf operator+} (const {\bf Sub\-String} \&x, const {\bf String} \&y)
+\item 
+{\bf String} {\bf operator+} (const {\bf Sub\-String} \&x, const {\bf Sub\-String} \&y)
+\item 
+{\bf String} {\bf operator+} (const {\bf Sub\-String} \&x, const char $\ast$y)
+\item 
+{\bf String} {\bf operator+} (const {\bf Sub\-String} \&x, char y)
+\item 
+{\bf String} {\bf operator+} (const char $\ast$x, const {\bf String} \&y)
+\item 
+{\bf String} {\bf operator+} (char x, const {\bf String} \&y)
+\item 
+{\bf String} {\bf operator+} (const char $\ast$x, const {\bf Sub\-String} \&y)
+\item 
+{\bf String} {\bf reverse} (const {\bf String} \&x)
+\item 
+{\bf String} {\bf upcase} (const {\bf String} \&x)
+\item 
+{\bf String} {\bf downcase} (const {\bf String} \&x)
+\item 
+{\bf String} {\bf capitalize} (const {\bf String} \&x)
+\item 
+ostream \& {\bf operator$<$$<$} (ostream \&s, const {\bf String} \&x)
+\item 
+int {\bf operator==} (const {\bf String} \&x, const {\bf String} \&y)
+\item 
+int {\bf operator!=} (const {\bf String} \&x, const {\bf String} \&y)
+\item 
+int {\bf operator$>$} (const {\bf String} \&x, const {\bf String} \&y)
+\item 
+int {\bf operator$>$=} (const {\bf String} \&x, const {\bf String} \&y)
+\item 
+int {\bf operator$<$} (const {\bf String} \&x, const {\bf String} \&y)
+\item 
+int {\bf operator$<$=} (const {\bf String} \&x, const {\bf String} \&y)
+\item 
+int {\bf operator==} (const {\bf String} \&x, const {\bf Sub\-String} \&y)
+\item 
+int {\bf operator!=} (const {\bf String} \&x, const {\bf Sub\-String} \&y)
+\item 
+int {\bf operator$>$} (const {\bf String} \&x, const {\bf Sub\-String} \&y)
+\item 
+int {\bf operator$>$=} (const {\bf String} \&x, const {\bf Sub\-String} \&y)
+\item 
+int {\bf operator$<$} (const {\bf String} \&x, const {\bf Sub\-String} \&y)
+\item 
+int {\bf operator$<$=} (const {\bf String} \&x, const {\bf Sub\-String} \&y)
+\item 
+int {\bf operator==} (const {\bf String} \&x, const char $\ast$t)
+\item 
+int {\bf operator!=} (const {\bf String} \&x, const char $\ast$t)
+\item 
+int {\bf operator$>$} (const {\bf String} \&x, const char $\ast$t)
+\item 
+int {\bf operator$>$=} (const {\bf String} \&x, const char $\ast$t)
+\item 
+int {\bf operator$<$} (const {\bf String} \&x, const char $\ast$t)
+\item 
+int {\bf operator$<$=} (const {\bf String} \&x, const char $\ast$t)
+\item 
+int {\bf operator==} (const {\bf Sub\-String} \&x, const {\bf String} \&y)
+\item 
+int {\bf operator!=} (const {\bf Sub\-String} \&x, const {\bf String} \&y)
+\item 
+int {\bf operator$>$} (const {\bf Sub\-String} \&x, const {\bf String} \&y)
+\item 
+int {\bf operator$>$=} (const {\bf Sub\-String} \&x, const {\bf String} \&y)
+\item 
+int {\bf operator$<$} (const {\bf Sub\-String} \&x, const {\bf String} \&y)
+\item 
+int {\bf operator$<$=} (const {\bf Sub\-String} \&x, const {\bf String} \&y)
+\item 
+int {\bf operator==} (const {\bf Sub\-String} \&x, const {\bf Sub\-String} \&y)
+\item 
+int {\bf operator!=} (const {\bf Sub\-String} \&x, const {\bf Sub\-String} \&y)
+\item 
+int {\bf operator$>$} (const {\bf Sub\-String} \&x, const {\bf Sub\-String} \&y)
+\item 
+int {\bf operator$>$=} (const {\bf Sub\-String} \&x, const {\bf Sub\-String} \&y)
+\item 
+int {\bf operator$<$} (const {\bf Sub\-String} \&x, const {\bf Sub\-String} \&y)
+\item 
+int {\bf operator$<$=} (const {\bf Sub\-String} \&x, const {\bf Sub\-String} \&y)
+\item 
+int {\bf operator==} (const {\bf Sub\-String} \&x, const char $\ast$t)
+\item 
+int {\bf operator!=} (const {\bf Sub\-String} \&x, const char $\ast$t)
+\item 
+int {\bf operator$>$} (const {\bf Sub\-String} \&x, const char $\ast$t)
+\item 
+int {\bf operator$>$=} (const {\bf Sub\-String} \&x, const char $\ast$t)
+\item 
+int {\bf operator$<$} (const {\bf Sub\-String} \&x, const char $\ast$t)
+\item 
+int {\bf operator$<$=} (const {\bf Sub\-String} \&x, const char $\ast$t)
+\end{CompactItemize}
+\subsection*{Variables}
+\begin{CompactItemize}
+\item 
+{\bf Str\-Rep} {\bf \_\-nil\-Str\-Rep}
+\item 
+{\bf String} {\bf \_\-nil\-String}
+\end{CompactItemize}
+
+
+\subsection{Define Documentation}
+\index{BigString.hh@{Big\-String.hh}!_BigString_hh@{\_\-BigString\_\-hh}}
+\index{_BigString_hh@{\_\-BigString\_\-hh}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define \_\-Big\-String\_\-hh\ 1}\label{BigString_8hh_a0}
+
+
+
+
+Definition at line 30 of file Big\-String.hh.\index{BigString.hh@{Big\-String.hh}!_G_NO_NRV@{\_\-G\_\-NO\_\-NRV}}
+\index{_G_NO_NRV@{\_\-G\_\-NO\_\-NRV}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define \_\-G\_\-NO\_\-NRV}\label{BigString_8hh_a2}
+
+
+
+
+Definition at line 40 of file Big\-String.hh.\index{BigString.hh@{Big\-String.hh}!_String_hh@{\_\-String\_\-hh}}
+\index{_String_hh@{\_\-String\_\-hh}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define \_\-String\_\-hh\ 1}\label{BigString_8hh_a1}
+
+
+
+
+Definition at line 31 of file Big\-String.hh.\index{BigString.hh@{Big\-String.hh}!BIGSTRING_DOUBLE_INITIALIZATION@{BIGSTRING\_\-DOUBLE\_\-INITIALIZATION}}
+\index{BIGSTRING_DOUBLE_INITIALIZATION@{BIGSTRING\_\-DOUBLE\_\-INITIALIZATION}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define BIGSTRING\_\-DOUBLE\_\-INITIALIZATION}\label{BigString_8hh_a6}
+
+
+
+
+Definition at line 52 of file Big\-String.hh.\index{BigString.hh@{Big\-String.hh}!BIGSTRING_ISTREAM_INITIALIZATION@{BIGSTRING\_\-ISTREAM\_\-INITIALIZATION}}
+\index{BIGSTRING_ISTREAM_INITIALIZATION@{BIGSTRING\_\-ISTREAM\_\-INITIALIZATION}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define BIGSTRING\_\-ISTREAM\_\-INITIALIZATION}\label{BigString_8hh_a4}
+
+
+
+
+Definition at line 50 of file Big\-String.hh.\index{BigString.hh@{Big\-String.hh}!BIGSTRING_LONGLONG_INITIALIZATION@{BIGSTRING\_\-LONGLONG\_\-INITIALIZATION}}
+\index{BIGSTRING_LONGLONG_INITIALIZATION@{BIGSTRING\_\-LONGLONG\_\-INITIALIZATION}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define BIGSTRING\_\-LONGLONG\_\-INITIALIZATION}\label{BigString_8hh_a5}
+
+
+
+
+Definition at line 51 of file Big\-String.hh.\index{BigString.hh@{Big\-String.hh}!BIGSTRING_MAXIMIZE_SPEED@{BIGSTRING\_\-MAXIMIZE\_\-SPEED}}
+\index{BIGSTRING_MAXIMIZE_SPEED@{BIGSTRING\_\-MAXIMIZE\_\-SPEED}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define BIGSTRING\_\-MAXIMIZE\_\-SPEED}\label{BigString_8hh_a3}
+
+
+
+
+Definition at line 48 of file Big\-String.hh.
+
+\subsection{Typedef Documentation}
+\index{BigString.hh@{Big\-String.hh}!_BIGSTRING_ALLOC@{\_\-BIGSTRING\_\-ALLOC}}
+\index{_BIGSTRING_ALLOC@{\_\-BIGSTRING\_\-ALLOC}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef unsigned int \_\-BIGSTRING\_\-ALLOC}\label{BigString_8hh_a7}
+
+
+
+
+Definition at line 71 of file Big\-String.hh.
+
+Referenced by String::allocation().\index{BigString.hh@{Big\-String.hh}!_BIGSTRING_ALLOCMANIP@{\_\-BIGSTRING\_\-ALLOCMANIP}}
+\index{_BIGSTRING_ALLOCMANIP@{\_\-BIGSTRING\_\-ALLOCMANIP}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef unsigned long \_\-BIGSTRING\_\-ALLOCMANIP}\label{BigString_8hh_a12}
+
+
+
+
+Definition at line 76 of file Big\-String.hh.\index{BigString.hh@{Big\-String.hh}!_BIGSTRING_ITERATOR@{\_\-BIGSTRING\_\-ITERATOR}}
+\index{_BIGSTRING_ITERATOR@{\_\-BIGSTRING\_\-ITERATOR}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef int \_\-BIGSTRING\_\-ITERATOR}\label{BigString_8hh_a10}
+
+
+
+
+Definition at line 74 of file Big\-String.hh.
+
+Referenced by String::\_\-gsub(), String::elem(), extract\_\-paper\_\-novelties(), join(), operator$>$$>$(), String::operator[$\,$](), readline(), and split().\index{BigString.hh@{Big\-String.hh}!_BIGSTRING_LENGTH@{\_\-BIGSTRING\_\-LENGTH}}
+\index{_BIGSTRING_LENGTH@{\_\-BIGSTRING\_\-LENGTH}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef unsigned int \_\-BIGSTRING\_\-LENGTH}\label{BigString_8hh_a8}
+
+
+
+
+Definition at line 72 of file Big\-String.hh.
+
+Referenced by String::alloc(), common\_\-prefix(), common\_\-suffix(), String::del(), String::freq(), Sub\-String::length(), and String::length().\index{BigString.hh@{Big\-String.hh}!_BIGSTRING_REVERSE@{\_\-BIGSTRING\_\-REVERSE}}
+\index{_BIGSTRING_REVERSE@{\_\-BIGSTRING\_\-REVERSE}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef int \_\-BIGSTRING\_\-REVERSE}\label{BigString_8hh_a11}
+
+
+
+
+Definition at line 75 of file Big\-String.hh.\index{BigString.hh@{Big\-String.hh}!_BIGSTRING_SIZE@{\_\-BIGSTRING\_\-SIZE}}
+\index{_BIGSTRING_SIZE@{\_\-BIGSTRING\_\-SIZE}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef int \_\-BIGSTRING\_\-SIZE}\label{BigString_8hh_a9}
+
+
+
+
+Definition at line 73 of file Big\-String.hh.
+
+Referenced by String::\_\-gsub(), String::after(), String::alloc(), Sub\-String::assign(), String::at(), String::before(), common\_\-prefix(), common\_\-suffix(), compare(), String::contains(), String::del(), fcompare(), String::freq(), String::from(), String::gsub(), String::index(), join(), String::match(), String::matches(), String::operator()(), readline(), replicate(), Salloc(), Salloc\_\-istream(), Scapitalize(), Scat(), Scopy(), Sdowncase(), String::search(), split(), Sprepend(), Sreverse(), String::String(), Sub\-String::Sub\-String(), Supcase(), and String::through().\index{BigString.hh@{Big\-String.hh}!StrTmp@{StrTmp}}
+\index{StrTmp@{StrTmp}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf String} Str\-Tmp}\label{BigString_8hh_a13}
+
+
+
+
+Definition at line 476 of file Big\-String.hh.
+
+\subsection{Function Documentation}
+\index{BigString.hh@{Big\-String.hh}!capitalize@{capitalize}}
+\index{capitalize@{capitalize}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} capitalize (const {\bf String} \& {\em x})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a84}
+
+
+
+
+Definition at line 1028 of file Big\-String.hh.
+
+References String::rep, and Scapitalize().
+
+Referenced by update\_\-main\_\-ALs().
+
+
+
+\footnotesize\begin{verbatim}1029 {
+1030   String r; r.rep = Scapitalize(x.rep, r.rep); return r;
+1031 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const char $\ast$ {\em a}, const char $\ast$ {\em x}, char {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a69}
+
+
+
+
+Definition at line 809 of file Big\-String.hh.
+
+References String::rep, and Scat().
+
+Referenced by operator+().
+
+
+
+\footnotesize\begin{verbatim}810 {
+811   r.rep = Scat(r.rep, a, -1, x, -1, &y, 1);
+812 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const char $\ast$ {\em a}, const char $\ast$ {\em x}, const char $\ast$ {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a68}
+
+
+
+
+Definition at line 804 of file Big\-String.hh.
+
+References String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}805 {
+806   r.rep = Scat(r.rep, a, -1, x, -1, y, -1);
+807 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const char $\ast$ {\em a}, const char $\ast$ {\em x}, const {\bf Sub\-String} \& {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a67}
+
+
+
+
+Definition at line 799 of file Big\-String.hh.
+
+References Sub\-String::chars(), Sub\-String::length(), String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}800 {
+801   r.rep = Scat(r.rep, a, -1, x, -1, y.chars(), y.length());
+802 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const char $\ast$ {\em a}, const char $\ast$ {\em x}, const {\bf String} \& {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a66}
+
+
+
+
+Definition at line 794 of file Big\-String.hh.
+
+References String::chars(), String::length(), String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}795 {
+796   r.rep = Scat(r.rep, a, -1, x, -1, y.chars(), y.length());
+797 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const char $\ast$ {\em a}, const {\bf Sub\-String} \& {\em x}, char {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a65}
+
+
+
+
+Definition at line 789 of file Big\-String.hh.
+
+References Sub\-String::chars(), Sub\-String::length(), String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}790 {
+791   r.rep = Scat(r.rep, a, -1, x.chars(), x.length(), &y, 1);
+792 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const char $\ast$ {\em a}, const {\bf Sub\-String} \& {\em x}, const char $\ast$ {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a64}
+
+
+
+
+Definition at line 784 of file Big\-String.hh.
+
+References Sub\-String::chars(), Sub\-String::length(), String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}785 {
+786   r.rep = Scat(r.rep, a, -1, x.chars(), x.length(), y, -1);
+787 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const char $\ast$ {\em a}, const {\bf Sub\-String} \& {\em x}, const {\bf Sub\-String} \& {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a63}
+
+
+
+
+Definition at line 779 of file Big\-String.hh.
+
+References Sub\-String::chars(), Sub\-String::length(), String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}780 {
+781   r.rep = Scat(r.rep, a, -1, x.chars(), x.length(), y.chars(), y.length());
+782 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const char $\ast$ {\em a}, const {\bf Sub\-String} \& {\em x}, const {\bf String} \& {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a62}
+
+
+
+
+Definition at line 774 of file Big\-String.hh.
+
+References String::chars(), Sub\-String::chars(), String::length(), Sub\-String::length(), String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}775 {
+776   r.rep = Scat(r.rep, a, -1, x.chars(), x.length(), y.chars(), y.length());
+777 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const char $\ast$ {\em a}, const {\bf String} \& {\em x}, char {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a61}
+
+
+
+
+Definition at line 769 of file Big\-String.hh.
+
+References String::chars(), String::length(), String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}770 {
+771   r.rep = Scat(r.rep, a, -1, x.chars(), x.length(), &y, 1);
+772 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const char $\ast$ {\em a}, const {\bf String} \& {\em x}, const char $\ast$ {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a60}
+
+
+
+
+Definition at line 764 of file Big\-String.hh.
+
+References String::chars(), String::length(), String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}765 {
+766   r.rep = Scat(r.rep, a, -1, x.chars(), x.length(), y, -1);
+767 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const char $\ast$ {\em a}, const {\bf String} \& {\em x}, const {\bf Sub\-String} \& {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a59}
+
+
+
+
+Definition at line 759 of file Big\-String.hh.
+
+References Sub\-String::chars(), String::chars(), Sub\-String::length(), String::length(), String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}760 {
+761   r.rep = Scat(r.rep, a, -1, x.chars(), x.length(), y.chars(), y.length());
+762 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const char $\ast$ {\em a}, const {\bf String} \& {\em x}, const {\bf String} \& {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a58}
+
+
+
+
+Definition at line 754 of file Big\-String.hh.
+
+References String::chars(), String::length(), String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}755 {
+756   r.rep = Scat(r.rep, a, -1, x.chars(), x.length(), y.chars(), y.length());
+757 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const {\bf String} \& {\em a}, const char $\ast$ {\em x}, char {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a57}
+
+
+
+
+Definition at line 748 of file Big\-String.hh.
+
+References String::chars(), String::length(), String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}749 {
+750   r.rep = Scat(r.rep, a.chars(), a.length(), x, -1, &y, 1);
+751 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const {\bf String} \& {\em a}, const char $\ast$ {\em x}, const char $\ast$ {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a56}
+
+
+
+
+Definition at line 743 of file Big\-String.hh.
+
+References String::chars(), String::length(), String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}744 {
+745   r.rep = Scat(r.rep, a.chars(), a.length(), x, -1, y, -1);
+746 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const {\bf String} \& {\em a}, const char $\ast$ {\em x}, const {\bf Sub\-String} \& {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a55}
+
+
+
+
+Definition at line 738 of file Big\-String.hh.
+
+References Sub\-String::chars(), String::chars(), Sub\-String::length(), String::length(), String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}739 {
+740   r.rep = Scat(r.rep, a.chars(), a.length(), x, -1, y.chars(), y.length());
+741 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const {\bf String} \& {\em a}, const char $\ast$ {\em x}, const {\bf String} \& {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a54}
+
+
+
+
+Definition at line 733 of file Big\-String.hh.
+
+References String::chars(), String::length(), String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}734 {
+735   r.rep = Scat(r.rep, a.chars(), a.length(), x, -1, y.chars(), y.length());
+736 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const {\bf String} \& {\em a}, const {\bf Sub\-String} \& {\em x}, char {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a53}
+
+
+
+
+Definition at line 728 of file Big\-String.hh.
+
+References Sub\-String::chars(), String::chars(), Sub\-String::length(), String::length(), String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}729 {
+730   r.rep = Scat(r.rep, a.chars(), a.length(), x.chars(), x.length(), &y, 1);
+731 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const {\bf String} \& {\em a}, const {\bf Sub\-String} \& {\em x}, const char $\ast$ {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a52}
+
+
+
+
+Definition at line 723 of file Big\-String.hh.
+
+References Sub\-String::chars(), String::chars(), Sub\-String::length(), String::length(), String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}724 {
+725   r.rep = Scat(r.rep, a.chars(), a.length(), x.chars(), x.length(), y, -1);
+726 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const {\bf String} \& {\em a}, const {\bf Sub\-String} \& {\em x}, const {\bf Sub\-String} \& {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a51}
+
+
+
+
+Definition at line 718 of file Big\-String.hh.
+
+References Sub\-String::chars(), String::chars(), Sub\-String::length(), String::length(), String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}719 {
+720   r.rep = Scat(r.rep, a.chars(), a.length(), x.chars(), x.length(), y.chars(), y.length());
+721 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const {\bf String} \& {\em a}, const {\bf Sub\-String} \& {\em x}, const {\bf String} \& {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a50}
+
+
+
+
+Definition at line 713 of file Big\-String.hh.
+
+References Sub\-String::chars(), String::chars(), Sub\-String::length(), String::length(), String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}714 {
+715   r.rep = Scat(r.rep, a.chars(), a.length(), x.chars(), x.length(), y.chars(), y.length());
+716 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const {\bf String} \& {\em a}, const {\bf String} \& {\em x}, char {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a49}
+
+
+
+
+Definition at line 708 of file Big\-String.hh.
+
+References String::chars(), String::length(), String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}709 {
+710   r.rep = Scat(r.rep, a.chars(), a.length(), x.chars(), x.length(), &y, 1);
+711 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const {\bf String} \& {\em a}, const {\bf String} \& {\em x}, const char $\ast$ {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a48}
+
+
+
+
+Definition at line 703 of file Big\-String.hh.
+
+References String::chars(), String::length(), String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}704 {
+705   r.rep = Scat(r.rep, a.chars(), a.length(), x.chars(), x.length(), y, -1);
+706 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const {\bf String} \& {\em a}, const {\bf String} \& {\em x}, const {\bf Sub\-String} \& {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a47}
+
+
+
+
+Definition at line 698 of file Big\-String.hh.
+
+References Sub\-String::chars(), String::chars(), Sub\-String::length(), String::length(), String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}699 {
+700   r.rep = Scat(r.rep, a.chars(), a.length(), x.chars(), x.length(), y.chars(), y.length());
+701 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const {\bf String} \& {\em a}, const {\bf String} \& {\em x}, const {\bf String} \& {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a46}
+
+
+
+
+Definition at line 693 of file Big\-String.hh.
+
+References String::chars(), String::length(), String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}694 {
+695   r.rep = Scat(r.rep, a.chars(), a.length(), x.chars(), x.length(), y.chars(), y.length());
+696 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const char $\ast$ {\em x}, char {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a45}
+
+
+
+
+Definition at line 688 of file Big\-String.hh.
+
+References String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}689 {
+690   r.rep = Scat(r.rep, x, -1, &y, 1);
+691 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const char $\ast$ {\em x}, const char $\ast$ {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a44}
+
+
+
+
+Definition at line 683 of file Big\-String.hh.
+
+References String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}684 {
+685   r.rep = Scat(r.rep, x, -1, y, -1);
+686 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const char $\ast$ {\em x}, const {\bf Sub\-String} \& {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a43}
+
+
+
+
+Definition at line 678 of file Big\-String.hh.
+
+References Sub\-String::chars(), Sub\-String::length(), String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}679 {
+680   r.rep = Scat(r.rep, x, -1, y.chars(), y.length());
+681 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const char $\ast$ {\em x}, const {\bf String} \& {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a42}
+
+
+
+
+Definition at line 673 of file Big\-String.hh.
+
+References String::chars(), String::length(), String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}674 {
+675   r.rep = Scat(r.rep, x, -1, y.chars(), y.length());
+676 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const {\bf Sub\-String} \& {\em x}, char {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a41}
+
+
+
+
+Definition at line 668 of file Big\-String.hh.
+
+References Sub\-String::chars(), Sub\-String::length(), String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}669 {
+670   r.rep = Scat(r.rep, x.chars(), x.length(), &y, 1);
+671 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const {\bf Sub\-String} \& {\em x}, const char $\ast$ {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a40}
+
+
+
+
+Definition at line 663 of file Big\-String.hh.
+
+References Sub\-String::chars(), Sub\-String::length(), String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}664 {
+665   r.rep = Scat(r.rep, x.chars(), x.length(), y, -1);
+666 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const {\bf Sub\-String} \& {\em x}, const {\bf Sub\-String} \& {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a39}
+
+
+
+
+Definition at line 658 of file Big\-String.hh.
+
+References Sub\-String::chars(), Sub\-String::length(), String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}659 {
+660   r.rep = Scat(r.rep, x.chars(), x.length(), y.chars(), y.length());
+661 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const {\bf Sub\-String} \& {\em x}, const {\bf String} \& {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a38}
+
+
+
+
+Definition at line 653 of file Big\-String.hh.
+
+References String::chars(), Sub\-String::chars(), String::length(), Sub\-String::length(), String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}654 {
+655   r.rep = Scat(r.rep, x.chars(), x.length(), y.chars(), y.length());
+656 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const {\bf String} \& {\em x}, char {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a37}
+
+
+
+
+Definition at line 648 of file Big\-String.hh.
+
+References String::chars(), String::length(), String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}649 {
+650   r.rep = Scat(r.rep, x.chars(), x.length(), &y, 1);
+651 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const {\bf String} \& {\em x}, const char $\ast$ {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a36}
+
+
+
+
+Definition at line 643 of file Big\-String.hh.
+
+References String::chars(), String::length(), String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}644 {
+645   r.rep = Scat(r.rep, x.chars(), x.length(), y, -1);
+646 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const {\bf String} \& {\em x}, const {\bf Sub\-String} \& {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a35}
+
+
+
+
+Definition at line 638 of file Big\-String.hh.
+
+References Sub\-String::chars(), String::chars(), Sub\-String::length(), String::length(), String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}639 {
+640   r.rep = Scat(r.rep, x.chars(), x.length(), y.chars(), y.length());
+641 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!cat@{cat}}
+\index{cat@{cat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void cat (const {\bf String} \& {\em x}, const {\bf String} \& {\em y}, {\bf String} \& {\em r})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a34}
+
+
+
+
+Definition at line 633 of file Big\-String.hh.
+
+References String::chars(), String::length(), String::rep, and Scat().
+
+
+
+\footnotesize\begin{verbatim}634 {
+635   r.rep = Scat(r.rep, x.chars(), x.length(), y.chars(), y.length());
+636 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!compare@{compare}}
+\index{compare@{compare}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} compare (const {\bf Sub\-String} \& {\em x}, const char $\ast$ {\em y})}\label{BigString_8hh_a32}
+
+
+
+
+Definition at line 481 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, Sub\-String::chars(), and Sub\-String::length().
+
+Referenced by operator!=(), operator$<$(), operator$<$=(), operator==(), operator$>$(), and operator$>$=().
+
+
+
+\footnotesize\begin{verbatim}482 {
+483   if (b == 0)
+484     return x.length();
+485   else
+486   {
+487     const char* a = x.chars();
+488     _BIGSTRING_SIZE n = x.length();
+489     int diff;
+490     while (n-- > 0) if ((diff = *a++ - *b++) != 0) return diff;
+491     return (*b == 0) ? 0 : -1;
+492   }
+493 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!compare@{compare}}
+\index{compare@{compare}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} compare (const {\bf Sub\-String} \& {\em x}, const {\bf Sub\-String} \& {\em y})}\label{BigString_8hh_a31}
+
+
+\index{BigString.hh@{Big\-String.hh}!compare@{compare}}
+\index{compare@{compare}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} compare (const {\bf Sub\-String} \& {\em x}, const {\bf String} \& {\em y})}\label{BigString_8hh_a30}
+
+
+\index{BigString.hh@{Big\-String.hh}!compare@{compare}}
+\index{compare@{compare}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} compare (const {\bf String} \& {\em x}, const char $\ast$ {\em y})}\label{BigString_8hh_a29}
+
+
+\index{BigString.hh@{Big\-String.hh}!compare@{compare}}
+\index{compare@{compare}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} compare (const {\bf String} \& {\em x}, const {\bf Sub\-String} \& {\em y})}\label{BigString_8hh_a28}
+
+
+\index{BigString.hh@{Big\-String.hh}!compare@{compare}}
+\index{compare@{compare}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} compare (const {\bf String} \& {\em x}, const {\bf String} \& {\em y})}\label{BigString_8hh_a27}
+
+
+\index{BigString.hh@{Big\-String.hh}!downcase@{downcase}}
+\index{downcase@{downcase}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} downcase (const {\bf String} \& {\em x})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a83}
+
+
+
+
+Definition at line 1023 of file Big\-String.hh.
+
+References String::rep, and Sdowncase().
+
+
+
+\footnotesize\begin{verbatim}1024 {
+1025   String r; r.rep = Sdowncase(x.rep, r.rep); return r;
+1026 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!fcompare@{fcompare}}
+\index{fcompare@{fcompare}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} fcompare (const {\bf String} \& {\em x}, const {\bf String} \& {\em y})}\label{BigString_8hh_a33}
+
+
+
+
+Definition at line 428 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, String::chars(), and String::length().
+
+
+
+\footnotesize\begin{verbatim}429 {
+430   const char* a = x.chars();
+431   const char* b = y.chars();
+432   _BIGSTRING_SIZE al = x.length();
+433   _BIGSTRING_SIZE bl = y.length();
+434   _BIGSTRING_SIZE n = (al <= bl)? al : bl;
+435   int diff = 0;
+436   while (n-- > 0)
+437   {
+438     char ac = *a++;
+439     char bc = *b++;
+440     if ((diff = ac - bc) != 0)
+441     {
+442       if (ac >= 'a' && ac <= 'z')
+443         ac = ac - 'a' + 'A';
+444       if (bc >= 'a' && bc <= 'z')
+445         bc = bc - 'a' + 'A';
+446       if ((diff = ac - bc) != 0)
+447         return diff;
+448     }
+449   }
+450   return al - bl;
+451 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator!= (const {\bf Sub\-String} \& {\em x}, const char $\ast$ {\em t})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a117}
+
+
+
+
+Definition at line 1423 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1424 {
+1425   return compare(x, t) != 0;
+1426 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator!= (const {\bf Sub\-String} \& {\em x}, const {\bf Sub\-String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a111}
+
+
+
+
+Definition at line 1393 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1394 {
+1395   return compare(x, y) != 0;
+1396 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator!= (const {\bf Sub\-String} \& {\em x}, const {\bf String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a105}
+
+
+
+
+Definition at line 1363 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1364 {
+1365   return compare(y, x) != 0;
+1366 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator!= (const {\bf String} \& {\em x}, const char $\ast$ {\em t})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a99}
+
+
+
+
+Definition at line 1333 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1334 {
+1335   return compare(x, t) != 0; 
+1336 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator!= (const {\bf String} \& {\em x}, const {\bf Sub\-String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a93}
+
+
+
+
+Definition at line 1303 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1304 {
+1305   return compare(x, y) != 0; 
+1306 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator!= (const {\bf String} \& {\em x}, const {\bf String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a87}
+
+
+
+
+Definition at line 1273 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1274 {
+1275   return compare(x, y) != 0; 
+1276 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator+@{operator+}}
+\index{operator+@{operator+}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} operator+ (const char $\ast$ {\em x}, const {\bf Sub\-String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a80}
+
+
+
+
+Definition at line 1008 of file Big\-String.hh.
+
+References cat().
+
+
+
+\footnotesize\begin{verbatim}1009 {
+1010   String r; cat(x, y, r); return r;
+1011 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator+@{operator+}}
+\index{operator+@{operator+}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} operator+ (char {\em x}, const {\bf String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a79}
+
+
+
+
+Definition at line 996 of file Big\-String.hh.
+
+References String::prepend().
+
+
+
+\footnotesize\begin{verbatim}997 {
+998 //cout << "<*>" ;
+999   String r;
+1000   r = y;
+1001 //for (char *tp = (char *) r.chars(); *tp!='\0'; tp++) cout << (*tp) << '{' << (int) (*tp) << '}';
+1002 //cout << '\n';
+1003   r.prepend(x);
+1004 //for (char *tp = (char *) r.chars(); *tp!='\0'; tp++) cout << (*tp) << '{' << (int) (*tp) << '}';
+1005   return r;
+1006 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator+@{operator+}}
+\index{operator+@{operator+}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} operator+ (const char $\ast$ {\em x}, const {\bf String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a78}
+
+
+
+
+Definition at line 991 of file Big\-String.hh.
+
+References cat().
+
+
+
+\footnotesize\begin{verbatim}992 {
+993   String r; cat(x, y, r); return r;
+994 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator+@{operator+}}
+\index{operator+@{operator+}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} operator+ (const {\bf Sub\-String} \& {\em x}, char {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a77}
+
+
+
+
+Definition at line 986 of file Big\-String.hh.
+
+References cat().
+
+
+
+\footnotesize\begin{verbatim}987 {
+988   String r; cat(x, y, r); return r;
+989 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator+@{operator+}}
+\index{operator+@{operator+}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} operator+ (const {\bf Sub\-String} \& {\em x}, const char $\ast$ {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a76}
+
+
+
+
+Definition at line 981 of file Big\-String.hh.
+
+References cat().
+
+
+
+\footnotesize\begin{verbatim}982 {
+983   String r; cat(x, y, r); return r;
+984 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator+@{operator+}}
+\index{operator+@{operator+}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} operator+ (const {\bf Sub\-String} \& {\em x}, const {\bf Sub\-String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a75}
+
+
+
+
+Definition at line 976 of file Big\-String.hh.
+
+References cat().
+
+
+
+\footnotesize\begin{verbatim}977 {
+978   String r; cat(x, y, r); return r;
+979 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator+@{operator+}}
+\index{operator+@{operator+}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} operator+ (const {\bf Sub\-String} \& {\em x}, const {\bf String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a74}
+
+
+
+
+Definition at line 971 of file Big\-String.hh.
+
+References cat().
+
+
+
+\footnotesize\begin{verbatim}972 {
+973   String r; cat(x, y, r); return r;
+974 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator+@{operator+}}
+\index{operator+@{operator+}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} operator+ (const {\bf String} \& {\em x}, char {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a73}
+
+
+
+
+Definition at line 966 of file Big\-String.hh.
+
+References cat().
+
+
+
+\footnotesize\begin{verbatim}967 {
+968   String r; cat(x, y, r); return r;
+969 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator+@{operator+}}
+\index{operator+@{operator+}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} operator+ (const {\bf String} \& {\em x}, const char $\ast$ {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a72}
+
+
+
+
+Definition at line 961 of file Big\-String.hh.
+
+References cat().
+
+
+
+\footnotesize\begin{verbatim}962 {
+963   String r; cat(x, y, r); return r;
+964 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator+@{operator+}}
+\index{operator+@{operator+}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} operator+ (const {\bf String} \& {\em x}, const {\bf Sub\-String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a71}
+
+
+
+
+Definition at line 956 of file Big\-String.hh.
+
+References cat().
+
+
+
+\footnotesize\begin{verbatim}957 {
+958   String r; cat(x, y, r); return r;
+959 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator+@{operator+}}
+\index{operator+@{operator+}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} operator+ (const {\bf String} \& {\em x}, const {\bf String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a70}
+
+
+
+
+Definition at line 951 of file Big\-String.hh.
+
+References cat().
+
+
+
+\footnotesize\begin{verbatim}952 {
+953   String r;  cat(x, y, r);  return r;
+954 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator<@{operator$<$}}
+\index{operator<@{operator$<$}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator$<$ (const {\bf Sub\-String} \& {\em x}, const char $\ast$ {\em t})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a120}
+
+
+
+
+Definition at line 1438 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1439 {
+1440   return compare(x, t) < 0; 
+1441 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator<@{operator$<$}}
+\index{operator<@{operator$<$}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator$<$ (const {\bf Sub\-String} \& {\em x}, const {\bf Sub\-String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a114}
+
+
+
+
+Definition at line 1408 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1409 {
+1410   return compare(x, y) < 0;
+1411 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator<@{operator$<$}}
+\index{operator<@{operator$<$}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator$<$ (const {\bf Sub\-String} \& {\em x}, const {\bf String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a108}
+
+
+
+
+Definition at line 1378 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1379 {
+1380   return compare(y, x) > 0;
+1381 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator<@{operator$<$}}
+\index{operator<@{operator$<$}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator$<$ (const {\bf String} \& {\em x}, const char $\ast$ {\em t})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a102}
+
+
+
+
+Definition at line 1348 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1349 {
+1350   return compare(x, t) < 0; 
+1351 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator<@{operator$<$}}
+\index{operator<@{operator$<$}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator$<$ (const {\bf String} \& {\em x}, const {\bf Sub\-String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a96}
+
+
+
+
+Definition at line 1318 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1319 {
+1320   return compare(x, y) < 0; 
+1321 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator<@{operator$<$}}
+\index{operator<@{operator$<$}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator$<$ (const {\bf String} \& {\em x}, const {\bf String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a90}
+
+
+
+
+Definition at line 1288 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1289 {
+1290   return compare(x, y) < 0; 
+1291 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator<<@{operator$<$$<$}}
+\index{operator<<@{operator$<$$<$}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}ostream\& operator$<$$<$ (ostream \& {\em s}, const {\bf String} \& {\em x})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a85}
+
+
+
+
+Definition at line 1261 of file Big\-String.hh.
+
+References String::chars().
+
+
+
+\footnotesize\begin{verbatim}1262 {
+1263    s << x.chars(); return s;
+1264 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator<=@{operator$<$=}}
+\index{operator<=@{operator$<$=}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator$<$= (const {\bf Sub\-String} \& {\em x}, const char $\ast$ {\em t})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a121}
+
+
+
+
+Definition at line 1443 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1444 {
+1445   return compare(x, t) <= 0; 
+1446 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator<=@{operator$<$=}}
+\index{operator<=@{operator$<$=}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator$<$= (const {\bf Sub\-String} \& {\em x}, const {\bf Sub\-String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a115}
+
+
+
+
+Definition at line 1413 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1414 {
+1415   return compare(x, y) <= 0;
+1416 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator<=@{operator$<$=}}
+\index{operator<=@{operator$<$=}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator$<$= (const {\bf Sub\-String} \& {\em x}, const {\bf String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a109}
+
+
+
+
+Definition at line 1383 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1384 {
+1385   return compare(y, x) >= 0;
+1386 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator<=@{operator$<$=}}
+\index{operator<=@{operator$<$=}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator$<$= (const {\bf String} \& {\em x}, const char $\ast$ {\em t})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a103}
+
+
+
+
+Definition at line 1353 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1354 {
+1355   return compare(x, t) <= 0; 
+1356 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator<=@{operator$<$=}}
+\index{operator<=@{operator$<$=}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator$<$= (const {\bf String} \& {\em x}, const {\bf Sub\-String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a97}
+
+
+
+
+Definition at line 1323 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1324 {
+1325   return compare(x, y) <= 0; 
+1326 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator<=@{operator$<$=}}
+\index{operator<=@{operator$<$=}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator$<$= (const {\bf String} \& {\em x}, const {\bf String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a91}
+
+
+
+
+Definition at line 1293 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1294 {
+1295   return compare(x, y) <= 0; 
+1296 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator==@{operator==}}
+\index{operator==@{operator==}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator== (const {\bf Sub\-String} \& {\em x}, const char $\ast$ {\em t})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a116}
+
+
+
+
+Definition at line 1418 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1419 {
+1420   return compare(x, t) == 0; 
+1421 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator==@{operator==}}
+\index{operator==@{operator==}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator== (const {\bf Sub\-String} \& {\em x}, const {\bf Sub\-String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a110}
+
+
+
+
+Definition at line 1388 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1389 {
+1390   return compare(x, y) == 0; 
+1391 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator==@{operator==}}
+\index{operator==@{operator==}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator== (const {\bf Sub\-String} \& {\em x}, const {\bf String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a104}
+
+
+
+
+Definition at line 1358 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1359 {
+1360   return compare(y, x) == 0; 
+1361 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator==@{operator==}}
+\index{operator==@{operator==}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator== (const {\bf String} \& {\em x}, const char $\ast$ {\em t})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a98}
+
+
+
+
+Definition at line 1328 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1329 {
+1330   return compare(x, t) == 0; 
+1331 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator==@{operator==}}
+\index{operator==@{operator==}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator== (const {\bf String} \& {\em x}, const {\bf Sub\-String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a92}
+
+
+
+
+Definition at line 1298 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1299 {
+1300   return compare(x, y) == 0; 
+1301 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator==@{operator==}}
+\index{operator==@{operator==}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator== (const {\bf String} \& {\em x}, const {\bf String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a86}
+
+
+
+
+Definition at line 1268 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1269 {
+1270   return compare(x, y) == 0; 
+1271 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator>@{operator$>$}}
+\index{operator>@{operator$>$}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator$>$ (const {\bf Sub\-String} \& {\em x}, const char $\ast$ {\em t})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a118}
+
+
+
+
+Definition at line 1428 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1429 {
+1430   return compare(x, t) > 0; 
+1431 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator>@{operator$>$}}
+\index{operator>@{operator$>$}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator$>$ (const {\bf Sub\-String} \& {\em x}, const {\bf Sub\-String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a112}
+
+
+
+
+Definition at line 1398 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1399 {
+1400   return compare(x, y) > 0;
+1401 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator>@{operator$>$}}
+\index{operator>@{operator$>$}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator$>$ (const {\bf Sub\-String} \& {\em x}, const {\bf String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a106}
+
+
+
+
+Definition at line 1368 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1369 {
+1370   return compare(y, x) < 0;
+1371 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator>@{operator$>$}}
+\index{operator>@{operator$>$}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator$>$ (const {\bf String} \& {\em x}, const char $\ast$ {\em t})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a100}
+
+
+
+
+Definition at line 1338 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1339 {
+1340   return compare(x, t) > 0; 
+1341 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator>@{operator$>$}}
+\index{operator>@{operator$>$}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator$>$ (const {\bf String} \& {\em x}, const {\bf Sub\-String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a94}
+
+
+
+
+Definition at line 1308 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1309 {
+1310   return compare(x, y) > 0; 
+1311 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator>@{operator$>$}}
+\index{operator>@{operator$>$}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator$>$ (const {\bf String} \& {\em x}, const {\bf String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a88}
+
+
+
+
+Definition at line 1278 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1279 {
+1280   return compare(x, y) > 0; 
+1281 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator>=@{operator$>$=}}
+\index{operator>=@{operator$>$=}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator$>$= (const {\bf Sub\-String} \& {\em x}, const char $\ast$ {\em t})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a119}
+
+
+
+
+Definition at line 1433 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1434 {
+1435   return compare(x, t) >= 0; 
+1436 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator>=@{operator$>$=}}
+\index{operator>=@{operator$>$=}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator$>$= (const {\bf Sub\-String} \& {\em x}, const {\bf Sub\-String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a113}
+
+
+
+
+Definition at line 1403 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1404 {
+1405   return compare(x, y) >= 0;
+1406 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator>=@{operator$>$=}}
+\index{operator>=@{operator$>$=}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator$>$= (const {\bf Sub\-String} \& {\em x}, const {\bf String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a107}
+
+
+
+
+Definition at line 1373 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1374 {
+1375   return compare(y, x) <= 0;
+1376 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator>=@{operator$>$=}}
+\index{operator>=@{operator$>$=}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator$>$= (const {\bf String} \& {\em x}, const char $\ast$ {\em t})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a101}
+
+
+
+
+Definition at line 1343 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1344 {
+1345   return compare(x, t) >= 0; 
+1346 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator>=@{operator$>$=}}
+\index{operator>=@{operator$>$=}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator$>$= (const {\bf String} \& {\em x}, const {\bf Sub\-String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a95}
+
+
+
+
+Definition at line 1313 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1314 {
+1315   return compare(x, y) >= 0; 
+1316 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!operator>=@{operator$>$=}}
+\index{operator>=@{operator$>$=}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int operator$>$= (const {\bf String} \& {\em x}, const {\bf String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a89}
+
+
+
+
+Definition at line 1283 of file Big\-String.hh.
+
+References compare().
+
+
+
+\footnotesize\begin{verbatim}1284 {
+1285   return compare(x, y) >= 0; 
+1286 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!reverse@{reverse}}
+\index{reverse@{reverse}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} reverse (const {\bf String} \& {\em x})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a81}
+
+
+
+
+Definition at line 1013 of file Big\-String.hh.
+
+References String::rep, and Sreverse().
+
+
+
+\footnotesize\begin{verbatim}1014 {
+1015   String r; r.rep = Sreverse(x.rep, r.rep); return r;
+1016 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!Salloc@{Salloc}}
+\index{Salloc@{Salloc}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Str\-Rep}$\ast$ Salloc ({\bf Str\-Rep} $\ast$ {\em old}, const char $\ast$ {\em src}, {\bf \_\-BIGSTRING\_\-SIZE} {\em srclen}, {\bf \_\-BIGSTRING\_\-SIZE} {\em newlen})}\label{BigString_8hh_a16}
+
+
+
+
+Definition at line 173 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, Str\-Rep::len, Str\-Rep::s, and Str\-Rep::sz.
+
+Referenced by common\_\-prefix(), common\_\-suffix(), String::operator=(), Scapitalize(), Sdowncase(), split(), Sreverse(), String::String(), and Supcase().
+
+
+
+\footnotesize\begin{verbatim}174 {
+175 #ifdef DEBUG_BIGSTRING
+176 //bool _debugop;
+177 //if (old) _debugop = old->debugop; else _debugop = true;
+178 //if (old) old->debugop = false;
+179 #endif
+180   if (old == &_nilStrRep) old = 0;
+181   if (srclen < 0) srclen = slen(src);
+182   if (newlen < srclen) newlen = srclen;
+183 #ifdef DEBUG_BIGSTRING
+184 //if (_debugop) cerr << "[Salloc] srclen = " << srclen << ", newlen = " << newlen << '\n';
+185 if (globaldebugop) cerr << "[Salloc] srclen = " << srclen << ", newlen = " << newlen << '\n';
+186 #endif
+187   StrRep* rep;
+188   if (old == 0 || newlen > old->sz)
+189     rep = Snew(newlen);
+190   else
+191     rep = old;
+192 
+193   rep->len = newlen;
+194   ncopy0(src, rep->s, srclen);
+195 
+196   if (old != rep && old != 0) delete old;
+197 
+198 #ifdef DEBUG_BIGSTRING
+199 //rep->debugop = _debugop;
+200 #endif
+201   return rep;
+202 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!Salloc_istream@{Salloc\_\-istream}}
+\index{Salloc_istream@{Salloc\_\-istream}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Str\-Rep}$\ast$ Salloc\_\-istream ({\bf Str\-Rep} $\ast$ {\em old}, istream \& {\em src}, {\bf \_\-BIGSTRING\_\-SIZE} {\em srclen}, {\bf \_\-BIGSTRING\_\-SIZE} {\em newlen})}\label{BigString_8hh_a25}
+
+
+
+
+Definition at line 207 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, Str\-Rep::len, Str\-Rep::s, and Str\-Rep::sz.
+
+Referenced by String::operator=().
+
+
+
+\footnotesize\begin{verbatim}208 {
+209         if (!src) return old;
+210         if (old == &_nilStrRep) old = 0;
+211         if (srclen < 0) {
+212                 src.seekg(0,ios::end);
+213                 srclen = src.tellg();
+214                 src.seekg(0);
+215         }
+216         if (newlen < srclen) newlen = srclen;
+217         StrRep* rep;
+218         if (old == 0 || newlen > old->sz) rep = Snew(newlen);
+219         else rep = old;
+220         rep->len = newlen;
+221         ncopy0_istream(src, rep->s, srclen);
+222         if (old != rep && old != 0) delete old;
+223         return rep;
+224 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!Scapitalize@{Scapitalize}}
+\index{Scapitalize@{Scapitalize}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Str\-Rep}$\ast$ Scapitalize (const {\bf Str\-Rep} $\ast$, {\bf Str\-Rep} $\ast$)}\label{BigString_8hh_a24}
+
+
+
+
+Definition at line 1218 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, Str\-Rep::len, Str\-Rep::s, and Salloc().
+
+Referenced by String::capitalize(), and capitalize().
+
+
+
+\footnotesize\begin{verbatim}1219 {
+1220   _BIGSTRING_SIZE n = src->len;
+1221   if (src != dest) dest = Salloc(dest, src->s, n, n);
+1222 
+1223   char* p = dest->s;
+1224   char* e = &(p[n]);
+1225   for (; p < e; ++p)
+1226   {
+1227     int at_word;
+1228     if (at_word = islower(*p))
+1229       *p = toupper(*p);
+1230     else 
+1231       at_word = isupper(*p) || isdigit(*p);
+1232 
+1233     if (at_word)
+1234     {
+1235       while (++p < e)
+1236       {
+1237         if (isupper(*p))
+1238           *p = tolower(*p);
+1239         /* A '\'' does not break a word, so that "Nathan's" stays
+1240            "Nathan's" rather than turning into "Nathan'S". */
+1241         else if (!islower(*p) && !isdigit(*p) && (*p != '\''))
+1242           break;
+1243       }
+1244     }
+1245   }
+1246   return dest;
+1247 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!Scat@{Scat}}
+\index{Scat@{Scat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Str\-Rep}$\ast$ Scat ({\bf Str\-Rep} $\ast$, const char $\ast$, {\bf \_\-BIGSTRING\_\-SIZE}, const char $\ast$, {\bf \_\-BIGSTRING\_\-SIZE}, const char $\ast$, {\bf \_\-BIGSTRING\_\-SIZE})}\label{BigString_8hh_a19}
+
+
+
+
+Definition at line 344 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, Str\-Rep::len, Str\-Rep::s, and Str\-Rep::sz.
+
+Referenced by cat().
+
+
+
+\footnotesize\begin{verbatim}346 {
+347   if (old == &_nilStrRep) old = 0;
+348   if (srclen < 0) srclen = slen(s);
+349   if (tlen < 0) tlen = slen(t);
+350   if (ulen < 0) ulen = slen(u);
+351   _BIGSTRING_SIZE newlen = srclen + tlen + ulen;
+352   StrRep* rep;
+353   if (old == 0 || newlen > old->sz || 
+354       (t >= old->s && t < &(old->s[old->len])) ||
+355       (u >= old->s && u < &(old->s[old->len])))
+356     rep = Snew(newlen);
+357   else
+358     rep = old;
+359 
+360   rep->len = newlen;
+361 
+362   ncopy(s, rep->s, srclen);
+363   ncopy(t, &(rep->s[srclen]), tlen);
+364   ncopy0(u, &(rep->s[srclen+tlen]), ulen);
+365 
+366   if (old != rep && old != 0) delete old;
+367 
+368   return rep;
+369 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!Scat@{Scat}}
+\index{Scat@{Scat}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Str\-Rep}$\ast$ Scat ({\bf Str\-Rep} $\ast$, const char $\ast$, {\bf \_\-BIGSTRING\_\-SIZE}, const char $\ast$, {\bf \_\-BIGSTRING\_\-SIZE})}\label{BigString_8hh_a18}
+
+
+\index{BigString.hh@{Big\-String.hh}!Scat_istream@{Scat\_\-istream}}
+\index{Scat_istream@{Scat\_\-istream}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Str\-Rep}$\ast$ Scat\_\-istream ({\bf Str\-Rep} $\ast$, const char $\ast$, {\bf \_\-BIGSTRING\_\-SIZE}, istream \&, {\bf \_\-BIGSTRING\_\-SIZE})}\label{BigString_8hh_a26}
+
+
+\index{BigString.hh@{Big\-String.hh}!Scopy@{Scopy}}
+\index{Scopy@{Scopy}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Str\-Rep}$\ast$ Scopy ({\bf Str\-Rep} $\ast$, const {\bf Str\-Rep} $\ast$)}\label{BigString_8hh_a17}
+
+
+
+
+Definition at line 262 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, Str\-Rep::len, Str\-Rep::s, and Str\-Rep::sz.
+
+Referenced by String::operator=().
+
+
+
+\footnotesize\begin{verbatim}263 {
+264   if (old == &_nilStrRep) old = 0;
+265   if (s == &_nilStrRep) s = 0;
+266   if (old == s) 
+267     return (old == 0)? &_nilStrRep : old;
+268   else if (s == 0)
+269   {
+270     old->s[0] = 0;
+271     old->len = 0;
+272     return old;
+273   }
+274   else 
+275   {
+276     StrRep* rep;
+277     _BIGSTRING_SIZE newlen = s->len;
+278     if (old == 0 || newlen > old->sz)
+279     {
+280       if (old != 0) delete old;
+281       rep = Snew(newlen);
+282     }
+283     else
+284       rep = old;
+285     rep->len = newlen;
+286     ncopy0(s->s, rep->s, newlen);
+287     return rep;
+288   }
+289 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!Sdowncase@{Sdowncase}}
+\index{Sdowncase@{Sdowncase}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Str\-Rep}$\ast$ Sdowncase (const {\bf Str\-Rep} $\ast$, {\bf Str\-Rep} $\ast$)}\label{BigString_8hh_a23}
+
+
+
+
+Definition at line 1208 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, Str\-Rep::len, Str\-Rep::s, and Salloc().
+
+Referenced by String::downcase(), and downcase().
+
+
+
+\footnotesize\begin{verbatim}1209 {
+1210   _BIGSTRING_SIZE n = src->len;
+1211   if (src != dest) dest = Salloc(dest, src->s, n, n);
+1212   char* p = dest->s;
+1213   char* e = &(p[n]);
+1214   for (; p < e; ++p) if (isupper(*p)) *p = tolower(*p);
+1215   return dest;
+1216 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!Sprepend@{Sprepend}}
+\index{Sprepend@{Sprepend}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Str\-Rep}$\ast$ Sprepend ({\bf Str\-Rep} $\ast$, const char $\ast$, {\bf \_\-BIGSTRING\_\-SIZE})}\label{BigString_8hh_a20}
+
+
+
+
+Definition at line 373 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, Str\-Rep::len, Str\-Rep::s, and Str\-Rep::sz.
+
+Referenced by String::prepend().
+
+
+
+\footnotesize\begin{verbatim}374 {
+375   char* s;
+376   _BIGSTRING_SIZE srclen;
+377   if (old == &_nilStrRep || old == 0)
+378   {
+379     s = 0; old = 0; srclen = 0;
+380   }
+381   else
+382   {
+383     s = old->s; srclen = old->len;
+384   }
+385   if (tlen < 0) tlen = slen(t);
+386   _BIGSTRING_SIZE newlen = srclen + tlen;
+387   StrRep* rep;
+388   if (old == 0 || newlen > old->sz || 
+389       (t >= old->s && t < &(old->s[old->len])))
+390     rep = Snew(newlen);
+391   else
+392     rep = old;
+393 
+394   rep->len = newlen;
+395 
+396   revcopy(&(s[srclen]), &(rep->s[newlen]), srclen+1);
+397   ncopy(t, rep->s, tlen);
+398 
+399   if (old != rep && old != 0) delete old;
+400 
+401   return rep;
+402 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!Sreverse@{Sreverse}}
+\index{Sreverse@{Sreverse}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Str\-Rep}$\ast$ Sreverse (const {\bf Str\-Rep} $\ast$, {\bf Str\-Rep} $\ast$)}\label{BigString_8hh_a21}
+
+
+
+
+Definition at line 1178 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, Str\-Rep::len, Str\-Rep::s, and Salloc().
+
+Referenced by String::reverse(), and reverse().
+
+
+
+\footnotesize\begin{verbatim}1179 {
+1180   _BIGSTRING_SIZE n = src->len;
+1181   if (src != dest)
+1182     dest = Salloc(dest, src->s, n, n);
+1183   if (n > 0)
+1184   {
+1185     char* a = dest->s;
+1186     char* b = &(a[n - 1]);
+1187     while (a < b)
+1188     {
+1189       char t = *a;
+1190       *a++ = *b;
+1191       *b-- = t;
+1192     }
+1193   }
+1194   return dest;
+1195 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!Supcase@{Supcase}}
+\index{Supcase@{Supcase}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Str\-Rep}$\ast$ Supcase (const {\bf Str\-Rep} $\ast$, {\bf Str\-Rep} $\ast$)}\label{BigString_8hh_a22}
+
+
+
+
+Definition at line 1198 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, Str\-Rep::len, Str\-Rep::s, and Salloc().
+
+Referenced by String::upcase(), and upcase().
+
+
+
+\footnotesize\begin{verbatim}1199 {
+1200   _BIGSTRING_SIZE n = src->len;
+1201   if (src != dest) dest = Salloc(dest, src->s, n, n);
+1202   char* p = dest->s;
+1203   char* e = &(p[n]);
+1204   for (; p < e; ++p) if (islower(*p)) *p = toupper(*p);
+1205   return dest;
+1206 }
+\end{verbatim}\normalsize 
+\index{BigString.hh@{Big\-String.hh}!upcase@{upcase}}
+\index{upcase@{upcase}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} upcase (const {\bf String} \& {\em x})\hspace{0.3cm}{\tt  [inline]}}\label{BigString_8hh_a82}
+
+
+
+
+Definition at line 1018 of file Big\-String.hh.
+
+References String::rep, and Supcase().
+
+
+
+\footnotesize\begin{verbatim}1019 {
+1020   String r; r.rep = Supcase(x.rep, r.rep); return r;
+1021 }
+\end{verbatim}\normalsize 
+
+
+\subsection{Variable Documentation}
+\index{BigString.hh@{Big\-String.hh}!_nilString@{\_\-nilString}}
+\index{_nilString@{\_\-nilString}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} \_\-nil\-String}\label{BigString_8hh_a15}
+
+
+
+
+Definition at line 489 of file Big\-String.hh.\index{BigString.hh@{Big\-String.hh}!_nilStrRep@{\_\-nilStrRep}}
+\index{_nilStrRep@{\_\-nilStrRep}!BigString.hh@{Big\-String.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Str\-Rep} \_\-nil\-Str\-Rep}\label{BigString_8hh_a14}
+
+
+
+
+Definition at line 488 of file Big\-String.hh.

@@ -1,0 +1,43 @@
+rx.c:2935
+unaccessible pointer data in *freelist
+was called in rx_cache_malloc_or_get due to (*freelist)
+- find bug in freelist in rx
+- try to convert regex-gnu to C++
+- try different mallocs with regex-gnu
+
+#if __STDC__
+
+#define _STD_ARGS(args) args
+
+#else
+
+#define
+^(\n.*\n[^(]*)\([^)]*\)\n(.[\n]?)*\n{
+\1(\2)\n{
+
+#ifdef __STDC__
+#else
+#endif
+#0  0x806ddee in rx_cache_get (cache=0x8081d68, freelist=0x8081d9c) at rx.c:2941
+#1  0x806de39 in rx_cache_malloc_or_get (cache=0x8081d68, freelist=0x8081d9c, bytes=44) at rx.c:2965
+#2  0x806df6c in superset_allocator (rules=0x8081d68, val=0xbfff96c4) at rx.c:3035
+#3  0x806b448 in rx_hash_store (table=0x80b4f20, hash=5699861, value=0xbfff96c4, rules=0x8081d68) at rx.c:813
+#4  0x806e240 in rx_superset_cons (rx=0xbfff9da4, car=0x842c4b0, cdr=0x8143dc1) at rx.c:3239
+#5  0x806e361 in rx_superstate_eclosure_union (rx=0xbfff9da4, set=0x80b0a78, ecl=0x842d664) at rx.c:3294
+#6  0x806e309 in rx_superstate_eclosure_union (rx=0xbfff9da4, set=0x80f5c80, ecl=0x842d664) at rx.c:3281
+#7  0x806e8b0 in solve_destination (rx=0xbfff9da4, df=0x80d7420) at rx.c:3573
+#8  0x806f017 in rx_handle_cache_miss (rx=0xbfff9da4, super=0x80f6de4, chr=111 'o', data=0x80d7420) at rx.c:3895
+#9  0x806a975 in rx_search (rxb=0xbfff9da4, startpos=271, range=1512, stop=1512,
+total_size=1512, get_burst=0x8073580 <re_search_2_get_burst>, back_check=0x80737e4 <re_search_2_back_check>, fetch_char=0x8073948 <re_search_2_fetch_char>, app_closure=0xbfff9d24, regs=0xbfff9f50, resume_state=0x0, save_state=0x0) at rx.h:3620
+#10 0x8073a45 in re_search_2 (rxb=0xbfff9da4, string1=0x0, size1=0, string2=0x8464db3 "chunk Begin --><TR><TD><FONT COLOR=\"#FFFFFF\"><A NAME=\"200003080718\"><B>200003080718</B></A>\n<!-- chunk AL --><A HREF=\"active-thesis-list.html\">Active Thesis List</A> (<A HREF=\"task-log.20000204.html#2"..., size2=1512, startpos=0, range=1512, regs=0xbfff9f50, stop=1512) at rx.c:6444
+#11 0x8073b00 in re_search (rxb=0xbfff9da4, string=0x8464db3 "chunk Begin --><TR><TD><FONT COLOR=\"#FFFFFF\"><A NAME=\"200003080718\"><B>200003080718</B></A>\n<!-- chunk AL --><A HREF=\"active-thesis-list.html\">Active Thesis List</A> (<A HREF=\"task-log.20000204.html#2"..., size=1512, startpos=0, range=1512, regs=0xbfff9f50) at rx.c:6542
+#12 0x807435f in BigRegexec (preg=0x841e9f8, string=0x8464db3 "chunk Begin --><TR><TD><FONT COLOR=\"#FFFFFF\"><A
+NAME=\"200003080718\"><B>200003080718</B></A>\n<!-- chunk AL --><A HREF=\"active-thesis-list.html\">Active Thesis List</A> (<A HREF=\"task-log.20000204.html#2"..., nmatch=16, pmatch=0x8280620, eflags=0) at rx.c:7103
+#13 0x807a1df in BigRegex::search (this=0xbfffa484, s=0x40189010 "<HTML>\n<HEAD>\n<TITLE>Task Log (20000204)</TITLE>\n</HEAD>\n<BODY BGCOLOR=\"#000000\" TEXT=\"#FFDF00\" LINK=\"#AFAFFF\" VLINK=\"#7F7FFF\">\n<H1><FONT COLOR=\"#00FF00\">Task Log (20000204)</FONT></H1>\n\n<TABLE WIDTH="..., len=93283, matchlen=@0xbfff9fc8, startpos=91771) at BigRegex.cc:123
+#14 0x80781d7 in String::at (this=0xbfffa5d8, r=@0xbfffa484, startpos=91771) at BigString.cc:769
+#15 0x805da3e in add_TL_chunk_or_entry (tl=@0xbfffd180, notestr=@0xbfffa928, newchunk=true, chunkid={rep = 0xbfffa8e4}, tlinsertloc=@0xbfffd17c) at tladmin.cc:640
+#16 0x806074c in decide_add_TL_chunk (tl=@0xbfffd180, tlinsertloc=@0xbfffd17c, comparetimes=true, createifgreater=false) at tladmin.cc:827
+#17 0x8066c83 in chunk_controller (controllercmd={rep = 0xbffffa18}) at controller.cc:58
+#18 0x80672ee in schedule_controller (controllercmd={rep = 0xbffffb30}) at controller.cc:114
+#19 0x804dcfd in main (argc=2, argv=0xbffffb8c) at dil2al.cc:332
+#20 0x804c46b in ___crt_dummy__ ()

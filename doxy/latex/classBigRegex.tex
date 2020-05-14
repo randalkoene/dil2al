@@ -1,0 +1,424 @@
+\section{Big\-Regex  Class Reference}
+\label{classBigRegex}\index{BigRegex@{Big\-Regex}}
+{\tt \#include $<$Big\-Regex.hh$>$}
+
+\subsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf Big\-Regex} (const char $\ast$t, int fast=0, int bufsize=40, const char $\ast$transtable=0)
+\item 
+{\bf $\sim$Big\-Regex} ()
+\item 
+int {\bf match} (const char $\ast$s, int len, int pos=0) const
+\item 
+int {\bf search} (const char $\ast$s, int len, int \&matchlen, int startpos=0) const
+\item 
+int {\bf match\_\-info} (int \&start, int \&length, int nth=0) const
+\item 
+int {\bf subpos} (int nth=0) const
+\item 
+int {\bf sublen} (int nth=0) const
+\item 
+int {\bf OK} () const
+\end{CompactItemize}
+\subsection*{Protected Attributes}
+\begin{CompactItemize}
+\item 
+regex\_\-t $\ast$ {\bf re}
+\item 
+regmatch\_\-t $\ast$ {\bf rm}
+\item 
+bool $\ast$ {\bf re\_\-assigned}
+\end{CompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{BigRegex@{Big\-Regex}!BigRegex@{BigRegex}}
+\index{BigRegex@{BigRegex}!BigRegex@{Big\-Regex}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Big\-Regex::Big\-Regex (const char $\ast$ {\em t}, int {\em fast} = 0, int {\em bufsize} = 40, const char $\ast$ {\em transtable} = 0)}\label{classBigRegex_a0}
+
+
+
+
+Definition at line 61 of file Big\-Regex.cc.
+
+References BIGREGEX\_\-MAX\_\-SUBEXPRESSIONS, re, re\_\-assigned, res, and rm.
+
+
+
+\footnotesize\begin{verbatim}61                                                                                {
+62         re_assigned = new bool;
+63         if (t==0) *re_assigned = false; // zero-length RE
+64         else {
+65                 re = new regex_t;
+66 //*** NOTE: bufsize doesn't really work yet, since it
+67 //*** is not remembered anywhere and up to
+68 //*** BIGREGEX_MAX_SUBEXPRESSIONS are filled in searches below
+69                  if (bufsize>BIGREGEX_MAX_SUBEXPRESSIONS) bufsize = BIGREGEX_MAX_SUBEXPRESSIONS;
+70                 rm = new regmatch_t[bufsize];
+71                 int res;
+72 #ifdef __DIL2AL__
+73                 // revert to Basic RE backslashing style as inherited from Regex
+74                 // this reverses backslashed and non-backslashed meanings for: (){}|
+75                 char * ttmp;
+76                 int tlen = 0; while (t[tlen]) tlen++;
+77                 ttmp = new char[(2*tlen)+1]; // allocate a character buffer twice as large in case everything has to be escaped with `\'
+78                 int ttmplen = 0; int ii;
+79                 for (int i=0; i<=tlen; i++) {
+80                         ii = i+1;
+81                         if ((t[i]=='\\') && ((t[ii]=='\\') || (t[ii]=='(') || (t[ii]==')') || (t[ii]=='{') || (t[ii]=='}') || (t[ii]=='|'))) {
+82                                 if (t[ii]=='\\') { // retain escaped backslash
+83                                         ttmp[ttmplen] = '\\';
+84                                         ttmplen++;
+85                                 }
+86                                 i++; // skip backslash
+87                         } else if ((t[i]=='(') || (t[i]==')') || (t[i]=='{') || (t[i]=='}') || (t[i]=='|')) {
+88                                 ttmp[ttmplen] = '\\'; // add backslash
+89                                 ttmplen++;
+90                         }
+91                         ttmp[ttmplen] = t[i]; // copy character (possibly after skipping or adding a backslash)
+92                         ttmplen++;
+93                 }
+94                 ttmplen--; // don't count '\0'
+95                 res = regcomp(re,ttmp,REG_EXTENDED);
+96                 delete[] ttmp;
+97 #else
+98                 res = regcomp(re,t,REG_EXTENDED);
+99 #endif
+100                 if (!res) *re_assigned = true;
+101                 else {
+102                         *re_assigned = false;
+103 #ifdef _BIGREGEX_HAVE_ERROR_HANDLER
+104                         char errbuf[256];
+105                         if (regerror(res,re,errbuf,256)>0) (*lib_error_handler)("BigRegex",errbuf);
+106 #endif                  
+107                 }
+108         }
+109 }
+\end{verbatim}\normalsize 
+\index{BigRegex@{Big\-Regex}!~BigRegex@{$\sim$BigRegex}}
+\index{~BigRegex@{$\sim$BigRegex}!BigRegex@{Big\-Regex}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Big\-Regex::$\sim$Big\-Regex ()}\label{classBigRegex_a1}
+
+
+
+
+Definition at line 54 of file Big\-Regex.cc.
+
+References re, re\_\-assigned, and rm.
+
+
+
+\footnotesize\begin{verbatim}54                     {
+55         if (re_assigned) if (*re_assigned) regfree(re);
+56         delete re;
+57         delete[] rm;
+58         delete re_assigned;
+59 }
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Function Documentation}
+\index{BigRegex@{Big\-Regex}!match@{match}}
+\index{match@{match}!BigRegex@{Big\-Regex}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Big\-Regex::match (const char $\ast$ {\em s}, int {\em len}, int {\em pos} = 0) const}\label{classBigRegex_a2}
+
+
+
+
+Definition at line 295 of file Big\-Regex.cc.
+
+References BIGREGEX\_\-MAX\_\-SUBEXPRESSIONS, re, res, and rm.
+
+Referenced by String::contains(), Sub\-String::matches(), and String::matches().
+
+
+
+\footnotesize\begin{verbatim}295                                                       {
+296         // negative p is considered an offset from len backwards,
+297         // but note that the match is still scanned forward
+298         if (p < 0) {
+299                 len += p + 1; // point len at len - abs(p) + 1
+300                 if (len <= 0) return -1;
+301                 p = 0;
+302         } else if (p > len) return -1;
+303         // match re to (char*) s, from position p to position len
+304         // store subexpression information
+305         // return the number of characters matched
+306         int res;
+307 #ifndef _BIGREGEX_SAFE_MATCHES
+308         if (s[len]=='\0') res = regexec(re,&s[p],(size_t) BIGREGEX_MAX_SUBEXPRESSIONS,(regmatch_t *) rm,0);
+309         else {
+310 #endif
+311                 char * stmp; // copy up to len characters
+312                 stmp = new char[len+1];
+313                 int i;
+314 #ifdef _BIGREGEX_SAFE_MATCHES
+315                 for (i=0; ((i<len) && (s[i]!='\0')); i++) stmp[i]=s[i];
+316 #else
+317                 for (i=0; i<len; i++) stmp[i]=s[i];
+318 #endif
+319                 stmp[i]='\0';
+320                 res = regexec(re,&stmp[p],(size_t) BIGREGEX_MAX_SUBEXPRESSIONS,(regmatch_t *) rm,0);
+321                 delete[] stmp;
+322 #ifndef _BIGREGEX_SAFE_MATCHES
+323         }
+324 #endif
+325         if (res==0) {
+326                 if (p>0) { // adjust rm to the offset p
+327                         for(i=0; ((i<BIGREGEX_MAX_SUBEXPRESSIONS) && (rm[i].rm_so>-1)); i++) {
+328                                 rm[i].rm_so += p;
+329                                 rm[i].rm_eo += p;
+330                         }
+331                 }
+332 #if defined(_BIGREGEX_SAFE_MATCHES) && defined(_BIGREGEX_HAS_RM_SPEP)
+333                 // change rm pointers back to original string
+334                 for(i=0; ((i<BIGREGEX_MAX_SUBEXPRESSIONS) && (rm[i].rm_so>-1)); i++) {
+335                         rm[i].rm_sp = s + rm[i].rm_so;
+336                         rm[i].rm_ep = s + rm[i].rm_eo;
+337                 }
+338 #endif
+339                 return rm[0].rm_eo - rm[0].rm_so; // number of characters matched
+340         } else {
+341                 if (res==REG_NOMATCH) return 0;
+342                 else return -2; // internal error
+343         }
+344 }
+\end{verbatim}\normalsize 
+\index{BigRegex@{Big\-Regex}!match_info@{match\_\-info}}
+\index{match_info@{match\_\-info}!BigRegex@{Big\-Regex}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Big\-Regex::match\_\-info (int \& {\em start}, int \& {\em length}, int {\em nth} = 0) const}\label{classBigRegex_a4}
+
+
+
+
+Definition at line 111 of file Big\-Regex.cc.
+
+References BIGREGEX\_\-MAX\_\-SUBEXPRESSIONS, and rm.
+
+Referenced by String::\_\-gsub(), D2A\_\-get\_\-tag(), Detailed\_\-Items\_\-List::Get\_\-All\_\-DIL\_\-ID\_\-File\_\-Parameters(), HTML\_\-get\_\-href(), HTML\_\-get\_\-marker(), HTML\_\-get\_\-name(), select\_\-TL\_\-DIL\_\-refs(), and String::sub().
+
+
+
+\footnotesize\begin{verbatim}111                                                                {
+112         if ((unsigned)(nth) >= BIGREGEX_MAX_SUBEXPRESSIONS) return 0;
+113         start = rm[nth].rm_so;
+114         length = rm[nth].rm_eo - start;
+115         return start >= 0 && length >= 0;
+116 }
+\end{verbatim}\normalsize 
+\index{BigRegex@{Big\-Regex}!OK@{OK}}
+\index{OK@{OK}!BigRegex@{Big\-Regex}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Big\-Regex::OK () const}\label{classBigRegex_a7}
+
+
+
+
+Definition at line 346 of file Big\-Regex.cc.
+
+References re\_\-assigned.
+
+
+
+\footnotesize\begin{verbatim}346                        {
+347 #ifdef _BIGREGEX_HAVE_ERROR_HANDLER
+348         if (re_assigned) if (!(*re_assigned)) (*lib_error_handler)("BigRegex", "invariant failure");
+349 #endif
+350         if (re_assigned) return *re_assigned;
+351         else return 0;
+352 }
+\end{verbatim}\normalsize 
+\index{BigRegex@{Big\-Regex}!search@{search}}
+\index{search@{search}!BigRegex@{Big\-Regex}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Big\-Regex::search (const char $\ast$ {\em s}, int {\em len}, int \& {\em matchlen}, int {\em startpos} = 0) const}\label{classBigRegex_a3}
+
+
+
+
+Definition at line 190 of file Big\-Regex.cc.
+
+References BIGREGEX\_\-MAX\_\-SUBEXPRESSIONS, DEBUG\_\-OUT, re, re\_\-registers, res, rm, TALLOC, and TFREE.
+
+Referenced by String::\_\-gsub(), String::after(), String::at(), String::before(), Sub\-String::contains(), String::contains(), String::del(), String::from(), String::index(), select\_\-TL\_\-DIL\_\-refs(), split(), and String::through().
+
+
+
+\footnotesize\begin{verbatim}190                                                                               {
+191 // Returns -1 if no match, otherwise index of match
+192 // Negative startpos means scan from end (very slow with regular POSIX.2 regex)
+193         int res = -1;
+194         char * stmp;
+195         bool copied = true;
+196         int p = startpos;
+197         if (startpos<0) {
+198 DEBUG_OUT('~')
+199                 len += p + 1;   // start searching at len-abs(startpos)
+200                 if (len <= 0) return -1;
+201                 p = 0;
+202         }
+203 #ifndef _BIGREGEX_SAFE_MATCHES
+204         if (s[len]=='\0') { // assumes no '\0' prior to s[len]
+205                 copied = false;
+206                 stmp = s;
+207         } else
+208 #endif
+209         stmp = new char[len+1];
+210         int i;
+211 #ifdef _BIGREGEX_SAFE_MATCHES
+212         for (i=0; ((i<len) && (s[i]!='\0')); i++) stmp[i]=s[i];
+213 #else
+214         for (i=0; i<len; i++) stmp[i]=s[i];
+215 #endif
+216         stmp[i]='\0';
+217         if (startpos>=0) { // search forward
+218                 res = regexec(re,&stmp[p],(size_t) BIGREGEX_MAX_SUBEXPRESSIONS,(regmatch_t *) rm,0);
+219         } else { // search backward
+220 #ifdef _BIGREGEX_PARANOID_POSIX
+221                 int tmpp = p, tmpres = 0;
+222                 regmatch_t * tmprm = new regmatch_t[BIGREGEX_MAX_SUBEXPRESSIONS];
+223                 res = REG_NOMATCH;
+224                 while ((tmpp<len) && (tmpres==0)) {
+225                         tmpres = regexec(re,&stmp[tmpp],(size_t) BIGREGEX_MAX_SUBEXPRESSIONS,(regmatch_t *) tmprm,0);
+226                         if (tmpres!=REG_NOMATCH) { // furthest match found so far
+227                                 res = tmpres;
+228                                 p = tmpp;
+229                                 for (i=0; i<BIGREGEX_MAX_SUBEXPRESSIONS; i++) {
+230                                         rm[i].rm_so = tmprm[i].rm_so;
+231                                         rm[i].rm_eo = tmprm[i].rm_eo;
+232 #if defined(_BIGREGEX_SAFE_MATCHES) && defined(_BIGREGEX_HAS_RM_SPEP)
+233                                         rm[i].rm_sp = tmprm[i].rm_sp;
+234                                         rm[i].rm_ep = tmprm[i].rm_ep;
+235 #endif
+236                                 }
+237                                 tmpp=tmprm[0].rm_so+1;  // try next just after current match index
+238                         }
+239                 }
+240                 delete[] tmprm;
+241 #else
+242 DEBUG_OUT('-')
+243                 regex_t private_preg;
+244                 struct re_registers regs;
+245                 private_preg = *re;
+246                 private_preg.not_bol = !!(0 & REG_NOTBOL);
+247                 private_preg.not_eol = !!(0 & REG_NOTEOL);
+248                 private_preg.regs_allocated = REGS_FIXED;
+249                 regs.num_regs = BIGREGEX_MAX_SUBEXPRESSIONS;
+250                 regs.start = TALLOC (BIGREGEX_MAX_SUBEXPRESSIONS, regoff_t);
+251                 regs.end = TALLOC (BIGREGEX_MAX_SUBEXPRESSIONS, regoff_t);
+252                 if (regs.start == NULL || regs.end == NULL) return (int) REG_NOMATCH;
+253                 res = re_search (&private_preg, stmp, len, len-1, -(len-1), &regs);
+254              if (res >= 0) {
+255 DEBUG_OUT('!')
+256                         for (unsigned r = 0; r < BIGREGEX_MAX_SUBEXPRESSIONS; r++) {
+257                                 rm[r].rm_so = regs.start[r];
+258                                 rm[r].rm_eo = regs.end[r];
+259                         }
+260                         res = 0;
+261                 } else res = REG_NOMATCH;
+262                 TFREE (regs.start);
+263                 TFREE (regs.end);
+264 #endif
+265         }
+266 #ifndef _BIGREGEX_SAFE_MATCHES
+267         if (copied)
+268 #endif
+269         delete[] stmp;
+270         if (res==0) {
+271                 if (p>0) { // adjust rm to the offset p
+272                         for(i=0; ((i<BIGREGEX_MAX_SUBEXPRESSIONS) && (rm[i].rm_so>-1)); i++) {
+273                                 rm[i].rm_so += p;
+274                                 rm[i].rm_eo += p;
+275                         }
+276                 }
+277 #if defined(_BIGREGEX_SAFE_MATCHES) && defined(_BIGREGEX_HAS_RM_SPEP)
+278                 // change rm pointers back to original string
+279                 for(i=0; ((i<BIGREGEX_MAX_SUBEXPRESSIONS) && (rm[i].rm_so>-1)); i++) {
+280                         rm[i].rm_sp = s + rm[i].rm_so;
+281                         rm[i].rm_ep = s + rm[i].rm_eo;
+282                 }
+283 #endif
+284                 matchlen = rm[0].rm_eo - rm[0].rm_so;
+285                 return rm[0].rm_so; // start of match
+286         } else {
+287                 matchlen = 0;
+288                 if (res==REG_NOMATCH) return -1;
+289                 else return -2; // internal error
+290         }
+291 }
+\end{verbatim}\normalsize 
+\index{BigRegex@{Big\-Regex}!sublen@{sublen}}
+\index{sublen@{sublen}!BigRegex@{Big\-Regex}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Big\-Regex::sublen (int {\em nth} = 0) const}\label{classBigRegex_a6}
+
+
+
+
+Definition at line 123 of file Big\-Regex.cc.
+
+References BIGREGEX\_\-MAX\_\-SUBEXPRESSIONS, and rm.
+
+Referenced by extract\_\-DIL\_\-IDs\_\-from\_\-form(), extract\_\-paper\_\-novelties(), Financial\_\-Note::get(), get\_\-figure\_\-data(), modify\_\-DIL\_\-group\_\-target\_\-dates\_\-cmd(), remove\_\-AL\_\-TC(), select\_\-TL\_\-DIL\_\-refs(), send\_\-dil\_\-to\_\-DIL(), Te\-X\_\-format\_\-corrections(), Te\-X\_\-get\_\-command(), and Te\-X\_\-safe\_\-text().
+
+
+
+\footnotesize\begin{verbatim}123                                   {
+124         if ((unsigned)(nth) >= BIGREGEX_MAX_SUBEXPRESSIONS) return -1;
+125         return rm[nth].rm_eo - rm[nth].rm_so;
+126 }
+\end{verbatim}\normalsize 
+\index{BigRegex@{Big\-Regex}!subpos@{subpos}}
+\index{subpos@{subpos}!BigRegex@{Big\-Regex}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Big\-Regex::subpos (int {\em nth} = 0) const}\label{classBigRegex_a5}
+
+
+
+
+Definition at line 118 of file Big\-Regex.cc.
+
+References BIGREGEX\_\-MAX\_\-SUBEXPRESSIONS, and rm.
+
+Referenced by extract\_\-DIL\_\-IDs\_\-from\_\-form(), extract\_\-paper\_\-novelties(), Financial\_\-Note::get(), Detailed\_\-Items\_\-List::Get\_\-All\_\-DIL\_\-ID\_\-File\_\-Parameters(), get\_\-figure\_\-data(), Get\_\-Target\_\-Regex(), modify\_\-DIL\_\-group\_\-target\_\-dates\_\-cmd(), remove\_\-AL\_\-TC(), select\_\-TL\_\-DIL\_\-refs(), send\_\-dil\_\-to\_\-DIL(), Te\-X\_\-format\_\-corrections(), Te\-X\_\-get\_\-command(), and Target\_\-Access::transformed\_\-name().
+
+
+
+\footnotesize\begin{verbatim}118                                   {
+119         if ((unsigned)(nth) >= BIGREGEX_MAX_SUBEXPRESSIONS) return -1;
+120         return rm[nth].rm_so;
+121 }
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Data Documentation}
+\index{BigRegex@{Big\-Regex}!re@{re}}
+\index{re@{re}!BigRegex@{Big\-Regex}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}regex\_\-t$\ast$ Big\-Regex::re\hspace{0.3cm}{\tt  [protected]}}\label{classBigRegex_n0}
+
+
+
+
+Definition at line 86 of file Big\-Regex.hh.
+
+Referenced by Big\-Regex(), match(), search(), and $\sim$Big\-Regex().\index{BigRegex@{Big\-Regex}!re_assigned@{re\_\-assigned}}
+\index{re_assigned@{re\_\-assigned}!BigRegex@{Big\-Regex}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool$\ast$ Big\-Regex::re\_\-assigned\hspace{0.3cm}{\tt  [protected]}}\label{classBigRegex_n2}
+
+
+
+
+Definition at line 88 of file Big\-Regex.hh.
+
+Referenced by Big\-Regex(), OK(), and $\sim$Big\-Regex().\index{BigRegex@{Big\-Regex}!rm@{rm}}
+\index{rm@{rm}!BigRegex@{Big\-Regex}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}regmatch\_\-t$\ast$ Big\-Regex::rm\hspace{0.3cm}{\tt  [protected]}}\label{classBigRegex_n1}
+
+
+
+
+Definition at line 87 of file Big\-Regex.hh.
+
+Referenced by Big\-Regex(), match(), match\_\-info(), search(), sublen(), subpos(), and $\sim$Big\-Regex().
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf Big\-Regex.hh}\item 
+{\bf Big\-Regex.cc}\end{CompactItemize}

@@ -1,0 +1,174 @@
+\section{DIL\_\-Visualize\_\-with\_\-Tabs  Class Reference}
+\label{classDIL__Visualize__with__Tabs}\index{DIL_Visualize_with_Tabs@{DIL\_\-Visualize\_\-with\_\-Tabs}}
+{\tt \#include $<$dil2al.hh$>$}
+
+Inheritance diagram for DIL\_\-Visualize\_\-with\_\-Tabs::\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2cm]{classDIL__Visualize__with__Tabs}
+\end{center}
+\end{figure}
+\subsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf DIL\_\-Visualize\_\-with\_\-Tabs} ({\bf DIL\_\-Hierarchy\_\-Level\_\-Data} $\ast$ld=NULL)
+\item 
+virtual void {\bf Initialize} ()
+\item 
+virtual void {\bf Visualize\_\-Element} ({\bf DIL\_\-entry} $\ast$de, int depth)
+\item 
+virtual void {\bf Visualize\_\-Not\-Shown} (int numdependencies, int depth)
+\item 
+virtual {\bf String} {\bf Output} ()
+\item 
+virtual {\bf String} {\bf Output\_\-Content} ()
+\end{CompactItemize}
+\subsection*{Protected Attributes}
+\begin{CompactItemize}
+\item 
+{\bf String} {\bf s}
+\item 
+{\bf String} {\bf content}
+\end{CompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{DIL_Visualize_with_Tabs@{DIL\_\-Visualize\_\-with\_\-Tabs}!DIL_Visualize_with_Tabs@{DIL\_\-Visualize\_\-with\_\-Tabs}}
+\index{DIL_Visualize_with_Tabs@{DIL\_\-Visualize\_\-with\_\-Tabs}!DIL_Visualize_with_Tabs@{DIL\_\-Visualize\_\-with\_\-Tabs}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}DIL\_\-Visualize\_\-with\_\-Tabs::DIL\_\-Visualize\_\-with\_\-Tabs ({\bf DIL\_\-Hierarchy\_\-Level\_\-Data} $\ast$ {\em ld} = NULL)\hspace{0.3cm}{\tt  [inline]}}\label{classDIL__Visualize__with__Tabs_a0}
+
+
+
+
+Definition at line 766 of file dil2al.hh.
+
+
+
+\footnotesize\begin{verbatim}766 : DIL_Visualize(ld) {}
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Function Documentation}
+\index{DIL_Visualize_with_Tabs@{DIL\_\-Visualize\_\-with\_\-Tabs}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!DIL_Visualize_with_Tabs@{DIL\_\-Visualize\_\-with\_\-Tabs}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}virtual void DIL\_\-Visualize\_\-with\_\-Tabs::Initialize ()\hspace{0.3cm}{\tt  [inline, virtual]}}\label{classDIL__Visualize__with__Tabs_a1}
+
+
+
+
+Reimplemented from {\bf DIL\_\-Visualize} {\rm (p.\,\pageref{classDIL__Visualize_a1})}.
+
+Definition at line 767 of file dil2al.hh.
+
+
+
+\footnotesize\begin{verbatim}767 { s = ""; content = ""; }
+\end{verbatim}\normalsize 
+\index{DIL_Visualize_with_Tabs@{DIL\_\-Visualize\_\-with\_\-Tabs}!Output@{Output}}
+\index{Output@{Output}!DIL_Visualize_with_Tabs@{DIL\_\-Visualize\_\-with\_\-Tabs}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf String} DIL\_\-Visualize\_\-with\_\-Tabs::Output ()\hspace{0.3cm}{\tt  [inline, virtual]}}\label{classDIL__Visualize__with__Tabs_a4}
+
+
+
+
+Reimplemented from {\bf DIL\_\-Visualize} {\rm (p.\,\pageref{classDIL__Visualize_a7})}.
+
+Definition at line 770 of file dil2al.hh.
+
+Referenced by Tabbed\_\-DIL\_\-Hierarchy().
+
+
+
+\footnotesize\begin{verbatim}770 { return s; }
+\end{verbatim}\normalsize 
+\index{DIL_Visualize_with_Tabs@{DIL\_\-Visualize\_\-with\_\-Tabs}!Output_Content@{Output\_\-Content}}
+\index{Output_Content@{Output\_\-Content}!DIL_Visualize_with_Tabs@{DIL\_\-Visualize\_\-with\_\-Tabs}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf String} DIL\_\-Visualize\_\-with\_\-Tabs::Output\_\-Content ()\hspace{0.3cm}{\tt  [inline, virtual]}}\label{classDIL__Visualize__with__Tabs_a5}
+
+
+
+
+Definition at line 771 of file dil2al.hh.
+
+Referenced by Tabbed\_\-DIL\_\-Hierarchy().
+
+
+
+\footnotesize\begin{verbatim}771 { return content; }
+\end{verbatim}\normalsize 
+\index{DIL_Visualize_with_Tabs@{DIL\_\-Visualize\_\-with\_\-Tabs}!Visualize_Element@{Visualize\_\-Element}}
+\index{Visualize_Element@{Visualize\_\-Element}!DIL_Visualize_with_Tabs@{DIL\_\-Visualize\_\-with\_\-Tabs}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void DIL\_\-Visualize\_\-with\_\-Tabs::Visualize\_\-Element ({\bf DIL\_\-entry} $\ast$ {\em de}, int {\em depth})\hspace{0.3cm}{\tt  [virtual]}}\label{classDIL__Visualize__with__Tabs_a2}
+
+
+
+
+Reimplemented from {\bf DIL\_\-Visualize} {\rm (p.\,\pageref{classDIL__Visualize_a5})}.
+
+Definition at line 102 of file diladmin.cc.
+
+References DIL\_\-ID::chars(), content, DIL\_\-entry::Entry\_\-Text(), HTML\_\-remove\_\-tags(), replicate(), and s.
+
+
+
+\footnotesize\begin{verbatim}102                                                                          {
+103         if (depth>0) s += replicate('\t',depth);
+104         s += "DIL#" + String(de->chars()) + '\n';
+105         content += "\nDIL#" + String(de->chars()) + ":\n";
+106         String * ctxt = de->Entry_Text();
+107         if (ctxt) {
+108                 String ptxtcontent(*ctxt);
+109                 content += (*HTML_remove_tags(ptxtcontent));
+110         }
+111         content += '\n';
+112 }
+\end{verbatim}\normalsize 
+\index{DIL_Visualize_with_Tabs@{DIL\_\-Visualize\_\-with\_\-Tabs}!Visualize_NotShown@{Visualize\_\-NotShown}}
+\index{Visualize_NotShown@{Visualize\_\-NotShown}!DIL_Visualize_with_Tabs@{DIL\_\-Visualize\_\-with\_\-Tabs}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void DIL\_\-Visualize\_\-with\_\-Tabs::Visualize\_\-Not\-Shown (int {\em numdependencies}, int {\em depth})\hspace{0.3cm}{\tt  [virtual]}}\label{classDIL__Visualize__with__Tabs_a3}
+
+
+
+
+Reimplemented from {\bf DIL\_\-Visualize} {\rm (p.\,\pageref{classDIL__Visualize_a6})}.
+
+Definition at line 114 of file diladmin.cc.
+
+References replicate(), and s.
+
+
+
+\footnotesize\begin{verbatim}114                                                                                {
+115   if (numdependencies>0) {
+116     if (depth>0) s += replicate('\t',depth);
+117     s += '['+String((long) numdependencies)+" dependencies...]\n";
+118   }
+119 }
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Data Documentation}
+\index{DIL_Visualize_with_Tabs@{DIL\_\-Visualize\_\-with\_\-Tabs}!content@{content}}
+\index{content@{content}!DIL_Visualize_with_Tabs@{DIL\_\-Visualize\_\-with\_\-Tabs}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} DIL\_\-Visualize\_\-with\_\-Tabs::content\hspace{0.3cm}{\tt  [protected]}}\label{classDIL__Visualize__with__Tabs_n1}
+
+
+
+
+Definition at line 764 of file dil2al.hh.
+
+Referenced by Visualize\_\-Element().\index{DIL_Visualize_with_Tabs@{DIL\_\-Visualize\_\-with\_\-Tabs}!s@{s}}
+\index{s@{s}!DIL_Visualize_with_Tabs@{DIL\_\-Visualize\_\-with\_\-Tabs}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} DIL\_\-Visualize\_\-with\_\-Tabs::s\hspace{0.3cm}{\tt  [protected]}}\label{classDIL__Visualize__with__Tabs_n0}
+
+
+
+
+Definition at line 763 of file dil2al.hh.
+
+Referenced by Visualize\_\-Element(), and Visualize\_\-Not\-Shown().
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf dil2al.hh}\item 
+{\bf diladmin.cc}\end{CompactItemize}

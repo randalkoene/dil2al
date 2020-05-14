@@ -1,0 +1,53 @@
+\section{templates.classic.hh File Reference}
+\label{templates_8classic_8hh}\index{templates.classic.hh@{templates.classic.hh}}
+\subsection*{Compounds}
+\begin{CompactItemize}
+\item 
+class {\bf PLLHandle}
+\item 
+class {\bf PLLRoot}
+\end{CompactItemize}
+\subsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define {\bf Protected\_\-Linked\_\-List\_\-Indexed\_\-Access}({\bf PLLType}, Here, There)
+\item 
+\#define {\bf PLL\_\-LOOP\_\-FORWARD}({\bf PLLType}, Init\_\-El, Extra\_\-Test)\ for ({\bf PLLType} $\ast$ e = Init\_\-El; ((e) \&\& (Extra\_\-Test)); e = e $\rightarrow$ Next())
+\item 
+\#define {\bf PLL\_\-LOOP\_\-FORWARD\_\-NESTED}({\bf PLLType}, Init\_\-El, Extra\_\-Test, Ref\-Var)\ for ({\bf PLLType} $\ast$ Ref\-Var = Init\_\-El; ((Ref\-Var) \&\& (Extra\_\-Test)); Ref\-Var = Ref\-Var $\rightarrow$ Next())
+\end{CompactItemize}
+
+
+\subsection{Define Documentation}
+\index{templates.classic.hh@{templates.classic.hh}!PLL_LOOP_FORWARD@{PLL\_\-LOOP\_\-FORWARD}}
+\index{PLL_LOOP_FORWARD@{PLL\_\-LOOP\_\-FORWARD}!templates.classic.hh@{templates.classic.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define PLL\_\-LOOP\_\-FORWARD({\bf PLLType}, Init\_\-El, Extra\_\-Test)\ for ({\bf PLLType} $\ast$ e = Init\_\-El; ((e) \&\& (Extra\_\-Test)); e = e $\rightarrow$ Next())}\label{templates_8classic_8hh_a1}
+
+
+
+
+Definition at line 342 of file templates.classic.hh.
+
+Referenced by Financial\_\-Monthly::add(), Financial\_\-Monthly\_\-Category::add(), AL\_\-Day\_\-Marker(), AL\_\-Passed\_\-Target\_\-Dates(), AL\_\-TC::avail\_\-el(), AL\_\-TC::available\_\-before(), Financial\_\-Monthly::Copy\_\-Categories(), Financial\_\-Monthly\_\-Category::Copy\_\-Sub\-Categories(), Detailed\_\-Items\_\-List::Entry\_\-Has\_\-Dependencies(), exit\_\-report(), financial\_\-monthly(), generate\_\-AL(), Active\_\-List::generate\_\-focused\_\-AL(), Active\_\-List::generate\_\-wide\_\-AL(), Detailed\_\-Items\_\-List::Get\_\-All\_\-Topical\_\-DIL\_\-Parameters(), DIL\_\-entry::Has\_\-Superiors(), Active\_\-List::Initialize\_\-AL\_\-Length(), DIL\_\-entry::Is\_\-Direct\_\-Dependency\_\-Of(), AL\_\-Day::linear\_\-day\_\-distribution(), Financial\_\-Note::link\_\-sorted(), modify\_\-DIL\_\-entry\_\-target\_\-date(), modify\_\-DIL\_\-group\_\-target\_\-dates(), AL\_\-TC::next\_\-avail\_\-el(), DIL\_\-entry::Propagated\_\-Target\_\-Date(), Financial\_\-Note::put(), Financial\_\-Monthly\_\-Root::put\_\-results(), search(), search\_\-output(), Active\_\-List::set\_\-TC\_\-values(), Show\_\-DIL\_\-Hierarchy(), Detailed\_\-Items\_\-List::Sort\_\-by\_\-Target\_\-Date(), AL\_\-Day::squared\_\-day\_\-distribution(), Tabbed\_\-FORM\_\-DIL\_\-Hierarchy\_\-full(), update\_\-DIL\_\-entry\_\-elements(), update\_\-DIL\_\-entry\_\-parameter\_\-elements(), write\_\-financial\_\-notes\_\-file(), Detailed\_\-Items\_\-List::Write\_\-to\_\-Binary\_\-Cache(), DIL\_\-entry\_\-parameters::Write\_\-to\_\-Binary\_\-Cache(), Detailed\_\-Items\_\-List::Write\_\-to\_\-File(), and Detailed\_\-Items\_\-List::Write\_\-Topical\_\-to\_\-Binary\_\-Cache().\index{templates.classic.hh@{templates.classic.hh}!PLL_LOOP_FORWARD_NESTED@{PLL\_\-LOOP\_\-FORWARD\_\-NESTED}}
+\index{PLL_LOOP_FORWARD_NESTED@{PLL\_\-LOOP\_\-FORWARD\_\-NESTED}!templates.classic.hh@{templates.classic.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define PLL\_\-LOOP\_\-FORWARD\_\-NESTED({\bf PLLType}, Init\_\-El, Extra\_\-Test, Ref\-Var)\ for ({\bf PLLType} $\ast$ Ref\-Var = Init\_\-El; ((Ref\-Var) \&\& (Extra\_\-Test)); Ref\-Var = Ref\-Var $\rightarrow$ Next())}\label{templates_8classic_8hh_a2}
+
+
+
+
+Definition at line 349 of file templates.classic.hh.
+
+Referenced by modify\_\-DIL\_\-group\_\-target\_\-dates(), Financial\_\-Monthly\_\-Root::put\_\-results(), and Detailed\_\-Items\_\-List::Write\_\-to\_\-File().\index{templates.classic.hh@{templates.classic.hh}!Protected_Linked_List_Indexed_Access@{Protected\_\-Linked\_\-List\_\-Indexed\_\-Access}}
+\index{Protected_Linked_List_Indexed_Access@{Protected\_\-Linked\_\-List\_\-Indexed\_\-Access}!templates.classic.hh@{templates.classic.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define Protected\_\-Linked\_\-List\_\-Indexed\_\-Access({\bf PLLType}, Here, There)}\label{templates_8classic_8hh_a0}
+
+
+{\bf Value:}
+
+\footnotesize\begin{verbatim}if (!n) return Here; \
+        if (PLLType * e = el(n)) return e->There; else return NULL \\end{verbatim}\normalsize 
+
+
+Definition at line 335 of file templates.classic.hh.
+
+Referenced by Topical\_\-DIL\_\-Files::operator[$\,$]().

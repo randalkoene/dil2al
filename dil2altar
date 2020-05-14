@@ -1,0 +1,16 @@
+#! /bin/sh
+#
+# dil2alarc - Create archive of dil2al files
+#
+# Randal A. Koene, 20011016
+
+dil2alarc=`date +"%Y%m%d"`
+dil2alarc="dil2al-$dil2alarc"
+
+if [ -d dil2al ]; then
+	tar cvf $dil2alarc.tar dil2al/Makefile dil2al/*.c dil2al/*.cc dil2al/*.h dil2al/*.hh dil2al/dil2altar dil2al/kenjisetup dil2al/*Non_Posix2 dil2al/*.fig dil2al/*.html dil2al/*.m dil2al/*.txt
+	gzip -9 $dil2alarc.tar
+	echo "dil2al files have been archived to $dil2alarc.tar.gz"
+else
+	echo "This script should be run from the parent directory of the dil2al directory"
+fi

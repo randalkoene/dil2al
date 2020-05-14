@@ -1,0 +1,1798 @@
+\section{diladmin.cc File Reference}
+\label{diladmin_8cc}\index{diladmin.cc@{diladmin.cc}}
+{\tt \#include \char`\"{}dil2al.hh\char`\"{}}\par
+\subsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define {\bf MODIFY\_\-DIL\_\-GROUP\_\-TARGET\_\-DATES\_\-RETURN\_\-WITH\_\-CLEANUP}({\bf res})\ delete[$\,$] e; return {\bf res}
+\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+bool {\bf get\_\-active\_\-DIL\_\-IDs} ({\bf String\-List} \&idfileids, unsigned long $\ast$resnumidfileids=NULL)
+\item 
+{\bf String} {\bf superior\_\-reference\_\-info} ({\bf String\-List} $\ast$supinfoptr)
+\item 
+bool {\bf add\_\-new\_\-to\_\-DIL} ({\bf String} dilfile, {\bf String\-List} $\ast$supinfoptr)
+\item 
+bool {\bf create\_\-new\_\-DIL} ({\bf String} dilfile)
+\item 
+bool {\bf send\_\-dil\_\-to\_\-DIL} ({\bf String} dilfile)
+\item 
+{\bf String} {\bf get\_\-new\_\-DIL\_\-ID} ()
+\item 
+void {\bf generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-entry\_\-content} ({\bf DIL\_\-entry} $\ast$de)
+\item 
+void {\bf generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-Superiors} ({\bf DIL\_\-entry} $\ast$sup, {\bf String} dilstr, bool isplanoutcome={\bf false}, DIL\_\-Superiors $\ast$dilsup=NULL)
+\item 
+void {\bf generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-entry\_\-parameters} ({\bf DIL\_\-entry} $\ast$de)
+\item 
+bool {\bf generate\_\-modify\_\-element\_\-FORM\_\-interface} ({\bf String\-List} $\ast$qlist=NULL)
+\item 
+void {\bf modify\_\-element\_\-through\_\-FORM\_\-interface\_\-DIL\_\-Superiors} (int \&dilididx, {\bf String\-List} $\ast$qlist, {\bf String} supid, DIL\_\-Superiors $\ast$dilsup)
+\item 
+bool {\bf modify\_\-element\_\-through\_\-FORM\_\-interface} ({\bf String\-List} $\ast$qlist=NULL)
+\item 
+bool {\bf update\_\-DIL\_\-entry\_\-elements} ({\bf String} dilid, double valuation, bool updateval, double completion, bool updatecomp, double required, bool updatereq, time\_\-t tdiff=-1)
+\item 
+bool {\bf update\_\-DIL\_\-entry\_\-parameter\_\-elements} ({\bf Detailed\_\-Items\_\-List} \&dilist, {\bf DIL\_\-ID} dilid, {\bf PLLRoot}$<$ DIL\_\-Superiors $>$ \&addsups, {\bf String\-List} $\ast$removesups, int removesupsnum)
+\item 
+bool {\bf modify\_\-DIL\_\-entry\_\-target\_\-date} ({\bf DIL\_\-ID} dilid, time\_\-t tdate, {\bf Detailed\_\-Items\_\-List} \&dilist)
+\item 
+bool {\bf modify\_\-DIL\_\-entry\_\-target\_\-date} ({\bf DIL\_\-ID} dilid, time\_\-t tdate)
+\item 
+bool {\bf modify\_\-DIL\_\-group\_\-target\_\-dates} ({\bf Detailed\_\-Items\_\-List} \&dilgroup, bool minfragmentation={\bf true})
+\item 
+bool {\bf modify\_\-DIL\_\-group\_\-target\_\-dates\_\-cmd} (bool minfragmentation, {\bf String\-List} $\ast$qlist=NULL)
+\item 
+bool {\bf extract\_\-DIL\_\-IDs\_\-from\_\-form} ({\bf String\-List} $\ast$qlist=NULL)
+\item 
+void {\bf Show\_\-DIL\_\-Hierarchy} ({\bf DIL\_\-entry} $\ast$topde, {\bf DIL\_\-Visualize} \&dv, const int maxdepth, int depth=0, double likelihood=DILSUPS\_\-REL\_\-UNSPECIFIED)
+\item 
+{\bf String} {\bf Tabbed\_\-DIL\_\-Hierarchy} ({\bf String} dilidstr, int maxdepth=50)
+\item 
+{\bf String} {\bf Tabbed\_\-HTML\_\-DIL\_\-Hierarchy} ({\bf String} dilidstr, int maxdepth=50)
+\item 
+void {\bf Tabbed\_\-FORM\_\-DIL\_\-Hierarchy\_\-full} ({\bf Detailed\_\-Items\_\-List} \&dilist, {\bf DIL\_\-Visualize\_\-with\_\-FORM\_\-Tabs} \&dv, const int maxdepth, {\bf String} \&expressions)
+\item 
+{\bf String} {\bf Tabbed\_\-FORM\_\-DIL\_\-Hierarchy} ({\bf String} dilidstr, int maxdepth=50)
+\item 
+bool {\bf DIL\_\-Hierarchy\_\-cmd} ({\bf String} dilidstr, int maxdepth=50)
+\end{CompactItemize}
+
+
+\subsection{Define Documentation}
+\index{diladmin.cc@{diladmin.cc}!MODIFY_DIL_GROUP_TARGET_DATES_RETURN_WITH_CLEANUP@{MODIFY\_\-DIL\_\-GROUP\_\-TARGET\_\-DATES\_\-RETURN\_\-WITH\_\-CLEANUP}}
+\index{MODIFY_DIL_GROUP_TARGET_DATES_RETURN_WITH_CLEANUP@{MODIFY\_\-DIL\_\-GROUP\_\-TARGET\_\-DATES\_\-RETURN\_\-WITH\_\-CLEANUP}!diladmin.cc@{diladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define MODIFY\_\-DIL\_\-GROUP\_\-TARGET\_\-DATES\_\-RETURN\_\-WITH\_\-CLEANUP({\bf res})\ delete[$\,$] e; return {\bf res}}\label{diladmin_8cc_a0}
+
+
+
+
+\subsection{Function Documentation}
+\index{diladmin.cc@{diladmin.cc}!add_new_to_DIL@{add\_\-new\_\-to\_\-DIL}}
+\index{add_new_to_DIL@{add\_\-new\_\-to\_\-DIL}!diladmin.cc@{diladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool add\_\-new\_\-to\_\-DIL ({\bf String} {\em dilfile}, {\bf String\-List} $\ast$ {\em supinfoptr})}\label{diladmin_8cc_a3}
+
+
+
+
+Definition at line 281 of file diladmin.cc.
+
+References backup\_\-and\_\-rename(), EOUT, find\_\-in\_\-line(), find\_\-line(), get\_\-active\_\-DIL\_\-IDs(), String\-List::insert(), pattern\_\-in\_\-line(), RELLISTSDIR, res, substring\_\-from\_\-line(), superior\_\-reference\_\-info(), and VOUT.
+
+Referenced by dil2al\_\-commands(), and send\_\-dil\_\-to\_\-DIL().
+
+
+
+\footnotesize\begin{verbatim}281                                                              {
+282 // Adds all new DIL entry ID references to the DIL-by-ID file,
+283 // with superior DIL entry information if provided in supinfoptr
+284         const int LLEN = 10240;
+285         char lbuf[LLEN];
+286         String dilid[2], dilfilename, dilfiletitle;
+287         StringList dilfileids, idfileids, beforeid;
+288         unsigned long numdilfileids = 0, numidfileids = 0, newdils = 0;
+289         int res;
+290         // get name of DIL file
+291         if (!substring_from_line("([^/]+)$",2,dilid,(const char *) dilfile)) {
+292                 EOUT << "dil2al: Unable to parse name from DIL file path in add_new_to_DIL()\n";
+293                 return false;
+294         } else dilfilename = dilid[1];
+295         dilfile=basedir+RELLISTSDIR+dilfilename;
+296         if (verbose) VOUT << "Adding new DIL ID from " << dilfile << '\n';
+297         ifstream df(dilfile);
+298         if (df) {
+299                 // get title of DIL file
+300                 if (!find_line(&df,"[<]TITLE[>] *DIL: *",lbuf,LLEN)) {
+301                         EOUT << "dil2al: Unable to find title of DIL file in add_new_to_DIL()\n";
+302                         return false;
+303                 }
+304                 if (!substring_from_line("[<]TITLE[>] *DIL: *([^<]+)",2,dilid,lbuf)) {
+305                         EOUT << "dil2al: Unable to parse title from title line of DIL file in add_new_to_DIL()\n";
+306                         return false;
+307                 } else dilfiletitle = dilid[1];
+308                 // collect all DIL IDs in dilfile
+309                 if (!find_line(&df,"[<]!-- *dil2al: *DIL *begin *--[>]",lbuf,LLEN)) {
+310                         EOUT << "dil2al: Tag <!-- dil2al: DIL begin --> not found in " << dilfile << '\n';
+311                         return false;
+312                 }
+313                 if (verbose) VOUT << "Reading DIL IDs\n";
+314                 do {
+315                         if ((res=find_in_line(&df,"[<]TR +BGCOLOR=\"#00005F",0,NULL,"[<]!-- *dil2al: *DIL *end *--[>]",lbuf,LLEN))==1) {
+316                                 res = find_in_line(&df,"[<]TD[^>]*[>][<]A +NAME=\"([.0-9]+)\"",2,dilid,"[<]TR +BGCOLOR=\"#00005F|[<]!-- *dil2al: *DIL *end *--[>]",lbuf,LLEN);
+317                                 if (res<-1) return false;
+318                                 if (numdilfileids) {
+319                                         unsigned long i;
+320                                         for (i=0; ((i<numdilfileids) && (dilid[1]>dilfileids[i])); i++);
+321                                         dilfileids.insert(i,dilid[1]);
+322                                 } else dilfileids[0]=dilid[1];
+323                                 numdilfileids++;
+324                         } else {
+325                                 if (res>=-1) res=-1;
+326                                 else return false;
+327                         }
+328                 } while ((res>0) || ((res==0) && (!pattern_in_line("[<]!-- *dil2al: *DIL *end *--[>]",lbuf))));
+329                 df.close();
+330         } else {
+331                 EOUT << "dil2al: Unable to open DIL file " << dilfile << '\n';
+332                 return false;
+333         }
+334         // compare with all DIL IDs in detailed-items-by-ID.html
+335         if (verbose) VOUT << "Comparing with DIL IDs in " << idfile << '\n';
+336         if (!get_active_DIL_IDs(idfileids,&numidfileids)) {
+337                 EOUT << "dil2al: Unable to obtain DIL IDs from " << idfile << '\n';
+338                 return false;
+339         }
+340 //      for (int i=0; i<numidfileids; i++) cout << idfileids[i] << '\n';
+341         if (verbose) VOUT << "Removing existing IDs from batch to add\n";
+342 //*** THIS IS WHERE IT *SHOULD* STILL ADD ADDITIONAL DIL REFERENCES TO THE
+343 //*** DIL-BY-ID LIST IF AN ITEM OCCURS IN MORE THAN ONE DIL!!!
+344 //*** SEE DIL 20000124180439.1, WHICH OCCURS IN BOTH components.html and experiments.html
+345 //*** (NOTE ALSO THAT SENDTODIL DID NOT WORK PROPERLY FOR THE SECOND OCCURRANCE!)
+346         newdils=numdilfileids;
+347         for (unsigned long i=0; i<numdilfileids; i++)
+348                 for (unsigned long j=0; j<numidfileids; j++)
+349                         if ((dilfileids[i])==(idfileids[j])) {
+350                                 dilfileids[i]=""; // avoid adding multiples
+351                                 newdils--;
+352                                 break;
+353                         } else if ((idfileids[j]>dilfileids[i]) && (beforeid[i]=="")) beforeid[i]=idfileids[j];
+354         if (newdils>0) {
+355                 VOUT << "Number of new DILs: " << newdils << '\n';
+356 //              for (int i=0; i<numdilfileids; i++) cout << dilfileids[i] << ',' << beforeid[i] << '\n';
+357                 // copy idfile and add new DILs in sorted locations (beforeid[i]=="" implies place at end)
+358                 df.open(idfile);
+359                 if (!df) {
+360                         EOUT << "dil2al: Unable to open DIL ID file " << idfile << "in add_new_to_DIL()\n";
+361                         return false;
+362                 }
+363                 ofstream ndf(idfile+".new");
+364                 if (ndf) {
+365                         //df.seekg(0);
+366                         unsigned long i;
+367                         if (verbose) VOUT << "Inserting new IDs\n";
+368                         // find first new DIL to insert
+369                         for (i=0; (i<numdilfileids) && (dilfileids[i]==""); i++);
+370                         while (!df.eof()) {
+371                                 df.getline(lbuf,LLEN);
+372                                 if (newdils) {
+373                                         // test if found an insertion location
+374                                         if ((beforeid[i]!="") && (pattern_in_line("[<]TD[^>]*[>][<]A +NAME=\""+beforeid[i],lbuf))) {
+375                                                 // insert
+376                                                 ndf << "<TD><A NAME=\"" << dilfileids[i] << "\">"
+377                                                         << dilfileids[i] << "</A>\n<TD><A HREF=\""
+378                                                         << dilfilename << '#' << dilfileids[i] << "\">"
+379                                                         << dilfiletitle << superior_reference_info(supinfoptr) << "<TR>\n";
+380                                                 // find next DIL to insert
+381                                                 for (i++; (i<numdilfileids) && (dilfileids[i]==""); i++);
+382                                                 newdils--;
+383                                         }
+384                                         // test if found end of DILs (insert rest here)
+385                                         if (pattern_in_line("[<]!-- *dil2al: *DIL ID *end *--[>]",lbuf)) {
+386                                                 do {
+387                                                         ndf << "<TR>\n<TD><A NAME=\"" << dilfileids[i] << "\">"
+388                                                                 << dilfileids[i] << "</A>\n<TD><A HREF=\""
+389                                                                 << dilfilename << '#' << dilfileids[i] << "\">"
+390                                                                 << dilfiletitle << superior_reference_info(supinfoptr);
+391                                                         for (i++; (i<numdilfileids) && (dilfileids[i]==""); i++);
+392                                                         newdils--;
+393                                                 } while (newdils);
+394                                         }
+395                                 }
+396                                 if (!df.eof()) ndf << lbuf << endl;
+397                         }
+398                         df.close();
+399                         ndf.close();
+400                         if (!backup_and_rename(idfile,"DIL ID")) return false;
+401                 } else {
+402                         EOUT << "dil2al: Unable to create file " << idfile << ".new in add_new_to_DIL()\n";
+403                         return false;
+404                 }
+405         } else if (verbose) VOUT << "No new IDs to add\n";
+406         return true;
+407 }
+\end{verbatim}\normalsize 
+\index{diladmin.cc@{diladmin.cc}!create_new_DIL@{create\_\-new\_\-DIL}}
+\index{create_new_DIL@{create\_\-new\_\-DIL}!diladmin.cc@{diladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool create\_\-new\_\-DIL ({\bf String} {\em dilfile})}\label{diladmin_8cc_a4}
+
+
+
+
+Definition at line 409 of file diladmin.cc.
+
+References backup\_\-and\_\-rename(), copy\_\-until\_\-line(), EOUT, RELLISTSDIR, substring\_\-from\_\-line(), and VOUT.
+
+Referenced by dil2al\_\-commands(), and send\_\-dil\_\-to\_\-DIL().
+
+
+
+\footnotesize\begin{verbatim}409                                     {
+410         const int LLEN = 10240;
+411         char lbuf[LLEN];
+412         String dilid[2], dilfilename, diltitle;
+413         // get name of DIL file regardless of whether it was a relative or absolute path
+414         if (!substring_from_line("([^/]+)$",2,dilid,(const char *) dilfile)) {
+415                 EOUT << "dil2al: Unable to parse name from DIL file path in create_new_DIL()\n";
+416                 return false;
+417         } else dilfilename = dilid[1];
+418         dilfile=basedir+RELLISTSDIR+dilfilename;
+419         if (verbose) VOUT << "Creating new DIL file " << dilfile << '\n';
+420         ifstream df(dilfile);
+421         if (df) {
+422                 df.close();
+423                 cout << "DIL file " << dilfilename << " already exists, overwrite? (y/N) ";
+424                 cin.getline(lbuf,LLEN);
+425                 if ((lbuf[0]!='y') && (lbuf[0]!='Y')) return false;
+426         }
+427         ofstream ndf(dilfile);
+428         if (ndf) {
+429                 if (verbose) VOUT << "Initializing new DIL file\n";
+430                 cout << "DIL title for " << dilfilename << ": ";
+431                 cin.getline(lbuf,LLEN); diltitle = lbuf;
+432                 ndf << "<HTML>\n<HEAD>\n<TITLE>DIL: " << diltitle << "</TITLE>\n";
+433                 ndf << "</HEAD>\n<BODY BGCOLOR=\"#000000\" TEXT=\"#F0E0A0\" LINK=\"#AFAFFF\" VLINK=\"#7F7FFF\">\n";
+434                 ndf << "<H1><FONT COLOR=\"#00FF00\">DIL: " << diltitle << "</FONT></H1>\n\n";
+435                 cout << "DIL keywords and relevance, e.g. neuron (1.0), synapse (1.0): ";
+436                 cin.getline(lbuf,LLEN);
+437                 ndf << "<B>Topic Keywords, k_{top} (and relevance in [0,1]):</B> " << lbuf << "\n<P>\n\n";
+438                 ndf << "<TABLE WIDTH=\"100%\" CELLPADDING=3 BORDER=2>\n<!-- dil2al: DIL begin -->\n\n<!-- dil2al: DIL end -->\n</TABLE>\n\n\n";
+439                 ndf << "<LI><A HREF=\"detailed-items-by-ID.html\">Detailed Items by ID</A>\n<LI><A HREF=\"../lists.html#DIL\">Topical Detailed Items Lists</A>\n<P>\n";
+440                 ndf << "<HR>~/doc/<A HREF=\"../maincont.html\">html</A>/<A HREF=\"../lists.html\">lists</A>/"
+441                         << dilfilename << " <FONT COLOR=\"#AFAFAF\"><I>&nbsp;&nbsp;&nbsp;(created " << curdate << ", Randal A. Koene)</I></FONT>\n\n</BODY>\n";
+442                 ndf.close();
+443         } else {
+444                 EOUT << "dil2al: Unable to create file " << dilfile << " in create_new_DIL()\n";
+445                 return false;
+446         }
+447         // Add DIL title and reference to list.html
+448         df.open(listfile);
+449         if (!df) {
+450                 EOUT << "dil2al: Unable to open " << listfile << " in create_new_DIL()\n";
+451                 return false;
+452         }
+453         ndf.open(listfile+".new");
+454         if (!ndf) {
+455                 EOUT << "dil2al: Unable to create " << listfile << ".new in create_new_DIL()\n";
+456                 return false;
+457         }
+458         if (verbose) VOUT << "Adding new DIL to " << listfile << '\n';
+459         if (copy_until_line(&df,&ndf,"<H1><A NAME=\"DIL\">",lbuf,LLEN)<=0) {
+460                 EOUT << "dil2al: No DIL header ``<H1><A NAME=\"DIL\">'' found in create_new_DIL()\n";
+461                 return false;
+462         }
+463         ndf << lbuf << endl;
+464         if (copy_until_line(&df,&ndf,"</UL>",lbuf,LLEN)<=0) {
+465                 EOUT << "dil2al: No DIL list end ``</UL>'' found in create_new_DIL()\n";
+466                 return false;
+467         }
+468         ndf << "<LI><A HREF=\"" << RELLISTSDIR << dilfilename << "\">" << diltitle << "</A>\n";
+469         ndf << lbuf << endl;
+470         ndf << df.rdbuf();
+471         df.close();
+472         ndf.close();
+473         if (!backup_and_rename(listfile,"lists index")) return false;
+474         return true;
+475 }
+\end{verbatim}\normalsize 
+\index{diladmin.cc@{diladmin.cc}!DIL_Hierarchy_cmd@{DIL\_\-Hierarchy\_\-cmd}}
+\index{DIL_Hierarchy_cmd@{DIL\_\-Hierarchy\_\-cmd}!diladmin.cc@{diladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool DIL\_\-Hierarchy\_\-cmd ({\bf String} {\em dilidstr}, int {\em maxdepth} = 50)}\label{diladmin_8cc_a25}
+
+
+
+
+Definition at line 1545 of file diladmin.cc.
+
+References String::after(), String::before(), String::del(), String::empty(), String::from(), String::length(), Tabbed\_\-DIL\_\-Hierarchy(), Tabbed\_\-FORM\_\-DIL\_\-Hierarchy(), Tabbed\_\-HTML\_\-DIL\_\-Hierarchy(), VOUT, and write\_\-file\_\-from\_\-String().
+
+Referenced by dil2al\_\-commands(), and extract\_\-DIL\_\-IDs\_\-from\_\-form().
+
+
+
+\footnotesize\begin{verbatim}1545                                                            {
+1546 // visualize a DIL hierarchy
+1547 #ifdef DEBUG_HIERARCHY_EXPRESSIONS
+1548   VOUT << "&&& DIL_Hierarchy_cmd: dilidstr = " << dilidstr << '\n';
+1549 #endif
+1550   String hierarchyfile("");
+1551   // 1. Get optional @f@ hierarchyfile reference
+1552   if ((dilidstr.length()>=2) && (dilidstr[0]=='@')) {
+1553     dilidstr.del(0,1);
+1554     hierarchyfile = dilidstr.before('@');
+1555     dilidstr = dilidstr.after('@');
+1556   }
+1557 #ifdef DEBUG_HIERARCHY_EXPRESSIONS
+1558   VOUT << "&&& DIL_Hierarchy_cmd: hierarchyfile = " << hierarchyfile << " dilidstr = " << dilidstr << '\n';
+1559 #endif
+1560   // 2. Get optional type identifier
+1561   if ((dilidstr.length()>=4) && (String(dilidstr.before(4))=="FORM")) {
+1562     dilidstr = dilidstr.from(4);
+1563 #ifdef DEBUG_HIERARCHY_EXPRESSIONS
+1564     VOUT << "&&& DIL_Hierarchy_cmd: type is FORM, dilidstr = " << dilidstr << '\n';
+1565 #endif
+1566     if ((calledbyforminput) && (hierarchyfile.empty())) VOUT << "</PRE><!-- "; // clean up HTML output (dil2al processing output can still be inspected by looking at the HTML source)
+1567     dilidstr = Tabbed_FORM_DIL_Hierarchy(dilidstr,maxdepth);
+1568     // *** If I want to give hierarchy.html a proper head and tail then I
+1569     //     can detect "if ((!hierarchyfile.empty()) && (!dilidstr.empty()))"
+1570     //     here and prepend the head and append the tail to dilidstr if true.
+1571   } else if ((dilidstr.length()>4) && (String(dilidstr.before(4))=="HTML")) {
+1572     dilidstr = dilidstr.from(4);
+1573     dilidstr = Tabbed_HTML_DIL_Hierarchy(dilidstr,maxdepth);
+1574   } else dilidstr = Tabbed_DIL_Hierarchy(dilidstr,maxdepth);
+1575   if (dilidstr.empty()) return false;
+1576   if (!hierarchyfile.empty()) {
+1577     VOUT << "Writing DIL Hierarchy to file " << hierarchyfile << " (<A HREF=\"file://" << hierarchyfile << "\">" << hierarchyfile << "</A>\n";
+1578     return write_file_from_String(hierarchyfile,dilidstr,"DIL Hierarchy");
+1579   }
+1580   VOUT << dilidstr;
+1581   return true;
+1582 }
+\end{verbatim}\normalsize 
+\index{diladmin.cc@{diladmin.cc}!extract_DIL_IDs_from_form@{extract\_\-DIL\_\-IDs\_\-from\_\-form}}
+\index{extract_DIL_IDs_from_form@{extract\_\-DIL\_\-IDs\_\-from\_\-form}!diladmin.cc@{diladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool extract\_\-DIL\_\-IDs\_\-from\_\-form ({\bf String\-List} $\ast$ {\em qlist} = NULL)}\label{diladmin_8cc_a19}
+
+
+
+
+Definition at line 1342 of file diladmin.cc.
+
+References String\-List::concatenate(), String::contains(), DIL\_\-Hierarchy\_\-cmd(), Big\-Regex::sublen(), Big\-Regex::subpos(), URI\_\-unescape(), VOUT, and write\_\-file\_\-from\_\-String().
+
+Referenced by Detect\_\-Form\_\-Input().
+
+
+
+\footnotesize\begin{verbatim}1342                                                           {
+1343   // Form interface that extracts DIL IDs that correspond to checked
+1344   // checkboxes in any form.
+1345   // Known variable names in form: dil2al, DILIDCHKBX<DIL_ID>, processcmd,
+1346   // maxdepth, hierarchyfile.
+1347   if (!qlist) return false;
+1348   const BigRegex dilidchkbx("^DILIDCHKBX\\([0-9]+[.][0-9]+\\)=");
+1349   StringList dilids; int dilidsnum = 0;
+1350   // Find checked checkboxes that contain DIL IDs
+1351   int qnum = qlist->length()-1; // *** empty element at end of StringList
+1352   for (int i = 0; i<qnum; i++) {
+1353     // *** Beware: The same caveat about the assumed length of DIL IDs applies
+1354     //     as in the modify_DIL_group_target_dates_cmd() function above.
+1355 #ifdef DEBUGTIER2
+1356     cout << '$' << (*qlist)[i] << '\n';
+1357 #endif
+1358     if ((*qlist)[i].contains(dilidchkbx)) {
+1359       String chkbxid = (*qlist)[i].at(dilidchkbx.subpos(1),dilidchkbx.sublen(1));
+1360       String chkbxval = (*qlist)[i].after('=');
+1361       if (chkbxval=="extract") {
+1362         dilids[dilidsnum] = chkbxid;
+1363         dilidsnum++;
+1364       }
+1365     }
+1366   }
+1367   // Check if extract or make new hierarchy
+1368   int processcmdidx = qlist->contains("processcmd");
+1369   if (processcmdidx>0) if (String((*qlist)[processcmdidx].after('='))=="newhierarchy") {
+1370     int depthidx = qlist->contains("maxdepth"), maxdepth = 50;
+1371     if (depthidx>0) maxdepth = atol((const char *) String((*qlist)[depthidx].after('=')));
+1372     int hierarchyfileidx = qlist->contains("hierarchyfile"); String hierarchyfile("");
+1373     if (hierarchyfileidx>0) hierarchyfile = '@'+String((*qlist)[hierarchyfileidx].after('='))+'@';
+1374     int expressionsidx = qlist->contains("expressions"); String expressions("");
+1375     if (expressionsidx>0) expressions = '#'+URI_unescape(String((*qlist)[expressionsidx].after('=')));
+1376     int contentfileidx = qlist->contains("contentfile"); String contentfile("");
+1377     if (contentfileidx>0) contentfile = 'c'+String((*qlist)[contentfileidx].after('='));
+1378     return DIL_Hierarchy_cmd(hierarchyfile+"FORM"+dilids.concatenate('+')+contentfile+expressions,maxdepth);
+1379   }
+1380   // Write the DIL IDs to the dilref file
+1381   if (dilidsnum==0) return false;
+1382   VOUT << dilids.concatenate("\n");
+1383   String dilidsstr;
+1384   for (int i = 0; i<dilidsnum; i++) dilidsstr += "Current URL      file://"+idfile+'#'+dilids[i]+'\n';
+1385   return write_file_from_String(dilref,dilidsstr,"Checked DIL IDs");
+1386 }
+\end{verbatim}\normalsize 
+\index{diladmin.cc@{diladmin.cc}!generate_modify_element_FORM_interface@{generate\_\-modify\_\-element\_\-FORM\_\-interface}}
+\index{generate_modify_element_FORM_interface@{generate\_\-modify\_\-element\_\-FORM\_\-interface}!diladmin.cc@{diladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool generate\_\-modify\_\-element\_\-FORM\_\-interface ({\bf String\-List} $\ast$ {\em qlist} = NULL)}\label{diladmin_8cc_a10}
+
+
+
+
+Definition at line 705 of file diladmin.cc.
+
+References DIL\_\-entry::elbyid(), generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-entry\_\-content(), generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-entry\_\-parameters(), Detailed\_\-Items\_\-List::Get\_\-All\_\-DIL\_\-ID\_\-File\_\-Parameters(), Detailed\_\-Items\_\-List::Get\_\-All\_\-Topical\_\-DIL\_\-Parameters(), PLLRoot$<$ DIL\_\-entry $>$::head(), Detailed\_\-Items\_\-List::list, DIL\_\-ID::valid(), and VOUT.
+
+Referenced by Detect\_\-Form\_\-Input().
+
+
+
+\footnotesize\begin{verbatim}705                                                                        {
+706 // generates an HTML FORM interface that enables modification of elements
+707 // of a DIL entry. The DIL entry is given by a DILID variable in qlist.
+708   int dilididx = qlist->contains("DILID");
+709   if (dilididx<0) return false;
+710   DIL_ID dilid((*qlist)[dilididx].after('='));
+711   if (!dilid.valid()) return false;
+712   if (calledbyforminput) VOUT << "</PRE><!-- "; // clean up HTML output (dil2al processing output can still be inspected by looking at the HTML source)
+713   Detailed_Items_List dilist;
+714   if (dilist.Get_All_DIL_ID_File_Parameters()<0) return false;
+715   if (!dilist.list.head()) return false;
+716   if (dilist.Get_All_Topical_DIL_Parameters(true)<0) return false;
+717   DIL_entry * de = dilist.list.head()->elbyid(dilid);
+718   if (!de) return false;
+719   VOUT << "<!-- comment out process output -->\n";
+720   generate_modify_element_FORM_interface_DIL_entry_content(de);
+721   VOUT << "<P>&nbsp;<P>\n<HR>\n<P>\n";
+722   generate_modify_element_FORM_interface_DIL_entry_parameters(de); //,dilist);
+723   VOUT << "<P>&nbsp;<P>\n";
+724   return true;
+725 }
+\end{verbatim}\normalsize 
+\index{diladmin.cc@{diladmin.cc}!generate_modify_element_FORM_interface_DIL_entry_content@{generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-entry\_\-content}}
+\index{generate_modify_element_FORM_interface_DIL_entry_content@{generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-entry\_\-content}!diladmin.cc@{diladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-entry\_\-content ({\bf DIL\_\-entry} $\ast$ {\em de})}\label{diladmin_8cc_a7}
+
+
+
+
+Definition at line 593 of file diladmin.cc.
+
+References absurl(), String::at(), DIL\_\-ID::chars(), DIL\_\-entry\_\-content::completion, DIL\_\-entry::content, DIL\_\-entry::Entry\_\-Text(), HTML\_\-get\_\-href(), HTML\_\-put\_\-href(), DIL\_\-entry::Is\_\-Plan\_\-Entry(), String::length(), PLAN\_\-ENTRY\_\-TYPE\_\-OUTCOME, RELLISTSDIR, DIL\_\-entry\_\-content::required, DIL\_\-entry\_\-content::valuation, and VOUT.
+
+Referenced by generate\_\-modify\_\-element\_\-FORM\_\-interface().
+
+
+
+\footnotesize\begin{verbatim}593                                                                               {
+594   // generates FORM components specific to editing the content elements of
+595   // a DIL entry
+596   VOUT << "<FORM METHOD=\"POST\" ACTION=\"/cgi-bin/dil2al\"><INPUT type=\"hidden\" name=\"dil2al\" value=\"MEi\">\n<P>\n";
+597   // ID
+598   VOUT << "<B>DIL ID# " << de->chars() << "</B> Content <INPUT type=\"hidden\" name=\"DILID\" value=\"" << de->chars() << "\">\n<P>\n";
+599   if (de->content) {
+600     VOUT << "<TABLE>\n";
+601     // valuation
+602     if (de->Is_Plan_Entry()==PLAN_ENTRY_TYPE_OUTCOME) VOUT << "<TR><TD ALIGN=RIGHT><B>desirability</B> = <TD>" << String((double) de->content->PLAN_OUTCOME_DESIRABILITY,"%.2f") << " <TD><INPUT type=\"text\" name=\"valuation\" maxlength=5><TD>&nbsp;\n<P>\n";
+603     else VOUT << "<TR><TD ALIGN=RIGHT>valuation = <TD>" << String((double) de->content->valuation,"%.2f") << " <TD><INPUT type=\"text\" name=\"valuation\" maxlength=5><TD>&nbsp;\n<P>\n";
+604     // completion ratio
+605     VOUT << "<TR><TD ALIGN=RIGHT>completion ratio = <TD>" << String((double) de->content->completion,"%.2f") << " <TD><INPUT type=\"text\" name=\"completion\" maxlength=5><TD>special completion values:\n<UL>\n<LI>-1 = obsolete\n<LI>-2 = replaced\n<LI>-3 = done differently\n<LI>-4 = no longer possible / did not come to pass\n</UL>\n<P>\n";
+606     // time required
+607     VOUT << "<TR><TD ALIGN=RIGHT>time required = <TD>" << String((double) (de->content->required/3600.0),"%.2f") << " <TD><INPUT type=\"text\" name=\"required\" maxlength=5><TD>&nbsp;\n<P>\n";
+608     VOUT << "</TABLE>\n";
+609   } else VOUT << "<B>No content found!</B>\n<P>\n";
+610   // text
+611   if (de->Entry_Text()) {
+612     String textstr(""),hrefurl,hreftext; int hrefstart,hrefend = 0,hrefnextend; 
+613     while ((hrefnextend=HTML_get_href(*(de->Entry_Text()),hrefend,hrefurl,hreftext,&hrefstart))>=0) {
+614       if (hrefstart>hrefend) textstr += de->Entry_Text()->at(hrefend,hrefstart-hrefend);
+615       hrefurl = absurl(basedir+RELLISTSDIR,hrefurl);
+616       textstr += HTML_put_href(hrefurl,hreftext);
+617       hrefend = hrefnextend;
+618     }
+619     if (de->Entry_Text()->length()>hrefend) textstr += de->Entry_Text()->at(hrefend,de->Entry_Text()->length()-hrefend);
+620     VOUT << textstr << "\n<P>\n";
+621     VOUT << "<TEXTAREA name=\"contenttext\" rows=\"20\" cols=\"80\">\n" << *(de->Entry_Text()) << "\n</TEXTAREA>\n<P>\n";
+622   }
+623   // close FORM
+624   VOUT << "<BR><INPUT type=\"submit\" value=\"Process Content\"> <INPUT type=\"reset\"></FORM>\n";
+625 }
+\end{verbatim}\normalsize 
+\index{diladmin.cc@{diladmin.cc}!generate_modify_element_FORM_interface_DIL_entry_parameters@{generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-entry\_\-parameters}}
+\index{generate_modify_element_FORM_interface_DIL_entry_parameters@{generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-entry\_\-parameters}!diladmin.cc@{diladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-entry\_\-parameters ({\bf DIL\_\-entry} $\ast$ {\em de})}\label{diladmin_8cc_a9}
+
+
+
+
+Definition at line 665 of file diladmin.cc.
+
+References DIL\_\-ID::chars(), DIL\_\-Superiors, DIL\_\-entry::elbyid(), generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-Superiors(), String::gsub(), HTML\_\-put\_\-href(), DIL\_\-entry::Is\_\-Plan\_\-Entry(), String\-List::length(), PLAN\_\-ENTRY\_\-TYPE\_\-OUTCOME, DIL\_\-entry::Projects(), read\_\-file\_\-into\_\-String(), DIL\_\-ID::valid(), and VOUT.
+
+Referenced by generate\_\-modify\_\-element\_\-FORM\_\-interface().
+
+
+
+\footnotesize\begin{verbatim}665                                                                                  { //, Detailed_Items_List & dilist) {
+666   // generates FORM components specific to editing the parameter elements of
+667   // a DIL entry
+668   bool isplanoutcome = (de->Is_Plan_Entry()==PLAN_ENTRY_TYPE_OUTCOME);
+669   VOUT << "<FORM METHOD=\"POST\" ACTION=\"/cgi-bin/dil2al\"><INPUT type=\"hidden\" name=\"dil2al\" value=\"MEi\">\n<P>\n";
+670   // ID
+671   VOUT << "<B>DIL ID# " << de->chars() << "</B> Parameters <INPUT type=\"hidden\" name=\"DILID\" value=\"" << de->chars() << "\">\n<P>\n";
+672   // ***I can add an interface to edit topic information here
+673   // Current superiors/projects that may be removed
+674   DIL_Superiors * dilsup = de->Projects(0);
+675   if (!dilsup) VOUT << "No current superior DIL entry references.\n<P>\n";
+676   else {
+677     VOUT << "<U>Current superior DIL ID references</U>:\n<P>\n<OL>\n";
+678     for (; (dilsup); dilsup = dilsup->Next()) {
+679       VOUT << "<LI>(remove <INPUT type=\"checkbox\" name=\"suprm__EQ__" << dilsup->al.title << "\">) " << HTML_put_href(dilsup->al.file,dilsup->al.title) << ": ";
+680       generate_modify_element_FORM_interface_DIL_Superiors(dilsup->Superiorbyid(),dilsup->al.title,isplanoutcome,dilsup);
+681     }
+682     VOUT << "</OL>\n<P>\nSelect references above to remove.\n<P>\n";
+683   }
+684   // Possible superiors to add
+685   String dilrefsupstr;
+686   if (!read_file_into_String(dilref,dilrefsupstr,false)) VOUT << "No superior DIL entries in " << dilref << " for possible addition.\n<P>\n";
+687   else {
+688     VOUT << "<U>DIL IDs referenced in " << dilref << "</U>:\n<P>\n<OL>\n";
+689     dilrefsupstr.gsub(BigRegex("Current[^f]*file..."),"");
+690     StringList dilrefsups(dilrefsupstr,'\n'); String supid;
+691     for (int i=0; i<dilrefsups.length(); i++) {
+692       supid = dilrefsups[i].after('#');
+693       DIL_ID did(supid);
+694       if (did.valid()) {
+695         VOUT << "<LI>" << HTML_put_href(dilrefsups[i],supid) << ": ";
+696         generate_modify_element_FORM_interface_DIL_Superiors(de->elbyid(did),supid,isplanoutcome);
+697       }
+698     }
+699     VOUT << "</OL>\n<P>\n<INPUT type=\"checkbox\" name=\"dilrefsups\"> Add these as superior DIL entries.\n<P>\n";
+700   }
+701   // close FORM
+702   VOUT << "<BR><INPUT type=\"submit\" value=\"Process Parameters\"> <INPUT type=\"reset\"></FORM>\n";
+703 }
+\end{verbatim}\normalsize 
+\index{diladmin.cc@{diladmin.cc}!generate_modify_element_FORM_interface_DIL_Superiors@{generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-Superiors}}
+\index{generate_modify_element_FORM_interface_DIL_Superiors@{generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-Superiors}!diladmin.cc@{diladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-Superiors ({\bf DIL\_\-entry} $\ast$ {\em sup}, {\bf String} {\em dilstr}, bool {\em isplanoutcome} = {\bf false}, DIL\_\-Superiors $\ast$ {\em dilsup} = NULL)}\label{diladmin_8cc_a8}
+
+
+
+
+Definition at line 627 of file diladmin.cc.
+
+References DIL\_\-Superiors, DILSUPS\_\-TD\_\-UNSPECIFIED, DILSUPS\_\-TDPROP\_\-FIXED, Elipsis\_\-At(), DIL\_\-entry::Entry\_\-Text(), HTML\_\-put\_\-form\_\-radio(), HTML\_\-remove\_\-tags(), remove\_\-whitespace(), time\_\-stamp(), and VOUT.
+
+Referenced by generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-entry\_\-parameters().
+
+
+
+\footnotesize\begin{verbatim}627                                                                                                                                                      {
+628   // shows superior data (where available) and provides input tags for data
+629   // entry
+630   if (!sup) VOUT << "*WARNING - This does not appear to be a valid reference!*\n";
+631   else {
+632     if (sup->Entry_Text()) {
+633       String suptext(*(sup->Entry_Text()));
+634       HTML_remove_tags(suptext);
+635       remove_whitespace(suptext);
+636       Elipsis_At(suptext,hierarchyexcerptlength);
+637       VOUT << suptext << '\n';
+638     } else VOUT << '\n';
+639   }
+640   VOUT << "<BR><TABLE>\n<TR><TD>";
+641   if (isplanoutcome) VOUT << "likelihood<TD>= ";
+642   else VOUT << "relevance<TD>= ";
+643   if (dilsup) VOUT << String((double) dilsup->relevance,"%.2f ");
+644   VOUT << "<TD><INPUT type=\"text\" name=\"" << dilstr << ".relevance\" maxlength=5><TD>(0.0 = unspecified)\n<TR><TD>unbounded importance<TD>= ";
+645   if (dilsup) VOUT << String((double) dilsup->unbounded,"%.2f ");
+646   VOUT << "<TD><INPUT type=\"text\" name=\"" << dilstr << ".unbounded\" maxlength=5><TD>(0.0 = unspecified)\n<TR><TD>bounded importance<TD>= ";
+647   if (dilsup) VOUT << String((double) dilsup->bounded,"%.2f ");
+648   VOUT << "<TD><INPUT type=\"text\" name=\"" << dilstr << ".bounded\" maxlength=5><TD>(0.0 = unspecified)\n<TR><TD>target date<TD>= ";
+649   bool tdvariable = true;
+650   if (dilsup) {
+651     tdvariable = (dilsup->tdproperty()!=DILSUPS_TDPROP_FIXED);
+652     if (dilsup->targetdate()==DILSUPS_TD_UNSPECIFIED) VOUT << "unspecified";
+653     else VOUT << time_stamp("%Y%m%d%H%M",dilsup->targetdate());
+654   }
+655   if (tdvariable) VOUT << "<TD><INPUT type=\"text\" name=\"" << dilstr << ".targetdate\" maxlength=12>";
+656   else VOUT << "<TD>(FIXED)";
+657   VOUT << "<TD>( -1 = unspecified) set property " << HTML_put_form_radio(dilstr+".fixed","fixed","fixed",!tdvariable) << ' ' << HTML_put_form_radio(dilstr+".fixed","variable","variable",tdvariable) << "\n<TR><TD>computed urgency<TD>= ";
+658   if (dilsup) VOUT << String((double) dilsup->urgency,"%.2f ");
+659   VOUT << "<TD><INPUT type=\"text\" name=\"" << dilstr << ".urgency\" maxlength=5><TD>(0.0 = unspecified)\n<TR><TD>computed priority<TD>= ";
+660   if (dilsup) VOUT << String((double) dilsup->priority,"%.2f ");
+661   VOUT << "<TD><INPUT type=\"text\" name=\"" << dilstr << ".priority\" maxlength=5><TD>(0.0 = unspecified)\n";
+662   VOUT << "</TABLE>\n";
+663 }
+\end{verbatim}\normalsize 
+\index{diladmin.cc@{diladmin.cc}!get_active_DIL_IDs@{get\_\-active\_\-DIL\_\-IDs}}
+\index{get_active_DIL_IDs@{get\_\-active\_\-DIL\_\-IDs}!diladmin.cc@{diladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool get\_\-active\_\-DIL\_\-IDs ({\bf String\-List} \& {\em idfileids}, unsigned long $\ast$ {\em resnumidfileids} = NULL)}\label{diladmin_8cc_a1}
+
+
+
+
+Definition at line 231 of file diladmin.cc.
+
+References EOUT, find\_\-in\_\-line(), find\_\-line(), pattern\_\-in\_\-line(), and res.
+
+Referenced by add\_\-new\_\-to\_\-DIL(), and get\_\-new\_\-DIL\_\-ID().
+
+
+
+\footnotesize\begin{verbatim}231                                                                                         {
+232 // obtains all DIL IDs from the DIL-by-ID file
+233 // optionally adds the number of IDs found to resnumidfileids
+234         const int LLEN = 10240;
+235         char lbuf[LLEN];
+236         String dilid[2];
+237         unsigned long numidfileids = 0;
+238         int res;
+239         ifstream df(idfile);
+240         if (df) {
+241                 if (!find_line(&df,"[<]!-- *dil2al: *DIL ID *begin *--[>]",lbuf,LLEN)) {
+242                         EOUT << "dil2al: Tag <!-- dil2al: DIL ID begin --> not found in " << idfile << "in get_active_DIL_IDs()\n";
+243                         return false;
+244                 }
+245                 do {
+246                         if ((res=find_in_line(&df,"[<]TR[>]",0,NULL,"[<]!-- *dil2al: *DIL ID *end *--[>]",lbuf,LLEN))==1) {
+247                                 res = find_in_line(&df,"[<]TD[^>]*[>][<]A +NAME=\"([.0-9]+)\"",2,dilid,"[<]TR[>]|[<]!-- *dil2al: *DIL ID *end *--[>]",lbuf,LLEN);
+248                                 if (res<-1) return false;
+249                                 idfileids[numidfileids++] = dilid[1];
+250                         } else {
+251                                 if (res>=-1) res=-1;
+252                                 else return false;
+253                         }
+254                 } while ((res>0) || ((res==0) && (!pattern_in_line("[<]!-- *dil2al: *DIL ID *end *--[>]",lbuf))));
+255                 df.close();
+256         } else {
+257                 EOUT << "dil2al: Unable to open DIL ID file " << idfile << "in get_active_DIL_IDs()\n";
+258                 return false;
+259         }
+260         if (resnumidfileids) (*resnumidfileids) += numidfileids;
+261         return true;
+262 }
+\end{verbatim}\normalsize 
+\index{diladmin.cc@{diladmin.cc}!get_new_DIL_ID@{get\_\-new\_\-DIL\_\-ID}}
+\index{get_new_DIL_ID@{get\_\-new\_\-DIL\_\-ID}!diladmin.cc@{diladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} get\_\-new\_\-DIL\_\-ID ()}\label{diladmin_8cc_a6}
+
+
+
+
+Definition at line 553 of file diladmin.cc.
+
+References EOUT, get\_\-active\_\-DIL\_\-IDs(), String\-List::get\_\-Next(), and time\_\-stamp().
+
+Referenced by dil2al\_\-commands(), and initialize\_\-new\_\-DIL\_\-TL().
+
+
+
+\footnotesize\begin{verbatim}553                         {
+554 // generates a new DIL ID based on the current time
+555 // and the next single decimal available with that
+556 // time stamp (in the unlikely event that there are
+557 // already 9 items with that time stamp, it will
+558 // try an ID based on another time stamp)
+559         // obtain all existing DIL IDs
+560         StringList idfileids;
+561         unsigned long numidfileids = 0;
+562         if (!get_active_DIL_IDs(idfileids,&numidfileids)) {
+563                 EOUT << "dil2al: Unable to obtain DIL IDs from " << idfile << '\n';
+564                 return "";
+565         }
+566         // generate a new time stamped DIL ID
+567         String newdilid;
+568         for (int loopescape=60; (loopescape); loopescape--) { 
+569                 String idtimestamp = time_stamp("%Y%m%d%H%M%S");
+570                 // try ID decimal indices
+571                 for (char decimalindex = '1'; decimalindex <= '9'; decimalindex++) {
+572                         newdilid = idtimestamp + '.' + decimalindex;
+573                         for (StringList * idfileentry = &idfileids; (idfileentry); idfileentry=idfileentry->get_Next()) {
+574                                 if (newdilid==(*idfileentry)[0]) {
+575                                         newdilid="";
+576                                         break;
+577                                 }
+578                         }
+579                         if (newdilid!="") break;
+580                 }
+581                 if (newdilid!="") break;
+582                 if (loopescape>1) {
+583 // #ifdef SYSV
+584 //                      poll((struct poll *) 0, (size_t) 0, 1000); /* 1000 msec */
+585 // #else
+586                         sleep(1); /* usleep(1000000L); 1000000 microsec */
+587 // #endif
+588                 }
+589         }
+590         return newdilid;
+591 }
+\end{verbatim}\normalsize 
+\index{diladmin.cc@{diladmin.cc}!modify_DIL_entry_target_date@{modify\_\-DIL\_\-entry\_\-target\_\-date}}
+\index{modify_DIL_entry_target_date@{modify\_\-DIL\_\-entry\_\-target\_\-date}!diladmin.cc@{diladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool modify\_\-DIL\_\-entry\_\-target\_\-date ({\bf DIL\_\-ID} {\em dilid}, time\_\-t {\em tdate})}\label{diladmin_8cc_a16}
+
+
+
+
+Definition at line 1050 of file diladmin.cc.
+
+References EOUT, PLLRoot$<$ DIL\_\-entry $>$::head(), Detailed\_\-Items\_\-List::list, PLL\_\-LOOP\_\-FORWARD, res, and Detailed\_\-Items\_\-List::Write\_\-to\_\-File().
+
+Referenced by modify\_\-DIL\_\-group\_\-target\_\-dates(), and Modify\_\-Element().
+
+
+
+\footnotesize\begin{verbatim}1050                                                               {
+1051 // modify the target date of dilid in all self- or superior-
+1052 // references (dilid can be initialized from a String) and
+1053 // write to DIL ID file
+1054 // Target dates are modified locally, without regard to target
+1055 // dates of superiors. If no target date was previously given,
+1056 // a set of parameters is created. The target date -1 indicates
+1057 // that target dates should be set to "?", i.e. unspecified.
+1058 // Modifications are made only if tdate differs from Target_Date().
+1059 // (Note: Use `modify_DIL_group_target_date()' to update the
+1060 // target date with minimal disturbances of relationships
+1061 // between dependencies and superiors within a group of DIL
+1062 // entries.)
+1063         // modify dilid target dates
+1064         Detailed_Items_List dilist;
+1065         if (!modify_DIL_entry_target_date(dilid,tdate,dilist)) return false;
+1066         // place new data and copy rest
+1067 #ifdef VERBOSEDEBUG
+1068         PLL_LOOP_FORWARD(DIL_entry,dilist.list.head(),1) {
+1069                 EOUT << e->chars();
+1070                 if (e->Projects(0)) EOUT << '\t' << e->Projects(0)->targetdate();
+1071                 EOUT << '\n';
+1072         }
+1073 #endif
+1074 #ifdef DEBUG
+1075         bool res = dilist.Write_to_File();
+1076         if (res) EOUT << "Modified DIL entry target date and stored to DIL ID file\n";
+1077         return res;
+1078 #else
+1079         return dilist.Write_to_File();
+1080 #endif
+1081 }
+\end{verbatim}\normalsize 
+\index{diladmin.cc@{diladmin.cc}!modify_DIL_entry_target_date@{modify\_\-DIL\_\-entry\_\-target\_\-date}}
+\index{modify_DIL_entry_target_date@{modify\_\-DIL\_\-entry\_\-target\_\-date}!diladmin.cc@{diladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool modify\_\-DIL\_\-entry\_\-target\_\-date ({\bf DIL\_\-ID} {\em dilid}, time\_\-t {\em tdate}, {\bf Detailed\_\-Items\_\-List} \& {\em dilist})}\label{diladmin_8cc_a15}
+
+
+
+
+Definition at line 976 of file diladmin.cc.
+
+References DIL\_\-ID::chars(), DILSUPS\_\-BND\_\-UNSPECIFIED, DILSUPS\_\-PRI\_\-UNSPECIFIED, DILSUPS\_\-REL\_\-UNSPECIFIED, DILSUPS\_\-UNB\_\-UNSPECIFIED, DILSUPS\_\-URG\_\-UNSPECIFIED, DIL\_\-entry::elbyid(), EOUT, Detailed\_\-Items\_\-List::Get\_\-All\_\-DIL\_\-ID\_\-File\_\-Parameters(), PLLRoot$<$ DIL\_\-entry $>$::head(), PLLRoot$<$ DIL\_\-entry $>$::length(), Detailed\_\-Items\_\-List::list, DIL\_\-entry::parameters, PLL\_\-LOOP\_\-FORWARD, DIL\_\-entry\_\-parameters::project\_\-append(), DIL\_\-entry::Projects(), DIL\_\-entry::Target\_\-Date(), time\_\-stamp(), and VOUT.
+
+
+
+\footnotesize\begin{verbatim}976                                                                                             {
+977 // modify the target date of dilid in all self- or superior-
+978 // references (dilid can be initialized from a String)
+979 // Target dates are modified locally, without regard to target
+980 // dates of superiors. If no target date was previously given,
+981 // a set of parameters is created. The target date -1 indicates
+982 // that target dates should be set to "?", i.e. unspecified.
+983 // If dilist is empty, Get_All_DIL_ID_File_Parameters() is called.
+984 // Modifications are made only if tdate differs from Target_Date().
+985 // (Note: Use `modify_DIL_group_target_date()' to update the
+986 // target date with minimal disturbances of relationships
+987 // between dependencies and superiors within a group of DIL
+988 // entries.)
+989 // *** perhaps there should be a way to `force' modification if
+990 //     it is used to ensure that the target date is local
+991         // get DIL parameter sets
+992         int entrynum;
+993 #ifdef DEBUGTIER1
+994         VOUT << "dil2al: [DEBUGTIER1] Modifying for DIL#" << dilid.chars() << " to tdate=" << tdate << " (" << time_stamp("%Y%m%d%H%M",tdate) << ")\n";
+995 #endif
+996         if (!dilist.list.head()) entrynum=dilist.Get_All_DIL_ID_File_Parameters();
+997         else entrynum=dilist.list.length();
+998         if (entrynum<=0) {
+999                 EOUT << "No DIL entries found in " << idfile << " in modify_DIL_entry_target_date(), continuing as is\n";
+1000                 return false;
+1001         }
+1002 #ifdef DEBUGTIER2
+1003         VOUT << "dil2al: [DEBUGTIER2] Modification progress: 1";
+1004 #endif
+1005         // get first entry in list
+1006         DIL_entry * de = dilist.list.head();
+1007         // if (!de) return false; // should never happen when entrynum>0
+1008         DIL_entry * did = de->elbyid(dilid);
+1009         if (!did) {
+1010                 EOUT << "DIL entry " << dilid << " not found in " << idfile << " in modify_DIL_entry_target_date(), continuing as is\n";
+1011                 return false;
+1012         }
+1013 #ifdef DEBUGTIER2
+1014         VOUT << ", 2";
+1015 #endif
+1016         if (did->Target_Date()!=tdate) { // modify only if different
+1017                 if (!did->parameters) {
+1018                         EOUT << "DIL entry " << dilid << " parameters not found in " << idfile << " in modify_DIL_entry_target_date(), continuing as is\n";
+1019                         return false;
+1020                 }
+1021 #ifdef DEBUGTIER2
+1022         VOUT << ", 3\n";
+1023 #endif
+1024                 // modify dilid target dates
+1025                 if (did->Projects(0)) PLL_LOOP_FORWARD(DIL_AL_List,did->Projects(0),1) {
+1026 #ifdef DEBUGTIER2
+1027                         VOUT << "e->targetdate = tdate\n";
+1028 #endif
+1029                         if (!e->set_targetdate(tdate)) VOUT << "Unable to modify FIXED target date of ref.#" << dilid << "->#" << e->al.title << '\n';
+1030                 } else if (tdate>=0) { // create self-reference for specified target date
+1031                         // *** Modify this if the data format changes
+1032 #ifdef DEBUGTIER2
+1033                         VOUT << "did->parameters->project_append\n";
+1034 #endif
+1035                         did->parameters->project_append(idfile+String('#')+did->chars(),did->chars(),DILSUPS_REL_UNSPECIFIED,DILSUPS_UNB_UNSPECIFIED,DILSUPS_BND_UNSPECIFIED,tdate,0,DILSUPS_URG_UNSPECIFIED,DILSUPS_PRI_UNSPECIFIED);
+1036                 }
+1037 #ifdef DEBUGTIER1
+1038                 VOUT << "dil2al: [DEBUGTIER1] Modification performed\n";
+1039 #endif
+1040         }
+1041 #ifdef DEBUGTIER2
+1042         else VOUT << ", target date already correct\n";
+1043 #endif
+1044 #ifdef DEBUG
+1045         EOUT << "Modified DIL entry target date\n";
+1046 #endif
+1047         return true;
+1048 }
+\end{verbatim}\normalsize 
+\index{diladmin.cc@{diladmin.cc}!modify_DIL_group_target_dates@{modify\_\-DIL\_\-group\_\-target\_\-dates}}
+\index{modify_DIL_group_target_dates@{modify\_\-DIL\_\-group\_\-target\_\-dates}!diladmin.cc@{diladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool modify\_\-DIL\_\-group\_\-target\_\-dates ({\bf Detailed\_\-Items\_\-List} \& {\em dilgroup}, bool {\em minfragmentation} = {\bf true})}\label{diladmin_8cc_a17}
+
+
+
+
+Definition at line 1083 of file diladmin.cc.
+
+References DIL\_\-AL\_\-List::al, DIL\_\-ID::chars(), DIL\_\-Superiors, DILSUPS\_\-BND\_\-UNSPECIFIED, DILSUPS\_\-PRI\_\-UNSPECIFIED, DILSUPS\_\-REL\_\-UNSPECIFIED, DILSUPS\_\-UNB\_\-UNSPECIFIED, DILSUPS\_\-URG\_\-UNSPECIFIED, PLLRoot$<$ DIL\_\-entry $>$::el(), DIL\_\-entry::elbyid(), EOUT, Detailed\_\-Items\_\-List::Get\_\-All\_\-DIL\_\-ID\_\-File\_\-Parameters(), PLLRoot$<$ DIL\_\-entry $>$::head(), PLLRoot$<$ DIL\_\-entry $>$::length(), Detailed\_\-Items\_\-List::list, DIL\_\-entry::Local\_\-Target\_\-Date(), modify\_\-DIL\_\-entry\_\-target\_\-date(), DIL\_\-entry::parameters, PLL\_\-LOOP\_\-FORWARD, PLL\_\-LOOP\_\-FORWARD\_\-NESTED, DIL\_\-entry\_\-parameters::project\_\-append(), DIL\_\-entry::Projects(), res, DIL\_\-AL\_\-List::set\_\-targetdate(), Detailed\_\-Items\_\-List::Sort\_\-by\_\-Target\_\-Date(), DIL\_\-entry::Target\_\-Date(), time\_\-stamp(), filetitle\_\-t::title, VOUT, and Detailed\_\-Items\_\-List::Write\_\-to\_\-File().
+
+Referenced by modify\_\-DIL\_\-group\_\-target\_\-dates\_\-cmd().
+
+
+
+\footnotesize\begin{verbatim}1083                                                                                                  {
+1084 // Adjust the target dates of DIL entries listed in dilgroup,
+1085 // utilizing propagation rules to minimize the number of
+1086 // locally specified target dates where superiors can be
+1087 // modified and are members of the group. Desired target dates
+1088 // are specified in dilgroup.list[i]->Projects(0)->_targetdate,
+1089 // so that they can be obtained through dilgroup.list[i]->Target_Date().
+1090 // A target date is not changed if it is the same as the
+1091 // entry's current Target_Date() or if -2 was specified.
+1092 // A target date specification of -1 implies that it will be
+1093 // set to `DILSUPS_TD_UNSPECIFIED'.
+1094 #ifdef DEBUG_REPORT_DEVIATIONS
+1095         int tdmodifdeviations = 0;
+1096 #endif
+1097         Detailed_Items_List dilist; DIL_entry * de, * did; time_t tdate;
+1098 #ifdef DEBUGTIER2
+1099         time_t * oldtargetdate;
+1100         if (!dilist.list.head()) dilist.Get_All_DIL_ID_File_Parameters();
+1101         oldtargetdate = new time_t[dilist.list.length()];
+1102         for (int i=0; i<dilist.list.length(); i++) oldtargetdate[i] = dilist.list.el(i)->Local_Target_Date(0);
+1103 #endif
+1104         if (minfragmentation) { // apply minimization rules
+1105 #ifdef DEBUGTIER2
+1106         VOUT << "dil2al: [DEBUGTIER2] Applying rules to minimize fragmentation\n";
+1107 #endif
+1108                 int entrynum=dilist.Get_All_DIL_ID_File_Parameters();
+1109                 if (entrynum<=0) {
+1110                         EOUT << "No DIL entries found in " << idfile << " in modify_DIL_group_target_dates(), continuing as is\n";
+1111                         return false;
+1112                 }
+1113                 DIL_entry * de = dilist.list.head();
+1114                 // sort dilgroup in reverse order of desired target dates
+1115                 // - thus superiors with the latest target date are updated first (minimizes insulations)
+1116                 DIL_entry ** e = dilgroup.Sort_by_Target_Date(); // traverse in reverse order, highest to lowest
+1117                 #define MODIFY_DIL_GROUP_TARGET_DATES_RETURN_WITH_CLEANUP(res) delete[] e; return res
+1118                 for (int i = dilgroup.list.length()-1; i>=0; i--) if ((tdate=e[i]->Local_Target_Date(0))>=-1) { // iterate through dilgroup members
+1119                         did = de->elbyid(*(e[i]));
+1120                         if (!did) {
+1121                                 EOUT << "DIL entry " << e[i]->chars() << " not found in " << idfile << " in modify_DIL_group_target_dates(), continuing as is\n";
+1122                                 MODIFY_DIL_GROUP_TARGET_DATES_RETURN_WITH_CLEANUP(false);
+1123                         }
+1124                         if (did->Projects(0)) PLL_LOOP_FORWARD_NESTED(DIL_Superiors,did->Projects(0),1,pe) { // iterate through corresponding dilist member superiors
+1125                                 // Note: Do this even if did->Target_Date()==tdate to insure that
+1126                                 //       did->Target_Date()==tdate will also be true after the
+1127                                 //       target dates of superiors may have been modified.
+1128                                 // *** can set local target date if pe refers to self
+1129                                 //     once superior references are pointer parameters
+1130                                 // set `local' target date specifications to desired target date
+1131                                 if (pe->targetdate()>=0) { 
+1132                                         if (!pe->set_targetdate(tdate)) VOUT << "Unable to modify FIXED target date of ref.#" << e[i]->chars() << "->#" << pe->al.title << '\n';
+1133                                 } else if (tdate>=0) {
+1134                                         if (pe->IsSelfReference()) {
+1135                                                 EOUT << "dil2al: Warning - Correcting self-reference without local target date in modify_DIL_group_target_dates\n()";
+1136                                                 if (!pe->set_targetdate(tdate)) VOUT << "Unable to modify FIXED target date of ref.#" << e[i]->chars() << "->#" << pe->al.title << '\n';
+1137                                         } else {
+1138                                                 DIL_ID peid(pe->al.title);
+1139                                                 DIL_entry * peg = dilgroup.list.head()->elbyid(peid); // can't use Superiorbyid() here, since getting in dilgroup
+1140                                                 time_t petdate = -1;
+1141                                                 if (peg) petdate = peg->Local_Target_Date(0); // to insure that code -1 is detected
+1142                                                 DIL_entry * sup = pe->Superiorbyid();
+1143                                                 if (!sup) {
+1144                                                         EOUT << "dil2al: DIL entry superior with ID #" << pe->al.title << " not found in modify_DIL_group_target_dates(), continuing as is\n";
+1145                                                         continue;
+1146                                                 }
+1147                                                 // if superior pe of e is in dilgroup with same desired TD
+1148                                                 // then pe will take care of update (beware of loops)
+1149                                                 if (petdate==tdate) continue;
+1150                                                 // if pe->Target_Date() is earlier than desired
+1151                                                 // then set desired locally (don't alter superior, since
+1152                                                 // that could affect other dependencies of that superior)
+1153                                                 if (sup->Target_Date()<tdate) { // insulate from superior's target date
+1154                                                         if (!pe->set_targetdate(tdate)) VOUT << "Unable to modify FIXED target date of ref.#" << e[i]->chars() << "->#" << pe->al.title << '\n';
+1155                                                 } else {
+1156                                                         // if pe in dilgroup and pe desired < e desired
+1157                                                         // and relevance not 1.0 or unspecified then set locally
+1158                                                         // else warn incompatibility for fully relevant dependency
+1159                                                         if ((peg) && (petdate<tdate)) {
+1160                                                                 if ((pe->relevance<1.0) && (pe->relevance!=DILSUPS_REL_UNSPECIFIED)) {
+1161                                                                         // set locally, because superior will be set to earlier
+1162                                                                         if (!pe->set_targetdate(tdate)) VOUT << "Unable to modify FIXED target date of ref.#" << e[i]->chars() << "->#" << pe->al.title << '\n';
+1163                                                                         continue;
+1164                                                                 } else EOUT << "dil2al: Warning - earlier target date requested for superior with ID #" << pe->al.title << " than for dependency with ID # " << e[i]->chars() << " in modify_DIL_group_target_dates(), continuing\n";
+1165                                                         }
+1166                                                         // if pe is last superior and Target_Date() is still
+1167                                                         // > desired then set locally
+1168                                                         if (!pe->Next()) if (did->Target_Date()>tdate) {
+1169                                                                 if (!pe->set_targetdate(tdate)) VOUT << "Unable to modify FIXED target date of ref.#" << e[i]->chars() << "->#" << pe->al.title << '\n';
+1170                                                         }
+1171                                                 }
+1172                                         }
+1173                                 }
+1174                         } else if (tdate>=0) { // unless setting to unspecified, make a self-reference
+1175                                 // *** Modify this if the data format changes
+1176                                 if (!did->parameters) did->parameters = new DIL_entry_parameters(*did);
+1177                                 did->parameters->project_append(idfile+'#'+did->chars(),did->chars(),DILSUPS_REL_UNSPECIFIED,DILSUPS_UNB_UNSPECIFIED,DILSUPS_BND_UNSPECIFIED,tdate,0,DILSUPS_URG_UNSPECIFIED,DILSUPS_PRI_UNSPECIFIED);
+1178                         }
+1179                 }
+1180                 // Double-check to insure that target dates are detected as requested
+1181                 for (int i = dilgroup.list.length()-1; i>=0; i--) if ((tdate=e[i]->Local_Target_Date(0))>=0) { // iterate through dilgroup members
+1182                         did = de->elbyid(*(e[i]));
+1183                         if (did->Target_Date()!=tdate) {
+1184 #ifdef DEBUG_REPORT_DEVIATIONS
+1185                                 tdmodifdeviations++; // useful when testing functional or rule-based approach above
+1186 #endif
+1187                                 if (did->Projects(0)) {
+1188                                         if (did->Target_Date()>tdate) {
+1189                                                 if (!did->Projects(0)->set_targetdate(tdate)) VOUT << "Unable to modify FIXED target date of ref.#" << e[i]->chars() << "->#" << did->Projects(0)->al.title << '\n';
+1190                                                 else VOUT << "Forcing target date adjustment at DIL entry #" << did->chars() << " superior reference " << did->Projects(0)->al.title << '\n';
+1191                                         } else PLL_LOOP_FORWARD_NESTED(DIL_Superiors,did->Projects(0),1,pe) { // iterate through corresponding dilist member superiors
+1192                                                 if (pe->targetdate() < tdate) {
+1193                                                         if (!pe->set_targetdate(tdate)) VOUT << "Unable to modify FIXED target date of ref.#" << e[i]->chars() << "->#" << pe->al.title << '\n';
+1194                                                         else VOUT << "Forcing target date adjustment at DIL entry #" << did->chars() << " superior reference " << pe->al.title << '\n';
+1195                                                 }
+1196                                         }
+1197                                 }
+1198                         }
+1199                 }
+1200                 // Final test of detected target dates achieved
+1201                 for (int i = dilgroup.list.length()-1; i>=0; i--) if ((tdate=e[i]->Local_Target_Date(0))>=0) // iterate through dilgroup members
+1202                         if (de->elbyid(*(e[i]))->Target_Date()!=tdate) EOUT << "dil2al: Unable to set target date for DIL#" << did->chars() << " in modify_DIL_group_target_dates(), continuing as is\n";
+1203                 delete[] e;
+1204         } else PLL_LOOP_FORWARD(DIL_entry,dilgroup.list.head(),1) { // modify target dates directly
+1205                 tdate = e->Local_Target_Date(0); // not using Target_Date() to insure -1 and -2 codes are detected
+1206                 if (tdate>=-1) if (!modify_DIL_entry_target_date(*e,tdate,dilist)) return false;
+1207         }
+1208 #ifdef DEBUGTIER2
+1209         int i = 0;
+1210         PLL_LOOP_FORWARD(DIL_entry,dilist.list.head(),1) {
+1211                 if (e->Local_Target_Date(0)!=oldtargetdate[i]) cout << "dil2al: [DEBUGTIER2] Changed DIL entry #" << e->chars() << ", old=" << oldtargetdate[i] << " (" << time_stamp("%Y%m%d%H%M",oldtargetdate[i]) << "), new=" << e->Local_Target_Date(0) << " (" << time_stamp("%Y%m%d%H%M",e->Local_Target_Date(0)) << ") TD=" << time_stamp("%Y%m%d%H%M",e->Target_Date()) << '\n';
+1212                 i++;
+1213         }
+1214         delete[] oldtargetdate;
+1215 #endif
+1216 #ifdef DEBUG_REPORT_DEVIATIONS
+1217         EOUT << "dil2al: [DEBUG_REPORT_DEVIATIONS] Target Date Modification Deviations = " << tdmodifdeviations << '\n';
+1218 #endif
+1219 #ifdef DEBUG
+1220         bool res = dilist.Write_to_File();
+1221         if (res) EOUT << "Modified DIL group target dates and stored to DIL ID file\n";
+1222         return res;
+1223 #else
+1224         return dilist.Write_to_File();
+1225 #endif
+1226 /*
+1227 An alternative approach
+1228 -----------------------
+1229 Note that the concept below needs to be worked out for the case of muiltiple
+1230 superiors at each level, i.e. when tracking through the superiors structure,
+1231 all path possibilities must be marked/remembered, instead of just using pe as
+1232 a roadblock. Due to this, and the depth-search itself, it is unclear if this
+1233 functional approach is more or less efficient than the rule-based one. It also
+1234 remains to be seen if this approach follows all the same rules as the rule-based
+1235 approach.
+1236 
+1237 From furthest TD to nearest TD in list of DIL entries:
+1238 
+1239 isgroupsuperior()
+1240         if (!pe) return false;
+1241         e = dilgroup.list.head()->elbyid(*pe);
+1242         if (!e) return false;
+1243         if (e->Target_Date()!=tdate) return false;
+1244         return true;
+1245 
+1246 while Target_Date()!=tdate
+1247         pe = NULL
+1248         while (!isgroupsuperior(pe)) pe = Target_Date_Specified(pe);
+1249         if (pe->Projects(0)) pe->Projects(0)->_targetdate = tdate;
+1250         else pe->parameters->add_project(...,tdate,...);
+1251 */
+1252 }
+\end{verbatim}\normalsize 
+\index{diladmin.cc@{diladmin.cc}!modify_DIL_group_target_dates_cmd@{modify\_\-DIL\_\-group\_\-target\_\-dates\_\-cmd}}
+\index{modify_DIL_group_target_dates_cmd@{modify\_\-DIL\_\-group\_\-target\_\-dates\_\-cmd}!diladmin.cc@{diladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool modify\_\-DIL\_\-group\_\-target\_\-dates\_\-cmd (bool {\em minfragmentation}, {\bf String\-List} $\ast$ {\em qlist} = NULL)}\label{diladmin_8cc_a18}
+
+
+
+
+Definition at line 1254 of file diladmin.cc.
+
+References ANSI\_\-BOLD\_\-OFF, ANSI\_\-BOLD\_\-ON, ANSI\_\-UNDERLINE\_\-OFF, ANSI\_\-UNDERLINE\_\-ON, String::at(), String::before(), DIL\_\-ID::chars(), DILSUPS\_\-BND\_\-UNSPECIFIED, DILSUPS\_\-PRI\_\-UNSPECIFIED, DILSUPS\_\-REL\_\-UNSPECIFIED, DILSUPS\_\-UNB\_\-UNSPECIFIED, DILSUPS\_\-URG\_\-UNSPECIFIED, DIN, PLLRoot$<$ DIL\_\-entry $>$::el(), String::gsub(), String::index(), String\-List::length(), String::length(), PLLRoot$<$ DIL\_\-entry $>$::link\_\-before(), Detailed\_\-Items\_\-List::list, DIL\_\-entry::Local\_\-Target\_\-Date(), modify\_\-DIL\_\-group\_\-target\_\-dates(), DIL\_\-entry::parameters, DIL\_\-entry\_\-parameters::project\_\-append(), read\_\-data\_\-from\_\-stream(), RX\_\-Search\_\-Safe(), Big\-Regex::sublen(), Big\-Regex::subpos(), time\_\-stamp(), time\_\-stamp\_\-time(), and VOUT.
+
+Referenced by Detect\_\-Form\_\-Input(), and Modify\_\-Element().
+
+
+
+\footnotesize\begin{verbatim}1254                                                                                          {
+1255 // Command line interface to modify_DIL_group_target_dates().
+1256 // Reads pairs of DIL entry IDs and desired target dates (with
+1257 // optional -2 code to indicate no target date modification, and
+1258 // -1 to unspecify local target date parameters).
+1259 // Data is read from the DIN stream.
+1260 // If qlist is not NULL then HTML form data is obtained from qlist.
+1261         const BigRegex td("^TD\\([0-9]+[.][0-9]+\\)=");
+1262         const BigRegex tdchkbx("^TDCHKBX\\([0-9]+[.][0-9]+\\)=");
+1263         const BigRegex pairsep("[ \t,:;]+");
+1264         const BigRegex nonnumerals("[^-0-9]");
+1265         String modifdata;
+1266         if (qlist) { // HTML form interface
+1267                 StringList exclude; int excludenum = 0;
+1268                 int qnum = qlist->length()-1; // *** empty element at end of StringList
+1269                 for (int i = 0; i<qnum; i++) {
+1270                 // *** Beware: This code assumes that DIL entry IDs do not
+1271                 //     occur as subsets of other DIL entry IDs, i.e. it
+1272                 //     assumes that a move to IDs with more digits would imply
+1273                 //     prepending older IDs with 0s. This could of course be
+1274                 //     handled by a preprocessing loop.
+1275 #ifdef DEBUGTIER2
+1276                         cout << '$' << (*qlist)[i] << '\n';
+1277 #endif
+1278                         if ((*qlist)[i].contains("TDupdate=")) {
+1279                                 if ((*qlist)[i].after('=')=="direct") minfragmentation = false;
+1280                                 else minfragmentation = true;
+1281                         } else if ((*qlist)[i].contains(td)) {
+1282                                 modifdata += (*qlist)[i].at(td.subpos(1),td.sublen(1)) + ' ';
+1283                                 String tdstr = (*qlist)[i].after('='); if (tdstr.length()==0) tdstr = "-2";
+1284                                 modifdata += tdstr + '\n';
+1285                         } else if ((*qlist)[i].contains(tdchkbx)) {
+1286                                 String chkbxid = (*qlist)[i].at(tdchkbx.subpos(1),tdchkbx.sublen(1));
+1287                                 String tdstr = (*qlist)[i].after('=');
+1288                                 if (tdstr=="noupdate") { // set corresponding desired target date to code -2
+1289                                         exclude[excludenum] = chkbxid;
+1290                                         excludenum++;
+1291                                 }
+1292                         }
+1293                 }
+1294                 for (int i = 0; i<excludenum; i++) modifdata.gsub(BigRegex(RX_Search_Safe(exclude[i])+" [-0-9]*"),exclude[i]+" -2");
+1295         } else {
+1296                 if (useansi) VOUT << ANSI_BOLD_ON;
+1297                 VOUT << "Enter group of DIL entries to consider for target date modification.\n";
+1298                 if (useansi) VOUT << ANSI_BOLD_OFF;
+1299                 VOUT << "Rows of DIL entry ID and desired target date pairs.\n\
+1300 Special desired target date codes:\n\
+1301 -1 = set to `unspecified', -2 = no desired target date (but modifiable).\n\
+1302 Separate pairs with any number of spaces, tabs, commas, colons or semicolons.\n\
+1303 End of File (Ctrl+D) or a line stating `EOF' completes data entry.\n\n";
+1304                 if (useansi) VOUT << ANSI_UNDERLINE_ON;
+1305                 VOUT << "DIL entry ID#\tdesired target date\n";
+1306                 if (useansi) VOUT << ANSI_UNDERLINE_OFF;
+1307                 read_data_from_stream(DIN,modifdata,"EOF");
+1308         }
+1309         StringList modiflist(modifdata,'\n');
+1310         int groupsize = modiflist.length()-1; // *** last entry empty when initializing from string with separator
+1311         Detailed_Items_List dilgroup; DIL_entry * de; String did; time_t tdate;
+1312 #ifdef DEBUGTIER2
+1313         cout << "Content-Type: text/plain\n\ndil2al: [DEBUGTIER2]\n";
+1314         for (int j=0; j<groupsize; j++) {
+1315                 String & s = modiflist[j];
+1316                 cout << s << '\n';
+1317         }
+1318         cout << "+++\n";
+1319 #endif
+1320         for (int i=0; i<groupsize; i++) {
+1321                 did = modiflist[i].after(pairsep); if (did.index(nonnumerals)>=0) did = did.before(nonnumerals);
+1322                 tdate = time_stamp_time(did);
+1323                 did = modiflist[i].before(pairsep);
+1324                 de = new DIL_entry(dilgroup,did);
+1325                 de->parameters = new DIL_entry_parameters(*de);
+1326                 de->parameters->project_append('#'+did,did,DILSUPS_REL_UNSPECIFIED,DILSUPS_UNB_UNSPECIFIED,DILSUPS_BND_UNSPECIFIED,tdate,0,DILSUPS_URG_UNSPECIFIED,DILSUPS_PRI_UNSPECIFIED);
+1327                 dilgroup.list.link_before(de);
+1328         }
+1329 #ifdef DEBUGTIER1
+1330         if (minfragmentation) cout << "dil2al: [DEBUGTIER1] Minimum fragmentation\n"; else cout << "dil2al: [DEBUGTIER1] Direct\n";
+1331 #endif
+1332 #ifdef DEBUGTIER2
+1333         for (int i=0; i<groupsize; i++) {
+1334                 cout << "dil2al: [DEBUGTIER2] " << dilgroup.list.el(i)->chars() << '\t';
+1335                 if (dilgroup.list.el(i)->Local_Target_Date(0)<0) cout << dilgroup.list.el(i)->Local_Target_Date(0) << '\n';
+1336                 else cout << time_stamp("%Y%m%d%H%M",dilgroup.list.el(i)->Local_Target_Date(0)) << '\n';
+1337         }
+1338 #endif
+1339         return modify_DIL_group_target_dates(dilgroup,minfragmentation);
+1340 }
+\end{verbatim}\normalsize 
+\index{diladmin.cc@{diladmin.cc}!modify_element_through_FORM_interface@{modify\_\-element\_\-through\_\-FORM\_\-interface}}
+\index{modify_element_through_FORM_interface@{modify\_\-element\_\-through\_\-FORM\_\-interface}!diladmin.cc@{diladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool modify\_\-element\_\-through\_\-FORM\_\-interface ({\bf String\-List} $\ast$ {\em qlist} = NULL)}\label{diladmin_8cc_a12}
+
+
+
+
+Definition at line 776 of file diladmin.cc.
+
+References absurl(), DIL\_\-ID::chars(), String\-List::contains(), DIL2AL\_\-CONDITIONAL\_\-ERROR\_\-RETURN, DIL\_\-Superiors, DIL\_\-entry::elbyid(), Detailed\_\-Items\_\-List::Get\_\-All\_\-DIL\_\-ID\_\-File\_\-Parameters(), get\_\-double(), String\-List::get\_\-Next(), String::gsub(), PLLRoot$<$ DIL\_\-entry $>$::head(), String\-List::length(), PLLRoot$<$ PLLType $>$::link\_\-before(), Detailed\_\-Items\_\-List::list, String\-List::List\_\-Index(), modify\_\-element\_\-through\_\-FORM\_\-interface\_\-DIL\_\-Superiors(), DIL\_\-entry::Projects(), read\_\-file\_\-into\_\-String(), DIL\_\-ID::str(), update\_\-DIL\_\-entry\_\-elements(), update\_\-DIL\_\-entry\_\-parameter\_\-elements(), DIL\_\-ID::valid(), and VOUT.
+
+Referenced by Detect\_\-Form\_\-Input().
+
+
+
+\footnotesize\begin{verbatim}776                                                                       {
+777 // receives information about element modifications in a DIL entry through
+778 // an HTML FORM interface. The DIL entry is given by a DILID variable in qlist.
+779   if (!qlist) return false;
+780   // for (int i = 0; i<qlist->length(); i++) VOUT << (*qlist)[i] << '\n';
+781   int dilididx = qlist->contains("DILID");
+782   if (dilididx<0) return false;
+783   DIL_ID dilid((*qlist)[dilididx].after('='));
+784   if (!dilid.valid()) return false;
+785   // content modifications
+786   double valuation = 0.0, completion = 0.0, required = 0.0;
+787   bool updateval = false, updatecomp = false, updatereq = false;
+788   String valstr;
+789   if ((dilididx=qlist->contains("valuation="))>=0) valuation=get_double((*qlist)[dilididx].after('='),valuation,&updateval); // modify valuation
+790   if ((dilididx=qlist->contains("completion="))>=0) completion=get_double((*qlist)[dilididx].after('='),completion,&updatecomp); // modify completion ratio
+791   if ((dilididx=qlist->contains("required="))>=0) required=get_double((*qlist)[dilididx].after('='),required,&updatereq); // modify time required
+792   if (updateval || updatecomp || updatereq) {
+793     if (!update_DIL_entry_elements(dilid.chars(),valuation,updateval,completion,updatecomp,required,updatereq)) {
+794       VOUT << "Unable to modify content elements of DIL entry\n";
+795       return false;
+796     }
+797     return true;
+798   }
+799   // parameters modifications
+800   Detailed_Items_List dilist; int entrynum;
+801   DIL2AL_CONDITIONAL_ERROR_RETURN((entrynum=dilist.Get_All_DIL_ID_File_Parameters())<=0,"No DIL entries found in "+idfile+" in modify_element_through_FORM_interface()\n");
+802   DIL_entry * de;
+803   DIL2AL_CONDITIONAL_ERROR_RETURN(!(de = dilist.list.head()->elbyid(dilid)),"The DIL entry "+dilid.str()+" does not appear to exist in modify_element_through_FORM_interface()\n");
+804   PLLRoot<DIL_Superiors> addsups;
+805   // detect add
+806   if ((dilididx=qlist->contains("dilrefsups="))>=0) { // add superiors specified in dilref
+807     String dilrefsupstr;
+808     if (!read_file_into_String(dilref,dilrefsupstr,false)) VOUT << "No superior DIL entries in " << dilref << " for possible addition.\n";
+809     else {
+810       dilrefsupstr.gsub(BigRegex("Current[^f]*file..."),"");
+811       StringList dilrefsups(dilrefsupstr,'\n'); String supid;
+812       for (int i=0; i<dilrefsups.length(); i++) {
+813         supid = dilrefsups[i].after('#');
+814         DIL_ID did(supid);
+815         if (did.valid()) {
+816           DIL_entry * sup = dilist.list.head()->elbyid(did);
+817           if (sup) {
+818             DIL_Superiors * dilsup = new DIL_Superiors(*de);
+819             dilsup->al.title = supid;
+820             dilsup->al.file = absurl(idfile,'#'+supid);
+821             modify_element_through_FORM_interface_DIL_Superiors(dilididx,qlist,supid,dilsup);
+822             addsups.link_before(dilsup);
+823             continue;
+824           }
+825         }
+826         VOUT << supid << "does not appear to be a valid reference!\n";
+827       }
+828     }
+829   }
+830   // detect remove
+831   StringList removesups; int removesupsnum = 0;
+832   for (StringList * qlistptr = qlist->List_Index(qlist->contains("suprm=")); (qlistptr); ) {
+833     removesups[removesupsnum] = (*qlistptr)[0].after('=');
+834     if (removesups[removesupsnum].contains('=')) removesups[removesupsnum] = removesups[removesupsnum].before('=');
+835     removesupsnum++;
+836     if (!(qlistptr=qlistptr->get_Next())) break;
+837     qlistptr = qlistptr->List_Index(qlistptr->contains("suprm="));
+838   }
+839   // detect modify
+840   for (DIL_Superiors * dilsup = de->Projects(0); dilsup; dilsup = dilsup->Next())
+841     modify_element_through_FORM_interface_DIL_Superiors(dilididx,qlist,dilsup->al.title,dilsup);
+842   if (!update_DIL_entry_parameter_elements(dilist,dilid,addsups,&removesups,removesupsnum)) {
+843     VOUT << "Unable to modify parameter elements of DIL entry\n";
+844     return false;
+845   }
+846   return true;
+847 }
+\end{verbatim}\normalsize 
+\index{diladmin.cc@{diladmin.cc}!modify_element_through_FORM_interface_DIL_Superiors@{modify\_\-element\_\-through\_\-FORM\_\-interface\_\-DIL\_\-Superiors}}
+\index{modify_element_through_FORM_interface_DIL_Superiors@{modify\_\-element\_\-through\_\-FORM\_\-interface\_\-DIL\_\-Superiors}!diladmin.cc@{diladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void modify\_\-element\_\-through\_\-FORM\_\-interface\_\-DIL\_\-Superiors (int \& {\em dilididx}, {\bf String\-List} $\ast$ {\em qlist}, {\bf String} {\em supid}, DIL\_\-Superiors $\ast$ {\em dilsup})}\label{diladmin_8cc_a11}
+
+
+
+
+Definition at line 727 of file diladmin.cc.
+
+References String\-List::contains(), DIL\_\-Superiors, DILSUPS\_\-TDPROP\_\-FIXED, String::empty(), get\_\-double(), String::matches(), time\_\-stamp(), time\_\-stamp\_\-time(), and VOUT.
+
+Referenced by modify\_\-element\_\-through\_\-FORM\_\-interface().
+
+
+
+\footnotesize\begin{verbatim}727                                                                                                                                    {
+728 // test if specific parameters of a DIL_Superiors object should be
+729 // modified and make the modification if possible
+730 // Note that according to the reference at
+731 // http://www.w3.org/TR/REC-html40/interact/forms.html#successful-controls
+732 // an empty text input field may or may not be treated as a successful
+733 // control by the user agent (e.g. w3m), so that particular user agents
+734 // or their particular versions may behave differently. For that reason,
+735 // even if the QUERY_STRING contains some of the parameter tags tested
+736 // below, there must also be a test for a valid value.
+737   if ((!qlist) || (!dilsup)) return;
+738   bool validvalue;
+739   if ((dilididx=qlist->contains(supid+".relevance="))>=0) {
+740     dilsup->relevance = get_double((*qlist)[dilididx].after('='),dilsup->relevance,&validvalue);
+741     if (validvalue && verbose) VOUT << "  " << supid << ".relevance = " << String((double) dilsup->relevance,"%.2f\n");
+742   }
+743   if ((dilididx=qlist->contains(supid+".unbounded="))>=0) {
+744     dilsup->unbounded = get_double((*qlist)[dilididx].after('='),dilsup->unbounded,&validvalue);
+745     if (validvalue && verbose) VOUT << "  " << supid << ".unbounded = " << String((double) dilsup->unbounded,"%.2f\n");
+746   }
+747   if ((dilididx=qlist->contains(supid+".bounded="))>=0) {
+748     dilsup->bounded = get_double((*qlist)[dilididx].after('='),dilsup->bounded,&validvalue);
+749     if (validvalue && verbose) VOUT << "  " << supid << ".bounded = " << String((double) dilsup->bounded,"%.2f\n");
+750   }
+751   if ((dilididx=qlist->contains(supid+".targetdate="))>=0) {
+752     String newtargetdate = (*qlist)[dilididx].after('=');
+753     if ((!newtargetdate.empty()) && (newtargetdate.matches(BRXint))) {
+754       if (!dilsup->set_targetdate(time_stamp_time(newtargetdate))) VOUT << "Unable to modify targetdate, targetdate property=FIXED.\n";
+755       else if (verbose) VOUT << "  " << supid << ".targetdate = " << time_stamp("%Y%m%d%H%M\n",dilsup->targetdate());
+756     }
+757   }
+758   if ((dilididx=qlist->contains(supid+".fixed=fixed"))>=0) {
+759     dilsup->set_tdproperty(DILSUPS_TDPROP_FIXED);
+760     if (verbose) VOUT << "  " << supid << ".tdproperty = fixed\n";
+761   }
+762   if ((dilididx=qlist->contains(supid+".fixed=variable"))>=0) {
+763     dilsup->set_tdproperty(0);
+764     if (verbose) VOUT << "  " << supid << ".tdproperty = variable\n";
+765   }
+766   if ((dilididx=qlist->contains(supid+".urgency="))>=0) {
+767     dilsup->urgency = get_double((*qlist)[dilididx].after('='),dilsup->urgency,&validvalue);
+768     if (validvalue && verbose) VOUT << "  " << supid << ".urgency = " << String((double) dilsup->urgency,"%.2f\n");
+769   }
+770   if ((dilididx=qlist->contains(supid+".priority="))>=0) {
+771     dilsup->priority = get_double((*qlist)[dilididx].after('='),dilsup->priority,&validvalue);
+772     if (validvalue && verbose) VOUT << "  " << supid << ".priority = " << String((double) dilsup->priority,"%.2f\n");
+773   }
+774 }
+\end{verbatim}\normalsize 
+\index{diladmin.cc@{diladmin.cc}!send_dil_to_DIL@{send\_\-dil\_\-to\_\-DIL}}
+\index{send_dil_to_DIL@{send\_\-dil\_\-to\_\-DIL}!diladmin.cc@{diladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool send\_\-dil\_\-to\_\-DIL ({\bf String} {\em dilfile})}\label{diladmin_8cc_a5}
+
+
+
+
+Definition at line 477 of file diladmin.cc.
+
+References add\_\-new\_\-to\_\-DIL(), String::at(), backup\_\-and\_\-rename(), copy\_\-until\_\-line(), create\_\-new\_\-DIL(), String::del(), DIN, EOUT, generate\_\-tag(), String::gsub(), String::index(), read\_\-data\_\-from\_\-stream(), RELLISTSDIR, RX\_\-Search\_\-Safe(), Big\-Regex::sublen(), Big\-Regex::subpos(), substring\_\-from\_\-line(), and VOUT.
+
+Referenced by dil2al\_\-commands().
+
+
+
+\footnotesize\begin{verbatim}477                                      {
+478         const int LLEN = 10240;
+479         char lbuf[LLEN];
+480         String dilid[2], dilfilename;
+481         // read entry data into string buffer (to avoid confusion in case stdin and create file requests)
+482         String dentrybuf;
+483         if (verbose) VOUT << "Reading DIL entry content\n";
+484         read_data_from_stream(DIN,dentrybuf,"@End of DIL entry@");
+485         // get inline tag information and remove those inline tags
+486         String supinfotag("DESUP"); supinfotag = RX_Search_Safe(generate_tag(supinfotag)); // get standardized tag
+487         supinfotag.gsub(BigRegex(":[    ]*"),":[%_%]*\\(");
+488         supinfotag.gsub(" ","[  ]+");
+489         supinfotag.gsub("%_%","         ");
+490         supinfotag.gsub("SUPid","[.0-9]+");
+491         supinfotag.gsub(BigRegex("SI[^,)]*"),"[^,)]*");
+492         supinfotag.gsub(BigRegex("\\(.\\)@"),"_1\\)@",'_');
+493         BigRegex si(supinfotag); StringList supinfo; int supnum = 0;
+494         while (dentrybuf.index(si)>=0) {
+495                 supinfo[supnum] = dentrybuf.at(si.subpos(1),si.sublen(1)); // get superior id and information
+496                 dentrybuf.del(si.subpos(0),si.sublen(0)); // remove tag
+497                 supnum++;
+498         }
+499         // get name of DIL file regardless of whether it was a relative or absolute path
+500         if (!substring_from_line("([^/]+)$",2,dilid,(const char *) dilfile)) {
+501                 EOUT << "dil2al: Unable to parse name from DIL file path in send_dil_to_DIL()\n";
+502                 return false;
+503         } else dilfilename = dilid[1];
+504         dilfile=basedir+RELLISTSDIR+dilfilename;
+505         if (verbose) VOUT << "Sending DIL entry to " << dilfile << '\n';
+506         ifstream df(dilfile);
+507         if (!df) {
+508                 // optionally create new DIL file
+509                 cout << "DIL file " << dilfilename << " does not exist, create? (y/N) ";
+510                 cin.getline(lbuf,LLEN);
+511                 if ((lbuf[0]=='y') || (lbuf[0]=='Y')) {
+512                         if (!create_new_DIL(dilfilename)) {
+513                                 EOUT << "dil2al: Unable to create new DIL file " << dilfilename << " in send_dil_to_DIL()\n";
+514                                 return false;
+515                         }
+516                         df.open(dilfile);
+517                 } else return false;
+518         }
+519         if (df) {
+520                 ofstream ndf(dilfile+".new");
+521                 if (!ndf) {
+522                         EOUT << "dil2al: Unable to create " << dilfile << ".new in send_dil_to_DIL()\n";
+523                         return false;
+524                 }
+525                 if (verbose) VOUT << "Copying DIL to " << dilfile << ".new and adding new entry\n";
+526                 // copy content up to bottom of DIL table
+527                 if (copy_until_line(&df,&ndf,"[<]!-- *dil2al: *DIL *end *--[>]",lbuf,LLEN)<=0) {
+528                         EOUT << "dil2al: End of DIL table ``<!-- dil2al: DIL end -->'' not found in send_dil_to_DIL()\n";
+529                         return false;
+530                 }
+531                 // add new DIL content
+532                 ndf << dentrybuf;
+533                 // place end of DIL table marker
+534                 ndf << lbuf << endl;
+535                 // copy rest of DIL file
+536                 ndf << df.rdbuf();
+537                 df.close();
+538                 ndf.close();
+539         } else {
+540                 EOUT << "dil2al: Unable to open new DIL file " << dilfilename << " in send_dil_to_DIL()\n";
+541                 return false;
+542         }
+543         if (!backup_and_rename(dilfile,"DIL")) return false;
+544         StringList * supinfoptr = NULL;
+545         if (supinfo[0]!="") supinfoptr = &supinfo;
+546         if (!add_new_to_DIL(dilfile,supinfoptr)) {
+547                 EOUT << "dil2al: Unable to add new item from " << dilfile << " to DIL in send_dil_to_DIL()\n";
+548                 return false;
+549         }
+550         return true;
+551 }
+\end{verbatim}\normalsize 
+\index{diladmin.cc@{diladmin.cc}!Show_DIL_Hierarchy@{Show\_\-DIL\_\-Hierarchy}}
+\index{Show_DIL_Hierarchy@{Show\_\-DIL\_\-Hierarchy}!diladmin.cc@{diladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Show\_\-DIL\_\-Hierarchy ({\bf DIL\_\-entry} $\ast$ {\em topde}, {\bf DIL\_\-Visualize} \& {\em dv}, const int {\em maxdepth}, int {\em depth} = 0, double {\em likelihood} = DILSUPS\_\-REL\_\-UNSPECIFIED)}\label{diladmin_8cc_a20}
+
+
+
+
+Definition at line 1388 of file diladmin.cc.
+
+References DIL\_\-Visualize::Attach\_\-Level\_\-Data(), DIL\_\-ID::chars(), DIL\_\-Visualize::Detach\_\-Level\_\-Data(), DILSUPS\_\-REL\_\-UNSPECIFIED, EOUT, DIL\_\-Visualize::get\_\-cumlikelihood(), PLLHandle$<$ DIL\_\-entry $>$::head(), DIL\_\-Visualize::ldroot, PLLRoot$<$ DIL\_\-Hierarchy\_\-Level\_\-Data $>$::link\_\-before(), PLL\_\-LOOP\_\-FORWARD, DIL\_\-entry::Projects(), DIL\_\-Visualize::set\_\-cumlikelihood(), DIL\_\-Visualize::Visualize\_\-Element(), and DIL\_\-Visualize::Visualize\_\-Not\-Shown().
+
+Referenced by Tabbed\_\-DIL\_\-Hierarchy(), Tabbed\_\-FORM\_\-DIL\_\-Hierarchy(), Tabbed\_\-FORM\_\-DIL\_\-Hierarchy\_\-full(), and Tabbed\_\-HTML\_\-DIL\_\-Hierarchy().
+
+
+
+\footnotesize\begin{verbatim}1388                                                                                                                                                {
+1389 // create a visual representation of a DIL hierarchy from a DIL entry
+1390 // topde must be part of a valid Detailed_Items_List or at least part
+1391 // of a valid PLLHandle<DIL_entry> list.
+1392 #ifdef DEBUG_PLAN_ENTRY
+1393   EOUT << "Show " << topde->chars() << '\n'; EOUT.flush();
+1394 #endif
+1395   DIL_Hierarchy_Level_Data ld(*topde,likelihood);
+1396   dv.ldroot.link_before(&ld); // link into list of level data in this depth first process
+1397   dv.Attach_Level_Data(ld);
+1398   dv.Visualize_Element(topde,depth);
+1399   dv.Detach_Level_Data();
+1400   depth++;
+1401   int numdependencies = 0; double thislevelcumlikelihood = dv.get_cumlikelihood();
+1402   if (reversehierarchy) {
+1403     DIL_AL_List * topdeproj = topde->Projects(0);
+1404     if (topdeproj) PLL_LOOP_FORWARD(DIL_AL_List,topdeproj,1) if (!(e->Superiorbyid()==topde)) {
+1405       if (maxdepth>=depth) {
+1406         dv.set_cumlikelihood(thislevelcumlikelihood);
+1407         Show_DIL_Hierarchy(e->Superiorbyid(),dv,maxdepth,depth,e->PLAN_OUTCOME_LIKELIHOOD);
+1408       } else numdependencies++;
+1409     }
+1410   } else {
+1411     PLL_LOOP_FORWARD(DIL_entry,topde->head(),1) if (e->Is_Direct_Dependency_Of(topde)) {
+1412       if (maxdepth>=depth) Show_DIL_Hierarchy(e,dv,maxdepth,depth);
+1413       else numdependencies++;
+1414     }
+1415   }
+1416   // the following is used to convey benefit/risk information for PLAN
+1417   // entries and if maxdepth was reached and there are further dependencies
+1418   dv.Attach_Level_Data(ld);
+1419   dv.Visualize_NotShown(numdependencies,depth);
+1420   dv.Detach_Level_Data();
+1421   // ld is automatically removed from list of level data in this depth first process
+1422 }
+\end{verbatim}\normalsize 
+\index{diladmin.cc@{diladmin.cc}!superior_reference_info@{superior\_\-reference\_\-info}}
+\index{superior_reference_info@{superior\_\-reference\_\-info}!diladmin.cc@{diladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} superior\_\-reference\_\-info ({\bf String\-List} $\ast$ {\em supinfoptr})}\label{diladmin_8cc_a2}
+
+
+
+
+Definition at line 264 of file diladmin.cc.
+
+References String\-List::length(), res, and VOUT.
+
+Referenced by add\_\-new\_\-to\_\-DIL().
+
+
+
+\footnotesize\begin{verbatim}264                                                         {
+265 // add superior DIL entry references to DIL-by-ID entry
+266         String res("</A> (");
+267         if (supinfoptr) {
+268                 int suprefsadded = 0;
+269                 res += "1.0)\n<TD>";
+270                 for (int sr=0; sr<supinfoptr->length(); sr++) if ((*supinfoptr)[sr]!="") {
+271                         if (suprefsadded>0) res += ", ";
+272                         res += (*supinfoptr)[sr];
+273                         suprefsadded++;
+274                 }
+275                 res += "\n\n";
+276                 if (verbose) VOUT << suprefsadded << " superior DIL entry references added\n";
+277         } else res += "?.?)\n<TD>&nbsp;\n\n";
+278         return res;
+279 }
+\end{verbatim}\normalsize 
+\index{diladmin.cc@{diladmin.cc}!Tabbed_DIL_Hierarchy@{Tabbed\_\-DIL\_\-Hierarchy}}
+\index{Tabbed_DIL_Hierarchy@{Tabbed\_\-DIL\_\-Hierarchy}!diladmin.cc@{diladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} Tabbed\_\-DIL\_\-Hierarchy ({\bf String} {\em dilidstr}, int {\em maxdepth} = 50)}\label{diladmin_8cc_a21}
+
+
+
+
+Definition at line 1424 of file diladmin.cc.
+
+References String::after(), String::before(), DIL\_\-entry::elbyid(), String::empty(), EOUT, Detailed\_\-Items\_\-List::Get\_\-All\_\-DIL\_\-ID\_\-File\_\-Parameters(), Detailed\_\-Items\_\-List::Get\_\-All\_\-Topical\_\-DIL\_\-Parameters(), PLLRoot$<$ DIL\_\-entry $>$::head(), Detailed\_\-Items\_\-List::list, DIL\_\-Visualize\_\-with\_\-Tabs::Output(), DIL\_\-Visualize\_\-with\_\-Tabs::Output\_\-Content(), Show\_\-DIL\_\-Hierarchy(), DIL\_\-ID::valid(), and write\_\-file\_\-from\_\-String().
+
+Referenced by DIL\_\-Hierarchy\_\-cmd().
+
+
+
+\footnotesize\begin{verbatim}1424                                                                 {
+1425 // visualize a DIL hierarchy starting at dilid with tabs indicating depth
+1426         DIL_Visualize_with_Tabs dv;
+1427         // 3. Get optional expressions that must occur in DIL entry content text
+1428         String expressions(dilidstr.after('#'));
+1429         if (!expressions.empty()) dilidstr = dilidstr.before('#');
+1430         // 4. Get optional ContentFile reference
+1431         String contentfile(dilidstr.after('c'));
+1432         if (!contentfile.empty()) dilidstr = dilidstr.before('c');
+1433         DIL_ID dilid(dilidstr);
+1434         if (!dilid.valid()) return String("");
+1435         Detailed_Items_List dilist;
+1436         dilist.Get_All_DIL_ID_File_Parameters();
+1437         if (!contentfile.empty()) dilist.Get_All_Topical_DIL_Parameters(true);
+1438         if (dilist.list.head()) Show_DIL_Hierarchy(dilist.list.head()->elbyid(dilid),dv,maxdepth);
+1439         if (!contentfile.empty()) if (!write_file_from_String(contentfile,dv.Output_Content(),"DIL Hierarchy Content")) EOUT << "dil2al: Unable to write " << contentfile << "in Tabbed_DIL_Hierarchy(), continuing as is\n";
+1440         return dv.Output();
+1441 }
+\end{verbatim}\normalsize 
+\index{diladmin.cc@{diladmin.cc}!Tabbed_FORM_DIL_Hierarchy@{Tabbed\_\-FORM\_\-DIL\_\-Hierarchy}}
+\index{Tabbed_FORM_DIL_Hierarchy@{Tabbed\_\-FORM\_\-DIL\_\-Hierarchy}!diladmin.cc@{diladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} Tabbed\_\-FORM\_\-DIL\_\-Hierarchy ({\bf String} {\em dilidstr}, int {\em maxdepth} = 50)}\label{diladmin_8cc_a24}
+
+
+
+
+Definition at line 1488 of file diladmin.cc.
+
+References String::after(), DIL\_\-Visualize\_\-with\_\-FORM\_\-Tabs::Append(), String::before(), DIL\_\-entry::elbyid(), String::empty(), EOUT, Detailed\_\-Items\_\-List::Get\_\-All\_\-DIL\_\-ID\_\-File\_\-Parameters(), Detailed\_\-Items\_\-List::Get\_\-All\_\-Topical\_\-DIL\_\-Parameters(), PLLRoot$<$ DIL\_\-entry $>$::head(), String\-List::length(), Detailed\_\-Items\_\-List::list, DIL\_\-Visualize\_\-with\_\-FORM\_\-Tabs::Output(), DIL\_\-Visualize\_\-with\_\-FORM\_\-Tabs::Output\_\-Content(), Show\_\-DIL\_\-Hierarchy(), Tabbed\_\-FORM\_\-DIL\_\-Hierarchy\_\-full(), DIL\_\-ID::valid(), VOUT, and write\_\-file\_\-from\_\-String().
+
+Referenced by DIL\_\-Hierarchy\_\-cmd().
+
+
+
+\footnotesize\begin{verbatim}1488                                                                      {
+1489 // Visualize a DIL hierarchy starting at dilid with tabs indicating depth
+1490 // including HREFs and other HTML code, while HTML head and tail code are
+1491 // left to the content in which the extracted hierarchy is embedded.
+1492 // A comment is included that enables commenting out of process output simply
+1493 // by appending "<!-- " to the head code.
+1494 // Note that since standard output does not know which file the text may
+1495 // be embedded in, HREF file references are absolute. Post-processing may
+1496 // convert those to relative references.
+1497 // This output presents FORM check boxes and a "submit" button that extracts
+1498 // checked DIL IDs with the aid of dil2al form processing.
+1499 // There is also a "new hierarchy" button that uses the checked boxes as
+1500 // the top items in new hierarchies to visualize.
+1501 #ifdef DEBUG_HIERARCHY_EXPRESSIONS
+1502   VOUT << "&&& Tabbed_FORM_DIL_Hierarchy: dilidstr = " << dilidstr << '\n';
+1503 #endif
+1504   DIL_Visualize_with_FORM_Tabs dv;
+1505   // 3. Get optional expressions that must occur in DIL entry content text
+1506   String expressions(dilidstr.after('#'));
+1507   if (!expressions.empty()) dilidstr = dilidstr.before('#');
+1508   // 4. Get optional ContentFile reference
+1509   String contentfile(dilidstr.after('c'));
+1510   if (!contentfile.empty()) dilidstr = dilidstr.before('c');
+1511   // dilidstr may now contain no, one or several DIL IDs
+1512   Detailed_Items_List dilist;
+1513   dilist.Get_All_DIL_ID_File_Parameters();
+1514   dilist.Get_All_Topical_DIL_Parameters(true); // always get for FORM hierarchy
+1515   if (!dilist.list.head()) return String("");
+1516   if (dilidstr.empty()) { // full hierarchy
+1517     VOUT << "No specific DIL ID, creating full hierarchy\n";
+1518     // *** Is implemented in ~/doc/html/lists.html: maxdepth = 5; // reduced depth for full hierarchy
+1519     Tabbed_FORM_DIL_Hierarchy_full(dilist,dv,maxdepth,expressions);
+1520   } else {
+1521         StringList dilidlist(dilidstr,'+'); int dilidnum = dilidlist.length();
+1522         DIL_ID dilid;
+1523         for (int i = 0; i<dilidnum; i++) {
+1524                 dilid = dilidlist[i];
+1525                 if (dilid.valid()) {
+1526                         Show_DIL_Hierarchy(dilist.list.head()->elbyid(dilid),dv,maxdepth);
+1527                         dv.Append("<HR>\n");
+1528                 }
+1529         }
+1530         if (!expressions.empty()) Tabbed_FORM_DIL_Hierarchy_full(dilist,dv,maxdepth,expressions);
+1531   }
+1532   if (!contentfile.empty()) if (!write_file_from_String(contentfile,dv.Output_Content(),"DIL Hierarchy Content")) EOUT << "dil2al: Unable to write " << contentfile << "in Tabbed_HTML_DIL_Hierarchy(), continuing as is\n";
+1533   // prepare the FORM output
+1534   String formoutputstr("<!-- comment out process output --><B>Maximum Depth = ");
+1535   formoutputstr += String((long) maxdepth)+"</B>\n<FORM METHOD=\"GET\" ACTION=\"/cgi-bin/dil2al\"><INPUT type=\"hidden\" name=\"dil2al\" value=\"D\">\n<PRE>\n"+dv.Output()+"</PRE>\n<P>\n<INPUT type=\"radio\" name=\"processcmd\" value=\"extract\"> Extract\n<BR><INPUT type=\"radio\" name=\"processcmd\" value=\"newhierarchy\" checked> New Hierarchy with depth: <INPUT type=\"text\" name=\"maxdepth\" value=\"" + String((long) maxdepth) + "\" maxlength=5> and excerpt length: <INPUT type=\"text\" name=\"setpar__EQ__hierarchyexcerptlength\" value=\""+String((long) hierarchyexcerptlength)+"\" maxlength=5> <INPUT type=\"radio\" name=\"setpar\" value=\"noreversehierarchy\"";
+1536   if (!reversehierarchy) formoutputstr += " checked";
+1537   formoutputstr += "> top-down <INPUT type=\"radio\" name=\"setpar\" value=\"reversehierarchy hierarchyplanparse\"";
+1538   if (reversehierarchy) formoutputstr += " checked";
+1539   formoutputstr += "> bottom-up <INPUT type=\"checkbox\" name=\"expressions\" value=\"%40begin%3A%20PLAN%20DIL%20TEMPLATE\"";
+1540   if (!expressions.empty()) formoutputstr += " checked";
+1541   formoutputstr += "> PLAN entries only\n<BR><INPUT type=\"submit\" value=\"Process\"> <INPUT type=\"reset\"></FORM>\n";
+1542   return formoutputstr;
+1543 }
+\end{verbatim}\normalsize 
+\index{diladmin.cc@{diladmin.cc}!Tabbed_FORM_DIL_Hierarchy_full@{Tabbed\_\-FORM\_\-DIL\_\-Hierarchy\_\-full}}
+\index{Tabbed_FORM_DIL_Hierarchy_full@{Tabbed\_\-FORM\_\-DIL\_\-Hierarchy\_\-full}!diladmin.cc@{diladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Tabbed\_\-FORM\_\-DIL\_\-Hierarchy\_\-full ({\bf Detailed\_\-Items\_\-List} \& {\em dilist}, {\bf DIL\_\-Visualize\_\-with\_\-FORM\_\-Tabs} \& {\em dv}, const int {\em maxdepth}, {\bf String} \& {\em expressions})}\label{diladmin_8cc_a23}
+
+
+
+
+Definition at line 1467 of file diladmin.cc.
+
+References Detailed\_\-Items\_\-List::Entry\_\-Has\_\-Dependencies(), String\-List::first\_\-contained\_\-in(), PLLRoot$<$ DIL\_\-entry $>$::head(), String\-List::length(), Detailed\_\-Items\_\-List::list, PLL\_\-LOOP\_\-FORWARD, DIL\_\-entry::Set\_\-Semaphores(), Show\_\-DIL\_\-Hierarchy(), URI\_\-unescape(), and VOUT.
+
+Referenced by Tabbed\_\-FORM\_\-DIL\_\-Hierarchy().
+
+
+
+\footnotesize\begin{verbatim}1467                                                                                                                                                {
+1468   // Show full hierarchy with possible restriction to roots containing certain expressions
+1469   StringList expressionlist(expressions,'+');
+1470   int expressionnum = expressionlist.length()-1; // since an empty extra item is initialized in the StringList
+1471   for (int i = 0; i<expressionnum; i++) expressionlist[i] = URI_unescape(expressionlist[i]);
+1472 #ifdef DEBUG_HIERARCHY_EXPRESSIONS
+1473   for (int i = 0; i<expressionnum; i++) VOUT << "&&& expressionlist[" << i << "] = " << expressionlist[i] << '\n';
+1474 #endif
+1475   if (dilist.list.head()) dilist.list.head()->Set_Semaphores(1); // initialize all as valid to show
+1476   // if specific expressions are selected, test for their presence
+1477   if (expressionnum>0) PLL_LOOP_FORWARD(DIL_entry,dilist.list.head(),1) {
+1478     String * cptr = e->Entry_Text();
+1479     if (!cptr) e->Set_Semaphore(0);
+1480     else if (expressionlist.first_contained_in(*cptr)<0) e->Set_Semaphore(0);
+1481   }
+1482   // show the desired entries of the full DIL hierarchy
+1483   if (reversehierarchy) PLL_LOOP_FORWARD(DIL_entry,dilist.list.head(),1) {
+1484     if ((e->Get_Semaphore()>0) && (!dilist.Entry_Has_Dependencies(e,true))) Show_DIL_Hierarchy(e,dv,maxdepth);
+1485   } else PLL_LOOP_FORWARD(DIL_entry,dilist.list.head(),1) if ((e->Get_Semaphore()>0) && (!e->Has_Superiors(true))) Show_DIL_Hierarchy(e,dv,maxdepth);
+1486 }
+\end{verbatim}\normalsize 
+\index{diladmin.cc@{diladmin.cc}!Tabbed_HTML_DIL_Hierarchy@{Tabbed\_\-HTML\_\-DIL\_\-Hierarchy}}
+\index{Tabbed_HTML_DIL_Hierarchy@{Tabbed\_\-HTML\_\-DIL\_\-Hierarchy}!diladmin.cc@{diladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} Tabbed\_\-HTML\_\-DIL\_\-Hierarchy ({\bf String} {\em dilidstr}, int {\em maxdepth} = 50)}\label{diladmin_8cc_a22}
+
+
+
+
+Definition at line 1443 of file diladmin.cc.
+
+References String::after(), String::before(), DIL\_\-entry::elbyid(), String::empty(), EOUT, Detailed\_\-Items\_\-List::Get\_\-All\_\-DIL\_\-ID\_\-File\_\-Parameters(), Detailed\_\-Items\_\-List::Get\_\-All\_\-Topical\_\-DIL\_\-Parameters(), PLLRoot$<$ DIL\_\-entry $>$::head(), Detailed\_\-Items\_\-List::list, DIL\_\-Visualize\_\-with\_\-HTML\_\-Tabs::Output(), DIL\_\-Visualize\_\-with\_\-HTML\_\-Tabs::Output\_\-Content(), Show\_\-DIL\_\-Hierarchy(), DIL\_\-ID::valid(), and write\_\-file\_\-from\_\-String().
+
+Referenced by DIL\_\-Hierarchy\_\-cmd().
+
+
+
+\footnotesize\begin{verbatim}1443                                                                      {
+1444 // visualize a DIL hierarchy starting at dilid with tabs indicating depth
+1445 // including HREFs and other HTML code, while HTML head and tail code are
+1446 // left to the content in which the extracted hierarchy is embedded
+1447 // Note that since standard output does not know which file the text may
+1448 // be embedded in, HREF file references are absolute. Post-processing may
+1449 // convert those to relative references.
+1450         DIL_Visualize_with_HTML_Tabs dv;
+1451         // 3. Get optional expressions that must occur in DIL entry content text
+1452         String expressions(dilidstr.after('#'));
+1453         if (!expressions.empty()) dilidstr = dilidstr.before('#');
+1454         // 4. Get optional ContentFile reference
+1455         String contentfile(dilidstr.after('c'));
+1456         if (!contentfile.empty()) dilidstr = dilidstr.before('c');
+1457         DIL_ID dilid(dilidstr);
+1458         if (!dilid.valid()) return String("");
+1459         Detailed_Items_List dilist;
+1460         dilist.Get_All_DIL_ID_File_Parameters();
+1461         if (!contentfile.empty()) dilist.Get_All_Topical_DIL_Parameters(true);
+1462         if (dilist.list.head()) Show_DIL_Hierarchy(dilist.list.head()->elbyid(dilid),dv,maxdepth);
+1463         if (!contentfile.empty()) if (!write_file_from_String(contentfile,dv.Output_Content(),"DIL Hierarchy Content")) EOUT << "dil2al: Unable to write " << contentfile << "in Tabbed_HTML_DIL_Hierarchy(), continuing as is\n";
+1464         return "<PRE>\n"+dv.Output()+"</PRE>\n";
+1465 }
+\end{verbatim}\normalsize 
+\index{diladmin.cc@{diladmin.cc}!update_DIL_entry_elements@{update\_\-DIL\_\-entry\_\-elements}}
+\index{update_DIL_entry_elements@{update\_\-DIL\_\-entry\_\-elements}!diladmin.cc@{diladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool update\_\-DIL\_\-entry\_\-elements ({\bf String} {\em dilid}, double {\em valuation}, bool {\em updateval}, double {\em completion}, bool {\em updatecomp}, double {\em required}, bool {\em updatereq}, time\_\-t {\em tdiff} = -1)}\label{diladmin_8cc_a13}
+
+
+
+
+Definition at line 849 of file diladmin.cc.
+
+References String::after(), String::before(), EOUT, String::from(), Detailed\_\-Items\_\-List::Get\_\-All\_\-DIL\_\-ID\_\-File\_\-Parameters(), get\_\-file\_\-in\_\-list(), String::gsub(), PLLRoot$<$ DIL\_\-entry $>$::head(), HTML\_\-get\_\-table\_\-cell(), HTML\_\-put\_\-table\_\-cell(), HTML\_\-remove\_\-tags(), String::index(), Detailed\_\-Items\_\-List::list, PLL\_\-LOOP\_\-FORWARD, RX\_\-Search\_\-Safe(), String::SEARCH\_\-END, Text\_\-File\_\-Buffers::tf, Text\_\-File\_\-Buffers::tfname, Text\_\-File\_\-Buffers::tfnum, DIL\_\-entry::Topics(), VOUT, and write\_\-file\_\-from\_\-String().
+
+Referenced by Modify\_\-Element(), modify\_\-element\_\-through\_\-FORM\_\-interface(), and stop\_\-TL\_\-chunk().
+
+
+
+\footnotesize\begin{verbatim}849                                                                                                                                                                        {
+850   // update the elements of all instances of dilid, as
+851   // referenced in the DIL-by-ID file
+852   // When tdiff>=0, this is used to indicate new time spent on the DIL
+853   // entry during a task chunk instead of the value in completion.
+854   // The simplest update uses the difference between current time
+855   // and the start time of the most recent task log chunk to compute
+856   // the update. More sophisticated updates apply the rules
+857   // specified in dil2al.html#20000815153735.1.
+858   // get DIL references of DIL entry
+859   Detailed_Items_List dilist; int entrynum;
+860   if ((entrynum=dilist.Get_All_DIL_ID_File_Parameters(&dilid))<=0) {
+861     EOUT << "DIL entry " << dilid << " not found in " << idfile << " in update_DIL_entry_completion_ratio(), continuing as is\n";
+862     return false;
+863   }
+864   if (entrynum>1) VOUT << "Warning - DIL entry with ID " << dilid << " occurs " << entrynum << " times in " << idfile << '\n';
+865   DIL_entry * de = dilist.list.head(); int dilidx;
+866   PLL_LOOP_FORWARD(DIL_Topical_List,de->Topics(0),1) {
+867     // get DIL file and update completion ratio of entry
+868     if ((dilidx=get_file_in_list(e->dil.file,dilist.tf,dilist.tfname,dilist.tfnum))<0)
+869       EOUT << "dil2al: DIL file " << e->dil.file << " not found in update_DIL_entry_elements(), continuing as is\n";
+870     else {
+871       // find DIL ID
+872       String & dilstr = dilist.tf[dilidx];
+873       int dilpos, dilentryend; String cellparams, cellcontent;
+874       if ((dilpos=dilstr.index(BigRegex("[<]!--[        ]*dil2al:[      ]*DIL begin[    ]*--[>]"),String::SEARCH_END))<0) {
+875         EOUT << "dil2al: Missing DIL begin marker in DIL file " << e->dil.file << " in update_DIL_entry_elements(), continuing as is\n";
+876         continue;
+877       }
+878       if ((dilpos=dilstr.index(BigRegex(("[<][Aa][      ]+[Nn][Aa][Mm][Ee][     ]*=[    ]*\""+RX_Search_Safe(dilid))+'"'),dilpos))<0) {
+879         EOUT << "dil2al: DIL entry with ID " << dilid << " not found in DIL file " << e->dil.file << " in update_DIL_entry_elements(), continuing as is\n";
+880         continue;
+881       }
+882       if ((dilentryend=HTML_get_table_cell(dilstr,dilpos,cellparams,cellcontent,&dilpos))<0) {
+883         EOUT << "dil2al: Missing data at DIL entry with ID " << dilid << " in DIL file " << e->dil.file << " in update_DIL_entry_elements(), continuing as is\n";
+884         continue;
+885       }
+886       if (verbose) VOUT << "Setting:\n";
+887       if (updateval) { // modify valuation
+888         String vstr(valuation,"_1 %4.2f");
+889         if (verbose) VOUT << "  valuation = " << vstr << '\n';
+890         cellcontent.gsub(BigRegex("\\(valuation:[^-0-9  ]*\\)[  ]*\\([0-9]+[.][0-9]+\\|-\\)"),vstr,'_');
+891       }
+892       if (updatecomp) { // modify completion ratio
+893         String crstr;
+894         if (tdiff>=0) {
+895           if (!updatereq) {
+896             cellparams = cellcontent.after(BigRegex("time[      ]+required[^:   ]*[:    ]")); HTML_remove_tags(cellparams);
+897             required = atof(cellparams);
+898           }
+899           crstr = cellparams.after(BigRegex("completion[        ]+ratio[^:      ]*[:    ]"));
+900           completion = atof(crstr);
+901           if (completion<0.0) EOUT << "dil2al: DIL entry with ID " << dilid << " in DIL file " << e->dil.file << " has a completion status with special meaning that cannot be updated in update_DIL_entry_elements(), continuing as is\n";
+902           else {
+903             if (required==0.0) EOUT << "dil2al: No time required indicated for DIL entry with ID " << dilid << " in DIL file " << e->dil.file << " in update_DIL_entry_elements(), continuing as is\n";
+904             else completion += (((double) tdiff)/(ceil(required*60.0)*60.0));
+905           }
+906         }
+907         crstr = String(completion,"_1 %4.2f");
+908         if (verbose) VOUT << "  completion ratio = " << crstr << '\n';
+909         cellcontent.gsub(BigRegex("\\(completion[       ]+ratio:[^-0-9  ]*\\)[  ]*\\([0-9]+[.][0-9]+\\|-\\)"),crstr,'_');
+910       }
+911       if (updatereq) { // modify required time
+912         String rstr(required,"_1 %4.2f");
+913         if (verbose) VOUT << "  required = " << rstr << '\n';
+914         cellcontent.gsub(BigRegex("\\(time[     ]+required:[^-0-9       ]*\\)[  ]*\\([0-9]+[.][0-9]+\\|-\\)"),rstr,'_');
+915       }
+916       // paste modified DIL entry into topical DIL file
+917       String newdilstr(dilstr.before(dilpos));
+918       newdilstr += HTML_put_table_cell("",cellcontent,true) + dilstr.from(dilentryend);
+919       // write modified DIL file
+920       if (!write_file_from_String(e->dil.file,newdilstr,"DIL ``"+e->dil.title+"''")) return false;
+921     }
+922   }
+923 #ifdef DEBUG
+924   EOUT << "Completed DIL updates\n";
+925 #endif
+926   return true;
+927 }
+\end{verbatim}\normalsize 
+\index{diladmin.cc@{diladmin.cc}!update_DIL_entry_parameter_elements@{update\_\-DIL\_\-entry\_\-parameter\_\-elements}}
+\index{update_DIL_entry_parameter_elements@{update\_\-DIL\_\-entry\_\-parameter\_\-elements}!diladmin.cc@{diladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool update\_\-DIL\_\-entry\_\-parameter\_\-elements ({\bf Detailed\_\-Items\_\-List} \& {\em dilist}, {\bf DIL\_\-ID} {\em dilid}, {\bf PLLRoot}$<$ DIL\_\-Superiors $>$ \& {\em addsups}, {\bf String\-List} $\ast$ {\em removesups}, int {\em removesupsnum})}\label{diladmin_8cc_a14}
+
+
+
+
+Definition at line 929 of file diladmin.cc.
+
+References DIL\_\-ID::chars(), DIL\_\-Superiors, DIL\_\-entry::elbyid(), EOUT, PLLRoot$<$ PLLType $>$::head(), PLLRoot$<$ DIL\_\-entry $>$::head(), PLLRoot$<$ DIL\_\-entry $>$::length(), Detailed\_\-Items\_\-List::list, DIL\_\-entry::parameters, PLL\_\-LOOP\_\-FORWARD, DIL\_\-entry\_\-parameters::project\_\-append(), DIL\_\-entry::Projects(), VOUT, and Detailed\_\-Items\_\-List::Write\_\-to\_\-File().
+
+Referenced by modify\_\-element\_\-through\_\-FORM\_\-interface().
+
+
+
+\footnotesize\begin{verbatim}929                                                                                                                                                                    {
+930   // update elements of the DIL-by-ID parameters file
+931   // target date modification is currently a special case, as described in
+932   // the modify_DIL_entry_target_date() and modify_DIL_group_target_dates()
+933   // and is therefore not included in this function
+934   int entrynum = dilist.list.length();
+935   if (entrynum<1) return false;
+936   DIL_entry * de = dilist.list.head()->elbyid(dilid);
+937   if (!de) {
+938     VOUT << "The DIL entry with ID " << dilid.chars() << "was not found in the Detailed_Items_List in update_DIL_entry_parameter_elements()\n";
+939     return false;
+940   }
+941   // Add superiors referenced in dilref
+942   if (addsups.head()) {
+943     // modify project data to add the superiors
+944     if (!de->parameters) {
+945       EOUT << "DIL entry " << dilid << " parameters not found in " << idfile << " in update_DIL_entry_parameter_elements()\n";
+946       return false;
+947     }
+948     if (verbose) VOUT << "Adding superior references from " << dilref << ":\n";
+949     for (DIL_Superiors * dilsup = addsups.head(); dilsup; dilsup = dilsup->Next()) {
+950       if (!de->parameters->project_append(dilsup->al.file,dilsup->al.title,dilsup->relevance,dilsup->unbounded,dilsup->bounded,dilsup->targetdate(),dilsup->tdproperty(),dilsup->urgency,dilsup->priority)) VOUT << "Unable to append a superior reference with ID " << dilsup->al.title << '\n';
+951       else if (verbose) VOUT << "     " << dilsup->al.title << " added\n";
+952     }
+953   }
+954   // Remove superiors indicated in removesups
+955   if ((removesupsnum>0) && (removesups)) {
+956     if (verbose) {
+957       VOUT << "Removing superior references:\n";
+958       for (int i = 0; i<removesupsnum; i++) VOUT << "     " << (*removesups)[i] << '\n';
+959     }
+960     // modify project data to remove the superiors
+961     if (!de->Projects(0)) {
+962       VOUT << "The DIL entry with ID " << dilid.chars() << " has no superiors, therefore none can be removed.\n";
+963       return false;
+964     }
+965     for (int i = 0; i<removesupsnum; i++) {
+966       PLL_LOOP_FORWARD(DIL_Superiors,de->Projects(0),1) if (e->al.title==(*removesups)[i]) {
+967         e->remove();
+968         if (verbose) VOUT << "     " << (*removesups)[i] << " removed\n";
+969         break;
+970       }
+971     }
+972   }
+973   return dilist.Write_to_File();
+974 }
+\end{verbatim}\normalsize 

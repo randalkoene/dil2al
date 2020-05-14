@@ -1,0 +1,5 @@
+g++  -g -D_ALT_REGEX_H=\"regex-gnu.h\" -D_USE_ALT_REGEX -D_CPP_REGEX -D__DIL2AL__ -D_BIGREGEX_SAFE_MATCHES -felide-constructors -fnonnull-objects -I/opt/FSFlibg++/lib/g++-include -c regextest.c -o regextest.o
+g++  -g -D_ALT_REGEX_H=\"regex-gnu.h\" -D_USE_ALT_REGEX -D_CPP_REGEX -D__DIL2AL__ -D_BIGREGEX_SAFE_MATCHES -felide-constructors -fnonnull-objects -I/opt/FSFlibg++/lib/g++-include  -c BigRegex.cc -o BigRegex.o
+g++  -g -D_ALT_REGEX_H=\"regex-gnu.h\" -D_USE_ALT_REGEX -D_CPP_REGEX -D__DIL2AL__ -D_BIGREGEX_SAFE_MATCHES -felide-constructors -fnonnull-objects -I/opt/FSFlibg++/lib/g++-include regextest.o regex-gnu.o BigRegex.o -o regextest 
+gcc -g -D__DIL2AL__ -DSTDC_HEADERS -c regextestc.c -o regextestc.o
+gcc -g -D__DIL2AL__ -DSTDC_HEADERS regextestc.o regex-gnu.o -o regextestc 

@@ -1,0 +1,208 @@
+\section{controller.cc File Reference}
+\label{controller_8cc}\index{controller.cc@{controller.cc}}
+{\tt \#include \char`\"{}dil2al.hh\char`\"{}}\par
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+{\bf String} {\bf chunk\_\-controller} ({\bf String} controllercmd)
+\item 
+time\_\-t {\bf time\_\-chunk\_\-remaining} ({\bf String} chunkid)
+\item 
+bool {\bf schedule\_\-controller} ({\bf String} controllercmd)
+\end{CompactItemize}
+
+
+\subsection{Function Documentation}
+\index{controller.cc@{controller.cc}!chunk_controller@{chunk\_\-controller}}
+\index{chunk_controller@{chunk\_\-controller}!controller.cc@{controller.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} chunk\_\-controller ({\bf String} {\em controllercmd})}\label{controller_8cc_a0}
+
+
+
+
+Definition at line 6 of file controller.cc.
+
+References ANSI\_\-BOLD\_\-OFF, ANSI\_\-BOLD\_\-ON, auto\_\-interactive(), decide\_\-add\_\-TL\_\-chunk(), EOUT, get\_\-TL\_\-head(), make\_\-note(), read\_\-file\_\-into\_\-String(), stop\_\-TL\_\-chunk(), time\_\-stamp(), VOUT, and write\_\-file\_\-from\_\-String().
+
+Referenced by dil2al\_\-commands(), and schedule\_\-controller().
+
+
+
+\footnotesize\begin{verbatim}6                                               {
+7 // Called timechunk minutes after starting a task chunk
+8 // (e.g. via at-jobs or a timer daemon, which could be
+9 // constructed as an AfterStep Wharf applet).
+10 // It can also be called before timechunk minutes have
+11 // passed if the chunk is stopped early.
+12 // As previous chunks are closed with stop_TL_chunk() where
+13 // necessary with options C,S or T, AL updating options
+14 // determine if and how the current AL and closed chunk's DIL
+15 // entry should be updated, and the corresponding update is done.
+16         const int LLEN = 10240;
+17         char lbuf[LLEN];
+18         // check if audio-visual flag is to be made noticable
+19         if (showflag) {
+20                 cout << "\a";
+21                 if (flagcmd!="") {
+22                         if (system(flagcmd)<0) EOUT << "dil2al: Unable to show visual flag in chunk_controller(), continuing\n";
+23                 }
+24         }
+25         // show next AL item(s) (may involve recomputing)
+26 //*** recomputation of AL not yet included
+27 #ifdef DEBUG
+28         cout << "dil2al: DEBUG - Recomputation of ALs in chunk_controller() not yet implemented\n";
+29 #endif
+30         // offer opportunity to make a Task Log entry
+31         bool madenote = false;
+32         chunkcreated = false; // reset process variable
+33         if (useansi) cout << ANSI_BOLD_ON; // bold on
+34         auto_interactive(controllercmd,"Make Note/Task Log entry? (y/N) ",lbuf,LLEN);
+35         if (useansi) cout << ANSI_BOLD_OFF; // bold off
+36         if ((lbuf[0]=='y') || (lbuf[0]=='Y')) {
+37                 // make Task Log entry
+38                 if (!make_note()) EOUT << "dil2al: Unable to make note in chunk_contorller(), continuing as is\n";
+39                 madenote = true;
+40         }
+41         // offer controller options
+42         lbuf[0]='\0'; String chunkid;
+43         while (lbuf[0]=='\0') {
+44                 String message = "\nOptions:\n[C]ontinue Task Chunk if Time Remaining else Start New Task Chunk\n";
+45                 if (!chunkcreated) message += "[S]tart New Task Chunk (new task context)\n";
+46                 message += "S[t]op Task Chunk (pause list tasks)\nE[x]it Retaining Current State (ignore list suggestions)\n";
+47                 if (useansi) cout << ANSI_BOLD_ON; // bold on
+48                 auto_interactive(controllercmd,message,lbuf,LLEN);
+49                 if (useansi) cout << ANSI_BOLD_OFF; // bold off
+50                 // refresh curtime to avoid misrepresentations due to long delay before option selection
+51                 // but don't change time if madenote to properly detect chunkid==curtime
+52                 // if a new chunk was made during make_note()
+53                 if (!madenote) curtime = time_stamp("%Y%m%d%H%M");
+54                 String tl; int tlinsertloc;
+55                 switch (lbuf[0]) {
+56                         case 'c': case 'C':
+57                                 if (verbose) VOUT << "Continuing according to task list chunk controller suggestions\n";
+58                                 tlinsertloc = -1;
+59                                 if (!read_file_into_String(get_TL_head(),tl)) return String("");
+60                                 if (tl=="") return tl;
+61                                 if ((chunkid=decide_add_TL_chunk(tl,tlinsertloc,true,false))=="") return String("");
+62                                 break;
+63                         case 's': case 'S':
+64                                 if (!chunkcreated) {
+65                                         if (verbose) VOUT << "Starting task chunk with new context\n";
+66                                         tlinsertloc = -1;
+67                                         if (!read_file_into_String(get_TL_head(),tl)) return String("");
+68                                         if (tl=="") return tl;
+69                                         if ((chunkid=decide_add_TL_chunk(tl,tlinsertloc,false,false))=="") return String("");
+70                                 } else {
+71                                         EOUT << "dil2al: Unknown option `" << lbuf[0] << "'\n";
+72                                         lbuf[0]='\0';
+73                                 }
+74                                 break;
+75                         case 't': case 'T':
+76 //*** instead of this approach, which exits once list tasks are paused
+77 //*** it is possible to stay in this while loop and offer exit as well
+78 //*** as start with comparetimes=false in the decide_add_TL_chunk() call
+79                                 if (verbose) VOUT << "Stopping task chunk and pausing list tasks\n";
+80                                 if (!read_file_into_String(get_TL_head(),tl)) return String("");
+81                                 if (tl=="") return tl;
+82                                 stop_TL_chunk(tl);
+83                                 if (!write_file_from_String(taskloghead,tl,"Task Log")) return String("");
+84                                 chunkid = "-1";
+85                                 break;
+86                         case 'x': case 'X':
+87                                 if (verbose) VOUT << "Exiting and retaining current task state\n";
+88                                 chunkid = "-2";
+89                                 break;
+90                         default:
+91                                 EOUT << "dil2al: Unknown option `" << lbuf[0] << "'\n";
+92                                 lbuf[0] = '\0';
+93                 }
+94         }
+95         return chunkid;
+96 }
+\end{verbatim}\normalsize 
+\index{controller.cc@{controller.cc}!schedule_controller@{schedule\_\-controller}}
+\index{schedule_controller@{schedule\_\-controller}!controller.cc@{controller.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool schedule\_\-controller ({\bf String} {\em controllercmd})}\label{controller_8cc_a2}
+
+
+
+
+Definition at line 105 of file controller.cc.
+
+References chunk\_\-controller(), EOUT, and time\_\-chunk\_\-remaining().
+
+Referenced by dil2al\_\-commands().
+
+
+
+\footnotesize\begin{verbatim}105                                                {
+106 // schedules periodical calls to chunk_controller(),
+107 // either via an at-job or by retaining dil2al as a daemon
+108         String chunkid;
+109         if (isdaemon) { // daemon schedules chunk_controller()
+110                 String ccmd;
+111                 while (1) {
+112                         ccmd = controllercmd; // fresh copy of automatic commands to controller
+113                         if ((chunkid=chunk_controller(ccmd))=="") return false;
+114                         if ((chunkid=="-1") || (chunkid=="-2")) return true;
+115                         time_t tdiff = time_chunk_remaining(chunkid);
+116                         if (tdiff>0) sleep(tdiff);
+117                 }
+118         } else { // at-job schedules chunk_controller()
+119                 if ((chunkid=chunk_controller(controllercmd))=="") return false;
+120                 if ((chunkid=="-1") || (chunkid=="-2")) return true;
+121 #ifdef DEBUG
+122 cout << "current chunkid = " << chunkid << '\n';
+123 #endif
+124                 time_t tdiff = time_chunk_remaining(chunkid);
+125 #ifdef DEBUG
+126 cout << "seconds remaining = " << tdiff << '\n';
+127 #endif
+128                 if (tdiff>0) {
+129                         tdiff /= 60;
+130                         String atcmd = atcommand;
+131                         if (tdiff) { atcmd += " + "; atcmd += dec(tdiff); atcmd += " minutes"; }
+132                         else atcmd += " + 1 minute";
+133                         FILE * p = popen((const char *) atcmd, "w");
+134                         if (!p) {
+135                                 EOUT << "dil2al: Unable to schedule controller call with " << atcontroller << " in schedule_controller()\n";
+136                                 return false;
+137                         }
+138                         fprintf(p,(const char *) atcontroller);
+139                         if (pclose(p)==-1) {
+140                                 EOUT << "dil2al: Scheduling controller call with " << atcontroller << " did not complete operations in schedule_controller()\n";
+141                                 return false;
+142                         }
+143                 }
+144         }
+145 #ifdef DEBUG
+146 const int LLEN = 10;
+147 char lbuf[LLEN];
+148 cout << "Scheduled controller processing completed...\n";
+149 cin.getline(lbuf,LLEN);
+150 #endif
+151         return true;
+152 }
+\end{verbatim}\normalsize 
+\index{controller.cc@{controller.cc}!time_chunk_remaining@{time\_\-chunk\_\-remaining}}
+\index{time_chunk_remaining@{time\_\-chunk\_\-remaining}!controller.cc@{controller.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}time\_\-t time\_\-chunk\_\-remaining ({\bf String} {\em chunkid})\hspace{0.3cm}{\tt  [inline]}}\label{controller_8cc_a1}
+
+
+
+
+Definition at line 98 of file controller.cc.
+
+References time\_\-stamp(), time\_\-stamp\_\-diff(), and VOUT.
+
+Referenced by schedule\_\-controller().
+
+
+
+\footnotesize\begin{verbatim}98                                                    {
+99         time_t tdiff = timechunksize*60;
+100         tdiff -= time_stamp_diff(chunkid,time_stamp("%Y%m%d%H%M"));
+101         if (verbose) VOUT << "\nTask schedule controller: " << tdiff << " seconds remaining in time chunk\n(Current chunk initiated at " << chunkid << ")\n";
+102         return tdiff;
+103 }
+\end{verbatim}\normalsize 

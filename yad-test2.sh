@@ -1,0 +1,8 @@
+yad --plug=123 --tabnum=1 --list --column=Num.:NUM --column=Option:TEXT 0 'family.html#20060914084328.1:DIL: Family 20060914084328.1' 1 'organization.html#20110215104130.1:' 2 'organization.html#20091115180507.1:[0740] AL Update &amp; Daily Self-Evaluation: Use [Best Practices] to refresh the AL as needed....' 3 'storage.html#20190115140907.1:[0800] BMITUP: Team and Investors: Figure out how I can comfortably talk with people about BMITUP. This is...' 4 'consulting.html#20181214143950.1:[0820] Xapiens: Send Siranush et al: Some suggested overviews of Neurotech. Some ideas...' 5 'financial.html#20110107103918.1:[0840] Offer consulting services related to neuroscience, AGI and neural engineering. ' 6 'social.html#20171130175518.1:DIL: Social Items 20171130175518.1</A> ' 7 'dil2al.html#20010225122509.1:DIL: DIL, AL and TL automation 20010225122509.1</A> ' 8 'family.html#20140428114925.1:DIL: Family 20140428114925.1</A> ' 9 'community.html#20190110065308.1:DIL: Community and Residential Matters 20190110065308.1</A> ' --no-markup --text='
+Task Entry DIL ID or identifying comment (deprecated) [can include HREFs]:
+  Note A: with 'browser' option in w3m save URL to ~/tmp/dilref with 2,ESC,SHIFT+M,d.
+  Note B: postpone to set a new Active List (current AL = active-list.all.html)
+DEFAULT: family.html#20060914084328.1:DIL: Family 20060914084328.1' 2> /dev/null &
+yad --plug=123 --tabnum=2 --text='Manual entry DIL ID or Comment:
+' --entry 2> /dev/null &
+yad --notebook --key=123 --tab='Tab 1' --tab='Tab 2' --geometry=640x512 --title=dil2al --buttons-layout=spread --button=DEFAULT:2 --button=Select:0 --button='browse':3 --button='fork browser':4 --button='postpone':5 --button=Cancel:1 2> /dev/null

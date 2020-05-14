@@ -1,0 +1,322 @@
+\section{search.cc File Reference}
+\label{search_8cc}\index{search.cc@{search.cc}}
+{\tt \#include \char`\"{}dil2al.hh\char`\"{}}\par
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+void {\bf generic\_\-remove\_\-name\_\-reference} ({\bf String} \&tpath)
+\item 
+long {\bf search\_\-output} ({\bf PLLRoot}$<$ {\bf Search\_\-Result} $>$ $\ast$sr, {\bf String} \&{\bf res}, bool stringoutput={\bf true})
+\item 
+{\bf String} {\bf search} ({\bf String\-List} \&targets, {\bf String} searchkey, bool stringoutput={\bf true})
+\item 
+unsigned long {\bf Get\_\-Target\_\-Directory} ({\bf String\-List} \&targets, unsigned long i, {\bf String} dirpath)
+\item 
+unsigned long {\bf Get\_\-Target\_\-Regex} ({\bf String\-List} \&targets, unsigned long i, {\bf String} dirpath)
+\item 
+bool {\bf search\_\-cmd} ({\bf String} grepinfo)
+\item 
+bool {\bf search\_\-FORM\_\-cmd} ({\bf String\-List} $\ast$qlist=NULL)
+\end{CompactItemize}
+
+
+\subsection{Function Documentation}
+\index{search.cc@{search.cc}!generic_remove_name_reference@{generic\_\-remove\_\-name\_\-reference}}
+\index{generic_remove_name_reference@{generic\_\-remove\_\-name\_\-reference}!search.cc@{search.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void generic\_\-remove\_\-name\_\-reference ({\bf String} \& {\em tpath})}\label{search_8cc_a0}
+
+
+
+
+Definition at line 94 of file search.cc.
+
+References String::del(), String::index(), and String::length().
+
+Referenced by Search\_\-Target::links(), and Target\_\-Access::remove\_\-name\_\-reference().
+
+
+
+\footnotesize\begin{verbatim}94                                                    {
+95         int nameref = tpath.index('#',-1);
+96         int fileref = tpath.index('/',-1);
+97         if ((nameref>=0) && (nameref>fileref)) tpath.del(nameref,tpath.length()-nameref);
+98 }
+\end{verbatim}\normalsize 
+\index{search.cc@{search.cc}!Get_Target_Directory@{Get\_\-Target\_\-Directory}}
+\index{Get_Target_Directory@{Get\_\-Target\_\-Directory}!search.cc@{search.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}unsigned long Get\_\-Target\_\-Directory ({\bf String\-List} \& {\em targets}, unsigned long {\em i}, {\bf String} {\em dirpath})}\label{search_8cc_a3}
+
+
+
+
+Definition at line 470 of file search.cc.
+
+References String::del(), EOUT, file\_\-is\_\-directory(), file\_\-is\_\-regular\_\-or\_\-symlink(), String::lastchar(), String\-List::length(), String::length(), and Directory\_\-Access::read().
+
+Referenced by Get\_\-Target\_\-Regex(), and Target\_\-Access::make\_\-local\_\-copy\_\-of\_\-directory().
+
+
+
+\footnotesize\begin{verbatim}470                                                                                           {
+471         // add filenames from a directory to the list of targets
+472         // returns the number of targets added
+473         unsigned long num;
+474         // get directory content
+475         String t;
+476         if (dirpath.lastchar()=='/') dirpath.del((int) (dirpath.length()-1),1);
+477         Directory_Access da(dirpath);
+478         num = da.read(t);
+479         if (num<0) {
+480                 EOUT << "dil2al: Unable to read directory " << dirpath << '\n';
+481                 return 0;
+482         }
+483         t.del(0,1); // remove first separator character
+484         StringList df(t,'/'); String f;
+485         // add verified files to targets list and adjust num as needed
+486         for (unsigned long j = 0; j<(df.length()-1); j++) {
+487                 f = dirpath+'/'+df[j];
+488                 if (file_is_regular_or_symlink(f)) {
+489                         targets[i] = f;
+490                         i++;
+491                 } else if (followlinks>0) { // can enable recursive searching of directories
+492                         if ((file_is_directory(f)) && (df[j]!=".") && (df[j]!="..")) {
+493                                 targets[i] = f;
+494                                 i++;
+495                         } else num --;
+496                 } else num--;
+497         }
+498         return num;
+499 }
+\end{verbatim}\normalsize 
+\index{search.cc@{search.cc}!Get_Target_Regex@{Get\_\-Target\_\-Regex}}
+\index{Get_Target_Regex@{Get\_\-Target\_\-Regex}!search.cc@{search.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}unsigned long Get\_\-Target\_\-Regex ({\bf String\-List} \& {\em targets}, unsigned long {\em i}, {\bf String} {\em dirpath})}\label{search_8cc_a4}
+
+
+
+
+Definition at line 501 of file search.cc.
+
+References String::before(), String::contains(), String::del(), EOUT, Get\_\-Target\_\-Directory(), String\-List::length(), String::length(), String::matches(), String::sub(), and Big\-Regex::subpos().
+
+Referenced by search\_\-cmd().
+
+
+
+\footnotesize\begin{verbatim}501                                                                                       {
+502         // add filenames from a directory to the list of targets that match a regex
+503         // returns the number of targets added
+504         // the regex is provided as "@regex-pattern@" following the directory, '@' need not be escaped
+505         StringList d;
+506         BigRegex trx("@[^/]+@$");
+507         // get regex
+508         if (!dirpath.contains(trx)) {
+509                 EOUT << "dil2al: No regex pattern in " << dirpath << " in Get_Target_Regex()\n";
+510                 return 0;
+511         }
+512         String fileregex = dirpath.sub(trx,0); fileregex.del(0,1); fileregex.del((int) (fileregex.length()-1),1);
+513         // get directory content
+514         unsigned long num = Get_Target_Directory(d,0,dirpath.before(trx.subpos()));
+515         // add files that match the regex to targets list and ajust num as needed
+516         String filename; BigRegex frx(fileregex);
+517         for (unsigned long j = 0; j<d.length(); j++) {
+518                 filename = d[j].from(trx.subpos());
+519                 if (filename.matches(frx)) {
+520                         targets[i] = d[j];
+521                         i++;
+522                 } else num--;
+523         }
+524         return num;
+525 }
+\end{verbatim}\normalsize 
+\index{search.cc@{search.cc}!search@{search}}
+\index{search@{search}!search.cc@{search.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} search ({\bf String\-List} \& {\em targets}, {\bf String} {\em searchkey}, bool {\em stringoutput} = {\bf true})}\label{search_8cc_a2}
+
+
+
+
+Definition at line 425 of file search.cc.
+
+References PLLRoot$<$ PLLType $>$::clear(), PLLRoot$<$ PLLType $>$::head(), String\-List::length(), PLLRoot$<$ PLLType $>$::link\_\-before(), PLL\_\-LOOP\_\-FORWARD, res, search\_\-output(), and write\_\-file\_\-from\_\-String().
+
+Referenced by search\_\-cmd().
+
+
+
+\footnotesize\begin{verbatim}425                                                                                 {
+426         // Search the target for searchkey
+427         // Result output is returned as a string or on VOUT.
+428         // Returns results as string or a string with the number of results.
+429         // Note: Directories are conceptually handled in the same manner
+430         // as HTML pages, but they are read differently and can contain
+431         // only links to follow for recursive searching.
+432         // Note: It is quite easy to make alternative search functions using
+433         // the Search_Target and Search_Result classes.
+434         // initialize global lists
+435         static String res; // stored in function, not objects, static to avoid problems with lifetime of object that return value points to
+436         PLLRoot<Search_Result> results;
+437         PLLRoot<Search_Target> globaltargets;
+438         Quick_String_Hash encountered;
+439         // search target objects for searchkey
+440         // *** Whether the list of Search_Target objects ever becomes
+441         //     greater than one depends on whether a followlinks search
+442         //     is conducted in breadth-first or depth-first fashion.
+443         Search_Target * t; String progressfile(tareadfile+"progress"), progress; long resnum = 0;
+444         for (int i = 0; i<targets.length(); i++) if (!targets[i].empty()) {
+445 //cerr << searchkey << " in " << targets[i] << '\n'; cerr.flush();
+446                 t = new Search_Target(&results,searchkey,targets[i],followlinks,false,&encountered);
+447                 globaltargets.link_before(t);
+448                 // *** Not quite sure where to put the next lines, in this
+449                 //     loop or outside it, and how that affects the search
+450                 //     order if additional targets are added by finding
+451                 //     links to follow in a breadth-first followlinks search.
+452                 long i_search = 0;
+453                 PLL_LOOP_FORWARD(Search_Target,globaltargets.head(),1) {
+454                         if (searchprogressmeter) { // write a progress meter to a file
+455                                 progress = String((long) i)+','+String(i_search)+':'+e->Target();
+456                                 write_file_from_String(progressfile,progress,"",true);
+457                                 i_search++;
+458                         }
+459                         e->search();
+460                         if (immediatesearchoutput) resnum += search_output(&results,res,stringoutput);
+461                         // *** caused problems here: e->remove(); // frees up space and avoids repeated searches
+462                 }
+463                 globaltargets.clear(); // frees up space and avoids repeated searches
+464         }
+465         if (!immediatesearchoutput) resnum = search_output(&results,res,stringoutput);
+466         if (!stringoutput) res = String(resnum);
+467         return res;
+468 }
+\end{verbatim}\normalsize 
+\index{search.cc@{search.cc}!search_cmd@{search\_\-cmd}}
+\index{search_cmd@{search\_\-cmd}!search.cc@{search.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool search\_\-cmd ({\bf String} {\em grepinfo})}\label{search_8cc_a5}
+
+
+
+
+Definition at line 527 of file search.cc.
+
+References String::after(), String::at(), String::before(), String\-List::contains(), String::del(), String::empty(), EOUT, file\_\-is\_\-directory(), Get\_\-Target\_\-Regex(), String::gsub(), String::index(), String::length(), replicate(), res, search(), and VOUT.
+
+Referenced by dil2al\_\-commands(), and search\_\-FORM\_\-cmd().
+
+
+
+\footnotesize\begin{verbatim}527                                  {
+528         // Command line interface to search()
+529         // Note: For optimal use, wrap the output of this call in a complete framework
+530         // for an HTML file. It is also possible to direct the error output to another
+531         // file and to link to that one from the HTML file with the search results.
+532         const BigRegex trx("@[^/]+@$");
+533         const BigRegex rrx("\\(^[Hh][Tt][Tt][Pp]:\\|^[Ff][Tt][Pp]:\\)");
+534         if (grepinfo.empty()) {
+535                 EOUT << "dil2al: Missing search information in search_cmd()\n";
+536                 return false;
+537         }
+538         char separator = grepinfo[0];
+539         grepinfo.gsub(replicate(separator,2),(char) 255); // temporarily replace escaped characters
+540         int keyend = grepinfo.index(separator,1);
+541         if (keyend<0) {
+542                 EOUT << "dil2al: Missing search key end in search_cmd()\n";
+543                 return false;
+544         }
+545         if (keyend==1) {
+546                 EOUT << "dil2al: Zero length search key in search_cmd()\n";
+547                 return false;
+548         }
+549         if ((keyend+1)>=grepinfo.length()) {
+550                 EOUT << "dil2al: Missing search target in search_cmd()\n";
+551                 return false;
+552         }
+553         // put all search targets into a StringList
+554         String searchkey(grepinfo.at(1,keyend-1)); searchkey.gsub((char) 255,separator); // restore escaped characters
+555         StringList targets;
+556         grepinfo.del(0,keyend+1);
+557         for (unsigned long i = 0; (!grepinfo.empty()); i++) {
+558                 // get next target from command line arguments
+559                 targets[i] = grepinfo.before(separator);
+560                 if (targets[i].empty()) targets[i] = grepinfo;
+561                 targets[i].gsub((char) 255,separator); // restore escaped characters
+562                 // interpret target
+563                 // *** add: tar(gz) and zip archives, archive declarator, file containing target lines, default set
+564                 if (targets[i].contains(trx)) i = Get_Target_Regex(targets,i,targets[i]) - 1;
+565                 // *** does not yet properly handle remote files matching regex pattern or remote files pointing to archives
+566                 // Now handled within search: else if (file_is_directory(targets[i])) i = Get_Target_Directory(targets,i,targets[i]) - 1;
+567                 else if ((!targets[i].contains(rrx)) && (file_is_directory(targets[i])) && (followlinks<=0)) { // follow links one deep into the directory
+568                         followlinks = 1;
+569                         if (verbose) VOUT << "(Setting followlinks=1 to search directory.)\n";
+570                 }
+571                 grepinfo = grepinfo.after(separator);
+572         }
+573         VOUT << '\n';
+574         String res = search(targets,searchkey,false);
+575         VOUT << "(Number of search results: <B>" << res << "</B>)\n<P>\n";
+576         return true;
+577 }
+\end{verbatim}\normalsize 
+\index{search.cc@{search.cc}!search_FORM_cmd@{search\_\-FORM\_\-cmd}}
+\index{search_FORM_cmd@{search\_\-FORM\_\-cmd}!search.cc@{search.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool search\_\-FORM\_\-cmd ({\bf String\-List} $\ast$ {\em qlist} = NULL)}\label{search_8cc_a6}
+
+
+
+
+Definition at line 579 of file search.cc.
+
+References DIL2AL\_\-CONDITIONAL\_\-ERROR\_\-RETURN, String::empty(), String::gsub(), search\_\-cmd(), and URI\_\-unescape().
+
+Referenced by Detect\_\-Form\_\-Input().
+
+
+
+\footnotesize\begin{verbatim}579                                                 {
+580   // Perform a dil2al regex search with input from an HTML FORM.
+581   const char escapedseparator[3] = {254,254,0};
+582   const char separator = 254;
+583   if (!qlist) return false;
+584   String grepinfo(separator);
+585   int paridx; String parstr;
+586   DIL2AL_CONDITIONAL_ERROR_RETURN((paridx=qlist->contains("regex="))<0,"No regex parameter found in form data in search_FORM_cmd()\n");
+587   parstr=URI_unescape((*qlist)[paridx].after('='));
+588   DIL2AL_CONDITIONAL_ERROR_RETURN(parstr.empty(),"Empty regex parameter in search_FORM_cmd()\n");
+589   parstr.gsub(separator,escapedseparator);
+590   grepinfo += parstr + separator;
+591   DIL2AL_CONDITIONAL_ERROR_RETURN((paridx=qlist->contains("targets="))<0,"No targets parameter found in form data in search_FORM_cmd()\n");
+592   parstr=URI_unescape((*qlist)[paridx].after('='));
+593   DIL2AL_CONDITIONAL_ERROR_RETURN(parstr.empty(),"Empty targets parameter in search_FORM_cmd()\n");
+594   parstr.gsub(separator,escapedseparator);
+595   parstr.gsub('\r',"");
+596   parstr.gsub('\n',separator);
+597   grepinfo += parstr;
+598   return search_cmd(grepinfo);
+599 }
+\end{verbatim}\normalsize 
+\index{search.cc@{search.cc}!search_output@{search\_\-output}}
+\index{search_output@{search\_\-output}!search.cc@{search.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}long search\_\-output ({\bf PLLRoot}$<$ {\bf Search\_\-Result} $>$ $\ast$ {\em sr}, {\bf String} \& {\em res}, bool {\em stringoutput} = {\bf true})}\label{search_8cc_a1}
+
+
+
+
+Definition at line 413 of file search.cc.
+
+References PLLRoot$<$ PLLType $>$::clear(), PLLRoot$<$ PLLType $>$::head(), PLLRoot$<$ PLLType $>$::length(), PLL\_\-LOOP\_\-FORWARD, res, and VOUT.
+
+Referenced by search().
+
+
+
+\footnotesize\begin{verbatim}413                                                                                         {
+414         // output results
+415         if (stringoutput) PLL_LOOP_FORWARD(Search_Result,sr->head(),1) res += e->HTML_put_text();
+416         else {
+417                 PLL_LOOP_FORWARD(Search_Result,sr->head(),1) VOUT << e->HTML_put_text();
+418                 VOUT.flush();
+419         }
+420         long num = sr->length();
+421         sr->clear();
+422         return num;
+423 }
+\end{verbatim}\normalsize 

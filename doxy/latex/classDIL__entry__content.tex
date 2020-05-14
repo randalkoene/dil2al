@@ -1,0 +1,331 @@
+\section{DIL\_\-entry\_\-content  Class Reference}
+\label{classDIL__entry__content}\index{DIL_entry_content@{DIL\_\-entry\_\-content}}
+{\tt \#include $<$dil2al.hh$>$}
+
+\subsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf $\sim$DIL\_\-entry\_\-content} ()
+\item 
+{\bf DIL\_\-entry\_\-content} ({\bf DIL\_\-entry} \&e)
+\item 
+int {\bf Is\_\-Plan\_\-Entry} ()
+\item 
+{\bf Plan\_\-entry\_\-content} $\ast$ {\bf Get\_\-Plan\_\-Entry\_\-Content} ()
+\item 
+bool {\bf Write\_\-Topical\_\-to\_\-Binary\_\-Cache} (ofstream \&cfl, bool gottext)
+\item 
+bool {\bf Read\_\-Topical\_\-from\_\-Binary\_\-Cache} (ifstream \&cfl, bool gottext)
+\item 
+bool {\bf Binary\_\-Cache\_\-Diagnostic} (DIL\_\-entry\_\-content $\ast$cached, int \&testedbytes)
+\end{CompactItemize}
+\subsection*{Public Attributes}
+\begin{CompactItemize}
+\item 
+time\_\-t {\bf started}
+\item 
+time\_\-t {\bf required}
+\item 
+float {\bf completion}
+\item 
+float {\bf valuation}
+\item 
+{\bf String} $\ast$ {\bf text}
+\end{CompactItemize}
+\subsection*{Protected Attributes}
+\begin{CompactItemize}
+\item 
+{\bf DIL\_\-entry} $\ast$ {\bf entry}
+\item 
+int {\bf planentrytype}
+\item 
+{\bf Plan\_\-entry\_\-content} $\ast$ {\bf plancontent}
+\end{CompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{DIL_entry_content@{DIL\_\-entry\_\-content}!~DIL_entry_content@{$\sim$DIL\_\-entry\_\-content}}
+\index{~DIL_entry_content@{$\sim$DIL\_\-entry\_\-content}!DIL_entry_content@{DIL\_\-entry\_\-content}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}DIL\_\-entry\_\-content::$\sim$DIL\_\-entry\_\-content ()\hspace{0.3cm}{\tt  [inline]}}\label{classDIL__entry__content_a0}
+
+
+
+
+Definition at line 498 of file dil2al.hh.
+
+References text.
+
+
+
+\footnotesize\begin{verbatim}498 { delete text; delete plancontent; }
+\end{verbatim}\normalsize 
+\index{DIL_entry_content@{DIL\_\-entry\_\-content}!DIL_entry_content@{DIL\_\-entry\_\-content}}
+\index{DIL_entry_content@{DIL\_\-entry\_\-content}!DIL_entry_content@{DIL\_\-entry\_\-content}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}DIL\_\-entry\_\-content::DIL\_\-entry\_\-content ({\bf DIL\_\-entry} \& {\em e})}\label{classDIL__entry__content_a1}
+
+
+
+
+Definition at line 581 of file utilities.cc.
+
+References PLAN\_\-ENTRY\_\-TYPE\_\-UNASSIGNED.
+
+
+
+\footnotesize\begin{verbatim}581 : entry(&e), planentrytype(PLAN_ENTRY_TYPE_UNASSIGNED), plancontent(NULL), started(0), required(0), completion(0.0), valuation(0.0), text(NULL) {}
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Function Documentation}
+\index{DIL_entry_content@{DIL\_\-entry\_\-content}!Binary_Cache_Diagnostic@{Binary\_\-Cache\_\-Diagnostic}}
+\index{Binary_Cache_Diagnostic@{Binary\_\-Cache\_\-Diagnostic}!DIL_entry_content@{DIL\_\-entry\_\-content}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool DIL\_\-entry\_\-content::Binary\_\-Cache\_\-Diagnostic (DIL\_\-entry\_\-content $\ast$ {\em cached}, int \& {\em testedbytes})}\label{classDIL__entry__content_a6}
+
+
+
+
+Definition at line 648 of file utilities.cc.
+
+References completion, entry, String::length(), required, started, text, valuation, and VOUT.
+
+Referenced by DIL\_\-entry::Binary\_\-Cache\_\-Diagnostic().
+
+
+
+\footnotesize\begin{verbatim}648                                                                                             {
+649   // test if the quick load cache process works reliably
+650   // this is the original entry_content, cached is the one retrieved from the binary cache
+651   int localtestedbytes = 0;
+652   // *** Add caching and diagnostics for Plan_entry_content
+653   localtestedbytes += sizeof(planentrytype) + sizeof(plancontent);
+654   if (plancontent) {
+655     localtestedbytes += sizeof(Plan_entry_content);
+656     VOUT << "Implementation Warning - Plan_entry_content is not yet cached!\n";
+657   }
+658   if ((*entry)!=(*(cached->entry))) VOUT << "*** DIL_entry_content entry mismatch\n"; // testing if DIL_ID==DIL_ID
+659   localtestedbytes += sizeof(entry);
+660   if (started!=cached->started) VOUT << "*** DIL_entry_content started mismatch\n";
+661   localtestedbytes += sizeof(started);
+662   if (required!=cached->required) VOUT << "*** DIL_entry_content required mismatch\n";
+663   localtestedbytes += sizeof(required);
+664   if (completion!=cached->completion) VOUT << "*** DIL_entry_content completion mismatch\n";
+665   localtestedbytes += sizeof(completion);
+666   if (valuation!=cached->valuation) VOUT << "*** DIL_entry_content valuation mismatch\n";
+667   localtestedbytes += sizeof(valuation);
+668   if (text) {
+669     if (cached->text) {
+670       if ((*text)!=(*(cached->text))) VOUT << "*** DIL_entry_content text mismatch\n";
+671       localtestedbytes += text->length();
+672     } else VOUT << "*** DIL_entry_content original has text, but cached does not\n";
+673   } else if (cached->text) VOUT << "*** DIL_entry_content cached has text, but original does not\n";
+674   localtestedbytes += sizeof(text);
+675   testedbytes += localtestedbytes;
+676   return true;
+677 }
+\end{verbatim}\normalsize 
+\index{DIL_entry_content@{DIL\_\-entry\_\-content}!Get_Plan_Entry_Content@{Get\_\-Plan\_\-Entry\_\-Content}}
+\index{Get_Plan_Entry_Content@{Get\_\-Plan\_\-Entry\_\-Content}!DIL_entry_content@{DIL\_\-entry\_\-content}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Plan\_\-entry\_\-content}$\ast$ DIL\_\-entry\_\-content::Get\_\-Plan\_\-Entry\_\-Content ()\hspace{0.3cm}{\tt  [inline]}}\label{classDIL__entry__content_a3}
+
+
+
+
+Definition at line 513 of file dil2al.hh.
+
+Referenced by DIL\_\-Visualize\_\-with\_\-FORM\_\-Tabs::Visualize\_\-Plan\_\-Entry().
+
+
+
+\footnotesize\begin{verbatim}513 { return plancontent; }
+\end{verbatim}\normalsize 
+\index{DIL_entry_content@{DIL\_\-entry\_\-content}!Is_Plan_Entry@{Is\_\-Plan\_\-Entry}}
+\index{Is_Plan_Entry@{Is\_\-Plan\_\-Entry}!DIL_entry_content@{DIL\_\-entry\_\-content}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int DIL\_\-entry\_\-content::Is\_\-Plan\_\-Entry ()}\label{classDIL__entry__content_a2}
+
+
+
+
+Definition at line 583 of file utilities.cc.
+
+References String::at(), entry, EOUT, String::index(), NUM\_\-PLAN\_\-ENTRY\_\-TYPES, PLAN\_\-ENTRY\_\-IDENTIFIER\_\-TAG, PLAN\_\-ENTRY\_\-IDENTIFIER\_\-TAG\_\-LENGTH, PLAN\_\-ENTRY\_\-TYPE\_\-NONE, plan\_\-entry\_\-type\_\-strings, PLAN\_\-ENTRY\_\-TYPE\_\-UNASSIGNED, plancontent, planentrytype, and text.
+
+Referenced by DIL\_\-entry::Is\_\-Plan\_\-Entry().
+
+
+
+\footnotesize\begin{verbatim}583                                      {
+584   // attempts to determine if the DIL entry content contains PLAN entry data
+585   // *** this should be upgraded to obtain the DIL entry content if it is
+586   //     not available
+587   if (planentrytype!=PLAN_ENTRY_TYPE_UNASSIGNED) return planentrytype;
+588   if (!text) {
+589     EOUT << "dil2al: Warning - no content->text available for DIL_entry_content::Is_Plan_Entry() --- obtaining content->text automatically is not yet implemented, continuing as is\n";
+590     return PLAN_ENTRY_TYPE_UNASSIGNED;
+591   }
+592   String & ctxt = (*text);
+593   // Note: The following expects a specific tag, including spaces.
+594   int j,k; planentrytype = PLAN_ENTRY_TYPE_NONE;
+595   if ((j=ctxt.index(PLAN_ENTRY_IDENTIFIER_TAG))<0) return PLAN_ENTRY_TYPE_NONE;
+596   j += PLAN_ENTRY_IDENTIFIER_TAG_LENGTH;
+597   if ((k=ctxt.index('@',j))<0) return PLAN_ENTRY_TYPE_NONE;
+598   String idtagstr(ctxt.at(j,k-j));
+599   for (j=0; j<NUM_PLAN_ENTRY_TYPES; j++) if (idtagstr==plan_entry_type_strings[j]) { planentrytype=j+1; break; }
+600   // provide other information
+601   if (planentrytype!=PLAN_ENTRY_TYPE_NONE) plancontent = new Plan_entry_content(*entry,planentrytype,k);
+602   return planentrytype;
+603 }
+\end{verbatim}\normalsize 
+\index{DIL_entry_content@{DIL\_\-entry\_\-content}!Read_Topical_from_Binary_Cache@{Read\_\-Topical\_\-from\_\-Binary\_\-Cache}}
+\index{Read_Topical_from_Binary_Cache@{Read\_\-Topical\_\-from\_\-Binary\_\-Cache}!DIL_entry_content@{DIL\_\-entry\_\-content}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool DIL\_\-entry\_\-content::Read\_\-Topical\_\-from\_\-Binary\_\-Cache (ifstream \& {\em cfl}, bool {\em gottext})}\label{classDIL__entry__content_a5}
+
+
+
+
+Definition at line 624 of file utilities.cc.
+
+References completion, READSOMETYPE, required, started, TEST\_\-LBUF\_\-BOUNDS, text, and valuation.
+
+Referenced by DIL\_\-entry::Read\_\-Topical\_\-from\_\-Binary\_\-Cache().
+
+
+
+\footnotesize\begin{verbatim}624                                                                                    {
+625   const int LLEN = 10240;
+626   char lbuf[LLEN];
+627   // started
+628   if ((cfl.read((READSOMETYPE) (&started), sizeof(started))).gcount()<sizeof(started)) return false;
+629   // required
+630   if ((cfl.read((READSOMETYPE) (&required), sizeof(required))).gcount()<sizeof(required)) return false;
+631   // completion
+632   if ((cfl.read((READSOMETYPE) (&completion), sizeof(completion))).gcount()<sizeof(completion)) return false;
+633   // valuation
+634   if ((cfl.read((READSOMETYPE) (&valuation), sizeof(valuation))).gcount()<sizeof(valuation)) return false;
+635   // text
+636   if (gottext) {
+637     int textlen;
+638     if ((cfl.read((READSOMETYPE) (&textlen), sizeof(textlen))).gcount()<sizeof(textlen)) return false;
+639     TEST_LBUF_BOUNDS(textlen,"DIL_Topical_List::Read_from_Binary_Cache()")
+640       if ((cfl.read((READSOMETYPE) lbuf, textlen)).gcount()<textlen) return false;
+641     lbuf[textlen]='\0';
+642     delete text; // remove prior allocation
+643     text = new String(lbuf);
+644   }
+645   return true;
+646 }
+\end{verbatim}\normalsize 
+\index{DIL_entry_content@{DIL\_\-entry\_\-content}!Write_Topical_to_Binary_Cache@{Write\_\-Topical\_\-to\_\-Binary\_\-Cache}}
+\index{Write_Topical_to_Binary_Cache@{Write\_\-Topical\_\-to\_\-Binary\_\-Cache}!DIL_entry_content@{DIL\_\-entry\_\-content}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool DIL\_\-entry\_\-content::Write\_\-Topical\_\-to\_\-Binary\_\-Cache (ofstream \& {\em cfl}, bool {\em gottext})}\label{classDIL__entry__content_a4}
+
+
+
+
+Definition at line 605 of file utilities.cc.
+
+References String::chars(), completion, String::length(), required, started, text, and valuation.
+
+Referenced by DIL\_\-entry::Write\_\-Topical\_\-to\_\-Binary\_\-Cache().
+
+
+
+\footnotesize\begin{verbatim}605                                                                                   {
+606   // started
+607   cfl.write((const void *) (&started), sizeof(started));
+608   // required
+609   cfl.write((const void *) (&required), sizeof(required));
+610   // completion
+611   cfl.write((const void *) (&completion), sizeof(completion));
+612   // valuation
+613   cfl.write((const void *) (&valuation), sizeof(valuation));
+614   // text
+615   if (gottext) {
+616     int textlen = 0;
+617     if (text) textlen = text->length();
+618     cfl.write((const void *) (&textlen), sizeof(textlen));
+619     cfl.write((const void *) text->chars(), textlen);
+620   }
+621   return true;
+622 }
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Data Documentation}
+\index{DIL_entry_content@{DIL\_\-entry\_\-content}!completion@{completion}}
+\index{completion@{completion}!DIL_entry_content@{DIL\_\-entry\_\-content}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}float DIL\_\-entry\_\-content::completion}\label{classDIL__entry__content_m2}
+
+
+
+
+Definition at line 508 of file dil2al.hh.
+
+Referenced by Binary\_\-Cache\_\-Diagnostic(), DIL\_\-entry::Completion\_\-State(), generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-entry\_\-content(), Detailed\_\-Items\_\-List::Get\_\-All\_\-Topical\_\-DIL\_\-Parameters(), DIL\_\-entry::Get\_\-Entry\_\-Parameters(), Read\_\-Topical\_\-from\_\-Binary\_\-Cache(), DIL\_\-Visualize\_\-with\_\-FORM\_\-Tabs::Visualize\_\-Element(), and Write\_\-Topical\_\-to\_\-Binary\_\-Cache().\index{DIL_entry_content@{DIL\_\-entry\_\-content}!entry@{entry}}
+\index{entry@{entry}!DIL_entry_content@{DIL\_\-entry\_\-content}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf DIL\_\-entry}$\ast$ DIL\_\-entry\_\-content::entry\hspace{0.3cm}{\tt  [protected]}}\label{classDIL__entry__content_n0}
+
+
+
+
+Definition at line 493 of file dil2al.hh.
+
+Referenced by Binary\_\-Cache\_\-Diagnostic(), and Is\_\-Plan\_\-Entry().\index{DIL_entry_content@{DIL\_\-entry\_\-content}!plancontent@{plancontent}}
+\index{plancontent@{plancontent}!DIL_entry_content@{DIL\_\-entry\_\-content}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Plan\_\-entry\_\-content}$\ast$ DIL\_\-entry\_\-content::plancontent\hspace{0.3cm}{\tt  [protected]}}\label{classDIL__entry__content_n2}
+
+
+
+
+Definition at line 495 of file dil2al.hh.
+
+Referenced by Is\_\-Plan\_\-Entry().\index{DIL_entry_content@{DIL\_\-entry\_\-content}!planentrytype@{planentrytype}}
+\index{planentrytype@{planentrytype}!DIL_entry_content@{DIL\_\-entry\_\-content}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int DIL\_\-entry\_\-content::planentrytype\hspace{0.3cm}{\tt  [protected]}}\label{classDIL__entry__content_n1}
+
+
+
+
+Definition at line 494 of file dil2al.hh.
+
+Referenced by Is\_\-Plan\_\-Entry().\index{DIL_entry_content@{DIL\_\-entry\_\-content}!required@{required}}
+\index{required@{required}!DIL_entry_content@{DIL\_\-entry\_\-content}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}time\_\-t DIL\_\-entry\_\-content::required}\label{classDIL__entry__content_m1}
+
+
+
+
+Definition at line 507 of file dil2al.hh.
+
+Referenced by Binary\_\-Cache\_\-Diagnostic(), generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-entry\_\-content(), Detailed\_\-Items\_\-List::Get\_\-All\_\-Topical\_\-DIL\_\-Parameters(), DIL\_\-entry::Get\_\-Entry\_\-Parameters(), Read\_\-Topical\_\-from\_\-Binary\_\-Cache(), DIL\_\-entry::Time\_\-Required(), and Write\_\-Topical\_\-to\_\-Binary\_\-Cache().\index{DIL_entry_content@{DIL\_\-entry\_\-content}!started@{started}}
+\index{started@{started}!DIL_entry_content@{DIL\_\-entry\_\-content}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}time\_\-t DIL\_\-entry\_\-content::started}\label{classDIL__entry__content_m0}
+
+
+
+
+Definition at line 504 of file dil2al.hh.
+
+Referenced by Binary\_\-Cache\_\-Diagnostic(), Detailed\_\-Items\_\-List::Get\_\-All\_\-Topical\_\-DIL\_\-Parameters(), DIL\_\-entry::Get\_\-Entry\_\-Parameters(), Read\_\-Topical\_\-from\_\-Binary\_\-Cache(), and Write\_\-Topical\_\-to\_\-Binary\_\-Cache().\index{DIL_entry_content@{DIL\_\-entry\_\-content}!text@{text}}
+\index{text@{text}!DIL_entry_content@{DIL\_\-entry\_\-content}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String}$\ast$ DIL\_\-entry\_\-content::text}\label{classDIL__entry__content_m4}
+
+
+
+
+Definition at line 510 of file dil2al.hh.
+
+Referenced by Binary\_\-Cache\_\-Diagnostic(), DIL\_\-entry::Entry\_\-Text(), Detailed\_\-Items\_\-List::Get\_\-All\_\-Topical\_\-DIL\_\-Parameters(), Is\_\-Plan\_\-Entry(), Plan\_\-entry\_\-content::Parse\_\-Entry\_\-Content(), Read\_\-Topical\_\-from\_\-Binary\_\-Cache(), Write\_\-Topical\_\-to\_\-Binary\_\-Cache(), and $\sim$DIL\_\-entry\_\-content().\index{DIL_entry_content@{DIL\_\-entry\_\-content}!valuation@{valuation}}
+\index{valuation@{valuation}!DIL_entry_content@{DIL\_\-entry\_\-content}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}float DIL\_\-entry\_\-content::valuation}\label{classDIL__entry__content_m3}
+
+
+
+
+Definition at line 509 of file dil2al.hh.
+
+Referenced by Binary\_\-Cache\_\-Diagnostic(), generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-entry\_\-content(), Detailed\_\-Items\_\-List::Get\_\-All\_\-Topical\_\-DIL\_\-Parameters(), DIL\_\-entry::Get\_\-Entry\_\-Parameters(), Read\_\-Topical\_\-from\_\-Binary\_\-Cache(), and Write\_\-Topical\_\-to\_\-Binary\_\-Cache().
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf dil2al.hh}\item 
+{\bf utilities.cc}\end{CompactItemize}

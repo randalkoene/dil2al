@@ -1,0 +1,367 @@
+\section{PLLType$<$ PLLType $>$  Class Template Reference}
+\label{classPLLType}\index{PLLType@{PLLType}}
+{\tt \#include $<$templates.defines.hh$>$}
+
+\subsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf PLLType} ()
+\item 
+PLLRoot\_\- PLLType $\ast$ {\bf Next} ()
+\item 
+PLLType $\ast$ {\bf Prev} ()
+\item 
+PLLType $\ast$ {\bf head} ()
+\item 
+PLLType $\ast$ {\bf tail} ()
+\item 
+PLLType $\ast$ {\bf el} (int n)
+\item 
+PLLType $\ast$ {\bf seek\_\-head} ()
+\item 
+PLLType $\ast$ {\bf seek\_\-tail} ()
+\item 
+int {\bf length} ()
+\item 
+int {\bf fulllength} ()
+\item 
+bool {\bf unlink\_\-before} (PLLRoot\_\-\#\#PLLType \&{\bf succ})
+\item 
+bool {\bf unlink\_\-after} (PLLRoot\_\-\#\#PLLType \&{\bf pred})
+\item 
+PLLType $\ast$ {\bf remove} ()
+\item 
+$\sim$PLLRoot\_\- PLLRoot\_\- PLLType $\ast$ {\bf head} ()
+\item 
+PLLType $\ast$ {\bf tail} ()
+\item 
+PLLType $\ast$ {\bf el} (int n)
+\item 
+PLLType $\ast$ {\bf operator[$\,$]} (int n)
+\item 
+int {\bf length} ()
+\item 
+void {\bf update} ()
+\item 
+bool {\bf link\_\-before} (PLLRoot\_\-\#\#PLLType $\ast${\bf succ})
+\item 
+bool {\bf link\_\-before} (PLLType $\ast${\bf succ})
+\item 
+bool {\bf link\_\-after} (PLLRoot\_\-\#\#PLLType $\ast${\bf pred})
+\item 
+bool {\bf link\_\-after} (PLLType $\ast${\bf pred})
+\item 
+bool {\bf insert\_\-after} (PLLType $\ast${\bf pred}, PLLType $\ast$inshead)
+\item 
+bool {\bf insert\_\-after} (int n, PLLType $\ast$inshead)
+\item 
+bool {\bf insert\_\-before} (PLLType $\ast${\bf succ}, PLLType $\ast$inshead)
+\item 
+bool {\bf insert\_\-before} (int n, PLLType $\ast$inshead)
+\end{CompactItemize}
+\subsection*{Protected Methods}
+\begin{CompactItemize}
+\item 
+void {\bf set\_\-root} (PLLType $\ast$h)
+\end{CompactItemize}
+\subsection*{Protected Attributes}
+\begin{CompactItemize}
+\item 
+PLLRoot\_\- PLLType $\ast$ {\bf pllnext}
+\item 
+PLLRoot\_\- PLLType $\ast$ {\bf pllprev}
+\item 
+PLLType $\ast$ {\bf pllhead}
+\item 
+PLLType $\ast$ {\bf plltail}
+\end{CompactItemize}
+\subsubsection*{template$<$class PLLType$>$ class PLLType$<$ PLLType $>$}
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{PLLType@{PLLType}!PLLType@{PLLType}}
+\index{PLLType@{PLLType}!PLLType@{PLLType}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ PLLType$<$ PLLType $>$::PLLType ()\hspace{0.3cm}{\tt  [inline]}}\label{classPLLType_a0}
+
+
+
+
+Definition at line 57 of file templates.defines.hh.
+
+
+
+\footnotesize\begin{verbatim}57 : pllroot(NULL), pllnext(NULL), pllprev(NULL) {} 
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Function Documentation}
+\index{PLLType@{PLLType}!el@{el}}
+\index{el@{el}!PLLType@{PLLType}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ PLLType$\ast$ PLLType$<$ PLLType $>$::el (int {\em n})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLType_a15}
+
+
+
+
+Definition at line 83 of file templates.defines.hh.
+
+References PLLType$<$ PLLType $>$::el().
+
+
+
+\footnotesize\begin{verbatim}83 { if (pllhead) return pllhead->el(n); return NULL; } 
+\end{verbatim}\normalsize 
+\index{PLLType@{PLLType}!el@{el}}
+\index{el@{el}!PLLType@{PLLType}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ PLLType$\ast$ PLLType$<$ PLLType $>$::el (int {\em n})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLType_a5}
+
+
+
+
+Referenced by PLLRoot$<$ DIL\_\-entry\_\-Pointer $>$::el(), and PLLType$<$ PLLType $>$::el().\index{PLLType@{PLLType}!fulllength@{fulllength}}
+\index{fulllength@{fulllength}!PLLType@{PLLType}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ int PLLType$<$ PLLType $>$::fulllength ()\hspace{0.3cm}{\tt  [inline]}}\label{classPLLType_a9}
+
+
+\index{PLLType@{PLLType}!head@{head}}
+\index{head@{head}!PLLType@{PLLType}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ $\sim$PLLRoot\_\- PLLRoot\_\- PLLType$\ast$ PLLType$<$ PLLType $>$::head ()\hspace{0.3cm}{\tt  [inline]}}\label{classPLLType_a13}
+
+
+
+
+Definition at line 81 of file templates.defines.hh.
+
+
+
+\footnotesize\begin{verbatim}81 { return pllhead; } 
+\end{verbatim}\normalsize 
+\index{PLLType@{PLLType}!head@{head}}
+\index{head@{head}!PLLType@{PLLType}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ PLLType$\ast$ PLLType$<$ PLLType $>$::head ()\hspace{0.3cm}{\tt  [inline]}}\label{classPLLType_a3}
+
+
+
+
+Definition at line 61 of file templates.defines.hh.
+
+Referenced by if().
+
+
+
+\footnotesize\begin{verbatim}61 { return pllroot->head(); } 
+\end{verbatim}\normalsize 
+\index{PLLType@{PLLType}!insert_after@{insert\_\-after}}
+\index{insert_after@{insert\_\-after}!PLLType@{PLLType}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLType$<$ PLLType $>$::insert\_\-after (int {\em n}, PLLType$<$ PLLType $>$ $\ast$ {\em inshead})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLType_a24}
+
+
+\index{PLLType@{PLLType}!insert_after@{insert\_\-after}}
+\index{insert_after@{insert\_\-after}!PLLType@{PLLType}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLType$<$ PLLType $>$::insert\_\-after (PLLType$<$ PLLType $>$ $\ast$ {\em pred}, PLLType$<$ PLLType $>$ $\ast$ {\em inshead})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLType_a23}
+
+
+\index{PLLType@{PLLType}!insert_before@{insert\_\-before}}
+\index{insert_before@{insert\_\-before}!PLLType@{PLLType}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLType$<$ PLLType $>$::insert\_\-before (int {\em n}, PLLType$<$ PLLType $>$ $\ast$ {\em inshead})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLType_a26}
+
+
+\index{PLLType@{PLLType}!insert_before@{insert\_\-before}}
+\index{insert_before@{insert\_\-before}!PLLType@{PLLType}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLType$<$ PLLType $>$::insert\_\-before (PLLType$<$ PLLType $>$ $\ast$ {\em succ}, PLLType$<$ PLLType $>$ $\ast$ {\em inshead})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLType_a25}
+
+
+\index{PLLType@{PLLType}!length@{length}}
+\index{length@{length}!PLLType@{PLLType}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ int PLLType$<$ PLLType $>$::length ()\hspace{0.3cm}{\tt  [inline]}}\label{classPLLType_a17}
+
+
+
+
+Definition at line 85 of file templates.defines.hh.
+
+References PLLType$<$ PLLType $>$::length().
+
+
+
+\footnotesize\begin{verbatim}85 { if (pllhead) return pllhead->length(); return 0; } 
+\end{verbatim}\normalsize 
+\index{PLLType@{PLLType}!length@{length}}
+\index{length@{length}!PLLType@{PLLType}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ int PLLType$<$ PLLType $>$::length ()\hspace{0.3cm}{\tt  [inline]}}\label{classPLLType_a8}
+
+
+
+
+Referenced by PLLHandle$<$ PLLType $>$::fulllength(), PLLRoot$<$ DIL\_\-entry\_\-Pointer $>$::length(), PLLType$<$ PLLType $>$::length(), and PLLHandle$<$ PLLType $>$::length().\index{PLLType@{PLLType}!link_after@{link\_\-after}}
+\index{link_after@{link\_\-after}!PLLType@{PLLType}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLType$<$ PLLType $>$::link\_\-after (PLLType$<$ PLLType $>$ $\ast$ {\em pred})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLType_a22}
+
+
+\index{PLLType@{PLLType}!link_after@{link\_\-after}}
+\index{link_after@{link\_\-after}!PLLType@{PLLType}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLType$<$ PLLType $>$::link\_\-after (PLLRoot\_\-\#\#PLLType$<$ PLLType $>$ $\ast$ {\em pred})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLType_a21}
+
+
+\index{PLLType@{PLLType}!link_before@{link\_\-before}}
+\index{link_before@{link\_\-before}!PLLType@{PLLType}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLType$<$ PLLType $>$::link\_\-before (PLLType$<$ PLLType $>$ $\ast$ {\em succ})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLType_a20}
+
+
+\index{PLLType@{PLLType}!link_before@{link\_\-before}}
+\index{link_before@{link\_\-before}!PLLType@{PLLType}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLType$<$ PLLType $>$::link\_\-before (PLLRoot\_\-\#\#PLLType$<$ PLLType $>$ $\ast$ {\em succ})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLType_a19}
+
+
+\index{PLLType@{PLLType}!Next@{Next}}
+\index{Next@{Next}!PLLType@{PLLType}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ PLLRoot\_\- PLLType$\ast$ PLLType$<$ PLLType $>$::Next ()\hspace{0.3cm}{\tt  [inline]}}\label{classPLLType_a1}
+
+
+
+
+Definition at line 59 of file templates.defines.hh.
+
+Referenced by PLLRoot$<$ PLLType $>$::set\_\-root().
+
+
+
+\footnotesize\begin{verbatim}59 { return pllnext; } 
+\end{verbatim}\normalsize 
+\index{PLLType@{PLLType}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!PLLType@{PLLType}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ PLLType$\ast$ PLLType$<$ PLLType $>$::operator[$\,$] (int {\em n})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLType_a16}
+
+
+
+
+Definition at line 84 of file templates.defines.hh.
+
+
+
+\footnotesize\begin{verbatim}84 { return el(n); } 
+\end{verbatim}\normalsize 
+\index{PLLType@{PLLType}!Prev@{Prev}}
+\index{Prev@{Prev}!PLLType@{PLLType}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ PLLType$\ast$ PLLType$<$ PLLType $>$::Prev ()\hspace{0.3cm}{\tt  [inline]}}\label{classPLLType_a2}
+
+
+
+
+Definition at line 60 of file templates.defines.hh.
+
+
+
+\footnotesize\begin{verbatim}60 { return pllprev; } 
+\end{verbatim}\normalsize 
+\index{PLLType@{PLLType}!remove@{remove}}
+\index{remove@{remove}!PLLType@{PLLType}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ PLLType$\ast$ PLLType$<$ PLLType $>$::remove ()\hspace{0.3cm}{\tt  [inline]}}\label{classPLLType_a12}
+
+
+\index{PLLType@{PLLType}!seek_head@{seek\_\-head}}
+\index{seek_head@{seek\_\-head}!PLLType@{PLLType}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ PLLType$\ast$ PLLType$<$ PLLType $>$::seek\_\-head ()\hspace{0.3cm}{\tt  [inline]}}\label{classPLLType_a6}
+
+
+\index{PLLType@{PLLType}!seek_tail@{seek\_\-tail}}
+\index{seek_tail@{seek\_\-tail}!PLLType@{PLLType}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ PLLType$\ast$ PLLType$<$ PLLType $>$::seek\_\-tail ()\hspace{0.3cm}{\tt  [inline]}}\label{classPLLType_a7}
+
+
+\index{PLLType@{PLLType}!set_root@{set\_\-root}}
+\index{set_root@{set\_\-root}!PLLType@{PLLType}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ void PLLType$<$ PLLType $>$::set\_\-root (PLLType$<$ PLLType $>$ $\ast$ {\em h})\hspace{0.3cm}{\tt  [inline, protected]}}\label{classPLLType_b0}
+
+
+\index{PLLType@{PLLType}!tail@{tail}}
+\index{tail@{tail}!PLLType@{PLLType}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ PLLType$\ast$ PLLType$<$ PLLType $>$::tail ()\hspace{0.3cm}{\tt  [inline]}}\label{classPLLType_a14}
+
+
+
+
+Definition at line 82 of file templates.defines.hh.
+
+
+
+\footnotesize\begin{verbatim}82 { return plltail; } 
+\end{verbatim}\normalsize 
+\index{PLLType@{PLLType}!tail@{tail}}
+\index{tail@{tail}!PLLType@{PLLType}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ PLLType$\ast$ PLLType$<$ PLLType $>$::tail ()\hspace{0.3cm}{\tt  [inline]}}\label{classPLLType_a4}
+
+
+
+
+Definition at line 62 of file templates.defines.hh.
+
+Referenced by if().
+
+
+
+\footnotesize\begin{verbatim}62 { return pllroot->tail(); } 
+\end{verbatim}\normalsize 
+\index{PLLType@{PLLType}!unlink_after@{unlink\_\-after}}
+\index{unlink_after@{unlink\_\-after}!PLLType@{PLLType}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLType$<$ PLLType $>$::unlink\_\-after (PLLRoot\_\-\#\#PLLType$<$ PLLType $>$ \& {\em pred})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLType_a11}
+
+
+
+
+Referenced by PLLRoot$<$ PLLType $>$::insert\_\-after().\index{PLLType@{PLLType}!unlink_before@{unlink\_\-before}}
+\index{unlink_before@{unlink\_\-before}!PLLType@{PLLType}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLType$<$ PLLType $>$::unlink\_\-before (PLLRoot\_\-\#\#PLLType$<$ PLLType $>$ \& {\em succ})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLType_a10}
+
+
+
+
+Referenced by PLLRoot$<$ PLLType $>$::insert\_\-before().\index{PLLType@{PLLType}!update@{update}}
+\index{update@{update}!PLLType@{PLLType}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ void PLLType$<$ PLLType $>$::update ()\hspace{0.3cm}{\tt  [inline]}}\label{classPLLType_a18}
+
+
+
+
+\subsection{Member Data Documentation}
+\index{PLLType@{PLLType}!pllhead@{pllhead}}
+\index{pllhead@{pllhead}!PLLType@{PLLType}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ PLLType$\ast$ PLLType$<$ PLLType $>$::pllhead\hspace{0.3cm}{\tt  [protected]}}\label{classPLLType_n2}
+
+
+
+
+Definition at line 75 of file templates.defines.hh.
+
+Referenced by if().\index{PLLType@{PLLType}!pllnext@{pllnext}}
+\index{pllnext@{pllnext}!PLLType@{PLLType}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ PLLRoot\_\- PLLType$\ast$ PLLType$<$ PLLType $>$::pllnext\hspace{0.3cm}{\tt  [protected]}}\label{classPLLType_n0}
+
+
+
+
+Definition at line 55 of file templates.defines.hh.
+
+Referenced by PLLRoot$<$ PLLType $>$::link\_\-after().\index{PLLType@{PLLType}!pllprev@{pllprev}}
+\index{pllprev@{pllprev}!PLLType@{PLLType}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ PLLRoot\_\- PLLType $\ast$ PLLType$<$ PLLType $>$::pllprev\hspace{0.3cm}{\tt  [protected]}}\label{classPLLType_n1}
+
+
+
+
+Definition at line 55 of file templates.defines.hh.
+
+Referenced by if(), and PLLRoot$<$ PLLType $>$::link\_\-before().\index{PLLType@{PLLType}!plltail@{plltail}}
+\index{plltail@{plltail}!PLLType@{PLLType}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ PLLType$\ast$ PLLType$<$ PLLType $>$::plltail\hspace{0.3cm}{\tt  [protected]}}\label{classPLLType_n3}
+
+
+
+
+Definition at line 76 of file templates.defines.hh.
+
+Referenced by if().
+
+The documentation for this class was generated from the following file:\begin{CompactItemize}
+\item 
+{\bf templates.defines.hh}\end{CompactItemize}

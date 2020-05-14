@@ -1,0 +1,198 @@
+\section{Plan\_\-entry\_\-content  Class Reference}
+\label{classPlan__entry__content}\index{Plan_entry_content@{Plan\_\-entry\_\-content}}
+{\tt \#include $<$dil2al.hh$>$}
+
+\subsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf Plan\_\-entry\_\-content} ({\bf DIL\_\-entry} \&e, int pet, int parsefrom=-1)
+\item 
+int {\bf get\_\-decision} ()
+\item 
+{\bf DIL\_\-ID} \& {\bf Decision} ()
+\item 
+{\bf DIL\_\-entry} $\ast$ {\bf Decision\_\-Ptr} ()
+\item 
+void {\bf Parse\_\-Entry\_\-Content} (int parsefrom=0)
+\end{CompactItemize}
+\subsection*{Protected Attributes}
+\begin{CompactItemize}
+\item 
+{\bf DIL\_\-entry} $\ast$ {\bf entry}
+\item 
+int {\bf planentrytype}
+\item 
+int {\bf decision}
+\item 
+{\bf DIL\_\-ID} {\bf decision\-ID}
+\item 
+{\bf DIL\_\-entry} $\ast$ {\bf decisionptr}
+\end{CompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Plan_entry_content@{Plan\_\-entry\_\-content}!Plan_entry_content@{Plan\_\-entry\_\-content}}
+\index{Plan_entry_content@{Plan\_\-entry\_\-content}!Plan_entry_content@{Plan\_\-entry\_\-content}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Plan\_\-entry\_\-content::Plan\_\-entry\_\-content ({\bf DIL\_\-entry} \& {\em e}, int {\em pet}, int {\em parsefrom} = -1)\hspace{0.3cm}{\tt  [inline]}}\label{classPlan__entry__content_a0}
+
+
+
+
+Definition at line 471 of file dil2al.hh.
+
+References decision, Parse\_\-Entry\_\-Content(), and planentrytype.
+
+
+
+\footnotesize\begin{verbatim}471 : entry(&e), planentrytype(pet), decision(-1), decisionID(), decisionptr(NULL) { if (parsefrom>=0) Parse_Entry_Content(parsefrom); }
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Function Documentation}
+\index{Plan_entry_content@{Plan\_\-entry\_\-content}!Decision@{Decision}}
+\index{Decision@{Decision}!Plan_entry_content@{Plan\_\-entry\_\-content}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf DIL\_\-ID}\& Plan\_\-entry\_\-content::Decision ()\hspace{0.3cm}{\tt  [inline]}}\label{classPlan__entry__content_a2}
+
+
+
+
+Definition at line 473 of file dil2al.hh.
+
+Referenced by DIL\_\-Visualize\_\-with\_\-FORM\_\-Tabs::Visualize\_\-Plan\_\-Entry().
+
+
+
+\footnotesize\begin{verbatim}473 { return decisionID; }
+\end{verbatim}\normalsize 
+\index{Plan_entry_content@{Plan\_\-entry\_\-content}!Decision_Ptr@{Decision\_\-Ptr}}
+\index{Decision_Ptr@{Decision\_\-Ptr}!Plan_entry_content@{Plan\_\-entry\_\-content}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf DIL\_\-entry} $\ast$ Plan\_\-entry\_\-content::Decision\_\-Ptr ()\hspace{0.3cm}{\tt  [inline]}}\label{classPlan__entry__content_a3}
+
+
+
+
+Definition at line 1166 of file dil2al.hh.
+
+References decision\-ID, decisionptr, DIL\_\-entry::elbyid(), and entry.
+
+
+
+\footnotesize\begin{verbatim}1166                                                     {
+1167   if (!decisionptr) decisionptr=entry->elbyid(decisionID);
+1168   return decisionptr;
+1169 }
+\end{verbatim}\normalsize 
+\index{Plan_entry_content@{Plan\_\-entry\_\-content}!get_decision@{get\_\-decision}}
+\index{get_decision@{get\_\-decision}!Plan_entry_content@{Plan\_\-entry\_\-content}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Plan\_\-entry\_\-content::get\_\-decision ()\hspace{0.3cm}{\tt  [inline]}}\label{classPlan__entry__content_a1}
+
+
+
+
+Definition at line 472 of file dil2al.hh.
+
+References decision.
+
+
+
+\footnotesize\begin{verbatim}472 { return decision; }
+\end{verbatim}\normalsize 
+\index{Plan_entry_content@{Plan\_\-entry\_\-content}!Parse_Entry_Content@{Parse\_\-Entry\_\-Content}}
+\index{Parse_Entry_Content@{Parse\_\-Entry\_\-Content}!Plan_entry_content@{Plan\_\-entry\_\-content}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Plan\_\-entry\_\-content::Parse\_\-Entry\_\-Content (int {\em parsefrom} = 0)}\label{classPlan__entry__content_a4}
+
+
+
+
+Definition at line 551 of file utilities.cc.
+
+References String::contains(), DIL\_\-entry::content, decision, decision\-ID, entry, HTML\_\-get\_\-href(), HTML\_\-get\_\-list(), HTML\_\-get\_\-list\_\-item(), HTML\_\-remove\_\-comments(), String::index(), PLAN\_\-ENTRY\_\-DECISION\_\-TAG, PLAN\_\-ENTRY\_\-TYPE\_\-GOAL, planentrytype, DIL\_\-entry\_\-content::text, and DIL\_\-ID::valid().
+
+Referenced by Plan\_\-entry\_\-content().
+
+
+
+\footnotesize\begin{verbatim}551                                                               {
+552   // find plan specific information in DIL entry text content
+553   if (planentrytype==PLAN_ENTRY_TYPE_GOAL) {
+554     String & ctxt = *(entry->content->text);
+555     int i;
+556     // note: This assumes that action alternatives are elements of the first
+557     // ordered list in the text.
+558     if ((i=ctxt.index("<OL>",parsefrom))>=0) {
+559       String listparams, listcontent;
+560       if ((i=HTML_get_list(ctxt,i,listparams,listcontent))>=0) {
+561         HTML_remove_comments(listcontent);
+562         String itemcontent; int j = 0; decision = -1;
+563         while ((j=HTML_get_list_item(listcontent,j,listparams,itemcontent))>=0) {
+564           decision++;
+565           // *** The decision tag has not yet been tested
+566           if (itemcontent.contains(PLAN_ENTRY_DECISION_TAG)) {
+567             String hreftext;
+568             if (HTML_get_href(itemcontent,0,listparams,hreftext)>=0) {
+569               decisionID = hreftext;
+570               break;
+571             }
+572           }
+573         }
+574         if (decision==0) if (HTML_get_href(itemcontent,0,listparams,listcontent)>=0) decisionID = listcontent;
+575         if ((decision>0) && (!decisionID.valid())) decision = -1; // alternatives exist, but no decision specified
+576       }
+577     }
+578   }
+579 }
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Data Documentation}
+\index{Plan_entry_content@{Plan\_\-entry\_\-content}!decision@{decision}}
+\index{decision@{decision}!Plan_entry_content@{Plan\_\-entry\_\-content}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Plan\_\-entry\_\-content::decision\hspace{0.3cm}{\tt  [protected]}}\label{classPlan__entry__content_n2}
+
+
+
+
+Definition at line 467 of file dil2al.hh.
+
+Referenced by get\_\-decision(), Parse\_\-Entry\_\-Content(), and Plan\_\-entry\_\-content().\index{Plan_entry_content@{Plan\_\-entry\_\-content}!decisionID@{decisionID}}
+\index{decisionID@{decisionID}!Plan_entry_content@{Plan\_\-entry\_\-content}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf DIL\_\-ID} Plan\_\-entry\_\-content::decision\-ID\hspace{0.3cm}{\tt  [protected]}}\label{classPlan__entry__content_n3}
+
+
+
+
+Definition at line 468 of file dil2al.hh.
+
+Referenced by Decision\_\-Ptr(), and Parse\_\-Entry\_\-Content().\index{Plan_entry_content@{Plan\_\-entry\_\-content}!decisionptr@{decisionptr}}
+\index{decisionptr@{decisionptr}!Plan_entry_content@{Plan\_\-entry\_\-content}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf DIL\_\-entry}$\ast$ Plan\_\-entry\_\-content::decisionptr\hspace{0.3cm}{\tt  [protected]}}\label{classPlan__entry__content_n4}
+
+
+
+
+Definition at line 469 of file dil2al.hh.
+
+Referenced by Decision\_\-Ptr().\index{Plan_entry_content@{Plan\_\-entry\_\-content}!entry@{entry}}
+\index{entry@{entry}!Plan_entry_content@{Plan\_\-entry\_\-content}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf DIL\_\-entry}$\ast$ Plan\_\-entry\_\-content::entry\hspace{0.3cm}{\tt  [protected]}}\label{classPlan__entry__content_n0}
+
+
+
+
+Definition at line 465 of file dil2al.hh.
+
+Referenced by Decision\_\-Ptr(), and Parse\_\-Entry\_\-Content().\index{Plan_entry_content@{Plan\_\-entry\_\-content}!planentrytype@{planentrytype}}
+\index{planentrytype@{planentrytype}!Plan_entry_content@{Plan\_\-entry\_\-content}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Plan\_\-entry\_\-content::planentrytype\hspace{0.3cm}{\tt  [protected]}}\label{classPlan__entry__content_n1}
+
+
+
+
+Definition at line 466 of file dil2al.hh.
+
+Referenced by Parse\_\-Entry\_\-Content(), and Plan\_\-entry\_\-content().
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf dil2al.hh}\item 
+{\bf utilities.cc}\end{CompactItemize}

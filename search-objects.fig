@@ -1,0 +1,42 @@
+#FIG 3.2
+Landscape
+Center
+Metric
+A4      
+100.00
+Single
+-2
+1200 2
+2 2 0 1 0 7 50 0 -1 0.000 0 0 -1 0 0 5
+	 8820 2385 11655 2385 11655 5400 8820 5400 8820 2385
+2 1 0 1 0 7 50 0 -1 0.000 0 0 -1 1 0 3
+	1 1 1.00 120.00 120.00
+	 10350 2655 10710 2655 10710 1575
+2 1 2 1 0 7 50 0 -1 3.000 0 0 -1 1 0 3
+	1 1 1.00 120.00 120.00
+	 10260 3285 10710 3285 10710 5805
+4 0 0 50 0 0 12 0.0000 4 180 645 450 450 Options:\001
+4 0 0 50 0 0 12 0.0000 4 180 7440 450 675 1. Search starting at one file (where links are found in HTML protocol and approximations thereof)\001
+4 0 0 50 0 0 12 0.0000 4 135 1995 450 900 2. Search several archives\001
+4 0 0 50 0 0 12 0.0000 4 180 2865 450 1350 Search term can be any regex pattern.\001
+4 0 0 50 0 0 12 0.0000 4 180 1155 450 1800 Search targets:\001
+4 0 0 50 0 0 12 0.0000 4 180 3495 450 2025 - local file (formats: txt, HTML, PS, PDF, fig)\001
+4 0 0 50 0 0 12 0.0000 4 180 4560 450 2250 - archived file (gz, GZ, Z, zip, tar) of local file or remote file\001
+4 0 0 50 0 0 12 0.0000 4 180 2010 450 2475 - remote file (HTTP, FTP)\001
+4 0 0 50 0 0 12 0.0000 4 180 2205 450 2700 - search engine (e.g. google)\001
+4 0 0 50 0 0 12 0.0000 4 135 1785 450 3150 Uniform search results:\001
+4 0 0 50 0 0 12 0.0000 4 180 7845 450 3375 An object that stores the search hit with surrounding text, the search key (regex), the source reference.\001
+4 0 0 50 0 0 12 0.0000 4 180 7605 450 3600 That object can also output the results as HTML. A linked list of such objects can be used to get the\001
+4 0 0 50 0 0 12 0.0000 4 180 1890 450 3825 results and display them.\001
+4 0 0 50 0 0 12 0.0000 4 180 7380 450 4050 A search object has a reference to the linked list of search storage objects, knows the search key\001
+4 0 0 50 0 0 12 0.0000 4 180 7635 450 4275 (regex) and its current target to search. Calling the search function on that object results in obtaining\001
+4 0 0 50 0 0 12 0.0000 4 180 7725 450 4500 the target (if possible), searching it, and storing (A) results and (B) linked targets to search (which is\001
+4 0 0 50 0 0 12 0.0000 4 180 7425 450 4725 not done if archives are searched). The linked targets can be stored in another linked list of search\001
+4 0 0 50 0 0 12 0.0000 4 180 7335 450 4950 objects. The linked list may be global or local. A global list achieves breadth-first search, while a\001
+4 0 0 50 0 0 12 0.0000 4 180 7260 450 5175 local list achieves depth-first search. Results must be kept globally, and care must be taken not\001
+4 0 0 50 0 0 12 0.0000 4 180 6855 450 5400 to delete the results list when the current search object completes its task and is removed.\001
+4 0 0 50 0 0 12 0.0000 4 180 1080 8820 2340 Search Object\001
+4 0 0 50 0 0 12 0.0000 4 180 1365 8910 2700 * Results Objects\001
+4 0 0 50 0 0 12 0.0000 4 180 1305 8910 3330 * Search Objects\001
+4 0 0 50 0 0 12 0.0000 4 180 450 10305 1530 global\001
+4 0 0 50 0 0 12 0.0000 4 180 1035 10260 6030 may be global\001

@@ -1,0 +1,2235 @@
+\section{utilities.cc File Reference}
+\label{utilities_8cc}\index{utilities.cc@{utilities.cc}}
+{\tt \#include \char`\"{}dil2al.hh\char`\"{}}\par
+\subsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define {\bf READSOMETYPE}\ char$\ast$
+\item 
+\#define {\bf TEST\_\-LBUF\_\-BOUNDS}(slen, funcname)\ if (slen$>$=LLEN) \{ EOUT $<$$<$ \char`\"{}dil2al: Number of characters exceeds lbuf bounds in \char`\"{} $<$$<$ funcname $<$$<$ '$\backslash$n'; return {\bf false}; \}
+\item 
+\#define {\bf PLAN\_\-ENTRY\_\-IDENTIFIER\_\-TAG}\ \char`\"{}$<$!-- @begin: PLAN DIL TEMPLATE: \char`\"{}
+\item 
+\#define {\bf PLAN\_\-ENTRY\_\-IDENTIFIER\_\-TAG\_\-LENGTH}\ 32
+\item 
+\#define {\bf PLAN\_\-ENTRY\_\-DECISION\_\-TAG}\ \char`\"{}$<$BR$>$$<$B$>$decision:\char`\"{}
+\item 
+\#define {\bf PLAN\_\-ENTRY\_\-STRING\_\-ACTION}\ \char`\"{}action\char`\"{}
+\item 
+\#define {\bf PLAN\_\-ENTRY\_\-STRING\_\-GOAL}\ \char`\"{}goal\char`\"{}
+\item 
+\#define {\bf PLAN\_\-ENTRY\_\-STRING\_\-OBJECTIVE}\ \char`\"{}objective\char`\"{}
+\item 
+\#define {\bf PLAN\_\-ENTRY\_\-STRING\_\-OUTCOME}\ \char`\"{}outcome\char`\"{}
+\item 
+\#define {\bf PLAN\_\-ENTRY\_\-STRING\_\-VARIABLE}\ \char`\"{}variable\char`\"{}
+\item 
+\#define {\bf NUM\_\-PLAN\_\-ENTRY\_\-TYPES}\ 5
+\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+bool {\bf Lock\_\-File} ({\bf String} lockfile, {\bf String} msgstr)
+\item 
+bool {\bf Unlock\_\-File} ({\bf String} lockfile)
+\item 
+int {\bf DIL\_\-entry\_\-target\_\-date\_\-qsort\_\-compare} (const void $\ast$vde1, const void $\ast$vde2)
+\item 
+int {\bf Big\-Regex\_\-freq} ({\bf String} \&str, const {\bf Big\-Regex} \&rx)
+\item 
+int {\bf Big\-Regex\_\-freq} ({\bf String} \&str, {\bf String} rxstr)
+\item 
+int {\bf Big\-Regex\_\-freq} ({\bf String} \&str, const char $\ast$rxstr)
+\item 
+{\bf String} {\bf RX\_\-Search\_\-Safe} ({\bf String} s)
+\item 
+time\_\-t {\bf Time} (time\_\-t $\ast$tloc)
+\item 
+{\bf String} {\bf time\_\-stamp} (const char $\ast$dateformat, time\_\-t t=-1)
+\item 
+{\bf String} {\bf time\_\-stamp\_\-GM} (const char $\ast$dateformat, time\_\-t t=-1)
+\item 
+{\bf String} {\bf date\_\-string} ()
+\item 
+time\_\-t {\bf time\_\-stamp\_\-time} ({\bf String} timestr)
+\item 
+time\_\-t {\bf time\_\-stamp\_\-time\_\-of\_\-day} ({\bf String} timestr)
+\item 
+time\_\-t {\bf time\_\-stamp\_\-time\_\-date} ({\bf String} timestr)
+\item 
+time\_\-t {\bf time\_\-stamp\_\-diff} ({\bf String} oldtime, {\bf String} newtime)
+\item 
+time\_\-t {\bf double2time} (double t)
+\item 
+bool {\bf confirmation} ({\bf String} message, char nondefault)
+\item 
+void {\bf auto\_\-interactive} ({\bf String} \&autostr, {\bf String} message, char $\ast$lbuf, int llen)
+\item 
+{\bf String} {\bf relurl} ({\bf String} srcurl, {\bf String} dsturl)
+\item 
+{\bf String} {\bf absurl} ({\bf String} srcurl, {\bf String} relurl)
+\item 
+bool {\bf file\_\-is\_\-regular} ({\bf String} filepath)
+\item 
+bool {\bf file\_\-is\_\-regular\_\-or\_\-symlink} ({\bf String} filepath)
+\item 
+bool {\bf file\_\-is\_\-directory} ({\bf String} filepath)
+\item 
+bool {\bf prepare\_\-temporary\_\-file} ({\bf String} tmpfile, {\bf String} initstr)
+\item 
+bool {\bf backup\_\-and\_\-rename} ({\bf String} filename, {\bf String} message, bool isnew={\bf false})
+\item 
+bool {\bf read\_\-file\_\-into\_\-String} (ifstream \&sfl, {\bf String} \&filestr, bool warnnoopen={\bf true})
+\item 
+bool {\bf read\_\-file\_\-into\_\-String} ({\bf String} filename, {\bf String} \&filestr, bool warnnoopen={\bf true})
+\item 
+bool {\bf read\_\-file\_\-into\_\-String} (bool \&isnew, {\bf String} filename, {\bf String} \&filestr)
+\item 
+int {\bf get\_\-file\_\-in\_\-list} ({\bf String} \&fname, {\bf String\-List} \&srcf, {\bf String\-List} \&srcfname, int \&srcfnum)
+\item 
+bool {\bf write\_\-file\_\-from\_\-String} ({\bf String} filename, const {\bf String} \&filestr, {\bf String} message, bool isnew={\bf false})
+\item 
+void {\bf read\_\-data\_\-from\_\-stream} (istream \&ifs, {\bf String} \&dstr, const char $\ast$terminate)
+\item 
+int {\bf find\_\-delimiter} ({\bf String} \&str, int startpos, int lenlimit, char delimiter='$\backslash$n')
+\item 
+bool {\bf pattern\_\-in\_\-line} (const char $\ast$pattern, char $\ast$lbuf)
+\item 
+bool {\bf substring\_\-from\_\-line} (const char $\ast$pattern, int nsub, {\bf String} $\ast$dilid, const char $\ast$lbuf)
+\item 
+bool {\bf find\_\-line} (ifstream $\ast$lf, const char $\ast$pattern, char $\ast$lbuf, int llen)
+\item 
+int {\bf copy\_\-until\_\-line} (ifstream $\ast$lf, ofstream $\ast$of, const char $\ast$pattern, char $\ast$lbuf, int llen)
+\item 
+int {\bf find\_\-in\_\-line} (ifstream $\ast$lf, const char $\ast$pattern, int nsub, {\bf String} $\ast$dilid, const char $\ast$before, char $\ast$lbuf, int llen)
+\item 
+bool {\bf initialize\_\-new\_\-DIL\_\-TL} ({\bf String} initializecmd, bool includeinput)
+\item 
+int {\bf D2A\_\-get\_\-tag} ({\bf String} \&d2astr, int strloc, {\bf String} d2atag, {\bf String} \&tagtext)
+\item 
+int {\bf HTML\_\-get\_\-marker} ({\bf String} \&htmlstr, int strloc, {\bf String} \&marker, bool locate={\bf true})
+\item 
+{\bf String} {\bf HTML\_\-marker\_\-arguments} ({\bf String} \&marker)
+\item 
+int {\bf HTML\_\-get\_\-tagged\_\-environment} (const {\bf Big\-Regex} \&begintag, const {\bf Big\-Regex} \&endmatch, const {\bf Big\-Regex} \&endtag, {\bf String} \&htmlstr, int strloc, {\bf String} \&envparams, {\bf String} \&envcontent, int $\ast$envstart=NULL)
+\item 
+int {\bf HTML\_\-get\_\-table\_\-cell} ({\bf String} \&htmlstr, int strloc, {\bf String} \&cellparams, {\bf String} \&cellcontent, int $\ast$cellstart=NULL)
+\item 
+int {\bf HTML\_\-get\_\-table\_\-row} ({\bf String} \&htmlstr, int strloc, {\bf String} \&rowparams, {\bf String} \&rowcontent, int $\ast$rowstart=NULL)
+\item 
+int {\bf HTML\_\-get\_\-list} ({\bf String} \&htmlstr, int strloc, {\bf String} \&listparams, {\bf String} \&listcontent, int $\ast$liststart=NULL)
+\item 
+int {\bf HTML\_\-get\_\-list\_\-item} ({\bf String} \&htmlstr, int strloc, {\bf String} \&itemparams, {\bf String} \&itemcontent, int $\ast$itemstart=NULL)
+\item 
+int {\bf HTML\_\-get\_\-href} ({\bf String} \&htmlstr, int strloc, {\bf String} \&hrefurl, {\bf String} \&hreftext, int $\ast$hrefstart=NULL)
+\item 
+int {\bf HTML\_\-get\_\-name} ({\bf String} \&htmlstr, int strloc, {\bf String} \&nametag, {\bf String} \&nametext)
+\item 
+{\bf String} $\ast$ {\bf HTML\_\-safe} ({\bf String} \&textstr)
+\item 
+{\bf String} $\ast$ {\bf HTML\_\-remove\_\-comments} ({\bf String} \&htmlstr)
+\item 
+{\bf String} $\ast$ {\bf HTML\_\-remove\_\-tags} ({\bf String} \&htmlstr)
+\item 
+{\bf String} {\bf HTML\_\-put\_\-structure} ({\bf String} tag, {\bf String} params, {\bf String} content, bool relaxedhtml={\bf false})
+\item 
+{\bf String} {\bf HTML\_\-put\_\-table\_\-row} ({\bf String} rowparams, {\bf String} rowcontent, bool relaxedhtml={\bf false})
+\item 
+{\bf String} {\bf HTML\_\-put\_\-table\_\-cell} ({\bf String} cellparams, {\bf String} cellcontent, bool relaxedhtml={\bf false})
+\item 
+{\bf String} {\bf HTML\_\-put\_\-list} (char listtype, {\bf String} htmlstr)
+\item 
+{\bf String} {\bf HTML\_\-put\_\-list\_\-item} ({\bf String} htmlstr, bool relaxedhtml={\bf false})
+\item 
+{\bf String} {\bf HTML\_\-put\_\-href} ({\bf String} hrefurl, {\bf String} hreftext)
+\item 
+{\bf String} {\bf HTML\_\-put\_\-name} ({\bf String} nametag, {\bf String} nametext)
+\item 
+{\bf String} {\bf HTML\_\-put\_\-form} ({\bf String} formmethod, {\bf String} formaction, {\bf String} formcontent)
+\item 
+{\bf String} {\bf HTML\_\-put\_\-form\_\-input} ({\bf String} inputtype, {\bf String} inputargs)
+\item 
+{\bf String} {\bf HTML\_\-put\_\-form\_\-submit} ({\bf String} submittext)
+\item 
+{\bf String} {\bf HTML\_\-put\_\-form\_\-reset} ()
+\item 
+{\bf String} {\bf HTML\_\-put\_\-form\_\-radio} ({\bf String} radioname, {\bf String} radiovalue, {\bf String} radiotext, bool checked={\bf false})
+\item 
+{\bf String} {\bf HTML\_\-put\_\-form\_\-checkbox} ({\bf String} checkboxname, {\bf String} checkboxvalue, {\bf String} checkboxtext, bool checked={\bf false})
+\item 
+{\bf String} {\bf HTML\_\-put\_\-form\_\-text} ({\bf String} textname, {\bf String} textvalue, long maxlen=-1)
+\item 
+{\bf String} {\bf HTML\_\-put\_\-form\_\-text} ({\bf String} textname, long maxlen=-1)
+\item 
+int {\bf Elipsis\_\-At} ({\bf String} \&s, int maxsize)
+\item 
+{\bf String} {\bf URI\_\-unescape} ({\bf String} escaped\-URI)
+\item 
+{\bf String} {\bf Int2Hex\-Str} (unsigned int i)
+\item 
+{\bf String} $\ast$ {\bf remove\_\-whitespace} ({\bf String} \&str)
+\item 
+double {\bf get\_\-double} ({\bf String} valstr, double defval=0.0, bool $\ast$gotdouble=NULL)
+\end{CompactItemize}
+\subsection*{Variables}
+\begin{CompactItemize}
+\item 
+const char {\bf plan\_\-entry\_\-type\_\-strings} [NUM\_\-PLAN\_\-ENTRY\_\-TYPES][10] = \{PLAN\_\-ENTRY\_\-STRING\_\-ACTION,PLAN\_\-ENTRY\_\-STRING\_\-GOAL,PLAN\_\-ENTRY\_\-STRING\_\-OBJECTIVE,PLAN\_\-ENTRY\_\-STRING\_\-OUTCOME,PLAN\_\-ENTRY\_\-STRING\_\-VARIABLE\}
+\end{CompactItemize}
+
+
+\subsection{Define Documentation}
+\index{utilities.cc@{utilities.cc}!NUM_PLAN_ENTRY_TYPES@{NUM\_\-PLAN\_\-ENTRY\_\-TYPES}}
+\index{NUM_PLAN_ENTRY_TYPES@{NUM\_\-PLAN\_\-ENTRY\_\-TYPES}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define NUM\_\-PLAN\_\-ENTRY\_\-TYPES\ 5}\label{utilities_8cc_a10}
+
+
+
+
+Definition at line 21 of file utilities.cc.
+
+Referenced by DIL\_\-entry\_\-content::Is\_\-Plan\_\-Entry().\index{utilities.cc@{utilities.cc}!PLAN_ENTRY_DECISION_TAG@{PLAN\_\-ENTRY\_\-DECISION\_\-TAG}}
+\index{PLAN_ENTRY_DECISION_TAG@{PLAN\_\-ENTRY\_\-DECISION\_\-TAG}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define PLAN\_\-ENTRY\_\-DECISION\_\-TAG\ \char`\"{}$<$BR$>$$<$B$>$decision:\char`\"{}}\label{utilities_8cc_a4}
+
+
+
+
+Definition at line 15 of file utilities.cc.
+
+Referenced by Plan\_\-entry\_\-content::Parse\_\-Entry\_\-Content().\index{utilities.cc@{utilities.cc}!PLAN_ENTRY_IDENTIFIER_TAG@{PLAN\_\-ENTRY\_\-IDENTIFIER\_\-TAG}}
+\index{PLAN_ENTRY_IDENTIFIER_TAG@{PLAN\_\-ENTRY\_\-IDENTIFIER\_\-TAG}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define PLAN\_\-ENTRY\_\-IDENTIFIER\_\-TAG\ \char`\"{}$<$!-- @begin: PLAN DIL TEMPLATE: \char`\"{}}\label{utilities_8cc_a2}
+
+
+
+
+Definition at line 13 of file utilities.cc.
+
+Referenced by DIL\_\-entry\_\-content::Is\_\-Plan\_\-Entry().\index{utilities.cc@{utilities.cc}!PLAN_ENTRY_IDENTIFIER_TAG_LENGTH@{PLAN\_\-ENTRY\_\-IDENTIFIER\_\-TAG\_\-LENGTH}}
+\index{PLAN_ENTRY_IDENTIFIER_TAG_LENGTH@{PLAN\_\-ENTRY\_\-IDENTIFIER\_\-TAG\_\-LENGTH}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define PLAN\_\-ENTRY\_\-IDENTIFIER\_\-TAG\_\-LENGTH\ 32}\label{utilities_8cc_a3}
+
+
+
+
+Definition at line 14 of file utilities.cc.
+
+Referenced by DIL\_\-entry\_\-content::Is\_\-Plan\_\-Entry().\index{utilities.cc@{utilities.cc}!PLAN_ENTRY_STRING_ACTION@{PLAN\_\-ENTRY\_\-STRING\_\-ACTION}}
+\index{PLAN_ENTRY_STRING_ACTION@{PLAN\_\-ENTRY\_\-STRING\_\-ACTION}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define PLAN\_\-ENTRY\_\-STRING\_\-ACTION\ \char`\"{}action\char`\"{}}\label{utilities_8cc_a5}
+
+
+
+
+Definition at line 16 of file utilities.cc.\index{utilities.cc@{utilities.cc}!PLAN_ENTRY_STRING_GOAL@{PLAN\_\-ENTRY\_\-STRING\_\-GOAL}}
+\index{PLAN_ENTRY_STRING_GOAL@{PLAN\_\-ENTRY\_\-STRING\_\-GOAL}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define PLAN\_\-ENTRY\_\-STRING\_\-GOAL\ \char`\"{}goal\char`\"{}}\label{utilities_8cc_a6}
+
+
+
+
+Definition at line 17 of file utilities.cc.\index{utilities.cc@{utilities.cc}!PLAN_ENTRY_STRING_OBJECTIVE@{PLAN\_\-ENTRY\_\-STRING\_\-OBJECTIVE}}
+\index{PLAN_ENTRY_STRING_OBJECTIVE@{PLAN\_\-ENTRY\_\-STRING\_\-OBJECTIVE}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define PLAN\_\-ENTRY\_\-STRING\_\-OBJECTIVE\ \char`\"{}objective\char`\"{}}\label{utilities_8cc_a7}
+
+
+
+
+Definition at line 18 of file utilities.cc.\index{utilities.cc@{utilities.cc}!PLAN_ENTRY_STRING_OUTCOME@{PLAN\_\-ENTRY\_\-STRING\_\-OUTCOME}}
+\index{PLAN_ENTRY_STRING_OUTCOME@{PLAN\_\-ENTRY\_\-STRING\_\-OUTCOME}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define PLAN\_\-ENTRY\_\-STRING\_\-OUTCOME\ \char`\"{}outcome\char`\"{}}\label{utilities_8cc_a8}
+
+
+
+
+Definition at line 19 of file utilities.cc.\index{utilities.cc@{utilities.cc}!PLAN_ENTRY_STRING_VARIABLE@{PLAN\_\-ENTRY\_\-STRING\_\-VARIABLE}}
+\index{PLAN_ENTRY_STRING_VARIABLE@{PLAN\_\-ENTRY\_\-STRING\_\-VARIABLE}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define PLAN\_\-ENTRY\_\-STRING\_\-VARIABLE\ \char`\"{}variable\char`\"{}}\label{utilities_8cc_a9}
+
+
+
+
+Definition at line 20 of file utilities.cc.\index{utilities.cc@{utilities.cc}!READSOMETYPE@{READSOMETYPE}}
+\index{READSOMETYPE@{READSOMETYPE}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define READSOMETYPE\ char$\ast$}\label{utilities_8cc_a0}
+
+
+
+
+Definition at line 9 of file utilities.cc.
+
+Referenced by DIL\_\-ID::Read\_\-DIL\_\-ID\_\-from\_\-Binary\_\-Cache(), Detailed\_\-Items\_\-List::Read\_\-from\_\-Binary\_\-Cache(), DIL\_\-entry::Read\_\-from\_\-Binary\_\-Cache(), DIL\_\-entry\_\-parameters::Read\_\-from\_\-Binary\_\-Cache(), DIL\_\-AL\_\-List::Read\_\-from\_\-Binary\_\-Cache(), DIL\_\-Topical\_\-List::Read\_\-from\_\-Binary\_\-Cache(), Detailed\_\-Items\_\-List::Read\_\-Topical\_\-from\_\-Binary\_\-Cache(), DIL\_\-entry::Read\_\-Topical\_\-from\_\-Binary\_\-Cache(), and DIL\_\-entry\_\-content::Read\_\-Topical\_\-from\_\-Binary\_\-Cache().\index{utilities.cc@{utilities.cc}!TEST_LBUF_BOUNDS@{TEST\_\-LBUF\_\-BOUNDS}}
+\index{TEST_LBUF_BOUNDS@{TEST\_\-LBUF\_\-BOUNDS}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define TEST\_\-LBUF\_\-BOUNDS(slen, funcname)\ if (slen$>$=LLEN) \{ EOUT $<$$<$ \char`\"{}dil2al: Number of characters exceeds lbuf bounds in \char`\"{} $<$$<$ funcname $<$$<$ '$\backslash$n'; return {\bf false}; \}}\label{utilities_8cc_a1}
+
+
+
+
+Definition at line 11 of file utilities.cc.
+
+Referenced by DIL\_\-AL\_\-List::Read\_\-from\_\-Binary\_\-Cache(), DIL\_\-Topical\_\-List::Read\_\-from\_\-Binary\_\-Cache(), and DIL\_\-entry\_\-content::Read\_\-Topical\_\-from\_\-Binary\_\-Cache().
+
+\subsection{Function Documentation}
+\index{utilities.cc@{utilities.cc}!absurl@{absurl}}
+\index{absurl@{absurl}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} absurl ({\bf String} {\em srcurl}, {\bf String} {\em relurl})}\label{utilities_8cc_a31}
+
+
+
+
+Definition at line 1943 of file utilities.cc.
+
+References String::after(), String::before(), String::contains(), String::freq(), and String::gsub().
+
+Referenced by extract\_\-paper\_\-plan\_\-to\_\-paper(), extract\_\-recursively(), generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-entry\_\-content(), Detailed\_\-Items\_\-List::Get\_\-All\_\-DIL\_\-ID\_\-File\_\-Parameters(), get\_\-Paper\_\-Plans\_\-Section\_\-IDs(), modify\_\-element\_\-through\_\-FORM\_\-interface(), and Topical\_\-DIL\_\-Files::Refresh().
+
+
+
+\footnotesize\begin{verbatim}1943                                             {
+1944 // srcurl is an absolute filename or a directory path
+1945 // ending with "/"
+1946 // relurl is a URL relative to srcurl or an absolute URL
+1947 // Note: This function may be confused by directory names
+1948 //       of the form BigRegex(".+[.][.]")
+1949         if (relurl=="") return srcurl;
+1950         if (relurl.contains("://")) relurl = relurl.after("://");
+1951         if (relurl[0]=='/') return relurl;
+1952         if (relurl[0]=='#') return srcurl+relurl;
+1953         int upcnt = relurl.freq("../");
+1954         relurl.gsub("../","");
+1955         srcurl = srcurl.before('/',-1); // prune source filename
+1956         for (int i = 0; i < upcnt; i++) srcurl = srcurl.before('/',-1);
+1957         return srcurl+'/'+relurl;
+1958 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!auto_interactive@{auto\_\-interactive}}
+\index{auto_interactive@{auto\_\-interactive}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void auto\_\-interactive ({\bf String} \& {\em autostr}, {\bf String} {\em message}, char $\ast$ {\em lbuf}, int {\em llen})}\label{utilities_8cc_a29}
+
+
+
+
+Definition at line 1916 of file utilities.cc.
+
+References String::del().
+
+Referenced by chunk\_\-controller().
+
+
+
+\footnotesize\begin{verbatim}1916                                                                                {
+1917 // enables interactive responses or takes responses from autostr if available
+1918         if (autostr=="") {
+1919                 cout << message;
+1920                 cin.getline(lbuf,llen);
+1921         } else {
+1922                 strcpy(lbuf,(const char *) autostr);
+1923                 autostr.del(0,1);
+1924         }
+1925 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!backup_and_rename@{backup\_\-and\_\-rename}}
+\index{backup_and_rename@{backup\_\-and\_\-rename}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool backup\_\-and\_\-rename ({\bf String} {\em filename}, {\bf String} {\em message}, bool {\em isnew} = {\bf false})}\label{utilities_8cc_a36}
+
+
+
+
+Definition at line 2016 of file utilities.cc.
+
+References EOUT, and VOUT.
+
+Referenced by add\_\-new\_\-to\_\-DIL(), cmdline\_\-extract\_\-paper\_\-novelties(), create\_\-new\_\-DIL(), extract\_\-paper\_\-plan\_\-to\_\-paper(), send\_\-dil\_\-to\_\-DIL(), and write\_\-file\_\-from\_\-String().
+
+
+
+\footnotesize\begin{verbatim}2016                                                                             {
+2017 // Backup previous version of file with date stamp and make
+2018 // new version current.
+2019         String backupname = filename+'.'+curdate+".bak";
+2020         if (!isnew) if (rename(filename,backupname)<0) {
+2021                 if (errno!=ENOENT) {
+2022                         EOUT << "dil2al: Unable to rename " << filename << " to " << backupname << " in backup_and_rename()\n(New version remains in " << filename << ".new)\n";
+2023                         return false;
+2024                 } else EOUT << "dil2al: Warning - no old version of " << filename << " to backup in backup_and_rename()\n";
+2025         }
+2026         if (rename(filename+".new",filename)<0) {
+2027                 EOUT << "dil2al: Unable to rename " << filename << ".new to " << filename << " in backup_and_rename()\n(New version remains in " << filename << ".new)\nRestoring previous " << filename << '\n';
+2028                 if (!isnew) if (rename(backupname,filename)<0) EOUT << "dil2al: Unable to restore " << backupname << " to " << filename << '\n';
+2029                 return false;
+2030         }
+2031         if (verbose) { // *** perhaps this should be suppressed if errno==ENOENT was caught above
+2032                 if (isnew) VOUT << message << " initialized as " << filename << '\n';
+2033                 else VOUT << "Old " << message << " file moved to " << backupname << '\n';
+2034         }
+2035         return true;
+2036 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!BigRegex_freq@{BigRegex\_\-freq}}
+\index{BigRegex_freq@{BigRegex\_\-freq}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Big\-Regex\_\-freq ({\bf String} \& {\em str}, const char $\ast$ {\em rxstr})}\label{utilities_8cc_a17}
+
+
+
+
+Definition at line 1809 of file utilities.cc.
+
+Referenced by Assess\_\-Paper\_\-Correction\_\-Time(), Big\-Regex\_\-freq(), and decide\_\-add\_\-TL\_\-chunk().
+
+
+
+\footnotesize\begin{verbatim}1809                                                     {
+1810         BigRegex rx(rxstr);
+1811         return BigRegex_freq(str,rx);
+1812 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!BigRegex_freq@{BigRegex\_\-freq}}
+\index{BigRegex_freq@{BigRegex\_\-freq}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Big\-Regex\_\-freq ({\bf String} \& {\em str}, {\bf String} {\em rxstr})}\label{utilities_8cc_a16}
+
+
+
+
+Definition at line 1804 of file utilities.cc.
+
+References Big\-Regex\_\-freq().
+
+
+
+\footnotesize\begin{verbatim}1804                                               {
+1805         BigRegex rx(rxstr);
+1806         return BigRegex_freq(str,rx);
+1807 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!BigRegex_freq@{BigRegex\_\-freq}}
+\index{BigRegex_freq@{BigRegex\_\-freq}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Big\-Regex\_\-freq ({\bf String} \& {\em str}, const {\bf Big\-Regex} \& {\em rx})}\label{utilities_8cc_a15}
+
+
+
+
+Definition at line 1798 of file utilities.cc.
+
+References String::index(), and String::SEARCH\_\-END.
+
+
+
+\footnotesize\begin{verbatim}1798                                                      {
+1799         int i = 0, cnt = 0;
+1800         while ((i=str.index(rx,String::SEARCH_END,i))>=0) cnt++;
+1801         return cnt;
+1802 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!confirmation@{confirmation}}
+\index{confirmation@{confirmation}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool confirmation ({\bf String} {\em message}, char {\em nondefault})}\label{utilities_8cc_a28}
+
+
+
+
+Definition at line 1907 of file utilities.cc.
+
+Referenced by extract\_\-hierarchy\_\-depth\_\-decrease\_\-to\_\-paper(), extract\_\-hierarchy\_\-depth\_\-increase\_\-to\_\-paper(), extract\_\-recursively(), extract\_\-required\_\-item\_\-to\_\-paper(), financial\_\-notes(), select\_\-TL\_\-DIL\_\-refs(), and stop\_\-TL\_\-chunk().
+
+
+
+\footnotesize\begin{verbatim}1907                                                    {
+1908 // requests confirmation, returns false if the response is nondefault
+1909         const int LLEN = 16;
+1910         char lbuf[LLEN];
+1911         cout << message;
+1912         cin.getline(lbuf,LLEN);
+1913         return (lbuf[0]!=nondefault);
+1914 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!copy_until_line@{copy\_\-until\_\-line}}
+\index{copy_until_line@{copy\_\-until\_\-line}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int copy\_\-until\_\-line (ifstream $\ast$ {\em lf}, ofstream $\ast$ {\em of}, const char $\ast$ {\em pattern}, char $\ast$ {\em lbuf}, int {\em llen})}\label{utilities_8cc_a47}
+
+
+
+
+Definition at line 2248 of file utilities.cc.
+
+References EOUT.
+
+Referenced by create\_\-new\_\-DIL(), make\_\-note(), and send\_\-dil\_\-to\_\-DIL().
+
+
+
+\footnotesize\begin{verbatim}2248                                                                                                {
+2249 // returns 1 if line was encountered, 0 if not, and <0 for errors
+2250 // the line containing pattern is not copied, but is returned in lbuf
+2251         regex_t re;
+2252         int mres;
+2253         if (!lf) {
+2254                 EOUT << "dil2al: input file not open in copy_until_line()\n";
+2255                 return -1;
+2256         }
+2257         if (!of) {
+2258                 EOUT << "dil2al: output file not open in copy_until_line()\n";
+2259                 return -1;
+2260         }
+2261         if (regcomp(&re,pattern, REG_EXTENDED|REG_NOSUB) != 0) {
+2262                 EOUT << "dil2al: Unable to compile regular expression in copy_until_line()\n";
+2263                 return -2;
+2264         }
+2265         mres = 1;
+2266         cout << "dil2al WARNING: copy_until_line(<from>,<to>," << pattern << ",<lbuf>,<llen>) may be broken as EOF is not detected when line length exceeds llen=" << llen << ", this code should use BigRegex functions instead!\n";
+2267         while (mres!=0) {
+2268                 if (lf->eof()) {
+2269                         regfree(&re);
+2270                         return 0;
+2271                 }
+2272                 lf->getline(lbuf,llen);
+2273                 mres = regexec(&re,lbuf, (size_t) 0, NULL, 0);
+2274                 if ((mres != 0) && (mres != REG_NOMATCH)) {
+2275                         EOUT << "dil2al: Internal error while matching in copy_until_line()\n";
+2276                         regfree(&re);
+2277                         return -3;
+2278                 }
+2279                 if (mres!=0) (*of) << lbuf << endl;
+2280         }
+2281         regfree(&re);
+2282         return 1;
+2283 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!D2A_get_tag@{D2A\_\-get\_\-tag}}
+\index{D2A_get_tag@{D2A\_\-get\_\-tag}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int D2A\_\-get\_\-tag ({\bf String} \& {\em d2astr}, int {\em strloc}, {\bf String} {\em d2atag}, {\bf String} \& {\em tagtext})}\label{utilities_8cc_a50}
+
+
+
+
+Definition at line 2396 of file utilities.cc.
+
+References String::at(), EOUT, String::index(), Big\-Regex::match\_\-info(), and String::SEARCH\_\-END.
+
+Referenced by Assess\_\-Paper\_\-Correction\_\-Time().
+
+
+
+\footnotesize\begin{verbatim}2396                                                                               {
+2397 // searches for a dil2al standardized tag with the specific regex
+2398 // id d2atag and returns the corresponding specific information
+2399 // in tagtext, as well as the position in d2astr immediately
+2400 // following the tag
+2401         BigRegex tm('@'+d2atag+":\\([^@]*\\)@");
+2402         if ((strloc=d2astr.index(tm,String::SEARCH_END,strloc))>=0) {
+2403                 int s,l;
+2404                 if (!tm.match_info(s,l,1)) return -1;
+2405                 if (l==0) EOUT << "dil2al: Warning - Non-specific tag at " << s << " in D2A_get_tag(), continuing\n";
+2406                 tagtext = d2astr.at(s,l);
+2407         }
+2408         return strloc;
+2409 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!date_string@{date\_\-string}}
+\index{date_string@{date\_\-string}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} date\_\-string ()}\label{utilities_8cc_a22}
+
+
+
+
+Definition at line 1852 of file utilities.cc.
+
+References time\_\-stamp().
+
+Referenced by dil2al\_\-commands(), and main().
+
+
+
+\footnotesize\begin{verbatim}1852                      {
+1853         return time_stamp("%Y%m%d");
+1854 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!DIL_entry_target_date_qsort_compare@{DIL\_\-entry\_\-target\_\-date\_\-qsort\_\-compare}}
+\index{DIL_entry_target_date_qsort_compare@{DIL\_\-entry\_\-target\_\-date\_\-qsort\_\-compare}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int DIL\_\-entry\_\-target\_\-date\_\-qsort\_\-compare (const void $\ast$ {\em vde1}, const void $\ast$ {\em vde2})}\label{utilities_8cc_a14}
+
+
+
+
+Definition at line 1774 of file utilities.cc.
+
+References MAXTIME\_\-T.
+
+Referenced by Detailed\_\-Items\_\-List::Sort\_\-by\_\-Target\_\-Date().
+
+
+
+\footnotesize\begin{verbatim}1774                                                                               {
+1775 // used with qsort() (<stdlib.h>)
+1776 // Treats unspecified self-referential target dates as MAXTIME
+1777 // for the ordering of the corresponding DIL entry  - and avoids
+1778 // the accompanying warning messages.
+1779 // (This is useful when groups of DIL entries with desired
+1780 // target dates are sorted, in which some DIL entries are marked
+1781 // with -2 codes).
+1782 // Note: ISO C++ is strict about providing the correct function
+1783 // declaration in cases such as the call to qsort(). This function
+1784 // was therefore rewritten from the original declaration,
+1785 // DIL_entry_target_date_qsort_compare(DIL_entry ** de1, DIL_entry ** de2)
+1786 // - please keep in mind that the elements are of type DIL_entry **,
+1787 // i.e. arrays/pointers of pointers to objects.
+1788         DIL_entry ** de1 = (DIL_entry **) vde1;
+1789         DIL_entry ** de2 = (DIL_entry **) vde2;
+1790         time_t t1 = MAXTIME_T, t2 = MAXTIME_T;
+1791         if (*de1) t1 = (*de1)->Propagated_Target_Date(false);
+1792         if (*de2) t2 = (*de2)->Propagated_Target_Date(false);
+1793         if (t1==t2) return 0;
+1794         if (t1<t2) return -1;
+1795         return 1;
+1796 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!double2time@{double2time}}
+\index{double2time@{double2time}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}time\_\-t double2time (double {\em t})}\label{utilities_8cc_a27}
+
+
+
+
+Definition at line 1893 of file utilities.cc.
+
+Referenced by DIL\_\-entry::Get\_\-Entry\_\-Parameters().
+
+
+
+\footnotesize\begin{verbatim}1893                              {
+1894         struct tm td;
+1895         td.tm_sec = 0; // seconds not explicit
+1896         td.tm_min = (int) fmod(t,100.0); t /= 100.0;
+1897         td.tm_hour = (int) fmod(t,100.0); t /= 100.0;
+1898         td.tm_mday = (int) fmod(t,100.0); t /= 100.0;
+1899         td.tm_mon = ((int) fmod(t,100.0))-1; t /= 100.0;
+1900         td.tm_year = ((int) t)-1900;
+1901         td.tm_wday = 0;
+1902         td.tm_yday = 0;
+1903         td.tm_isdst = 0;
+1904         return mktime(&td);
+1905 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!Elipsis_At@{Elipsis\_\-At}}
+\index{Elipsis_At@{Elipsis\_\-At}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Elipsis\_\-At ({\bf String} \& {\em s}, int {\em maxsize})}\label{utilities_8cc_a78}
+
+
+
+
+Definition at line 2634 of file utilities.cc.
+
+References String::before(), and String::length().
+
+Referenced by AL\_\-Passed\_\-Target\_\-Dates(), generate\_\-AL(), Active\_\-List::generate\_\-focused\_\-AL(), generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-Superiors(), Active\_\-List::generate\_\-wide\_\-AL(), update\_\-main\_\-ALs(), DIL\_\-Visualize\_\-with\_\-FORM\_\-Tabs::Visualize\_\-Element(), and DIL\_\-Visualize\_\-with\_\-HTML\_\-Tabs::Visualize\_\-Element().
+
+
+
+\footnotesize\begin{verbatim}2634                                         {
+2635 // returns the length of the resulting string
+2636         if (s.length()>maxsize) {
+2637                 s = s.before(maxsize);
+2638                 s = s.before(BigRegex("[        \n.,;:]"),-1);
+2639                 s += "...";
+2640         }
+2641         return s.length();
+2642 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!file_is_directory@{file\_\-is\_\-directory}}
+\index{file_is_directory@{file\_\-is\_\-directory}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool file\_\-is\_\-directory ({\bf String} {\em filepath})}\label{utilities_8cc_a34}
+
+
+
+
+Definition at line 1988 of file utilities.cc.
+
+References EOUT.
+
+Referenced by Get\_\-Target\_\-Directory(), search\_\-cmd(), and Target\_\-Access::set\_\-target().
+
+
+
+\footnotesize\begin{verbatim}1988                                         {
+1989         struct stat fs;
+1990         if (stat(filepath,&fs)!=0) {
+1991                 if (verbose) EOUT << "dil2al: Error reading file attributes of " << filepath << "in file_is_directory()\n";
+1992                 return false;
+1993         }
+1994         return S_ISDIR(fs.st_mode);
+1995 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!file_is_regular@{file\_\-is\_\-regular}}
+\index{file_is_regular@{file\_\-is\_\-regular}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool file\_\-is\_\-regular ({\bf String} {\em filepath})}\label{utilities_8cc_a32}
+
+
+
+
+Definition at line 1970 of file utilities.cc.
+
+References EOUT.
+
+
+
+\footnotesize\begin{verbatim}1970                                       {
+1971         struct stat fs;
+1972         if (stat(filepath,&fs)!=0) {
+1973                 if (verbose) EOUT << "dil2al: Error reading file attributes of " << filepath << " in file_is_regular()\n";
+1974                 return false;
+1975         }
+1976         return S_ISREG(fs.st_mode);
+1977 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!file_is_regular_or_symlink@{file\_\-is\_\-regular\_\-or\_\-symlink}}
+\index{file_is_regular_or_symlink@{file\_\-is\_\-regular\_\-or\_\-symlink}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool file\_\-is\_\-regular\_\-or\_\-symlink ({\bf String} {\em filepath})}\label{utilities_8cc_a33}
+
+
+
+
+Definition at line 1979 of file utilities.cc.
+
+References EOUT.
+
+Referenced by Get\_\-Target\_\-Directory().
+
+
+
+\footnotesize\begin{verbatim}1979                                                  {
+1980         struct stat fs;
+1981         if (stat(filepath,&fs)!=0) {
+1982                 if (verbose) EOUT << "dil2al: Error reading file attributes of " << filepath << "in file_is_regular_or_symlink()\n";
+1983                 return false;
+1984         }
+1985         return (S_ISREG(fs.st_mode) || (S_ISLNK(fs.st_mode)));
+1986 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!find_delimiter@{find\_\-delimiter}}
+\index{find_delimiter@{find\_\-delimiter}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int find\_\-delimiter ({\bf String} \& {\em str}, int {\em startpos}, int {\em lenlimit}, char {\em delimiter} = '$\backslash$n')\hspace{0.3cm}{\tt  [inline]}}\label{utilities_8cc_a43}
+
+
+
+
+Definition at line 2158 of file utilities.cc.
+
+References String::index().
+
+Referenced by Detailed\_\-Items\_\-List::Get\_\-Project\_\-Data().
+
+
+
+\footnotesize\begin{verbatim}2158                                                                                            {
+2159         int delimpos = str.index(delimiter,startpos);
+2160         if (delimpos>=lenlimit) return -1;
+2161         return delimpos;
+2162 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!find_in_line@{find\_\-in\_\-line}}
+\index{find_in_line@{find\_\-in\_\-line}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int find\_\-in\_\-line (ifstream $\ast$ {\em lf}, const char $\ast$ {\em pattern}, int {\em nsub}, {\bf String} $\ast$ {\em dilid}, const char $\ast$ {\em before}, char $\ast$ {\em lbuf}, int {\em llen})}\label{utilities_8cc_a48}
+
+
+
+
+Definition at line 2285 of file utilities.cc.
+
+References EOUT.
+
+Referenced by add\_\-new\_\-to\_\-DIL(), get\_\-active\_\-DIL\_\-IDs(), and select\_\-TL\_\-AL\_\-refs().
+
+
+
+\footnotesize\begin{verbatim}2285                                                                                                                             {
+2286 // takes an open ifstream and searches for the regex pattern with nsub subexpressions
+2287 // before a line with the ``before'' pattern (NULL = EOF)
+2288 // returns substrings in dilid and the return value
+2289 // 1 (found ``pattern''), 0 (found ``before''), -1 (EOF),
+2290 // -2 (wrong #substrings), -3 (regex error) -4 (file not open)
+2291         const int SLEN = 1024;
+2292         char sbuf[SLEN];
+2293         regex_t re,be;
+2294         regmatch_t * rm;
+2295         int mres;
+2296         bool done;
+2297         if (*lf) {
+2298                 if (nsub) rm = new regmatch_t[nsub];
+2299                 else rm = NULL;
+2300                 if (regcomp(&re,pattern, REG_EXTENDED) != 0) {
+2301                         EOUT << "dil2al: Unable to compile ``pattern'' regular expression in find_in_line()\n";
+2302                         return -3;
+2303                 }
+2304                 if (before) {
+2305                         if (regcomp(&be,before, REG_EXTENDED|REG_NOSUB) != 0) {
+2306                                 regfree(&re);
+2307                                 EOUT << "dil2al: Unable to compile ``before'' regular expression in find_in_line()\n";
+2308                                 return -3;
+2309                         }
+2310                 }
+2311                 done = false;
+2312                 while (!done) {
+2313                         if (lf->eof()) { mres = 2; done=true; }
+2314                         else {
+2315                                 lf->getline(lbuf,llen);
+2316                                 if (before) mres = regexec(&be,lbuf, (size_t) 0, NULL, 0);
+2317                                 if ((before) && (mres != 0) && (mres != REG_NOMATCH)) {
+2318                                         EOUT << "dil2al: Internal error while matching ``before'' in find_in_line()\n";
+2319                                         mres = 4; done = true;
+2320                                 } else {
+2321                                         if ((before) && (mres==0)) { mres = 1; done = true; }
+2322                                         else {
+2323                                                 mres = regexec(&re,lbuf, (size_t) nsub, rm, 0);
+2324                                                 if ((mres != 0) && (mres != REG_NOMATCH)) {
+2325                                                         EOUT << "dil2al: Internal error while matching ``pattern'' in find_in_line()\n";
+2326                                                         mres = 4; done = true;
+2327                                                 } else {
+2328                                                         if (!mres) {
+2329                                                                 done = true;
+2330                                                                 if (nsub) {
+2331                                                                         if (rm[nsub-1].rm_so==-1) {
+2332                                                                                 EOUT << "dil2al: Wrong number of substring matches in find_in_line()\n";
+2333                                                                                 mres = 3;
+2334                                                                         } else {
+2335                                                                                 for (int i=0; i<nsub; i++) {
+2336                                                                                         strncpy(sbuf,&lbuf[rm[i].rm_so],rm[i].rm_eo-rm[i].rm_so);
+2337                                                                                         sbuf[rm[i].rm_eo-rm[i].rm_so]='\0';
+2338                                                                                         dilid[i] = sbuf;
+2339                                                                                 }
+2340                                                                         }
+2341                                                                 }
+2342                                                         }
+2343                                                 }
+2344                                         }
+2345                                 }
+2346                         }
+2347                 }
+2348                 regfree(&re);
+2349                 regfree(&be);
+2350                 if (nsub) delete[] rm;
+2351                 return (-mres) + 1;
+2352         } else {
+2353                 EOUT << "dil2al: file not open in find_in_line()\n";
+2354                 return -4;
+2355         }
+2356 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!find_line@{find\_\-line}}
+\index{find_line@{find\_\-line}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool find\_\-line (ifstream $\ast$ {\em lf}, const char $\ast$ {\em pattern}, char $\ast$ {\em lbuf}, int {\em llen})}\label{utilities_8cc_a46}
+
+
+
+
+Definition at line 2217 of file utilities.cc.
+
+References EOUT.
+
+Referenced by add\_\-new\_\-to\_\-DIL(), get\_\-active\_\-DIL\_\-IDs(), get\_\-topic\_\-keywords(), make\_\-note(), Topical\_\-DIL\_\-Files::Refresh(), select\_\-TL\_\-AL\_\-refs(), and select\_\-TL\_\-DIL\_\-refs().
+
+
+
+\footnotesize\begin{verbatim}2217                                                                            {
+2218 // takes an open ifstream and searches for the regex pattern
+2219         regex_t re;
+2220         int mres;
+2221         if (*lf) {
+2222                 if (regcomp(&re,pattern, REG_EXTENDED|REG_NOSUB) != 0) {
+2223                         EOUT << "dil2al: Unable to compile regular expression in find_line()\n";
+2224                         return false;
+2225                 }
+2226                 mres = 1;
+2227                 while (mres!=0) {
+2228                         if (lf->eof()) {
+2229                                 regfree(&re);
+2230                                 return false;
+2231                         }
+2232                         lf->getline(lbuf,llen);
+2233                         mres = regexec(&re,lbuf, (size_t) 0, NULL, 0);
+2234                         if ((mres != 0) && (mres != REG_NOMATCH)) {
+2235                                 EOUT << "dil2al: Internal error while matching in find_line()\n";
+2236                                 regfree(&re);
+2237                                 return false;
+2238                         }
+2239                 }
+2240                 regfree(&re);
+2241                 return true;
+2242         } else {
+2243                 EOUT << "dil2al: file not open in find_line()\n";
+2244                 return false;
+2245         }
+2246 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!get_double@{get\_\-double}}
+\index{get_double@{get\_\-double}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}double get\_\-double ({\bf String} {\em valstr}, double {\em defval} = 0.0, bool $\ast$ {\em gotdouble} = NULL)}\label{utilities_8cc_a82}
+
+
+
+
+Definition at line 2685 of file utilities.cc.
+
+References String::empty(), and String::matches().
+
+Referenced by modify\_\-element\_\-through\_\-FORM\_\-interface(), and modify\_\-element\_\-through\_\-FORM\_\-interface\_\-DIL\_\-Superiors().
+
+
+
+\footnotesize\begin{verbatim}2685                                                                                {
+2686   // attempts to extract a double variable value from a string
+2687   // if no double variable value is found then the value defval is assigned
+2688   bool gotdoubledummy;
+2689   if (!gotdouble) gotdouble = &gotdoubledummy;
+2690   if (valstr.empty()) { (*gotdouble) = false; return defval; }
+2691   if (((*gotdouble)=valstr.matches(BRXdouble))==true) return atof((const char *) valstr);
+2692   else return defval;
+2693 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!get_file_in_list@{get\_\-file\_\-in\_\-list}}
+\index{get_file_in_list@{get\_\-file\_\-in\_\-list}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int get\_\-file\_\-in\_\-list ({\bf String} \& {\em fname}, {\bf String\-List} \& {\em srcf}, {\bf String\-List} \& {\em srcfname}, int \& {\em srcfnum})}\label{utilities_8cc_a40}
+
+
+
+
+Definition at line 2101 of file utilities.cc.
+
+References EOUT, String\-List::iselement(), and read\_\-file\_\-into\_\-String().
+
+Referenced by extract\_\-hierarchy\_\-depth\_\-decrease\_\-to\_\-paper(), extract\_\-hierarchy\_\-depth\_\-increase\_\-to\_\-paper(), extract\_\-recursively(), Text\_\-File\_\-Buffers::File\-Index(), Detailed\_\-Items\_\-List::Get\_\-All\_\-DIL\_\-ID\_\-File\_\-Parameters(), Detailed\_\-Items\_\-List::Get\_\-All\_\-Topical\_\-DIL\_\-Parameters(), get\_\-figure\_\-data(), and update\_\-DIL\_\-entry\_\-elements().
+
+
+
+\footnotesize\begin{verbatim}2101                                                                                              {
+2102 // load a file if it is not already in a list of file-strings
+2103         int srcidx;
+2104         if ((srcidx = srcfname.iselement(fname))<0) {
+2105                 if (!read_file_into_String(fname,srcf[srcfnum])) {
+2106                         EOUT << "dil2al: Unable to load source document " << fname << " in get_file_in_list()\n";
+2107                         return -1;
+2108                 }
+2109                 srcfname[srcfnum] = fname;
+2110                 srcidx = srcfnum;
+2111                 srcfnum++;
+2112         }
+2113         return srcidx;
+2114 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!HTML_get_href@{HTML\_\-get\_\-href}}
+\index{HTML_get_href@{HTML\_\-get\_\-href}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int HTML\_\-get\_\-href ({\bf String} \& {\em htmlstr}, int {\em strloc}, {\bf String} \& {\em hrefurl}, {\bf String} \& {\em hreftext}, int $\ast$ {\em hrefstart} = NULL)}\label{utilities_8cc_a58}
+
+
+
+
+Definition at line 2483 of file utilities.cc.
+
+References String::at(), EOUT, String::index(), Big\-Regex::match\_\-info(), and String::SEARCH\_\-END.
+
+Referenced by generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-entry\_\-content(), Detailed\_\-Items\_\-List::Get\_\-All\_\-DIL\_\-ID\_\-File\_\-Parameters(), Plan\_\-entry\_\-content::Parse\_\-Entry\_\-Content(), remove\_\-AL\_\-TC(), select\_\-TL\_\-DIL\_\-refs(), and update\_\-main\_\-ALs().
+
+
+
+\footnotesize\begin{verbatim}2483                                                                                                              {
+2484 // *** warning, this function can't deal properly yet with HREFs that contain
+2485 //     HTML font formatting commands (e.g. <B>) in the reference text!
+2486         const BigRegex h("[<][Aa][      ]+[^>]*[Hh][Rr][Ee][Ff][        ]*=[    ]*\"\\([^\"]*\\)\"[^>]*[>]\\([^<]*\\)[<]/[Aa][  ]?[^>]*[>]");
+2487         if ((strloc=htmlstr.index(h,String::SEARCH_END,strloc))>=0) {
+2488                 int s,l;
+2489                 if (hrefstart) {
+2490                   if (!h.match_info(s,l,0)) return -1;
+2491                   else *hrefstart = s;
+2492                 }
+2493                 if (!h.match_info(s,l,1)) return -1;
+2494                 if (l==0) {
+2495                         EOUT << "dil2al: Missing HREF URL at " << s << " in HTML_get_href()\n";
+2496                         return -1;
+2497                 }
+2498                 hrefurl = htmlstr.at(s,l);
+2499                 if (!h.match_info(s,l,2)) return -1;
+2500                 if (l==0) EOUT << "dil2al: Warning - Invisible HREF anchor at " << s << " in HTML_get_href(), continuing\n";
+2501                 hreftext = htmlstr.at(s,l);
+2502         }
+2503         return strloc;
+2504 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!HTML_get_list@{HTML\_\-get\_\-list}}
+\index{HTML_get_list@{HTML\_\-get\_\-list}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int HTML\_\-get\_\-list ({\bf String} \& {\em htmlstr}, int {\em strloc}, {\bf String} \& {\em listparams}, {\bf String} \& {\em listcontent}, int $\ast$ {\em liststart} = NULL)}\label{utilities_8cc_a56}
+
+
+
+
+Definition at line 2469 of file utilities.cc.
+
+References HTML\_\-get\_\-tagged\_\-environment().
+
+Referenced by Plan\_\-entry\_\-content::Parse\_\-Entry\_\-Content(), and update\_\-main\_\-ALs().
+
+
+
+\footnotesize\begin{verbatim}2469                                                                                                                    {
+2470         const BigRegex lm("[<][UuOo][Ll]");
+2471         const BigRegex l("\\([<]/[UuOo][Ll]\\|[<]/[Tt][Aa][Bb][Ll][Ee]\\|[<]/[Bb][Oo][Dd][Yy]\\|[<]/[Hh][Tt][Mm][Ll]\\)");
+2472         const BigRegex le("[<]/[UuOo][Ll][^>][>]"); 
+2473         return HTML_get_tagged_environment(lm,l,le,htmlstr,strloc,listparams,listcontent,liststart);
+2474 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!HTML_get_list_item@{HTML\_\-get\_\-list\_\-item}}
+\index{HTML_get_list_item@{HTML\_\-get\_\-list\_\-item}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int HTML\_\-get\_\-list\_\-item ({\bf String} \& {\em htmlstr}, int {\em strloc}, {\bf String} \& {\em itemparams}, {\bf String} \& {\em itemcontent}, int $\ast$ {\em itemstart} = NULL)}\label{utilities_8cc_a57}
+
+
+
+
+Definition at line 2476 of file utilities.cc.
+
+References HTML\_\-get\_\-tagged\_\-environment().
+
+Referenced by Plan\_\-entry\_\-content::Parse\_\-Entry\_\-Content(), and update\_\-main\_\-ALs().
+
+
+
+\footnotesize\begin{verbatim}2476                                                                                                                         {
+2477         const BigRegex im("[<][Ll][Ii]");
+2478         const BigRegex i("\\([<]/?[Ll][Ii]\\|[<]/[UuOo][Ll]\\|[<]/[Tt][Aa][Bb][Ll][Ee]\\|[<]/[Bb][Oo][Dd][Yy]\\|[<]/[Hh][Tt][Mm][Ll]\\)");
+2479         const BigRegex ie("[<]/[Ll][Ii][^>][>]");
+2480         return HTML_get_tagged_environment(im,i,ie,htmlstr,strloc,itemparams,itemcontent,itemstart);
+2481 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!HTML_get_marker@{HTML\_\-get\_\-marker}}
+\index{HTML_get_marker@{HTML\_\-get\_\-marker}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int HTML\_\-get\_\-marker ({\bf String} \& {\em htmlstr}, int {\em strloc}, {\bf String} \& {\em marker}, bool {\em locate} = {\bf true})}\label{utilities_8cc_a51}
+
+
+
+
+Definition at line 2411 of file utilities.cc.
+
+References String::at(), String::index(), String::length(), and Big\-Regex::match\_\-info().
+
+Referenced by HTML\_\-get\_\-tagged\_\-environment().
+
+
+
+\footnotesize\begin{verbatim}2411                                                                                       {
+2412         const BigRegex m("[<][^>]+[>]");
+2413         // find start of marker
+2414         if (locate) {
+2415                 if ((strloc=htmlstr.index(m,strloc))<0) return -1;
+2416                 // get marker
+2417                 int s,l;
+2418                 m.match_info(s,l,0);
+2419                 marker = htmlstr.at(s,l);
+2420                 return strloc+l;
+2421         }
+2422         // get marker
+2423         marker = htmlstr.at(m,strloc); // assumes marker starts at strloc
+2424         return strloc+marker.length();
+2425 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!HTML_get_name@{HTML\_\-get\_\-name}}
+\index{HTML_get_name@{HTML\_\-get\_\-name}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int HTML\_\-get\_\-name ({\bf String} \& {\em htmlstr}, int {\em strloc}, {\bf String} \& {\em nametag}, {\bf String} \& {\em nametext})}\label{utilities_8cc_a59}
+
+
+
+
+Definition at line 2506 of file utilities.cc.
+
+References String::at(), EOUT, String::index(), Big\-Regex::match\_\-info(), and String::SEARCH\_\-END.
+
+Referenced by Detailed\_\-Items\_\-List::Get\_\-All\_\-Topical\_\-DIL\_\-Parameters(), and update\_\-main\_\-ALs().
+
+
+
+\footnotesize\begin{verbatim}2506                                                                                      {
+2507         const BigRegex n("[<][Aa][      ]+[^>]*[Nn][Aa][Mm][Ee][        ]*=[    ]*\"\\([^\"]*\\)\"[^>]*[>]\\([^<]*\\)[<]/[Aa][  ]?[^>]*[>]");
+2508         if ((strloc=htmlstr.index(n,String::SEARCH_END,strloc))>=0) {
+2509                 int s,l;
+2510                 if (!n.match_info(s,l,1)) return -1;
+2511                 if (l==0) {
+2512                         EOUT << "dil2al: Missing NAME tag at " << s << " in HTML_get_name()\n";
+2513                         return -1;
+2514                 }
+2515                 nametag = htmlstr.at(s,l);
+2516                 if (!n.match_info(s,l,2)) return -1;
+2517                 if (l==0) EOUT << "dil2al: Warning - Invisible NAME anchor at " << s << " in HTML_get_name(), continuing\n";
+2518                 nametext = htmlstr.at(s,l);
+2519         }
+2520         return strloc;
+2521 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!HTML_get_table_cell@{HTML\_\-get\_\-table\_\-cell}}
+\index{HTML_get_table_cell@{HTML\_\-get\_\-table\_\-cell}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int HTML\_\-get\_\-table\_\-cell ({\bf String} \& {\em htmlstr}, int {\em strloc}, {\bf String} \& {\em cellparams}, {\bf String} \& {\em cellcontent}, int $\ast$ {\em cellstart} = NULL)}\label{utilities_8cc_a54}
+
+
+
+
+Definition at line 2455 of file utilities.cc.
+
+References HTML\_\-get\_\-tagged\_\-environment().
+
+Referenced by Financial\_\-Note::get(), get\_\-AL\_\-entry(), Detailed\_\-Items\_\-List::Get\_\-All\_\-DIL\_\-ID\_\-File\_\-Parameters(), Detailed\_\-Items\_\-List::Get\_\-All\_\-Topical\_\-DIL\_\-Parameters(), select\_\-TL\_\-DIL\_\-refs(), and update\_\-DIL\_\-entry\_\-elements().
+
+
+
+\footnotesize\begin{verbatim}2455                                                                                                                          {
+2456         const BigRegex cm("[<][Tt][Dd]");
+2457         const BigRegex c("\\([<]/?[Tt][DdRr]\\|[<]/[Tt][Aa][Bb][Ll][Ee]\\|[<]/[Bb][Oo][Dd][Yy]\\|[<]/[Hh][Tt][Mm][Ll]\\)");
+2458         const BigRegex ce("[<]/[Tt][Dd][^>]*[>]");
+2459         return HTML_get_tagged_environment(cm,c,ce,htmlstr,strloc,cellparams,cellcontent,cellstart);
+2460 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!HTML_get_table_row@{HTML\_\-get\_\-table\_\-row}}
+\index{HTML_get_table_row@{HTML\_\-get\_\-table\_\-row}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int HTML\_\-get\_\-table\_\-row ({\bf String} \& {\em htmlstr}, int {\em strloc}, {\bf String} \& {\em rowparams}, {\bf String} \& {\em rowcontent}, int $\ast$ {\em rowstart} = NULL)}\label{utilities_8cc_a55}
+
+
+
+
+Definition at line 2462 of file utilities.cc.
+
+References HTML\_\-get\_\-tagged\_\-environment().
+
+Referenced by Financial\_\-Note::get(), get\_\-AL\_\-entry(), Detailed\_\-Items\_\-List::Get\_\-All\_\-Topical\_\-DIL\_\-Parameters(), and Detailed\_\-Items\_\-List::Write\_\-to\_\-File().
+
+
+
+\footnotesize\begin{verbatim}2462                                                                                                                      {
+2463         const BigRegex rm("[<][Tt][Rr]");
+2464         const BigRegex r("\\([<]/?[Tt][Rr]\\|[<]/[Tt][Aa][Bb][Ll][Ee]\\|[<]/[Bb][Oo][Dd][Yy]\\|[<]/[Hh][Tt][Mm][Ll]\\)");
+2465         const BigRegex re("[<]/[Tt][Rr][^>][>]");
+2466         return HTML_get_tagged_environment(rm,r,re,htmlstr,strloc,rowparams,rowcontent,rowstart);
+2467 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!HTML_get_tagged_environment@{HTML\_\-get\_\-tagged\_\-environment}}
+\index{HTML_get_tagged_environment@{HTML\_\-get\_\-tagged\_\-environment}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int HTML\_\-get\_\-tagged\_\-environment (const {\bf Big\-Regex} \& {\em begintag}, const {\bf Big\-Regex} \& {\em endmatch}, const {\bf Big\-Regex} \& {\em endtag}, {\bf String} \& {\em htmlstr}, int {\em strloc}, {\bf String} \& {\em envparams}, {\bf String} \& {\em envcontent}, int $\ast$ {\em envstart} = NULL)}\label{utilities_8cc_a53}
+
+
+
+
+Definition at line 2433 of file utilities.cc.
+
+References String::at(), HTML\_\-get\_\-marker(), String::index(), String::length(), and String::SEARCH\_\-END.
+
+Referenced by HTML\_\-get\_\-list(), HTML\_\-get\_\-list\_\-item(), HTML\_\-get\_\-table\_\-cell(), and HTML\_\-get\_\-table\_\-row().
+
+
+
+\footnotesize\begin{verbatim}2433                                                                                                                                                                                                              {
+2434 // searches for an environment beginning with a tag matching begintag,
+2435 // determines the environment end according to possible matches in endmatch,
+2436 // returns tag parameters in envparams, environment contents in envcontent,
+2437 // optionally returns the start of the environment in envstart, and
+2438 // returns the position directly after the environment and a potential
+2439 // endtag
+2440         // find start of environment
+2441         if ((strloc=htmlstr.index(begintag,strloc))<0) return -1;
+2442         if (envstart) (*envstart) = strloc;
+2443         // get environment tag parameters
+2444         if ((strloc=HTML_get_marker(htmlstr,strloc,envparams,false))<0) return -1;
+2445         // get environment content
+2446         int envend = htmlstr.index(endmatch,strloc);
+2447         if (envend<0) envend = htmlstr.length();
+2448         envcontent = htmlstr.at(strloc,envend-strloc);
+2449         // skip possible end tag
+2450         int envendtagend = htmlstr.index(endtag,String::SEARCH_END,envend);
+2451         if (envendtagend>=0) envend = envendtagend;
+2452         return envend;
+2453 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!HTML_marker_arguments@{HTML\_\-marker\_\-arguments}}
+\index{HTML_marker_arguments@{HTML\_\-marker\_\-arguments}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} HTML\_\-marker\_\-arguments ({\bf String} \& {\em marker})}\label{utilities_8cc_a52}
+
+
+
+
+Definition at line 2427 of file utilities.cc.
+
+References String::before(), String::from(), String::length(), and res.
+
+Referenced by Detailed\_\-Items\_\-List::Write\_\-to\_\-File().
+
+
+
+\footnotesize\begin{verbatim}2427                                               {
+2428         const BigRegex a("[     ]");
+2429         String res = marker.from(a); if (res.length()>=1) res = res.before((int) res.length()-1);
+2430         return res;
+2431 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!HTML_put_form@{HTML\_\-put\_\-form}}
+\index{HTML_put_form@{HTML\_\-put\_\-form}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} HTML\_\-put\_\-form ({\bf String} {\em formmethod}, {\bf String} {\em formaction}, {\bf String} {\em formcontent})}\label{utilities_8cc_a70}
+
+
+
+
+Definition at line 2593 of file utilities.cc.
+
+Referenced by AL\_\-Passed\_\-Target\_\-Dates().
+
+
+
+\footnotesize\begin{verbatim}2593                                                                                {
+2594         return "<FORM METHOD="+formmethod+" ACTION=\""+formaction+"\">"+formcontent+"</FORM>";
+2595 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!HTML_put_form_checkbox@{HTML\_\-put\_\-form\_\-checkbox}}
+\index{HTML_put_form_checkbox@{HTML\_\-put\_\-form\_\-checkbox}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} HTML\_\-put\_\-form\_\-checkbox ({\bf String} {\em checkboxname}, {\bf String} {\em checkboxvalue}, {\bf String} {\em checkboxtext}, bool {\em checked} = {\bf false})}\label{utilities_8cc_a75}
+
+
+
+
+Definition at line 2617 of file utilities.cc.
+
+References HTML\_\-put\_\-form\_\-input().
+
+Referenced by AL\_\-Passed\_\-Target\_\-Dates(), generate\_\-AL(), and generate\_\-EPS\_\-cells().
+
+
+
+\footnotesize\begin{verbatim}2617                                                                                                                     {
+2618         String checkedstr;
+2619         if (checked) checkedstr = "\" checked"; else checkedstr = "\"";
+2620         return HTML_put_form_input("checkbox","name=\""+checkboxname+"\" value=\""+checkboxvalue+checkedstr)+' '+checkboxtext;
+2621 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!HTML_put_form_input@{HTML\_\-put\_\-form\_\-input}}
+\index{HTML_put_form_input@{HTML\_\-put\_\-form\_\-input}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} HTML\_\-put\_\-form\_\-input ({\bf String} {\em inputtype}, {\bf String} {\em inputargs})}\label{utilities_8cc_a71}
+
+
+
+
+Definition at line 2597 of file utilities.cc.
+
+References String::length().
+
+Referenced by AL\_\-Passed\_\-Target\_\-Dates(), HTML\_\-put\_\-form\_\-checkbox(), HTML\_\-put\_\-form\_\-radio(), HTML\_\-put\_\-form\_\-reset(), HTML\_\-put\_\-form\_\-submit(), and HTML\_\-put\_\-form\_\-text().
+
+
+
+\footnotesize\begin{verbatim}2597                                                                {
+2598         String inputstr("<INPUT type=\""+inputtype+'"');
+2599         if (inputargs.length()>0) return inputstr+' '+inputargs+'>';
+2600         else return inputstr+'>';
+2601 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!HTML_put_form_radio@{HTML\_\-put\_\-form\_\-radio}}
+\index{HTML_put_form_radio@{HTML\_\-put\_\-form\_\-radio}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} HTML\_\-put\_\-form\_\-radio ({\bf String} {\em radioname}, {\bf String} {\em radiovalue}, {\bf String} {\em radiotext}, bool {\em checked} = {\bf false})}\label{utilities_8cc_a74}
+
+
+
+
+Definition at line 2611 of file utilities.cc.
+
+References HTML\_\-put\_\-form\_\-input().
+
+Referenced by AL\_\-Passed\_\-Target\_\-Dates(), and generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-Superiors().
+
+
+
+\footnotesize\begin{verbatim}2611                                                                                                         {
+2612         String checkedstr;
+2613         if (checked) checkedstr = "\" checked"; else checkedstr = "\"";
+2614         return HTML_put_form_input("radio","name=\""+radioname+"\" value=\""+radiovalue+checkedstr)+' '+radiotext;
+2615 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!HTML_put_form_reset@{HTML\_\-put\_\-form\_\-reset}}
+\index{HTML_put_form_reset@{HTML\_\-put\_\-form\_\-reset}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} HTML\_\-put\_\-form\_\-reset ()}\label{utilities_8cc_a73}
+
+
+
+
+Definition at line 2607 of file utilities.cc.
+
+References HTML\_\-put\_\-form\_\-input().
+
+Referenced by AL\_\-Passed\_\-Target\_\-Dates().
+
+
+
+\footnotesize\begin{verbatim}2607                              {
+2608         return HTML_put_form_input("reset","");
+2609 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!HTML_put_form_submit@{HTML\_\-put\_\-form\_\-submit}}
+\index{HTML_put_form_submit@{HTML\_\-put\_\-form\_\-submit}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} HTML\_\-put\_\-form\_\-submit ({\bf String} {\em submittext})}\label{utilities_8cc_a72}
+
+
+
+
+Definition at line 2603 of file utilities.cc.
+
+References HTML\_\-put\_\-form\_\-input().
+
+Referenced by AL\_\-Passed\_\-Target\_\-Dates().
+
+
+
+\footnotesize\begin{verbatim}2603                                                {
+2604         return HTML_put_form_input("submit","value=\""+submittext+'"');
+2605 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!HTML_put_form_text@{HTML\_\-put\_\-form\_\-text}}
+\index{HTML_put_form_text@{HTML\_\-put\_\-form\_\-text}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} HTML\_\-put\_\-form\_\-text ({\bf String} {\em textname}, long {\em maxlen} = -1)}\label{utilities_8cc_a77}
+
+
+
+
+Definition at line 2630 of file utilities.cc.
+
+Referenced by AL\_\-Passed\_\-Target\_\-Dates(), generate\_\-AL(), and generate\_\-EPS\_\-cells().
+
+
+
+\footnotesize\begin{verbatim}2630                                                              {
+2631         return HTML_put_form_text(textname,"",maxlen);
+2632 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!HTML_put_form_text@{HTML\_\-put\_\-form\_\-text}}
+\index{HTML_put_form_text@{HTML\_\-put\_\-form\_\-text}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} HTML\_\-put\_\-form\_\-text ({\bf String} {\em textname}, {\bf String} {\em textvalue}, long {\em maxlen} = -1)}\label{utilities_8cc_a76}
+
+
+
+
+Definition at line 2623 of file utilities.cc.
+
+References HTML\_\-put\_\-form\_\-input(), and String::length().
+
+
+
+\footnotesize\begin{verbatim}2623                                                                                {
+2624         textname += '"';
+2625         if (textvalue.length()>0) textname += " value=\"" + textvalue + '"';
+2626         if (maxlen>0) textname += " maxlength=" + String(maxlen);
+2627         return HTML_put_form_input("text","name=\""+textname);
+2628 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!HTML_put_href@{HTML\_\-put\_\-href}}
+\index{HTML_put_href@{HTML\_\-put\_\-href}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} HTML\_\-put\_\-href ({\bf String} {\em hrefurl}, {\bf String} {\em hreftext})}\label{utilities_8cc_a68}
+
+
+
+
+Definition at line 2585 of file utilities.cc.
+
+Referenced by AL\_\-Day\_\-Marker(), AL\_\-Passed\_\-Target\_\-Dates(), generate\_\-AL(), Active\_\-List::generate\_\-focused\_\-AL(), generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-entry\_\-content(), generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-entry\_\-parameters(), Active\_\-List::generate\_\-wide\_\-AL(), Target\_\-Access::make\_\-local\_\-copy\_\-of\_\-directory(), update\_\-main\_\-ALs(), DIL\_\-Visualize\_\-with\_\-FORM\_\-Tabs::Visualize\_\-Element(), DIL\_\-Visualize\_\-with\_\-HTML\_\-Tabs::Visualize\_\-Element(), and Detailed\_\-Items\_\-List::Write\_\-to\_\-File().
+
+
+
+\footnotesize\begin{verbatim}2585                                                       {
+2586         return "<A HREF=\""+hrefurl+"\">"+hreftext+"</A>";
+2587 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!HTML_put_list@{HTML\_\-put\_\-list}}
+\index{HTML_put_list@{HTML\_\-put\_\-list}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} HTML\_\-put\_\-list (char {\em listtype}, {\bf String} {\em htmlstr})}\label{utilities_8cc_a66}
+
+
+
+
+Definition at line 2577 of file utilities.cc.
+
+References HTML\_\-put\_\-structure().
+
+Referenced by update\_\-main\_\-ALs().
+
+
+
+\footnotesize\begin{verbatim}2577                                                    {
+2578         return HTML_put_structure(listtype+String("L"),"",htmlstr);
+2579 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!HTML_put_list_item@{HTML\_\-put\_\-list\_\-item}}
+\index{HTML_put_list_item@{HTML\_\-put\_\-list\_\-item}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} HTML\_\-put\_\-list\_\-item ({\bf String} {\em htmlstr}, bool {\em relaxedhtml} = {\bf false})}\label{utilities_8cc_a67}
+
+
+
+
+Definition at line 2581 of file utilities.cc.
+
+References HTML\_\-put\_\-structure().
+
+Referenced by Active\_\-List::generate\_\-wide\_\-AL(), and update\_\-main\_\-ALs().
+
+
+
+\footnotesize\begin{verbatim}2581                                                                     {
+2582         return HTML_put_structure("LI","",htmlstr,relaxedhtml);
+2583 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!HTML_put_name@{HTML\_\-put\_\-name}}
+\index{HTML_put_name@{HTML\_\-put\_\-name}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} HTML\_\-put\_\-name ({\bf String} {\em nametag}, {\bf String} {\em nametext})}\label{utilities_8cc_a69}
+
+
+
+
+Definition at line 2589 of file utilities.cc.
+
+Referenced by Detailed\_\-Items\_\-List::Write\_\-to\_\-File().
+
+
+
+\footnotesize\begin{verbatim}2589                                                       {
+2590         return "<A NAME=\""+nametag+"\">"+nametext+"</A>";
+2591 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!HTML_put_structure@{HTML\_\-put\_\-structure}}
+\index{HTML_put_structure@{HTML\_\-put\_\-structure}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} HTML\_\-put\_\-structure ({\bf String} {\em tag}, {\bf String} {\em params}, {\bf String} {\em content}, bool {\em relaxedhtml} = {\bf false})}\label{utilities_8cc_a63}
+
+
+
+
+Definition at line 2561 of file utilities.cc.
+
+References String::prepend().
+
+Referenced by HTML\_\-put\_\-list(), HTML\_\-put\_\-list\_\-item(), HTML\_\-put\_\-table\_\-cell(), and HTML\_\-put\_\-table\_\-row().
+
+
+
+\footnotesize\begin{verbatim}2561                                                                                                {
+2562         params.prepend('<'+tag);
+2563         params += '>'+content;
+2564         if (relaxedhtml) return params;
+2565         params += "</"+tag+">\n";
+2566         return params;
+2567 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!HTML_put_table_cell@{HTML\_\-put\_\-table\_\-cell}}
+\index{HTML_put_table_cell@{HTML\_\-put\_\-table\_\-cell}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} HTML\_\-put\_\-table\_\-cell ({\bf String} {\em cellparams}, {\bf String} {\em cellcontent}, bool {\em relaxedhtml} = {\bf false})}\label{utilities_8cc_a65}
+
+
+
+
+Definition at line 2573 of file utilities.cc.
+
+References HTML\_\-put\_\-structure().
+
+Referenced by AL\_\-Day\_\-Marker(), generate\_\-AL(), generate\_\-EPS\_\-cells(), Active\_\-List::generate\_\-focused\_\-AL(), Financial\_\-Note::put(), update\_\-DIL\_\-entry\_\-elements(), and Detailed\_\-Items\_\-List::Write\_\-to\_\-File().
+
+
+
+\footnotesize\begin{verbatim}2573                                                                                             {
+2574         return HTML_put_structure("TD",cellparams,cellcontent,relaxedhtml);
+2575 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!HTML_put_table_row@{HTML\_\-put\_\-table\_\-row}}
+\index{HTML_put_table_row@{HTML\_\-put\_\-table\_\-row}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} HTML\_\-put\_\-table\_\-row ({\bf String} {\em rowparams}, {\bf String} {\em rowcontent}, bool {\em relaxedhtml} = {\bf false})}\label{utilities_8cc_a64}
+
+
+
+
+Definition at line 2569 of file utilities.cc.
+
+References HTML\_\-put\_\-structure().
+
+Referenced by AL\_\-Day\_\-Marker(), generate\_\-AL(), Active\_\-List::generate\_\-focused\_\-AL(), Financial\_\-Note::put(), remove\_\-AL\_\-TC(), and Detailed\_\-Items\_\-List::Write\_\-to\_\-File().
+
+
+
+\footnotesize\begin{verbatim}2569                                                                                          {
+2570         return HTML_put_structure("TR",rowparams,rowcontent,relaxedhtml);
+2571 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!HTML_remove_comments@{HTML\_\-remove\_\-comments}}
+\index{HTML_remove_comments@{HTML\_\-remove\_\-comments}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String}$\ast$ HTML\_\-remove\_\-comments ({\bf String} \& {\em htmlstr})}\label{utilities_8cc_a61}
+
+
+
+
+Definition at line 2530 of file utilities.cc.
+
+References String::alloc(), String::at(), String::index(), String::length(), res, and String::SEARCH\_\-END.
+
+Referenced by Detailed\_\-Items\_\-List::Get\_\-All\_\-DIL\_\-ID\_\-File\_\-Parameters(), and Plan\_\-entry\_\-content::Parse\_\-Entry\_\-Content().
+
+
+
+\footnotesize\begin{verbatim}2530                                                 {
+2531   int cidx, cend = 0; String res;
+2532   res.alloc(htmlstr.length());
+2533   while ((cidx=htmlstr.index("<!--",cend))>=0) {
+2534     if (cidx>cend) res += htmlstr.at(cend,cidx-cend);
+2535     if ((cend=htmlstr.index(BigRegex("--[       ]*[>]"),String::SEARCH_END,cidx))<0) cend=htmlstr.length();
+2536   }
+2537   cidx=htmlstr.length();
+2538   if (cidx>cend) res += htmlstr.at(cend,cidx-cend);
+2539   htmlstr = res;
+2540   return &htmlstr;
+2541 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!HTML_remove_tags@{HTML\_\-remove\_\-tags}}
+\index{HTML_remove_tags@{HTML\_\-remove\_\-tags}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String}$\ast$ HTML\_\-remove\_\-tags ({\bf String} \& {\em htmlstr})}\label{utilities_8cc_a62}
+
+
+
+
+Definition at line 2555 of file utilities.cc.
+
+References String::gsub().
+
+Referenced by AL\_\-Passed\_\-Target\_\-Dates(), generate\_\-AL(), Active\_\-List::generate\_\-focused\_\-AL(), generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-Superiors(), Active\_\-List::generate\_\-wide\_\-AL(), Detailed\_\-Items\_\-List::Get\_\-All\_\-Topical\_\-DIL\_\-Parameters(), select\_\-TL\_\-DIL\_\-refs(), update\_\-DIL\_\-entry\_\-elements(), DIL\_\-Visualize\_\-with\_\-FORM\_\-Tabs::Visualize\_\-Element(), DIL\_\-Visualize\_\-with\_\-HTML\_\-Tabs::Visualize\_\-Element(), and DIL\_\-Visualize\_\-with\_\-Tabs::Visualize\_\-Element().
+
+
+
+\footnotesize\begin{verbatim}2555                                             {
+2556         const BigRegex m("[<][^>]+[>]");
+2557         htmlstr.gsub(m,"");
+2558         return &htmlstr;
+2559 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!HTML_safe@{HTML\_\-safe}}
+\index{HTML_safe@{HTML\_\-safe}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String}$\ast$ HTML\_\-safe ({\bf String} \& {\em textstr})}\label{utilities_8cc_a60}
+
+
+
+
+Definition at line 2523 of file utilities.cc.
+
+References String::gsub().
+
+Referenced by Search\_\-Result::HTML\_\-put\_\-text().
+
+
+
+\footnotesize\begin{verbatim}2523                                      {
+2524         textstr.gsub("&","&amp;");
+2525         textstr.gsub("<","&lt;");
+2526         textstr.gsub(">","&gt;");
+2527         return &textstr;
+2528 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!initialize_new_DIL_TL@{initialize\_\-new\_\-DIL\_\-TL}}
+\index{initialize_new_DIL_TL@{initialize\_\-new\_\-DIL\_\-TL}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool initialize\_\-new\_\-DIL\_\-TL ({\bf String} {\em initializecmd}, bool {\em includeinput})}\label{utilities_8cc_a49}
+
+
+
+
+Definition at line 2358 of file utilities.cc.
+
+References DIN, EOUT, generate\_\-TL\_\-chunk\_\-header(), generate\_\-TL\_\-entry\_\-header(), get\_\-new\_\-DIL\_\-ID(), and read\_\-data\_\-from\_\-stream().
+
+Referenced by dil2al\_\-commands().
+
+
+
+\footnotesize\begin{verbatim}2358                                                                     {
+2359 // sends a DIL template with a new DIL ID, or a Task Log chunk or entry template to stdout
+2360         if (initializecmd=="tc") { // initialize Task Log chunk
+2361                 cout << generate_TL_chunk_header("{"+curtime+"}","{relative-active-list-url}","{Active List Title}","{#tag-previous-AL-head}","relative-DIL-url","DIL Title/Non-DIL Identifying Comment","#tag-previous-DIL-head",-1) << "<!-- edit items in ``{}'' brackets";
+2362                 if (!includeinput) cout << " and add entries here";
+2363                 cout << " then close chunk -->\n";
+2364         } else if (initializecmd=="te") { // initialize Task Log entry
+2365                 cout << generate_TL_entry_header("{"+curtime+"}.{1}","{relative-active-list-url}","{Active List Title}","{#tag-previous-AL-head}","relative-DIL-url","DIL Title/Non-DIL Identifying Comment","#tag-previous-DIL-head") << "<!-- edit items in ``{}'' brackets";
+2366                 if (!includeinput) cout << " and add content here";
+2367                 cout << " -->\n";
+2368         } else { // initialize DIL entry
+2369                 String newdilid = get_new_DIL_ID();
+2370                 if (newdilid=="") {
+2371                         EOUT << "dil2al: Unable to generate new DIL ID in initialize_new_DIL_TL()\n";
+2372                         return false;
+2373                 }
+2374                 cout << "<TR BGCOLOR=\"#00005F\">\n<TD WIDTH=\"15%\"><A NAME=\""
+2375                         << newdilid << "\" HREF=\"detailed-items-by-ID.html#"
+2376                         << newdilid << "\">" << newdilid
+2377                         << "</A>\n<TD><B>time started:</B> - <B>time required:</B> ?.?hrs <B>completion ratio:</B> 0.0 <B>valuation:</B> ?.?\n<TR>\n<TD COLSPAN=2>";
+2378         }
+2379         if (includeinput) {
+2380                 const int LLEN = 10240;
+2381                 char lbuf[LLEN];
+2382                 String dentrybuf;
+2383                 read_data_from_stream(DIN,dentrybuf,"@End of DIL entry@");
+2384                 cout << dentrybuf;
+2385         }
+2386         if (initializecmd=="tc") { // Task Log chunk
+2387                 cout << generate_TL_chunk_header("","","","","","","",1);
+2388         } else if (initializecmd=="te") { // Task Log entry
+2389                 cout << "<P>\n\n";
+2390         } else { // DIL entry
+2391                 cout << "\n\n";
+2392         }
+2393         return true;
+2394 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!Int2HexStr@{Int2HexStr}}
+\index{Int2HexStr@{Int2HexStr}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} Int2Hex\-Str (unsigned int {\em i})}\label{utilities_8cc_a80}
+
+
+
+
+Definition at line 2666 of file utilities.cc.
+
+References String::prepend().
+
+
+
+\footnotesize\begin{verbatim}2666                                   {
+2667   // convert integer to hexadecimal string
+2668   String s;
+2669   if (i==0) s = "0";
+2670   else {
+2671     while (i>0) {
+2672       int j = i % 16; i = i / 16;
+2673       if (j<10) s.prepend(('0'+(char) j));
+2674       else s.prepend(('A'+(char) (j-10)));
+2675     }
+2676   }
+2677   return s;
+2678 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!Lock_File@{Lock\_\-File}}
+\index{Lock_File@{Lock\_\-File}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool Lock\_\-File ({\bf String} {\em lockfile}, {\bf String} {\em msgstr})}\label{utilities_8cc_a12}
+
+
+
+
+Definition at line 1399 of file utilities.cc.
+
+References EOUT, and prepare\_\-temporary\_\-file().
+
+Referenced by Detailed\_\-Items\_\-List::Read\_\-from\_\-Binary\_\-Cache(), Detailed\_\-Items\_\-List::Read\_\-Topical\_\-from\_\-Binary\_\-Cache(), Detailed\_\-Items\_\-List::Write\_\-to\_\-Binary\_\-Cache(), and Detailed\_\-Items\_\-List::Write\_\-Topical\_\-to\_\-Binary\_\-Cache().
+
+
+
+\footnotesize\begin{verbatim}1399                                                {
+1400   // check for lock file
+1401   struct stat statbuf;
+1402   if (stat(lockfile,&statbuf)!=-1) EOUT << "dil2al: Warning - lock file " << lockfile <<  " in use by other process, waiting for release of lock in Lock_File()\n";
+1403   while (stat(lockfile,&statbuf)!=-1) sleep(5);
+1404   // lock and write to binary cache file
+1405   return prepare_temporary_file(lockfile,msgstr);
+1406 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!pattern_in_line@{pattern\_\-in\_\-line}}
+\index{pattern_in_line@{pattern\_\-in\_\-line}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool pattern\_\-in\_\-line (const char $\ast$ {\em pattern}, char $\ast$ {\em lbuf})}\label{utilities_8cc_a44}
+
+
+
+
+Definition at line 2164 of file utilities.cc.
+
+References EOUT.
+
+Referenced by add\_\-new\_\-to\_\-DIL(), get\_\-active\_\-DIL\_\-IDs(), Topical\_\-DIL\_\-Files::Refresh(), and Set\_\-Parameter().
+
+
+
+\footnotesize\begin{verbatim}2164                                                         {
+2165         regex_t re;
+2166         int mres;
+2167         if (regcomp(&re,pattern, REG_EXTENDED|REG_NOSUB) != 0) {
+2168                 EOUT << "dil2al: Unable to compile regular expression in pattern_in_line()\n";
+2169                 return false;
+2170         }
+2171         mres = regexec(&re,lbuf, (size_t) 0, NULL, 0);
+2172         regfree(&re);
+2173         if ((mres != 0) && (mres != REG_NOMATCH)) {
+2174                 EOUT << "dil2al: Internal error while matching in pattern_in_line()\n";
+2175                 return false;
+2176         }
+2177         return (mres==0);
+2178 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!prepare_temporary_file@{prepare\_\-temporary\_\-file}}
+\index{prepare_temporary_file@{prepare\_\-temporary\_\-file}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool prepare\_\-temporary\_\-file ({\bf String} {\em tmpfile}, {\bf String} {\em initstr})}\label{utilities_8cc_a35}
+
+
+
+
+Definition at line 1997 of file utilities.cc.
+
+References EOUT.
+
+Referenced by Lock\_\-File(), and make\_\-note().
+
+
+
+\footnotesize\begin{verbatim}1997                                                             {
+1998 // Can be used to create temporary files (e.g. the dilref or,
+1999 // note or DIL entry stubs), and automatically back up the
+2000 // previous file if it exists. The stub is filled with the
+2001 // content of initstr and closed.
+2002         if (rename(tmpfile,tmpfile+".bak")<0) if (errno!=ENOENT) {
+2003                 EOUT << "dil2al: Unable to rename " << tmpfile << " to " << tmpfile+".bak in prepare_temporary_file()\n";
+2004                 return false;
+2005         }
+2006         ofstream ntf(tmpfile);
+2007         if (!ntf) {
+2008                 EOUT << "dil2al: Unable to create temporary file " << tmpfile << " in prepare_temporary_file()\n";
+2009                 return false;
+2010         }
+2011         if (initstr!="") ntf << initstr;
+2012         ntf.close();
+2013         return true;
+2014 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!read_data_from_stream@{read\_\-data\_\-from\_\-stream}}
+\index{read_data_from_stream@{read\_\-data\_\-from\_\-stream}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void read\_\-data\_\-from\_\-stream (istream \& {\em ifs}, {\bf String} \& {\em dstr}, const char $\ast$ {\em terminate})}\label{utilities_8cc_a42}
+
+
+
+
+Definition at line 2143 of file utilities.cc.
+
+Referenced by initialize\_\-new\_\-DIL\_\-TL(), modify\_\-DIL\_\-group\_\-target\_\-dates\_\-cmd(), and send\_\-dil\_\-to\_\-DIL().
+
+
+
+\footnotesize\begin{verbatim}2143                                                                                  {
+2144 // Reads data from a stream such as the data input stream
+2145 // DIN line by line. Returns when end of file or a line
+2146 // stating the terminate string is found.
+2147 // *** This can be replaced by String::readtotag if LLEN=4096 is sufficient.
+2148         const int LLEN = 10240;
+2149         char lbuf[LLEN];
+2150         while (ifs) {
+2151                 ifs.getline(lbuf,LLEN);
+2152                 if (ifs.eof()) break;
+2153                 if (strcmp(lbuf,terminate)==0) break;
+2154                 dstr = (dstr + lbuf) + '\n';
+2155         }
+2156 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!read_file_into_String@{read\_\-file\_\-into\_\-String}}
+\index{read_file_into_String@{read\_\-file\_\-into\_\-String}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool read\_\-file\_\-into\_\-String (bool \& {\em isnew}, {\bf String} {\em filename}, {\bf String} \& {\em filestr})}\label{utilities_8cc_a39}
+
+
+
+
+Definition at line 2074 of file utilities.cc.
+
+References EOUT.
+
+Referenced by add\_\-TL\_\-chunk\_\-or\_\-entry(), add\_\-TL\_\-section(), Assess\_\-Paper\_\-Correction\_\-Time(), chunk\_\-controller(), extract\_\-paper\_\-novelties(), extract\_\-paper\_\-plan\_\-to\_\-paper(), generate\_\-AL\_\-entry(), generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-entry\_\-parameters(), get\_\-file\_\-in\_\-list(), get\_\-Paper\_\-Plans\_\-Section\_\-IDs(), include\_\-article\_\-head\_\-template(), include\_\-article\_\-section\_\-head\_\-template(), include\_\-article\_\-tail\_\-template(), modify\_\-element\_\-through\_\-FORM\_\-interface(), pre\_\-process\_\-note(), Target\_\-Access::read\_\-cleartext\_\-into\_\-String(), read\_\-file\_\-into\_\-String(), read\_\-financial\_\-notes\_\-file(), Target\_\-Access::read\_\-raw\_\-into\_\-String(), Target\_\-Access::read\_\-uncompressed\_\-into\_\-String(), remove\_\-AL\_\-TC(), select\_\-TL\_\-DIL\_\-refs(), and update\_\-main\_\-ALs().
+
+
+
+\footnotesize\begin{verbatim}2074                                                                             {
+2075 // read the file called filename into filestr if it exists,
+2076 // optionally offer to create the file if it does not exist,
+2077 // or warn about the inability to open the file
+2078 // returns true if file content was read into filestr
+2079 // note that no file is created at this point, but the setting
+2080 // of the isnew flag can be used later (e.g. by the function
+2081 // write_string_to_file()) to anticipate new file creation
+2082         if (read_file_into_String(filename,filestr,false)) {
+2083                 isnew = false;
+2084                 return true;
+2085         } else {
+2086                 if (offercreate) {
+2087                         const int LLEN = 10;
+2088                         char lbuf[LLEN];
+2089                         cout << "File " << filename << "\ndoes not exist, create (y/N)? ";
+2090                         cin.getline(lbuf,LLEN);
+2091                         if ((lbuf[0]!='y') && (lbuf[0]!='Y')) return false;
+2092                         isnew = true;
+2093                         return true;
+2094                 } else {
+2095                         EOUT << "dil2al: Unable to open " << filename << " in read_file_into_String()\n";
+2096                         return false;
+2097                 }
+2098         }
+2099 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!read_file_into_String@{read\_\-file\_\-into\_\-String}}
+\index{read_file_into_String@{read\_\-file\_\-into\_\-String}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool read\_\-file\_\-into\_\-String ({\bf String} {\em filename}, {\bf String} \& {\em filestr}, bool {\em warnnoopen} = {\bf true})}\label{utilities_8cc_a38}
+
+
+
+
+Definition at line 2062 of file utilities.cc.
+
+References EOUT, and read\_\-file\_\-into\_\-String().
+
+
+
+\footnotesize\begin{verbatim}2062                                                                                       {
+2063 // read the file called filename into the string filestr,
+2064 // optionally warning about the inability to open the file
+2065 // returns true if file content was read into filestr
+2066         ifstream sfl(filename);
+2067         if (read_file_into_String(sfl,filestr,false)) return true;
+2068         else {
+2069                 if (warnnoopen) EOUT << "dil2al: Unable to open " << filename << " in read_file_into_String()\n";
+2070                 return false;
+2071         }
+2072 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!read_file_into_String@{read\_\-file\_\-into\_\-String}}
+\index{read_file_into_String@{read\_\-file\_\-into\_\-String}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool read\_\-file\_\-into\_\-String (ifstream \& {\em sfl}, {\bf String} \& {\em filestr}, bool {\em warnnoopen} = {\bf true})}\label{utilities_8cc_a37}
+
+
+
+
+Definition at line 2038 of file utilities.cc.
+
+References EOUT.
+
+
+
+\footnotesize\begin{verbatim}2038                                                                                      {
+2039 // read from an open file stream into the string filestr,
+2040 // optionally warning about the inability to open the file
+2041 // returns true if file content was read into filestr
+2042         if (sfl) {
+2043                 filestr = sfl;
+2044 /*              sfl.seekg(0,ios::end); // seek to EOF
+2045                 long int sflsize = sfl.tellg();
+2046                 sfl.seekg(0);
+2047                 char * s;
+2048                 s = new char[sflsize+1];
+2049                 sfl.read(s,sflsize);
+2050                 s[sfl.gcount()]='\0';
+2051                 filestr = s;
+2052                 delete[] s;
+2053                 if (sfl.gcount()!=sflsize) EOUT << "dil2al: Characters read (" << sfl.gcount() << ") does not equal expected file size (" << sflsize << ") in read_file_into_String(), continuing as is\n";
+2054 */              sfl.close();
+2055                 return true;
+2056         } else {
+2057                 if (warnnoopen) EOUT << "dil2al: Unable to open file in read_file_into_String()\n";
+2058                 return false;
+2059         }
+2060 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!relurl@{relurl}}
+\index{relurl@{relurl}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} relurl ({\bf String} {\em srcurl}, {\bf String} {\em dsturl})}\label{utilities_8cc_a30}
+
+
+
+
+Definition at line 1927 of file utilities.cc.
+
+References String::after(), String::before(), common\_\-prefix(), String::empty(), String::from(), String::lastchar(), String::length(), String::prepend(), and String::through().
+
+Referenced by AL\_\-Day\_\-Marker(), AL\_\-Passed\_\-Target\_\-Dates(), extract\_\-paper\_\-novelties(), extract\_\-paper\_\-plan\_\-to\_\-paper(), extract\_\-recursively(), extraction\_\-put\_\-figure(), generate\_\-AL(), generate\_\-Figures\_\-Directory\_\-entry(), Active\_\-List::generate\_\-focused\_\-AL(), Active\_\-List::generate\_\-wide\_\-AL(), get\_\-figure\_\-data(), make\_\-note(), update\_\-main\_\-ALs(), and Detailed\_\-Items\_\-List::Write\_\-to\_\-File().
+
+
+
+\footnotesize\begin{verbatim}1927                                             {
+1928         String tmp = common_prefix(srcurl.through('/',-1),dsturl.through('/',-1));
+1929         if ((!tmp.empty()) && (tmp.lastchar()!='/')) tmp = tmp.through('/',-1);
+1930         if (tmp!="") {
+1931                 srcurl = srcurl.after(tmp);
+1932                 dsturl = dsturl.after(tmp);
+1933                 tmp = dsturl.from('#'); // for dsturl references in srcurl file
+1934                 if (tmp.length()>0) {
+1935                         String tmp2 = srcurl.before('#'); if (tmp2.length()==0) tmp2 = srcurl;
+1936                         if (tmp2==dsturl.before('#')) return tmp;
+1937                 }
+1938                 while (srcurl.before('/')!="") { srcurl=srcurl.after('/'); dsturl.prepend("../"); }
+1939         }
+1940         return dsturl;
+1941 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!remove_whitespace@{remove\_\-whitespace}}
+\index{remove_whitespace@{remove\_\-whitespace}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String}$\ast$ remove\_\-whitespace ({\bf String} \& {\em str})}\label{utilities_8cc_a81}
+
+
+
+
+Definition at line 2680 of file utilities.cc.
+
+References String::gsub().
+
+Referenced by generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-Superiors(), and select\_\-TL\_\-DIL\_\-refs().
+
+
+
+\footnotesize\begin{verbatim}2680                                          {
+2681   str.gsub(BRXwhite," ");
+2682   return &str;
+2683 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!RX_Search_Safe@{RX\_\-Search\_\-Safe}}
+\index{RX_Search_Safe@{RX\_\-Search\_\-Safe}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} RX\_\-Search\_\-Safe ({\bf String} {\em s})}\label{utilities_8cc_a18}
+
+
+
+
+Definition at line 1814 of file utilities.cc.
+
+References String::after(), String::gsub(), and String::length().
+
+Referenced by add\_\-TL\_\-chunk\_\-or\_\-entry(), Assess\_\-Paper\_\-Correction\_\-Time(), convert\_\-item\_\-content\_\-to\_\-Te\-X(), extract\_\-hierarchy\_\-depth\_\-decrease\_\-to\_\-paper(), extract\_\-hierarchy\_\-depth\_\-increase\_\-to\_\-paper(), extract\_\-paper\_\-novelties(), extract\_\-recursively(), extract\_\-required\_\-item\_\-to\_\-paper(), get\_\-figure\_\-data(), include\_\-article\_\-section\_\-head\_\-template(), include\_\-article\_\-section\_\-tail\_\-template(), include\_\-protected\_\-text(), item\_\-content\_\-between\_\-range\_\-tags(), modify\_\-DIL\_\-group\_\-target\_\-dates\_\-cmd(), send\_\-dil\_\-to\_\-DIL(), Te\-X\_\-format\_\-corrections(), and update\_\-DIL\_\-entry\_\-elements().
+
+
+
+\footnotesize\begin{verbatim}1814                                 {
+1815 // converts a regular string to that
+1816 // string's match in a BigRegex search
+1817         s.gsub("[","[[]");
+1818         s.gsub("]","[]]");
+1819         s.gsub(BigRegex("[\\.*+?$]"),"[_0]",'_');
+1820         if ((s.length()>0) && (s[0]=='^')) s = "[^]" + s.after(0);
+1821         return s;
+1822 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!substring_from_line@{substring\_\-from\_\-line}}
+\index{substring_from_line@{substring\_\-from\_\-line}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool substring\_\-from\_\-line (const char $\ast$ {\em pattern}, int {\em nsub}, {\bf String} $\ast$ {\em dilid}, const char $\ast$ {\em lbuf})}\label{utilities_8cc_a45}
+
+
+
+
+Definition at line 2180 of file utilities.cc.
+
+References EOUT.
+
+Referenced by add\_\-new\_\-to\_\-DIL(), create\_\-new\_\-DIL(), send\_\-dil\_\-to\_\-DIL(), and Set\_\-Parameter().
+
+
+
+\footnotesize\begin{verbatim}2180                                                                                             {
+2181         const int SLEN = 1024;
+2182         char sbuf[SLEN];
+2183         regex_t re;
+2184         regmatch_t * rm;
+2185         int mres;
+2186         if (nsub) {
+2187                 if (regcomp(&re,pattern, REG_EXTENDED) != 0) {
+2188                         EOUT << "dil2al: Unable to compile regular expression in substring_from_line()\n";
+2189                         return false;
+2190                 }
+2191                 rm = new regmatch_t[nsub];
+2192                 mres = regexec(&re,lbuf, (size_t) nsub, rm, 0);
+2193                 if ((mres != 0) && (mres != REG_NOMATCH)) {
+2194                         EOUT << "dil2al: Internal error while matching in substring_from_line()\n";
+2195                 } else {
+2196                         if (!mres) {
+2197                                 if (rm[nsub-1].rm_so==-1) {
+2198                                         EOUT << "dil2al: Wrong number of substring matches in substring_from_line()\n";
+2199                                         mres = 3;
+2200                                 } else {
+2201                                         for (int i=0; i<nsub; i++) {
+2202                                                 strncpy(sbuf,&lbuf[rm[i].rm_so],rm[i].rm_eo-rm[i].rm_so);
+2203                                                 sbuf[rm[i].rm_eo-rm[i].rm_so]='\0';
+2204                                                 dilid[i] = sbuf;
+2205                                         }
+2206                                 }
+2207                         }
+2208                 }
+2209                 delete[] rm;
+2210                 return (mres==0);
+2211         } else {
+2212                 EOUT << "dil2al: nsub==0 in substring_from_line()\n";
+2213                 return false;
+2214         }
+2215 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!Time@{Time}}
+\index{Time@{Time}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}time\_\-t Time (time\_\-t $\ast$ {\em tloc})}\label{utilities_8cc_a19}
+
+
+
+
+Definition at line 1824 of file utilities.cc.
+
+Referenced by Active\_\-List::Add\_\-Day(), generate\_\-AL(), read\_\-financial\_\-notes\_\-file(), time\_\-stamp(), and time\_\-stamp\_\-GM().
+
+
+
+\footnotesize\begin{verbatim}1824                           {
+1825 // Local time() wrapper, allows emulation of different current time
+1826 // returns time and sets (*tloc) to the same time if tloc!=NULL
+1827         if (emulatedtime) {
+1828                 if (tloc) *tloc = emulatedtime;
+1829                 return emulatedtime;
+1830         }
+1831         return time(tloc);
+1832 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!time_stamp@{time\_\-stamp}}
+\index{time_stamp@{time\_\-stamp}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} time\_\-stamp (const char $\ast$ {\em dateformat}, time\_\-t {\em t} = -1)}\label{utilities_8cc_a20}
+
+
+
+
+Definition at line 1834 of file utilities.cc.
+
+References Time().
+
+Referenced by Financial\_\-Monthly\_\-Root::add(), Active\_\-List::Add\_\-Day(), AL\_\-Day\_\-Marker(), AL\_\-Passed\_\-Target\_\-Dates(), AL\_\-Day::allocate(), AL\_\-Day::allocate\_\-with\_\-value(), Time::caltime2local(), chunk\_\-controller(), date\_\-string(), dil2al\_\-commands(), AL\_\-Day::expand(), generate\_\-AL(), generate\_\-EPS\_\-cells(), Active\_\-List::generate\_\-focused\_\-AL(), generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-Superiors(), Active\_\-List::generate\_\-wide\_\-AL(), get\_\-new\_\-DIL\_\-ID(), include\_\-article\_\-tail\_\-template(), Active\_\-List::Initialize\_\-AL\_\-Length(), main(), make\_\-note(), modify\_\-DIL\_\-entry\_\-target\_\-date(), modify\_\-DIL\_\-group\_\-target\_\-dates(), modify\_\-DIL\_\-group\_\-target\_\-dates\_\-cmd(), modify\_\-element\_\-through\_\-FORM\_\-interface\_\-DIL\_\-Superiors(), Financial\_\-Note::put(), AL\_\-Day::set\_\-TC\_\-values(), time\_\-chunk\_\-remaining(), and Detailed\_\-Items\_\-List::Write\_\-to\_\-File().
+
+
+
+\footnotesize\begin{verbatim}1834                                                            {
+1835 // time stamp in local time
+1836         char dstr[80];
+1837         if (t<0) t = Time(NULL);
+1838         strftime(dstr,80,dateformat,localtime(&t));
+1839         return String(dstr);
+1840 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!time_stamp_diff@{time\_\-stamp\_\-diff}}
+\index{time_stamp_diff@{time\_\-stamp\_\-diff}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}time\_\-t time\_\-stamp\_\-diff ({\bf String} {\em oldtime}, {\bf String} {\em newtime})}\label{utilities_8cc_a26}
+
+
+
+
+Definition at line 1889 of file utilities.cc.
+
+References time\_\-stamp\_\-time().
+
+Referenced by decide\_\-add\_\-TL\_\-chunk(), select\_\-TL\_\-DIL\_\-refs(), stop\_\-TL\_\-chunk(), and time\_\-chunk\_\-remaining().
+
+
+
+\footnotesize\begin{verbatim}1889                                                       {
+1890         return time_stamp_time(newtime) - time_stamp_time(oldtime);
+1891 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!time_stamp_GM@{time\_\-stamp\_\-GM}}
+\index{time_stamp_GM@{time\_\-stamp\_\-GM}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} time\_\-stamp\_\-GM (const char $\ast$ {\em dateformat}, time\_\-t {\em t} = -1)}\label{utilities_8cc_a21}
+
+
+
+
+Definition at line 1842 of file utilities.cc.
+
+References Time().
+
+Referenced by AL\_\-Day\_\-Marker(), Active\_\-List::generate\_\-focused\_\-AL(), Active\_\-List::Initialize\_\-AL\_\-Length(), and remove\_\-AL\_\-TC().
+
+
+
+\footnotesize\begin{verbatim}1842                                                              {
+1843 // Greenwich Meantime time stamp
+1844 // Note: Use this when expressing time differences
+1845 //       such as hours and minutes since 0.
+1846         char dstr[80];
+1847         if (t<0) t = Time(NULL);
+1848         strftime(dstr,80,dateformat,gmtime(&t));
+1849         return String(dstr);
+1850 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!time_stamp_time@{time\_\-stamp\_\-time}}
+\index{time_stamp_time@{time\_\-stamp\_\-time}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}time\_\-t time\_\-stamp\_\-time ({\bf String} {\em timestr})}\label{utilities_8cc_a23}
+
+
+
+
+Definition at line 1856 of file utilities.cc.
+
+References String::at(), and String::length().
+
+Referenced by Active\_\-List::Add\_\-Day(), Detect\_\-Form\_\-Input(), dil2al\_\-commands(), Detailed\_\-Items\_\-List::Get\_\-Project\_\-Data(), modify\_\-DIL\_\-group\_\-target\_\-dates\_\-cmd(), Modify\_\-Element(), modify\_\-element\_\-through\_\-FORM\_\-interface\_\-DIL\_\-Superiors(), time\_\-stamp\_\-diff(), and time\_\-stamp\_\-time\_\-date().
+
+
+
+\footnotesize\begin{verbatim}1856                                        {
+1857 // local time string to calendar time time_t
+1858 // negative numbers are returned as they are so that
+1859 // special codes can be detected
+1860         struct tm ts;
+1861         int tl = timestr.length();
+1862         if (tl>0) if (timestr[0]=='-') return (time_t) atol((const char *) timestr);
+1863         if (tl<9) return (time_t) -1;
+1864         ts.tm_sec = 0;
+1865         ts.tm_min = atoi((const char *) String(timestr.at(tl-2,2)));
+1866         ts.tm_hour = atoi((const char *) String(timestr.at(tl-4,2)));
+1867         ts.tm_mday = atoi((const char *) String(timestr.at(tl-6,2)));
+1868         ts.tm_mon = atoi((const char *) String(timestr.at(tl-8,2)))-1;
+1869         ts.tm_year = atoi((const char *) String(timestr.at(0,tl-8)))-1900;
+1870         ts.tm_wday = 0;
+1871         ts.tm_yday = 0;
+1872         ts.tm_isdst = -1; // computed by mktime since indicated "unknown" here
+1873         return mktime(&ts);
+1874 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!time_stamp_time_date@{time\_\-stamp\_\-time\_\-date}}
+\index{time_stamp_time_date@{time\_\-stamp\_\-time\_\-date}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}time\_\-t time\_\-stamp\_\-time\_\-date ({\bf String} {\em timestr})}\label{utilities_8cc_a25}
+
+
+
+
+Definition at line 1882 of file utilities.cc.
+
+References String::before(), String::length(), and time\_\-stamp\_\-time().
+
+Referenced by Active\_\-List::Add\_\-Day(), financial\_\-notes(), generate\_\-EPS\_\-cells(), Financial\_\-Note::get(), and Active\_\-List::Initialize\_\-AL\_\-Length().
+
+
+
+\footnotesize\begin{verbatim}1882                                             {
+1883 // local time string %Y%m%d%H%M set to 00:00 time of
+1884 // day to calendar time
+1885         int tl = timestr.length() - 4;
+1886         return time_stamp_time(String(timestr.before(tl))+"0000");
+1887 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!time_stamp_time_of_day@{time\_\-stamp\_\-time\_\-of\_\-day}}
+\index{time_stamp_time_of_day@{time\_\-stamp\_\-time\_\-of\_\-day}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}time\_\-t time\_\-stamp\_\-time\_\-of\_\-day ({\bf String} {\em timestr})}\label{utilities_8cc_a24}
+
+
+
+
+Definition at line 1876 of file utilities.cc.
+
+References String::at(), String::chars(), and String::length().
+
+Referenced by generate\_\-EPS\_\-cells(), Get\_\-Worked\_\-Estimate(), Active\_\-List::Initialize\_\-AL\_\-Length(), and remove\_\-AL\_\-TC().
+
+
+
+\footnotesize\begin{verbatim}1876                                               {
+1877         int tl = timestr.length();
+1878         String h(timestr.at(tl-4,2)),m(timestr.at(tl-2,2));
+1879         return ((((time_t) atoi(h.chars()))*60)+((time_t) atoi(m.chars())))*60;
+1880 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!Unlock_File@{Unlock\_\-File}}
+\index{Unlock_File@{Unlock\_\-File}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool Unlock\_\-File ({\bf String} {\em lockfile})}\label{utilities_8cc_a13}
+
+
+
+
+Definition at line 1408 of file utilities.cc.
+
+References EOUT.
+
+Referenced by Detailed\_\-Items\_\-List::Read\_\-from\_\-Binary\_\-Cache(), Detailed\_\-Items\_\-List::Read\_\-Topical\_\-from\_\-Binary\_\-Cache(), Detailed\_\-Items\_\-List::Write\_\-to\_\-Binary\_\-Cache(), and Detailed\_\-Items\_\-List::Write\_\-Topical\_\-to\_\-Binary\_\-Cache().
+
+
+
+\footnotesize\begin{verbatim}1408                                   {
+1409   if (unlink(lockfile)<0) {
+1410     EOUT << "dil2al: Unable to remove lock file " << lockfile << " in Unlock_File(), continuing as is\n";
+1411     return false;
+1412   }
+1413   return true;
+1414 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!URI_unescape@{URI\_\-unescape}}
+\index{URI_unescape@{URI\_\-unescape}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} URI\_\-unescape ({\bf String} {\em escaped\-URI})}\label{utilities_8cc_a79}
+
+
+
+
+Definition at line 2644 of file utilities.cc.
+
+References String::length().
+
+Referenced by extract\_\-DIL\_\-IDs\_\-from\_\-form(), search\_\-FORM\_\-cmd(), and Tabbed\_\-FORM\_\-DIL\_\-Hierarchy\_\-full().
+
+
+
+\footnotesize\begin{verbatim}2644                                        {
+2645 // convert URI strings with escaped characters to regular character strings
+2646         String s; char c; int d1,d2;
+2647         for (int i = 0; i<escapedURI.length(); i++) {
+2648                 c = escapedURI[i];
+2649                 if (c=='%') {
+2650                         i++; c = escapedURI[i];
+2651                         if ((c>='0') && (c<='9')) d1 = (int) (c - '0');
+2652                         else if ((c>='A') && (c<='F')) d1 = ((int) (c - 'A')) + 10;
+2653                         else d1 = ((int) (c - 'a')) + 10;
+2654                         i++; c = escapedURI[i];
+2655                         if ((c>='0') && (c<='9')) d2 = (int) (c - '0');
+2656                         else if ((c>='A') && (c<='F')) d2 = ((int) (c - 'A')) + 10;
+2657                         else d2 = ((int) (c - 'a')) + 10;
+2658                         d1 *=16; d1 += d2;
+2659                         c = (char) d1;
+2660                 }
+2661                 s += c;
+2662         }
+2663         return s;
+2664 }
+\end{verbatim}\normalsize 
+\index{utilities.cc@{utilities.cc}!write_file_from_String@{write\_\-file\_\-from\_\-String}}
+\index{write_file_from_String@{write\_\-file\_\-from\_\-String}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool write\_\-file\_\-from\_\-String ({\bf String} {\em filename}, const {\bf String} \& {\em filestr}, {\bf String} {\em message}, bool {\em isnew} = {\bf false})}\label{utilities_8cc_a41}
+
+
+
+
+Definition at line 2116 of file utilities.cc.
+
+References backup\_\-and\_\-rename(), String::empty(), EOUT, and VOUT.
+
+Referenced by add\_\-TL\_\-chunk\_\-or\_\-entry(), add\_\-TL\_\-section(), chunk\_\-controller(), DIL\_\-Hierarchy\_\-cmd(), extract\_\-DIL\_\-IDs\_\-from\_\-form(), generate\_\-AL(), Active\_\-List::generate\_\-focused\_\-AL(), Active\_\-List::generate\_\-wide\_\-AL(), Target\_\-Access::make\_\-local\_\-copy\_\-of\_\-directory(), post\_\-process\_\-note(), remove\_\-AL\_\-TC(), search(), Tabbed\_\-DIL\_\-Hierarchy(), Tabbed\_\-FORM\_\-DIL\_\-Hierarchy(), Tabbed\_\-HTML\_\-DIL\_\-Hierarchy(), update\_\-DIL\_\-entry\_\-elements(), update\_\-main\_\-ALs(), write\_\-financial\_\-notes\_\-file(), and Detailed\_\-Items\_\-List::Write\_\-to\_\-File().
+
+
+
+\footnotesize\begin{verbatim}2116                                                                                                          {
+2117 // Write a file from string content, with automatic backup of
+2118 // a previous version (if one exists).
+2119 #ifdef DEBUG
+2120         bool b = (filename==taskloghead);
+2121         if (b) cout << '+';
+2122 #endif
+2123         String newfilename = filename;
+2124         if (!isnew) newfilename += ".new";
+2125         ofstream ntl(newfilename);
+2126         if (!ntl) {
+2127                 EOUT << "dil2al: Unable to create " << newfilename << " in write_file_from_String()\n";
+2128                 return false;
+2129         }
+2130         ntl << filestr;
+2131         ntl.close();
+2132 #ifdef DEBUG
+2133         if (b) cout << '+';
+2134 #endif
+2135         if (isnew) { if (verbose && (!message.empty())) VOUT << message << " initialized as " << filename << '\n'; }
+2136         else if (!backup_and_rename(filename,message)) return false;
+2137 #ifdef DEBUG
+2138         if (b) cout << "+\n";
+2139 #endif
+2140         return true;
+2141 }
+\end{verbatim}\normalsize 
+
+
+\subsection{Variable Documentation}
+\index{utilities.cc@{utilities.cc}!plan_entry_type_strings@{plan\_\-entry\_\-type\_\-strings}}
+\index{plan_entry_type_strings@{plan\_\-entry\_\-type\_\-strings}!utilities.cc@{utilities.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}const char plan\_\-entry\_\-type\_\-strings[NUM\_\-PLAN\_\-ENTRY\_\-TYPES][10] = \{PLAN\_\-ENTRY\_\-STRING\_\-ACTION,PLAN\_\-ENTRY\_\-STRING\_\-GOAL,PLAN\_\-ENTRY\_\-STRING\_\-OBJECTIVE,PLAN\_\-ENTRY\_\-STRING\_\-OUTCOME,PLAN\_\-ENTRY\_\-STRING\_\-VARIABLE\}}\label{utilities_8cc_a11}
+
+
+
+
+Definition at line 23 of file utilities.cc.
+
+Referenced by DIL\_\-entry\_\-content::Is\_\-Plan\_\-Entry().

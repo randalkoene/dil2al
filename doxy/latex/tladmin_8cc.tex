@@ -1,0 +1,1272 @@
+\section{tladmin.cc File Reference}
+\label{tladmin_8cc}\index{tladmin.cc@{tladmin.cc}}
+{\tt \#include \char`\"{}dil2al.hh\char`\"{}}\par
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+{\bf String} {\bf get\_\-TL\_\-head} ()
+\item 
+int {\bf max\_\-chunk\_\-entry} ({\bf String} \&tlchunk)
+\item 
+{\bf String} {\bf generate\_\-TL\_\-chunk\_\-header} ({\bf String} nametag, {\bf String} newalref, {\bf String} altitle, {\bf String} alhead, {\bf String} newdilref, {\bf String} diltitle, {\bf String} dilhead, int generateparts=0)
+\item 
+{\bf String} {\bf generate\_\-TL\_\-entry\_\-header} ({\bf String} nametag, {\bf String} newalref, {\bf String} altitle, {\bf String} alhead, {\bf String} newdilref, {\bf String} diltitle, {\bf String} dilhead)
+\item 
+{\bf String} {\bf get\_\-most\_\-recent\_\-TC\_\-AL} ({\bf String} \&tl)
+\item 
+{\bf String} {\bf get\_\-most\_\-recent\_\-TC\_\-DE} ({\bf String} \&tl)
+\item 
+void {\bf stop\_\-TL\_\-chunk} ({\bf String} \&tl)
+\item 
+{\bf String} {\bf select\_\-TL\_\-DIL\_\-refs} ({\bf String} \&tl, bool newchunk, {\bf String} newalref)
+\item 
+{\bf String} {\bf select\_\-TL\_\-AL\_\-refs} ({\bf String} \&tl, bool newchunk, {\bf String} newdilref)
+\item 
+{\bf String} {\bf add\_\-TL\_\-chunk\_\-or\_\-entry} ({\bf String} \&tl, {\bf String} \&notestr, bool newchunk, {\bf String} chunkid, int \&tlinsertloc)
+\item 
+bool {\bf add\_\-TL\_\-section} ({\bf String} \&tl)
+\item 
+int {\bf locate\_\-most\_\-recent\_\-TL\_\-chunk} ({\bf String} \&tl, int seekfrom, {\bf String} $\ast$chunkid)
+\item 
+{\bf String} {\bf decide\_\-add\_\-TL\_\-chunk} ({\bf String} \&tl, int \&tlinsertloc, bool comparetimes, bool createifgreater={\bf true})
+\end{CompactItemize}
+
+
+\subsection{Function Documentation}
+\index{tladmin.cc@{tladmin.cc}!add_TL_chunk_or_entry@{add\_\-TL\_\-chunk\_\-or\_\-entry}}
+\index{add_TL_chunk_or_entry@{add\_\-TL\_\-chunk\_\-or\_\-entry}!tladmin.cc@{tladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} add\_\-TL\_\-chunk\_\-or\_\-entry ({\bf String} \& {\em tl}, {\bf String} \& {\em notestr}, bool {\em newchunk}, {\bf String} {\em chunkid}, int \& {\em tlinsertloc})}\label{tladmin_8cc_a9}
+
+
+
+
+Definition at line 485 of file tladmin.cc.
+
+References String::after(), String::at(), String::before(), String::contains(), String::del(), EOUT, String::from(), generate\_\-TL\_\-chunk\_\-header(), generate\_\-TL\_\-entry\_\-header(), get\_\-TL\_\-head(), String::gsub(), String::index(), String::length(), max\_\-chunk\_\-entry(), String::prepend(), read\_\-file\_\-into\_\-String(), RELLISTSDIR, RX\_\-Search\_\-Safe(), select\_\-TL\_\-AL\_\-refs(), select\_\-TL\_\-DIL\_\-refs(), stop\_\-TL\_\-chunk(), and write\_\-file\_\-from\_\-String().
+
+Referenced by decide\_\-add\_\-TL\_\-chunk(), and process\_\-note\_\-TL().
+
+
+
+\footnotesize\begin{verbatim}485                                                                                                                {
+486 // Add a new chunk or a new entry to the Task Log
+487 // tlinsertloc is used when adding an entry, while it
+488 // is set here when adding a chunk
+489         String nametag;
+490         int chunkendindex; // used to find NAME tag and for entry insertion
+491         if (!newchunk) {
+492                 // determine entry NAME tag
+493                 nametag = chunkid;
+494                 chunkendindex = tl.index(BigRegex("[<]!--[      ]*chunk End[    ]*--[>]"),tlinsertloc);
+495                 if (chunkendindex>=0) {
+496                         String tlchunk = tl.at(tlinsertloc,chunkendindex-tlinsertloc);
+497                         nametag = nametag + "." + dec(max_chunk_entry(tlchunk)+1);
+498                 } else {
+499                         EOUT << "dil2al: Unable to find Task Log chunk end in add_TL_chunk_or_entry()\n";
+500                         return String("");
+501                 }
+502         } else {
+503                 nametag = curtime; // new NAME tag for new chunk
+504                 // if a current chunk is active, mark its completion time
+505                 stop_TL_chunk(tl); // can close previous task chunk and update AL and completion ratios
+506         }
+507 #ifdef DEBUGTIER1
+508         cout << "chunkid nametag: " << nametag << '\n';
+509 #endif
+510         // obtain DIL reference ID or identifying comment and AL reference ID
+511         String newdilref,newalref,alhead,dilhead,altitle,diltitle;
+512 #ifdef DEBUGTIER1
+513         cout << '+';
+514 #endif
+515         while ((newdilref=="*") || (newdilref=="")) {
+516 #ifdef DEBUGTIER1
+517                 cout << 'x';
+518 #endif
+519                 if ((newdilref=select_TL_DIL_refs(tl,newchunk,newalref))=="") return String("");
+520 #ifdef DEBUGTIER1
+521                 cout << 'x';
+522 #endif
+523                 if ((newalref=="") || (newdilref=="*")) if ((newalref=select_TL_AL_refs(tl,newchunk,newdilref))=="") return String("");
+524 #ifdef DEBUGTIER1
+525                 cout << 'x';
+526 #endif
+527         }
+528 #ifdef DEBUGTIER1
+529         cout << "newdilref: " << newdilref << "\nnewalref: " << newalref << '\n';
+530 #endif
+531         String lfstr, lfrx;
+532 #ifdef DEBUG_BIGSTRING
+533         //lfstr.debug_on();
+534         globaldebugop=true;
+535 #endif
+536         if (newalref[0]!='*') {
+537                 // find previous AL reference with the same ID
+538                 if (!read_file_into_String(listfile,lfstr)) return String("");
+539                 // AL head and title in lists file
+540 #ifdef DEBUG_BIGSTRING
+541                 globaldebugop=false;
+542                 //lfstr.debug_off();
+543                 cout << "[Freshly read] lfstr.length()=" << lfstr.length() << '\n';
+544 #endif
+545 #ifdef DEBUGTIER1
+546                 cout << ".";
+547 #endif
+548                 lfrx = "[<]LI[>][       ]*[<]A[         ][^>]*[Hh][Rr][Ee][Ff][         ]*=[    ]*\""+RX_Search_Safe(RELLISTSDIR+newalref)+"\"[^\n]*";
+549                 altitle = lfstr.at(BigRegex(lfrx));
+550 #ifdef DEBUG_BIGSTRING
+551                 cout << "[After reading into alhead] lfstr.length()=" << lfstr.length() << '\n';
+552 #endif
+553                 alhead = altitle.at(BigRegex("([^)]*AL head"));
+554                 altitle.del(BigRegex("[         ]*([^)]*AL head.*"));
+555                 altitle.gsub(BigRegex("[<][^>]*[>]"),"");
+556                 if (alhead!="") {
+557 #ifdef DEBUGTIER1
+558                         cout << ".";
+559 #endif
+560                         alhead.del(BigRegex("([^,]*,[   ]*[<]A [^>]*[Hh][Rr][Ee][Ff][   ]*=[    ]*\""));
+561                         if (alhead[0]!='/') {
+562                                 if (alhead.contains(RELLISTSDIR,0)) alhead.del(RELLISTSDIR);
+563                                 else alhead.prepend("../");
+564                         }
+565                         alhead = alhead.before("\"");
+566                         alhead.del(get_TL_head());
+567                 }
+568 #ifdef DEBUGTIER1
+569                 cout << "altitle: " << altitle << "\nalhead: " << alhead << '\n';
+570 #endif
+571         }
+572         String dfstr, dlrx;
+573         if (newdilref[0]!='*') {
+574                 // find previous DIL reference with the same ID or identifying comment
+575                 if (newdilref[0]=='!') { // non-DIL identifying comment
+576                         int dilheadindex;
+577                         if ((dilheadindex = tl.index(BigRegex("Context[         ]*--[>][        ]*"+RX_Search_Safe(newdilref.after("!"))+"[^(]*([^/]*/next"),-1))>=0) {
+578                                 dilhead = tl.at(BigRegex("Begin[        ]*-->[^\n]*[<]A[        ]+[^>]*[Nn][Aa][Mm][Ee][        ]*=[    ]*\"[^\"]+"),dilheadindex-tl.length());
+579                                 if (dilhead!="") {
+580                                         dilhead = dilhead.after("\"",-1);
+581                                         dilhead.prepend('#');
+582 #ifdef DEBUGTIER1
+583                                         cout << "diltitle: " << diltitle << "\ndilhead: " << dilhead << '\n';
+584 #endif
+585                                 } else EOUT << "dil2al: Context error, no matching Begin in add_TL_chunk_or_entry(), continuing\n";
+586                         } else {
+587                                 // search for Context in previous TL sections
+588                                 String prevtlfile = tl.at(BigRegex("[<]/H1[>]\n+[<]TABLE.*[>][  ]*previous[     ]+TL[   ]+section"));
+589                                 if (prevtlfile!="") {
+590                                         prevtlfile = prevtlfile.after(BigRegex("[<]A[   ]+[Hh][Rr][Ee][Ff]=\""));
+591                                         prevtlfile = basedir+RELLISTSDIR+prevtlfile.before("\"");
+592                                         while (prevtlfile!="") {
+593                                                 String prevtl;
+594                                                 if (!read_file_into_String(prevtlfile,prevtl)) {
+595                                                         EOUT << "dil2al: Continuing without non-DIL identifying comment previous dilhead\n";
+596                                                         break;
+597                                                 }
+598                                                 if ((dilheadindex = prevtl.index(BigRegex("Context[     ]*--[>][        ]*"+RX_Search_Safe(newdilref.after("!"))+"[^(]*([^/]*/next"),-1))>=0) {
+599                                                         dilhead = prevtl.at(BigRegex("Begin[    ]*-->[^\n]*[<]A[        ]+[^>]*[Nn][Aa][Mm][Ee][        ]*=[    ]*\"[^\"]+"),dilheadindex-tl.length());
+600                                                         if (dilhead!="") {
+601                                                                 dilhead = dilhead.after("\"",-1);
+602                                                                 dilhead.prepend('#');
+603 #ifdef DEBUGTIER1
+604                                                                 cout << "diltitle: " << diltitle << "\ndilhead: " << dilhead << '\n';
+605 #endif
+606                                                                 break;
+607                                                         } else EOUT << "dil2al: Context error, no matching Begin in add_TL_chunk_or_entry(), continuing\n";
+608                                                 }
+609                                                 prevtlfile = prevtl.at(BigRegex("[<]/H1[>]\n+[<]TABLE.*[>][     ]*previous[     ]+TL[   ]+section"));
+610                                                 if (prevtlfile!="") {
+611                                                         prevtlfile = prevtlfile.after(BigRegex("[<]A[   ]+[Hh][Rr][Ee][Ff]=\""));
+612                                                         prevtlfile = basedir+RELLISTSDIR+prevtlfile.before("\"");
+613                                                 }
+614                                         }
+615                                 }
+616                         }
+617                 } else { // DIL reference ID
+618                         if (!read_file_into_String(basedir+RELLISTSDIR+newdilref.before("#"),dfstr)) return String("");
+619                         // DIL title in newdilref file
+620                         diltitle = dfstr.at(BigRegex("[<]TITLE[>][^<]*[<]/TITLE[>]"));
+621                         diltitle.del("<TITLE>");
+622                         diltitle.del("</TITLE>");
+623                         // DIL head in newdilref file
+624                         dlrx = "[<]TD[^>]*[>][<]A [^>]*[Nn][Aa][Mm][Ee][        ]*=[    ]*\""+RX_Search_Safe(newdilref.after("#"))+"\"[^\n]*([^)]*head";
+625                         dilhead = dfstr.at(BigRegex(dlrx));
+626                         if (dilhead!="") {
+627                                 dilhead.del(BigRegex("[<]TD[^>]*[>][<]A [^>]*[Nn][Aa][Mm][Ee][  ]*=[    ]*\""+RX_Search_Safe(newdilref.after("#"))+"\"[^\n]*([^,]*,[    ]*[<]A [^>]*[Hh][Rr][Ee][Ff][   ]*=[    ]*\""));
+628                                 dilhead = dilhead.before("\"");
+629                                 dilhead.del(get_TL_head());
+630                         }
+631 #ifdef DEBUGTIER1
+632                         cout << "diltitle: " << diltitle << "\ndilhead: " << dilhead << '\n';
+633 #endif
+634                 }
+635         }
+636         // prepend newalref, newdilref, alhead, dilhead, altitle and diltitle information to note
+637         String notepre;
+638         if (newchunk) {
+639                 notepre = generate_TL_chunk_header(nametag, newalref, altitle, alhead, newdilref, diltitle, dilhead);
+640                 // find new chunk insertion location (becomes tlinsertloc for entry also)
+641                 if ((tlinsertloc=tl.index(BigRegex("[<]!--[     ]+section End[  ]+-->")))<0) {
+642                         EOUT << "dil2al: Unable to find section End in " << taskloghead << "in add_TL_chunk_or_entry()\n";
+643                         return String("");
+644                 }
+645         } else {
+646                 notepre = generate_TL_entry_header(nametag, newalref, altitle, alhead, newdilref, diltitle, dilhead);
+647                 // reposition at End of chunk for insertion of TL entry
+648                 tlinsertloc=chunkendindex;
+649         }
+650         // insert note and store if operations on tl are complete
+651         String tltail = tl.from(tlinsertloc);
+652         if (newchunk) tl = tl.before(tlinsertloc) + notepre + tltail;
+653         else tl = tl.before(tlinsertloc) + notepre + notestr + "<P>\n\n" + tltail;
+654         get_TL_head();
+655         String tlheadfile=taskloghead.after(basedir+RELLISTSDIR);
+656         String alheadfile=alhead.before("#"); if ((alhead!="") && (alheadfile=="")) alheadfile = tlheadfile;
+657         String dilheadfile=dilhead.before("#"); if ((dilhead!="") && (dilheadfile=="")) dilheadfile = tlheadfile;
+658 #ifdef DEBUGTIER1
+659         cout << "tlheadfile = " << tlheadfile << "\nalheadfile = " << alheadfile << "\ndilheadfile = " << dilheadfile << '\n';
+660 #endif
+661         if ((tlheadfile!=alheadfile) && (tlheadfile!=dilheadfile)) {
+662                 // store updated Task Log
+663                 if (!write_file_from_String(taskloghead,tl,"Task Log")) return String("");
+664         }
+665         String tlp;
+666         if (alhead!="") {
+667                 // modify ``next'' in previous AL head
+668                 String newalnext, altlfile = basedir+RELLISTSDIR+alheadfile;
+669 #ifdef DEBUGTIER2
+670                 cout << "D1,"; cout.flush();
+671 #endif
+672 //*** This is not very optimized, requiring some copying
+673 //*** of long Strings. This is due to a ``bug'' in the
+674 //*** String class, which caused modifications via a
+675 //*** pointer tlp->at.() or reference tlp.at() to add
+676 //*** several characters of junk at the end of the
+677 //*** string. Note that we cannot simply overwrite tl
+678 //*** here as it may be needed below.
+679                 if (tlheadfile==alheadfile) {
+680 #ifdef DEBUGTIER2
+681                         cout << "D2,"; cout.flush();
+682 #endif
+683                         tlp = tl;
+684 #ifdef DEBUGTIER2
+685                         cout << "D3,"; cout.flush();
+686 #endif
+687                         newalnext = '#'+nametag;
+688 #ifdef DEBUGTIER2
+689                         cout << "D4,"; cout.flush();
+690 #endif
+691                 } else {
+692                         if (!read_file_into_String(altlfile,tlp)) return String("");
+693                         newalnext = tlheadfile+'#'+nametag;
+694                 }
+695                 BigRegex alindexrx("\\(chunk\\|entry\\)[        ]+Begin[        ]+--[>][^\n]*[<]A[      ][^>]*[Nn][Aa][Mm][Ee][         ]*=[    ]*\""+alhead.after("#")+'"');
+696 #ifdef DEBUGTIER1
+697                 cout << "D5,"; cout.flush();
+698 #endif
+699 //*** could make this a forward search by continuing to
+700 //*** search until -1 is returned
+701 //*** NOT NECESSARY WITH NON-PARANOID OR FASTER BACKWARD SEARCH METHOD
+702                 int alnextindex=tlp.index(alindexrx,-1);
+703 #ifdef DEBUGTIER1
+704                 cout << "alnextindex = " << alnextindex << '\n';
+705                 cout << "E,"; cout.flush();
+706 #endif
+707                 if (alnextindex<0) {
+708                         EOUT << "dil2al: Unable to find previous AL head in " << alheadfile << " in add_TL_chunk_or_entry()\n";
+709                         return String("");
+710                 }
+711 #ifdef DEBUGTIER2
+712                 cout << "E0,"; cout.flush();
+713 #endif
+714                 String alnext;
+715 #ifdef DEBUGTIER2
+716                 cout << "E0.5,"; cout.flush();
+717 #endif
+718                 BigRegex alnextrx("AL[  ]+--[>][^\n]*\""+newalref+"\"[^(]*([^)]*/next");
+719 #ifdef DEBUGTIER2
+720                 cout << "E0.75,"; cout.flush();
+721 #endif
+722                 alnext=tlp.at(alnextrx,alnextindex);
+723 #ifdef DEBUGTIER2
+724                 cout << "alnext =  " << alnext << "\nE1,"; cout.flush();                
+725 #endif
+726                 alnext = alnext.before("next",-1) + "<A HREF=\""+newalnext+"\">next</A>";
+727                 //alnext.at("next",-1)="<A HREF=\""+newalnext+"\">next</A>";
+728 #ifdef DEBUGTIER2
+729                 cout << "alnext =  " << alnext << "\nE2,"; cout.flush();                
+730 #endif
+731                 String ttmp = tlp.before(BigRegex("AL[  ]+--[>][^\n]*\""+RX_Search_Safe(newalref)+"\"[^(]*([^)]*/next"),alnextindex);
+732 #ifdef DEBUGTIER2
+733                 cout << "E3,"; cout.flush();            
+734 #endif
+735                 ttmp += alnext;
+736 #ifdef DEBUGTIER2
+737                 cout << "E4,"; cout.flush();            
+738 #endif
+739                 ttmp += tlp.after(BigRegex("AL[         ]+--[>][^\n]*\""+RX_Search_Safe(newalref)+"\"[^(]*([^)]*/next"),alnextindex);
+740 #ifdef DEBUGTIER2
+741                 cout << "E5,"; cout.flush();            
+742 #endif
+743                 tlp = ttmp;
+744 //*** THIS WORKED... SO IT IS OBVIOUSLY DANGEROUS TO USE THE SUBSTRING REPLACEMENT
+745 //*** METHOD FOR INSERTION, BUT THE ABOVE IS OF COURSE VERY NON-OPTIMAL!
+746 //              tlp.at(BigRegex("AL[    ]+--[>][^\n]*\""+newalref+"\"[^(]*([^)]*/next"),alnextindex)=alnext;
+747 #ifdef DEBUGTIER1
+748                 cout << "F,"; cout.flush();
+749 #endif
+750                 if (alheadfile!=dilheadfile) {
+751                         if (!write_file_from_String(altlfile,tlp,"AL head Task Log")) return String("");
+752                 }
+753         }
+754 #ifdef DEBUGTIER1
+755         cout << "G,"; cout.flush();
+756 #endif
+757         if (dilhead!="") {
+758 #ifdef DEBUGTIER1
+759                 cout << "H,"; cout.flush();
+760 #endif
+761                 // modify ``next'' in previous DIL head
+762                 String newdilnext, diltlfile = basedir+RELLISTSDIR+dilheadfile;
+763                 if (dilheadfile==tlheadfile) newdilnext = '#'+nametag;
+764                 else newdilnext = tlheadfile+'#'+nametag;
+765                 if (alheadfile!=dilheadfile) {
+766                         if (tlheadfile==dilheadfile) tlp = tl;
+767                         else if (!read_file_into_String(diltlfile,tlp)) return String("");
+768                 }
+769 #ifdef DEBUGTIER2
+770                 cout << "H1,"; cout.flush();
+771 #endif
+772                 String dilnext;
+773 //*** could make this a forward search by continuing to
+774 //*** search until -1 is returned
+775 //*** NOT NECESSARY WITH NON-PARANOID OR FASTER BACKWARD SEARCH METHOD
+776                 int dilnextindex=tlp.index(BigRegex("\\(chunk\\|entry\\)[       ]+Begin[        ]+--[>][^\n]*[<]A[      ][^>]*[Nn][Aa][Mm][Ee][         ]*=[    ]*\""+RX_Search_Safe(dilhead.after("#")+'"')),-1);
+777                 if (dilnextindex<0) {
+778                         EOUT << "dil2al: Unable to find previous DIL head in " << dilheadfile << " in add_TL_chunk_or_entry()\n";
+779                         return String("");
+780                 }
+781 #ifdef DEBUGTIER2
+782                 cout << "H2,"; cout.flush();
+783 #endif
+784                 if (newdilref[0]=='!') {
+785 #ifdef DEBUGTIER2
+786                         cout << "H3,"; cout.flush();
+787 #endif
+788                         dilnext=tlp.at(BigRegex("Context[       ]+--[>][        ]*"+RX_Search_Safe(newdilref.after("!"))+"[^(]*([^)]*/next"),dilnextindex);
+789                         dilnext.at("next",-1)="<A HREF=\""+newdilnext+"\">next</A>";
+790                         tlp.at(BigRegex("Context[       ]+--[>][        ]*"+RX_Search_Safe(newdilref.after("!"))+"[^(]*([^)]*/next"),dilnextindex)=dilnext;
+791                 } else {
+792 #ifdef DEBUGTIER2
+793                         cout << "H4,"; cout.flush();
+794 #endif
+795                         dilnext=tlp.at(BigRegex("Context[       ]+--[>][^\n]*\""+RX_Search_Safe(newdilref)+"\"[^(]*([^)]*/next"),dilnextindex);
+796                         dilnext.at("next",-1)="<A HREF=\""+newdilnext+"\">next</A>";
+797                         tlp.at(BigRegex("Context[       ]+--[>][^\n]*\""+RX_Search_Safe(newdilref)+"\"[^(]*([^)]*/next"),dilnextindex)=dilnext;
+798                 }
+799                 if (!write_file_from_String(diltlfile,tlp,"Context head Task Log")) return String("");
+800 #ifdef DEBUGTIER2
+801                 cout << "H5,"; cout.flush();
+802 #endif
+803         }
+804         if (newalref[0]!='*') {
+805 #ifdef DEBUGTIER1
+806                 cout << "I,";
+807 #endif
+808                 // update AL head in listfile
+809                 if (alhead!="") {
+810 #ifdef DEBUGTIER1
+811                         cout << ",J"; cout.flush();
+812 #endif
+813                         String newalnext = lfstr.at(BigRegex(lfrx));
+814 #ifdef DEBUG_BIGSTRING
+815                         cout << "[After reading into newalnext] lfstr.length()=" << lfstr.length() << '\n';
+816 #endif
+817 #ifdef DEBUGTIER2
+818                         cout << ",J1"; cout.flush();
+819 #endif
+820                         newalnext.at(BigRegex("[Hh][Rr][Ee][Ff][        ]*=[    ]*\"[^\"]+\""),-1) = "HREF=\""+(RELLISTSDIR+tlheadfile)+'#'+nametag+"\"";
+821 #ifdef DEBUGTIER2
+822                         cout << ",J2"; cout.flush();
+823 #endif
+824 #ifdef DEBUG_BIGSTRING
+825                         cout << "lfstr.length()=" << lfstr.length() << '\n';
+826                         newalnext.debug_on();
+827 #endif
+828                         lfstr.at(BigRegex(lfrx)) = newalnext;
+829 #ifdef DEBUG_BIGSTRING
+830                         newalnext.debug_off();
+831                         cout << "lfstr.length()=" << lfstr.length() << '\n';
+832 #endif
+833                 } else {
+834 #ifdef DEBUGTIER2
+835                         cout << ",JJ"; cout.flush();
+836 #endif
+837                         String newalnext = lfstr.at(BigRegex("[<]LI[>][         ]*[<]A[         ][^>]*[Hh][Rr][Ee][Ff][         ]*=[    ]*\""+RX_Search_Safe(RELLISTSDIR+newalref)+"\"[^\n]*"));
+838 #ifdef DEBUGTIER2
+839                         cout << ",JJ1"; cout.flush();
+840 #endif
+841                         newalnext.at("<BR>",-1) = " (<A HREF=\""+(RELLISTSDIR+tlheadfile)+'#'+nametag+"\">AL tail</A>,<A HREF=\""+(RELLISTSDIR+tlheadfile)+('#'+nametag)+"\">AL head</A>)<BR>";
+842 #ifdef DEBUGTIER2
+843                         cout << ",JJ2"; cout.flush();
+844 #endif
+845                         lfstr.at(BigRegex("[<]LI[>][    ]*[<]A[         ][^>]*[Hh][Rr][Ee][Ff][         ]*=[    ]*\""+RX_Search_Safe(RELLISTSDIR+newalref)+"\"[^\n]*")) = newalnext;
+846                 }
+847                 if (!write_file_from_String(listfile,lfstr,"Main Lists")) return String("");
+848         }
+849 #ifdef DEBUGTIER1
+850         cout << ",K";
+851 #endif
+852         if ((newdilref[0]!='*') && (newdilref[0]!='!')) {
+853 #ifdef DEBUGTIER1
+854                 cout << ",L";
+855 #endif
+856                 // update DIL head in DIL file
+857                 if (dilhead!="") {
+858                         String newdilnext = dfstr.at(BigRegex(dlrx)); 
+859 #ifdef DEBUGTIER2
+860                         cout << ",L1";
+861 #endif
+862                         newdilnext.at(BigRegex("[Hh][Rr][Ee][Ff][       ]*=[    ]*\"[^\"]+\""),-1) = "HREF=\""+tlheadfile+'#'+nametag+"\"";
+863 #ifdef DEBUGTIER2
+864                         cout << ",L2";
+865 #endif
+866                         dfstr.at(BigRegex(dlrx)) = newdilnext;
+867                 } else {
+868 #ifdef DEBUGTIER1
+869                         cout << ",M";
+870 #endif
+871                         String newdilnext = dfstr.at(BigRegex("[<]TD[^>]*[>][<]A [^>]*[Nn][Aa][Mm][Ee][         ]*=[    ]*\""+RX_Search_Safe(newdilref.after("#"))+"\"[^\n]*"));
+872 #ifdef DEBUGTIER2
+873                         cout << ",M1";
+874 #endif
+875                         newdilnext += " (<A HREF=\""+tlheadfile+'#'+nametag+"\">tail</A>,<A HREF=\""+tlheadfile+'#'+nametag+"\">head</A>)<BR>";
+876 #ifdef DEBUGTIER2
+877                         cout << ",M2";
+878 #endif
+879                         dfstr.at(BigRegex("[<]TD[^>]*[>][<]A [^>]*[Nn][Aa][Mm][Ee][     ]*=[    ]*\""+RX_Search_Safe(newdilref.after("#"))+"\"[^\n]*")) = newdilnext;
+880                 }
+881                 if (!write_file_from_String(basedir+RELLISTSDIR+newdilref.before("#"),dfstr,"DIL")) return String("");
+882         }
+883 #ifdef DEBUGTIER1
+884         cout << ",N\n";
+885 #endif
+886         if (newchunk) chunkcreated = true; // update process variable
+887         return nametag;
+888 }
+\end{verbatim}\normalsize 
+\index{tladmin.cc@{tladmin.cc}!add_TL_section@{add\_\-TL\_\-section}}
+\index{add_TL_section@{add\_\-TL\_\-section}!tladmin.cc@{tladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool add\_\-TL\_\-section ({\bf String} \& {\em tl})}\label{tladmin_8cc_a10}
+
+
+
+
+Definition at line 890 of file tladmin.cc.
+
+References String::at(), String::before(), EOUT, get\_\-TL\_\-head(), String::index(), read\_\-file\_\-into\_\-String(), RELLISTSDIR, stop\_\-TL\_\-chunk(), and write\_\-file\_\-from\_\-String().
+
+Referenced by decide\_\-add\_\-TL\_\-chunk().
+
+
+
+\footnotesize\begin{verbatim}890                                  {
+891 // Add a new section to the Task Log
+892 // Note: modifies current Task Log head file, tl, taskloghead,
+893 //       Main List File (listfile), Task Log symbolic link (tasklog);
+894 //       update in-memory copies and any variables that reference specific
+895 //       items or locations in the modified variables and files if necessary
+896         // close any currently active TL chunk
+897         stop_TL_chunk(tl);
+898         // initialize new TL section
+899         get_TL_head();
+900         String curtlid = taskloghead.after("task-log.");
+901         curtlid = curtlid.before(".html");
+902         if (curtlid==curdate) {
+903                 EOUT << "dil2al: Cannot create Task Log section with same ID as current Task Log head\n";
+904                 return false;
+905         }
+906         String newreltlhead = "task-log."+curdate+".html";
+907         String newtlsection = "<HTML>\n<HEAD><TITLE>Task Log ("+curdate+")</TITLE>\n</HEAD>\n<BODY BGCOLOR=\"#000000\" TEXT=\"#FFDF00\" LINK=\"#AFAFFF\" VLINK=\"#7F7FFF\">\n<H1><FONT COLOR=\"#00FF00\">Task Log ("
+908                                         + curdate + ")</FONT></H1>\n\n<TABLE WIDTH=\"100%\" CELLPADDING=3 BGCOLOR=\"#007F00\"><TR><TD WIDTH=\"30%\" ALIGN=CENTER><A HREF=\"task-log."
+909                                         + curtlid + ".html\"><FONT COLOR=\"#FFFFFF\">previous TL section ("+curtlid+")</FONT></A><TD WIDTH=\"40%\" BGCOLOR=\"#005F00\">&nbsp;<TD WIDTH=\"30%\" ALIGN=CENTER><FONT COLOR=\"#FFFFFF\">(no next TL section)</FONT></TABLE>\n\n"
+910                                         + "<P>\n<LI><A HREF=\"../lists.html#AL\">Project Active Lists</A>\n"
+911                                         + "<LI><A HREF=\"../lists.html#DIL\">Topical Detailed Items Lists</A>\n"
+912                                         + "<LI><A HREF=\"detailed-items-by-ID.html\">Detailed Items by ID</A>\n"
+913                                         + "<LI><A HREF=\"../work-log.html\">Work Log</A>\n<P>\n<HR>\n<P>\n"
+914                                         + "<!-- section Begin --><TABLE WIDTH=\"100%\" CELLPADDING=3 BGCOLOR=\"#3F3F3F\">\n\n"
+915                                         + "<!-- section End --></TABLE>\n\n<P>\n<HR>\n"
+916                                         + "~/doc/<A HREF=\"../maincont.html\">html</A>/<A HREF=\"../lists.html\">lists</A>/"+newreltlhead+"\n\n</BODY>\n";
+917         String newtaskloghead = basedir+RELLISTSDIR+newreltlhead;
+918         if (!write_file_from_String(newtaskloghead,newtlsection,"New Task Log section",true)) return false;
+919         // update next TL section reference in tl and store current Task Log
+920         tl.at(BigRegex("[<]FONT[        ]+COLOR[        ]*=[    ]*\"#FFFFFF\"[>][       ]*([    ]*no next TL section[   ]*)[    ]*[<]/FONT[>][<]/TABLE[>]")) = "<A HREF=\""+newreltlhead+"\"><FONT COLOR=\"#FFFFFF\">next TL section ("+curdate+")</FONT></A></TABLE>";
+921         if (!write_file_from_String(taskloghead,tl,"Task Log")) return false;
+922         // update list of Task Log sections in listfile
+923         String lfstr;
+924         if (!read_file_into_String(listfile,lfstr)) return false;
+925         int lftlindex = lfstr.index("<A NAME=\"TL\">");
+926         if (lftlindex>=0) if ((lftlindex=lfstr.index("</OL>",lftlindex))>=0) lfstr.at(lftlindex,1) = "<LI><A HREF=\""+(RELLISTSDIR+newreltlhead)+"\">Task Log: section initiation date mark "+curdate+"</A>\n<";
+927         if (lftlindex<0) EOUT << "dil2al: Unable to update Task Log sections list in " << listfile << " in add_TL_section(), continuing as is\n";
+928         if (!write_file_from_String(listfile,lfstr,"Main List")) return false;
+929         // update Task Log symbolic link in tasklog
+930         if (unlink(tasklog)<0) {
+931                 EOUT << "dil2al: Unable to remove Task Log symbolic link " << tasklog << " to task-log." << curtlid << ".html in add_TL_section()\n";
+932                 return false;
+933         }
+934         if (symlink(newreltlhead,tasklog)<0) {
+935                 EOUT << "dil2al: Unable to create Task Log symbolic link " << tasklog << " to " << newreltlhead << " in add_TL_section()\n";
+936                 return false;
+937         }
+938         // set variables to new Task Log section
+939         tl = newtlsection;
+940         taskloghead = newtaskloghead;
+941         return true;
+942 }
+\end{verbatim}\normalsize 
+\index{tladmin.cc@{tladmin.cc}!decide_add_TL_chunk@{decide\_\-add\_\-TL\_\-chunk}}
+\index{decide_add_TL_chunk@{decide\_\-add\_\-TL\_\-chunk}!tladmin.cc@{tladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} decide\_\-add\_\-TL\_\-chunk ({\bf String} \& {\em tl}, int \& {\em tlinsertloc}, bool {\em comparetimes}, bool {\em createifgreater} = {\bf true})}\label{tladmin_8cc_a12}
+
+
+
+
+Definition at line 971 of file tladmin.cc.
+
+References add\_\-TL\_\-chunk\_\-or\_\-entry(), add\_\-TL\_\-section(), ANSI\_\-BOLD\_\-OFF, ANSI\_\-BOLD\_\-ON, Big\-Regex\_\-freq(), EOUT, locate\_\-most\_\-recent\_\-TL\_\-chunk(), TCS\_\-ASK, TCS\_\-CURRENT, TCS\_\-NEW, time\_\-stamp\_\-diff(), TSS\_\-ASK, and TSS\_\-NEW.
+
+Referenced by chunk\_\-controller(), and process\_\-note\_\-TL().
+
+
+
+\footnotesize\begin{verbatim}971                                                                                                            {
+972 // Add a Task Log chunk based on strategies and time since creation
+973 // of most recent chunk
+974 // time-based decisions can be either
+975 // create-if-greater-than-chunksize-plus-slack or
+976 // create-unless-smaller-than-chunksize
+977 // initialize tlinsertloc with -1 to search from end of Task Log
+978 // tlinsertloc is updated for use when adding entry to Task Log
+979 // returns chunkid
+980         // find most recent TL chunk (immediately preceding @INSERT-TL-NOTE@ if present)
+981         const int LLEN = 10240;
+982         char lbuf[LLEN];
+983         String chunkid; bool newchunk = !createifgreater;
+984         if ((tlinsertloc = locate_most_recent_TL_chunk(tl,tlinsertloc,&chunkid))<0) return String("");
+985         if (chunkid=="") newchunk=true;
+986         else {
+987                 // compare chunk time stamp with curtime
+988 #ifdef DEBUG
+989                 cout << "decision chunkid = " << chunkid << "\ncurtime = " << curtime << '\n';
+990 #endif
+991                 if (createifgreater) {
+992                         // test if curtime > chunk_creation_time+timechunksize+timechunkslack
+993                         if ((comparetimes) && ((time_stamp_diff(chunkid,curtime)/60)>(timechunksize+timechunkslack))) {
+994                                 if (timechunkoverstrategy==TCS_NEW) newchunk=true;
+995                                 else if (timechunkoverstrategy==TCS_ASK) {
+996                                         if (useansi) cout << ANSI_BOLD_ON; // bold on
+997                                         cout << "\nDifference between time stamp of current Task Log chunk and current time is\ngreater than " << (timechunksize+timechunkslack) << " minutes. Create new Task Log chunk? (y/N) ";
+998                                         if (useansi) cout << ANSI_BOLD_OFF; // bold off
+999                                         cin.getline(lbuf,LLEN);
+1000                                         if ((lbuf[0]=='y') || (lbuf[0]=='Y')) newchunk=true;
+1001                                 }
+1002                         }
+1003                 } else {
+1004                         // test if curtime == chunk_creation_time, e.g. created during make_note() opportunity in chunk_controller()
+1005                         if (chunkid==curtime) newchunk=false;
+1006                         else {
+1007                                 // test if curtime < chunk_creation_time+timechunksize
+1008                                 if ((comparetimes) && ((time_stamp_diff(chunkid,curtime)/60)<timechunksize)) {
+1009                                         if (timechunkunderstrategy==TCS_CURRENT) newchunk=false;
+1010                                         else if (timechunkunderstrategy==TCS_ASK) {
+1011                                                 if (useansi) cout << ANSI_BOLD_ON; // bold on
+1012                                                 cout << "\nDifference between time stamp of current Task Log chunk and current time is\nless than " << timechunksize << " minutes. Create new Task Log chunk anyway? (y/N) ";
+1013                                                 if (useansi) cout << ANSI_BOLD_OFF; // bold off
+1014                                                 cin.getline(lbuf,LLEN);
+1015                                                 if ((lbuf[0]!='y') && (lbuf[0]!='Y')) newchunk=false;
+1016                                         }
+1017                                 }
+1018                         }
+1019                 }
+1020         }
+1021         if (newchunk) {
+1022                 bool newsection = false;
+1023                 // if TL contains more than sectionsize chunks consider starting a new section
+1024                 int numchunks = BigRegex_freq(tl,"[<]!--[       ]+chunk Begin[  ]+--[>]");
+1025                 if (numchunks>=sectionsize) {
+1026                         if (sectionstrategy==TSS_NEW) newsection = true;
+1027                         else if (sectionstrategy==TSS_ASK) {
+1028                                 if (useansi) cout << ANSI_BOLD_ON; // bold on
+1029                                 cout << "\nThere are " << numchunks << " chunks in this Task Log section. Create new section? (y/N) ";
+1030                                 if (useansi) cout << ANSI_BOLD_OFF; // bold off
+1031                                 cin.getline(lbuf,LLEN);
+1032                                 if ((lbuf[0]=='y') || (lbuf[0]=='Y')) newsection=true;
+1033                         }
+1034                 }
+1035                 if (newsection) {
+1036                         // add a new section to the Task Log
+1037                         if (!add_TL_section(tl)) {
+1038                                 EOUT << "dil2al: Unable to add new Task Log section in decide_add_TL_chunk()\n";
+1039                                 return String("");
+1040                         }
+1041                 }
+1042                 // add a new chunk to the Task Log
+1043                 if ((chunkid = add_TL_chunk_or_entry(tl,chunkid,true,chunkid,tlinsertloc))=="") {
+1044                         EOUT << "dil2al: Unable to add new Task Log chunk in decide_add_TL_chunk()\n";
+1045                         return String("");
+1046                 }
+1047         }
+1048         return chunkid;
+1049 }
+\end{verbatim}\normalsize 
+\index{tladmin.cc@{tladmin.cc}!generate_TL_chunk_header@{generate\_\-TL\_\-chunk\_\-header}}
+\index{generate_TL_chunk_header@{generate\_\-TL\_\-chunk\_\-header}!tladmin.cc@{tladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} generate\_\-TL\_\-chunk\_\-header ({\bf String} {\em nametag}, {\bf String} {\em newalref}, {\bf String} {\em altitle}, {\bf String} {\em alhead}, {\bf String} {\em newdilref}, {\bf String} {\em diltitle}, {\bf String} {\em dilhead}, int {\em generateparts} = 0)}\label{tladmin_8cc_a2}
+
+
+
+
+Definition at line 52 of file tladmin.cc.
+
+References String::after().
+
+Referenced by add\_\-TL\_\-chunk\_\-or\_\-entry(), and initialize\_\-new\_\-DIL\_\-TL().
+
+
+
+\footnotesize\begin{verbatim}52                                                                                                                                                                           {
+53 // generatparts = 0 both parts, -1 begin part, 1 end part
+54 #ifdef DEBUG
+55         cout << "Generating TL chunk header with tag = " << nametag << ", AL = " << newalref << ", DIL entry = " << newdilref << '\n';
+56 #endif
+57         String chunkheader;
+58         if (generateparts<=0) {
+59                 chunkheader = "<!-- chunk Begin --><TR><TD><FONT COLOR=\"#FFFFFF\"><A NAME=\""+nametag+"\"><B>"+nametag+"</B></A>\n<!-- chunk AL --><A HREF=\""+newalref+"\">"+altitle+"</A> (";
+60                 if (alhead!="") chunkheader += "<A HREF=\""+alhead+"\">previous</A>/next)\n<!-- chunk Context -->";
+61                 else chunkheader += "previous/next)\n<!-- chunk Context -->";
+62                 if (newdilref[0]=='!') chunkheader += newdilref.after("!")+" (";
+63                 else chunkheader += "<A HREF=\""+newdilref+"\">"+diltitle+" "+newdilref.after("#")+"</A> (";
+64                 if (dilhead!="") chunkheader +=  "<A HREF=\""+dilhead+"\">previous</A>/next)</FONT>\n<P>\n\n";
+65                 else chunkheader += "previous/next)</FONT>\n<P>\n\n";
+66         }
+67         if (generateparts>=0) {
+68                 chunkheader += "<!-- chunk End --></TD></TR>\n\n";
+69         }
+70         return chunkheader;             
+71 }
+\end{verbatim}\normalsize 
+\index{tladmin.cc@{tladmin.cc}!generate_TL_entry_header@{generate\_\-TL\_\-entry\_\-header}}
+\index{generate_TL_entry_header@{generate\_\-TL\_\-entry\_\-header}!tladmin.cc@{tladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} generate\_\-TL\_\-entry\_\-header ({\bf String} {\em nametag}, {\bf String} {\em newalref}, {\bf String} {\em altitle}, {\bf String} {\em alhead}, {\bf String} {\em newdilref}, {\bf String} {\em diltitle}, {\bf String} {\em dilhead})}\label{tladmin_8cc_a3}
+
+
+
+
+Definition at line 73 of file tladmin.cc.
+
+References String::after().
+
+Referenced by add\_\-TL\_\-chunk\_\-or\_\-entry(), and initialize\_\-new\_\-DIL\_\-TL().
+
+
+
+\footnotesize\begin{verbatim}73                                                                                                                                                    {
+74         String entryheader;
+75         entryheader = "<!-- entry Begin --><FONT COLOR=\"#FFFFFF\">[<A NAME=\""+nametag+"\"><B>"+nametag.after(".")+"</B></A>";
+76         if ((newalref[0]!='*') || (newdilref[0]!='*')) {
+77                 entryheader += " -\n<!-- entry AL -->";
+78                 if (newalref[0]!='*') {
+79                         entryheader += "<A HREF=\""+newalref+"\">"+altitle+"</A> (";
+80                         if (alhead!="") entryheader += "<A HREF=\""+alhead+"\">previous</A>/next)\n<!-- entry Context -->";
+81                         else entryheader += "previous/next)\n<!-- entry Context -->";
+82                 } else entryheader += "\n<!-- entry Context -->";
+83                 if (newdilref[0]!='*') {
+84                         if (newdilref[0]=='!') entryheader += newdilref.after("!")+" (";
+85                         else entryheader += "<A HREF=\""+newdilref+"\">"+diltitle+" "+newdilref.after("#")+"</A> (";
+86                         if (dilhead!="") entryheader +=  "<A HREF=\""+dilhead+"\">previous</A>/next)]</FONT>\n<BR>\n";
+87                         else entryheader += "previous/next)]</FONT>\n<BR>\n";
+88                 } else entryheader += "]</FONT>\n<BR>\n";
+89         } else entryheader += "]</FONT>\n"; //*** add "<BR>\n" here?
+90         return entryheader;
+91 }
+\end{verbatim}\normalsize 
+\index{tladmin.cc@{tladmin.cc}!get_most_recent_TC_AL@{get\_\-most\_\-recent\_\-TC\_\-AL}}
+\index{get_most_recent_TC_AL@{get\_\-most\_\-recent\_\-TC\_\-AL}!tladmin.cc@{tladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} get\_\-most\_\-recent\_\-TC\_\-AL ({\bf String} \& {\em tl})}\label{tladmin_8cc_a4}
+
+
+
+
+Definition at line 96 of file tladmin.cc.
+
+References String::at(), String::del(), String::prepend(), and RELLISTSDIR.
+
+Referenced by select\_\-TL\_\-AL\_\-refs(), select\_\-TL\_\-DIL\_\-refs(), and stop\_\-TL\_\-chunk().
+
+
+
+\footnotesize\begin{verbatim}96                                           {
+97 // returns the AL reference of the most recent task chunk
+98         String curAL;
+99         curAL = tl.at(BigRegex("[<]!-- chunk AL [^(]*"),-1);
+100         curAL.del(BigRegex("[<]!-- chunk AL -->[^\"]*\""));
+101         curAL.del(BigRegex("\".*"));
+102         curAL.prepend(basedir+RELLISTSDIR);
+103         return curAL;
+104 }
+\end{verbatim}\normalsize 
+\index{tladmin.cc@{tladmin.cc}!get_most_recent_TC_DE@{get\_\-most\_\-recent\_\-TC\_\-DE}}
+\index{get_most_recent_TC_DE@{get\_\-most\_\-recent\_\-TC\_\-DE}!tladmin.cc@{tladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} get\_\-most\_\-recent\_\-TC\_\-DE ({\bf String} \& {\em tl})}\label{tladmin_8cc_a5}
+
+
+
+
+Definition at line 106 of file tladmin.cc.
+
+References String::at(), String::del(), and String::gsub().
+
+Referenced by select\_\-TL\_\-DIL\_\-refs(), and stop\_\-TL\_\-chunk().
+
+
+
+\footnotesize\begin{verbatim}106                                           {
+107 // returns the DIL entry reference of the most recent task chunk
+108         String curDE;
+109         curDE = tl.at(BigRegex("[<]!-- chunk Context --[>][^\n][^(]*("),-1);
+110         curDE.del(BigRegex("[<]!-- chunk Context --[>]"));
+111         curDE.del(BigRegex("[<]A [^>]*[Hh][Rr][Ee][Ff][         ]*=[^\"]*\""));
+112         curDE.gsub("\">",":");
+113         curDE.del(BigRegex("\\([<][^>]*[>]\\)?[         ]*("));
+114         return curDE;
+115 }
+\end{verbatim}\normalsize 
+\index{tladmin.cc@{tladmin.cc}!get_TL_head@{get\_\-TL\_\-head}}
+\index{get_TL_head@{get\_\-TL\_\-head}!tladmin.cc@{tladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} get\_\-TL\_\-head ()}\label{tladmin_8cc_a0}
+
+
+
+
+Definition at line 6 of file tladmin.cc.
+
+References EOUT, res, and VOUT.
+
+Referenced by add\_\-TL\_\-chunk\_\-or\_\-entry(), add\_\-TL\_\-section(), chunk\_\-controller(), make\_\-note(), and process\_\-note().
+
+
+
+\footnotesize\begin{verbatim}6                      {
+7 // resolves the TL symbolic link to the TL head file
+8         if (taskloghead!="") return taskloghead;
+9         const int LLEN = 10240;
+10         char lbuf[LLEN];
+11         int res;
+12         if ((res=readlink(tasklog,lbuf,LLEN))<0) {
+13                 EOUT << "dil2al: Unable to read Task Log symbolic link\n" << tasklog << " in get_TL_head()\n";
+14                 return String("");
+15         } else {
+16                 lbuf[res]='\0';
+17                 if (lbuf[0]=='/') taskloghead=lbuf;
+18                 else {
+19                         taskloghead = tasklog;
+20                         taskloghead.gsub(BigRegex("[^/]*$"),"");
+21                         taskloghead += lbuf;
+22                 }
+23                 if (verbose) VOUT << "Task Log symbolic link resolved to " << taskloghead << '\n';
+24                 return taskloghead;
+25         }
+26 }
+\end{verbatim}\normalsize 
+\index{tladmin.cc@{tladmin.cc}!locate_most_recent_TL_chunk@{locate\_\-most\_\-recent\_\-TL\_\-chunk}}
+\index{locate_most_recent_TL_chunk@{locate\_\-most\_\-recent\_\-TL\_\-chunk}!tladmin.cc@{tladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int locate\_\-most\_\-recent\_\-TL\_\-chunk ({\bf String} \& {\em tl}, int {\em seekfrom}, {\bf String} $\ast$ {\em chunkid})}\label{tladmin_8cc_a11}
+
+
+
+
+Definition at line 944 of file tladmin.cc.
+
+References String::at(), String::del(), EOUT, and String::index().
+
+Referenced by decide\_\-add\_\-TL\_\-chunk(), and stop\_\-TL\_\-chunk().
+
+
+
+\footnotesize\begin{verbatim}944                                                                              {
+945 // seeks from seekfrom through the task log to find the
+946 // most recent chunk, set seekfrom==-1 to search backwards
+947 // from the end of the task log
+948 // returns the starting location of the most recent chunk or the
+949 // beginning of the section (-1 == not found)
+950 // if chunkid!=NULL sets (*chunkid) to the chunk ID or to "" if
+951 // the beginning of the section is returned
+952 // requires a valid task log section in tl
+953         int tlinsertloc;
+954         if ((tlinsertloc = tl.index(BigRegex("[<]!--[   ]+chunk Begin[  ]+--[>]"),seekfrom))<0) {
+955                 if (chunkid) (*chunkid) = ""; // no chunks in TL
+956                 if ((tlinsertloc = tl.index(BigRegex("[<]!--[   ]+section Begin[        ]+--[>]")))<0) {
+957                         // TL section not properly formatted
+958                         EOUT << "dil2al: Section Begin not found in " << taskloghead << " in locate_most_recent_TL_chunk()\n";
+959                         return -1;
+960                 } 
+961                 return tlinsertloc;
+962         }
+963         if (chunkid) {
+964                 // get chunk time stamp at tlinsertloc
+965                 (*chunkid) = tl.at(BigRegex("[<]TR[>][<]TD[>][<][^>]*=[^>]*[>][<]A[     ]+[Nn][Aa][Mm][Ee][     ]*=[    ]*\"[0-9]+"),tlinsertloc);
+966                 chunkid->del(BigRegex("[<]TR[>][<]TD[>][<][^>]*=[^>]*[>][<]A[   ]+[Nn][Aa][Mm][Ee][     ]*=[    ]*\""));
+967         }
+968         return tlinsertloc;
+969 }
+\end{verbatim}\normalsize 
+\index{tladmin.cc@{tladmin.cc}!max_chunk_entry@{max\_\-chunk\_\-entry}}
+\index{max_chunk_entry@{max\_\-chunk\_\-entry}!tladmin.cc@{tladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int max\_\-chunk\_\-entry ({\bf String} \& {\em tlchunk})}\label{tladmin_8cc_a1}
+
+
+
+
+Definition at line 28 of file tladmin.cc.
+
+References String::after(), String::before(), String::index(), and String::matches().
+
+Referenced by add\_\-TL\_\-chunk\_\-or\_\-entry().
+
+
+
+\footnotesize\begin{verbatim}28                                       {
+29 // searches for the largest entry number in a Task Log chunk
+30 // returns 0 if there are no entries
+31 // note that this works even if the entries are not in order or entry numbers are missing
+32 #ifdef DEBUG
+33         cout << "TLCHUNK:\n" << tlchunk << '\n';
+34 #endif
+35         int maxentry = 0, entryindex = -1;
+36         while ((entryindex = tlchunk.index(BigRegex("[<]!--[    ]*entry Begin[  ]*--[>]"),entryindex+1))>=0) {
+37                 String entryid = tlchunk.before(BigRegex("[     ]*[<]/B[>]"),entryindex);
+38                 entryid = entryid.after("<B>",-1);
+39                 int entryidnum;
+40                 if (entryid.matches(BRXint)) entryidnum = atoi((const char *) entryid);
+41 #ifdef DEBUG
+42                 cout << "entryid = " << entryid << "\nentryidnum = " << entryidnum << '\n';
+43 #endif
+44                 if (entryidnum>maxentry) maxentry = entryidnum;
+45         }
+46 #ifdef DEBUG
+47         cout << "maxentry = " << maxentry << '\n';
+48 #endif
+49         return maxentry;
+50 }
+\end{verbatim}\normalsize 
+\index{tladmin.cc@{tladmin.cc}!select_TL_AL_refs@{select\_\-TL\_\-AL\_\-refs}}
+\index{select_TL_AL_refs@{select\_\-TL\_\-AL\_\-refs}!tladmin.cc@{tladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} select\_\-TL\_\-AL\_\-refs ({\bf String} \& {\em tl}, bool {\em newchunk}, {\bf String} {\em newdilref})}\label{tladmin_8cc_a8}
+
+
+
+
+Definition at line 359 of file tladmin.cc.
+
+References String::after(), ANSI\_\-BOLD\_\-OFF, ANSI\_\-BOLD\_\-ON, ANSI\_\-UNDERLINE\_\-OFF, ANSI\_\-UNDERLINE\_\-ON, String::before(), String::contains(), String::del(), EOUT, find\_\-in\_\-line(), find\_\-line(), get\_\-most\_\-recent\_\-TC\_\-AL(), String::gsub(), String::matches(), String::prepend(), and RELLISTSDIR.
+
+Referenced by add\_\-TL\_\-chunk\_\-or\_\-entry().
+
+
+
+\footnotesize\begin{verbatim}359                                                                        {
+360 // select AL reference for new TL chunk or entry
+361 // tl should provide a pointer to a String containing
+362 // the most recent section of the Task Log
+363 // newchunk indicates if a new chunk or a new entry is being prepared
+364 // if newdilref=="*" then possibly choose a new AL
+365 // return value "*<AL-ref>"=same as chunk, ""=error
+366 // default is current AL
+367         const int LLEN = 10240;
+368         char lbuf[LLEN];
+369         StringList aloptions;
+370         int numaloptions = 0;
+371         // AL should default either to current, or to that associated with DIL
+372         // alternatives can be read from list.html
+373         // obtain current AL from TL
+374         String curAL = get_most_recent_TC_AL(tl);
+375 //*** could insure that if newdilref!="*" the default
+376 //*** Active List returned is curAL if the DIL is in it,
+377 //*** otherwise the primary one the DIL in newdilref is in
+378         if ((askALDILref) && (newdilref=="*")) {
+379                 // some options from listfile
+380                 ifstream alf(listfile);
+381                 if (!alf) EOUT << "dil2al: Unable to read " << listfile << " in select_TL_AL_refs(), continuing\n";
+382                 else {
+383                         if (find_line(&alf,"[<]A[       ][^>]*[Nn][Aa][Mm][Ee][         ]*=[    ]*\"AL\"",lbuf,LLEN)) {
+384                                 String alid[2];
+385                                 while (find_in_line(&alf,"[<]LI[>][<]A[         ][^>]*[Hh][Rr][Ee][Ff][         ]*=[    ]*\"(.+)[<][/]A[>]",2,alid,"[<][/]UL[>]",lbuf,LLEN)==1) {
+386                                         alid[1].gsub("\">",":");
+387                                         alid[1].del(RELLISTSDIR);
+388                                         if (!curAL.contains(alid[1].before(":"))) {
+389                                                 aloptions[numaloptions] = alid[1];
+390                                                 numaloptions++;
+391                                         }
+392                                 }
+393                         } else EOUT << "dil2al: No AL references in " << listfile << " in select_TL_AL_refs(), continuing\n";
+394                         alf.close();
+395                 }
+396                 // can enter AL ids directly, or quick-chooser choice from priority list
+397                 String affiliation = "";
+398                 while (affiliation=="") {
+399                         if (useansi) cout << ANSI_UNDERLINE_ON; // underline on
+400                         if (newchunk) cout << "\nChunk "; else cout << "\nEntry ";
+401                         cout << "AL reference ID\n";
+402                         if (useansi) cout << ANSI_UNDERLINE_OFF; // underline off
+403                         for (int i=0; i<numaloptions; i++) cout << i << ". " << aloptions[i] << '\n';
+404                         if (useansi) cout << ANSI_BOLD_ON; // bold on
+405                         cout << "\"\"=" << curAL.after(basedir+RELLISTSDIR) << " DEFAULT,\n\"?\"=browse (e.g. use S to save file info to ~/tmp/dilref for dil2al),\n\"?&\"=fork browser: ";
+406                         if (useansi) cout << ANSI_BOLD_OFF; // bold off
+407                         cin.getline(lbuf,LLEN);
+408                         if (lbuf[0]!='\0') {
+409                                 affiliation = lbuf;
+410                                 if (affiliation.matches(BRXint)) { // quick-select menu item
+411                                         int q = atoi((const char *) affiliation);
+412                                         if ((q>=0) && (q<numaloptions)) affiliation = aloptions[q].before(":");
+413                                         else {
+414                                                 EOUT << "dil2al: Selection " << q << " is not a predefined AL reference option\n";
+415                                                 affiliation = "";
+416                                         }
+417                                 } else if (affiliation=="?") {
+418                                         if (system(browser+" "+listfile)<0) EOUT << "dil2al: Unable to browse in select_TL_AL_refs(), continuing\n";
+419                                         affiliation = "";
+420                                         ifstream drf(dilref);
+421                                         if (drf) {
+422                                                 if (find_line(&drf,"Current URL",lbuf,LLEN)) {
+423                                                         String urlline = lbuf;
+424                                                         drf.getline(lbuf,LLEN);
+425                                                         if (lbuf[0]==' ') urlline += lbuf;
+426                                                         urlline.del("Current URL");
+427                                                         urlline.del("file://");
+428                                                         urlline.gsub(" ","");
+429                                                         urlline.del(basedir+RELLISTSDIR);
+430                                                         if (useansi) cout << ANSI_BOLD_ON; // bold on
+431                                                         cout << "Take `" << urlline << "' as AL reference ID? (y/N)";
+432                                                         if (useansi) cout << ANSI_BOLD_OFF; // bold off
+433                                                         cin.getline(lbuf,LLEN);
+434                                                         if ((lbuf[0]=='y') || (lbuf[0]=='Y')) affiliation = urlline;
+435                                                 }
+436                                                 drf.close();
+437                                                 unlink(dilref);
+438                                         }
+439                                 } else if (affiliation=="?&") {
+440                                         if (system("rxvt -e "+browser+" "+curAL+" &")<0) EOUT << "dil2al: Unable to spawn a browser in select_TL_AL_refs(), continuing\n";
+441                                         affiliation = "";
+442                                 } else { // verify that string is AL ID
+443                                         alf.open(listfile);
+444                                         if (!alf) {
+445                                                 EOUT << "dil2al: Unable to read " << listfile << " in select_TL_AL_ref()\n";
+446                                                 return String("");
+447                                         }
+448 #ifdef DEBUG
+449                                         cout << "seeking " << affiliation << '\n';
+450 #endif
+451                                         if (find_line(&alf,"[<]A[       ][^>]*[Nn][Aa][Mm][Ee][         ]*=[    ]*\"AL\"",lbuf,LLEN)) {
+452                                                 affiliation.prepend(RELLISTSDIR);
+453                                                 affiliation.prepend("[<]LI[>][<]A[      ][^>]*[Hh][Rr][Ee][Ff][         ]*=[    ]*\"");
+454                                                 if (find_line(&alf,affiliation,lbuf,LLEN)) {
+455                                                         affiliation = lbuf;
+456                                                         affiliation = affiliation.after(BigRegex("[Hh][Rr][Ee][Ff][     ]*=[    ]*\""));
+457                                                         affiliation = affiliation.after(RELLISTSDIR);
+458                                                         affiliation = affiliation.before("\">");
+459 #ifdef DEBUG
+460                                                         cout << "exists: " << affiliation << '\n';
+461 #endif
+462                                                 } else {
+463                                                         EOUT << "dil2al: AL reference " << affiliation << " not found in " << listfile << '\n';
+464                                                         affiliation = "";
+465                                                 }
+466                                         } else {
+467                                                 EOUT << "dil2al: No AL references found in " << listfile << " in select_TL_AL_ref()\n";
+468                                                 return String("");
+469                                         }
+470                                         alf.close();
+471                                 }
+472                         } else {
+473                                 affiliation = curAL.after(basedir+RELLISTSDIR);
+474                                 if (!newchunk) affiliation.prepend("*"); // same as chunk AL (no entry specific reference required)
+475                         }
+476                 }
+477                 return affiliation;
+478         } else {
+479                 curAL = curAL.after(basedir+RELLISTSDIR);
+480                 if (!newchunk) curAL.prepend("*");
+481                 return curAL;
+482         }
+483 }
+\end{verbatim}\normalsize 
+\index{tladmin.cc@{tladmin.cc}!select_TL_DIL_refs@{select\_\-TL\_\-DIL\_\-refs}}
+\index{select_TL_DIL_refs@{select\_\-TL\_\-DIL\_\-refs}!tladmin.cc@{tladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} select\_\-TL\_\-DIL\_\-refs ({\bf String} \& {\em tl}, bool {\em newchunk}, {\bf String} {\em newalref})}\label{tladmin_8cc_a7}
+
+
+
+
+Definition at line 161 of file tladmin.cc.
+
+References AAU\_\-ASK, AAU\_\-NO, String::after(), ANSI\_\-BOLD\_\-OFF, ANSI\_\-BOLD\_\-ON, ANSI\_\-UNDERLINE\_\-OFF, ANSI\_\-UNDERLINE\_\-ON, String::at(), String::before(), confirmation(), String\-List::contains(), String::contains(), String::del(), EOUT, find\_\-line(), generate\_\-AL(), get\_\-most\_\-recent\_\-TC\_\-AL(), get\_\-most\_\-recent\_\-TC\_\-DE(), String::gsub(), HTML\_\-get\_\-href(), HTML\_\-get\_\-table\_\-cell(), HTML\_\-remove\_\-tags(), String::index(), String::length(), Big\-Regex::match\_\-info(), String::matches(), String::prepend(), read\_\-file\_\-into\_\-String(), RELLISTSDIR, remove\_\-whitespace(), Big\-Regex::search(), Detailed\_\-Items\_\-List::Sort\_\-by\_\-Target\_\-Date(), Big\-Regex::sublen(), Big\-Regex::subpos(), time\_\-stamp\_\-diff(), and VOUT.
+
+Referenced by add\_\-TL\_\-chunk\_\-or\_\-entry().
+
+
+
+\footnotesize\begin{verbatim}161                                                                        {
+162 // select DIL reference for new TL chunk or entry
+163 // tl should provide a pointer to a String containing
+164 // the most recent section of the Task Log
+165 // newchunk indicates if a new chunk or a new entry is being prepared
+166 // if newalref is not "" then use it as AL for default/quick choices
+167 // return value "*<DIL-ref>"=same as chunk, "!<DIL-ref>"=non-DIL identifying
+168 // comment, "*"=decision postponed (see variableAL), ""=error
+169 // when newchunk=true the default is the highest priority item in the current AL
+170 // when newchunk=true the default is the same as that of the current chunk
+171         const int LLEN = 10240;
+172         char lbuf[LLEN];
+173         StringList diloptions;
+174         int numdiloptions = 0;
+175         String curAL;
+176         if (newalref=="") curAL = get_most_recent_TC_AL(tl); // obtain current AL from TL
+177         else {
+178                 if (newalref[0]=='*') newalref.del("*");
+179                 curAL = basedir+RELLISTSDIR+newalref;
+180         }
+181         // obtain default DIL ref for TL entry
+182         if (!newchunk) { // chunk DIL ref (or identifying comment) is default
+183                 diloptions[0] = get_most_recent_TC_DE(tl);
+184                 if (diloptions[0]=="") {
+185                         EOUT << "dil2al: Entry is not in a Task Log chunk in select_TL_DIL_refs()\n";
+186                         return String("");
+187                 }
+188                 numdiloptions++;
+189         }
+190         // recompute the AL if the suggested start time for the next
+191         // TC is significantly earlier than the current time
+192         String curALstr;
+193         if (read_file_into_String(curAL,curALstr)) {
+194                 String tmpstr, cellcontent;
+195                 HTML_get_table_cell(curALstr,0,tmpstr,cellcontent);
+196                 HTML_remove_tags(cellcontent);
+197                 BigRegex alr("Day[      ]+\\([0-9]+\\).*suggested[      ]+start[        ]+\\([0-9][0-9]\\):\\([0-9][0-9]\\)");
+198                 if (cellcontent.index(alr)==0) {
+199                         // get suggested start time for next TC
+200                         tmpstr = cellcontent.at(alr.subpos(1),alr.sublen(1))+cellcontent.at(alr.subpos(2),alr.sublen(2))+cellcontent.at(alr.subpos(3),alr.sublen(3));
+201                         time_t tdiff = time_stamp_diff(tmpstr,curtime); // positive if curtime is later than suggested time
+202                         if (tdiff>alsyncslack) { // recompute the AL
+203                                 // determine if AL updating should be automatic
+204                                 // *** Note: A separate configuration variable should be used if alautoupdate
+205                                 //     should apply only to the recomputation of the AL in stop_TL_chunk()
+206                                 //     above.
+207                                 switch (alautoupdate) {
+208                                         case AAU_NO:
+209                                                 if (verbose) VOUT << "Warning: AL desynchronized, no automatic recomputation (alautoupdate==AAU_NO)\n";
+210                                                 break;
+211                                         case AAU_ASK:
+212                                                 if (confirmation("AL desynchronized, update now? (y/N) ",'y')) break;
+213                                         default:
+214                                                 VOUT << "Recomputing AL\n";
+215                                                 Detailed_Items_List dilist;
+216                                                 DIL_entry ** dep = dilist.Sort_by_Target_Date(true);
+217                                                 // *** make this able to request generation of an AL
+218                                                 //     corresponding to the superior that generated curAL
+219                                                 if (!generate_AL(dep)) EOUT << "dil2al: Unable to generate AL in select_TL_DIL_refs(), continuing as is\n";
+220                                                 else { // get new version of AL
+221                                                         curALstr = "";
+222                                                         read_file_into_String(curAL,curALstr);
+223                                                 }
+224                                                 delete[] dep;
+225                                 }
+226                         }
+227                         // *** it is possible to add a message here if curtime is a lot
+228                         //     smaller than the suggested start time of the AL, e.g.
+229                         //     if all suggested TCs for this AL day have been completed
+230                 } else EOUT << "Day row missing at top of AL " << curAL << " in select_TL_DIL_refs(), continuing as is\n";
+231         }
+232         // some options from high priority current AL items
+233         if (curALstr.length()>0) {
+234                 int cellindex = 0; String cellparameters, cellcontent;
+235                 while ((numdiloptions<6) && ((cellindex=HTML_get_table_cell(curALstr,cellindex,cellparameters,cellcontent))>=0))
+236                         if (!cellcontent.contains(BigRegex("[<]!--[     ]+@select_TL_DIL_refs:[         ]+SKIP ROW@[    ]+--[>]"))) { // skip marked rows
+237                                 diloptions[numdiloptions]=cellcontent;
+238                                 String idhreftext;
+239                                 if (HTML_get_href(cellcontent,0,cellparameters,idhreftext)>=0) {
+240                                         // only unique DIL options
+241                                         for (int i=0; i<numdiloptions; i++) if (diloptions[i].contains(idhreftext)) { cellparameters=""; break; }
+242                                         if (cellparameters.length()>0) {
+243                                                 diloptions[numdiloptions]=cellparameters+':'+cellcontent.after(BigRegex("[]]\n?"));
+244                                                 HTML_remove_tags(diloptions[numdiloptions]);
+245                                                 remove_whitespace(diloptions[numdiloptions]);
+246                                                 if (diloptions[numdiloptions]!="") numdiloptions++;
+247                                         }
+248                                 } else EOUT << "Missing DIL entry reference in AL " << curAL << " in select_TL_DIL_refs(), continuing\n";
+249                         }
+250         }
+251         // some options from recent DIL refs in TL
+252         BigRegex r("[<]!-- \\(chunk\\|entry\\) Context --[>]\\([^\n][^(]*\\)(");
+253         int pos = tl.length(), matchlen;
+254         while (((pos = r.search(tl,pos-1,matchlen,-1))>=0) && (numdiloptions<10)) {
+255 #ifdef VERBOSEDEBUG
+256                 cout << "Context...\n";
+257 #endif
+258                 int subpos;
+259                 if (r.match_info(subpos,matchlen,2)) {
+260                         diloptions[numdiloptions] = tl.at(subpos,matchlen);
+261 #ifdef VERBOSEDEBUG
+262                         cout << "Candidate Context from TL: " << diloptions[numdiloptions] << '\n';
+263 #endif
+264                         String idhrefname = diloptions[numdiloptions].at(BigRegex("#[0-9]+[.][0-9]+"));
+265                         // only unique DIL options
+266                         for (int i=0; i<numdiloptions; i++) if (diloptions[i].contains(idhrefname)) { idhrefname=""; break; }
+267                         if (idhrefname!="") {
+268                                 diloptions[numdiloptions].del(BigRegex("[<]A [^>]*[Hh][Rr][Ee][Ff][     ]*=[^\"]*\""));
+269                                 diloptions[numdiloptions].gsub("\">",":");
+270                                 diloptions[numdiloptions].del(BigRegex("\\([<][^>]*[>]\\)?[     ]*("));
+271                                 if (diloptions[numdiloptions]!="") numdiloptions++;
+272                         }
+273                 }
+274         }
+275         // can enter DIL ids directly, or quick-chooser choice from priority list, or textual comment instead of DIL
+276         if (askALDILref) {
+277                 String affiliation = "";
+278                 while (affiliation=="") {
+279                         if (useansi) cout << ANSI_UNDERLINE_ON; // underline on
+280                         if (newchunk) cout << "\nChunk "; else cout << "\nEntry ";
+281                         cout << "DIL reference ID or identifying comment (DIL references generally\npreferred) can include HREFs\n";
+282                         if (useansi) cout << ANSI_UNDERLINE_OFF; // underline off
+283                         for (int i=1; i<numdiloptions; i++) cout << i << ". " << diloptions[i] << '\n';
+284                         if (useansi) cout << ANSI_BOLD_ON; // bold on
+285                         cout << "\"\"=" << diloptions[0] << " DEFAULT,\n\"?\"=browse (e.g. use S to save file info to ~/tmp/dilref for dil2al),\n\"?&\"=fork browser, \"*\"=postpone and get new Active List\n(current AL = "
+286                                 << curAL.after(basedir+RELLISTSDIR) << "): ";
+287                         if (useansi) cout << ANSI_BOLD_OFF; // bold off
+288                         cin.getline(lbuf,LLEN);
+289                         if (lbuf[0]!='\0') {
+290                                 affiliation = lbuf;
+291                                 if (affiliation.matches(BRXint)) { // quick-select menu item
+292                                         int q = atoi((const char *) affiliation);
+293                                         if ((q>0) && (q<numdiloptions)) affiliation = diloptions[q].before(":");
+294                                         else {
+295                                                 EOUT << "dil2al: Selection " << q << " is not a predefined DIL reference option\n";
+296                                                 affiliation = "";
+297                                         }
+298                                 } else if (affiliation.matches(BRXdouble)) { // DIL ID
+299                                         ifstream dbid(idfile);
+300                                         if (!dbid) {
+301                                                 EOUT << "dil2al: Unable to read " << idfile << " in select_TL_DIL_ref()\n";
+302                                                 return String("");
+303                                         }
+304                                         affiliation.prepend("#");
+305 #ifdef DEBUG
+306                                         cout << "seeking " << affiliation << '\n';
+307 #endif
+308                                         if (find_line(&dbid,affiliation,lbuf,LLEN)) {
+309                                                 affiliation = lbuf;
+310                                                 affiliation.del(BigRegex("[^<]*[<]TD[^>]*[>][<]A[^>]*[Hh][Rr][Ee][Ff]=\""));
+311                                                 affiliation = affiliation.before("\"");
+312 #ifdef DEBUG
+313                                         cout << "exists: " << affiliation << '\n';
+314 #endif
+315                                         } else {
+316                                                 EOUT << "dil2al: DIL reference " << affiliation << " not found in " << idfile << '\n';
+317                                                 affiliation = "";
+318                                         }
+319                                         dbid.close();
+320                                 } else if (affiliation=="?") {
+321                                         if (system(browser+" "+curAL)<0) EOUT << "dil2al: Unable to browse in select_TL_DIL_refs(), continuing\n";
+322                                         affiliation = "";
+323                                         ifstream drf(dilref);
+324                                         if (drf) {
+325                                                 if (find_line(&drf,"Current URL",lbuf,LLEN)) {
+326                                                         String urlline = lbuf;
+327                                                         drf.getline(lbuf,LLEN);
+328                                                         if (lbuf[0]==' ') urlline += lbuf;
+329                                                         urlline.del("Current URL");
+330                                                         urlline.del("file://");
+331                                                         urlline.gsub(" ","");
+332                                                         urlline.del(basedir+RELLISTSDIR);
+333                                                         if (useansi) cout << ANSI_BOLD_ON; // bold on
+334                                                         cout << "Take `" << urlline << "' as DIL reference ID or identifying comment? (y/N)";
+335                                                         if (useansi) cout << ANSI_BOLD_OFF; // bold off
+336                                                         cin.getline(lbuf,LLEN);
+337                                                         if ((lbuf[0]=='y') || (lbuf[0]=='Y')) affiliation=urlline;
+338                                                 }
+339                                                 drf.close();
+340                                                 unlink(dilref);
+341                                         }
+342                                 } else if (affiliation=="?&") {
+343                                         if (system("rxvt -e "+browser+" "+curAL+" &")<0) EOUT << "dil2al: Unable to spawn a browser in select_TL_DIL_refs(), continuing\n";
+344                                         affiliation = "";
+345                                 } else if (affiliation!="*") affiliation.prepend("!"); // else non-DIL identifying comment
+346                         } else {
+347                                 affiliation=diloptions[0].before(":");
+348                                 if (!newchunk) affiliation.prepend("*"); // same as chunk DIL (no entry specific reference required)
+349                         }
+350                 }
+351                 return affiliation;
+352         } else {
+353                 diloptions[0]=diloptions[0].before(":");
+354                 if (!newchunk) diloptions[0].prepend("*");
+355                 return diloptions[0];
+356         }
+357 }
+\end{verbatim}\normalsize 
+\index{tladmin.cc@{tladmin.cc}!stop_TL_chunk@{stop\_\-TL\_\-chunk}}
+\index{stop_TL_chunk@{stop\_\-TL\_\-chunk}!tladmin.cc@{tladmin.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void stop\_\-TL\_\-chunk ({\bf String} \& {\em tl})}\label{tladmin_8cc_a6}
+
+
+
+
+Definition at line 117 of file tladmin.cc.
+
+References AAU\_\-ASK, AAU\_\-NO, String::after(), String::before(), confirmation(), EOUT, generate\_\-AL(), get\_\-most\_\-recent\_\-TC\_\-AL(), get\_\-most\_\-recent\_\-TC\_\-DE(), String::gsub(), locate\_\-most\_\-recent\_\-TL\_\-chunk(), String::matches(), remove\_\-AL\_\-TC(), Detailed\_\-Items\_\-List::Sort\_\-by\_\-Target\_\-Date(), time\_\-stamp\_\-diff(), update\_\-DIL\_\-entry\_\-elements(), and VOUT.
+
+Referenced by add\_\-TL\_\-chunk\_\-or\_\-entry(), add\_\-TL\_\-section(), and chunk\_\-controller().
+
+
+
+\footnotesize\begin{verbatim}117                                 {
+118 // Mark the completion time of a Task Log chunk if there is one open
+119 // AL options determine if and how the current AL and closed chunk's
+120 // DIL entry should be updated, and the corresponding update is done.
+121         if (tl.gsub(BigRegex("[<]!--[   ]+chunk End[    ]+--[>][        ]*[<]/TD[>][    ]*[<]/TR[>]"),"<!-- chunk End --><I>"+curtime+"</I></TD></TR>")<=0) return;
+122         // determine if AL anc completion ratios should be updated automatically
+123         if (alautoupdate==AAU_NO) return;
+124         if (alautoupdate==AAU_ASK) if (confirmation("Update AL and completion ratios? (y/N) ",'y')) return;
+125         // obtain AL and DIL information from the most recent chunk
+126         String chunkid; int lasttlchunk;
+127         if ((lasttlchunk = locate_most_recent_TL_chunk(tl,-1,&chunkid))>=0) {
+128                 bool recomputeAL = false;
+129                 String curAL = get_most_recent_TC_AL(tl);
+130                 String curDE = get_most_recent_TC_DE(tl);
+131                 // a proper DIL entry ID is returned in the form:
+132                 // some-DIL-file.html#XXXXXXXXXXXXXX.Y:DIL-title-and-entry-ID
+133                 curDE = curDE.before(':'); curDE = curDE.after('#');
+134                 if (curDE.matches(BRXdouble)) {
+135                         time_t tdiff = time_stamp_diff(chunkid,curtime);
+136 // *** suggest tdiff, but allow entry of other time, in which
+137 //     case request if required time and completion status should
+138 //     be modified directly
+139 // *** if tdiff > taskchunksize*1.25 recompute AL... this test
+140 //     may not be necessary, since any significant delay will
+141 //     cause desynchronization between the updated suggested
+142 //     start time in the AL and the current time, which causes
+143 //     recomputation of the AL when a significant difference is
+144 //     detected in select_TL_DIL_refs()
+145                         if (!update_DIL_entry_elements(curDE,0.0,false,0.0,true,0.0,false,tdiff)) recomputeAL = true;
+146                         if (!remove_AL_TC(curAL,curDE)) recomputeAL = true;
+147                 } else {
+148                         VOUT << "Completed task chunk was not a DIL entry\n";
+149                         recomputeAL = true;
+150                 }
+151                 if (recomputeAL) { // recompute the AL
+152                         VOUT << "Recomputing AL\n";
+153                         Detailed_Items_List dilist;
+154                         DIL_entry ** dep = dilist.Sort_by_Target_Date(true);
+155                         if (!generate_AL(dep)) EOUT << "dil2al: Unable to generate AL in stop_TL_chunk(), continuing as is\n";
+156                         delete[] dep;
+157                 }
+158         } else EOUT << "dil2al: Unable to update AL and DIL entry in stop_TL_chunk(), continuing\n";
+159 }
+\end{verbatim}\normalsize 

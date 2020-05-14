@@ -1,0 +1,887 @@
+\section{Target\_\-Access  Class Reference}
+\label{classTarget__Access}\index{Target_Access@{Target\_\-Access}}
+{\tt \#include $<$dil2al.hh$>$}
+
+\subsection*{Public Types}
+\begin{CompactItemize}
+\item 
+enum {\bf Target\_\-Access\_\-types} \{ {\bf TA\_\-LOCAL}, 
+{\bf TA\_\-LOCAL\_\-DIRECTORY}, 
+{\bf TA\_\-HTTP}, 
+{\bf TA\_\-FTP}, 
+{\bf TA\_\-UNKNOWN}
+ \}
+\end{CompactItemize}
+\subsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf Target\_\-Access} (const char $\ast$t)
+\item 
+{\bf Target\_\-Access} (const Target\_\-Access \&t)
+\item 
+{\bf Target\_\-Access} (const Target\_\-Access \&parent, const char $\ast$t)
+\item 
+int {\bf isequal} (const Target\_\-Access \&ta) const
+\item 
+int {\bf operator==} (const Target\_\-Access \&ta) const
+\item 
+int {\bf operator!=} (const Target\_\-Access \&ta) const
+\item 
+bool {\bf make\_\-local\_\-copy} ()
+\item 
+bool {\bf uncompress} ()
+\item 
+bool {\bf cleartext\_\-conversion} ()
+\item 
+bool {\bf read\_\-raw\_\-into\_\-String} ({\bf String} \&text, bool warnopen={\bf true})
+\item 
+bool {\bf read\_\-uncompressed\_\-into\_\-String} ({\bf String} \&text, bool warnopen={\bf true})
+\item 
+bool {\bf read\_\-cleartext\_\-into\_\-String} ({\bf String} \&text, bool warnopen={\bf true})
+\item 
+void {\bf remove\_\-local\_\-copy} ()
+\item 
+void {\bf remove\_\-uncompressed} ()
+\item 
+void {\bf remove\_\-cleartext} ()
+\item 
+{\bf String} {\bf Target} () const
+\item 
+{\bf Target\_\-Access\_\-types} {\bf Type} () const
+\item 
+void {\bf Retain\_\-Transformed} ()
+\item 
+void {\bf Discard\_\-Transformed} ()
+\end{CompactItemize}
+\subsection*{Protected Methods}
+\begin{CompactItemize}
+\item 
+void {\bf set\_\-target} (const char $\ast$t, const Target\_\-Access $\ast$parent=NULL)
+\item 
+void {\bf remove\_\-name\_\-reference} ({\bf String} \&tpath)
+\item 
+void {\bf remove\_\-back\_\-references} ({\bf String} \&tpath)
+\item 
+void {\bf transformed\_\-name} ({\bf String} \&transformed, {\bf String} \&prevname)
+\item 
+void {\bf transformed\_\-name} ({\bf String} \&transformed, {\bf String} \&prevname, const {\bf Big\-Regex} \&transrx)
+\item 
+bool {\bf make\_\-local\_\-copy\_\-of\_\-directory} ()
+\item 
+bool {\bf make\_\-local\_\-copy\_\-of\_\-HTTP} ()
+\item 
+bool {\bf make\_\-local\_\-copy\_\-of\_\-FTP} ()
+\item 
+bool {\bf syscommand} ({\bf String} program, {\bf String} args, int success=0) const
+\end{CompactItemize}
+\subsection*{Protected Attributes}
+\begin{CompactItemize}
+\item 
+{\bf String} {\bf target}
+\item 
+{\bf String} {\bf user}
+\item 
+{\bf String} {\bf server}
+\item 
+{\bf String} {\bf path}
+\item 
+{\bf Target\_\-Access\_\-types} {\bf type}
+\item 
+{\bf String} {\bf localcopy}
+\item 
+{\bf String} {\bf uncompressed}
+\item 
+{\bf String} {\bf cleartext}
+\item 
+bool {\bf retaintransformed}
+\end{CompactItemize}
+
+
+\subsection{Member Enumeration Documentation}
+\index{Target_Access@{Target\_\-Access}!Target_Access_types@{Target\_\-Access\_\-types}}
+\index{Target_Access_types@{Target\_\-Access\_\-types}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}enum Target\_\-Access::Target\_\-Access\_\-types}\label{classTarget__Access_s5}
+
+
+\begin{Desc}
+\item[Enumeration values:]\par
+\begin{description}
+\index{TA_LOCAL@{TA\_\-LOCAL}!Target_Access@{Target\_\-Access}}\index{Target_Access@{Target\_\-Access}!TA_LOCAL@{TA\_\-LOCAL}}\item[{\em 
+{\em TA\_\-LOCAL}\label{classTarget__Access_s5s0}
+}]\index{TA_LOCAL_DIRECTORY@{TA\_\-LOCAL\_\-DIRECTORY}!Target_Access@{Target\_\-Access}}\index{Target_Access@{Target\_\-Access}!TA_LOCAL_DIRECTORY@{TA\_\-LOCAL\_\-DIRECTORY}}\item[{\em 
+{\em TA\_\-LOCAL\_\-DIRECTORY}\label{classTarget__Access_s5s1}
+}]\index{TA_HTTP@{TA\_\-HTTP}!Target_Access@{Target\_\-Access}}\index{Target_Access@{Target\_\-Access}!TA_HTTP@{TA\_\-HTTP}}\item[{\em 
+{\em TA\_\-HTTP}\label{classTarget__Access_s5s2}
+}]\index{TA_FTP@{TA\_\-FTP}!Target_Access@{Target\_\-Access}}\index{Target_Access@{Target\_\-Access}!TA_FTP@{TA\_\-FTP}}\item[{\em 
+{\em TA\_\-FTP}\label{classTarget__Access_s5s3}
+}]\index{TA_UNKNOWN@{TA\_\-UNKNOWN}!Target_Access@{Target\_\-Access}}\index{Target_Access@{Target\_\-Access}!TA_UNKNOWN@{TA\_\-UNKNOWN}}\item[{\em 
+{\em TA\_\-UNKNOWN}\label{classTarget__Access_s5s4}
+}]\end{description}
+\end{Desc}
+
+
+
+Definition at line 974 of file dil2al.hh.
+
+Referenced by Type().
+
+
+
+\footnotesize\begin{verbatim}974 { TA_LOCAL, TA_LOCAL_DIRECTORY, TA_HTTP, TA_FTP, TA_UNKNOWN };
+\end{verbatim}\normalsize 
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Target_Access@{Target\_\-Access}!Target_Access@{Target\_\-Access}}
+\index{Target_Access@{Target\_\-Access}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Target\_\-Access::Target\_\-Access (const char $\ast$ {\em t})\hspace{0.3cm}{\tt  [inline]}}\label{classTarget__Access_a0}
+
+
+
+
+Definition at line 992 of file dil2al.hh.
+
+References false, retaintransformed, and set\_\-target().
+
+
+
+\footnotesize\begin{verbatim}992 : localcopy(""), uncompressed(""), cleartext(""), retaintransformed(false) { set_target(t); }
+\end{verbatim}\normalsize 
+\index{Target_Access@{Target\_\-Access}!Target_Access@{Target\_\-Access}}
+\index{Target_Access@{Target\_\-Access}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Target\_\-Access::Target\_\-Access (const Target\_\-Access \& {\em t})\hspace{0.3cm}{\tt  [inline]}}\label{classTarget__Access_a1}
+
+
+
+
+Definition at line 993 of file dil2al.hh.
+
+References retaintransformed, and type.
+
+
+
+\footnotesize\begin{verbatim}993 : target(t.target), user(t.user), server(t.server), path(t.path), type(t.type), localcopy(t.localcopy), uncompressed(t.uncompressed), cleartext(t.cleartext), retaintransformed(t.retaintransformed) {}
+\end{verbatim}\normalsize 
+\index{Target_Access@{Target\_\-Access}!Target_Access@{Target\_\-Access}}
+\index{Target_Access@{Target\_\-Access}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Target\_\-Access::Target\_\-Access (const Target\_\-Access \& {\em parent}, const char $\ast$ {\em t})\hspace{0.3cm}{\tt  [inline]}}\label{classTarget__Access_a2}
+
+
+
+
+Definition at line 994 of file dil2al.hh.
+
+References false, retaintransformed, and set\_\-target().
+
+
+
+\footnotesize\begin{verbatim}994 : localcopy(""), uncompressed(""), cleartext(""), retaintransformed(false) { set_target(t,&parent); } // relative to parent target
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Function Documentation}
+\index{Target_Access@{Target\_\-Access}!cleartext_conversion@{cleartext\_\-conversion}}
+\index{cleartext_conversion@{cleartext\_\-conversion}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool Target\_\-Access::cleartext\_\-conversion ()}\label{classTarget__Access_a8}
+
+
+
+
+Definition at line 232 of file search.cc.
+
+References cleartext, String::contains(), String::empty(), syscommand(), transformed\_\-name(), uncompress(), and uncompressed.
+
+Referenced by read\_\-cleartext\_\-into\_\-String().
+
+
+
+\footnotesize\begin{verbatim}232                                          {
+233         // makes sure a clear text version is available
+234         if (!cleartext.empty()) return true;
+235         if (!uncompress()) return false;
+236         const BigRegex psrx("[.][Pp][Ss]$"); const BigRegex pdfrx("[.][Pp][Dd][Ff]$");
+237         if (uncompressed.contains(psrx)) {
+238                 transformed_name(cleartext,uncompressed,psrx);
+239                 remove(cleartext); // remove possible stale file
+240                 if (!syscommand("pstotext",uncompressed+" > "+cleartext)) return false;
+241         } else if (uncompressed.contains(pdfrx)) {
+242                 transformed_name(cleartext,uncompressed,pdfrx);
+243                 remove(cleartext); // remove possible stale file
+244                 if (!syscommand("pdftotext","-raw "+uncompressed+' '+cleartext)) return false;
+245         } else cleartext = uncompressed;
+246 //cerr << "Cleartext: " << cleartext << '\n';
+247         return true;
+248 }
+\end{verbatim}\normalsize 
+\index{Target_Access@{Target\_\-Access}!Discard_Transformed@{Discard\_\-Transformed}}
+\index{Discard_Transformed@{Discard\_\-Transformed}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Target\_\-Access::Discard\_\-Transformed ()\hspace{0.3cm}{\tt  [inline]}}\label{classTarget__Access_a18}
+
+
+
+
+Definition at line 1010 of file dil2al.hh.
+
+References retaintransformed.
+
+
+
+\footnotesize\begin{verbatim}1010 { retaintransformed = false; }
+\end{verbatim}\normalsize 
+\index{Target_Access@{Target\_\-Access}!isequal@{isequal}}
+\index{isequal@{isequal}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Target\_\-Access::isequal (const Target\_\-Access \& {\em ta}) const\hspace{0.3cm}{\tt  [inline]}}\label{classTarget__Access_a3}
+
+
+
+
+Definition at line 995 of file dil2al.hh.
+
+References target.
+
+Referenced by operator!=(), and operator==().
+
+
+
+\footnotesize\begin{verbatim}995 { return (target==ta.target); }
+\end{verbatim}\normalsize 
+\index{Target_Access@{Target\_\-Access}!make_local_copy@{make\_\-local\_\-copy}}
+\index{make_local_copy@{make\_\-local\_\-copy}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool Target\_\-Access::make\_\-local\_\-copy ()}\label{classTarget__Access_a6}
+
+
+
+
+Definition at line 181 of file search.cc.
+
+References String::empty(), EOUT, localcopy, make\_\-local\_\-copy\_\-of\_\-directory(), make\_\-local\_\-copy\_\-of\_\-FTP(), make\_\-local\_\-copy\_\-of\_\-HTTP(), path, TA\_\-HTTP, TA\_\-LOCAL, TA\_\-LOCAL\_\-DIRECTORY, TA\_\-UNKNOWN, target, transformed\_\-name(), and type.
+
+Referenced by read\_\-raw\_\-into\_\-String(), and uncompress().
+
+
+
+\footnotesize\begin{verbatim}181                                     {
+182         // makes sure a local copy is available
+183         if (!localcopy.empty()) return true;
+184         if (type==TA_UNKNOWN) {
+185                 if (verbose) EOUT << "dil2al: Unable to access unknown target type in Target_Access::make_local_copy()\n";
+186                 return false;
+187         }
+188         if (type==TA_LOCAL) localcopy = path;
+189         else if (type==TA_LOCAL_DIRECTORY) {
+190                 transformed_name(localcopy,path);
+191                 remove(localcopy); // remove possible stale file
+192                 return make_local_copy_of_directory();
+193         } else {
+194                 transformed_name(localcopy,target);
+195                 remove(localcopy); // remove possible stale file
+196                 if (type==TA_HTTP) return make_local_copy_of_HTTP();
+197                 else return make_local_copy_of_FTP();
+198         }
+199         return true;
+200 }
+\end{verbatim}\normalsize 
+\index{Target_Access@{Target\_\-Access}!make_local_copy_of_directory@{make\_\-local\_\-copy\_\-of\_\-directory}}
+\index{make_local_copy_of_directory@{make\_\-local\_\-copy\_\-of\_\-directory}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool Target\_\-Access::make\_\-local\_\-copy\_\-of\_\-directory ()\hspace{0.3cm}{\tt  [protected]}}\label{classTarget__Access_b5}
+
+
+
+
+Definition at line 145 of file search.cc.
+
+References Get\_\-Target\_\-Directory(), HTML\_\-put\_\-href(), localcopy, path, and write\_\-file\_\-from\_\-String().
+
+Referenced by make\_\-local\_\-copy().
+
+
+
+\footnotesize\begin{verbatim}145                                                  {
+146         // create HTML list of links for directory entries
+147         // Note: localcopy must point to a valid temporary file name
+148         // get directory
+149         StringList dirtargets;
+150         unsigned long num = Get_Target_Directory(dirtargets,0,path);
+151         // create HTML links
+152         String dirfile("<HTML>\n<HEAD>\n<TITLE>Local Directory: "+path+"</TITLE>\n</HEAD>\n<BODY>\n<H1>Local Directory: "+path+"</H1>\n\n");
+153         for (unsigned long i = 0; i<num; i++) dirfile += HTML_put_href(dirtargets[i],dirtargets[i].after('/',-1)) + "\n<P>\n";
+154         dirfile += "(Temporary local HTML copy of directory created by dil2al "+curtime+")\n\n</BODY>\n</HTML>\n";
+155         // write local file
+156         write_file_from_String(localcopy,dirfile,"",true); // message used to be: "Local copy of "+path+" directory"
+157         return true;
+158 }
+\end{verbatim}\normalsize 
+\index{Target_Access@{Target\_\-Access}!make_local_copy_of_FTP@{make\_\-local\_\-copy\_\-of\_\-FTP}}
+\index{make_local_copy_of_FTP@{make\_\-local\_\-copy\_\-of\_\-FTP}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool Target\_\-Access::make\_\-local\_\-copy\_\-of\_\-FTP ()\hspace{0.3cm}{\tt  [protected]}}\label{classTarget__Access_b7}
+
+
+
+
+Definition at line 172 of file search.cc.
+
+References localcopy, syscommand(), and target.
+
+Referenced by make\_\-local\_\-copy().
+
+
+
+\footnotesize\begin{verbatim}172                                           {
+173         // Note: The wget utility has a smaller footprint than the lynx browser, but
+174         // has some difficulties with unresponsive connections, as it tends to wait
+175         // just as long for a connection as it does between network packages (specified
+176         // with the -T option, with a default of 15 minutes).
+177         return syscommand("lynx","-connect_timeout=30 -source "+target+" > "+localcopy);
+178         //return syscommand("wget","-q -t 2 --retr-symlinks -O "+localcopy+' '+target);
+179 }
+\end{verbatim}\normalsize 
+\index{Target_Access@{Target\_\-Access}!make_local_copy_of_HTTP@{make\_\-local\_\-copy\_\-of\_\-HTTP}}
+\index{make_local_copy_of_HTTP@{make\_\-local\_\-copy\_\-of\_\-HTTP}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool Target\_\-Access::make\_\-local\_\-copy\_\-of\_\-HTTP ()\hspace{0.3cm}{\tt  [protected]}}\label{classTarget__Access_b6}
+
+
+
+
+Definition at line 160 of file search.cc.
+
+References localcopy, syscommand(), and target.
+
+Referenced by make\_\-local\_\-copy().
+
+
+
+\footnotesize\begin{verbatim}160                                            {
+161         // Note: The wget utility has a smaller footprint than the lynx browser, but
+162         // has some difficulties with unresponsive connections, as it tends to wait
+163         // just as long for a connection as it does between network packages (specified
+164         // with the -T option, with a default of 15 minutes).
+165         // *** An alternative solution for this is to do searching or at least remote
+166         //     retrieval in the background with multiple threads, as indicated in the
+167         //     DIL entry <A HREF="../../doc/html/lists/dil2al.html#20000930123422.1">DIL#20000930123422.1</A>.
+168         return syscommand("lynx","-connect_timeout=30 -source "+target+" > "+localcopy);
+169         //return syscommand("wget","-q -t 2 -O "+localcopy+' '+target);
+170 }
+\end{verbatim}\normalsize 
+\index{Target_Access@{Target\_\-Access}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Target\_\-Access::operator!= (const Target\_\-Access \& {\em ta}) const\hspace{0.3cm}{\tt  [inline]}}\label{classTarget__Access_a5}
+
+
+
+
+Definition at line 997 of file dil2al.hh.
+
+References isequal().
+
+
+
+\footnotesize\begin{verbatim}997 { return (!isequal(ta)); }
+\end{verbatim}\normalsize 
+\index{Target_Access@{Target\_\-Access}!operator==@{operator==}}
+\index{operator==@{operator==}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Target\_\-Access::operator== (const Target\_\-Access \& {\em ta}) const\hspace{0.3cm}{\tt  [inline]}}\label{classTarget__Access_a4}
+
+
+
+
+Definition at line 996 of file dil2al.hh.
+
+References isequal().
+
+
+
+\footnotesize\begin{verbatim}996 { return isequal(ta); }
+\end{verbatim}\normalsize 
+\index{Target_Access@{Target\_\-Access}!read_cleartext_into_String@{read\_\-cleartext\_\-into\_\-String}}
+\index{read_cleartext_into_String@{read\_\-cleartext\_\-into\_\-String}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool Target\_\-Access::read\_\-cleartext\_\-into\_\-String ({\bf String} \& {\em text}, bool {\em warnopen} = {\bf true})}\label{classTarget__Access_a11}
+
+
+
+
+Definition at line 267 of file search.cc.
+
+References cleartext, cleartext\_\-conversion(), read\_\-file\_\-into\_\-String(), remove\_\-cleartext(), remove\_\-local\_\-copy(), remove\_\-uncompressed(), and retaintransformed.
+
+Referenced by Search\_\-Target::search().
+
+
+
+\footnotesize\begin{verbatim}267                                                                                   {
+268         if (!cleartext_conversion()) return false;
+269         if (!read_file_into_String(cleartext,text,warnopen)) return false;
+270         if (!retaintransformed) {
+271                 remove_cleartext();
+272                 remove_uncompressed();
+273                 remove_local_copy();
+274         }
+275         return true;
+276 }
+\end{verbatim}\normalsize 
+\index{Target_Access@{Target\_\-Access}!read_raw_into_String@{read\_\-raw\_\-into\_\-String}}
+\index{read_raw_into_String@{read\_\-raw\_\-into\_\-String}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool Target\_\-Access::read\_\-raw\_\-into\_\-String ({\bf String} \& {\em text}, bool {\em warnopen} = {\bf true})}\label{classTarget__Access_a9}
+
+
+
+
+Definition at line 250 of file search.cc.
+
+References localcopy, make\_\-local\_\-copy(), read\_\-file\_\-into\_\-String(), remove\_\-local\_\-copy(), and retaintransformed.
+
+
+
+\footnotesize\begin{verbatim}250                                                                             {
+251         if (!make_local_copy()) return false;
+252         if (!read_file_into_String(localcopy,text,warnopen)) return false;
+253         if (!retaintransformed) remove_local_copy();
+254         return true;
+255 }
+\end{verbatim}\normalsize 
+\index{Target_Access@{Target\_\-Access}!read_uncompressed_into_String@{read\_\-uncompressed\_\-into\_\-String}}
+\index{read_uncompressed_into_String@{read\_\-uncompressed\_\-into\_\-String}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool Target\_\-Access::read\_\-uncompressed\_\-into\_\-String ({\bf String} \& {\em text}, bool {\em warnopen} = {\bf true})}\label{classTarget__Access_a10}
+
+
+
+
+Definition at line 257 of file search.cc.
+
+References read\_\-file\_\-into\_\-String(), remove\_\-local\_\-copy(), remove\_\-uncompressed(), retaintransformed, uncompress(), and uncompressed.
+
+
+
+\footnotesize\begin{verbatim}257                                                                                      {
+258         if (!uncompress()) return false;
+259         if (!read_file_into_String(uncompressed,text,warnopen)) return false;
+260         if (!retaintransformed) {
+261                 remove_uncompressed();
+262                 remove_local_copy();
+263         }
+264         return true;
+265 }
+\end{verbatim}\normalsize 
+\index{Target_Access@{Target\_\-Access}!remove_back_references@{remove\_\-back\_\-references}}
+\index{remove_back_references@{remove\_\-back\_\-references}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Target\_\-Access::remove\_\-back\_\-references ({\bf String} \& {\em tpath})\hspace{0.3cm}{\tt  [protected]}}\label{classTarget__Access_b2}
+
+
+
+
+Definition at line 105 of file search.cc.
+
+References String::del(), String::firstchar(), String::gsub(), String::index(), and String::length().
+
+Referenced by set\_\-target().
+
+
+
+\footnotesize\begin{verbatim}105                                                          {
+106         // Removes ./ and ../ references from a path
+107         tpath.gsub("/./","/");
+108         if ((tpath.firstchar()=='.') && (tpath[1]=='/')) tpath.del(0,2);
+109         int i, j;
+110         while ((i=tpath.index("/../"))>=0) {
+111                 if ((j=tpath.index('/',(i-tpath.length())-1))<0) j=-1;
+112                 j++;
+113                 tpath.del(j,(i-j)+4);
+114         }
+115 }
+\end{verbatim}\normalsize 
+\index{Target_Access@{Target\_\-Access}!remove_cleartext@{remove\_\-cleartext}}
+\index{remove_cleartext@{remove\_\-cleartext}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Target\_\-Access::remove\_\-cleartext ()\hspace{0.3cm}{\tt  [inline]}}\label{classTarget__Access_a14}
+
+
+
+
+Definition at line 1006 of file dil2al.hh.
+
+References String::empty().
+
+Referenced by read\_\-cleartext\_\-into\_\-String().
+
+
+
+\footnotesize\begin{verbatim}1006 { if (!cleartext.empty()) { if (cleartext!=path) remove(cleartext); cleartext = ""; } }
+\end{verbatim}\normalsize 
+\index{Target_Access@{Target\_\-Access}!remove_local_copy@{remove\_\-local\_\-copy}}
+\index{remove_local_copy@{remove\_\-local\_\-copy}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Target\_\-Access::remove\_\-local\_\-copy ()\hspace{0.3cm}{\tt  [inline]}}\label{classTarget__Access_a12}
+
+
+
+
+Definition at line 1004 of file dil2al.hh.
+
+References String::empty(), TA\_\-LOCAL, and type.
+
+Referenced by read\_\-cleartext\_\-into\_\-String(), read\_\-raw\_\-into\_\-String(), and read\_\-uncompressed\_\-into\_\-String().
+
+
+
+\footnotesize\begin{verbatim}1004 { if (!localcopy.empty()) { if (type!=TA_LOCAL) remove(localcopy); localcopy = ""; } }
+\end{verbatim}\normalsize 
+\index{Target_Access@{Target\_\-Access}!remove_name_reference@{remove\_\-name\_\-reference}}
+\index{remove_name_reference@{remove\_\-name\_\-reference}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Target\_\-Access::remove\_\-name\_\-reference ({\bf String} \& {\em tpath})\hspace{0.3cm}{\tt  [protected]}}\label{classTarget__Access_b1}
+
+
+
+
+Definition at line 100 of file search.cc.
+
+References generic\_\-remove\_\-name\_\-reference(), TA\_\-HTTP, and type.
+
+Referenced by set\_\-target().
+
+
+
+\footnotesize\begin{verbatim}100                                                         {
+101         // Removes a potential #name reference from an http target or path
+102         if (type == TA_HTTP) generic_remove_name_reference(tpath);
+103 }
+\end{verbatim}\normalsize 
+\index{Target_Access@{Target\_\-Access}!remove_uncompressed@{remove\_\-uncompressed}}
+\index{remove_uncompressed@{remove\_\-uncompressed}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Target\_\-Access::remove\_\-uncompressed ()\hspace{0.3cm}{\tt  [inline]}}\label{classTarget__Access_a13}
+
+
+
+
+Definition at line 1005 of file dil2al.hh.
+
+References String::empty().
+
+Referenced by read\_\-cleartext\_\-into\_\-String(), and read\_\-uncompressed\_\-into\_\-String().
+
+
+
+\footnotesize\begin{verbatim}1005 { if (!uncompressed.empty()) { if (uncompressed!=path) remove(uncompressed); uncompressed = ""; } }
+\end{verbatim}\normalsize 
+\index{Target_Access@{Target\_\-Access}!Retain_Transformed@{Retain\_\-Transformed}}
+\index{Retain_Transformed@{Retain\_\-Transformed}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Target\_\-Access::Retain\_\-Transformed ()\hspace{0.3cm}{\tt  [inline]}}\label{classTarget__Access_a17}
+
+
+
+
+Definition at line 1009 of file dil2al.hh.
+
+References retaintransformed.
+
+
+
+\footnotesize\begin{verbatim}1009 { retaintransformed = true; } // mode selector: whether to keep transformed versions or not
+\end{verbatim}\normalsize 
+\index{Target_Access@{Target\_\-Access}!set_target@{set\_\-target}}
+\index{set_target@{set\_\-target}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Target\_\-Access::set\_\-target (const char $\ast$ {\em t}, const Target\_\-Access $\ast$ {\em parent} = NULL)\hspace{0.3cm}{\tt  [protected]}}\label{classTarget__Access_b0}
+
+
+
+
+Definition at line 21 of file search.cc.
+
+References String::after(), String::at(), String::before(), String::empty(), EOUT, file\_\-is\_\-directory(), String::firstchar(), String::from(), String::index(), String::length(), path, String::prepend(), remove\_\-back\_\-references(), remove\_\-name\_\-reference(), String::SEARCH\_\-END, server, TA\_\-FTP, TA\_\-HTTP, TA\_\-LOCAL, TA\_\-LOCAL\_\-DIRECTORY, TA\_\-UNKNOWN, target, type, String::upcase, and user.
+
+Referenced by Target\_\-Access().
+
+
+
+\footnotesize\begin{verbatim}21                                                                                   {
+22         // Identify type of target and verify proper specification
+23                                 // *** generate new target, target is local if relative and current is local, followlinks-1
+24                                 // - put absolute file references in as such + server&user if current is remote
+25                                 // - append relative file references to current target
+26         // Note: This function is currently not intended to be used to reinitialize Target_Access objects,
+27         // as it does not reset server and user parameters if the new target is local
+28         target = t;
+29         String preslash(target.before('/'));
+30         preslash.upcase();
+31         if ((preslash == "HTTP:") || (preslash == "FTP:")) { // Server and path references for URLs
+32                 if (preslash == "HTTP:") type = TA_HTTP;
+33                 else type = TA_FTP;
+34                 remove_name_reference(target);
+35                 int serverstart = target.index("://",String::SEARCH_END,0);
+36                 if (serverstart<0) {
+37                         if (verbose) EOUT << "dil2al: Warning - malformed URL, " << target << ", in Target_Access::Target_Access()\n";
+38                         type = TA_UNKNOWN;
+39                         return;
+40                 }
+41                 int serverend = target.index('/',serverstart);
+42                 if (serverend<0) serverend = target.length();
+43                 if (serverstart==serverend) {
+44                         if (verbose) EOUT << "dil2al: Warning - malformed URL server, " << target << ", in Target_Access::Target_Access()\n";
+45                         type = TA_UNKNOWN;
+46                         return;
+47                 }
+48                 server = target.at(serverstart,serverend-serverstart);
+49                 path = target.from(serverend);
+50                 if (type == TA_HTTP) return;
+51                 // FTP specific initialization
+52                 user = server.before('@');
+53                 if (!user.empty()) server = server.after('@');
+54                 return;
+55         }
+56         // Local file specific initialization
+57         path = target;
+58         if (parent) { // reference relative to parent
+59                 if ((parent->type==TA_HTTP) || (parent->type==TA_FTP)) { // relative to remote
+60                         type = parent->type;
+61                         server = parent->server;
+62                         user = parent->user;
+63                         // *** problem: if parent target was an ftp or http directory without a '/' at
+64                         //     the end, then there is no way to know if the last part of the target path
+65                         //     is part of the path to prepend or not
+66                         //     You actually *have* this information, because if you are setting up a
+67                         //     target relative to a parent, then you have that parent's contents, from
+68                         //     which you got the link... so you can see if it's a directory index
+69                         // *** problem: at some point between reading the citeseer site and the nec.com
+70                         //     site, dil2al appears to develop a memory leak and grows rapidly then crashes
+71                         // *** problem: there has to be another way around the long wget wait for
+72                         //     connections, perhaps a site's availability can be tested some other way
+73                         //     before attempting a wget
+74                         remove_name_reference(path);
+75                         if (path.firstchar()!='/') path.prepend(const_cast<String &>(parent->path).through('/',-1));
+76                         remove_back_references(path);
+77                         if (type==TA_HTTP) target = "http://"+server+path;
+78                         else target = "ftp://"+user+'@'+server+path;
+79                         return;
+80                 } else if (path.firstchar()!='/') { // relative to local
+81                         if (parent->type==TA_LOCAL_DIRECTORY) {
+82                                 if (parent->path.lastchar()!='/') path.prepend('/');
+83                                 path.prepend(parent->path);
+84                         } else path.prepend(const_cast<String &>(parent->path).through('/',-1));
+85                 }
+86         }
+87         // local reference
+88         remove_back_references(path);
+89         target = path; // complete local target reference
+90         if (file_is_directory(path)) type = TA_LOCAL_DIRECTORY;
+91         else type = TA_LOCAL;
+92 }
+\end{verbatim}\normalsize 
+\index{Target_Access@{Target\_\-Access}!syscommand@{syscommand}}
+\index{syscommand@{syscommand}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool Target\_\-Access::syscommand ({\bf String} {\em program}, {\bf String} {\em args}, int {\em success} = 0) const\hspace{0.3cm}{\tt  [protected]}}\label{classTarget__Access_b8}
+
+
+
+
+Definition at line 202 of file search.cc.
+
+References EOUT.
+
+Referenced by cleartext\_\-conversion(), make\_\-local\_\-copy\_\-of\_\-FTP(), make\_\-local\_\-copy\_\-of\_\-HTTP(), and uncompress().
+
+
+
+\footnotesize\begin{verbatim}202                                                                                  {
+203         int sysret = system(program+' '+args);
+204         if (sysret==success) return true;
+205         switch (sysret) {
+206                 case -1:
+207                         EOUT << "dil2al: Error in system(<" << program << ">) call in Target_Access::syscommand()\n";
+208                         return false;
+209                 case 127:
+210                         EOUT << "dil2al: Execve() call for /bin/sh failed in Target_Access::syscommand()\n";
+211                         return false;
+212                 default:
+213                         EOUT << "dil2al: Return value of " << program << " was " << sysret << " in Target_Access::syscommand()\n";
+214                         return false;
+215         }
+216 }
+\end{verbatim}\normalsize 
+\index{Target_Access@{Target\_\-Access}!Target@{Target}}
+\index{Target@{Target}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} Target\_\-Access::Target () const\hspace{0.3cm}{\tt  [inline]}}\label{classTarget__Access_a15}
+
+
+
+
+Definition at line 1007 of file dil2al.hh.
+
+Referenced by Search\_\-Target::check\_\-encountered(), Search\_\-Result::HTML\_\-put\_\-text(), Search\_\-Target::search(), and Search\_\-Target::Target().
+
+
+
+\footnotesize\begin{verbatim}1007 { return target; }
+\end{verbatim}\normalsize 
+\index{Target_Access@{Target\_\-Access}!transformed_name@{transformed\_\-name}}
+\index{transformed_name@{transformed\_\-name}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Target\_\-Access::transformed\_\-name ({\bf String} \& {\em transformed}, {\bf String} \& {\em prevname}, const {\bf Big\-Regex} \& {\em transrx})\hspace{0.3cm}{\tt  [protected]}}\label{classTarget__Access_b4}
+
+
+
+
+Definition at line 140 of file search.cc.
+
+References String::before(), Big\-Regex::subpos(), and transformed\_\-name().
+
+
+
+\footnotesize\begin{verbatim}140                                                                                                       {
+141         transformed = prevname.before(transrx.subpos());
+142         transformed_name(transformed,prevname);
+143 }
+\end{verbatim}\normalsize 
+\index{Target_Access@{Target\_\-Access}!transformed_name@{transformed\_\-name}}
+\index{transformed_name@{transformed\_\-name}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Target\_\-Access::transformed\_\-name ({\bf String} \& {\em transformed}, {\bf String} \& {\em prevname})\hspace{0.3cm}{\tt  [protected]}}\label{classTarget__Access_b3}
+
+
+
+
+Definition at line 132 of file search.cc.
+
+References String::empty(), String::gsub(), path, String::prepend(), and target.
+
+Referenced by cleartext\_\-conversion(), make\_\-local\_\-copy(), transformed\_\-name(), and uncompress().
+
+
+
+\footnotesize\begin{verbatim}132                                                                             {
+133         if (transformed.empty()) transformed = prevname;
+134         if ((prevname==path) || (prevname==target)) {
+135                 transformed.gsub('/','%');
+136                 transformed.prepend(tareadfile);
+137         }
+138 }
+\end{verbatim}\normalsize 
+\index{Target_Access@{Target\_\-Access}!Type@{Type}}
+\index{Type@{Type}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Target\_\-Access\_\-types} Target\_\-Access::Type () const\hspace{0.3cm}{\tt  [inline]}}\label{classTarget__Access_a16}
+
+
+
+
+Definition at line 1008 of file dil2al.hh.
+
+References Target\_\-Access\_\-types, and type.
+
+Referenced by Search\_\-Target::check\_\-encountered(), and Search\_\-Result::Search\_\-Result().
+
+
+
+\footnotesize\begin{verbatim}1008 { return type; }
+\end{verbatim}\normalsize 
+\index{Target_Access@{Target\_\-Access}!uncompress@{uncompress}}
+\index{uncompress@{uncompress}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool Target\_\-Access::uncompress ()}\label{classTarget__Access_a7}
+
+
+
+
+Definition at line 218 of file search.cc.
+
+References String::contains(), String::empty(), localcopy, make\_\-local\_\-copy(), syscommand(), transformed\_\-name(), and uncompressed.
+
+Referenced by cleartext\_\-conversion(), and read\_\-uncompressed\_\-into\_\-String().
+
+
+
+\footnotesize\begin{verbatim}218                                {
+219         // makes sure an uncompressed version is available
+220         if (!uncompressed.empty()) return true;
+221         if (!make_local_copy()) return false;
+222         const BigRegex gzrx("[.][Gg]?[Zz]$");
+223         if (localcopy.contains(gzrx)) {
+224                 transformed_name(uncompressed,localcopy,gzrx);
+225 //cerr << "Uncompressed: " << uncompressed << '\n';
+226                 remove(uncompressed); // remove possible stale file
+227                 if (!syscommand("gzip","-d -c "+localcopy+" > "+uncompressed)) return false;
+228         } else uncompressed = localcopy;
+229         return true;
+230 }
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Data Documentation}
+\index{Target_Access@{Target\_\-Access}!cleartext@{cleartext}}
+\index{cleartext@{cleartext}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} Target\_\-Access::cleartext\hspace{0.3cm}{\tt  [protected]}}\label{classTarget__Access_n7}
+
+
+
+
+Definition at line 979 of file dil2al.hh.
+
+Referenced by cleartext\_\-conversion(), and read\_\-cleartext\_\-into\_\-String().\index{Target_Access@{Target\_\-Access}!localcopy@{localcopy}}
+\index{localcopy@{localcopy}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} Target\_\-Access::localcopy\hspace{0.3cm}{\tt  [protected]}}\label{classTarget__Access_n5}
+
+
+
+
+Definition at line 979 of file dil2al.hh.
+
+Referenced by make\_\-local\_\-copy(), make\_\-local\_\-copy\_\-of\_\-directory(), make\_\-local\_\-copy\_\-of\_\-FTP(), make\_\-local\_\-copy\_\-of\_\-HTTP(), read\_\-raw\_\-into\_\-String(), and uncompress().\index{Target_Access@{Target\_\-Access}!path@{path}}
+\index{path@{path}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} Target\_\-Access::path\hspace{0.3cm}{\tt  [protected]}}\label{classTarget__Access_n3}
+
+
+
+
+Definition at line 977 of file dil2al.hh.
+
+Referenced by make\_\-local\_\-copy(), make\_\-local\_\-copy\_\-of\_\-directory(), set\_\-target(), and transformed\_\-name().\index{Target_Access@{Target\_\-Access}!retaintransformed@{retaintransformed}}
+\index{retaintransformed@{retaintransformed}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool Target\_\-Access::retaintransformed\hspace{0.3cm}{\tt  [protected]}}\label{classTarget__Access_n8}
+
+
+
+
+Definition at line 980 of file dil2al.hh.
+
+Referenced by Discard\_\-Transformed(), read\_\-cleartext\_\-into\_\-String(), read\_\-raw\_\-into\_\-String(), read\_\-uncompressed\_\-into\_\-String(), Retain\_\-Transformed(), and Target\_\-Access().\index{Target_Access@{Target\_\-Access}!server@{server}}
+\index{server@{server}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} Target\_\-Access::server\hspace{0.3cm}{\tt  [protected]}}\label{classTarget__Access_n2}
+
+
+
+
+Definition at line 977 of file dil2al.hh.
+
+Referenced by set\_\-target().\index{Target_Access@{Target\_\-Access}!target@{target}}
+\index{target@{target}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} Target\_\-Access::target\hspace{0.3cm}{\tt  [protected]}}\label{classTarget__Access_n0}
+
+
+
+
+Definition at line 976 of file dil2al.hh.
+
+Referenced by isequal(), make\_\-local\_\-copy(), make\_\-local\_\-copy\_\-of\_\-FTP(), make\_\-local\_\-copy\_\-of\_\-HTTP(), set\_\-target(), and transformed\_\-name().\index{Target_Access@{Target\_\-Access}!type@{type}}
+\index{type@{type}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Target\_\-Access\_\-types} Target\_\-Access::type\hspace{0.3cm}{\tt  [protected]}}\label{classTarget__Access_n4}
+
+
+
+
+Definition at line 978 of file dil2al.hh.
+
+Referenced by make\_\-local\_\-copy(), remove\_\-local\_\-copy(), remove\_\-name\_\-reference(), set\_\-target(), Target\_\-Access(), and Type().\index{Target_Access@{Target\_\-Access}!uncompressed@{uncompressed}}
+\index{uncompressed@{uncompressed}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} Target\_\-Access::uncompressed\hspace{0.3cm}{\tt  [protected]}}\label{classTarget__Access_n6}
+
+
+
+
+Definition at line 979 of file dil2al.hh.
+
+Referenced by cleartext\_\-conversion(), read\_\-uncompressed\_\-into\_\-String(), and uncompress().\index{Target_Access@{Target\_\-Access}!user@{user}}
+\index{user@{user}!Target_Access@{Target\_\-Access}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} Target\_\-Access::user\hspace{0.3cm}{\tt  [protected]}}\label{classTarget__Access_n1}
+
+
+
+
+Definition at line 977 of file dil2al.hh.
+
+Referenced by set\_\-target().
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf dil2al.hh}\item 
+{\bf search.cc}\end{CompactItemize}

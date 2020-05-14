@@ -1,0 +1,110 @@
+46c46
+< void extract_required_item_to_paper(ofstream & ostr, String refurl, Novelty_Marker & nm, String & sectitle, String & requireditems) {
+---
+> void extract_required_item_to_paper(ofstream & ostr, String refurl, Novelty_Marker & nm) {
+49,52c49,50
+< // additionally keeps track of a list of required items to be updated
+< // in the paper plan and used for AL priority DIL entries
+< 	String contextconcat = nm.context.concatenate(", ");
+< 	String impconcat;
+---
+> 	ostr << "% @Begin REQUIRED@\n% Context: ";
+> 	ostr << nm.context.concatenate(", ");
+54,55c52,53
+< 		impconcat = nm.imp[0];
+< 		for (int i=1; i<nm.impnum; i++) impconcat += ", "+nm.imp[i];
+---
+> 		ostr << "\n% Importance: " << nm.imp[0];
+> 		for (int i=1; i<nm.impnum; i++) ostr << ", " << nm.imp[i];
+57,59d54
+< 	ostr << "% @Begin REQUIRED@\n% Context: ";
+< 	ostr << contextconcat;
+< 	if (nm.imp) ostr << "\n% Importance: " << impconcat;
+62c57
+< 	ostr << "\n\\editnote{REQUIRED: " << contextconcat << "}\n";
+---
+> 	ostr << "\n\\editnote{REQUIRED: " << nm.context.concatenate(", ") << "}\n";
+64,65d58
+< 	// collect required items for addition to paper plan
+< 	requireditems += "<LI>["+sectitle+"] "+contextconcat+" (imp: "+impconcat+", len: "+nm.len+")\n";
+153a147,149
+> //*** the following two lines can be removed when Thesis Log has been converted to the Task Log format
+> 	itemcontent.gsub(BigRegex("[<]!--[ 	]*entry Begin[ 	]*--[>][^]]+[]][ 	]*[<]/FONT[>]"),"");
+> 	itemcontent.gsub(BigRegex("[<]!--[ 	]*chunk End[ 	]*--[>][ 	]*[<][Ii][>][^<]+[<]/[Ii][>]"),"");
+239c235
+< 				ostr << itemcontent.at(istart,iend-istart); //*** cout add a `\n` here
+---
+> 				ostr << itemcontent.at(istart,iend-istart); //*** could add a `\n` here
+247c243
+< 				//*** conversions, strange HREFs detected
+---
+> 				//*** conversions
+252,253c248,264
+< 				nmhref.nmtype = Novelty_Marker::NM_CONTENT_HREF;
+< 				extract_recursively(ostr,nmhref,srcf,srcfname,srcfnum,depth,visited,poutline);
+---
+> 				// recognize figures
+> 				if (nmhref.source.contains(BigRegex("[.]\\([Ff][Ii][Gg]\\|[Pp][Ss]\\)$"))) {
+> 					nmhref.source = nmhref.source.through('.',-1) + "ps"; // use .ps not .fig
+> 					// obtain label, caption and psfrag conversions
+> 					String figlabel, figcaption, psconversions;
+> //*** obtain caption from Figures Directory
+> 					// include figure
+> //*** perhaps use a template here
+> //*** intelligently choose type of figure command
+> //*** place \figurehere and \figureloose (see below)
+> 					ostr << "\n\\figurehere";
+> 					if (psconversions!="") ostr << "{psconversions}";
+> 					ostr << '{' << figlabel << "}{" << relurl(poutline,nmhref.source) << "}{"+figcaption+"}\n";
+> 				} else {
+> 					nmhref.nmtype = Novelty_Marker::NM_CONTENT_HREF;
+> 					extract_recursively(ostr,nmhref,srcf,srcfname,srcfnum,depth,visited,poutline);
+> 				}
+255a267
+> // *** There are some references without ID
+333c345
+< 		int seclistidx; String refurl = relurl(poutline,ppname); String requireditems;
+---
+> 		int seclistidx; String refurl = relurl(poutline,ppname);
+339c351
+< 				if (nml[i].nmtype==Novelty_Marker::NM_REQUIRED_ITEM) extract_required_item_to_paper(ostr,refurl,nml[i],sectitle,requireditems);
+---
+> 				if (nml[i].nmtype==Novelty_Marker::NM_REQUIRED_ITEM) extract_required_item_to_paper(ostr,refurl,nml[i]);
+346a359
+> //*** if figures were remembered, could place \figureloose commands now
+353,387d365
+< 	// find required items list in paper plan, create if not found
+< 	int riidx;
+< 	if ((riidx = pptext.index(BigRegex("[<]!--[ 	]*@Begin REQUIRED ITEMS@[ 	]*--[>]\n"),String::SEARCH_END))<0) {
+< 		// create list of required items
+< 		if ((riidx = pptext.index(BigRegex("\\([<][Pp}[>][ 	]*\n[<][Hh][Rr][>]\\|[<]/[Bb][Oo][Dd][Yy][>]\\)")))<0)
+< 			EOUT << "dil2al: Unable to create list of required items in extract_paper_plan_to_paper(), continuing as is\n";
+< 		else {
+< 			String pptextrest = pptext.at(riidx,pptext.length()-riidx);
+< 			pptext = pptext.before(riidx)
+< 					+ "<H2><A HNAME=\"required-items\">Required Items</A></H2>\n\n<UL>\n<!-- @Begin REQUIRED ITEMS@ -->\n<!-- @End REQUIRED ITEMS@ -->\n</UL>\n\n"
+< 					+ pptextrest;
+< 			riidx += 93;
+< 		}
+< 	}
+< 	if (riidx>=0) {
+< 		// update required items list
+< 		int riend;
+< 		if ((riend = pptext.index(BigRegex("[<]!--[ 	]*@End REQUIRED ITEMS@[ 	]*--[>]"),riidx))<0) {
+< 			EOUT << "dil2al: Missing @End REQUIRED ITEMS@ tag in extract_paper_plan_to_paper(), placing tag\n";
+< 			String pptextrest = pptext.at(riidx,pptext.length()-riidx);
+< 			pptext = pptext.before(riidx) + "<!-- @End REQUIRED ITEMS@ -->\n" + pptextrest;
+< 			riend = riidx;
+< 		}
+< 		String pptextrest = pptext.at(riidx,pptext.length()-riend);
+< 		pptext = pptext.before(riidx) + requireditems + pptextrest;
+< 		// store, backup and rename updated paper plan
+< 		ostr.open(ppname+".new");
+< 		if (!ostr) {
+< 			EOUT << "dil2al: Unable to create " << ppname << ".new to update required items list in extract_paper_plan_to_paper(), continuing as is\n";
+< 			return false;
+< 		}
+< 		ostr << pptext;
+< 		if (!backup_and_rename(ppname,"Paper Plan"))
+< 			EOUT << "dil2al: Unable to update required items list extract_paper_plan_to_paper(), continuing as is\n";
+< 	}

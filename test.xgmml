@@ -1,0 +1,751 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<graph id="52" label="Roadmap" directed="1" cy:documentVersion="3.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:cy="http://www.cytoscape.org" xmlns="http://www.cs.rpi.edu/XGMML">
+  <att name="networkMetadata">
+    <rdf:RDF>
+      <rdf:Description rdf:about="http://www.cytoscape.org/">
+        <dc:type>Protein-Protein Interaction</dc:type>
+        <dc:description>N/A</dc:description>
+        <dc:identifier>N/A</dc:identifier>
+        <dc:date>2014-02-25 20:48:20</dc:date>
+        <dc:title>Roadmap</dc:title>
+        <dc:source>http://www.cytoscape.org/</dc:source>
+        <dc:format>Cytoscape-XGMML</dc:format>
+      </rdf:Description>
+    </rdf:RDF>
+  </att>
+  <att name="shared name" value="Roadmap" type="string"/>
+  <att name="name" value="Roadmap" type="string"/>
+  <att name="selected" value="1" type="boolean"/>
+  <att name="__Annotations" type="list">
+    <att name="__Annotations" value="" type="string"/>
+  </att>
+  <att name="layoutAlgorithm" value="Hierarchical Layout" type="string" cy:hidden="1"/>
+  <node id="20120329124446.1" label="Burning Man.
+
+ 
+
+">
+    <att name="name" value="Burning Man.
+
+ 
+
+" type="string"/>
+    <att name="progress" type="integer"/>
+    <att name="targetdate" value="2014-08-25" type="string"/>
+    <att name="significance" type="integer"/>
+    <att name="abbrev" value="Burni" type="string"/>
+    <att name="details" value="Burning Man.      [DIL#20120329124446.1]" type="string"/>
+    <att name="obsolete" value="0" type="boolean"/>
+    <att name="color" value="#ff00ff" type="string"/>
+    <att name="type" value="periodic task" type="string"/>
+    <att name="URL1" value="" type="string"/>
+    <att name="URL2" value="" type="string"/>
+  </node>
+  <node id="20120411150734.1" label="Noobie orientation for Burning Man.
+
+ 
+
+">
+    <att name="name" value="Noobie orientation for Burning Man.
+
+ 
+
+" type="string"/>
+    <att name="progress" type="integer"/>
+    <att name="targetdate" value="2012-04-20" type="string"/>
+    <att name="significance" type="integer"/>
+    <att name="abbrev" value="Noobi" type="string"/>
+    <att name="details" value="Noobie orientation for Burning Man.      [DIL#20120411150734.1]" type="string"/>
+    <att name="obsolete" value="1" type="boolean"/>
+    <att name="color" value="#ff00ff" type="string"/>
+    <att name="type" value="normal task" type="string"/>
+    <att name="URL1" value="" type="string"/>
+    <att name="URL2" value="" type="string"/>
+  </node>
+  <node id="20120730221310.1" label="Arrange for Burningman:
+  
+    A sleeping bag.
+    A bicycle.
+    Food and water.
+    Protection from sun and dust.
+    Something to share.
+    Batteries.
+    Anything else that the BM organization...">
+    <att name="name" value="Arrange for Burningman:
+  
+    A sleeping bag.
+    A bicycle.
+    Food and water.
+    Protection from sun and dust.
+    Something to share.
+    Batteries.
+    Anything else that the BM organization..." type="string"/>
+    <att name="progress" type="integer"/>
+    <att name="targetdate" value="2014-08-22" type="string"/>
+    <att name="significance" type="integer"/>
+    <att name="abbrev" value="Arran" type="string"/>
+    <att name="details" value="Arrange for Burningman:        A sleeping bag.     A bicycle.     Food and water.     Protection from sun and dust.     Something to share.     Batteries.     Anything else that the BM organization and experienced people recommend.    Also, see new suggestions in TL#201210211127.4.      [DIL#20120730221310.1]" type="string"/>
+    <att name="obsolete" value="0" type="boolean"/>
+    <att name="color" value="#ff00ff" type="string"/>
+    <att name="type" value="periodic task" type="string"/>
+    <att name="URL1" value="" type="string"/>
+    <att name="URL2" value="" type="string"/>
+  </node>
+  <node id="20130202160553.1" label="How to improve upon desert camping (for Burning Man)? The first question is: Tent with shade-structure versus hexayurt? If hexayurt, then it seems that the basic material and taping is not really a...">
+    <att name="name" value="How to improve upon desert camping (for Burning Man)? The first question is: Tent with shade-structure versus hexayurt? If hexayurt, then it seems that the basic material and taping is not really a..." type="string"/>
+    <att name="progress" type="integer"/>
+    <att name="targetdate" value="2013-08-15" type="string"/>
+    <att name="significance" type="integer"/>
+    <att name="abbrev" value="How t" type="string"/>
+    <att name="details" value="How to improve upon desert camping (for Burning Man)? The first question is: Tent with shade-structure versus hexayurt? If hexayurt, then it seems that the basic material and taping is not really a problem, but there might be improvements in: transportability, set-up, breakability. Some useful sites: http://hexayurttape.com/, http://hexayurt.com/, http://www.appropedia.org/Hexayurt_playa. I can also send a message to yurtopia / playagon village to see what sort of efforts may be going on already to improve these things.      [DIL#20130202160553.1]" type="string"/>
+    <att name="obsolete" value="0" type="boolean"/>
+    <att name="color" value="#ff00ff" type="string"/>
+    <att name="type" value="normal task" type="string"/>
+    <att name="URL1" value="" type="string"/>
+    <att name="URL2" value="" type="string"/>
+  </node>
+  <node id="20130818144911.1" label="Burning Man: Bikes tune-up. Clean my bike, inflate tires, make sure everything works. Get a patching kit. Fix Circadia's tire.
+
+ 
+
+">
+    <att name="name" value="Burning Man: Bikes tune-up. Clean my bike, inflate tires, make sure everything works. Get a patching kit. Fix Circadia's tire.
+
+ 
+
+" type="string"/>
+    <att name="progress" type="integer"/>
+    <att name="targetdate" value="2014-08-12" type="string"/>
+    <att name="significance" type="integer"/>
+    <att name="abbrev" value="Burni" type="string"/>
+    <att name="details" value="Burning Man: Bikes tune-up. Clean my bike, inflate tires, make sure everything works. Get a patching kit. Fix Circadia's tire.      [DIL#20130818144911.1]" type="string"/>
+    <att name="obsolete" value="0" type="boolean"/>
+    <att name="color" value="#ff00ff" type="string"/>
+    <att name="type" value="periodic task" type="string"/>
+    <att name="URL1" value="" type="string"/>
+    <att name="URL2" value="" type="string"/>
+  </node>
+  <node id="20130818145107.1" label="Burning Man: Sleeping arrangements. See if I can do better than an air mattress. [Was: Fix the air mattress. Take along a foam pad as well just in case.] Collect Sleeping bags and/or covers. Pick...">
+    <att name="name" value="Burning Man: Sleeping arrangements. See if I can do better than an air mattress. [Was: Fix the air mattress. Take along a foam pad as well just in case.] Collect Sleeping bags and/or covers. Pick..." type="string"/>
+    <att name="progress" type="integer"/>
+    <att name="targetdate" value="2014-08-10" type="string"/>
+    <att name="significance" type="integer"/>
+    <att name="abbrev" value="Burni" type="string"/>
+    <att name="details" value="Burning Man: Sleeping arrangements. See if I can do better than an air mattress. [Was: Fix the air mattress. Take along a foam pad as well just in case.] Collect Sleeping bags and/or covers. Pick pillows.      [DIL#20130818145107.1]" type="string"/>
+    <att name="obsolete" value="0" type="boolean"/>
+    <att name="color" value="#ff00ff" type="string"/>
+    <att name="type" value="normal task" type="string"/>
+    <att name="URL1" value="" type="string"/>
+    <att name="URL2" value="" type="string"/>
+  </node>
+  <node id="20130818145355.1" label="Burning Man: Hexayurt. Check it and fix it / update it as needed. Check if we have enough stakes/rebar and warnings against tripping over stakes/rebar. [Was: Check arrival of the tape. Inquire about...">
+    <att name="name" value="Burning Man: Hexayurt. Check it and fix it / update it as needed. Check if we have enough stakes/rebar and warnings against tripping over stakes/rebar. [Was: Check arrival of the tape. Inquire about..." type="string"/>
+    <att name="progress" type="integer"/>
+    <att name="targetdate" value="2014-08-14" type="string"/>
+    <att name="significance" type="integer"/>
+    <att name="abbrev" value="Burni" type="string"/>
+    <att name="details" value="Burning Man: Hexayurt. Check it and fix it / update it as needed. Check if we have enough stakes/rebar and warnings against tripping over stakes/rebar. [Was: Check arrival of the tape. Inquire about staging and storing in Berkeley. Get 50 feet of rope for the rope circle. Get U-shaped rebar. Get foam for the ends of the rebar/tent pegs. Get a 10 foot long very straight thing for cutting. Maybe get a furnace filter. Cut boards as required, pre-tape them - and see if we want to have a semi-folding hexayurt. Prepare it for safe transport.]      [DIL#20130818145355.1]" type="string"/>
+    <att name="obsolete" value="0" type="boolean"/>
+    <att name="color" value="#ff00ff" type="string"/>
+    <att name="type" value="periodic task" type="string"/>
+    <att name="URL1" value="" type="string"/>
+    <att name="URL2" value="" type="string"/>
+  </node>
+  <node id="20140304123520.1" label="BM: Order hexayurt tape. For example, order 3 rolls of 6 inch tape, 3 rolls of 3 inch tape and 1 roll of foil tape at http://hexayurttape.com/.
+
+ 
+
+
+">
+    <att name="name" value="BM: Order hexayurt tape. For example, order 3 rolls of 6 inch tape, 3 rolls of 3 inch tape and 1 roll of foil tape at http://hexayurttape.com/.
+
+ 
+
+
+" type="string"/>
+    <att name="progress" type="integer"/>
+    <att name="targetdate" value="2014-05-25" type="string"/>
+    <att name="significance" type="integer"/>
+    <att name="abbrev" value="BM: O" type="string"/>
+    <att name="details" value="BM: Order hexayurt tape. For example, order 3 rolls of 6 inch tape, 3 rolls of 3 inch tape and 1 roll of foil tape at http://hexayurttape.com/.       [DIL#20140304123520.1]" type="string"/>
+    <att name="obsolete" value="0" type="boolean"/>
+    <att name="color" value="#ff00ff" type="string"/>
+    <att name="type" value="periodic task" type="string"/>
+    <att name="URL1" value="" type="string"/>
+    <att name="URL2" value="" type="string"/>
+  </node>
+  <node id="20130818152831.1" label="Burning Man: Checklist. Make sure that all the items we need to have (excepting food, which is a different list) have been obtained. This should include:
+  
+    Print our Early Passes.
+    Check that...">
+    <att name="name" value="Burning Man: Checklist. Make sure that all the items we need to have (excepting food, which is a different list) have been obtained. This should include:
+  
+    Print our Early Passes.
+    Check that..." type="string"/>
+    <att name="progress" type="integer"/>
+    <att name="targetdate" value="2013-08-22" type="string"/>
+    <att name="significance" type="integer"/>
+    <att name="abbrev" value="Burni" type="string"/>
+    <att name="details" value="Burning Man: Checklist. Make sure that all the items we need to have (excepting food, which is a different list) have been obtained. This should include:        Print our Early Passes.     Check that all PDFs collected for use at Burning Man are on my Nook.     Small generator.     Tarp for Meike.     SPF 50 sunscreen.     AA batteries.     A shade structure.     Something warm to wear that is also fun.     Multiple coolers and separated ice.     Cash for center camp.     A funner hat.     A bike lock for Circadia.     Toilet paper.     Lip balm.         [DIL#20130818152831.1]" type="string"/>
+    <att name="obsolete" value="0" type="boolean"/>
+    <att name="color" value="#ff00ff" type="string"/>
+    <att name="type" value="normal task" type="string"/>
+    <att name="URL1" value="" type="string"/>
+    <att name="URL2" value="" type="string"/>
+  </node>
+  <node id="20130818153038.1" label="Burning Man: Food and Drink. Use a list prepared earlier or available online for a good set and quantity of food and drink. Take into account what I learned last year about things I wished I had more...">
+    <att name="name" value="Burning Man: Food and Drink. Use a list prepared earlier or available online for a good set and quantity of food and drink. Take into account what I learned last year about things I wished I had more..." type="string"/>
+    <att name="progress" type="integer"/>
+    <att name="targetdate" value="2013-08-22" type="string"/>
+    <att name="significance" type="integer"/>
+    <att name="abbrev" value="Burni" type="string"/>
+    <att name="details" value="Burning Man: Food and Drink. Use a list prepared earlier or available online for a good set and quantity of food and drink. Take into account what I learned last year about things I wished I had more of, things I did not eat/drink, and how to store/cool them. Purchase food and drink.      [DIL#20130818153038.1]" type="string"/>
+    <att name="obsolete" value="0" type="boolean"/>
+    <att name="color" value="#ff00ff" type="string"/>
+    <att name="type" value="normal task" type="string"/>
+    <att name="URL1" value="" type="string"/>
+    <att name="URL2" value="" type="string"/>
+  </node>
+  <node id="20130818153247.1" label="Burning Man: Packing for departure. Collect the trailer. Make sure we have the right trailer hitch set-up on Circadia's car. Pack the trailer and the car.
+
+ 
+
+">
+    <att name="name" value="Burning Man: Packing for departure. Collect the trailer. Make sure we have the right trailer hitch set-up on Circadia's car. Pack the trailer and the car.
+
+ 
+
+" type="string"/>
+    <att name="progress" type="integer"/>
+    <att name="targetdate" value="2013-08-22" type="string"/>
+    <att name="significance" type="integer"/>
+    <att name="abbrev" value="Burni" type="string"/>
+    <att name="details" value="Burning Man: Packing for departure. Collect the trailer. Make sure we have the right trailer hitch set-up on Circadia's car. Pack the trailer and the car.      [DIL#20130818153247.1]" type="string"/>
+    <att name="obsolete" value="0" type="boolean"/>
+    <att name="color" value="#ff00ff" type="string"/>
+    <att name="type" value="normal task" type="string"/>
+    <att name="URL1" value="" type="string"/>
+    <att name="URL2" value="" type="string"/>
+  </node>
+  <node id="20130819141347.1" label="Burning Man: Hair. Bleach parts of it, add colors.
+
+ 
+
+">
+    <att name="name" value="Burning Man: Hair. Bleach parts of it, add colors.
+
+ 
+
+" type="string"/>
+    <att name="progress" type="integer"/>
+    <att name="targetdate" value="2013-08-22" type="string"/>
+    <att name="significance" type="integer"/>
+    <att name="abbrev" value="Burni" type="string"/>
+    <att name="details" value="Burning Man: Hair. Bleach parts of it, add colors.      [DIL#20130819141347.1]" type="string"/>
+    <att name="obsolete" value="0" type="boolean"/>
+    <att name="color" value="#ff00ff" type="string"/>
+    <att name="type" value="normal task" type="string"/>
+    <att name="URL1" value="" type="string"/>
+    <att name="URL2" value="" type="string"/>
+  </node>
+  <node id="20120730222011.1" label="Consider what sort of thing I might show at Burningman, something that could be interesting over multiple days perhaps to attract people to my circle, or at least something that could come up once in...">
+    <att name="name" value="Consider what sort of thing I might show at Burningman, something that could be interesting over multiple days perhaps to attract people to my circle, or at least something that could come up once in..." type="string"/>
+    <att name="progress" type="integer"/>
+    <att name="targetdate" value="2014-05-15" type="string"/>
+    <att name="significance" type="integer"/>
+    <att name="abbrev" value="Consi" type="string"/>
+    <att name="details" value="Consider what sort of thing I might show at Burningman, something that could be interesting over multiple days perhaps to attract people to my circle, or at least something that could come up once in Future Camp.      [DIL#20120730222011.1]" type="string"/>
+    <att name="obsolete" value="0" type="boolean"/>
+    <att name="color" value="#ff00ff" type="string"/>
+    <att name="type" value="normal task" type="string"/>
+    <att name="URL1" value="" type="string"/>
+    <att name="URL2" value="" type="string"/>
+  </node>
+  <node id="20120730222311.1" label="Contact all the people I know who may be going to Burningman. This can be useful for figuring how to camp with a group and how perhaps to even drive there with someone.
+
+More details:
+
+Finalize the...">
+    <att name="name" value="Contact all the people I know who may be going to Burningman. This can be useful for figuring how to camp with a group and how perhaps to even drive there with someone.
+
+More details:
+
+Finalize the..." type="string"/>
+    <att name="progress" type="integer"/>
+    <att name="targetdate" value="2014-08-20" type="string"/>
+    <att name="significance" type="integer"/>
+    <att name="abbrev" value="Conta" type="string"/>
+    <att name="details" value="Contact all the people I know who may be going to Burningman. This can be useful for figuring how to camp with a group and how perhaps to even drive there with someone.  More details:  Finalize the ride-share agreements. See if I will rent a car or use my own. Map out the route to BRC. Map out events at Burning Man (I can start by somehow making sure I have access to the data in http://playaevents.burningman.com/2012/playa_events/1/).      [DIL#20120730222311.1]" type="string"/>
+    <att name="obsolete" value="0" type="boolean"/>
+    <att name="color" value="#ff00ff" type="string"/>
+    <att name="type" value="periodic task" type="string"/>
+    <att name="URL1" value="" type="string"/>
+    <att name="URL2" value="" type="string"/>
+  </node>
+  <node id="20120730222541.1" label="Figure out the protocol at Burningman:
+  
+    How do I get to camp at Future Camp? - Are there any details that I haven't done yet? Should I just inform Mason of my request?
+    Should I participate...">
+    <att name="name" value="Figure out the protocol at Burningman:
+  
+    How do I get to camp at Future Camp? - Are there any details that I haven't done yet? Should I just inform Mason of my request?
+    Should I participate..." type="string"/>
+    <att name="progress" type="integer"/>
+    <att name="targetdate" value="2012-08-22" type="string"/>
+    <att name="significance" type="integer"/>
+    <att name="abbrev" value="Figur" type="string"/>
+    <att name="details" value="Figure out the protocol at Burningman:        How do I get to camp at Future Camp? - Are there any details that I haven't done yet? Should I just inform Mason of my request?     Should I participate in set-up? How do I go about doing so (e.g. do I just show up) and who might I know who is doing that too? When does that happen?         [DIL#20120730222541.1]" type="string"/>
+    <att name="obsolete" value="0" type="boolean"/>
+    <att name="color" value="#ff00ff" type="string"/>
+    <att name="type" value="normal task" type="string"/>
+    <att name="URL1" value="" type="string"/>
+    <att name="URL2" value="" type="string"/>
+  </node>
+  <node id="20120730223358.1" label="Make sure I have the right clothing for Burningman. Check what other people wear, decide on my own style. Obtain what I need to pack.
+
+ 
+
+">
+    <att name="name" value="Make sure I have the right clothing for Burningman. Check what other people wear, decide on my own style. Obtain what I need to pack.
+
+ 
+
+" type="string"/>
+    <att name="progress" type="integer"/>
+    <att name="targetdate" value="2012-08-23" type="string"/>
+    <att name="significance" type="integer"/>
+    <att name="abbrev" value="Make " type="string"/>
+    <att name="details" value="Make sure I have the right clothing for Burningman. Check what other people wear, decide on my own style. Obtain what I need to pack.      [DIL#20120730223358.1]" type="string"/>
+    <att name="obsolete" value="0" type="boolean"/>
+    <att name="color" value="#ff00ff" type="string"/>
+    <att name="type" value="normal task" type="string"/>
+    <att name="URL1" value="" type="string"/>
+    <att name="URL2" value="" type="string"/>
+  </node>
+  <node id="20120803043201.1" label="Prepare for the Playa festival: http://www.preparefortheplaya.com/PftP/Welcome.html from 12:00 to 19:00 at Cafe Cocomo, 650 Indiana St., San Francisco, CA and on the street.
+
+ 
+
+">
+    <att name="name" value="Prepare for the Playa festival: http://www.preparefortheplaya.com/PftP/Welcome.html from 12:00 to 19:00 at Cafe Cocomo, 650 Indiana St., San Francisco, CA and on the street.
+
+ 
+
+" type="string"/>
+    <att name="progress" type="integer"/>
+    <att name="targetdate" value="2012-08-05" type="string"/>
+    <att name="significance" type="integer"/>
+    <att name="abbrev" value="Prepa" type="string"/>
+    <att name="details" value="Prepare for the Playa festival: http://www.preparefortheplaya.com/PftP/Welcome.html from 12:00 to 19:00 at Cafe Cocomo, 650 Indiana St., San Francisco, CA and on the street.      [DIL#20120803043201.1]" type="string"/>
+    <att name="obsolete" value="0" type="boolean"/>
+    <att name="color" value="#ff00ff" type="string"/>
+    <att name="type" value="normal task" type="string"/>
+    <att name="URL1" value="" type="string"/>
+    <att name="URL2" value="" type="string"/>
+  </node>
+  <node id="20120806070200.1" label="Consider getting contact lenses well before Burning Man. [Was: Glasses and shades/goggles! What to do about this? How do I combine my need for glasses with my need for shades and desert goggles (www...">
+    <att name="name" value="Consider getting contact lenses well before Burning Man. [Was: Glasses and shades/goggles! What to do about this? How do I combine my need for glasses with my need for shades and desert goggles (www..." type="string"/>
+    <att name="progress" type="integer"/>
+    <att name="targetdate" value="2014-06-01" type="string"/>
+    <att name="significance" type="integer"/>
+    <att name="abbrev" value="Consi" type="string"/>
+    <att name="details" value="Consider getting contact lenses well before Burning Man. [Was: Glasses and shades/goggles! What to do about this? How do I combine my need for glasses with my need for shades and desert goggles (www.dxdesertgoggles.com)?]      [DIL#20120806070200.1]" type="string"/>
+    <att name="obsolete" value="0" type="boolean"/>
+    <att name="color" value="#ff00ff" type="string"/>
+    <att name="type" value="normal task" type="string"/>
+    <att name="URL1" value="" type="string"/>
+    <att name="URL2" value="" type="string"/>
+  </node>
+  <node id="20120822011002.1" label="Some small things prior to Burning Man:
+  
+    See if I can do some sort of fitness training (upper body muscles) before going.
+    See if I will do something about my hair.
+    Order something with...">
+    <att name="name" value="Some small things prior to Burning Man:
+  
+    See if I can do some sort of fitness training (upper body muscles) before going.
+    See if I will do something about my hair.
+    Order something with..." type="string"/>
+    <att name="progress" type="integer"/>
+    <att name="targetdate" value="2012-09-08" type="string"/>
+    <att name="significance" type="integer"/>
+    <att name="abbrev" value="Some " type="string"/>
+    <att name="details" value="Some small things prior to Burning Man:        See if I can do some sort of fitness training (upper body muscles) before going.     See if I will do something about my hair.     Order something with a bat theme for Devany.         [DIL#20120822011002.1]" type="string"/>
+    <att name="obsolete" value="0" type="boolean"/>
+    <att name="color" value="#ff00ff" type="string"/>
+    <att name="type" value="normal task" type="string"/>
+    <att name="URL1" value="" type="string"/>
+    <att name="URL2" value="" type="string"/>
+  </node>
+  <node id="20120822025501.1" label="Present SIM at Future Camp.
+
+ 
+
+">
+    <att name="name" value="Present SIM at Future Camp.
+
+ 
+
+" type="string"/>
+    <att name="progress" type="integer"/>
+    <att name="targetdate" value="2012-08-27" type="string"/>
+    <att name="significance" type="integer"/>
+    <att name="abbrev" value="Prese" type="string"/>
+    <att name="details" value="Present SIM at Future Camp.      [DIL#20120822025501.1]" type="string"/>
+    <att name="obsolete" value="1" type="boolean"/>
+    <att name="color" value="#ff00ff" type="string"/>
+    <att name="type" value="normal task" type="string"/>
+    <att name="URL1" value="" type="string"/>
+    <att name="URL2" value="" type="string"/>
+  </node>
+  <node id="20120822025624.1" label="Present Biological Life Extension is Not Enough at Future Camp.
+
+ 
+
+">
+    <att name="name" value="Present Biological Life Extension is Not Enough at Future Camp.
+
+ 
+
+" type="string"/>
+    <att name="progress" type="integer"/>
+    <att name="targetdate" value="2012-08-29" type="string"/>
+    <att name="significance" type="integer"/>
+    <att name="abbrev" value="Prese" type="string"/>
+    <att name="details" value="Present Biological Life Extension is Not Enough at Future Camp.      [DIL#20120822025624.1]" type="string"/>
+    <att name="obsolete" value="1" type="boolean"/>
+    <att name="color" value="#ff00ff" type="string"/>
+    <att name="type" value="normal task" type="string"/>
+    <att name="URL1" value="" type="string"/>
+    <att name="URL2" value="" type="string"/>
+  </node>
+  <node id="20120822025738.1" label="Present System Identification in Neural Circuitry at Future Camp.
+
+ 
+
+">
+    <att name="name" value="Present System Identification in Neural Circuitry at Future Camp.
+
+ 
+
+" type="string"/>
+    <att name="progress" type="integer"/>
+    <att name="targetdate" value="2012-09-01" type="string"/>
+    <att name="significance" type="integer"/>
+    <att name="abbrev" value="Prese" type="string"/>
+    <att name="details" value="Present System Identification in Neural Circuitry at Future Camp.      [DIL#20120822025738.1]" type="string"/>
+    <att name="obsolete" value="1" type="boolean"/>
+    <att name="color" value="#ff00ff" type="string"/>
+    <att name="type" value="normal task" type="string"/>
+    <att name="URL1" value="" type="string"/>
+    <att name="URL2" value="" type="string"/>
+  </node>
+  <node id="20130121115906.1" label="Get Burning Man tickets.
+
+ 
+
+ ">
+    <att name="name" value="Get Burning Man tickets.
+
+ 
+
+ " type="string"/>
+    <att name="progress" type="integer"/>
+    <att name="targetdate" value="2015-02-01" type="string"/>
+    <att name="significance" type="integer"/>
+    <att name="abbrev" value="Get B" type="string"/>
+    <att name="details" value="Get Burning Man tickets.       [DIL#20130121115906.1]" type="string"/>
+    <att name="obsolete" value="0" type="boolean"/>
+    <att name="color" value="#ff00ff" type="string"/>
+    <att name="type" value="periodic task" type="string"/>
+    <att name="URL1" value="" type="string"/>
+    <att name="URL2" value="" type="string"/>
+  </node>
+  <node id="20130121115711.1" label="Make Burning Man profile for tickets!
+ 
+
+">
+    <att name="name" value="Make Burning Man profile for tickets!
+ 
+
+" type="string"/>
+    <att name="progress" type="integer"/>
+    <att name="targetdate" value="2013-01-21" type="string"/>
+    <att name="significance" type="integer"/>
+    <att name="abbrev" value="Make " type="string"/>
+    <att name="details" value="Make Burning Man profile for tickets!     [DIL#20130121115711.1]" type="string"/>
+    <att name="obsolete" value="0" type="boolean"/>
+    <att name="color" value="#ff00ff" type="string"/>
+    <att name="type" value="normal task" type="string"/>
+    <att name="URL1" value="" type="string"/>
+    <att name="URL2" value="" type="string"/>
+  </node>
+  <node id="20130122183807.1" label="Directed Group Sale of Burning Man Tickets (noon, 20140212).
+
+ 
+
+">
+    <att name="name" value="Directed Group Sale of Burning Man Tickets (noon, 20140212).
+
+ 
+
+" type="string"/>
+    <att name="progress" type="integer"/>
+    <att name="targetdate" value="2015-02-12" type="string"/>
+    <att name="significance" type="integer"/>
+    <att name="abbrev" value="Direc" type="string"/>
+    <att name="details" value="Directed Group Sale of Burning Man Tickets (noon, 20140212).      [DIL#20130122183807.1]" type="string"/>
+    <att name="obsolete" value="0" type="boolean"/>
+    <att name="color" value="#ff00ff" type="string"/>
+    <att name="type" value="periodic task" type="string"/>
+    <att name="URL1" value="" type="string"/>
+    <att name="URL2" value="" type="string"/>
+  </node>
+  <node id="20140108221048.1" label="Ask Meike, or Todd, etc., if I can participate in the Directed Group Sale of BM tickets (to open Feb.12).
+
+ 
+
+">
+    <att name="name" value="Ask Meike, or Todd, etc., if I can participate in the Directed Group Sale of BM tickets (to open Feb.12).
+
+ 
+
+" type="string"/>
+    <att name="progress" type="integer"/>
+    <att name="targetdate" value="2015-02-01" type="string"/>
+    <att name="significance" type="integer"/>
+    <att name="abbrev" value="Ask M" type="string"/>
+    <att name="details" value="Ask Meike, or Todd, etc., if I can participate in the Directed Group Sale of BM tickets (to open Feb.12).      [DIL#20140108221048.1]" type="string"/>
+    <att name="obsolete" value="0" type="boolean"/>
+    <att name="color" value="#ff00ff" type="string"/>
+    <att name="type" value="periodic task" type="string"/>
+    <att name="URL1" value="" type="string"/>
+    <att name="URL2" value="" type="string"/>
+  </node>
+  <node id="20130704083822.1" label="Buy the burning man ticket from Meike for Dmitry's friend.
+
+ 
+
+">
+    <att name="name" value="Buy the burning man ticket from Meike for Dmitry's friend.
+
+ 
+
+" type="string"/>
+    <att name="progress" type="integer"/>
+    <att name="targetdate" value="2013-08-08" type="string"/>
+    <att name="significance" type="integer"/>
+    <att name="abbrev" value="Buy t" type="string"/>
+    <att name="details" value="Buy the burning man ticket from Meike for Dmitry's friend.      [DIL#20130704083822.1]" type="string"/>
+    <att name="obsolete" value="0" type="boolean"/>
+    <att name="color" value="#ff00ff" type="string"/>
+    <att name="type" value="normal task" type="string"/>
+    <att name="URL1" value="" type="string"/>
+    <att name="URL2" value="" type="string"/>
+  </node>
+  <node id="20130725023946.1" label="Figure out which burning man camp I shall be with. One thing I could do, if I want to, is find out which camp would give me an early entry pass.
+
+ 
+
+">
+    <att name="name" value="Figure out which burning man camp I shall be with. One thing I could do, if I want to, is find out which camp would give me an early entry pass.
+
+ 
+
+" type="string"/>
+    <att name="progress" type="integer"/>
+    <att name="targetdate" value="2013-08-05" type="string"/>
+    <att name="significance" type="integer"/>
+    <att name="abbrev" value="Figur" type="string"/>
+    <att name="details" value="Figure out which burning man camp I shall be with. One thing I could do, if I want to, is find out which camp would give me an early entry pass.      [DIL#20130725023946.1]" type="string"/>
+    <att name="obsolete" value="0" type="boolean"/>
+    <att name="color" value="#ff00ff" type="string"/>
+    <att name="type" value="normal task" type="string"/>
+    <att name="URL1" value="" type="string"/>
+    <att name="URL2" value="" type="string"/>
+  </node>
+  <node id="20130804141358.1" label="Write an introduction to Meike's camp, and an introduction to Ashley's camp.
+
+ 
+
+">
+    <att name="name" value="Write an introduction to Meike's camp, and an introduction to Ashley's camp.
+
+ 
+
+" type="string"/>
+    <att name="progress" type="integer"/>
+    <att name="targetdate" value="2013-08-04" type="string"/>
+    <att name="significance" type="integer"/>
+    <att name="abbrev" value="Write" type="string"/>
+    <att name="details" value="Write an introduction to Meike's camp, and an introduction to Ashley's camp.      [DIL#20130804141358.1]" type="string"/>
+    <att name="obsolete" value="0" type="boolean"/>
+    <att name="color" value="#ff00ff" type="string"/>
+    <att name="type" value="normal task" type="string"/>
+    <att name="URL1" value="" type="string"/>
+    <att name="URL2" value="" type="string"/>
+  </node>
+  <node id="20130927194015.1" label="Burning Man: Realizations from last year:
+  
+    To have lots of fun at BM, I just need to make sure that I have plenty of responsibilities. I liked building and I liked running and closing a place.
+...">
+    <att name="name" value="Burning Man: Realizations from last year:
+  
+    To have lots of fun at BM, I just need to make sure that I have plenty of responsibilities. I liked building and I liked running and closing a place.
+..." type="string"/>
+    <att name="progress" type="integer"/>
+    <att name="targetdate" value="2014-04-01" type="string"/>
+    <att name="significance" type="integer"/>
+    <att name="abbrev" value="Burni" type="string"/>
+    <att name="details" value="Burning Man: Realizations from last year:        To have lots of fun at BM, I just need to make sure that I have plenty of responsibilities. I liked building and I liked running and closing a place.     I would really like to know what it is like to experience Burning Man with someone like Jean, Ashley, or someone similarly tied into the right groups (groups that satisfy my need to be around people who motivate me by being excellent in ways, smart achievers, entrepreneurs and real doers, creative).         [DIL#20130927194015.1]" type="string"/>
+    <att name="obsolete" value="0" type="boolean"/>
+    <att name="color" value="#ff00ff" type="string"/>
+    <att name="type" value="normal task" type="string"/>
+    <att name="URL1" value="" type="string"/>
+    <att name="URL2" value="" type="string"/>
+  </node>
+  <node id="20140304123846.1" label="Find out details about the condition of Pipedream and what needs to be done if we want to build it in camp The Future at Burning Man.
+
+ 
+
+
+">
+    <att name="name" value="Find out details about the condition of Pipedream and what needs to be done if we want to build it in camp The Future at Burning Man.
+
+ 
+
+
+" type="string"/>
+    <att name="progress" type="integer"/>
+    <att name="targetdate" value="2014-03-15" type="string"/>
+    <att name="significance" type="integer"/>
+    <att name="abbrev" value="Find " type="string"/>
+    <att name="details" value="Find out details about the condition of Pipedream and what needs to be done if we want to build it in camp The Future at Burning Man.       [DIL#20140304123846.1]" type="string"/>
+    <att name="obsolete" value="0" type="boolean"/>
+    <att name="color" value="#ff00ff" type="string"/>
+    <att name="type" value="normal task" type="string"/>
+    <att name="URL1" value="" type="string"/>
+    <att name="URL2" value="" type="string"/>
+  </node>
+  <edge label="20120411150734.1-20120329124446.1" source="20120411150734.1" target="20120329124446.1 cy:directed="1">
+    <graphics width="1"/>
+  </edge>
+DIL20120329124446_1 -> DIL20120411150734.1 [dir=back,color=black];
+  <edge label="20120730221310.1-20120329124446.1" source="20120730221310.1" target="20120329124446.1 cy:directed="1">
+    <graphics width="1"/>
+  </edge>
+DIL20120329124446_1 -> DIL20120730221310.1 [dir=back,color=black];
+  <edge label="20120730222011.1-20120329124446.1" source="20120730222011.1" target="20120329124446.1 cy:directed="1">
+    <graphics width="1"/>
+  </edge>
+DIL20120329124446_1 -> DIL20120730222011.1 [dir=back,color=black];
+  <edge label="20120730222311.1-20120329124446.1" source="20120730222311.1" target="20120329124446.1 cy:directed="1">
+    <graphics width="1"/>
+  </edge>
+DIL20120329124446_1 -> DIL20120730222311.1 [dir=back,color=black];
+  <edge label="20120730222541.1-20120329124446.1" source="20120730222541.1" target="20120329124446.1 cy:directed="1">
+    <graphics width="1"/>
+  </edge>
+DIL20120329124446_1 -> DIL20120730222541.1 [dir=back,color=black];
+  <edge label="20120730223358.1-20120329124446.1" source="20120730223358.1" target="20120329124446.1 cy:directed="1">
+    <graphics width="1"/>
+  </edge>
+DIL20120329124446_1 -> DIL20120730223358.1 [dir=back,color=black];
+  <edge label="20120803043201.1-20120730223358.1" source="20120803043201.1" target="20120730223358.1 cy:directed="1">
+    <graphics width="1"/>
+  </edge>
+DIL20120730223358_1 -> DIL20120803043201.1 [dir=back,color=black];
+  <edge label="20120806070200.1-20120329124446.1" source="20120806070200.1" target="20120329124446.1 cy:directed="1">
+    <graphics width="1"/>
+  </edge>
+DIL20120329124446_1 -> DIL20120806070200.1 [dir=back,color=black];
+  <edge label="20120822011002.1-20120329124446.1" source="20120822011002.1" target="20120329124446.1 cy:directed="1">
+    <graphics width="1"/>
+  </edge>
+DIL20120329124446_1 -> DIL20120822011002.1 [dir=back,color=black];
+  <edge label="20120822025501.1-20120329124446.1" source="20120822025501.1" target="20120329124446.1 cy:directed="1">
+    <graphics width="1"/>
+  </edge>
+DIL20120329124446_1 -> DIL20120822025501.1 [dir=back,color=black];
+  <edge label="20120822025624.1-20120329124446.1" source="20120822025624.1" target="20120329124446.1 cy:directed="1">
+    <graphics width="1"/>
+  </edge>
+DIL20120329124446_1 -> DIL20120822025624.1 [dir=back,color=black];
+  <edge label="20120822025738.1-20120329124446.1" source="20120822025738.1" target="20120329124446.1 cy:directed="1">
+    <graphics width="1"/>
+  </edge>
+DIL20120329124446_1 -> DIL20120822025738.1 [dir=back,color=black];
+  <edge label="20130121115711.1-20130121115906.1" source="20130121115711.1" target="20130121115906.1 cy:directed="1">
+    <graphics width="1"/>
+  </edge>
+DIL20130121115906_1 -> DIL20130121115711.1 [dir=back,color=black];
+  <edge label="20130121115906.1-20120329124446.1" source="20130121115906.1" target="20120329124446.1 cy:directed="1">
+    <graphics width="1"/>
+  </edge>
+DIL20120329124446_1 -> DIL20130121115906.1 [dir=back,color=black];
+  <edge label="20130122183807.1-20120329124446.1" source="20130122183807.1" target="20120329124446.1 cy:directed="1">
+    <graphics width="1"/>
+  </edge>
+DIL20120329124446_1 -> DIL20130122183807.1 [dir=back,color=black];
+  <edge label="20130202160553.1-20120730221310.1" source="20130202160553.1" target="20120730221310.1 cy:directed="1">
+    <graphics width="1"/>
+  </edge>
+DIL20120730221310_1 -> DIL20130202160553.1 [dir=back,color=black];
+  <edge label="20130704083822.1-20120329124446.1" source="20130704083822.1" target="20120329124446.1 cy:directed="1">
+    <graphics width="1"/>
+  </edge>
+DIL20120329124446_1 -> DIL20130704083822.1 [dir=back,color=black];
+  <edge label="20130725023946.1-20120329124446.1" source="20130725023946.1" target="20120329124446.1 cy:directed="1">
+    <graphics width="1"/>
+  </edge>
+DIL20120329124446_1 -> DIL20130725023946.1 [dir=back,color=black];
+  <edge label="20130804141358.1-20130725023946.1" source="20130804141358.1" target="20130725023946.1 cy:directed="1">
+    <graphics width="1"/>
+  </edge>
+DIL20130725023946_1 -> DIL20130804141358.1 [dir=back,color=black];
+  <edge label="20130818144911.1-20120730221310.1" source="20130818144911.1" target="20120730221310.1 cy:directed="1">
+    <graphics width="1"/>
+  </edge>
+DIL20120730221310_1 -> DIL20130818144911.1 [dir=back,color=black];
+  <edge label="20130818145107.1-20120730221310.1" source="20130818145107.1" target="20120730221310.1 cy:directed="1">
+    <graphics width="1"/>
+  </edge>
+DIL20120730221310_1 -> DIL20130818145107.1 [dir=back,color=black];
+  <edge label="20130818145355.1-20120730221310.1" source="20130818145355.1" target="20120730221310.1 cy:directed="1">
+    <graphics width="1"/>
+  </edge>
+DIL20120730221310_1 -> DIL20130818145355.1 [dir=back,color=black];
+  <edge label="20130818152831.1-20120730221310.1" source="20130818152831.1" target="20120730221310.1 cy:directed="1">
+    <graphics width="1"/>
+  </edge>
+DIL20120730221310_1 -> DIL20130818152831.1 [dir=back,color=black];
+  <edge label="20130818153038.1-20120730221310.1" source="20130818153038.1" target="20120730221310.1 cy:directed="1">
+    <graphics width="1"/>
+  </edge>
+DIL20120730221310_1 -> DIL20130818153038.1 [dir=back,color=black];
+  <edge label="20130818153247.1-20120730221310.1" source="20130818153247.1" target="20120730221310.1 cy:directed="1">
+    <graphics width="1"/>
+  </edge>
+DIL20120730221310_1 -> DIL20130818153247.1 [dir=back,color=black];
+  <edge label="20130819141347.1-20120730221310.1" source="20130819141347.1" target="20120730221310.1 cy:directed="1">
+    <graphics width="1"/>
+  </edge>
+DIL20120730221310_1 -> DIL20130819141347.1 [dir=back,color=black];
+  <edge label="20130927194015.1-20120329124446.1" source="20130927194015.1" target="20120329124446.1 cy:directed="1">
+    <graphics width="1"/>
+  </edge>
+DIL20120329124446_1 -> DIL20130927194015.1 [dir=back,color=black];
+  <edge label="20140108221048.1-20130122183807.1" source="20140108221048.1" target="20130122183807.1 cy:directed="1">
+    <graphics width="1"/>
+  </edge>
+DIL20130122183807_1 -> DIL20140108221048.1 [dir=back,color=black];
+  <edge label="20140304123520.1-20130818145355.1" source="20140304123520.1" target="20130818145355.1 cy:directed="1">
+    <graphics width="1"/>
+  </edge>
+DIL20130818145355_1 -> DIL20140304123520.1 [dir=back,color=black];
+  <edge label="20140304123846.1-20120329124446.1" source="20140304123846.1" target="20120329124446.1 cy:directed="1">
+    <graphics width="1"/>
+  </edge>
+DIL20120329124446_1 -> DIL20140304123846.1 [dir=back,color=black];
+
+</graph>

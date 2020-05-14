@@ -1,0 +1,130 @@
+\section{templates2.hh File Reference}
+\label{templates2_8hh}\index{templates2.hh@{templates2.hh}}
+\subsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define {\bf Protected\_\-Linked\_\-List}({\bf PLLType})
+\item 
+\#define {\bf Protected\_\-Linked\_\-List\_\-Class}({\bf PLLType})\ public PLL\_\-PLLType
+\item 
+\#define {\bf Protected\_\-Linked\_\-List\_\-functions}({\bf PLLType})
+\item 
+\#define {\bf Protected\_\-Linked\_\-List\_\-Indexed\_\-Access}({\bf PLLType}, Here, There)
+\item 
+\#define {\bf PLL\_\-LOOP\_\-FORWARD}({\bf PLLType}, Init\_\-El, Extra\_\-Test)\ for ({\bf PLLType} $\ast$ e = Init\_\-El; ((e) \&\& (Extra\_\-Test)); e = e $\rightarrow$ Next())
+\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+{\bf for} (;(h);h=h $\rightarrow$ Next()) h $\rightarrow$ pllroot=this
+\item 
+void {\bf update} ()
+\item 
+bool PLLRoot\_\- {\bf if} (!{\bf succ}) return {\bf false}
+\item 
+{\bf if} (!{\bf succ} $\rightarrow$ head()) return {\bf false}
+\item 
+{\bf if} ({\bf plltail})
+\end{CompactItemize}
+
+
+\subsection{Define Documentation}
+\index{templates2.hh@{templates2.hh}!PLL_LOOP_FORWARD@{PLL\_\-LOOP\_\-FORWARD}}
+\index{PLL_LOOP_FORWARD@{PLL\_\-LOOP\_\-FORWARD}!templates2.hh@{templates2.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define PLL\_\-LOOP\_\-FORWARD({\bf PLLType}, Init\_\-El, Extra\_\-Test)\ for ({\bf PLLType} $\ast$ e = Init\_\-El; ((e) \&\& (Extra\_\-Test)); e = e $\rightarrow$ Next())}\label{templates2_8hh_a4}
+
+
+\index{templates2.hh@{templates2.hh}!Protected_Linked_List@{Protected\_\-Linked\_\-List}}
+\index{Protected_Linked_List@{Protected\_\-Linked\_\-List}!templates2.hh@{templates2.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define Protected\_\-Linked\_\-List({\bf PLLType})}\label{templates2_8hh_a0}
+
+
+
+
+Definition at line 48 of file templates2.hh.\index{templates2.hh@{templates2.hh}!Protected_Linked_List_Class@{Protected\_\-Linked\_\-List\_\-Class}}
+\index{Protected_Linked_List_Class@{Protected\_\-Linked\_\-List\_\-Class}!templates2.hh@{templates2.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define Protected\_\-Linked\_\-List\_\-Class({\bf PLLType})\ public PLL\_\-PLLType}\label{templates2_8hh_a1}
+
+
+
+
+Definition at line 93 of file templates2.hh.\index{templates2.hh@{templates2.hh}!Protected_Linked_List_functions@{Protected\_\-Linked\_\-List\_\-functions}}
+\index{Protected_Linked_List_functions@{Protected\_\-Linked\_\-List\_\-functions}!templates2.hh@{templates2.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define Protected\_\-Linked\_\-List\_\-functions({\bf PLLType})}\label{templates2_8hh_a2}
+
+
+
+
+Definition at line 99 of file templates2.hh.\index{templates2.hh@{templates2.hh}!Protected_Linked_List_Indexed_Access@{Protected\_\-Linked\_\-List\_\-Indexed\_\-Access}}
+\index{Protected_Linked_List_Indexed_Access@{Protected\_\-Linked\_\-List\_\-Indexed\_\-Access}!templates2.hh@{templates2.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define Protected\_\-Linked\_\-List\_\-Indexed\_\-Access({\bf PLLType}, Here, There)}\label{templates2_8hh_a3}
+
+
+{\bf Value:}
+
+\footnotesize\begin{verbatim}if (!n) return Here; \
+        if (PLLType * e = el(n)) return e->There; else return NULL\end{verbatim}\normalsize 
+
+
+\subsection{Function Documentation}
+\index{templates2.hh@{templates2.hh}!for@{for}}
+\index{for@{for}!templates2.hh@{templates2.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}for (;(h); {\em h} = h-, Next())}\label{templates2_8hh_a5}
+
+
+\index{templates2.hh@{templates2.hh}!if@{if}}
+\index{if@{if}!templates2.hh@{templates2.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}if ({\bf plltail})}\label{templates2_8hh_a9}
+
+
+
+
+Definition at line 183 of file templates2.hh.
+
+References PLLType$<$ PLLType $>$::head(), PLLType$<$ PLLType $>$::pllprev, plltail, and succ.
+
+
+
+\footnotesize\begin{verbatim}183                              {
+184                         plltail->pllnext = succ->head();
+185                         succ->head()->pllprev = plltail;
+186                 } else pllhead = succ->head();
+\end{verbatim}\normalsize 
+\index{templates2.hh@{templates2.hh}!if@{if}}
+\index{if@{if}!templates2.hh@{templates2.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}if (!{\bf succ}-, head())}\label{templates2_8hh_a8}
+
+
+\index{templates2.hh@{templates2.hh}!if@{if}}
+\index{if@{if}!templates2.hh@{templates2.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool PLLRoot\_\- if (! {\em succ})\hspace{0.3cm}{\tt  [inline]}}\label{templates2_8hh_a7}
+
+
+\index{templates2.hh@{templates2.hh}!update@{update}}
+\index{update@{update}!templates2.hh@{templates2.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void update ()\hspace{0.3cm}{\tt  [inline]}}\label{templates2_8hh_a6}
+
+
+
+
+Definition at line 164 of file templates2.hh.
+
+References pllhead, and plltail.
+
+
+
+\footnotesize\begin{verbatim}164                              {
+165         // clears head and tail if elements were linked to another root
+166         // or fixes head and tail if either one pointed to an element with
+167         // a different root
+168                 if (pllhead) if (pllhead->Root()!=this) pllhead = NULL;
+169                 if (plltail) {
+170                         if (plltail->Root()!=this) {
+171                                 if (!pllhead) plltail = NULL;
+172                                 else plltail = pllhead->seek_tail();
+173                         } else {
+174                                 if (!pllhead) pllhead = plltail->seek_head();
+175                         }
+176                 }
+177         }
+\end{verbatim}\normalsize 

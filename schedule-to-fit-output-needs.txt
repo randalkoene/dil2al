@@ -1,0 +1,53 @@
+Scheduling tasks to fit output needs:
+====================================
+
+(20041110)
+
+The following describes an algorithmic approach to task scheduling that takes
+into account the need for a specific measurable output for the total task or
+for each cycle of work on tasks.
+
+Sometimes scheduling is simple and you only need to look at the total output
+at completion of a task. Sometimes the PERCEIVED OUTPUT during task work is
+important.
+
+This results in target dates that produce overlapping times for parallel
+work. The overlap and output determine the number of chunks per cycle.
+
+Previously (rescheduling-20040911.txt), three points were made about good
+parallel scheduling:
+(1) As much as possible, INHERIT target dates.
+(2) Retain the order of tasks as desired.
+(3) Place target dates further than their absolute minimum, e.g. by setting
+    a later virtual date while generating suggested target dates with the
+    EPS method.
+
+Also:
+- Figure out the LOAD of each task.
+- Figure out the PRIORITY of each task.
+- Figure out how much room to leave for other stuff (don't move ahead too far).
+
+The LOAD and PRIORITY are involved in the determination of the RATIO OF CHUNKS
+PER CYCLE to allocate for a task. And that in turn determines a target date.
+
+The actual significance of COMPLETED output can differ for different tasks.
+The RATIO OF CHUNKS PER CYCLE depends on (estimated) MEASURABLE OUTPUT PER
+CHUNK of work on a task and on the MEASURABLE OUTPUT PER CYCLE desired for
+that task.
+
+measurable output per chunk:
+This can be estimated for a type of task, and may be expressed as a curve
+for changing values as task completion progresses, e.g.
+
+measurable |              ******
+output     |           ***      ******
+           |          *               ****
+           |         *                    *****
+           |       **                          **
+           |     **
+           |  ***
+           |**
+         --+------------------------------------>
+           | 0%          completion          100%
+
+The total output is the integral of the curve shown above.

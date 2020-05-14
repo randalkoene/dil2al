@@ -1,0 +1,110 @@
+<HTML>
+<HEAD>
+<TITLE>DIL Dependency Hierarchy in HTML Tables</TITLE>
+</HEAD>
+<BODY BGCOLOR="#7F7F9F" TEXT="#000000">
+<H1>DIL Dependency Hierarchy in HTML Tables</H1>
+
+The following example shows how a DIL Dependency Hierarchy can be displayed in tables. There are some minor issues to be aware of. When a DIL entry is a dependency of multiple superiors and the drawn hierarchy is wide and deep enough to encounter it more than once, it will be drawn more than once. The number of occurrances can be indicated in the cell (pre-calculated during preparation of the drawing). While colours or the thickness of borders could be used to indicate the weight of a dependency, this will not show up in w3m, so that the weight should be included as a numerical parameter. There may be a limit to the number of tables within tables that browsers can display. The width of a table should be set in pixels so that cells do not become too small.
+<P>
+
+<!-- @DIL entry node start@ -->
+<TABLE BORDER="2" ALIGN=center BGCOLOR="#9FB07F">
+<TR><TD COLSPAN=3 ALIGN=center>SUPERIOR</TD></TR>
+
+<TR>
+<TD>
+<!-- @DIL entry node start@ -->
+<TABLE BORDER="2" ALIGN=center BGCOLOR="#9FB07F">
+<TR><TD COLSPAN=1 ALIGN=center>DEPENDENCY 1-1</TD></TR>
+
+<TR>
+<TD>
+DEPENDENCY 1-1-1
+</TD>
+
+</TABLE>
+<!-- @DIL entry node end@ -->
+</TD>
+
+<TD>
+<!-- @DIL entry node start@ -->
+<TABLE BORDER="2" ALIGN=center BGCOLOR="#9FB07F">
+<TR><TD COLSPAN=2 ALIGN=center>DEPENDENCY 1-2</TD></TR>
+
+<TR>
+<TD>
+<!-- @DIL entry node start@ -->
+<TABLE BORDER="2" ALIGN=center BGCOLOR="#9FB07F">
+<TR><TD COLSPAN=3 ALIGN=center>DEPENDENCY 1-2-1</TD></TR>
+
+<TR>
+<TD>
+DEPENDENCY 1-2-1-1
+</TD>
+
+<TD>
+DEPENDENCY 1-2-1-2
+</TD>
+
+<TD>
+<!-- @DIL entry node start@ -->
+<TABLE BORDER="2" ALIGN=center BGCOLOR="#9FB07F">
+<TR><TD COLSPAN=1 ALIGN=center>DEPENDENCY 1-2-1-3</TD></TR>
+
+<TR>
+<TD>
+DEPENDENCY 1-2-1-3-1
+</TD>
+
+</TABLE>
+<!-- @DIL entry node end@ -->
+</TD>
+
+</TABLE>
+<!-- @DIL entry node end@ -->
+</TD>
+
+<TD>
+DEPENDENCY 1-2-2
+</TD>
+
+</TABLE>
+<!-- @DIL entry node end@ -->
+</TD>
+
+<TD>
+<!-- @DIL entry node start@ -->
+<TABLE BORDER="2" ALIGN=center BGCOLOR="#9FB07F">
+<TR><TD COLSPAN=1 ALIGN=center>DEPENDENCY 1-3</TD></TR>
+
+<TR>
+<TD>
+<!-- @DIL entry node start@ -->
+<TABLE BORDER="2" ALIGN=center BGCOLOR="#9FB07F">
+<TR><TD COLSPAN=2 ALIGN=center>DEPENDENCY 1-3-1</TD></TR>
+
+<TR>
+<TD>
+DEPENDENCY 1-3-1-1
+</TD>
+
+<TD>
+DEPENDENCY 1-3-1-2
+</TD>
+
+</TABLE>
+<!-- @DIL entry node end@ -->
+</TD>
+</TABLE>
+<!-- @DIL entry node end@ -->
+</TD>
+
+</TABLE>
+<!-- @DIL entry node end@ -->
+
+
+<P><HR><A HREF="~/doc/html/filesystem.html">~</A><FONT COLOR="#1F1F1F">/src/dil2al/DIL-DH-tables-example.html - <!-- uploaddate -->Fri Oct  6 13:40:15 EDT 2000
+ - </FONT><A HREF="~/doc/html/webmirror/index.html">Randal A. Koene</A><P>
+
+</BODY></HTML>

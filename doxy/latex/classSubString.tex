@@ -1,0 +1,487 @@
+\section{Sub\-String  Class Reference}
+\label{classSubString}\index{SubString@{Sub\-String}}
+{\tt \#include $<$Big\-String.hh$>$}
+
+\subsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf $\sim$Sub\-String} ()
+\item 
+Sub\-String \& {\bf operator=} (const {\bf String} \&y)
+\item 
+Sub\-String \& {\bf operator=} (const Sub\-String \&y)
+\item 
+Sub\-String \& {\bf operator=} (const char $\ast$t)
+\item 
+Sub\-String \& {\bf operator=} (char c)
+\item 
+int {\bf contains} (char c) const
+\item 
+int {\bf contains} (const {\bf String} \&y) const
+\item 
+int {\bf contains} (const Sub\-String \&y) const
+\item 
+int {\bf contains} (const char $\ast$t) const
+\item 
+int {\bf contains} (const {\bf Big\-Regex} \&r) const
+\item 
+int {\bf matches} (const {\bf Big\-Regex} \&r) const
+\item 
+{\bf \_\-BIGSTRING\_\-LENGTH} {\bf length} () const
+\item 
+int {\bf empty} () const
+\item 
+const char $\ast$ {\bf chars} () const
+\item 
+int {\bf OK} () const
+\end{CompactItemize}
+\subsection*{Protected Methods}
+\begin{CompactItemize}
+\item 
+void {\bf assign} (const {\bf Str\-Rep} $\ast$, const char $\ast$, {\bf \_\-BIGSTRING\_\-SIZE}=-1)
+\item 
+{\bf Sub\-String} ({\bf String} \&x, {\bf \_\-BIGSTRING\_\-SIZE} p, {\bf \_\-BIGSTRING\_\-SIZE} l)
+\item 
+{\bf Sub\-String} (const Sub\-String \&x)
+\end{CompactItemize}
+\subsection*{Protected Attributes}
+\begin{CompactItemize}
+\item 
+{\bf String} \& {\bf S}
+\item 
+{\bf \_\-BIGSTRING\_\-LENGTH} {\bf pos}
+\item 
+{\bf \_\-BIGSTRING\_\-LENGTH} {\bf len}
+\end{CompactItemize}
+\subsection*{Friends}
+\begin{CompactItemize}
+\item 
+class {\bf String}
+\item 
+ostream \& {\bf operator$<$$<$} (ostream \&s, const Sub\-String \&x)
+\end{CompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{SubString@{Sub\-String}!SubString@{SubString}}
+\index{SubString@{SubString}!SubString@{Sub\-String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Sub\-String::Sub\-String ({\bf String} \& {\em x}, {\bf \_\-BIGSTRING\_\-SIZE} {\em p}, {\bf \_\-BIGSTRING\_\-SIZE} {\em l})\hspace{0.3cm}{\tt  [inline, protected]}}\label{classSubString_b1}
+
+
+
+
+Definition at line 541 of file Big\-String.hh.
+
+References \_\-BIGSTRING\_\-SIZE.
+
+
+
+\footnotesize\begin{verbatim}542   :S(x), pos(first), len(l) {}
+\end{verbatim}\normalsize 
+\index{SubString@{Sub\-String}!SubString@{SubString}}
+\index{SubString@{SubString}!SubString@{Sub\-String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Sub\-String::Sub\-String (const Sub\-String \& {\em x})\hspace{0.3cm}{\tt  [inline, protected]}}\label{classSubString_b2}
+
+
+
+
+Definition at line 539 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}540   :S(x.S), pos(x.pos), len(x.len) {}
+\end{verbatim}\normalsize 
+\index{SubString@{Sub\-String}!~SubString@{$\sim$SubString}}
+\index{~SubString@{$\sim$SubString}!SubString@{Sub\-String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Sub\-String::$\sim$Sub\-String ()\hspace{0.3cm}{\tt  [inline]}}\label{classSubString_a0}
+
+
+
+
+Definition at line 544 of file Big\-String.hh.
+
+
+
+\footnotesize\begin{verbatim}544 {}
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Function Documentation}
+\index{SubString@{Sub\-String}!assign@{assign}}
+\index{assign@{assign}!SubString@{Sub\-String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Sub\-String::assign (const {\bf Str\-Rep} $\ast$, const char $\ast$, {\bf \_\-BIGSTRING\_\-SIZE} = -1)\hspace{0.3cm}{\tt  [protected]}}\label{classSubString_b0}
+
+
+
+
+Definition at line 577 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, len, Str\-Rep::len, pos, String::rep, Str\-Rep::s, S, and Str\-Rep::sz.
+
+Referenced by operator=().
+
+
+
+\footnotesize\begin{verbatim}578 { // INVOLVED in lfstr.at(...) = ...
+579   if (&S == &_nilString) return;
+580 
+581   if (ylen < 0) ylen = slen(ys);
+582   StrRep* targ = S.rep;
+583   _BIGSTRING_SIZE sl = targ->len - len + ylen;
+584 #ifdef DEBUG_BIGSTRING
+585         if (ysrc->debugop) cerr << "Target String length = " << targ->len << ", Substring length = " << len << ", assigned length = " << ylen << ", sl = " << sl << '\n';
+586 #endif
+587 
+588   if (ysrc == targ || sl >= targ->sz)
+589   {
+590 #ifdef DEBUG_BIGSTRING
+591         if (ysrc->debugop) cerr << "Assigning new String chunk.\n";
+592 #endif
+593     StrRep* oldtarg = targ;
+594     targ = Sresize(0, sl);
+595     ncopy(oldtarg->s, targ->s, pos);
+596     ncopy(ys, &(targ->s[pos]), ylen);
+597     scopy(&(oldtarg->s[pos + len]), &(targ->s[pos + ylen]));
+598     delete oldtarg;
+599   }
+600   else if (len == ylen)
+601 #ifdef DEBUG_BIGSTRING
+602         {
+603                 if (ysrc->debugop) cerr << "Replacing with equal length.\n";
+604 #endif
+605     ncopy(ys, &(targ->s[pos]), len);
+606 #ifdef DEBUG_BIGSTRING
+607         }
+608 #endif
+609   else if (ylen < len)
+610   {
+611 #ifdef DEBUG_BIGSTRING
+612         if (ysrc->debugop) cerr << "New substring is shorter.\n";
+613 #endif
+614     ncopy(ys, &(targ->s[pos]), ylen);
+615     scopy(&(targ->s[pos + len]), &(targ->s[pos + ylen]));
+616   }
+617   else
+618   {
+619 #ifdef DEBUG_BIGSTRING
+620         if (ysrc->debugop) cerr << "New substring is longer, in same chunk.\n";
+621 #endif
+622     revcopy(&(targ->s[targ->len]), &(targ->s[sl]), targ->len-pos-len +1);
+623     ncopy(ys, &(targ->s[pos]), ylen);
+624   }
+625 #ifdef DEBUG_BIGSTRING
+626         if (ysrc->debugop) cerr << "New string length = " << sl << '\n';
+627 #endif
+628   targ->len = sl;
+629   S.rep = targ;
+630 }
+\end{verbatim}\normalsize 
+\index{SubString@{Sub\-String}!chars@{chars}}
+\index{chars@{chars}!SubString@{Sub\-String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ Sub\-String::chars () const\hspace{0.3cm}{\tt  [inline]}}\label{classSubString_a13}
+
+
+
+
+Definition at line 500 of file Big\-String.hh.
+
+References pos, String::rep, Str\-Rep::s, and S.
+
+Referenced by String::after(), String::at(), String::before(), cat(), compare(), contains(), String::contains(), String::del(), String::freq(), String::from(), String::gsub(), String::index(), matches(), String::matches(), operator$<$$<$(), operator=(), String::operator=(), String::prepend(), and String::through().
+
+
+
+\footnotesize\begin{verbatim}500 { return &(S.rep->s[pos]); }
+\end{verbatim}\normalsize 
+\index{SubString@{Sub\-String}!contains@{contains}}
+\index{contains@{contains}!SubString@{Sub\-String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Sub\-String::contains (const {\bf Big\-Regex} \& {\em r}) const\hspace{0.3cm}{\tt  [inline]}}\label{classSubString_a9}
+
+
+
+
+Definition at line 1224 of file Big\-String.hh.
+
+References chars(), len, and Big\-Regex::search().
+
+
+
+\footnotesize\begin{verbatim}1225 {
+1226   int unused;  return r.search(chars(), len, unused, 0) >= 0;
+1227 }
+\end{verbatim}\normalsize 
+\index{SubString@{Sub\-String}!contains@{contains}}
+\index{contains@{contains}!SubString@{Sub\-String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Sub\-String::contains (const char $\ast$ {\em t}) const\hspace{0.3cm}{\tt  [inline]}}\label{classSubString_a8}
+
+
+
+
+Definition at line 1204 of file Big\-String.hh.
+
+References len, pos, S, and String::search().
+
+
+
+\footnotesize\begin{verbatim}1205 {   
+1206   return S.search(pos, pos+len, t) >= 0;
+1207 }
+\end{verbatim}\normalsize 
+\index{SubString@{Sub\-String}!contains@{contains}}
+\index{contains@{contains}!SubString@{Sub\-String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Sub\-String::contains (const Sub\-String \& {\em y}) const\hspace{0.3cm}{\tt  [inline]}}\label{classSubString_a7}
+
+
+
+
+Definition at line 1214 of file Big\-String.hh.
+
+References chars(), len, length(), pos, S, and String::search().
+
+
+
+\footnotesize\begin{verbatim}1215 {   
+1216   return S.search(pos, pos+len, y.chars(), y.length()) >= 0;
+1217 }
+\end{verbatim}\normalsize 
+\index{SubString@{Sub\-String}!contains@{contains}}
+\index{contains@{contains}!SubString@{Sub\-String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Sub\-String::contains (const {\bf String} \& {\em y}) const\hspace{0.3cm}{\tt  [inline]}}\label{classSubString_a6}
+
+
+
+
+Definition at line 1209 of file Big\-String.hh.
+
+References String::chars(), len, String::length(), pos, S, and String::search().
+
+
+
+\footnotesize\begin{verbatim}1210 {   
+1211   return S.search(pos, pos+len, y.chars(), y.length()) >= 0;
+1212 }
+\end{verbatim}\normalsize 
+\index{SubString@{Sub\-String}!contains@{contains}}
+\index{contains@{contains}!SubString@{Sub\-String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Sub\-String::contains (char {\em c}) const\hspace{0.3cm}{\tt  [inline]}}\label{classSubString_a5}
+
+
+
+
+Definition at line 1219 of file Big\-String.hh.
+
+References len, pos, S, and String::search().
+
+
+
+\footnotesize\begin{verbatim}1220 {
+1221   return S.search(pos, pos+len, c) >= 0;
+1222 }
+\end{verbatim}\normalsize 
+\index{SubString@{Sub\-String}!empty@{empty}}
+\index{empty@{empty}!SubString@{Sub\-String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Sub\-String::empty () const\hspace{0.3cm}{\tt  [inline]}}\label{classSubString_a12}
+
+
+
+
+Definition at line 499 of file Big\-String.hh.
+
+References len.
+
+
+
+\footnotesize\begin{verbatim}499 { return len == 0; }
+\end{verbatim}\normalsize 
+\index{SubString@{Sub\-String}!length@{length}}
+\index{length@{length}!SubString@{Sub\-String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-LENGTH} Sub\-String::length () const\hspace{0.3cm}{\tt  [inline]}}\label{classSubString_a11}
+
+
+
+
+Definition at line 498 of file Big\-String.hh.
+
+References \_\-BIGSTRING\_\-LENGTH, and len.
+
+Referenced by String::after(), String::at(), String::before(), cat(), compare(), contains(), String::contains(), String::del(), String::freq(), String::from(), String::gsub(), String::index(), String::matches(), operator$<$$<$(), operator=(), String::operator=(), String::prepend(), and String::through().
+
+
+
+\footnotesize\begin{verbatim}498 { return len; }
+\end{verbatim}\normalsize 
+\index{SubString@{Sub\-String}!matches@{matches}}
+\index{matches@{matches}!SubString@{Sub\-String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Sub\-String::matches (const {\bf Big\-Regex} \& {\em r}) const\hspace{0.3cm}{\tt  [inline]}}\label{classSubString_a10}
+
+
+
+
+Definition at line 1229 of file Big\-String.hh.
+
+References chars(), len, and Big\-Regex::match().
+
+
+
+\footnotesize\begin{verbatim}1230 {
+1231   return r.match(chars(), len, 0) == len;
+1232 }
+\end{verbatim}\normalsize 
+\index{SubString@{Sub\-String}!OK@{OK}}
+\index{OK@{OK}!SubString@{Sub\-String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Sub\-String::OK () const}\label{classSubString_a14}
+
+
+
+
+Definition at line 1468 of file Big\-String.cc.
+
+References String::error(), Str\-Rep::len, len, String::OK(), pos, String::rep, and S.
+
+
+
+\footnotesize\begin{verbatim}1469 {
+1470   int v = S != (const char*)0; // have a String;
+1471   v &= S.OK();                 // that is legal
+1472   v &= pos + len >= S.rep->len;// pos and len within bounds
+1473   if (!v) S.error("SubString invariant failure");
+1474   return v;
+1475 }
+\end{verbatim}\normalsize 
+\index{SubString@{Sub\-String}!operator=@{operator=}}
+\index{operator=@{operator=}!SubString@{Sub\-String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Sub\-String \& Sub\-String::operator= (char {\em c})\hspace{0.3cm}{\tt  [inline]}}\label{classSubString_a4}
+
+
+
+
+Definition at line 606 of file Big\-String.hh.
+
+References assign().
+
+
+
+\footnotesize\begin{verbatim}607 {
+608   assign(0, &ch, 1);
+609   return *this;
+610 }
+\end{verbatim}\normalsize 
+\index{SubString@{Sub\-String}!operator=@{operator=}}
+\index{operator=@{operator=}!SubString@{Sub\-String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Sub\-String \& Sub\-String::operator= (const char $\ast$ {\em t})\hspace{0.3cm}{\tt  [inline]}}\label{classSubString_a3}
+
+
+
+
+Definition at line 600 of file Big\-String.hh.
+
+References assign().
+
+
+
+\footnotesize\begin{verbatim}601 {
+602   assign(0, ys);
+603   return *this;
+604 }
+\end{verbatim}\normalsize 
+\index{SubString@{Sub\-String}!operator=@{operator=}}
+\index{operator=@{operator=}!SubString@{Sub\-String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Sub\-String \& Sub\-String::operator= (const Sub\-String \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{classSubString_a2}
+
+
+
+
+Definition at line 618 of file Big\-String.hh.
+
+References assign(), chars(), length(), String::rep, and S.
+
+
+
+\footnotesize\begin{verbatim}619 {
+620   assign(y.S.rep, y.chars(), y.length());
+621   return *this;
+622 }
+\end{verbatim}\normalsize 
+\index{SubString@{Sub\-String}!operator=@{operator=}}
+\index{operator=@{operator=}!SubString@{Sub\-String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Sub\-String \& Sub\-String::operator= (const {\bf String} \& {\em y})\hspace{0.3cm}{\tt  [inline]}}\label{classSubString_a1}
+
+
+
+
+Definition at line 612 of file Big\-String.hh.
+
+References assign(), String::chars(), String::length(), and String::rep.
+
+
+
+\footnotesize\begin{verbatim}613 {
+614   assign(y.rep, y.chars(), y.length()); // INVOLVED in lfstr.at(...) = ...
+615   return *this;
+616 }
+\end{verbatim}\normalsize 
+
+
+\subsection{Friends And Related Function Documentation}
+\index{SubString@{Sub\-String}!operator<<@{operator$<$$<$}}
+\index{operator<<@{operator$<$$<$}!SubString@{Sub\-String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}ostream\& operator$<$$<$ (ostream \& {\em s}, const Sub\-String \& {\em x})\hspace{0.3cm}{\tt  [friend]}}\label{classSubString_l1}
+
+
+
+
+Definition at line 1415 of file Big\-String.cc.
+
+
+
+\footnotesize\begin{verbatim}1416 { 
+1417   const char* a = x.chars();
+1418   const char* lasta = &(a[x.length()]);
+1419   while (a < lasta)
+1420     s.put(*a++);
+1421   return(s);
+1422 }
+\end{verbatim}\normalsize 
+\index{SubString@{Sub\-String}!String@{String}}
+\index{String@{String}!SubString@{Sub\-String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}friend class String\hspace{0.3cm}{\tt  [friend]}}\label{classSubString_l0}
+
+
+
+
+Definition at line 113 of file Big\-String.hh.
+
+\subsection{Member Data Documentation}
+\index{SubString@{Sub\-String}!len@{len}}
+\index{len@{len}!SubString@{Sub\-String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-LENGTH} Sub\-String::len\hspace{0.3cm}{\tt  [protected]}}\label{classSubString_n2}
+
+
+
+
+Definition at line 118 of file Big\-String.hh.
+
+Referenced by assign(), contains(), empty(), length(), matches(), and OK().\index{SubString@{Sub\-String}!pos@{pos}}
+\index{pos@{pos}!SubString@{Sub\-String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-LENGTH} Sub\-String::pos\hspace{0.3cm}{\tt  [protected]}}\label{classSubString_n1}
+
+
+
+
+Definition at line 117 of file Big\-String.hh.
+
+Referenced by assign(), chars(), contains(), and OK().\index{SubString@{Sub\-String}!S@{S}}
+\index{S@{S}!SubString@{Sub\-String}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String}\& Sub\-String::S\hspace{0.3cm}{\tt  [protected]}}\label{classSubString_n0}
+
+
+
+
+Definition at line 116 of file Big\-String.hh.
+
+Referenced by assign(), chars(), contains(), OK(), and operator=().
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf Big\-String.hh}\item 
+{\bf Big\-String.cc}\end{CompactItemize}

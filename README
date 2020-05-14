@@ -1,0 +1,158 @@
+THE FORMALIZER AND DIL2AL
+=========================
+
+by Randal A. Koene
+commenced on or around 1999-11-27
+most recently updated on 2019-02-01
+
+FILES
+-----
+
+See the Google Doc 'The Formalizer' for the most recent information.
+
+The contents of this directory (~/src/dil2al), plus additional includes such
+as ~/src/include/templates.hh, comprise the source code for dil2al, the main
+component of the Formalizer.
+
+Other files used by the Formalizer are mainly found in the directory
+~/doc/html/lists, plus configuration files in the home directory ~/ and the
+~/doc/html/index.html file.
+
+There are also numerous scripts in ~/local/bin, which are typically backed up
+to ~/backup/batch, that are used with the Formalizer. And there are Octave
+scripts in ~/octave that are used by some of those scripts.
+
+There is a document project directory ~/doc/tex/formalizer-20110322 with a very
+limited context, as it was used in an early attempt to present the ideas
+around the Formalizer and dil2al. That is similar to the presentation that
+I gave at Quantified Self (https://youtu.be/bIdgpyZgikE).
+
+The document project ~/doc/tex/techrep was used together with dil2al in its
+early development in an attempt to automatically maintain content relevant to
+PhD research, as part of the portion of dil2al that is dedicated to automating
+aspects of research paper generation. Even though this was most relevant in
+1999, the file ~/doc/tex/techrep/techrep.tex was still being modified into
+2011, probably through automatic updates as the dil2al AL/DIL hooks into
+locations within the file. The techrep.tex file was even HTML readable, as
+linked through ~/doc/html/techrep/techrep.html.
+
+There is a mind map with associated images at
+~/doc/html/planning/FORMALIZER.mm.
+
+This is not guaranteed to be the full complement of Formalizer materials.
+Consult additional documentation, the dil2al source code, and/or links found
+by crawling the ~/doc/html/index.html file to establish a complete set.
+
+The compiled executable, dil2al, remains in ~/src/dil2al. Typically, a
+symbolic link is made from ~/local/bin/dil2al to ~/src/dil2al/dil2al.
+
+When the symbolic link ~/local/bin/formalizer also exists and points to
+~/src/di2lal/dil2al then the same executable can be run in a separate
+formalizer mode.
+
+Each mode has its own help when run with the '-h' option.
+
+
+ARCHIVAL
+--------
+
+The ~/local/bin/liststar script is used to create a valid archive tarball of
+operational dil2al Formalizer files and directories.
+
+This does not include configuration files in ~/ nor other assorted files
+that are not directly in ~/doc/html/lists. It is therefore intended
+principally as a quick way to safely store the Foramlizer state, in case a
+bug or human error causes corruption in principal files.
+
+Archived tarballs are stored in ~/.archive/doc/html.
+
+The script ~/local/bin/liststar-cleanup.sh is used to reduce the set of
+archive files stored there to just a week's worth of daily archives plus
+those that were made by manually calling liststar.
+
+Complete archival backup of the Formalizer, all associated files, and in fact
+all files that are deemed to belong to a standard system setup is achieved
+by using the ~/local/bin/rsyncaccount script or its more user friendly
+wrapper ~/local/bin/rsynctoartemis.sh.
+
+
+CRONTAB
+-------
+
+In addition to running dil2al/formalizer manually, and running dil2al as a
+daemon process, there are crontab tasks that are typically linked in to
+perform certain actions at specific times.
+
+Typical crontab tasks are:
+
+at 1:01 every day, run ~/local/bin/formalizer-daily.sh
+at minute 31 every hour, run ~/local/bin/dil2al-taskdata-hourly.sh
+
+
+ORIGINS
+-------
+
+The very earliest attempts at something like the Formalizer began as far back
+as 1991/1992. The idea was to create a system with the purpose of improving
+personal performance when dealing with a lot of projects and ideas by taking
+over an ever increasing amount of the drudgery involved, from keeping track
+of ideas and tasks all the way to producing implementations. Most of that
+early effort was purely brainstorming and conceptualizing, resulting in a lot
+of paper notes and some more elaborate writing. If written documents about
+that still exist in electronic form, they may be found on old 3.5 inch floppy
+disks stored in the Netherlands.
+
+There are also still some relics of first attempts to create Formalizer
+programs, and some of those were preserved by being copied from DOS/Windows
+systems used in Montreal between 1996-2001 into my standard system file
+structure under ~/doc/txt/RANDALK. An example is the FORMALIZ.PAS program
+that was written in Borland Pascal, but with heavy use of my own support
+libraries that include x86-specific inline assembly code. The file is at
+~/doc/txt/RANDALK/BORLAND/TP7/PAS/FORMALIZ.PAS. In addition to several
+general purpose utility units that I wrote to use with many of my programs,
+this also needs the unit defined in
+~/doc/txt/RANDALK/BORLAND/TP7/PAS/EVENTS.PAS. That Pascal unit defines all
+of the procedures needed for building, inspecting and modifying Event
+Structures. It is also heavily hard-coded in x86 assembly language through
+'Assembler' and 'ASM' statements.
+
+These earliest, original attempts also headed in another very interesting
+direction that still hasn't been fully explored. The thinking around properly
+formalizing ideas so that even implementation could be largely automated
+was abstract and highly reductionist, and it led to the notion of Events as
+the basis for everything. In the orignal conceptualization, Events could be
+Parallel Events or Sequential Events, and anything at all could be expressed
+as a hierarchy, and Event Structure, of such. Later work led to the insight
+that the system could be reduced further, because there are always ways to
+either express Parallel Events in terms of managed time sharing of
+Sequential Events, or express Sequential Events in terms of Parallel Events
+that include a formal Clock/Sequencer or similar expression. It was this
+Event Structure handling for which the FORMALIZER.PAS program was written as
+a test.
+
+The version of the Formalizer that has evolved around the dil2al program and
+that is still under development at this time (2019-02-01) was started on or
+before 1999-11-27. That date is based on the earliest entry found in the
+Task Log, in the file ~/doc/html/lists/task-log.19991127.html.
+
+There are a number of experimental components of the program that were used
+initially but that are not presently in active use (though still functional).
+E.g. the use of links and tags that seek to integrate bibliography management,
+or that can convert Task Log entries into portions of research papers.
+
+There was also an early intent to make most aspects of the Formalizer highly
+customizable and optional, even to the point where Task Log entries did not
+need to be made in a ~/doc/html/task-log*.html file, but could be made in
+any accessible file. That was more confusing than useful. Although the
+functionality still exists, it is purposely not in use.
+
+There are newer experimental components that are not yet satisfying or
+effective, and are therefore (not yet) in actual use. That includes dil2al
+functionality for 'plan-led rescheduling', DIL hierarchy visualization
+(though that has been used from time to time), and some of the metrics
+extraction operations.
+
+There is an intention or plan to eventually either rewrite the Formalizer or
+wrap it in a modern web-app or mobile-app interface as part of the
+Formalizer company project, as explained in the `Formalizer Product` Google
+doc.

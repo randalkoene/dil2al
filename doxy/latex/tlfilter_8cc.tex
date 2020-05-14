@@ -1,0 +1,174 @@
+\section{tlfilter.cc File Reference}
+\label{tlfilter_8cc}\index{tlfilter.cc@{tlfilter.cc}}
+{\tt \#include \char`\"{}dil2al.hh\char`\"{}}\par
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+bool {\bf filter\_\-TL\_\-by\_\-AL} ()
+\item 
+bool {\bf generate\_\-TL\_\-keyword\_\-index} ()
+\item 
+bool {\bf search\_\-TL} ({\bf String} searchstr)
+\item 
+bool {\bf extract\_\-paper\_\-novelties} ({\bf String} fname, {\bf String} paperplanurl, ostream \&ostr)
+\item 
+bool {\bf cmdline\_\-extract\_\-paper\_\-novelties} ({\bf String} filepaper)
+\end{CompactItemize}
+
+
+\subsection{Function Documentation}
+\index{tlfilter.cc@{tlfilter.cc}!cmdline_extract_paper_novelties@{cmdline\_\-extract\_\-paper\_\-novelties}}
+\index{cmdline_extract_paper_novelties@{cmdline\_\-extract\_\-paper\_\-novelties}!tlfilter.cc@{tlfilter.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool cmdline\_\-extract\_\-paper\_\-novelties ({\bf String} {\em filepaper})}\label{tlfilter_8cc_a4}
+
+
+
+
+Definition at line 65 of file tlfilter.cc.
+
+References String::after(), backup\_\-and\_\-rename(), String::before(), EOUT, extract\_\-paper\_\-novelties(), String::prepend(), and res.
+
+Referenced by dil2al\_\-commands().
+
+
+
+\footnotesize\begin{verbatim}65                                                        {
+66 // Commandline interface to the extraction of NOVELTY tagged items
+67         bool res;
+68         String fname, paperplanurl;
+69         fname = filepaper.before("+");
+70         if (fname == "") {
+71                 fname = filepaper;
+72                 paperplanurl = homedir+"doc/tex/somepaper/somepaper.html"; // dummy URL
+73                 res = extract_paper_novelties(fname,paperplanurl,cout);
+74         } else {
+75                 paperplanurl = filepaper.after("+");
+76                 if (paperplanurl == "") {
+77                         paperplanurl = homedir+"doc/tex/somepaper/somepaper.html"; // dummy URL
+78                         res = extract_paper_novelties(fname,paperplanurl,cout);
+79                 } else {
+80                         if (paperplanurl[0]!='/') paperplanurl.prepend(homedir);
+81                         ofstream ostr(paperplanurl+".new");
+82                         if (!ostr) {
+83                                 EOUT << "dil2al: Unable to create " << paperplanurl << ".new in cmdline_extract_paper_novelties()\n";
+84                                 return false;
+85                         }
+86                         ifstream istr(paperplanurl);
+87                         bool isnew = (!istr);
+88                         if (!isnew) ostr << istr.rdbuf(); // copy existing content (without regard to a possible </BODY> tag)
+89                         istr.close();
+90                         res = extract_paper_novelties(fname,paperplanurl,ostr);
+91                         ostr.close();
+92                         if (!backup_and_rename(paperplanurl,"Paper Plan",isnew)) return false;
+93                 }
+94         }
+95         return true;
+96 }
+\end{verbatim}\normalsize 
+\index{tlfilter.cc@{tlfilter.cc}!extract_paper_novelties@{extract\_\-paper\_\-novelties}}
+\index{extract_paper_novelties@{extract\_\-paper\_\-novelties}!tlfilter.cc@{tlfilter.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool extract\_\-paper\_\-novelties ({\bf String} {\em fname}, {\bf String} {\em paperplanurl}, ostream \& {\em ostr})}\label{tlfilter_8cc_a3}
+
+
+
+
+Definition at line 19 of file tlfilter.cc.
+
+References \_\-BIGSTRING\_\-ITERATOR, String::after(), String::at(), EOUT, String::gsub(), String::index(), read\_\-file\_\-into\_\-String(), relurl(), RX\_\-Search\_\-Safe(), Big\-Regex::sublen(), and Big\-Regex::subpos().
+
+Referenced by cmdline\_\-extract\_\-paper\_\-novelties().
+
+
+
+\footnotesize\begin{verbatim}19                                                                                 {
+20 // searches a document for <A NAME="NOVELTY-some-id">[<B>N</B>]</A>/<!-- @NOVELTY-some-id@ -->
+21 // tags and returns the items between the tags
+22         String fcont;
+23         if (!read_file_into_String(fname,fcont)) {
+24                 EOUT << "dil2al: Unable to read file " << fname << " in extract_paper_novelties()\n";
+25                 return false;
+26         }
+27         _BIGSTRING_ITERATOR i=-1;
+28         while ((i=fcont.index(BigRegex("[<]A[   ]+[Nn][Aa][Mm][Ee][     ]*=[    ]*\"NOVELTY-[^\"]*\"[>]"),i+1))>=0) {
+29                 _BIGSTRING_ITERATOR ii = fcont.index("\">",i); // find end of ID
+30                 if (ii>=0) {
+31                         String nid;
+32                         nid = fcont.at(i,ii-i);
+33                         nid = nid.after("\"",-1);
+34                         ii = fcont.index("</A>",ii); // find start of content
+35                         if (ii>=0) {
+36                                 BigRegex en("[<]!--[    ]+@"+RX_Search_Safe(nid)+"@[    ]+\\([^>]*\\)--[>]");
+37                                 _BIGSTRING_ITERATOR iii = fcont.index(en,ii); // get end marker
+38                                 if (iii>=0) {
+39                                         String cstr, istr, lstr, sstr;
+40                                         if (en.sublen(1)>0) { // extract possible qualifying and quantifying information
+41                                                 String qqinfo = fcont.at(en.subpos(1),en.sublen(1));
+42                                                 const BigRegex qqi("@CONTEXT:[  ]*\\([^@]*\\)@[         ]*@IMP:[        ]*\\([^@]*\\)@[         ]*@LEN:[        ]*\\([^@]*\\)@[         ]*@SECTION:[    ]*\\([^@]*\\)@");
+43                                                 if (qqinfo.index(qqi)>=0) {
+44                                                         cstr = qqinfo.at(qqi.subpos(1),qqi.sublen(1));
+45                                                         istr = qqinfo.at(qqi.subpos(2),qqi.sublen(2));
+46                                                         lstr = qqinfo.at(qqi.subpos(3),qqi.sublen(3));
+47                                                         sstr = qqinfo.at(qqi.subpos(4),qqi.sublen(4));
+48                                                 }
+49                                         }
+50                                         String ncont;
+51                                         ncont = fcont.at(ii+4,iii-(ii+4)); // get content
+52                                         ncont.gsub(BigRegex("[<][^>]*[>]"),""); // clean up content
+53                                         String fshortname = fname.after("/",-1);
+54                                         if (fshortname == "") fshortname = fname;
+55                                         ostr << "<LI>" << ncont << " [<A HREF=\"" << relurl(paperplanurl,fname) << '#' << nid << "\">" << fshortname << '#' << nid << "</A>]<BR>\n"; // return content
+56 //*** selection criteria suggestions can be automatically generated (see DIL#20000310091924.1)
+57                                         ostr << "(<B>Context</B>: " << cstr << ", <B>Importance</B>: " << istr << ", <B>Length</B>: " << lstr << ", <B>Section</B>: " << sstr << ")\n"; // add selection criteria
+58                                 }
+59                         }
+60                 }
+61         } // else may already have HREF reference to paper in which it is included
+62         return true;
+63 }
+\end{verbatim}\normalsize 
+\index{tlfilter.cc@{tlfilter.cc}!filter_TL_by_AL@{filter\_\-TL\_\-by\_\-AL}}
+\index{filter_TL_by_AL@{filter\_\-TL\_\-by\_\-AL}!tlfilter.cc@{tlfilter.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool filter\_\-TL\_\-by\_\-AL ()}\label{tlfilter_8cc_a0}
+
+
+
+
+Definition at line 6 of file tlfilter.cc.
+
+
+
+\footnotesize\begin{verbatim}6                        {
+7 }
+\end{verbatim}\normalsize 
+\index{tlfilter.cc@{tlfilter.cc}!generate_TL_keyword_index@{generate\_\-TL\_\-keyword\_\-index}}
+\index{generate_TL_keyword_index@{generate\_\-TL\_\-keyword\_\-index}!tlfilter.cc@{tlfilter.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool generate\_\-TL\_\-keyword\_\-index ()}\label{tlfilter_8cc_a1}
+
+
+
+
+Definition at line 9 of file tlfilter.cc.
+
+
+
+\footnotesize\begin{verbatim}9                                  {
+10 // keywords can be created with a special tag that you insert anywhere
+11 // in a task log entry, or anywhere in HTML or TeX documents or source code or
+12 // plain text, plus in the dil2al configuration file
+13 }
+\end{verbatim}\normalsize 
+\index{tlfilter.cc@{tlfilter.cc}!search_TL@{search\_\-TL}}
+\index{search_TL@{search\_\-TL}!tlfilter.cc@{tlfilter.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool search\_\-TL ({\bf String} {\em searchstr})}\label{tlfilter_8cc_a2}
+
+
+
+
+Definition at line 15 of file tlfilter.cc.
+
+
+
+\footnotesize\begin{verbatim}15                                  {
+16 // searchstr is a regexp
+17 }
+\end{verbatim}\normalsize 

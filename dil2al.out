@@ -1,0 +1,49 @@
+PARs: ................................
+DILs: #######################
+AL request initiated with settings generatealtcs=0 and generatealmaxt=0
+Distributing task chunks per DIL entry over 2352 AL task chunks
+DEs : dil2al: Warning - Target Date of DIL entry 20000907145814.1 precedes current time
+dil2al: Warning - Target Date of DIL entry 20000907203148.1 precedes current time
+dil2al: Warning - Target Date of DIL entry 20000906131600.1 precedes current time
+AVTD=969570000daydate=969508800 avail=24
+>AVTD=969570000daydate=969508800 avail=12
+Expanded for DIL entry #20000919122208.1
+AVTD=969570000daydate=969508800 avail=0
+ daystart=21600 tdiff=39600 tcseconds=1200
+REQ=18, al.avilable=0
+AVTD=969570000daydate=969508800 avail=0
+ daystart=21600 tdiff=39600 tcseconds=1200
+Expanded for DIL entry #20000919123033.1
+DIL entry #20000919123033.1 tasks cannot be completed before 200009211700
+AVTD=969570000daydate=969508800 avail=0
+Expanded for DIL entry #20000919124826.1
+DIL entry #20000919124826.1 tasks cannot be completed before 200009211700
+No task chunks available for DIL entry #20000919124826.1 before target date 200009211700
+AVTD=969595200daydate=969508800 avail=0
+AVTD=969595200daydate=969595200 avail=24
+Expanded for DIL entry #20000905203940.1
+DIL entry #20000905203940.1 tasks cannot be completed before 200009220000
+AVTD=969595200daydate=969508800 avail=20
+AVTD=969595200daydate=969595200 avail=24
+Expanded for DIL entry #20000919125451.1
+DIL entry #20000919125451.1 tasks cannot be completed before 200009220000
+AVTD=969595200daydate=969508800 avail=0
+AVTD=969595200daydate=969595200 avail=24
+Expanded for DIL entry #20000919130038.1
+DIL entry #20000919130038.1 tasks cannot be completed before 200009220000
+No task chunks available for DIL entry #20000919130038.1 before target date 200009220000
+AVTD=969595200daydate=969508800 avail=0
+AVTD=969595200daydate=969595200 avail=24
+Expanded for DIL entry #20000919130237.1
+DIL entry #20000919130237.1 tasks cannot be completed before 200009220000
+No task chunks available for DIL entry #20000919130237.1 before target date 200009220000
+AVTD=969822120daydate=969508800 avail=0
+AVTD=969822120daydate=969595200 avail=24
+AVTD=969822120daydate=969681600 avail=24
+AVTD=969822120daydate=969768000 avail=24
+STOPPED AT 19991221140514.1
+
+      ++
+      """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Old AL Focused file moved to /home/randalk/doc/html/lists/active-list.all.html.20000921.bak
+Old AL Wide file moved to /home/randalk/doc/html/lists/active-list.all.wide.html.20000921.bak

@@ -1,0 +1,5 @@
+It seems like the error may be due to String S being protected in
+SubString. Another SubString object can't directly access S. It would
+have to be made available through an inline function such as:
+String & _S() { return S; }
+There may be other issues (as well) of course.

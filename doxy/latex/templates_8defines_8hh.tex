@@ -1,0 +1,344 @@
+\section{templates.defines.hh File Reference}
+\label{templates_8defines_8hh}\index{templates.defines.hh@{templates.defines.hh}}
+\subsection*{Compounds}
+\begin{CompactItemize}
+\item 
+class {\bf PLLType}
+\item 
+class {\bf PLLType}
+\end{CompactItemize}
+\subsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define {\bf Protected\_\-Linked\_\-List\_\-Class}({\bf PLLType})
+\item 
+\#define {\bf Protected\_\-Linked\_\-List\_\-functions}({\bf PLLType})
+\item 
+\#define {\bf Protected\_\-Linked\_\-List\_\-Indexed\_\-Access}({\bf PLLType}, Here, There)
+\item 
+\#define {\bf PLL\_\-LOOP\_\-FORWARD}({\bf PLLType}, Init\_\-El, Extra\_\-Test)\ for ({\bf PLLType} $\ast$ e = Init\_\-El; ((e) \&\& (Extra\_\-Test)); e = e $\rightarrow$ Next())
+\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+{\bf if} ({\bf pllprev}) {\bf pllprev} $\rightarrow$ {\bf pllnext}=NULL
+\item 
+{\bf succ} {\bf set\_\-root} (this)
+\item 
+bool PLL\_\- {\bf if} ({\bf pred}.head()) return {\bf false}
+\item 
+{\bf pred} {\bf set\_\-root} ({\bf pred} $\rightarrow$ head())
+\item 
+{\bf PLLType} $\ast$PLL\_\- {\bf if} (!pllroot)
+\item 
+PLLRoot\_\- {\bf unlink\_\-before} (t)
+\item 
+{\bf unlink\_\-after} (r)
+\item 
+h {\bf link\_\-before} (t)
+\item 
+{\bf if} (n $>$0)
+\item 
+{\bf if} ({\bf pred} $\rightarrow$ Root()!=this) return link\_\-before(inshead)
+\item 
+PLLRoot\_\- {\bf pred} {\bf unlink\_\-after} (h)
+\item 
+{\bf link\_\-after} (\&h)
+\item 
+bool {\bf insert\_\-after} (int n, {\bf PLLType} $\ast$inshead)
+\item 
+return {\bf insert\_\-after} ({\bf pred}, inshead)
+\item 
+bool {\bf insert\_\-before} ({\bf PLLType} $\ast${\bf succ}, {\bf PLLType} $\ast$inshead)
+\item 
+{\bf if} ({\bf succ} $\rightarrow$ Root()!=this) return link\_\-after(inshead)
+\item 
+{\bf link\_\-before} (\&t)
+\item 
+bool {\bf insert\_\-before} (int n, {\bf PLLType} $\ast$inshead)
+\item 
+return {\bf insert\_\-before} ({\bf succ}, inshead)
+\end{CompactItemize}
+\subsection*{Variables}
+\begin{CompactItemize}
+\item 
+PLLRoot\_\- {\bf PLLType}
+\item 
+PLLRoot\_\- {\bf PLLType} {\bf false}
+\item 
+{\bf succ} {\bf pllhead} = this
+\item 
+else {\bf succ} {\bf plltail} = seek\_\-tail()
+\item 
+{\bf pllprev} = NULL
+\item 
+return {\bf true}
+\item 
+{\bf pllnext} = NULL
+\item 
+bool {\bf res} = h.link\_\-before(inshead)
+\item 
+{\bf PLLType} $\ast$ {\bf pred} = el(n)
+\item 
+{\bf PLLType} $\ast$ {\bf succ} = el(n)
+\end{CompactItemize}
+
+
+\subsection{Define Documentation}
+\index{templates.defines.hh@{templates.defines.hh}!PLL_LOOP_FORWARD@{PLL\_\-LOOP\_\-FORWARD}}
+\index{PLL_LOOP_FORWARD@{PLL\_\-LOOP\_\-FORWARD}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define PLL\_\-LOOP\_\-FORWARD({\bf PLLType}, Init\_\-El, Extra\_\-Test)\ for ({\bf PLLType} $\ast$ e = Init\_\-El; ((e) \&\& (Extra\_\-Test)); e = e $\rightarrow$ Next())}\label{templates_8defines_8hh_a3}
+
+
+
+
+Definition at line 294 of file templates.defines.hh.\index{templates.defines.hh@{templates.defines.hh}!Protected_Linked_List_Class@{Protected\_\-Linked\_\-List\_\-Class}}
+\index{Protected_Linked_List_Class@{Protected\_\-Linked\_\-List\_\-Class}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define Protected\_\-Linked\_\-List\_\-Class({\bf PLLType})}\label{templates_8defines_8hh_a0}
+
+
+\index{templates.defines.hh@{templates.defines.hh}!Protected_Linked_List_functions@{Protected\_\-Linked\_\-List\_\-functions}}
+\index{Protected_Linked_List_functions@{Protected\_\-Linked\_\-List\_\-functions}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define Protected\_\-Linked\_\-List\_\-functions({\bf PLLType})}\label{templates_8defines_8hh_a1}
+
+
+\index{templates.defines.hh@{templates.defines.hh}!Protected_Linked_List_Indexed_Access@{Protected\_\-Linked\_\-List\_\-Indexed\_\-Access}}
+\index{Protected_Linked_List_Indexed_Access@{Protected\_\-Linked\_\-List\_\-Indexed\_\-Access}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define Protected\_\-Linked\_\-List\_\-Indexed\_\-Access({\bf PLLType}, Here, There)}\label{templates_8defines_8hh_a2}
+
+
+{\bf Value:}
+
+\footnotesize\begin{verbatim}if (!n) return Here; \
+        if (PLLType * e = el(n)) return e->There; else return NULL \\end{verbatim}\normalsize 
+
+
+Definition at line 288 of file templates.defines.hh.
+
+\subsection{Function Documentation}
+\index{templates.defines.hh@{templates.defines.hh}!if@{if}}
+\index{if@{if}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}if ({\bf succ}-, Root()! = this)}\label{templates_8defines_8hh_a29}
+
+
+\index{templates.defines.hh@{templates.defines.hh}!if@{if}}
+\index{if@{if}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}if ({\bf pred}-, Root()! = this)}\label{templates_8defines_8hh_a23}
+
+
+\index{templates.defines.hh@{templates.defines.hh}!if@{if}}
+\index{if@{if}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}if (n, 0)}\label{templates_8defines_8hh_a22}
+
+
+
+
+Definition at line 155 of file templates.defines.hh.
+
+References pllnext.
+
+
+
+\footnotesize\begin{verbatim}155                          { 
+156                         if (pllnext) return pllnext->el(n-1); 
+157                         else return NULL; 
+158                 } else { 
+\end{verbatim}\normalsize 
+\index{templates.defines.hh@{templates.defines.hh}!if@{if}}
+\index{if@{if}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}if (! {\em succ})\hspace{0.3cm}{\tt  [inline]}}\label{templates_8defines_8hh_a18}
+
+
+
+
+Definition at line 140 of file templates.defines.hh.
+
+References pllnext, and pllprev.
+
+
+
+\footnotesize\begin{verbatim}140                               { 
+141                         pllprev->pllnext = pllnext; 
+142                         pllnext->pllprev = pllprev; 
+143                         PLLType * pn = pllnext; 
+144                         delete this; 
+145                         return pn; 
+146                 } 
+\end{verbatim}\normalsize 
+\index{templates.defines.hh@{templates.defines.hh}!if@{if}}
+\index{if@{if}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool PLL\_\- if ({\bf pred}.head())\hspace{0.3cm}{\tt  [inline]}}\label{templates_8defines_8hh_a16}
+
+
+\index{templates.defines.hh@{templates.defines.hh}!if@{if}}
+\index{if@{if}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}if ({\bf pllprev})}\label{templates_8defines_8hh_a14}
+
+
+
+
+Definition at line 112 of file templates.defines.hh.
+
+References PLLType$<$ PLLType $>$::pllhead, PLLType$<$ PLLType $>$::pllprev, PLLType$<$ PLLType $>$::plltail, succ, and PLLType$<$ PLLType $>$::tail().
+
+
+
+\footnotesize\begin{verbatim}112                              { 
+113                         succ.plltail = pllroot->tail(); 
+114                         pllroot->plltail = pllprev; 
+115                         if (!pllprev) pllroot->pllhead = NULL; 
+116                 } else succ.plltail = seek_tail(); 
+\end{verbatim}\normalsize 
+\index{templates.defines.hh@{templates.defines.hh}!insert_after@{insert\_\-after}}
+\index{insert_after@{insert\_\-after}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}return insert\_\-after ({\bf pred}, inshead)}\label{templates_8defines_8hh_a27}
+
+
+\index{templates.defines.hh@{templates.defines.hh}!insert_after@{insert\_\-after}}
+\index{insert_after@{insert\_\-after}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool insert\_\-after (int {\em n}, {\bf PLLType} $\ast$ {\em inshead})\hspace{0.3cm}{\tt  [inline]}}\label{templates_8defines_8hh_a26}
+
+
+\index{templates.defines.hh@{templates.defines.hh}!insert_before@{insert\_\-before}}
+\index{insert_before@{insert\_\-before}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}return insert\_\-before ({\bf succ}, inshead)}\label{templates_8defines_8hh_a32}
+
+
+\index{templates.defines.hh@{templates.defines.hh}!insert_before@{insert\_\-before}}
+\index{insert_before@{insert\_\-before}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool insert\_\-before (int {\em n}, {\bf PLLType} $\ast$ {\em inshead})\hspace{0.3cm}{\tt  [inline]}}\label{templates_8defines_8hh_a31}
+
+
+\index{templates.defines.hh@{templates.defines.hh}!insert_before@{insert\_\-before}}
+\index{insert_before@{insert\_\-before}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool insert\_\-before ({\bf PLLType} $\ast$ {\em succ}, {\bf PLLType} $\ast$ {\em inshead})\hspace{0.3cm}{\tt  [inline]}}\label{templates_8defines_8hh_a28}
+
+
+\index{templates.defines.hh@{templates.defines.hh}!link_after@{link\_\-after}}
+\index{link_after@{link\_\-after}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}link\_\-after (\& {\em h})}\label{templates_8defines_8hh_a25}
+
+
+\index{templates.defines.hh@{templates.defines.hh}!link_before@{link\_\-before}}
+\index{link_before@{link\_\-before}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}link\_\-before (\& {\em t})}\label{templates_8defines_8hh_a30}
+
+
+\index{templates.defines.hh@{templates.defines.hh}!link_before@{link\_\-before}}
+\index{link_before@{link\_\-before}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}h link\_\-before (t)}\label{templates_8defines_8hh_a21}
+
+
+\index{templates.defines.hh@{templates.defines.hh}!set_root@{set\_\-root}}
+\index{set_root@{set\_\-root}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf pred} set\_\-root ({\bf pred}-, head())}\label{templates_8defines_8hh_a17}
+
+
+\index{templates.defines.hh@{templates.defines.hh}!set_root@{set\_\-root}}
+\index{set_root@{set\_\-root}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf succ} set\_\-root (this)}\label{templates_8defines_8hh_a15}
+
+
+\index{templates.defines.hh@{templates.defines.hh}!unlink_after@{unlink\_\-after}}
+\index{unlink_after@{unlink\_\-after}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}PLLRoot\_\- {\bf pred} unlink\_\-after (h)}\label{templates_8defines_8hh_a24}
+
+
+\index{templates.defines.hh@{templates.defines.hh}!unlink_after@{unlink\_\-after}}
+\index{unlink_after@{unlink\_\-after}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}unlink\_\-after (r)}\label{templates_8defines_8hh_a20}
+
+
+\index{templates.defines.hh@{templates.defines.hh}!unlink_before@{unlink\_\-before}}
+\index{unlink_before@{unlink\_\-before}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}PLLRoot\_\- {\bf succ} unlink\_\-before (t)}\label{templates_8defines_8hh_a19}
+
+
+
+
+\subsection{Variable Documentation}
+\index{templates.defines.hh@{templates.defines.hh}!false@{false}}
+\index{false@{false}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}class PLLRoot\_\- {\bf PLLType}  false}\label{templates_8defines_8hh_a5}
+
+
+
+
+Referenced by AL\_\-Day::AL\_\-Day(), Financial\_\-Note::Financial\_\-Note(), Target\_\-Access::Target\_\-Access(), and Topical\_\-DIL\_\-Files::Topical\_\-DIL\_\-Files().\index{templates.defines.hh@{templates.defines.hh}!pllhead@{pllhead}}
+\index{pllhead@{pllhead}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}else {\bf pred} pllhead = this}\label{templates_8defines_8hh_a6}
+
+
+
+
+Definition at line 132 of file templates.defines.hh.
+
+Referenced by update().\index{templates.defines.hh@{templates.defines.hh}!pllnext@{pllnext}}
+\index{pllnext@{pllnext}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}return pllnext = NULL}\label{templates_8defines_8hh_a10}
+
+
+
+
+Definition at line 151 of file templates.defines.hh.
+
+Referenced by if().\index{templates.defines.hh@{templates.defines.hh}!pllprev@{pllprev}}
+\index{pllprev@{pllprev}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}pllprev = NULL}\label{templates_8defines_8hh_a8}
+
+
+
+
+Definition at line 117 of file templates.defines.hh.
+
+Referenced by if().\index{templates.defines.hh@{templates.defines.hh}!plltail@{plltail}}
+\index{plltail@{plltail}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf pred} plltail = seek\_\-tail()}\label{templates_8defines_8hh_a7}
+
+
+
+
+Definition at line 127 of file templates.defines.hh.
+
+Referenced by if(), and update().\index{templates.defines.hh@{templates.defines.hh}!PLLType@{PLLType}}
+\index{PLLType@{PLLType}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}class PLLRoot\_\- PLLType}\label{templates_8defines_8hh_a4}
+
+
+
+
+Definition at line 49 of file templates.defines.hh.\index{templates.defines.hh@{templates.defines.hh}!pred@{pred}}
+\index{pred@{pred}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf PLLType}$\ast$ pred = el(n)}\label{templates_8defines_8hh_a12}
+
+
+
+
+Definition at line 265 of file templates.defines.hh.
+
+Referenced by PLLRoot$<$ PLLType $>$::insert\_\-after(), PLLRoot$<$ PLLType $>$::link\_\-after(), and PLLHandle$<$ PLLType $>$::unlink\_\-after().\index{templates.defines.hh@{templates.defines.hh}!res@{res}}
+\index{res@{res}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}return res = h.link\_\-before(inshead)}\label{templates_8defines_8hh_a11}
+
+
+
+
+Definition at line 277 of file templates.defines.hh.
+
+Referenced by add\_\-new\_\-to\_\-DIL(), Big\-Regex::Big\-Regex(), cmdline\_\-extract\_\-paper\_\-novelties(), generate\_\-AL\_\-full\_\-entry(), generate\_\-Figures\_\-Directory\_\-entry(), generate\_\-tag(), get\_\-active\_\-DIL\_\-IDs(), get\_\-TL\_\-head(), HTML\_\-marker\_\-arguments(), Search\_\-Result::HTML\_\-put\_\-text(), HTML\_\-remove\_\-comments(), PLLRoot$<$ PLLType $>$::insert\_\-after(), PLLRoot$<$ PLLType $>$::insert\_\-before(), make\_\-note(), Big\-Regex::match(), modify\_\-DIL\_\-entry\_\-target\_\-date(), modify\_\-DIL\_\-group\_\-target\_\-dates(), Quick\_\-String\_\-Hash::nodes(), process\_\-note(), process\_\-note\_\-CC(), process\_\-note\_\-generic(), process\_\-note\_\-HTML(), process\_\-note\_\-Te\-X(), process\_\-note\_\-TL(), Financial\_\-Monthly\_\-Root::put\_\-results(), Detailed\_\-Items\_\-List::Read\_\-from\_\-Binary\_\-Cache(), Detailed\_\-Items\_\-List::Read\_\-Topical\_\-from\_\-Binary\_\-Cache(), search(), Search\_\-Target::search(), Big\-Regex::search(), search\_\-cmd(), search\_\-output(), Quick\_\-String\_\-Hash::size(), superior\_\-reference\_\-info(), Detailed\_\-Items\_\-List::Write\_\-to\_\-Binary\_\-Cache(), and Detailed\_\-Items\_\-List::Write\_\-Topical\_\-to\_\-Binary\_\-Cache().\index{templates.defines.hh@{templates.defines.hh}!succ@{succ}}
+\index{succ@{succ}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf PLLType}$\ast$ succ = el(n)}\label{templates_8defines_8hh_a13}
+
+
+
+
+Definition at line 282 of file templates.defines.hh.
+
+Referenced by if(), PLLRoot$<$ PLLType $>$::insert\_\-before(), PLLRoot$<$ PLLType $>$::link\_\-before(), and PLLHandle$<$ PLLType $>$::unlink\_\-before().\index{templates.defines.hh@{templates.defines.hh}!true@{true}}
+\index{true@{true}!templates.defines.hh@{templates.defines.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}return true}\label{templates_8defines_8hh_a9}
+
+
+
+
+Definition at line 135 of file templates.defines.hh.

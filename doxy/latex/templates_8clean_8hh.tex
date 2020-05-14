@@ -1,0 +1,47 @@
+\section{templates.clean.hh File Reference}
+\label{templates_8clean_8hh}\index{templates.clean.hh@{templates.clean.hh}}
+\subsection*{Compounds}
+\begin{CompactItemize}
+\item 
+class {\bf PLLHandle}
+\item 
+class {\bf PLLRoot}
+\end{CompactItemize}
+\subsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define {\bf Protected\_\-Linked\_\-List\_\-Indexed\_\-Access}({\bf PLLType}, Here, There)
+\item 
+\#define {\bf PLL\_\-LOOP\_\-FORWARD}({\bf PLLType}, Init\_\-El, Extra\_\-Test)\ for ({\bf PLLType} $\ast$ e = Init\_\-El; ((e) \&\& (Extra\_\-Test)); e = e $\rightarrow$ Next())
+\item 
+\#define {\bf PLL\_\-LOOP\_\-FORWARD\_\-NESTED}({\bf PLLType}, Init\_\-El, Extra\_\-Test, Ref\-Var)\ for ({\bf PLLType} $\ast$ Ref\-Var = Init\_\-El; ((Ref\-Var) \&\& (Extra\_\-Test)); Ref\-Var = Ref\-Var $\rightarrow$ Next())
+\end{CompactItemize}
+
+
+\subsection{Define Documentation}
+\index{templates.clean.hh@{templates.clean.hh}!PLL_LOOP_FORWARD@{PLL\_\-LOOP\_\-FORWARD}}
+\index{PLL_LOOP_FORWARD@{PLL\_\-LOOP\_\-FORWARD}!templates.clean.hh@{templates.clean.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define PLL\_\-LOOP\_\-FORWARD({\bf PLLType}, Init\_\-El, Extra\_\-Test)\ for ({\bf PLLType} $\ast$ e = Init\_\-El; ((e) \&\& (Extra\_\-Test)); e = e $\rightarrow$ Next())}\label{templates_8clean_8hh_a1}
+
+
+
+
+Definition at line 342 of file templates.clean.hh.\index{templates.clean.hh@{templates.clean.hh}!PLL_LOOP_FORWARD_NESTED@{PLL\_\-LOOP\_\-FORWARD\_\-NESTED}}
+\index{PLL_LOOP_FORWARD_NESTED@{PLL\_\-LOOP\_\-FORWARD\_\-NESTED}!templates.clean.hh@{templates.clean.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define PLL\_\-LOOP\_\-FORWARD\_\-NESTED({\bf PLLType}, Init\_\-El, Extra\_\-Test, Ref\-Var)\ for ({\bf PLLType} $\ast$ Ref\-Var = Init\_\-El; ((Ref\-Var) \&\& (Extra\_\-Test)); Ref\-Var = Ref\-Var $\rightarrow$ Next())}\label{templates_8clean_8hh_a2}
+
+
+
+
+Definition at line 349 of file templates.clean.hh.\index{templates.clean.hh@{templates.clean.hh}!Protected_Linked_List_Indexed_Access@{Protected\_\-Linked\_\-List\_\-Indexed\_\-Access}}
+\index{Protected_Linked_List_Indexed_Access@{Protected\_\-Linked\_\-List\_\-Indexed\_\-Access}!templates.clean.hh@{templates.clean.hh}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define Protected\_\-Linked\_\-List\_\-Indexed\_\-Access({\bf PLLType}, Here, There)}\label{templates_8clean_8hh_a0}
+
+
+{\bf Value:}
+
+\footnotesize\begin{verbatim}if (!n) return Here; \
+        if (PLLType * e = el(n)) return e->There; else return NULL \\end{verbatim}\normalsize 
+
+
+Definition at line 335 of file templates.clean.hh.

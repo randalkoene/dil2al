@@ -1,0 +1,1 @@
+g++  -O3 -felide-constructors -fnonnull-objects  -D__DIL2AL__ -D_ALT_REGEX_H=\"regex-gnu.h\" -D_USE_ALT_REGEX -D_CPP_REGEX -D_BIGREGEX_SAFE_MATCHES -I/opt/FSFlibg++/lib/g++-include -I/home/randalk/src/include  -c dil2al.cc -o dil2al.o

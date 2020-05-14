@@ -1,0 +1,395 @@
+\section{String\-List  Class Reference}
+\label{classStringList}\index{StringList@{String\-List}}
+{\tt \#include $<$dil2al.hh$>$}
+
+\subsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf $\sim$String\-List} ()
+\item 
+{\bf String\-List} ()
+\item 
+{\bf String\-List} (unsigned long n)
+\item 
+{\bf String\-List} (const {\bf String} cs, String\-List $\ast$cn=NULL)
+\item 
+{\bf String\-List} ({\bf String} cs, const char sep)
+\item 
+{\bf String} \& {\bf operator[$\,$]} (unsigned long n)
+\item 
+String\-List $\ast$ {\bf get\_\-Next} ()
+\item 
+String\-List $\ast$ {\bf List\_\-Index} (long n)
+\item 
+void {\bf append} (unsigned long n, {\bf String} \&ins)
+\item 
+void {\bf insert} (unsigned long n, {\bf String} \&ins)
+\item 
+unsigned long {\bf length} ()
+\item 
+long {\bf iselement} ({\bf String} el, unsigned long n=0)
+\item 
+long {\bf contains} ({\bf String} substr, unsigned long n=0)
+\item 
+long {\bf first\_\-contained\_\-in} ({\bf String} \&sourcestr, unsigned long n=0)
+\item 
+unsigned long {\bf split} (unsigned long n, {\bf String} cs, const char sep='$\backslash$n')
+\item 
+{\bf String} {\bf concatenate} ({\bf String} sepstr=\char`\"{}\char`\"{})
+\end{CompactItemize}
+\subsection*{Protected Attributes}
+\begin{CompactItemize}
+\item 
+String\-List $\ast$ {\bf Next}
+\item 
+{\bf String} {\bf s}
+\end{CompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{StringList@{String\-List}!~StringList@{$\sim$StringList}}
+\index{~StringList@{$\sim$StringList}!StringList@{String\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String\-List::$\sim$String\-List ()\hspace{0.3cm}{\tt  [inline]}}\label{classStringList_a0}
+
+
+
+
+Definition at line 100 of file dil2al.hh.
+
+
+
+\footnotesize\begin{verbatim}100 { if (Next) delete Next; }
+\end{verbatim}\normalsize 
+\index{StringList@{String\-List}!StringList@{StringList}}
+\index{StringList@{StringList}!StringList@{String\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String\-List::String\-List ()\hspace{0.3cm}{\tt  [inline]}}\label{classStringList_a1}
+
+
+
+
+Definition at line 101 of file dil2al.hh.
+
+Referenced by append(), insert(), operator[$\,$](), and String\-List().
+
+
+
+\footnotesize\begin{verbatim}101 { Next=NULL; }
+\end{verbatim}\normalsize 
+\index{StringList@{String\-List}!StringList@{StringList}}
+\index{StringList@{StringList}!StringList@{String\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String\-List::String\-List (unsigned long {\em n})\hspace{0.3cm}{\tt  [inline]}}\label{classStringList_a2}
+
+
+
+
+Definition at line 102 of file dil2al.hh.
+
+References String\-List().
+
+
+
+\footnotesize\begin{verbatim}102 { if (n) Next = new StringList(n-1); else Next = NULL; }
+\end{verbatim}\normalsize 
+\index{StringList@{String\-List}!StringList@{StringList}}
+\index{StringList@{StringList}!StringList@{String\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String\-List::String\-List (const {\bf String} {\em cs}, String\-List $\ast$ {\em cn} = NULL)\hspace{0.3cm}{\tt  [inline]}}\label{classStringList_a3}
+
+
+
+
+Definition at line 103 of file dil2al.hh.
+
+
+
+\footnotesize\begin{verbatim}103 { s=cs; Next=cn; }
+\end{verbatim}\normalsize 
+\index{StringList@{String\-List}!StringList@{StringList}}
+\index{StringList@{StringList}!StringList@{String\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String\-List::String\-List ({\bf String} {\em cs}, const char {\em sep})}\label{classStringList_a4}
+
+
+
+
+Definition at line 29 of file utilities.cc.
+
+References Next, and split().
+
+
+
+\footnotesize\begin{verbatim}29                                                 {
+30 // initialize list from a string with a specified separator
+31 // (Note: In the current implementation this leaves an unused
+32 // list element at the end of the list.
+33 // Beware! If you fix this to leave no unused list element at
+34 // the end of the list you must check all source code where
+35 // this initialization function is used to insure that the
+36 // code is modified so as not to depend on this "feature"!)
+37         Next=NULL;
+38         split(0,cs,sep);
+39 }
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Function Documentation}
+\index{StringList@{String\-List}!append@{append}}
+\index{append@{append}!StringList@{String\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void String\-List::append (unsigned long {\em n}, {\bf String} \& {\em ins})}\label{classStringList_a8}
+
+
+
+
+Definition at line 54 of file utilities.cc.
+
+References Next, and String\-List().
+
+
+
+\footnotesize\begin{verbatim}54                                                      {
+55         if (!n) Next = new StringList(ins,Next);
+56         else
+57                 if (Next) Next->append(n-1,ins);
+58                 else {
+59                         Next = new StringList();
+60                         Next->append(n-1,ins);
+61                 }
+62 }
+\end{verbatim}\normalsize 
+\index{StringList@{String\-List}!concatenate@{concatenate}}
+\index{concatenate@{concatenate}!StringList@{String\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} String\-List::concatenate ({\bf String} {\em sepstr} = \char`\"{}\char`\"{})}\label{classStringList_a15}
+
+
+
+
+Definition at line 110 of file utilities.cc.
+
+References Next, and s.
+
+Referenced by extract\_\-DIL\_\-IDs\_\-from\_\-form(), extract\_\-hierarchy\_\-depth\_\-increase\_\-to\_\-paper(), extract\_\-recursively(), and extract\_\-required\_\-item\_\-to\_\-paper().
+
+
+
+\footnotesize\begin{verbatim}110                                                  {
+111         if (Next) return s+sepstr+Next->concatenate(sepstr);
+112         else return s;
+113 }
+\end{verbatim}\normalsize 
+\index{StringList@{String\-List}!contains@{contains}}
+\index{contains@{contains}!StringList@{String\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}long String\-List::contains ({\bf String} {\em substr}, unsigned long {\em n} = 0)}\label{classStringList_a12}
+
+
+
+
+Definition at line 83 of file utilities.cc.
+
+References String::contains(), Next, and s.
+
+Referenced by Detect\_\-Form\_\-Input(), modify\_\-element\_\-through\_\-FORM\_\-interface(), modify\_\-element\_\-through\_\-FORM\_\-interface\_\-DIL\_\-Superiors(), search\_\-cmd(), and select\_\-TL\_\-DIL\_\-refs().
+
+
+
+\footnotesize\begin{verbatim}83                                                             {
+84         if (s.contains(substr)) return n;
+85         else {
+86                 if (Next) return Next->contains(substr,n+1);
+87                 else return -1;
+88         }
+89 }
+\end{verbatim}\normalsize 
+\index{StringList@{String\-List}!first_contained_in@{first\_\-contained\_\-in}}
+\index{first_contained_in@{first\_\-contained\_\-in}!StringList@{String\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}long String\-List::first\_\-contained\_\-in ({\bf String} \& {\em sourcestr}, unsigned long {\em n} = 0)}\label{classStringList_a13}
+
+
+
+
+Definition at line 91 of file utilities.cc.
+
+References String::contains(), Next, and s.
+
+Referenced by Tabbed\_\-FORM\_\-DIL\_\-Hierarchy\_\-full().
+
+
+
+\footnotesize\begin{verbatim}91                                                                            {
+92   if (sourcestr.contains(s)) return n;
+93   else {
+94     if (Next) return Next->first_contained_in(sourcestr,n+1);
+95     else return -1;
+96   }
+97 }
+\end{verbatim}\normalsize 
+\index{StringList@{String\-List}!get_Next@{get\_\-Next}}
+\index{get_Next@{get\_\-Next}!StringList@{String\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String\-List$\ast$ String\-List::get\_\-Next ()\hspace{0.3cm}{\tt  [inline]}}\label{classStringList_a6}
+
+
+
+
+Definition at line 106 of file dil2al.hh.
+
+Referenced by get\_\-new\_\-DIL\_\-ID(), and modify\_\-element\_\-through\_\-FORM\_\-interface().
+
+
+
+\footnotesize\begin{verbatim}106 { return Next; }
+\end{verbatim}\normalsize 
+\index{StringList@{String\-List}!insert@{insert}}
+\index{insert@{insert}!StringList@{String\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void String\-List::insert (unsigned long {\em n}, {\bf String} \& {\em ins})}\label{classStringList_a9}
+
+
+
+
+Definition at line 64 of file utilities.cc.
+
+References Next, s, and String\-List().
+
+Referenced by add\_\-new\_\-to\_\-DIL(), and split().
+
+
+
+\footnotesize\begin{verbatim}64                                                      {
+65         if (!n) { Next = new StringList(s,Next); s = ins; }
+66         else
+67                 if (Next) Next->insert(n-1,ins);
+68                 else 
+69                         if (n>1) {
+70                                 Next = new StringList();
+71                                 Next->insert(n-1,ins);
+72                         } else Next = new StringList(ins);
+73 }
+\end{verbatim}\normalsize 
+\index{StringList@{String\-List}!iselement@{iselement}}
+\index{iselement@{iselement}!StringList@{String\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}long String\-List::iselement ({\bf String} {\em el}, unsigned long {\em n} = 0)}\label{classStringList_a11}
+
+
+
+
+Definition at line 75 of file utilities.cc.
+
+References Next, and s.
+
+Referenced by extract\_\-hierarchy\_\-depth\_\-increase\_\-to\_\-paper(), extract\_\-paper\_\-plan\_\-to\_\-paper(), Novelty\_\-Marker\_\-List::Get\_\-Context\_\-Ranks(), and get\_\-file\_\-in\_\-list().
+
+
+
+\footnotesize\begin{verbatim}75                                                          {
+76         if (el == s) return n;
+77         else {
+78                 if (Next) return Next->iselement(el,n+1);
+79                 else return -1;
+80         }
+81 }
+\end{verbatim}\normalsize 
+\index{StringList@{String\-List}!length@{length}}
+\index{length@{length}!StringList@{String\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}unsigned long String\-List::length ()\hspace{0.3cm}{\tt  [inline]}}\label{classStringList_a10}
+
+
+
+
+Definition at line 113 of file dil2al.hh.
+
+Referenced by Detect\_\-Form\_\-Input(), extract\_\-paper\_\-plan\_\-to\_\-paper(), generate\_\-modify\_\-element\_\-FORM\_\-interface\_\-DIL\_\-entry\_\-parameters(), Novelty\_\-Marker::Get\_\-Novelty\_\-from\_\-Paper\_\-Plan(), Get\_\-Target\_\-Directory(), Get\_\-Target\_\-Regex(), modify\_\-DIL\_\-group\_\-target\_\-dates\_\-cmd(), modify\_\-element\_\-through\_\-FORM\_\-interface(), search(), split(), superior\_\-reference\_\-info(), Tabbed\_\-FORM\_\-DIL\_\-Hierarchy(), and Tabbed\_\-FORM\_\-DIL\_\-Hierarchy\_\-full().
+
+
+
+\footnotesize\begin{verbatim}113 { if (Next) return 1+Next->length(); else return 1; }
+\end{verbatim}\normalsize 
+\index{StringList@{String\-List}!List_Index@{List\_\-Index}}
+\index{List_Index@{List\_\-Index}!StringList@{String\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String\-List $\ast$ String\-List::List\_\-Index (long {\em n})}\label{classStringList_a7}
+
+
+
+
+Definition at line 47 of file utilities.cc.
+
+References Next.
+
+Referenced by modify\_\-element\_\-through\_\-FORM\_\-interface().
+
+
+
+\footnotesize\begin{verbatim}47                                           {
+48   if (n<0) return NULL;
+49   if (!n) return this;
+50   if (!Next) return NULL;
+51   return Next->List_Index(n-1);
+52 }
+\end{verbatim}\normalsize 
+\index{StringList@{String\-List}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!StringList@{String\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} \& String\-List::operator[$\,$] (unsigned long {\em n})}\label{classStringList_a5}
+
+
+
+
+Definition at line 41 of file utilities.cc.
+
+References Next, s, and String\-List().
+
+
+
+\footnotesize\begin{verbatim}41                                                {
+42         if (!n) return s;
+43         if (!Next) Next = new StringList();
+44         return (*Next)[n-1];
+45 }
+\end{verbatim}\normalsize 
+\index{StringList@{String\-List}!split@{split}}
+\index{split@{split}!StringList@{String\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}unsigned long String\-List::split (unsigned long {\em n}, {\bf String} {\em cs}, const char {\em sep} = '$\backslash$n')}\label{classStringList_a14}
+
+
+
+
+Definition at line 99 of file utilities.cc.
+
+References String::after(), String::before(), String::index(), insert(), length(), and String::length().
+
+Referenced by String\-List().
+
+
+
+\footnotesize\begin{verbatim}99                                                                                  {
+100 // insert list elements from a string with a specified separator
+101         if (cs.length()<=0) return length();
+102         String el;
+103         if (cs.index(sep)>=0) el = cs.before(sep); else el = cs;
+104         // *** this is not a speed optimized implementation
+105         insert(n,el);
+106         split(n+1,cs.after(sep),sep);
+107         return length();
+108 }
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Data Documentation}
+\index{StringList@{String\-List}!Next@{Next}}
+\index{Next@{Next}!StringList@{String\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}String\-List$\ast$ String\-List::Next\hspace{0.3cm}{\tt  [protected]}}\label{classStringList_n0}
+
+
+
+
+Definition at line 97 of file dil2al.hh.
+
+Referenced by append(), concatenate(), contains(), first\_\-contained\_\-in(), insert(), iselement(), List\_\-Index(), operator[$\,$](), and String\-List().\index{StringList@{String\-List}!s@{s}}
+\index{s@{s}!StringList@{String\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} String\-List::s\hspace{0.3cm}{\tt  [protected]}}\label{classStringList_n1}
+
+
+
+
+Definition at line 98 of file dil2al.hh.
+
+Referenced by concatenate(), contains(), first\_\-contained\_\-in(), insert(), iselement(), and operator[$\,$]().
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf dil2al.hh}\item 
+{\bf utilities.cc}\end{CompactItemize}

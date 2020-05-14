@@ -1,0 +1,296 @@
+\section{DIL\_\-entry\_\-parameters  Class Reference}
+\label{classDIL__entry__parameters}\index{DIL_entry_parameters@{DIL\_\-entry\_\-parameters}}
+{\tt \#include $<$dil2al.hh$>$}
+
+\subsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf DIL\_\-entry\_\-parameters} ({\bf DIL\_\-entry} \&e, int loc=-1)
+\item 
+bool {\bf topic\_\-append} ({\bf String} tfile, {\bf String} ttitle, float trelevance)
+\item 
+bool {\bf topic\_\-prepend} ({\bf String} tfile, {\bf String} ttitle, float trelevance)
+\item 
+bool {\bf project\_\-append} ({\bf String} pfile, {\bf String} ptitle, float prelevance, float punbounded, float pbounded, time\_\-t ptargetdate, int ptdprop, float purgency, float ppriority)
+\item 
+bool {\bf project\_\-prepend} ({\bf String} pfile, {\bf String} ptitle, float prelevance, float punbounded, float pbounded, time\_\-t ptargetdate, int ptdprop, float purgency, float ppriority)
+\item 
+int {\bf Orig\-Loc} ()
+\item 
+bool {\bf Write\_\-to\_\-Binary\_\-Cache} (ofstream \&cfl)
+\item 
+bool {\bf Read\_\-from\_\-Binary\_\-Cache} (ifstream \&cfl)
+\item 
+bool {\bf Binary\_\-Cache\_\-Diagnostic} (DIL\_\-entry\_\-parameters $\ast$cached, int \&testedbytes)
+\end{CompactItemize}
+\subsection*{Public Attributes}
+\begin{CompactItemize}
+\item 
+{\bf PLLRoot}$<$ {\bf DIL\_\-Topical\_\-List} $>$ {\bf topics}
+\item 
+{\bf PLLRoot}$<$ {\bf DIL\_\-AL\_\-List} $>$ {\bf projects}
+\end{CompactItemize}
+\subsection*{Protected Attributes}
+\begin{CompactItemize}
+\item 
+{\bf DIL\_\-entry} $\ast$ {\bf entry}
+\item 
+int {\bf origloc}
+\end{CompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{DIL_entry_parameters@{DIL\_\-entry\_\-parameters}!DIL_entry_parameters@{DIL\_\-entry\_\-parameters}}
+\index{DIL_entry_parameters@{DIL\_\-entry\_\-parameters}!DIL_entry_parameters@{DIL\_\-entry\_\-parameters}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}DIL\_\-entry\_\-parameters::DIL\_\-entry\_\-parameters ({\bf DIL\_\-entry} \& {\em e}, int {\em loc} = -1)\hspace{0.3cm}{\tt  [inline]}}\label{classDIL__entry__parameters_a0}
+
+
+
+
+Definition at line 624 of file dil2al.hh.
+
+References origloc.
+
+
+
+\footnotesize\begin{verbatim}624 : entry(&e), origloc(loc) {}
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Function Documentation}
+\index{DIL_entry_parameters@{DIL\_\-entry\_\-parameters}!Binary_Cache_Diagnostic@{Binary\_\-Cache\_\-Diagnostic}}
+\index{Binary_Cache_Diagnostic@{Binary\_\-Cache\_\-Diagnostic}!DIL_entry_parameters@{DIL\_\-entry\_\-parameters}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool DIL\_\-entry\_\-parameters::Binary\_\-Cache\_\-Diagnostic (DIL\_\-entry\_\-parameters $\ast$ {\em cached}, int \& {\em testedbytes})}\label{classDIL__entry__parameters_a8}
+
+
+
+
+Definition at line 892 of file utilities.cc.
+
+References DIL\_\-AL\_\-List::Binary\_\-Cache\_\-Diagnostic(), DIL\_\-Topical\_\-List::Binary\_\-Cache\_\-Diagnostic(), entry, PLLRoot$<$ DIL\_\-AL\_\-List $>$::head(), PLLRoot$<$ DIL\_\-Topical\_\-List $>$::head(), PLLRoot$<$ DIL\_\-AL\_\-List $>$::length(), PLLRoot$<$ DIL\_\-Topical\_\-List $>$::length(), PLLHandle$<$ DIL\_\-AL\_\-List $>$::Next(), PLLHandle$<$ DIL\_\-Topical\_\-List $>$::Next(), origloc, projects, topics, and VOUT.
+
+Referenced by DIL\_\-entry::Binary\_\-Cache\_\-Diagnostic().
+
+
+
+\footnotesize\begin{verbatim}892                                                                                                    {
+893   // test if the quick load cache process works reliably
+894   // this is the original entry_parameters, cached is the one retrieved from the binary cache
+895   //   start of this object test
+896   int localtestedbytes = 0;
+897   if ((*entry)!=(*(cached->entry))) VOUT << "*** DIL_entry_parameters entry mismatch\n"; // testing if DIL_ID==DIL_ID
+898   localtestedbytes += sizeof(entry);
+899   if (origloc!=cached->origloc) VOUT << "*** DIL_entry_parameters origloc mismatch\n";
+900   localtestedbytes += sizeof(origloc);
+901   if (topics.length()!=cached->topics.length()) VOUT << "*** DIL_entry_parameters topics length mismatch, " << topics.length() << " vs. " << cached->topics.length() << '\n';;
+902   localtestedbytes += sizeof(topics);
+903   if (projects.length()!=cached->projects.length()) VOUT << "*** DIL_entry_parameters projects length mismatch, " << projects.length() << " vs. " << cached->projects.length() << '\n';;
+904   localtestedbytes += sizeof(projects);
+905   //   end of this object test
+906   if (localtestedbytes!=sizeof(DIL_entry_parameters)) VOUT << "*** testedbytes!=sizeof(DIL_entry_parameters)\n";
+907   for (DIL_Topical_List * e = topics.head(), * c = cached->topics.head(); ((e) && (c)); e=e->Next(), c=c->Next()) if (!e->Binary_Cache_Diagnostic(c,testedbytes)) return false;
+908   for (DIL_AL_List * e = projects.head(), * c = cached->projects.head(); ((e) && (c)); e=e->Next(), c=c->Next()) if (!e->Binary_Cache_Diagnostic(c,testedbytes)) return false;
+909   testedbytes += localtestedbytes;
+910   return true;
+911 }
+\end{verbatim}\normalsize 
+\index{DIL_entry_parameters@{DIL\_\-entry\_\-parameters}!OrigLoc@{OrigLoc}}
+\index{OrigLoc@{OrigLoc}!DIL_entry_parameters@{DIL\_\-entry\_\-parameters}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int DIL\_\-entry\_\-parameters::Orig\-Loc ()\hspace{0.3cm}{\tt  [inline]}}\label{classDIL__entry__parameters_a5}
+
+
+
+
+Definition at line 637 of file dil2al.hh.
+
+References origloc.
+
+
+
+\footnotesize\begin{verbatim}637 { return origloc; }
+\end{verbatim}\normalsize 
+\index{DIL_entry_parameters@{DIL\_\-entry\_\-parameters}!project_append@{project\_\-append}}
+\index{project_append@{project\_\-append}!DIL_entry_parameters@{DIL\_\-entry\_\-parameters}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool DIL\_\-entry\_\-parameters::project\_\-append ({\bf String} {\em pfile}, {\bf String} {\em ptitle}, float {\em prelevance}, float {\em punbounded}, float {\em pbounded}, time\_\-t {\em ptargetdate}, int {\em ptdprop}, float {\em purgency}, float {\em ppriority})\hspace{0.3cm}{\tt  [inline]}}\label{classDIL__entry__parameters_a3}
+
+
+
+
+Definition at line 631 of file dil2al.hh.
+
+References PLLRoot$<$ PLLType $>$::link\_\-before().
+
+Referenced by Detailed\_\-Items\_\-List::Get\_\-Project\_\-Data(), modify\_\-DIL\_\-entry\_\-target\_\-date(), modify\_\-DIL\_\-group\_\-target\_\-dates(), modify\_\-DIL\_\-group\_\-target\_\-dates\_\-cmd(), and update\_\-DIL\_\-entry\_\-parameter\_\-elements().
+
+
+
+\footnotesize\begin{verbatim}631                                                                                                                                                                          {
+632     return projects.link_before(new DIL_AL_List(*entry,pfile,ptitle,prelevance,punbounded,pbounded,ptargetdate,ptdprop,purgency,ppriority));
+633   }
+\end{verbatim}\normalsize 
+\index{DIL_entry_parameters@{DIL\_\-entry\_\-parameters}!project_prepend@{project\_\-prepend}}
+\index{project_prepend@{project\_\-prepend}!DIL_entry_parameters@{DIL\_\-entry\_\-parameters}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool DIL\_\-entry\_\-parameters::project\_\-prepend ({\bf String} {\em pfile}, {\bf String} {\em ptitle}, float {\em prelevance}, float {\em punbounded}, float {\em pbounded}, time\_\-t {\em ptargetdate}, int {\em ptdprop}, float {\em purgency}, float {\em ppriority})\hspace{0.3cm}{\tt  [inline]}}\label{classDIL__entry__parameters_a4}
+
+
+
+
+Definition at line 634 of file dil2al.hh.
+
+References PLLRoot$<$ PLLType $>$::link\_\-after().
+
+
+
+\footnotesize\begin{verbatim}634                                                                                                                                                                           {
+635     return projects.link_after(new DIL_AL_List(*entry,pfile,ptitle,prelevance,punbounded,pbounded,ptargetdate,ptdprop,purgency,ppriority));
+636   }
+\end{verbatim}\normalsize 
+\index{DIL_entry_parameters@{DIL\_\-entry\_\-parameters}!Read_from_Binary_Cache@{Read\_\-from\_\-Binary\_\-Cache}}
+\index{Read_from_Binary_Cache@{Read\_\-from\_\-Binary\_\-Cache}!DIL_entry_parameters@{DIL\_\-entry\_\-parameters}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool DIL\_\-entry\_\-parameters::Read\_\-from\_\-Binary\_\-Cache (ifstream \& {\em cfl})}\label{classDIL__entry__parameters_a7}
+
+
+
+
+Definition at line 864 of file utilities.cc.
+
+References entry, PLLRoot$<$ DIL\_\-AL\_\-List $>$::link\_\-before(), PLLRoot$<$ DIL\_\-Topical\_\-List $>$::link\_\-before(), origloc, projects, DIL\_\-AL\_\-List::Read\_\-from\_\-Binary\_\-Cache(), DIL\_\-Topical\_\-List::Read\_\-from\_\-Binary\_\-Cache(), READSOMETYPE, topics, and VOUT.
+
+Referenced by DIL\_\-entry::Read\_\-from\_\-Binary\_\-Cache().
+
+
+
+\footnotesize\begin{verbatim}864                                                                 {
+865   // origloc
+866   if ((cfl.read((READSOMETYPE) (&origloc), sizeof(origloc))).gcount()<sizeof(origloc)) return false;
+867   // topics
+868   int numtopics;
+869   if ((cfl.read((READSOMETYPE) (&numtopics), sizeof(numtopics))).gcount()<sizeof(numtopics)) return false;
+870 #ifdef TEST_CACHE_READ
+871   VOUT << "&&& numtopics = " << numtopics << '\n'; cout.flush();
+872 #endif
+873   if (numtopics>0) for (int i = 0; i<numtopics; i++) {
+874     DIL_Topical_List * dtl = new DIL_Topical_List(*entry);
+875     if (!dtl->Read_from_Binary_Cache(cfl)) { delete dtl; return false; }
+876     topics.link_before(dtl);
+877   }
+878   // projects
+879   int numprojects;
+880   if ((cfl.read((READSOMETYPE) (&numprojects), sizeof(numprojects))).gcount()<sizeof(numprojects)) return false;
+881 #ifdef TEST_CACHE_READ
+882   VOUT << "&&& numprojects = " << numtopics << '\n'; cout.flush();
+883 #endif
+884   if (numprojects>0) for (int i = 0; i<numprojects; i++) {
+885     DIL_AL_List * dal = new DIL_AL_List(*entry);
+886     if (!dal->Read_from_Binary_Cache(cfl)) { delete dal; return false; }
+887     projects.link_before(dal);
+888   }
+889   return true;
+890 }
+\end{verbatim}\normalsize 
+\index{DIL_entry_parameters@{DIL\_\-entry\_\-parameters}!topic_append@{topic\_\-append}}
+\index{topic_append@{topic\_\-append}!DIL_entry_parameters@{DIL\_\-entry\_\-parameters}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool DIL\_\-entry\_\-parameters::topic\_\-append ({\bf String} {\em tfile}, {\bf String} {\em ttitle}, float {\em trelevance})\hspace{0.3cm}{\tt  [inline]}}\label{classDIL__entry__parameters_a1}
+
+
+
+
+Definition at line 629 of file dil2al.hh.
+
+References PLLRoot$<$ PLLType $>$::link\_\-before().
+
+Referenced by Detailed\_\-Items\_\-List::Get\_\-All\_\-DIL\_\-ID\_\-File\_\-Parameters().
+
+
+
+\footnotesize\begin{verbatim}629 { return topics.link_before(new DIL_Topical_List(*entry,tfile,ttitle,trelevance)); }
+\end{verbatim}\normalsize 
+\index{DIL_entry_parameters@{DIL\_\-entry\_\-parameters}!topic_prepend@{topic\_\-prepend}}
+\index{topic_prepend@{topic\_\-prepend}!DIL_entry_parameters@{DIL\_\-entry\_\-parameters}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool DIL\_\-entry\_\-parameters::topic\_\-prepend ({\bf String} {\em tfile}, {\bf String} {\em ttitle}, float {\em trelevance})\hspace{0.3cm}{\tt  [inline]}}\label{classDIL__entry__parameters_a2}
+
+
+
+
+Definition at line 630 of file dil2al.hh.
+
+References PLLRoot$<$ PLLType $>$::link\_\-after().
+
+
+
+\footnotesize\begin{verbatim}630 { return topics.link_after(new DIL_Topical_List(*entry,tfile,ttitle,trelevance)); }
+\end{verbatim}\normalsize 
+\index{DIL_entry_parameters@{DIL\_\-entry\_\-parameters}!Write_to_Binary_Cache@{Write\_\-to\_\-Binary\_\-Cache}}
+\index{Write_to_Binary_Cache@{Write\_\-to\_\-Binary\_\-Cache}!DIL_entry_parameters@{DIL\_\-entry\_\-parameters}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool DIL\_\-entry\_\-parameters::Write\_\-to\_\-Binary\_\-Cache (ofstream \& {\em cfl})}\label{classDIL__entry__parameters_a6}
+
+
+
+
+Definition at line 850 of file utilities.cc.
+
+References PLLRoot$<$ DIL\_\-AL\_\-List $>$::head(), PLLRoot$<$ DIL\_\-Topical\_\-List $>$::head(), PLLRoot$<$ DIL\_\-AL\_\-List $>$::length(), PLLRoot$<$ DIL\_\-Topical\_\-List $>$::length(), origloc, PLL\_\-LOOP\_\-FORWARD, projects, and topics.
+
+Referenced by DIL\_\-entry::Write\_\-to\_\-Binary\_\-Cache().
+
+
+
+\footnotesize\begin{verbatim}850                                                                {
+851   // origloc
+852   cfl.write((const void *) (&origloc), sizeof(origloc));
+853   // topics
+854   int numtopics = topics.length();
+855   cfl.write((const void *) (&numtopics), sizeof(numtopics));
+856   if (numtopics>0) PLL_LOOP_FORWARD(DIL_Topical_List,topics.head(),1) if (!e->Write_to_Binary_Cache(cfl)) return false;
+857   // projects
+858   int numprojects = projects.length();
+859   cfl.write((const void *) (&numprojects), sizeof(numprojects));
+860   if (numprojects>0) PLL_LOOP_FORWARD(DIL_AL_List,projects.head(),1) if (!e->Write_to_Binary_Cache(cfl)) return false;
+861   return true;
+862 }
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Data Documentation}
+\index{DIL_entry_parameters@{DIL\_\-entry\_\-parameters}!entry@{entry}}
+\index{entry@{entry}!DIL_entry_parameters@{DIL\_\-entry\_\-parameters}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf DIL\_\-entry}$\ast$ DIL\_\-entry\_\-parameters::entry\hspace{0.3cm}{\tt  [protected]}}\label{classDIL__entry__parameters_n0}
+
+
+
+
+Definition at line 620 of file dil2al.hh.
+
+Referenced by Binary\_\-Cache\_\-Diagnostic(), and Read\_\-from\_\-Binary\_\-Cache().\index{DIL_entry_parameters@{DIL\_\-entry\_\-parameters}!origloc@{origloc}}
+\index{origloc@{origloc}!DIL_entry_parameters@{DIL\_\-entry\_\-parameters}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int DIL\_\-entry\_\-parameters::origloc\hspace{0.3cm}{\tt  [protected]}}\label{classDIL__entry__parameters_n1}
+
+
+
+
+Definition at line 621 of file dil2al.hh.
+
+Referenced by Binary\_\-Cache\_\-Diagnostic(), DIL\_\-entry\_\-parameters(), Orig\-Loc(), Read\_\-from\_\-Binary\_\-Cache(), and Write\_\-to\_\-Binary\_\-Cache().\index{DIL_entry_parameters@{DIL\_\-entry\_\-parameters}!projects@{projects}}
+\index{projects@{projects}!DIL_entry_parameters@{DIL\_\-entry\_\-parameters}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf PLLRoot}$<${\bf DIL\_\-AL\_\-List}$>$ DIL\_\-entry\_\-parameters::projects}\label{classDIL__entry__parameters_m1}
+
+
+
+
+Definition at line 627 of file dil2al.hh.
+
+Referenced by Binary\_\-Cache\_\-Diagnostic(), DIL\_\-entry::Projects(), DIL\_\-entry::Propagated\_\-Target\_\-Date(), Read\_\-from\_\-Binary\_\-Cache(), and Write\_\-to\_\-Binary\_\-Cache().\index{DIL_entry_parameters@{DIL\_\-entry\_\-parameters}!topics@{topics}}
+\index{topics@{topics}!DIL_entry_parameters@{DIL\_\-entry\_\-parameters}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf PLLRoot}$<${\bf DIL\_\-Topical\_\-List}$>$ DIL\_\-entry\_\-parameters::topics}\label{classDIL__entry__parameters_m0}
+
+
+
+
+Definition at line 626 of file dil2al.hh.
+
+Referenced by Binary\_\-Cache\_\-Diagnostic(), Read\_\-from\_\-Binary\_\-Cache(), DIL\_\-entry::Topics(), and Write\_\-to\_\-Binary\_\-Cache().
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf dil2al.hh}\item 
+{\bf utilities.cc}\end{CompactItemize}

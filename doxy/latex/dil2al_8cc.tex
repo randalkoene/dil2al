@@ -1,0 +1,2145 @@
+\section{dil2al.cc File Reference}
+\label{dil2al_8cc}\index{dil2al.cc@{dil2al.cc}}
+{\tt \#include \char`\"{}dil2al.hh\char`\"{}}\par
+\subsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define {\bf DEFAULTHOMEDIR}\ \char`\"{}/home/randalk\char`\"{}
+\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+time\_\-t {\bf work\_\-end\_\-preferences} ({\bf String} westr)
+\item 
+void {\bf Set\_\-Parameter} (char $\ast$lbuf)
+\item 
+void {\bf initialize} ()
+\item 
+bool {\bf Diagnostic} ({\bf String} diagnosticstr)
+\item 
+{\bf String} {\bf generate\_\-tag} ({\bf String} \&tagid)
+\item 
+bool {\bf Modify\_\-Element} ({\bf String} modification)
+\item 
+void {\bf exit\_\-report} ()
+\item 
+void {\bf Form\_\-Reply\_\-Open} ({\bf String} msg)
+\item 
+void {\bf Form\_\-Reply\_\-Close} ({\bf String} msg)
+\item 
+void {\bf Form\_\-Reply} ({\bf String} msg)
+\item 
+void {\bf Form\_\-Input\_\-Error} ({\bf String} err)
+\item 
+void {\bf Detect\_\-Form\_\-Input} ()
+\item 
+void {\bf dil2al\_\-usage} ()
+\item 
+void {\bf formalizer\_\-usage} ()
+\item 
+void {\bf dil2al\_\-commands} (int argc, char $\ast$argv[$\,$])
+\item 
+void {\bf formalizer\_\-commands} (int argc, char $\ast$argv[$\,$])
+\item 
+{\bf main} (int argc, char $\ast$argv[$\,$])
+\end{CompactItemize}
+\subsection*{Variables}
+\begin{CompactItemize}
+\item 
+{\bf String} {\bf homedir} = DEFAULTHOMEDIR
+\item 
+{\bf String} {\bf basedir} = RELDIRHTML
+\item 
+{\bf String} {\bf listfile} = DILMAIN
+\item 
+{\bf String} {\bf idfile} = DILBYIDFILE
+\item 
+{\bf String} {\bf lockidfile}
+\item 
+{\bf String} {\bf crcidfile}
+\item 
+{\bf String} {\bf cacheidfile}
+\item 
+{\bf String} {\bf tasklog} = TASKLOGFILE
+\item 
+{\bf String} {\bf taskloghead} = \char`\"{}\char`\"{}
+\item 
+{\bf String} {\bf paperplansfile} = PAPERPLANSFILE
+\item 
+{\bf String} {\bf figuresdirectory} = FIGURESDIRECTORY
+\item 
+{\bf String} {\bf dilref} = DILREFFILE
+\item 
+{\bf String} {\bf tareadfile} = TAREADFILE
+\item 
+bool {\bf calledbyforminput} = {\bf false}
+\item 
+int {\bf followlinks} = 0
+\item 
+bool {\bf searchprogressmeter} = {\bf false}
+\item 
+bool {\bf immediatesearchoutput} = {\bf true}
+\item 
+bool {\bf remotesearch} = {\bf true}
+\item 
+{\bf String} {\bf bibindexfilename}
+\item 
+{\bf String} {\bf bibindexfile} = BIBINDEXFILE
+\item 
+{\bf String} {\bf articleheadtemplate} = ARTICLEHEADTEMPLATE
+\item 
+{\bf String} {\bf articletailtemplate} = ARTICLETAILTEMPLATE
+\item 
+{\bf String} {\bf templatearticlesubsection} = TEMPLATEARTICLESUBSECTION
+\item 
+{\bf String} {\bf templatearticlesubsubsection} = TEMPLATEARTICLESUBSUBSECTION
+\item 
+ifstream {\bf dinfile}
+\item 
+istream $\ast$ {\bf din}
+\item 
+ofstream {\bf eoutfile}
+\item 
+ostream $\ast$ {\bf eout}
+\item 
+ostream $\ast$ {\bf vout}
+\item 
+int {\bf num\-DILs}
+\item 
+{\bf Topical\_\-DIL\_\-Files\_\-Root} {\bf dil}
+\item 
+bool {\bf verbose} = {\bf true}
+\item 
+bool {\bf suggestnameref} = {\bf false}
+\item 
+bool {\bf askprocesstype} = {\bf false}
+\item 
+bool {\bf offercreate} = {\bf false}
+\item 
+bool {\bf ask\-ALDILref} = {\bf false}
+\item 
+bool {\bf showflag} = {\bf true}
+\item 
+bool {\bf isdaemon} = {\bf false}
+\item 
+bool {\bf useansi} = {\bf true}
+\item 
+bool {\bf askextractconcat} = {\bf true}
+\item 
+bool {\bf usequickloadcache} = {\bf false}
+\item 
+time\_\-t {\bf emulatedtime} = 0
+\item 
+{\bf String} {\bf curdate}
+\item 
+{\bf String} {\bf curtime}
+\item 
+{\bf String} {\bf owner} = OWNER
+\item 
+int {\bf timechunksize} = DEFAULTCHUNKSIZE
+\item 
+int {\bf timechunkslack} = DEFAULTCHUNKSLACK
+\item 
+int {\bf timechunkoverstrategy} = TCS\_\-ASK
+\item 
+int {\bf timechunkunderstrategy} = TCS\_\-ASK
+\item 
+int {\bf sectionsize} = DEFAULTSECTIONSIZE
+\item 
+int {\bf sectionstrategy} = TSS\_\-ASK
+\item 
+long {\bf generatealtcs} = DEFAULTALTCS
+\item 
+time\_\-t {\bf generatealmaxt} = 0
+\item 
+int {\bf alfocused} = DEFAULTALFOCUSED
+\item 
+int {\bf alwide} = DEFAULTALWIDE
+\item 
+int {\bf algenregular} = DEFAULTALGENREGULAR
+\item 
+int {\bf algenall} = DEFAULTALGENALL
+\item 
+float {\bf alepshours} = DEFAULTALEPSHOURS
+\item 
+bool {\bf alautoexpand} = {\bf true}
+\item 
+bool {\bf alshowcumulativereq} = {\bf false}
+\item 
+int {\bf alcumtimereqexcerptlength} = DEFAULTALCUMTIMEREQEXCERPTLENGTH
+\item 
+bool {\bf rapidscheduleupdating} = {\bf true}
+\item 
+bool {\bf targetdatepreferences} = {\bf true}
+\item 
+bool {\bf weekdayworkendpreferences} = {\bf false}
+\item 
+time\_\-t {\bf wdworkendprefs} [7] = \{-1,-1,-1,-1,-1,-1,-1\}
+\item 
+time\_\-t {\bf alworkdaystart} = DEFAULTALWORKDAYSTART
+\item 
+int {\bf alcurdayworkedstrategy} = ACW\_\-TIME
+\item 
+time\_\-t {\bf alworked} = -1
+\item 
+int {\bf alautoupdate} = AAU\_\-YES
+\item 
+time\_\-t {\bf alsyncslack} = DEFAULTALSYNCSLACK
+\item 
+int {\bf aldaydistfunc} = ALDAYDISTFUNCLINEAR
+\item 
+float {\bf aldaydistslope} = DEFAULTALDAYDISTSLOPE
+\item 
+bool {\bf reversehierarchy} = {\bf false}
+\item 
+bool {\bf hierarchyplanparse} = {\bf false}
+\item 
+int {\bf hierarchymaxdepth} = DEFAULTHIERARCHYMAXDEPTH
+\item 
+int {\bf hierarchyexcerptlength} = DEFAULTHIERARCHYEXCERPTLENGTH
+\item 
+{\bf String} {\bf updatenoteineditorcmd} = DEFAULTUNIECMD
+\item 
+int {\bf updatenoteineditor} = UNIE\_\-ASK
+\item 
+{\bf String} {\bf atcommand} = DEFAULTATCOMMAND
+\item 
+{\bf String} {\bf atcontroller} = DEFAULTATCONTROLLER
+\item 
+{\bf String} {\bf htmlforminterface} = DEFAULT\_\-HTMLFORM\_\-INTERFACE
+\item 
+{\bf String} {\bf htmlformmethod} = DEFAULT\_\-HTMLFORM\_\-METHOD
+\item 
+{\bf String} {\bf editor} = DEFAULTEDITOR
+\item 
+{\bf String} {\bf browser} = DEFAULTBROWSER
+\item 
+{\bf String} {\bf flagcmd} = DEFAULTFLAGCMD
+\item 
+{\bf String} {\bf notetmpfile} = NOTETMPFILE
+\item 
+{\bf String} {\bf tlentrytmpfile} = TLENTRYTMPFILE
+\item 
+{\bf String} {\bf configfile} = CONFIGFILE
+\item 
+{\bf String} {\bf finnotesfile} = FINNOTESFILE
+\item 
+{\bf String\-List} {\bf quicknotedst}
+\item 
+{\bf String\-List} {\bf quicknotedsttitle}
+\item 
+{\bf String\-List} {\bf quicknotedescr}
+\item 
+int {\bf quicknotedstnum} = 0
+\item 
+{\bf String\-List} {\bf indexkeys}
+\item 
+int {\bf indexkeysnum} = 0
+\item 
+{\bf String} {\bf new\-TLID}
+\item 
+bool {\bf chunkcreated}
+\item 
+{\bf Detailed\_\-Items\_\-List} $\ast$ {\bf looplist} = NULL
+\end{CompactItemize}
+
+
+\subsection{Define Documentation}
+\index{dil2al.cc@{dil2al.cc}!DEFAULTHOMEDIR@{DEFAULTHOMEDIR}}
+\index{DEFAULTHOMEDIR@{DEFAULTHOMEDIR}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define DEFAULTHOMEDIR\ \char`\"{}/home/randalk\char`\"{}}\label{dil2al_8cc_a0}
+
+
+
+
+Definition at line 24 of file dil2al.cc.
+
+\subsection{Function Documentation}
+\index{dil2al.cc@{dil2al.cc}!Detect_Form_Input@{Detect\_\-Form\_\-Input}}
+\index{Detect_Form_Input@{Detect\_\-Form\_\-Input}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Detect\_\-Form\_\-Input ()}\label{dil2al_8cc_a110}
+
+
+
+
+Definition at line 434 of file dil2al.cc.
+
+References alautoexpand, alshowcumulativereq, alworked, String::at(), calledbyforminput, String::chars(), String\-List::contains(), String::del(), DIN, String::empty(), extract\_\-DIL\_\-IDs\_\-from\_\-form(), Form\_\-Input\_\-Error(), Form\_\-Reply\_\-Close(), Form\_\-Reply\_\-Open(), generate\_\-modify\_\-element\_\-FORM\_\-interface(), generatealmaxt, generatealtcs, String\-List::length(), String::length(), modify\_\-DIL\_\-group\_\-target\_\-dates\_\-cmd(), modify\_\-element\_\-through\_\-FORM\_\-interface(), search\_\-FORM\_\-cmd(), time\_\-stamp\_\-time(), and update\_\-DIL\_\-to\_\-AL().
+
+Referenced by main().
+
+
+
+\footnotesize\begin{verbatim}434                          {
+435 // Detect and handle input data from an HTML form interface
+436 // *** for handling POST data (or POST+GET data), see
+437 //     http://www.abiglime.com/webmaster/articles/cgi/021098.htm
+438   const int LLEN = 10240;
+439   char lbuf[LLEN];
+440   char * qstr = getenv("QUERY_STRING"); // GET method form-data
+441   char * clenstr = getenv("CONTENT_LENGTH"); // POST method form-data
+442   if ((!qstr) && (!clenstr)) return;
+443   calledbyforminput = true; // set global flag
+444   String querystr;
+445   if (qstr) querystr = qstr; // get GET form-data
+446   if (clenstr) { // get POST form-data
+447     int clen = atoi(clenstr);
+448     if ((clen>0) && (clen<(LLEN-1))) {
+449       DIN.get(lbuf,clen+1);
+450          if (!querystr.empty()) querystr += '&';
+451          querystr += lbuf;
+452     }
+453   }
+454   if (querystr.length()==0) return;
+455   StringList qlist(querystr,'&'); int qnum = qlist.length()-1; // *** empty element at end of StringList
+456   // preprocessing, e.g. convert from FORM-special notation
+457   for (int i = 0; i<qnum; i++) {
+458     qlist[i].gsub("__EQ__","=");
+459   }
+460   long cmdidx;
+461   // find and process optional parameter initialization
+462   while ((cmdidx=qlist.contains("setpar="))>=0) { // each setpar argument
+463     String setparstr(qlist[cmdidx].after('='));
+464     StringList setparlist(setparstr,'+'); int setparnum = setparlist.length()-1; // multiple parameter settings elicited by one selection
+465     for (int i = 0; i<setparnum; i++) Set_Parameter(const_cast<char *>(setparlist[i].chars()));
+466     qlist[cmdidx] = "";
+467   }
+468   // find and process form command
+469   if ((cmdidx=qlist.contains("dil2al="))<0) return;
+470   String cmdarg(qlist[cmdidx].after('='));
+471   if (cmdarg.length()==0) return;
+472   char c = cmdarg[0], c2, c3; cmdarg.del(0,1);
+473   switch (c) {
+474   case 'A':
+475     if (cmdarg.length()>0) {
+476       if (cmdarg[0]=='c') { // show cumulative time required
+477         alshowcumulativereq = true;
+478         cmdarg.del(0,1);
+479       }
+480       if (cmdarg[0]=='S') { // strict, no automatic expansion
+481         alautoexpand = false;
+482         cmdarg.del(0,1);
+483       }
+484       if (cmdarg[0]=='W') { // time worked on current day
+485         alworked = 60*((((time_t) atoi(String(cmdarg.at(1,2))))*60)+((time_t) atoi(String(cmdarg.at(4,2)))));
+486         cmdarg.del(0,6);
+487       }
+488       if (cmdarg[0]=='T') { // maximum time to generate AL to
+489         cmdarg.del(0,1);
+490         if (cmdarg.length()<12) cmdarg += "0000";
+491         generatealmaxt = time_stamp_time(cmdarg);
+492       } else generatealtcs = atol(cmdarg.chars()); // number of task chunks of AL to generate
+493     }
+494     Form_Reply_Open("Updating DIL to AL");
+495     if (update_DIL_to_AL()) Form_Reply_Close("AL updated");
+496     else Form_Reply_Close("Unable to generate AL");
+497     break;
+498   case 'D': // extract from a form all checked DIL IDs
+499     Form_Reply_Open("Extracting DIL IDs");
+500     //  VOUT << "querystr = " << querystr << '\n'; cout.flush();
+501     if (extract_DIL_IDs_from_form(&qlist)) Form_Reply_Close("DIL IDs extracted");
+502     else Form_Reply_Close("Unable to extract DIL IDs");
+503     break;
+504   case 'M':
+505     if (cmdarg.length()>0) { c2 = cmdarg[0]; cmdarg.del(0,1); } else c2 = ' ';
+506     switch (c2) {
+507     case 'E':
+508       if (cmdarg.length()>0) { c3 = cmdarg[0]; cmdarg.del(0,1); } else c3 = ' ';
+509       switch (c3) {
+510       case 't':
+511         if (cmdarg.at(0,5)=="group") {
+512           Form_Reply_Open("Modifying target dates");
+513           if (modify_DIL_group_target_dates_cmd(true,&qlist)) Form_Reply_Close("Target dates modified");
+514           else Form_Reply_Close("Unable to modify target dates");
+515         } else Form_Input_Error(c+(c2+(c3+cmdarg)));
+516         break;
+517       case 'I': // modify element via FORM interface
+518         Form_Reply_Open("Interface: Modify Element");
+519         if (generate_modify_element_FORM_interface(&qlist)) Form_Reply_Close("Element modification interface generated");
+520         else Form_Reply_Close("Unable to create FORM interface for element modification");
+521         break;
+522       case 'i': // modify element as specified by FORM interface
+523         Form_Reply_Open("Modifying Element");
+524         if (modify_element_through_FORM_interface(&qlist)) Form_Reply_Close("Element modified as specified by FORM interface");
+525         else Form_Reply_Close("Unable to modify element as specified by FORM interface");
+526         break;
+527       default: Form_Input_Error(c+(c2+(c3+cmdarg)));
+528       }
+529       break;
+530     default: Form_Input_Error(c+(c2+cmdarg));
+531     }
+532     break;
+533   default: Form_Input_Error(c+cmdarg);
+534   case 'g': // perform dil2al regex search
+535     Form_Reply_Open("Performing regex search");
+536     //  VOUT << "querystr = " << querystr << '\n'; cout.flush();
+537     if (search_FORM_cmd(&qlist)) Form_Reply_Close("regex search completed");
+538     else Form_Reply_Close("Unable to perform regex search");
+539     break;
+540   }
+541   exit(0);
+542 }
+\end{verbatim}\normalsize 
+\index{dil2al.cc@{dil2al.cc}!Diagnostic@{Diagnostic}}
+\index{Diagnostic@{Diagnostic}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool Diagnostic ({\bf String} {\em diagnosticstr})}\label{dil2al_8cc_a102}
+
+
+
+
+Definition at line 348 of file dil2al.cc.
+
+References Detailed\_\-Items\_\-List::Binary\_\-Cache\_\-Diagnostic().
+
+Referenced by dil2al\_\-commands().
+
+
+
+\footnotesize\begin{verbatim}348                                       {
+349   // run a self-diagnostic test
+350   if (diagnosticstr=="cache") {
+351     Detailed_Items_List dilist;
+352     return dilist.Binary_Cache_Diagnostic();
+353   }
+354   return false;
+355 }
+\end{verbatim}\normalsize 
+\index{dil2al.cc@{dil2al.cc}!dil2al_commands@{dil2al\_\-commands}}
+\index{dil2al_commands@{dil2al\_\-commands}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void dil2al\_\-commands (int {\em argc}, char $\ast$ {\em argv}[$\,$])}\label{dil2al_8cc_a113}
+
+
+
+
+Definition at line 655 of file dil2al.cc.
+
+References AAU\_\-ASK, AAU\_\-NO, AAU\_\-YES, add\_\-new\_\-to\_\-DIL(), alautoexpand, alautoupdate, alshowcumulativereq, alworked, String::at(), String::chars(), chunk\_\-controller(), cmdline\_\-extract\_\-paper\_\-novelties(), cmdline\_\-extract\_\-paper\_\-plan\_\-to\_\-paper(), create\_\-new\_\-DIL(), date\_\-string(), String::del(), Diagnostic(), dil2al\_\-usage(), DIL\_\-Hierarchy\_\-cmd(), DIN, din, dinfile, emulatedtime, eout, EOUT, eoutfile, generate\_\-AL\_\-entry(), generate\_\-AL\_\-full\_\-entry(), generate\_\-Figures\_\-Directory\_\-entry(), generate\_\-tag(), generatealmaxt, generatealtcs, get\_\-new\_\-DIL\_\-ID(), hierarchymaxdepth, initialize\_\-new\_\-DIL\_\-TL(), String::length(), make\_\-note(), Modify\_\-Element(), Quantitative\_\-Assessment(), refresh\_\-quick\_\-load\_\-cache(), schedule\_\-controller(), search\_\-cmd(), send\_\-dil\_\-to\_\-DIL(), Set\_\-Parameter(), showflag, time\_\-stamp(), time\_\-stamp\_\-time(), update\_\-DIL\_\-to\_\-AL(), verbose, VOUT, and vout.
+
+Referenced by main().
+
+
+
+\footnotesize\begin{verbatim}655                                               {
+656   int c;
+657   bool addnewtodil = false, senddiltodilfile = false, createnewdilfile = false,
+658     generatenewID = false, initializenewDIL = false, includeinput = false,
+659     updatedil2al = false, makenote = false, controller = false, scheduledcontroller = false,
+660     generateALentry = false, generateALfull = false, extractnovelties = false,
+661     generatepaper = false, generatefigentry = false, generatetag = false,
+662     quanassessment = false, modifyelement = false, dilhierarchy = false,
+663     grep = false, refreshquickloadcache = false, diagnostic = false;
+664   String dilfile, newdilfile, tlfile, initializecmd, controllercmd, dilid, ppfile, grepinfo;
+665   char quanassessmenttype;
+666   opterr=0;
+667   while ((c=getopt(argc,argv,"hc:d:n:f:O:so:t::i::INQA::mE:C::S::u:V::a:l:x:X:F:q:p:T:M:H:g:D:")) != EOF) {
+668     switch (c) {
+669     case 'c':
+670       createnewdilfile=true;
+671       newdilfile = optarg;
+672       break;
+673     case 'd':
+674       if (!addnewtodil) {
+675         senddiltodilfile=true;
+676         dilfile = optarg;
+677       } else EOUT << "dil2al: preceding -n command takes precedence over -d command\n";
+678       break;
+679     case 'n':
+680       if (!senddiltodilfile) {
+681         addnewtodil=true;
+682         dilfile = optarg;
+683       } else EOUT << "dil2al: preceding -d command takes precedence over -n command\n";
+684       break;
+685     case 'f':
+686       dinfile.open(optarg);
+687       din = &dinfile;
+688       if (!DIN) {
+689         EOUT << "dil2al: Unable to open data input stream " << optarg << '\n';
+690         exit(2);
+691       }
+692       break;
+693     case 'O':
+694       eoutfile.open(optarg);
+695       eout = &eoutfile;
+696       vout = &eoutfile;
+697       if (!EOUT) {
+698         cerr << "dil2al: Unable to open error and verbose output stream " << optarg << '\n';
+699         exit(2);
+700       }
+701       break;
+702     case 's': verbose = false; break;
+703     case 'o':
+704       owner = optarg;
+705       break;
+706     case 'N': generatenewID = true; break;
+707     case 't':
+708       generatetag = true;
+709       if (optarg) initializecmd = optarg;
+710       break;
+711     case 'i':
+712       initializenewDIL = true;
+713       if (optarg) initializecmd = optarg;
+714       break;
+715     case 'I': includeinput = true; break;
+716     case 'A': 
+717       updatedil2al = true;
+718       if (optarg) {
+719         String tmpopt(optarg);
+720         if (tmpopt[0]=='c') { // show cumulative time required
+721           alshowcumulativereq = true;
+722           tmpopt.del(0,1);
+723         }
+724         if (tmpopt[0]=='S') { // strict, no automatic expansion
+725           alautoexpand = false;
+726           tmpopt.del(0,1);
+727         }
+728         if (tmpopt[0]=='W') { // time worked on current day
+729           alworked = 60*((((time_t) atoi(String(tmpopt.at(1,2))))*60)+((time_t) atoi(String(tmpopt.at(4,2)))));
+730           tmpopt.del(0,6);
+731         }
+732         if (tmpopt[0]=='T') { // maximum time to generate AL to
+733           tmpopt.del(0,1);
+734           if (tmpopt.length()<12) tmpopt += "0000";
+735           generatealmaxt = time_stamp_time(tmpopt);
+736         } else generatealtcs = atol(tmpopt.chars()); // number of task chunks of AL to generate
+737       }
+738       break;
+739     case 'm': makenote = true; break;
+740     case 'E': editor = optarg; break;
+741     case 'C':
+742       controller = true;
+743       if (optarg) controllercmd = optarg;
+744       break;
+745     case 'S':
+746       scheduledcontroller = true;
+747       if (optarg) controllercmd = optarg;
+748       break;
+749     case 'u':
+750       switch (optarg[0]) {
+751       case 'n': alautoupdate = AAU_NO; break;
+752       case 'y': alautoupdate = AAU_YES; break;
+753       case 'a': alautoupdate = AAU_ASK; break;
+754       }
+755       break;
+756     case 'V':
+757       showflag = true;
+758       if (optarg) flagcmd = optarg;
+759       break;
+760     case 'a':
+761       generateALentry = true;
+762       dilid = optarg;
+763       break;
+764     case 'l':
+765       generateALfull = true;
+766       dilid = optarg;
+767       break;
+768     case 'x':
+769       extractnovelties = true;
+770       tlfile = optarg;
+771       break;
+772     case 'X':
+773       generatepaper = true;
+774       ppfile = optarg;
+775       break;
+776     case 'F':
+777       generatefigentry = true;
+778       dilid = optarg;
+779       break;
+780     case 'q':
+781       quanassessment = true;
+782       if (optarg) {
+783         String tmpopt(optarg);
+784         quanassessmenttype = tmpopt[0];
+785         tmpopt.del(0,1);
+786         ppfile = tmpopt;
+787       }
+788       break;
+789     case 'p': Set_Parameter(optarg); break;
+790     case 'T':
+791       emulatedtime = time_stamp_time(optarg);
+792       curdate = date_string(); curtime = time_stamp("%Y%m%d%H%M");
+793       VOUT << "Emulated time: " << curtime << '\n';
+794       break;
+795     case 'Q':
+796       refreshquickloadcache = true;
+797       break;
+798     case 'M':
+799       modifyelement = true;
+800       controllercmd = optarg;
+801       break;
+802     case 'H':
+803       dilhierarchy = true;
+804       dilid = optarg;
+805       break;
+806     case 'g':
+807       grep = true;
+808       grepinfo = optarg;
+809       break;
+810     case 'D':
+811       diagnostic = true;
+812       grepinfo = optarg;
+813       break;
+814     case 'h': case '?':
+815       if (c=='?') { // may be optional argument
+816         switch (optopt) {
+817         case 't': generatetag = true; break;
+818         case 'i': initializenewDIL = true; break;
+819         case 'A': updatedil2al = true; break;
+820         case 'C': controller = true; break;
+821         case 'S': scheduledcontroller = true; break;
+822         case 'V': showflag = true; break;
+823         default: c='h';
+824         }
+825       }
+826       if (c=='h') {
+827         dil2al_usage();
+828         exit(2*(c=='?'));
+829       }
+830     }
+831   }
+832   if (!argc) cout << "dil2al: Currently no action defined when invoked without arguments\n";
+833   if (createnewdilfile) if (!create_new_DIL(newdilfile)) {
+834     EOUT << "dil2al: Unable to create new DIL " << newdilfile << "\n";
+835     exit(1);
+836   }
+837   if (senddiltodilfile) if (!send_dil_to_DIL(dilfile)) {
+838     EOUT << "dil2al: Unable to send DIL item to " << dilfile << "\n";
+839     exit(1);
+840   }
+841   if (addnewtodil) if (!add_new_to_DIL(dilfile,NULL)) {
+842     EOUT << "dil2al: Unable to add new item from " << dilfile << " to DIL\n";
+843     exit(1);
+844   }
+845   if (generatetag) {
+846     if ((initializecmd=generate_tag(initializecmd))=="") {
+847       EOUT << "dil2al: Unable to generate unknown tag\n";
+848       exit(1);
+849     } else cout << initializecmd;
+850   }
+851   if (generatenewID) {
+852     String newdilid;
+853     if ((newdilid=get_new_DIL_ID())=="") {
+854       EOUT << "dil2al: Unable to generate new DIL ID\n";
+855       exit(1);
+856     } else cout << newdilid << '\n';
+857   }
+858   if (initializenewDIL) if (!initialize_new_DIL_TL(initializecmd,includeinput)) {
+859     EOUT << "dil2al: Unable to initialize new DIL/TL chunk/entry";
+860     if (includeinput) EOUT << " with included content input\n"; else EOUT << '\n';
+861     exit(1);
+862   }
+863   if (makenote) if (!make_note()) {
+864     EOUT << "dil2al: Unable to make note\n";
+865     exit(1);
+866   }
+867   if (refreshquickloadcache) if (!refresh_quick_load_cache()) {
+868     EOUT << "dil2al: Unable to refresh the quick load cache files.\n";
+869     exit(1);
+870   }
+871   if (controller) if (chunk_controller(controllercmd)=="") {
+872     EOUT << "dil2al: Task controller did not complete operations\n";
+873     exit(1);
+874   }
+875   if (scheduledcontroller) if (!schedule_controller(controllercmd)) {
+876     EOUT << "dil2al: Scheduled task controller did not complete operations\n";
+877     exit(1);
+878   }
+879   if (generateALentry) {
+880     dilid = generate_AL_entry(dilid);
+881     if (dilid=="") {
+882       EOUT << "dil2al: Unable to generate AL entry\n";
+883       exit(1);
+884     }
+885     VOUT << dilid;
+886   }
+887   if (generateALfull) {
+888     dilid = generate_AL_full_entry(dilid,1);
+889     if (dilid=="") {
+890       EOUT << "dil2al: Unable to generate full AL entry\n";
+891       exit(1);
+892     }
+893     VOUT << dilid;
+894   }
+895   if (extractnovelties) if (!cmdline_extract_paper_novelties(tlfile)) {
+896     EOUT << "dil2al: Unable to extract NOVELTY tagged items\n";
+897     exit(1);
+898   }
+899   if (generatepaper) if (!cmdline_extract_paper_plan_to_paper(ppfile)) {
+900     EOUT << "dil2al: Unable to generatre paper draft\n";
+901     exit(1);
+902   }
+903   if (generatefigentry) {
+904     dilid = generate_Figures_Directory_entry(dilid);
+905     if (dilid=="") {
+906       EOUT << "dil2al: Unable to generate Figures Directory entry\n";
+907       exit(1);
+908     }
+909     cout << dilid;
+910   }
+911   if (quanassessment) if (!Quantitative_Assessment(quanassessmenttype,ppfile)) {
+912     EOUT << "dil2al: Unable to carry out quantitative assessment `" << quanassessmenttype << "'\n";
+913     exit(1);
+914   }
+915   if (modifyelement) if (!Modify_Element(controllercmd)) {
+916     EOUT << "dil2al: Unable to modify element `" << controllercmd << "'\n";
+917     exit(1);
+918   }
+919   if (dilhierarchy) if (!DIL_Hierarchy_cmd(dilid,hierarchymaxdepth)) {
+920     EOUT << "dil2al: Unable to visualize DIL hierarchy\n";
+921     exit(1);
+922   }
+923   if (grep) if (!search_cmd(grepinfo)) {
+924     EOUT << "dil2al: Unable to grep " << grepinfo << '\n';
+925     exit(1);
+926   }
+927   if (diagnostic) if (!Diagnostic(grepinfo)) {
+928     EOUT << "dil2al: Unable to perform diagnostic of: " << grepinfo << '\n';
+929     exit(1);
+930   }
+931   if (updatedil2al) if (!update_DIL_to_AL()) {
+932     EOUT << "dil2al: Unable to generate AL\n";
+933     exit(1);
+934   }
+935 }
+\end{verbatim}\normalsize 
+\index{dil2al.cc@{dil2al.cc}!dil2al_usage@{dil2al\_\-usage}}
+\index{dil2al_usage@{dil2al\_\-usage}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void dil2al\_\-usage ()}\label{dil2al_8cc_a111}
+
+
+
+
+Definition at line 567 of file dil2al.cc.
+
+Referenced by dil2al\_\-commands().
+
+
+
+\footnotesize\begin{verbatim}567                     {
+568   cerr << "Usage: dil2al [-s] [-o <owner>] [-c <DIL-filename>] [-n <DIL-filename>]\n"
+569        << "              [-t<tag-id>] [-N] [-i[tc|te] [-I]] [-f <data-file>]\n"
+570        << "              [-O <verbose-output-file>] [-A[c][S][Whh:mm][Tmaxt|numtcs]] [-m]\n"
+571        << "              [-E <editor>] [-C[autocommands]] [-S[autocommands]] [-u<n|y|a>]\n"
+572        << "              [-V[flag command]] [-a <DIL ID>] [-l <DIL ID>] [-x <file+plan>]\n"
+573        << "              [-X <plan+outline+previous>] [-F <figure<.eps|.fig|.ps>>] [-q<x>]\n"
+574        << "              [-M<modification>] [-p<param>=<value>] [-T <YYYYmmddHHMM>] [-Q]\n"
+575        << "              [-H[@f@][type]<DIL ID>[cContentFile][#expressions]]\n"
+576        << "              [-D<diagnostic>] [-g <+search-key+target>]\n"
+577        << "       dil2al [-s] [-o <owner>] [-c <DIL-filename>] [-d <DIL-filename>]\n"
+578        << "              [-D<diagnostic>]\n"
+579        << "              [-t<tag-id>] [-N] [-i[tc|te] [-I]] [-f <data-file>]\n"
+580        << "              [-O <verbose-output-file>] [-A[c][S][Whh:mm][Tmaxt|numtcs]] [-m]\n"
+581        << "              [-E <editor>] [-C[autocommands]] [-S[autocommands]] [-u<n|y|a>]\n"
+582        << "              [-V[flag command]] [-a <DIL ID>] [-l <DIL ID>] [-x <file+plan>]\n"
+583        << "              [-X <plan+outline+previous>] [-F <figure<.eps|.fig|.ps>>] [-q<x>]\n"
+584        << "              [-M<modification>] [-p<param>=<value>] [-T <YYYYmmddHHMM>] [-Q]\n"
+585        << "              [-H[@f@][type]<DIL ID>[cContentFile][#expressions]]\n"
+586        << "              [-D<diagnostic>] [-g <+search-key+target>]\n"
+587        << "       dil2al -h|-?\n"
+588        << "                      -s = silent, run non-verbosely\n"
+589        << "                      -o = specify DIL owner\n"
+590        << "                           (compiled default: " << OWNER << ")\n"
+591        << "                      -c = create new DIL (e.g. ltp.html)\n"
+592        << "                      -n = add new DIL entries to DIL-by-ID file\n"
+593        << "                           (" << DILBYIDFILE << ")\n"
+594        << "                      -d = send a DIL entry to a DIL file\n"
+595        << "                      -t = generate standard tag\n"
+596        << "                      -N = generate a new DIL ID\n"
+597        << "                      -i = initialize a new DIL entry\n"
+598        << "                           tc = initialize a new TL chunk\n"
+599        << "                           te = initialize a new TL entry\n"
+600        << "                      -I = include content input in initialized entry\n"
+601        << "                      -f = obtain content data from file instead of stdin\n"
+602        << "                      -O = send verbose and error output to file\n"
+603        << "                      -A = update Active Lists with DILs (and # of TCs)\n"
+604        << "                           (-A0 = complete AL, -Acx = show cumulative time\n"
+605        << "                           required, -ASx = strict, WHH:MM = worked,\n"
+606        << "                           TYYYYmmddHHMM = max time)\n"
+607        << "                      -m = make ``note'' (for TL or elsewhere)\n"
+608        << "                      -E = specify a text editor\n"
+609        << "                           (compiled default: " << DEFAULTEDITOR << ")\n"
+610        << "                      -C = task controller (with optional command string)\n"
+611        << "                      -S = scheduled task controller (and command string)\n"
+612        << "                      -u = automatic task update strategy (no/yes/ask)\n"
+613        << "                      -V = visual and audible flag\n"
+614        << "                      -a = generate AL entry\n"
+615        << "                      -l = generate full AL entry\n"
+616        << "                      -x = extract NOVELTY tagged items from ``file'' to\n"
+617        << "                           ``plan'' (if ``plan''==``'' to stdout)\n"
+618        << "                      -X = extract NOVELTY content into ``outline''\n"
+619        << "                           according to ``plan'', retaining elements\n"
+620        << "                           already rewritten in ``previous''\n"
+621        << "                      -F = generate Figures Directory entry\n"
+622        << "                      -q = carry out quantitative assessment `x'\n"
+623        << "                      -M = modify element\n"
+624        << "                           (-MEcXXXXXXXXXXXXXX.Y=R.r = entry completion ratio,\n"
+625        << "                           -MEcXXXXXXXXXXXXXX.Y=V.v = entry valuation,\n"
+626        << "                           -MEtXXXXXXXXXXXXXX.Y=YYYYmmddHHMM = target date,\n"
+627        << "                           -MEtgroup[direct] = group target dates)\n"
+628        << "                      -p = set parameter (multiple permitted)\n"
+629        << "                      -T = ``current'' time to emulate\n"
+630        << "                      -Q = refresh Quick Load Cache\n"
+631        << "                      -H = visualize DIL hierarchy, type=FORM, HTML or\n"
+632        << "                           none (meaning plain text) tabbed\n"
+633        << "                           format, `DILID'c`contentfile', @f@=hierarchyfile\n"
+634        << "                           (DILID+DILID+DILID optional with FORM type),\n"
+635        << "                           #expressions that must occur in DIL entries\n"
+636        << "                      -g = grep target for search-key (2* escapes separator)\n"
+637        << "                           set followlinks and searchprogressmeter with -p\n"
+638        << "                           can use @<regex>@ at end of target, multiple\n"
+639        << "                           targets indicated by separator\n"
+640        << "                      -D = diagnostic test\n"
+641        << "                             cache = test caching\n"
+642        << "(More information at ~/doc/html/lists.html and ~/doc/html/style-guide.html.)\n"
+643        << "\n(Also runnable as `formalizer` when link exists, see `formalizer -h`.)\n";
+644 }
+\end{verbatim}\normalsize 
+\index{dil2al.cc@{dil2al.cc}!exit_report@{exit\_\-report}}
+\index{exit_report@{exit\_\-report}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void exit\_\-report ()}\label{dil2al_8cc_a105}
+
+
+
+
+Definition at line 400 of file dil2al.cc.
+
+References String::chars(), PLLRoot$<$ DIL\_\-entry $>$::head(), Detailed\_\-Items\_\-List::list, PLL\_\-LOOP\_\-FORWARD, and VOUT.
+
+Referenced by Form\_\-Reply\_\-Close(), and main().
+
+
+
+\footnotesize\begin{verbatim}400                    {
+401         //VOUT << "Exit Report:\n";
+402         // loop warnings
+403         if (looplist) {
+404                 VOUT << "Warnings - DIL_entry::Propagated_Target_Date(), loops detected at:\n";
+405                 PLL_LOOP_FORWARD(DIL_entry,looplist->list.head(),1) {
+406                         VOUT << "DIL#";
+407                         if (calledbyforminput) VOUT << "<A HREF=\"" << idfile << '#' << e->chars() << "\">";
+408                         VOUT << e->chars();
+409                         if (calledbyforminput) VOUT << "</A>";
+410                         VOUT << '\n';
+411                 }
+412                 delete looplist;
+413         }
+414 }
+\end{verbatim}\normalsize 
+\index{dil2al.cc@{dil2al.cc}!Form_Input_Error@{Form\_\-Input\_\-Error}}
+\index{Form_Input_Error@{Form\_\-Input\_\-Error}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Form\_\-Input\_\-Error ({\bf String} {\em err})}\label{dil2al_8cc_a109}
+
+
+
+
+Definition at line 430 of file dil2al.cc.
+
+References VOUT.
+
+Referenced by Detect\_\-Form\_\-Input().
+
+
+
+\footnotesize\begin{verbatim}430                                   {
+431         VOUT << "Content-Type: text/html\n\n<HTML>\n<BODY>\n<H1>dil2al HTML form interface</H1>\nUnknown HTML form interface command `" << err << "'\n</BODY>\n</HTML>\n";
+432 }
+\end{verbatim}\normalsize 
+\index{dil2al.cc@{dil2al.cc}!Form_Reply@{Form\_\-Reply}}
+\index{Form_Reply@{Form\_\-Reply}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Form\_\-Reply ({\bf String} {\em msg})}\label{dil2al_8cc_a108}
+
+
+
+
+Definition at line 426 of file dil2al.cc.
+
+References VOUT.
+
+
+
+\footnotesize\begin{verbatim}426                             {
+427         VOUT << "Content-Type: text/html\n\n<HTML>\n<BODY>\n<H1>dil2al HTML form interface</H1>\n" << msg << "\n</BODY>\n</HTML>\n";
+428 }
+\end{verbatim}\normalsize 
+\index{dil2al.cc@{dil2al.cc}!Form_Reply_Close@{Form\_\-Reply\_\-Close}}
+\index{Form_Reply_Close@{Form\_\-Reply\_\-Close}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Form\_\-Reply\_\-Close ({\bf String} {\em msg})}\label{dil2al_8cc_a107}
+
+
+
+
+Definition at line 421 of file dil2al.cc.
+
+References exit\_\-report(), and VOUT.
+
+Referenced by Detect\_\-Form\_\-Input().
+
+
+
+\footnotesize\begin{verbatim}421                                   {
+422         exit_report();
+423         VOUT << "</PRE>\n" << msg << "\n</BODY>\n</HTML>\n";
+424 }
+\end{verbatim}\normalsize 
+\index{dil2al.cc@{dil2al.cc}!Form_Reply_Open@{Form\_\-Reply\_\-Open}}
+\index{Form_Reply_Open@{Form\_\-Reply\_\-Open}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Form\_\-Reply\_\-Open ({\bf String} {\em msg})}\label{dil2al_8cc_a106}
+
+
+
+
+Definition at line 416 of file dil2al.cc.
+
+References eout, and VOUT.
+
+Referenced by Detect\_\-Form\_\-Input().
+
+
+
+\footnotesize\begin{verbatim}416                                  {
+417         eout = &cout; // redirect error output to cout to make it visible in the HTML response
+418         VOUT << "Content-Type: text/html\n\n<HTML>\n<BODY>\n<H1>dil2al HTML form interface</H1>\n" << msg << "\n<PRE>\n";
+419 }
+\end{verbatim}\normalsize 
+\index{dil2al.cc@{dil2al.cc}!formalizer_commands@{formalizer\_\-commands}}
+\index{formalizer_commands@{formalizer\_\-commands}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void formalizer\_\-commands (int {\em argc}, char $\ast$ {\em argv}[$\,$])}\label{dil2al_8cc_a114}
+
+
+
+
+Definition at line 937 of file dil2al.cc.
+
+References EOUT, financial\_\-monthly(), financial\_\-notes(), and formalizer\_\-usage().
+
+Referenced by main().
+
+
+
+\footnotesize\begin{verbatim}937                                                   {
+938         int c;
+939         bool financesoptions = false, financialnotes = false, financialmonthly = false;
+940         opterr=0;
+941         while ((c=getopt(argc,argv,"hf:")) != EOF) {
+942                 switch (c) {
+943                         case 'f':
+944                                 financesoptions=true;
+945                                 if (optarg) {
+946                                   String tmpopt(optarg);
+947                                   switch (tmpopt[0]) {
+948                                   case 'n': financialnotes = true; break;
+949                                   case 'm': financialmonthly = true; break;
+950                                   default: EOUT << "dil2al.formalizer: Unknown finances option '" << tmpopt[0] << "'\n";
+951                                   }
+952                                 }
+953                                 break;
+954                         case 'h': case '?':
+955                                 if (c=='?') { // may be optional argument
+956                                         switch (optopt) {
+957                                                 default: c='h';
+958                                         }
+959                                 }
+960                                 if (c=='h') {
+961                                         formalizer_usage();
+962                                         exit(2*(c=='?'));
+963                                 }
+964                 }
+965         }
+966         if (!argc) cout << "dil2al.formalizer: Currently no action defined when invoked without arguments\n";
+967         if (financialnotes) if (!financial_notes()) {
+968           EOUT << "dil2al.formalizer: Unable to edit financial notes\n";
+969           exit(1);
+970         }
+971         if (financialmonthly) if (!financial_monthly()) {
+972           EOUT << "dil2al.formalizer: Unable to compute financial monthly results\n";
+973           exit(1);
+974         }
+975 }
+\end{verbatim}\normalsize 
+\index{dil2al.cc@{dil2al.cc}!formalizer_usage@{formalizer\_\-usage}}
+\index{formalizer_usage@{formalizer\_\-usage}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void formalizer\_\-usage ()}\label{dil2al_8cc_a112}
+
+
+
+
+Definition at line 646 of file dil2al.cc.
+
+Referenced by formalizer\_\-commands().
+
+
+
+\footnotesize\begin{verbatim}646                         {
+647   cerr << "Usage: formalizer [-f<n|m>]\n"
+648        << "       formalizer -h|-?\n"
+649        << "                      -f = finances options\n"
+650        << "                           n = financial note (financial-notes.html)\n"
+651        << "                           m = monthly results (financial-notes.html)\n"
+652        << "\n(Also runnable as `dil2al` when link exists, see `dil2al -h`.)\n";
+653 }
+\end{verbatim}\normalsize 
+\index{dil2al.cc@{dil2al.cc}!generate_tag@{generate\_\-tag}}
+\index{generate_tag@{generate\_\-tag}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} generate\_\-tag ({\bf String} \& {\em tagid})}\label{dil2al_8cc_a103}
+
+
+
+
+Definition at line 357 of file dil2al.cc.
+
+References res.
+
+Referenced by Assess\_\-Paper\_\-Correction\_\-Time(), dil2al\_\-commands(), and send\_\-dil\_\-to\_\-DIL().
+
+
+
+\footnotesize\begin{verbatim}357                                     {
+358         const int NUMTAGS = 8, TAGIDSSIZE= 6, TAGSTRSIZE = 300;
+359         const char tagids[NUMTAGS][TAGIDSSIZE] = {"CR","GUIDE","LSTY","CHL","CHM","OUTL","EMBH","DESUP"};
+360         const char tagstr[NUMTAGS][TAGSTRSIZE] = {"<A NAME=\"TAGname\"><!-- @CRef@ -->TAGanchor</A>",
+361                                                                                 "<A NAME=\"TAGname\"><!-- @guideline@ -->TAGanchor</A>",
+362                                                                                 "% @LaTeX STYLE REQUIRED: <A HREF=\"relstylepath\">style.sty</A>@",
+363                                                                                 "% @Begin CHECKLIST: LISTcaption@\n\\checklist{LISTcaption}{\n% --><TABLE BORDER=\"1\"><CAPTION><B>LISTcaption</B></CAPTION><!--\n}\n% @End CHECKLIST: LISTcaption@ --></TABLE><!--",
+364                                                                                 "% @Begin CHECKMARK: MARKtype MARKanchor@\n\\checkmark{0}{MARKtext} (MARKanchor)\\\\\n% --><TR><TD><INPUT TYPE=checkbox NAME=\"MARKtype\" VALUE=\"MARKanchor\"> MARKtext (<A HREF=\"relmarkpath\">MARKanchor</A>)</TD></TR><!--\n% @End CHECKMARK: MARKtype MARKanchor@",
+365                                                                                 "% @Begin OUTLINE: Context@\n\\outlinenote{OutlineData}\n% @End OUTLINE: Context@",
+366                                                                                 "% @EMBEDDED HTML: HTMLtext@",
+367                                                                                 "@DIL Entry Superior: <A HREF=\"#SUPid\">SUPid</A> (SIrel,SIuimp,SIimp,SItd,SIurg,SIpri)@"};
+368         if (tagid=="") {
+369                 String res;
+370                 for (int i = 0; i<NUMTAGS; i++) res += String(tagids[i])+" => "+String(tagstr[i])+'\n';
+371                 return res;
+372         }
+373         for (int i=0; i<NUMTAGS; i++) if (tagid==tagids[i]) return String(tagstr[i]);
+374         return String("");
+375 }
+\end{verbatim}\normalsize 
+\index{dil2al.cc@{dil2al.cc}!initialize@{initialize}}
+\index{initialize@{initialize}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void initialize ()}\label{dil2al_8cc_a101}
+
+
+
+
+Definition at line 307 of file dil2al.cc.
+
+References String::after(), num\-DILs, String::prepend(), and Set\_\-Parameter().
+
+Referenced by main().
+
+
+
+\footnotesize\begin{verbatim}307                   {
+308   const int LLEN = 10240;
+309   char lbuf[LLEN];
+310   numDILs = 0;
+311   bibindexfilename = bibindexfile.after("/",-1);
+312   if (bibindexfilename=="") bibindexfilename = bibindexfile;
+313   //    cout << getenv("HOME") << endl;
+314   // if getenv("HOME")==NULL then use value specified at compile-time
+315   if (getenv("HOME")!=NULL) homedir = getenv("HOME");
+316   homedir += '/';
+317   basedir.prepend(homedir);
+318   listfile.prepend(basedir);
+319   idfile.prepend(basedir);
+320   notetmpfile.prepend(homedir);
+321   tlentrytmpfile.prepend(homedir);
+322   configfile.prepend(homedir);
+323   tasklog.prepend(basedir);
+324   paperplansfile.prepend(basedir);
+325   figuresdirectory.prepend(basedir);
+326   bibindexfile.prepend(basedir);
+327   articleheadtemplate.prepend(basedir);
+328   articletailtemplate.prepend(basedir);
+329   templatearticlesubsection.prepend(basedir);
+330   templatearticlesubsubsection.prepend(basedir);
+331   dilref.prepend(homedir);
+332   tareadfile.prepend(homedir);
+333   finnotesfile.prepend(basedir);
+334   // parse configuration file
+335   ifstream cf(configfile);
+336   while (cf) {
+337     cf.getline(lbuf,LLEN);
+338     if (cf.eof()) break;
+339     Set_Parameter(lbuf);
+340   }
+341   // set dependent variables
+342   lockidfile = idfile + ".lock";
+343   crcidfile = idfile + ".crc";
+344   cacheidfile = idfile + ".cache";
+345   //    cout << listfile << '\n';
+346 }
+\end{verbatim}\normalsize 
+\index{dil2al.cc@{dil2al.cc}!main@{main}}
+\index{main@{main}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}main (int {\em argc}, char $\ast$ {\em argv}[$\,$])}\label{dil2al_8cc_a115}
+
+
+
+
+Definition at line 977 of file dil2al.cc.
+
+References String::after(), String::contains(), date\_\-string(), Detect\_\-Form\_\-Input(), dil2al\_\-commands(), din, eout, exit\_\-report(), formalizer\_\-commands(), initialize(), time\_\-stamp(), and vout.
+
+
+
+\footnotesize\begin{verbatim}977                               {
+978         din = &cin;
+979         eout = &cerr;
+980         vout = &cout;
+981         curdate = date_string(); curtime = time_stamp("%Y%m%d%H%M");
+982         initialize();
+983         Detect_Form_Input();
+984         String runnablename(argv[0]); if (runnablename.contains('/')) runnablename = runnablename.after('/',-1);
+985         if (runnablename=="formalizer") formalizer_commands(argc,argv);
+986         else dil2al_commands(argc,argv);
+987         exit_report();
+988 }
+\end{verbatim}\normalsize 
+\index{dil2al.cc@{dil2al.cc}!Modify_Element@{Modify\_\-Element}}
+\index{Modify_Element@{Modify\_\-Element}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool Modify\_\-Element ({\bf String} {\em modification})}\label{dil2al_8cc_a104}
+
+
+
+
+Definition at line 377 of file dil2al.cc.
+
+References String::after(), String::at(), String::before(), String::del(), EOUT, String::from(), String::length(), modify\_\-DIL\_\-entry\_\-target\_\-date(), modify\_\-DIL\_\-group\_\-target\_\-dates\_\-cmd(), time\_\-stamp\_\-time(), and update\_\-DIL\_\-entry\_\-elements().
+
+Referenced by dil2al\_\-commands().
+
+
+
+\footnotesize\begin{verbatim}377                                          {
+378         if (modification.length()<1) return false;
+379         char modiftype, eltype = modification[0]; modification.del(0,1);
+380         switch (eltype) {
+381                 case 'E': // DIL entry modifications
+382                         if (modification.length()<1) modiftype = ' ';
+383                         else { modiftype = modification[0]; modification.del(0,1); }
+384                         switch (modiftype) {
+385                                 case 'c': return update_DIL_entry_elements(modification.before('='),0.0,false,0.0,true,0.0,false,time_stamp_time(modification.after('=')));
+386                                 case 'v': return update_DIL_entry_elements(modification.before('='),atof((const char *) String(modification.after('='))),true,0.0,false,0.0,false);
+387                                 case 't':
+388                                         if (String(modification.at(0,5))=="group") return modify_DIL_group_target_dates_cmd(String(modification.from(5))!="direct");
+389                                         else return modify_DIL_entry_target_date(modification.before('='),time_stamp_time(modification.after('=')));
+390                                 default:
+391                                         EOUT << "dil2al: Unknown DIL entry modification request `" << modiftype << "' in Modify_Element()\n";
+392                                         return false;
+393                         }
+394                 default:
+395                         EOUT << "dil2al: Unknown element type `" << eltype << "' in Modify_Element()\n";
+396                         return false;
+397         }
+398 }
+\end{verbatim}\normalsize 
+\index{dil2al.cc@{dil2al.cc}!Set_Parameter@{Set\_\-Parameter}}
+\index{Set_Parameter@{Set\_\-Parameter}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Set\_\-Parameter (char $\ast$ {\em lbuf})}\label{dil2al_8cc_a100}
+
+
+
+
+Definition at line 134 of file dil2al.cc.
+
+References AAU\_\-ASK, AAU\_\-NO, AAU\_\-YES, ACW\_\-ASK, ACW\_\-TIME, ACW\_\-TL, alautoexpand, alautoupdate, alcumtimereqexcerptlength, alcurdayworkedstrategy, aldaydistfunc, ALDAYDISTFUNCLINEAR, ALDAYDISTFUNCSQUARED, aldaydistslope, alepshours, alfocused, algenall, algenregular, alshowcumulativereq, alsyncslack, alwide, alworkdaystart, ask\-ALDILref, askextractconcat, askprocesstype, followlinks, generatealtcs, hierarchyexcerptlength, hierarchymaxdepth, hierarchyplanparse, immediatesearchoutput, indexkeysnum, isdaemon, String::matches(), offercreate, pattern\_\-in\_\-line(), String::prepend(), quicknotedstnum, rapidscheduleupdating, remotesearch, reversehierarchy, searchprogressmeter, sectionsize, sectionstrategy, showflag, substring\_\-from\_\-line(), suggestnameref, targetdatepreferences, TCS\_\-ASK, TCS\_\-CURRENT, TCS\_\-NEW, timechunkoverstrategy, timechunksize, timechunkslack, timechunkunderstrategy, TSS\_\-ASK, TSS\_\-CURRENT, TSS\_\-NEW, UNIE\_\-ASK, UNIE\_\-NO, UNIE\_\-YES, updatenoteineditor, useansi, usequickloadcache, wdworkendprefs, and work\_\-end\_\-preferences().
+
+Referenced by dil2al\_\-commands(), and initialize().
+
+
+
+\footnotesize\begin{verbatim}134                                 {
+135         String confdefs[4];
+136         // notetarget definitions
+137         if (substring_from_line("^[     ]*notetarget[   ]*=[    ]*([^   ]+)[    ]*([^:]+)(.*)$",4,confdefs,lbuf)) {
+138                 if (confdefs[1][0]!='/') confdefs[1].prepend(homedir);
+139                 quicknotedst[quicknotedstnum]=confdefs[1];
+140                 quicknotedsttitle[quicknotedstnum]=confdefs[2];
+141                 quicknotedescr[quicknotedstnum]=confdefs[3];
+142                 quicknotedstnum++;
+143         }
+144         // indexkey definitions
+145         if (substring_from_line("^[     ]*indexkey[     ]*=[    ]*(.+)$",2,confdefs,lbuf)) {
+146                 indexkeys[indexkeysnum]=confdefs[1];
+147                 indexkeysnum++;
+148         }
+149         // preferred editor
+150         if (substring_from_line("^[     ]*editor[       ]*=[    ]*(.+)$",2,confdefs,lbuf)) editor=confdefs[1];
+151         // preferred browser
+152         if (substring_from_line("^[     ]*browser[      ]*=[    ]*(.+)$",2,confdefs,lbuf)) browser=confdefs[1];
+153         // default time chunk size
+154         if (substring_from_line("^[     ]*timechunksize[        ]*=[    ]*(.+)$",2,confdefs,lbuf)) timechunksize=atoi((const char *) confdefs[1]);
+155         // default time chunk slack
+156         if (substring_from_line("^[     ]*timechunkslack[       ]*=[    ]*(.+)$",2,confdefs,lbuf)) timechunkslack=atoi((const char *) confdefs[1]);
+157         // new decision strategy when time chunk is over timechunksize+timechunkslack
+158         if (substring_from_line("^[     ]*timechunkoverstrategy[        ]*=[    ]*(.+)$",2,confdefs,lbuf)) {
+159                 if (confdefs[1]=="TCS_CURRENT") timechunkoverstrategy=TCS_CURRENT;
+160                 else if (confdefs[1]=="TCS_NEW") timechunkoverstrategy=TCS_NEW;
+161                 else if (confdefs[1]=="TCS_ASK") timechunkoverstrategy=TCS_ASK;
+162                 else if (confdefs[1].matches(BRXint)) {
+163                         int q = atoi((const char *) confdefs[1]);
+164                         if ((q==TCS_CURRENT) || (q==TCS_NEW) || (q==TCS_ASK)) timechunkoverstrategy=q;
+165                 }
+166         }
+167         // new decision strategy when time chunk is under timechunksize
+168         if (substring_from_line("^[     ]*timechunkunderstrategy[       ]*=[    ]*(.+)$",2,confdefs,lbuf)) {
+169                 if (confdefs[1]=="TCS_CURRENT") timechunkunderstrategy=TCS_CURRENT;
+170                 else if (confdefs[1]=="TCS_NEW") timechunkunderstrategy=TCS_NEW;
+171                 else if (confdefs[1]=="TCS_ASK") timechunkunderstrategy=TCS_ASK;
+172                 else if (confdefs[1].matches(BRXint)) {
+173                         int q = atoi((const char *) confdefs[1]);
+174                         if ((q==TCS_CURRENT) || (q==TCS_NEW) || (q==TCS_ASK)) timechunkunderstrategy=q;
+175                 }
+176         }
+177         // new TL section decision strategy
+178         if (substring_from_line("^[     ]*sectionstrategy[      ]*=[    ]*(.+)$",2,confdefs,lbuf)) {
+179                 if (confdefs[1]=="TSS_CURRENT") sectionstrategy=TSS_CURRENT;
+180                 else if (confdefs[1]=="TSS_NEW") sectionstrategy=TSS_NEW;
+181                 else if (confdefs[1]=="TSS_ASK") sectionstrategy=TSS_ASK;
+182                 else if (confdefs[1].matches(BRXint)) {
+183                         int q = atoi((const char *) confdefs[1]);
+184                         if ((q==TSS_CURRENT) || (q==TSS_NEW) || (q==TSS_ASK)) sectionstrategy=q;
+185                 }
+186         }
+187         // update note in editor strategy
+188         if (substring_from_line("^[     ]*updatenoteineditor[   ]*=[    ]*(.+)$",2,confdefs,lbuf)) {
+189                 if (confdefs[1]=="UNIE_NO") updatenoteineditor=UNIE_NO;
+190                 else if (confdefs[1]=="UNIE_YES") updatenoteineditor=UNIE_YES;
+191                 else if (confdefs[1]=="UNIE_ASK") updatenoteineditor=UNIE_ASK;
+192                 else if (confdefs[1].matches(BRXint)) {
+193                         int q = atoi((const char *) confdefs[1]);
+194                         if ((q==UNIE_NO) || (q==UNIE_YES) || (q==UNIE_ASK)) updatenoteineditor=q;
+195                 }
+196         }
+197         // AL current work day time worked estimation strategy
+198         if (substring_from_line("^[     ]*alcurdayworkedstrategy[       ]*=[    ]*(.+)$",2,confdefs,lbuf)) {
+199                 if (confdefs[1]=="ACW_TIME") alcurdayworkedstrategy=ACW_TIME;
+200                 else if (confdefs[1]=="ACW_TL") alcurdayworkedstrategy=ACW_TL;
+201                 else if (confdefs[1]=="ACW_ASK") alcurdayworkedstrategy=ACW_ASK;
+202                 else if (confdefs[1].matches(BRXint)) {
+203                         int q = atoi((const char *) confdefs[1]);
+204                         if ((q==ACW_TIME) || (q==ACW_TL) || (q==ACW_ASK)) alcurdayworkedstrategy=q;
+205                 }
+206         }
+207         // automatically update AL and completion ratios strategy
+208         if (substring_from_line("^[     ]*alautoupdate[         ]*=[    ]*(.+)$",2,confdefs,lbuf)) {
+209                 if (confdefs[1]=="AAU_NO") alautoupdate=AAU_NO;
+210                 else if (confdefs[1]=="AAU_YES") alautoupdate=AAU_YES;
+211                 else if (confdefs[1]=="AAU_ASK") alautoupdate=AAU_ASK;
+212                 else if (confdefs[1].matches(BRXint)) {
+213                         int q = atoi((const char *) confdefs[1]);
+214                         if ((q==AAU_NO) || (q==AAU_YES) || (q==AAU_ASK)) alautoupdate=q;
+215                 }
+216         }
+217         // selected AL Day distribution function
+218         if (substring_from_line("^[     ]*aldaydistfunc[        ]*=[    ]*(.+)$",2,confdefs,lbuf)) {
+219                 if (confdefs[1]=="ALDAYDISTFUNCLINEAR") aldaydistfunc=ALDAYDISTFUNCLINEAR;
+220                 else if (confdefs[1]=="ALDAYDISTFUNCSQUARED") aldaydistfunc=ALDAYDISTFUNCSQUARED;
+221                 else if (confdefs[1].matches(BRXint)) {
+222                         int q = atoi((const char *) confdefs[1]);
+223                         if ((q==ALDAYDISTFUNCLINEAR) || (q==ALDAYDISTFUNCSQUARED)) aldaydistfunc=q;
+224                 }
+225         }
+226         // update note in editor command line
+227         if (substring_from_line("^[     ]*updatenoteineditorcmd[        ]*=[    ]*(.+)$",2,confdefs,lbuf)) updatenoteineditorcmd=confdefs[1];
+228         // default TL section size
+229         if (substring_from_line("^[     ]*sectionsize[  ]*=[    ]*(.+)$",2,confdefs,lbuf)) sectionsize=atoi((const char *) confdefs[1]);
+230         // default number of AL TCs to generate
+231         if (substring_from_line("^[     ]*generatealtcs[        ]*=[    ]*(.+)$",2,confdefs,lbuf)) generatealtcs=atol((const char *) confdefs[1]);
+232         // default number of AL TCs to show in the shorter listing
+233         if (substring_from_line("^[     ]*alfocused[    ]*=[    ]*(.+)$",2,confdefs,lbuf)) alfocused=atoi((const char *) confdefs[1]);
+234         // default number of AL TCs to show in the longer listing
+235         if (substring_from_line("^[     ]*alwide[       ]*=[    ]*(.+)$",2,confdefs,lbuf)) alwide=atoi((const char *) confdefs[1]);
+236         // default number of hours in a regular AL-day
+237         if (substring_from_line("^[     ]*algenregular[         ]*=[    ]*(.+)$",2,confdefs,lbuf)) algenregular=atoi((const char *) confdefs[1]);
+238         // default number of hours in an AL-day for an AL with all DIL-entries
+239         if (substring_from_line("^[     ]*algenall[     ]*=[    ]*(.+)$",2,confdefs,lbuf)) algenall=atoi((const char *) confdefs[1]);
+240         // assumed available hours per day for EPS scheduling method
+241         if (substring_from_line("^[     ]*alepshours[   ]*=[    ]*(.+)$",2,confdefs,lbuf)) alepshours=atof((const char *) confdefs[1]);
+242         // default standard start time of work on a regular work day (seconds since midnight)
+243         if (substring_from_line("^[     ]*alworkdaystart[       ]*=[    ]*(.+)$",2,confdefs,lbuf)) alworkdaystart=atol((const char *) confdefs[1]);
+244         // default allowable desynchronization between AL suggested start and current time in seconds
+245         if (substring_from_line("^[     ]*alsyncslack[  ]*=[    ]*(.+)$",2,confdefs,lbuf)) alsyncslack=atol((const char *) confdefs[1]);
+246         // default slope of AL Day distribution
+247         if (substring_from_line("^[     ]*aldaydistslope[       ]*=[    ]*(.+)$",2,confdefs,lbuf)) aldaydistslope=atof((const char *) confdefs[1]);
+248         // command used to set up an at-job
+249         if (substring_from_line("^[     ]*atcommand[    ]*=[    ]*(.+)$",2,confdefs,lbuf)) atcommand=confdefs[1];
+250         // default depth to follow links in a search
+251         if (substring_from_line("^[     ]*followlinks[  ]*=[    ]*(.+)$",2,confdefs,lbuf)) followlinks=atoi((const char *) confdefs[1]);
+252         // HTML form interface
+253         if (substring_from_line("^[     ]*htmlforminterface[    ]*=[    ]*(.+)$",2,confdefs,lbuf)) htmlforminterface=confdefs[1];
+254         // HTML form method
+255         if (substring_from_line("^[     ]*htmlformmethod[       ]*=[    ]*(.+)$",2,confdefs,lbuf)) htmlformmethod=confdefs[1];
+256         // default length of text excerpt from DIL entry in row of Comulative Time Required form
+257         if (substring_from_line("^[     ]*alcumtimereqexcerptlength[    ]*=[    ]*(.+)$",2,confdefs,lbuf)) alcumtimereqexcerptlength=atoi((const char *) confdefs[1]);
+258         // default depth of DIL hierarchy
+259         if (substring_from_line("^[     ]*hierarchymaxdepth[    ]*=[    ]*(.+)$",2,confdefs,lbuf)) hierarchymaxdepth=atoi((const char *) confdefs[1]);
+260         // default length of text excerpt from DIL entry in row of DIL hierarchy
+261         if (substring_from_line("^[     ]*hierarchyexcerptlength[       ]*=[    ]*(.+)$",2,confdefs,lbuf)) hierarchyexcerptlength=atoi((const char *) confdefs[1]);
+262         // automatically expand number of hours per day as necessary
+263         if (pattern_in_line("^[         ]*alautoexpand[         ]*",lbuf)) alautoexpand=true;
+264         if (pattern_in_line("^[         ]*noalautoexpand[       ]*",lbuf)) alautoexpand=false;
+265         // scheduled controller call at-job command line
+266         if (substring_from_line("^[     ]*atcontroller[         ]*=[    ]*(.+)$",2,confdefs,lbuf)) atcontroller=confdefs[1];
+267         if (pattern_in_line("^[         ]*suggestnameref[       ]*",lbuf)) suggestnameref=true;
+268         if (pattern_in_line("^[         ]*askprocesstype[       ]*",lbuf)) askprocesstype=true;
+269         if (pattern_in_line("^[         ]*offercreate[  ]*",lbuf)) offercreate=true;
+270         if (pattern_in_line("^[         ]*askALDILref[  ]*",lbuf)) askALDILref=true;
+271         if (pattern_in_line("^[         ]*showflag[     ]*",lbuf)) showflag=true;
+272         if (substring_from_line("^[     ]*flagcmd[      ]*=[    ]*(.+)$",2,confdefs,lbuf)) flagcmd=confdefs[1];
+273         if (pattern_in_line("^[         ]*noshowflag[   ]*",lbuf)) showflag=false;
+274         if (pattern_in_line("^[         ]*isdaemon[     ]*",lbuf)) isdaemon=true;
+275         if (pattern_in_line("^[         ]*useansi[      ]*",lbuf)) useansi=true;
+276         if (pattern_in_line("^[         ]*nouseansi[    ]*",lbuf)) useansi=false;
+277         if (pattern_in_line("^[         ]*askextractconcat[     ]*",lbuf)) askextractconcat=true;
+278         if (pattern_in_line("^[         ]*noaskextractconcat[   ]*",lbuf)) askextractconcat=false;
+279         if (pattern_in_line("^[         ]*searchprogressmeter[  ]*",lbuf)) searchprogressmeter=true;
+280         if (pattern_in_line("^[         ]*nosearchprogressmeter[        ]*",lbuf)) searchprogressmeter=false;
+281         if (pattern_in_line("^[         ]*immediatesearchoutput[        ]*",lbuf)) immediatesearchoutput=true;
+282         if (pattern_in_line("^[         ]*noimmediatesearchoutput[      ]*",lbuf)) immediatesearchoutput=false;
+283         if (pattern_in_line("^[         ]*remotesearch[         ]*",lbuf)) remotesearch=true;
+284         if (pattern_in_line("^[         ]*noremotesearch[       ]*",lbuf)) remotesearch=false;
+285         if (pattern_in_line("^[         ]*alshowcumulativereq[  ]*",lbuf)) alshowcumulativereq=true;
+286         if (pattern_in_line("^[         ]*noalshowcumulativereq[        ]*",lbuf)) alshowcumulativereq=false;
+287         if (pattern_in_line("^[         ]*rapidscheduleupdating[        ]*",lbuf)) rapidscheduleupdating=true;
+288         if (pattern_in_line("^[         ]*norapidscheduleupdating[      ]*",lbuf)) rapidscheduleupdating=false;
+289         if (pattern_in_line("^[         ]*targetdatepreferences[        ]*",lbuf)) targetdatepreferences=true;
+290         if (pattern_in_line("^[         ]*notargetdatepreferences[      ]*",lbuf)) targetdatepreferences=false;
+291         // the following seven parameters detected set preferred times for each day of the week at which the work day ends (used in the RSU method)
+292         if (substring_from_line("^[     ]*sundayendwork[        ]*=[    ]*(.+)$",2,confdefs,lbuf)) wdworkendprefs[0] = work_end_preferences(confdefs[1]);
+293         if (substring_from_line("^[     ]*mondayendwork[        ]*=[    ]*(.+)$",2,confdefs,lbuf)) wdworkendprefs[1] = work_end_preferences(confdefs[1]);
+294         if (substring_from_line("^[     ]*tuesdayendwork[       ]*=[    ]*(.+)$",2,confdefs,lbuf)) wdworkendprefs[2] = work_end_preferences(confdefs[1]);
+295         if (substring_from_line("^[     ]*wednesdayendwork[     ]*=[    ]*(.+)$",2,confdefs,lbuf)) wdworkendprefs[3] = work_end_preferences(confdefs[1]);
+296         if (substring_from_line("^[     ]*thursdayendwork[      ]*=[    ]*(.+)$",2,confdefs,lbuf)) wdworkendprefs[4] = work_end_preferences(confdefs[1]);
+297         if (substring_from_line("^[     ]*fridayendwork[        ]*=[    ]*(.+)$",2,confdefs,lbuf)) wdworkendprefs[5] = work_end_preferences(confdefs[1]);
+298         if (substring_from_line("^[     ]*saturdayendwork[      ]*=[    ]*(.+)$",2,confdefs,lbuf)) wdworkendprefs[6] = work_end_preferences(confdefs[1]);
+299         if (pattern_in_line("^[         ]*usequickloadcache[    ]*",lbuf)) usequickloadcache=true;
+300         if (pattern_in_line("^[         ]*nousequickloadcache[  ]*",lbuf)) usequickloadcache=false;
+301         if (pattern_in_line("^[         ]*reversehierarchy[     ]*",lbuf)) reversehierarchy=true;
+302         if (pattern_in_line("^[         ]*noreversehierarchy[   ]*",lbuf)) reversehierarchy=false;
+303         if (pattern_in_line("^[         ]*hierarchyplanparse[   ]*",lbuf)) hierarchyplanparse=true;
+304         if (pattern_in_line("^[         ]*nohierarchyplanparse[         ]*",lbuf)) hierarchyplanparse=false;
+305 }
+\end{verbatim}\normalsize 
+\index{dil2al.cc@{dil2al.cc}!work_end_preferences@{work\_\-end\_\-preferences}}
+\index{work_end_preferences@{work\_\-end\_\-preferences}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}time\_\-t work\_\-end\_\-preferences ({\bf String} {\em westr})}\label{dil2al_8cc_a99}
+
+
+
+
+Definition at line 128 of file dil2al.cc.
+
+References weekdayworkendpreferences.
+
+Referenced by Set\_\-Parameter().
+
+
+
+\footnotesize\begin{verbatim}128                                           { // function used in Set_Parameter()
+129   long a = atol((const char *) westr);
+130   weekdayworkendpreferences = true;
+131   return (time_t) (((a/100)*60)+(a%100))*60;
+132 }
+\end{verbatim}\normalsize 
+
+
+\subsection{Variable Documentation}
+\index{dil2al.cc@{dil2al.cc}!alautoexpand@{alautoexpand}}
+\index{alautoexpand@{alautoexpand}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool alautoexpand = {\bf true}}\label{dil2al_8cc_a59}
+
+
+
+
+Definition at line 77 of file dil2al.cc.
+
+Referenced by Detect\_\-Form\_\-Input(), dil2al\_\-commands(), and Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!alautoupdate@{alautoupdate}}
+\index{alautoupdate@{alautoupdate}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int alautoupdate = AAU\_\-YES}\label{dil2al_8cc_a69}
+
+
+
+
+Definition at line 87 of file dil2al.cc.
+
+Referenced by dil2al\_\-commands(), and Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!alcumtimereqexcerptlength@{alcumtimereqexcerptlength}}
+\index{alcumtimereqexcerptlength@{alcumtimereqexcerptlength}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int alcumtimereqexcerptlength = DEFAULTALCUMTIMEREQEXCERPTLENGTH}\label{dil2al_8cc_a61}
+
+
+
+
+Definition at line 79 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!alcurdayworkedstrategy@{alcurdayworkedstrategy}}
+\index{alcurdayworkedstrategy@{alcurdayworkedstrategy}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int alcurdayworkedstrategy = ACW\_\-TIME}\label{dil2al_8cc_a67}
+
+
+
+
+Definition at line 85 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!aldaydistfunc@{aldaydistfunc}}
+\index{aldaydistfunc@{aldaydistfunc}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int aldaydistfunc = ALDAYDISTFUNCLINEAR}\label{dil2al_8cc_a71}
+
+
+
+
+Definition at line 89 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!aldaydistslope@{aldaydistslope}}
+\index{aldaydistslope@{aldaydistslope}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}float aldaydistslope = DEFAULTALDAYDISTSLOPE}\label{dil2al_8cc_a72}
+
+
+
+
+Definition at line 90 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!alepshours@{alepshours}}
+\index{alepshours@{alepshours}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}float alepshours = DEFAULTALEPSHOURS}\label{dil2al_8cc_a58}
+
+
+
+
+Definition at line 76 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!alfocused@{alfocused}}
+\index{alfocused@{alfocused}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int alfocused = DEFAULTALFOCUSED}\label{dil2al_8cc_a54}
+
+
+
+
+Definition at line 72 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!algenall@{algenall}}
+\index{algenall@{algenall}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int algenall = DEFAULTALGENALL}\label{dil2al_8cc_a57}
+
+
+
+
+Definition at line 75 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!algenregular@{algenregular}}
+\index{algenregular@{algenregular}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int algenregular = DEFAULTALGENREGULAR}\label{dil2al_8cc_a56}
+
+
+
+
+Definition at line 74 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!alshowcumulativereq@{alshowcumulativereq}}
+\index{alshowcumulativereq@{alshowcumulativereq}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool alshowcumulativereq = {\bf false}}\label{dil2al_8cc_a60}
+
+
+
+
+Definition at line 78 of file dil2al.cc.
+
+Referenced by Detect\_\-Form\_\-Input(), dil2al\_\-commands(), and Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!alsyncslack@{alsyncslack}}
+\index{alsyncslack@{alsyncslack}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}time\_\-t alsyncslack = DEFAULTALSYNCSLACK}\label{dil2al_8cc_a70}
+
+
+
+
+Definition at line 88 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!alwide@{alwide}}
+\index{alwide@{alwide}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int alwide = DEFAULTALWIDE}\label{dil2al_8cc_a55}
+
+
+
+
+Definition at line 73 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!alworkdaystart@{alworkdaystart}}
+\index{alworkdaystart@{alworkdaystart}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}time\_\-t alworkdaystart = DEFAULTALWORKDAYSTART}\label{dil2al_8cc_a66}
+
+
+
+
+Definition at line 84 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!alworked@{alworked}}
+\index{alworked@{alworked}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}time\_\-t alworked = -1}\label{dil2al_8cc_a68}
+
+
+
+
+Definition at line 86 of file dil2al.cc.
+
+Referenced by Detect\_\-Form\_\-Input(), and dil2al\_\-commands().\index{dil2al.cc@{dil2al.cc}!articleheadtemplate@{articleheadtemplate}}
+\index{articleheadtemplate@{articleheadtemplate}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} articleheadtemplate = ARTICLEHEADTEMPLATE}\label{dil2al_8cc_a21}
+
+
+
+
+Definition at line 47 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!articletailtemplate@{articletailtemplate}}
+\index{articletailtemplate@{articletailtemplate}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} articletailtemplate = ARTICLETAILTEMPLATE}\label{dil2al_8cc_a22}
+
+
+
+
+Definition at line 48 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!askALDILref@{askALDILref}}
+\index{askALDILref@{askALDILref}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool ask\-ALDILref = {\bf false}}\label{dil2al_8cc_a36}
+
+
+
+
+Definition at line 59 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!askextractconcat@{askextractconcat}}
+\index{askextractconcat@{askextractconcat}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool askextractconcat = {\bf true}}\label{dil2al_8cc_a40}
+
+
+
+
+Definition at line 59 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!askprocesstype@{askprocesstype}}
+\index{askprocesstype@{askprocesstype}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool askprocesstype = {\bf false}}\label{dil2al_8cc_a34}
+
+
+
+
+Definition at line 58 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!atcommand@{atcommand}}
+\index{atcommand@{atcommand}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} atcommand = DEFAULTATCOMMAND}\label{dil2al_8cc_a79}
+
+
+
+
+Definition at line 105 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!atcontroller@{atcontroller}}
+\index{atcontroller@{atcontroller}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} atcontroller = DEFAULTATCONTROLLER}\label{dil2al_8cc_a80}
+
+
+
+
+Definition at line 106 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!basedir@{basedir}}
+\index{basedir@{basedir}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} basedir = RELDIRHTML}\label{dil2al_8cc_a2}
+
+
+
+
+Definition at line 28 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!bibindexfile@{bibindexfile}}
+\index{bibindexfile@{bibindexfile}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} bibindexfile = BIBINDEXFILE}\label{dil2al_8cc_a20}
+
+
+
+
+Definition at line 46 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!bibindexfilename@{bibindexfilename}}
+\index{bibindexfilename@{bibindexfilename}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} bibindexfilename}\label{dil2al_8cc_a19}
+
+
+
+
+Definition at line 45 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!browser@{browser}}
+\index{browser@{browser}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} browser = DEFAULTBROWSER}\label{dil2al_8cc_a84}
+
+
+
+
+Definition at line 110 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!cacheidfile@{cacheidfile}}
+\index{cacheidfile@{cacheidfile}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} cacheidfile}\label{dil2al_8cc_a7}
+
+
+
+
+Definition at line 33 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!calledbyforminput@{calledbyforminput}}
+\index{calledbyforminput@{calledbyforminput}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool calledbyforminput = {\bf false}}\label{dil2al_8cc_a14}
+
+
+
+
+Definition at line 40 of file dil2al.cc.
+
+Referenced by Detect\_\-Form\_\-Input().\index{dil2al.cc@{dil2al.cc}!chunkcreated@{chunkcreated}}
+\index{chunkcreated@{chunkcreated}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool chunkcreated}\label{dil2al_8cc_a97}
+
+
+
+
+Definition at line 123 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!configfile@{configfile}}
+\index{configfile@{configfile}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} configfile = CONFIGFILE}\label{dil2al_8cc_a88}
+
+
+
+
+Definition at line 114 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!crcidfile@{crcidfile}}
+\index{crcidfile@{crcidfile}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} crcidfile}\label{dil2al_8cc_a6}
+
+
+
+
+Definition at line 32 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!curdate@{curdate}}
+\index{curdate@{curdate}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} curdate}\label{dil2al_8cc_a43}
+
+
+
+
+Definition at line 62 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!curtime@{curtime}}
+\index{curtime@{curtime}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} curtime}\label{dil2al_8cc_a44}
+
+
+
+
+Definition at line 62 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!dil@{dil}}
+\index{dil@{dil}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Topical\_\-DIL\_\-Files\_\-Root} dil}\label{dil2al_8cc_a31}
+
+
+
+
+Definition at line 57 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!dilref@{dilref}}
+\index{dilref@{dilref}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} dilref = DILREFFILE}\label{dil2al_8cc_a12}
+
+
+
+
+Definition at line 38 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!din@{din}}
+\index{din@{din}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}istream$\ast$ din}\label{dil2al_8cc_a26}
+
+
+
+
+Definition at line 52 of file dil2al.cc.
+
+Referenced by dil2al\_\-commands(), and main().\index{dil2al.cc@{dil2al.cc}!dinfile@{dinfile}}
+\index{dinfile@{dinfile}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}ifstream dinfile}\label{dil2al_8cc_a25}
+
+
+
+
+Definition at line 51 of file dil2al.cc.
+
+Referenced by dil2al\_\-commands().\index{dil2al.cc@{dil2al.cc}!editor@{editor}}
+\index{editor@{editor}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} editor = DEFAULTEDITOR}\label{dil2al_8cc_a83}
+
+
+
+
+Definition at line 109 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!emulatedtime@{emulatedtime}}
+\index{emulatedtime@{emulatedtime}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}time\_\-t emulatedtime = 0}\label{dil2al_8cc_a42}
+
+
+
+
+Definition at line 61 of file dil2al.cc.
+
+Referenced by dil2al\_\-commands().\index{dil2al.cc@{dil2al.cc}!eout@{eout}}
+\index{eout@{eout}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}ostream$\ast$ eout}\label{dil2al_8cc_a28}
+
+
+
+
+Definition at line 54 of file dil2al.cc.
+
+Referenced by dil2al\_\-commands(), Form\_\-Reply\_\-Open(), and main().\index{dil2al.cc@{dil2al.cc}!eoutfile@{eoutfile}}
+\index{eoutfile@{eoutfile}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}ofstream eoutfile}\label{dil2al_8cc_a27}
+
+
+
+
+Definition at line 53 of file dil2al.cc.
+
+Referenced by dil2al\_\-commands().\index{dil2al.cc@{dil2al.cc}!figuresdirectory@{figuresdirectory}}
+\index{figuresdirectory@{figuresdirectory}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} figuresdirectory = FIGURESDIRECTORY}\label{dil2al_8cc_a11}
+
+
+
+
+Definition at line 37 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!finnotesfile@{finnotesfile}}
+\index{finnotesfile@{finnotesfile}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} finnotesfile = FINNOTESFILE}\label{dil2al_8cc_a89}
+
+
+
+
+Definition at line 115 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!flagcmd@{flagcmd}}
+\index{flagcmd@{flagcmd}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} flagcmd = DEFAULTFLAGCMD}\label{dil2al_8cc_a85}
+
+
+
+
+Definition at line 111 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!followlinks@{followlinks}}
+\index{followlinks@{followlinks}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int followlinks = 0}\label{dil2al_8cc_a15}
+
+
+
+
+Definition at line 41 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!generatealmaxt@{generatealmaxt}}
+\index{generatealmaxt@{generatealmaxt}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}time\_\-t generatealmaxt = 0}\label{dil2al_8cc_a53}
+
+
+
+
+Definition at line 71 of file dil2al.cc.
+
+Referenced by Detect\_\-Form\_\-Input(), and dil2al\_\-commands().\index{dil2al.cc@{dil2al.cc}!generatealtcs@{generatealtcs}}
+\index{generatealtcs@{generatealtcs}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}long generatealtcs = DEFAULTALTCS}\label{dil2al_8cc_a52}
+
+
+
+
+Definition at line 70 of file dil2al.cc.
+
+Referenced by Detect\_\-Form\_\-Input(), dil2al\_\-commands(), and Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!hierarchyexcerptlength@{hierarchyexcerptlength}}
+\index{hierarchyexcerptlength@{hierarchyexcerptlength}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int hierarchyexcerptlength = DEFAULTHIERARCHYEXCERPTLENGTH}\label{dil2al_8cc_a76}
+
+
+
+
+Definition at line 102 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!hierarchymaxdepth@{hierarchymaxdepth}}
+\index{hierarchymaxdepth@{hierarchymaxdepth}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int hierarchymaxdepth = DEFAULTHIERARCHYMAXDEPTH}\label{dil2al_8cc_a75}
+
+
+
+
+Definition at line 101 of file dil2al.cc.
+
+Referenced by dil2al\_\-commands(), and Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!hierarchyplanparse@{hierarchyplanparse}}
+\index{hierarchyplanparse@{hierarchyplanparse}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool hierarchyplanparse = {\bf false}}\label{dil2al_8cc_a74}
+
+
+
+
+Definition at line 100 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!homedir@{homedir}}
+\index{homedir@{homedir}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} homedir = DEFAULTHOMEDIR}\label{dil2al_8cc_a1}
+
+
+
+
+Definition at line 27 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!htmlforminterface@{htmlforminterface}}
+\index{htmlforminterface@{htmlforminterface}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} htmlforminterface = DEFAULT\_\-HTMLFORM\_\-INTERFACE}\label{dil2al_8cc_a81}
+
+
+
+
+Definition at line 107 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!htmlformmethod@{htmlformmethod}}
+\index{htmlformmethod@{htmlformmethod}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} htmlformmethod = DEFAULT\_\-HTMLFORM\_\-METHOD}\label{dil2al_8cc_a82}
+
+
+
+
+Definition at line 108 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!idfile@{idfile}}
+\index{idfile@{idfile}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} idfile = DILBYIDFILE}\label{dil2al_8cc_a4}
+
+
+
+
+Definition at line 30 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!immediatesearchoutput@{immediatesearchoutput}}
+\index{immediatesearchoutput@{immediatesearchoutput}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool immediatesearchoutput = {\bf true}}\label{dil2al_8cc_a17}
+
+
+
+
+Definition at line 43 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!indexkeys@{indexkeys}}
+\index{indexkeys@{indexkeys}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String\-List} indexkeys}\label{dil2al_8cc_a94}
+
+
+
+
+Definition at line 120 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!indexkeysnum@{indexkeysnum}}
+\index{indexkeysnum@{indexkeysnum}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int indexkeysnum = 0}\label{dil2al_8cc_a95}
+
+
+
+
+Definition at line 121 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!isdaemon@{isdaemon}}
+\index{isdaemon@{isdaemon}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool isdaemon = {\bf false}}\label{dil2al_8cc_a38}
+
+
+
+
+Definition at line 59 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!listfile@{listfile}}
+\index{listfile@{listfile}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} listfile = DILMAIN}\label{dil2al_8cc_a3}
+
+
+
+
+Definition at line 29 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!lockidfile@{lockidfile}}
+\index{lockidfile@{lockidfile}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} lockidfile}\label{dil2al_8cc_a5}
+
+
+
+
+Definition at line 31 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!looplist@{looplist}}
+\index{looplist@{looplist}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Detailed\_\-Items\_\-List}$\ast$ looplist = NULL}\label{dil2al_8cc_a98}
+
+
+
+
+Definition at line 125 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!newTLID@{newTLID}}
+\index{newTLID@{newTLID}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} new\-TLID}\label{dil2al_8cc_a96}
+
+
+
+
+Definition at line 122 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!notetmpfile@{notetmpfile}}
+\index{notetmpfile@{notetmpfile}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} notetmpfile = NOTETMPFILE}\label{dil2al_8cc_a86}
+
+
+
+
+Definition at line 112 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!numDILs@{numDILs}}
+\index{numDILs@{numDILs}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int num\-DILs}\label{dil2al_8cc_a30}
+
+
+
+
+Definition at line 56 of file dil2al.cc.
+
+Referenced by initialize().\index{dil2al.cc@{dil2al.cc}!offercreate@{offercreate}}
+\index{offercreate@{offercreate}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool offercreate = {\bf false}}\label{dil2al_8cc_a35}
+
+
+
+
+Definition at line 58 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!owner@{owner}}
+\index{owner@{owner}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} owner = OWNER}\label{dil2al_8cc_a45}
+
+
+
+
+Definition at line 63 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!paperplansfile@{paperplansfile}}
+\index{paperplansfile@{paperplansfile}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} paperplansfile = PAPERPLANSFILE}\label{dil2al_8cc_a10}
+
+
+
+
+Definition at line 36 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!quicknotedescr@{quicknotedescr}}
+\index{quicknotedescr@{quicknotedescr}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String\-List} quicknotedescr}\label{dil2al_8cc_a92}
+
+
+
+
+Definition at line 118 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!quicknotedst@{quicknotedst}}
+\index{quicknotedst@{quicknotedst}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String\-List} quicknotedst}\label{dil2al_8cc_a90}
+
+
+
+
+Definition at line 116 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!quicknotedstnum@{quicknotedstnum}}
+\index{quicknotedstnum@{quicknotedstnum}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int quicknotedstnum = 0}\label{dil2al_8cc_a93}
+
+
+
+
+Definition at line 119 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!quicknotedsttitle@{quicknotedsttitle}}
+\index{quicknotedsttitle@{quicknotedsttitle}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String\-List} quicknotedsttitle}\label{dil2al_8cc_a91}
+
+
+
+
+Definition at line 117 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!rapidscheduleupdating@{rapidscheduleupdating}}
+\index{rapidscheduleupdating@{rapidscheduleupdating}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool rapidscheduleupdating = {\bf true}}\label{dil2al_8cc_a62}
+
+
+
+
+Definition at line 80 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!remotesearch@{remotesearch}}
+\index{remotesearch@{remotesearch}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool remotesearch = {\bf true}}\label{dil2al_8cc_a18}
+
+
+
+
+Definition at line 44 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!reversehierarchy@{reversehierarchy}}
+\index{reversehierarchy@{reversehierarchy}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool reversehierarchy = {\bf false}}\label{dil2al_8cc_a73}
+
+
+
+
+Definition at line 99 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!searchprogressmeter@{searchprogressmeter}}
+\index{searchprogressmeter@{searchprogressmeter}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool searchprogressmeter = {\bf false}}\label{dil2al_8cc_a16}
+
+
+
+
+Definition at line 42 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!sectionsize@{sectionsize}}
+\index{sectionsize@{sectionsize}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int sectionsize = DEFAULTSECTIONSIZE}\label{dil2al_8cc_a50}
+
+
+
+
+Definition at line 68 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!sectionstrategy@{sectionstrategy}}
+\index{sectionstrategy@{sectionstrategy}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int sectionstrategy = TSS\_\-ASK}\label{dil2al_8cc_a51}
+
+
+
+
+Definition at line 69 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!showflag@{showflag}}
+\index{showflag@{showflag}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool showflag = {\bf true}}\label{dil2al_8cc_a37}
+
+
+
+
+Definition at line 59 of file dil2al.cc.
+
+Referenced by dil2al\_\-commands(), and Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!suggestnameref@{suggestnameref}}
+\index{suggestnameref@{suggestnameref}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool suggestnameref = {\bf false}}\label{dil2al_8cc_a33}
+
+
+
+
+Definition at line 58 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!tareadfile@{tareadfile}}
+\index{tareadfile@{tareadfile}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} tareadfile = TAREADFILE}\label{dil2al_8cc_a13}
+
+
+
+
+Definition at line 39 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!targetdatepreferences@{targetdatepreferences}}
+\index{targetdatepreferences@{targetdatepreferences}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool targetdatepreferences = {\bf true}}\label{dil2al_8cc_a63}
+
+
+
+
+Definition at line 81 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!tasklog@{tasklog}}
+\index{tasklog@{tasklog}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} tasklog = TASKLOGFILE}\label{dil2al_8cc_a8}
+
+
+
+
+Definition at line 34 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!taskloghead@{taskloghead}}
+\index{taskloghead@{taskloghead}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} taskloghead = \char`\"{}\char`\"{}}\label{dil2al_8cc_a9}
+
+
+
+
+Definition at line 35 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!templatearticlesubsection@{templatearticlesubsection}}
+\index{templatearticlesubsection@{templatearticlesubsection}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} templatearticlesubsection = TEMPLATEARTICLESUBSECTION}\label{dil2al_8cc_a23}
+
+
+
+
+Definition at line 49 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!templatearticlesubsubsection@{templatearticlesubsubsection}}
+\index{templatearticlesubsubsection@{templatearticlesubsubsection}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} templatearticlesubsubsection = TEMPLATEARTICLESUBSUBSECTION}\label{dil2al_8cc_a24}
+
+
+
+
+Definition at line 50 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!timechunkoverstrategy@{timechunkoverstrategy}}
+\index{timechunkoverstrategy@{timechunkoverstrategy}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int timechunkoverstrategy = TCS\_\-ASK}\label{dil2al_8cc_a48}
+
+
+
+
+Definition at line 66 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!timechunksize@{timechunksize}}
+\index{timechunksize@{timechunksize}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int timechunksize = DEFAULTCHUNKSIZE}\label{dil2al_8cc_a46}
+
+
+
+
+Definition at line 64 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!timechunkslack@{timechunkslack}}
+\index{timechunkslack@{timechunkslack}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int timechunkslack = DEFAULTCHUNKSLACK}\label{dil2al_8cc_a47}
+
+
+
+
+Definition at line 65 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!timechunkunderstrategy@{timechunkunderstrategy}}
+\index{timechunkunderstrategy@{timechunkunderstrategy}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int timechunkunderstrategy = TCS\_\-ASK}\label{dil2al_8cc_a49}
+
+
+
+
+Definition at line 67 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!tlentrytmpfile@{tlentrytmpfile}}
+\index{tlentrytmpfile@{tlentrytmpfile}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} tlentrytmpfile = TLENTRYTMPFILE}\label{dil2al_8cc_a87}
+
+
+
+
+Definition at line 113 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!updatenoteineditor@{updatenoteineditor}}
+\index{updatenoteineditor@{updatenoteineditor}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int updatenoteineditor = UNIE\_\-ASK}\label{dil2al_8cc_a78}
+
+
+
+
+Definition at line 104 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!updatenoteineditorcmd@{updatenoteineditorcmd}}
+\index{updatenoteineditorcmd@{updatenoteineditorcmd}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} updatenoteineditorcmd = DEFAULTUNIECMD}\label{dil2al_8cc_a77}
+
+
+
+
+Definition at line 103 of file dil2al.cc.\index{dil2al.cc@{dil2al.cc}!useansi@{useansi}}
+\index{useansi@{useansi}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool useansi = {\bf true}}\label{dil2al_8cc_a39}
+
+
+
+
+Definition at line 59 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!usequickloadcache@{usequickloadcache}}
+\index{usequickloadcache@{usequickloadcache}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool usequickloadcache = {\bf false}}\label{dil2al_8cc_a41}
+
+
+
+
+Definition at line 60 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!verbose@{verbose}}
+\index{verbose@{verbose}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool verbose = {\bf true}}\label{dil2al_8cc_a32}
+
+
+
+
+Definition at line 58 of file dil2al.cc.
+
+Referenced by dil2al\_\-commands().\index{dil2al.cc@{dil2al.cc}!vout@{vout}}
+\index{vout@{vout}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}ostream$\ast$ vout}\label{dil2al_8cc_a29}
+
+
+
+
+Definition at line 55 of file dil2al.cc.
+
+Referenced by dil2al\_\-commands(), and main().\index{dil2al.cc@{dil2al.cc}!wdworkendprefs@{wdworkendprefs}}
+\index{wdworkendprefs@{wdworkendprefs}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}time\_\-t wdworkendprefs[7] = \{-1,-1,-1,-1,-1,-1,-1\}}\label{dil2al_8cc_a65}
+
+
+
+
+Definition at line 83 of file dil2al.cc.
+
+Referenced by Set\_\-Parameter().\index{dil2al.cc@{dil2al.cc}!weekdayworkendpreferences@{weekdayworkendpreferences}}
+\index{weekdayworkendpreferences@{weekdayworkendpreferences}!dil2al.cc@{dil2al.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool weekdayworkendpreferences = {\bf false}}\label{dil2al_8cc_a64}
+
+
+
+
+Definition at line 82 of file dil2al.cc.
+
+Referenced by work\_\-end\_\-preferences().

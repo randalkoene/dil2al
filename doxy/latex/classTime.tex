@@ -1,0 +1,189 @@
+\section{Time  Class Reference}
+\label{classTime}\index{Time@{Time}}
+{\tt \#include $<$dil2al.hh$>$}
+
+\subsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf Time} ()
+\item 
+{\bf Time} (time\_\-t tinit)
+\item 
+{\bf Time} (const char $\ast$tlocal, bool withseconds={\bf false})
+\item 
+{\bf Time} (int h, int m, int s)
+\item 
+void {\bf local2caltime} (const char $\ast$tlocal, bool withseconds={\bf false})
+\item 
+{\bf String} {\bf caltime2local} (const char $\ast$dateformat)
+\item 
+{\bf String} {\bf caltime2GM} (const char $\ast$dateformat)
+\item 
+{\bf String} {\bf caltime2interval} (const char $\ast$dateformat)
+\item 
+time\_\-t {\bf date} (Time $\ast$tdate)
+\end{CompactItemize}
+\subsection*{Protected Attributes}
+\begin{CompactItemize}
+\item 
+time\_\-t {\bf t}
+\end{CompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Time@{Time}!Time@{Time}}
+\index{Time@{Time}!Time@{Time}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Time::Time ()\hspace{0.3cm}{\tt  [inline]}}\label{classTime_a0}
+
+
+
+
+Definition at line 84 of file dil2al.hh.
+
+References t.
+
+
+
+\footnotesize\begin{verbatim}84 : t(0) {}
+\end{verbatim}\normalsize 
+\index{Time@{Time}!Time@{Time}}
+\index{Time@{Time}!Time@{Time}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Time::Time (time\_\-t {\em tinit})\hspace{0.3cm}{\tt  [inline]}}\label{classTime_a1}
+
+
+
+
+Definition at line 85 of file dil2al.hh.
+
+References t.
+
+
+
+\footnotesize\begin{verbatim}85 { if (tinit<0) tinit=time(NULL); t=tinit; }
+\end{verbatim}\normalsize 
+\index{Time@{Time}!Time@{Time}}
+\index{Time@{Time}!Time@{Time}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Time::Time (const char $\ast$ {\em tlocal}, bool {\em withseconds} = {\bf false})\hspace{0.3cm}{\tt  [inline]}}\label{classTime_a2}
+
+
+
+
+Definition at line 86 of file dil2al.hh.
+
+References local2caltime().
+
+
+
+\footnotesize\begin{verbatim}86 { local2caltime(tlocal,withseconds); }
+\end{verbatim}\normalsize 
+\index{Time@{Time}!Time@{Time}}
+\index{Time@{Time}!Time@{Time}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Time::Time (int {\em h}, int {\em m}, int {\em s})\hspace{0.3cm}{\tt  [inline]}}\label{classTime_a3}
+
+
+
+
+Definition at line 87 of file dil2al.hh.
+
+References t.
+
+
+
+\footnotesize\begin{verbatim}87 { t = (((((time_t) h)*60)+((time_t) m))*60)+((time_t) s); }
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Function Documentation}
+\index{Time@{Time}!caltime2GM@{caltime2GM}}
+\index{caltime2GM@{caltime2GM}!Time@{Time}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} Time::caltime2GM (const char $\ast$ {\em dateformat})\hspace{0.3cm}{\tt  [inline]}}\label{classTime_a6}
+
+
+
+
+Definition at line 90 of file dil2al.hh.
+
+Referenced by caltime2interval().
+
+
+
+\footnotesize\begin{verbatim}90 {} // time_stamp_GM
+\end{verbatim}\normalsize 
+\index{Time@{Time}!caltime2interval@{caltime2interval}}
+\index{caltime2interval@{caltime2interval}!Time@{Time}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} Time::caltime2interval (const char $\ast$ {\em dateformat})\hspace{0.3cm}{\tt  [inline]}}\label{classTime_a7}
+
+
+
+
+Definition at line 91 of file dil2al.hh.
+
+References caltime2GM().
+
+
+
+\footnotesize\begin{verbatim}91 { return caltime2GM(dateformat); }
+\end{verbatim}\normalsize 
+\index{Time@{Time}!caltime2local@{caltime2local}}
+\index{caltime2local@{caltime2local}!Time@{Time}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} Time::caltime2local (const char $\ast$ {\em dateformat})}\label{classTime_a5}
+
+
+
+
+Definition at line 25 of file utilities.cc.
+
+References t, and time\_\-stamp().
+
+
+
+\footnotesize\begin{verbatim}25                                                   {
+26         return time_stamp(dateformat,t);
+27 }
+\end{verbatim}\normalsize 
+\index{Time@{Time}!date@{date}}
+\index{date@{date}!Time@{Time}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}time\_\-t Time::date (Time $\ast$ {\em tdate})\hspace{0.3cm}{\tt  [inline]}}\label{classTime_a8}
+
+
+
+
+Definition at line 92 of file dil2al.hh.
+
+
+
+\footnotesize\begin{verbatim}92 {} // time_stamp_time_date
+\end{verbatim}\normalsize 
+\index{Time@{Time}!local2caltime@{local2caltime}}
+\index{local2caltime@{local2caltime}!Time@{Time}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Time::local2caltime (const char $\ast$ {\em tlocal}, bool {\em withseconds} = {\bf false})\hspace{0.3cm}{\tt  [inline]}}\label{classTime_a4}
+
+
+
+
+Definition at line 88 of file dil2al.hh.
+
+Referenced by Time().
+
+
+
+\footnotesize\begin{verbatim}88 {} // time_stamp_time integrated with time_stamp_time_of_day
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Data Documentation}
+\index{Time@{Time}!t@{t}}
+\index{t@{t}!Time@{Time}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}time\_\-t Time::t\hspace{0.3cm}{\tt  [protected]}}\label{classTime_n0}
+
+
+
+
+Definition at line 82 of file dil2al.hh.
+
+Referenced by caltime2local(), and Time().
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf dil2al.hh}\item 
+{\bf utilities.cc}\end{CompactItemize}

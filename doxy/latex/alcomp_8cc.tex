@@ -1,0 +1,933 @@
+\section{alcomp.cc File Reference}
+\label{alcomp_8cc}\index{alcomp.cc@{alcomp.cc}}
+{\tt \#include \char`\"{}dil2al.hh\char`\"{}}\par
+\subsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define {\bf AL\_\-PREPARATION\_\-DELAY}\ 60
+\item 
+\#define {\bf LOCAL\_\-CLEAN\_\-EXIT}\ \{ delete[$\,$] req; return {\bf false}; \}
+\item 
+\#define {\bf GENERATE\_\-AL\_\-DEPLOOP\_\-CONTINUE}\ prevde = dep[i]; continue
+\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+int {\bf get\_\-topic\_\-keywords} ()
+\item 
+{\bf String} {\bf generate\_\-AL\_\-full\_\-entry} ({\bf String} dilid, int chunkfreq)
+\item 
+{\bf String} {\bf generate\_\-AL\_\-entry} ({\bf String} dilid, bool ishighestpriority={\bf false})
+\item 
+{\bf String} {\bf AL\_\-Day\_\-Marker} ({\bf String} \&dstfile, {\bf AL\_\-Day} $\ast$ald)
+\item 
+{\bf String} {\bf AL\_\-Passed\_\-Target\_\-Dates} ({\bf String} \&dstfile, {\bf AL\_\-TD} $\ast$atd)
+\item 
+bool {\bf update\_\-main\_\-ALs} ({\bf DIL\_\-entry} $\ast$superior)
+\item 
+float {\bf linear\_\-distribution} (float i, float i\_\-limit)
+\item 
+long $\ast$ {\bf DIL\_\-Required\_\-Task\_\-Chunks} ({\bf DIL\_\-entry} $\ast$$\ast$dep, int deplen)
+\item 
+void {\bf Get\_\-Worked\_\-Estimate} ()
+\item 
+void {\bf generate\_\-EPS\_\-cells} (time\_\-t grouptd, {\bf String} \&cumreqstr, {\bf String} \&rowreqstr, double \&groupreq, double cumreq, time\_\-t t\_\-current, {\bf DIL\_\-entry} \&de)
+\item 
+bool {\bf generate\_\-AL} ({\bf DIL\_\-entry} $\ast$$\ast$dep, {\bf DIL\_\-entry} $\ast$superior=NULL)
+\item 
+int {\bf get\_\-AL\_\-entry} ({\bf String} \&alstr, int alpos, {\bf String} \&rowcontent, int \&rowstart, int \&rowend)
+\item 
+bool {\bf remove\_\-AL\_\-TC} ({\bf String} alref, {\bf String} dilid)
+\item 
+bool {\bf update\_\-DIL\_\-to\_\-AL} ()
+\item 
+bool {\bf refresh\_\-quick\_\-load\_\-cache} ()
+\end{CompactItemize}
+
+
+\subsection{Define Documentation}
+\index{alcomp.cc@{alcomp.cc}!AL_PREPARATION_DELAY@{AL\_\-PREPARATION\_\-DELAY}}
+\index{AL_PREPARATION_DELAY@{AL\_\-PREPARATION\_\-DELAY}!alcomp.cc@{alcomp.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define AL\_\-PREPARATION\_\-DELAY\ 60}\label{alcomp_8cc_a0}
+
+
+
+
+Definition at line 267 of file alcomp.cc.
+
+Referenced by generate\_\-AL().\index{alcomp.cc@{alcomp.cc}!GENERATE_AL_DEPLOOP_CONTINUE@{GENERATE\_\-AL\_\-DEPLOOP\_\-CONTINUE}}
+\index{GENERATE_AL_DEPLOOP_CONTINUE@{GENERATE\_\-AL\_\-DEPLOOP\_\-CONTINUE}!alcomp.cc@{alcomp.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define GENERATE\_\-AL\_\-DEPLOOP\_\-CONTINUE\ prevde = dep[i]; continue}\label{alcomp_8cc_a2}
+
+
+\index{alcomp.cc@{alcomp.cc}!LOCAL_CLEAN_EXIT@{LOCAL\_\-CLEAN\_\-EXIT}}
+\index{LOCAL_CLEAN_EXIT@{LOCAL\_\-CLEAN\_\-EXIT}!alcomp.cc@{alcomp.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define LOCAL\_\-CLEAN\_\-EXIT\ \{ delete[$\,$] req; return {\bf false}; \}}\label{alcomp_8cc_a1}
+
+
+
+
+\subsection{Function Documentation}
+\index{alcomp.cc@{alcomp.cc}!AL_Day_Marker@{AL\_\-Day\_\-Marker}}
+\index{AL_Day_Marker@{AL\_\-Day\_\-Marker}!alcomp.cc@{alcomp.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} AL\_\-Day\_\-Marker ({\bf String} \& {\em dstfile}, {\bf AL\_\-Day} $\ast$ {\em ald})}\label{alcomp_8cc_a6}
+
+
+
+
+Definition at line 74 of file alcomp.cc.
+
+References AL\_\-Day::Day\-Date(), AL\_\-Day::Day\-Maxt(), AL\_\-Day::Day\-Start(), AL\_\-Day::Day\-Start\-Min(), AL\_\-Day::Day\-Type(), DEFAULTALDAYEMPHASIS, AL\_\-Day::Expanded(), HTML\_\-put\_\-href(), HTML\_\-put\_\-table\_\-cell(), HTML\_\-put\_\-table\_\-row(), PLL\_\-LOOP\_\-FORWARD, relurl(), AL\_\-Day::TD\_\-Head(), time\_\-stamp(), time\_\-stamp\_\-GM(), and AL\_\-Day::Total().
+
+Referenced by Active\_\-List::generate\_\-focused\_\-AL(), and Active\_\-List::generate\_\-wide\_\-AL().
+
+
+
+\footnotesize\begin{verbatim}74                                                      {
+75 // Generates a table row with data about ald for inclusion in AL files
+76         if (!ald) return String("");
+77         String daytxt = "<!-- @select_TL_DIL_refs: SKIP ROW@ --><B>Day " + time_stamp("%Y%m%d",ald->DayDate())
+78                         + "</B> (suggested start " + time_stamp_GM("%H:%M",ald->DayStart()) + ", limits "
+79                         + time_stamp_GM("%H:%M",ald->DayStartMin()) + '-' + time_stamp_GM("%H:%M",ald->DayMaxt());
+80         if (ald->DayType()==1) daytxt += ", worked " + time_stamp_GM("%H:%M",alworked);
+81         daytxt += "), "; daytxt += dec(ald->Total()); daytxt += " task chunks";
+82         if (ald->Expanded()) daytxt += " (expanded)";
+83         if (ald->TD_Head()) {
+84                 String relidfile(relurl(dstfile,idfile));
+85                 daytxt += ", target dates: ";
+86                 PLL_LOOP_FORWARD(AL_TD,ald->TD_Head(),1) {
+87                         daytxt += HTML_put_href((relidfile+'#')+e->DE()->chars(),"DIL#" + String(e->DE()->chars()));
+88                         daytxt += " (" + time_stamp("%H:%M",e->DE()->Target_Date()) + ')';
+89                         if (e->Next()) daytxt += ", ";
+90                 }
+91         }
+92         return HTML_put_table_row(DEFAULTALDAYEMPHASIS,HTML_put_table_cell("",daytxt)) + '\n';
+93 }
+\end{verbatim}\normalsize 
+\index{alcomp.cc@{alcomp.cc}!AL_Passed_Target_Dates@{AL\_\-Passed\_\-Target\_\-Dates}}
+\index{AL_Passed_Target_Dates@{AL\_\-Passed\_\-Target\_\-Dates}!alcomp.cc@{alcomp.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} AL\_\-Passed\_\-Target\_\-Dates ({\bf String} \& {\em dstfile}, {\bf AL\_\-TD} $\ast$ {\em atd})}\label{alcomp_8cc_a7}
+
+
+
+
+Definition at line 95 of file alcomp.cc.
+
+References Elipsis\_\-At(), HTML\_\-put\_\-form(), HTML\_\-put\_\-form\_\-checkbox(), HTML\_\-put\_\-form\_\-input(), HTML\_\-put\_\-form\_\-radio(), HTML\_\-put\_\-form\_\-reset(), HTML\_\-put\_\-form\_\-submit(), HTML\_\-put\_\-form\_\-text(), HTML\_\-put\_\-href(), HTML\_\-remove\_\-tags(), PLL\_\-LOOP\_\-FORWARD, relurl(), and time\_\-stamp().
+
+Referenced by Active\_\-List::generate\_\-focused\_\-AL().
+
+
+
+\footnotesize\begin{verbatim}95                                                              {
+96 // Generates a list of passed target date DIL entries
+97   if (atd) {
+98     String diltext;
+99     String passedstr(HTML_put_form_input("hidden","name=\"dil2al\" value=\"MEtgroup\"")+"\n<B>Passed Target Dates:</B>\n<UL>\n"), relidfile(relurl(dstfile,idfile));
+100     PLL_LOOP_FORWARD(AL_TD,atd,1) {
+101       if (e->DE()->Entry_Text()) diltext = (*e->DE()->Entry_Text());
+102       else diltext="";
+103       HTML_remove_tags(diltext);
+104       Elipsis_At(diltext,30);
+105       String deidstr(e->DE()->chars());
+106       passedstr += "<LI>" + HTML_put_href((relidfile+'#')+deidstr,"DIL#"+ deidstr)
+107         + "[<A HREF=\"file:///cgi-bin/dil2al?dil2al=MEI&DILID="+deidstr+"\">edit</A>] ("
+108         + time_stamp("%Y%m%d%H%M",e->DE()->Target_Date()) + ") "
+109         + HTML_put_form_checkbox(String("TDCHKBX")+deidstr,"noupdate","",true)
+110         + HTML_put_form_text(String("TD")+deidstr,12) + ' ' + diltext + '\n';
+111     }
+112     passedstr += "</UL>\n"+HTML_put_form_radio("TDupdate","group","Minimize fragmentation",true)
+113       + ' '+HTML_put_form_radio("TDupdate","direct","Direct")+"<BR>\n"
+114       + HTML_put_form_submit("Update")+' '+HTML_put_form_reset()+"\n<P>\n";
+115     return HTML_put_form(htmlformmethod,htmlforminterface,passedstr);
+116   } else return String("");
+117 }
+\end{verbatim}\normalsize 
+\index{alcomp.cc@{alcomp.cc}!DIL_Required_Task_Chunks@{DIL\_\-Required\_\-Task\_\-Chunks}}
+\index{DIL_Required_Task_Chunks@{DIL\_\-Required\_\-Task\_\-Chunks}!alcomp.cc@{alcomp.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}long$\ast$ DIL\_\-Required\_\-Task\_\-Chunks ({\bf DIL\_\-entry} $\ast$$\ast$ {\em dep}, int {\em deplen})}\label{alcomp_8cc_a10}
+
+
+
+
+Definition at line 273 of file alcomp.cc.
+
+References DIL\_\-ID::chars(), DIL\_\-entry::Completion\_\-State(), EOUT, and DIL\_\-entry::Time\_\-Required().
+
+Referenced by generate\_\-AL().
+
+
+
+\footnotesize\begin{verbatim}273                                                               {
+274 // returns an array with the number of task chunks
+275 // required to complete the DIL entries in the array
+276 // dep with length deplen
+277   long * req = new long[deplen];
+278   float completion;
+279   long c_size = ((long) timechunksize)*60;
+280   for (int i=0; i<deplen; i++) {
+281     req[i] = dep[i]->Time_Required();
+282     completion = dep[i]->Completion_State();
+283     if (completion<0.0) completion = 1.0; // negative completion values have special meaning but do imply that the task is no longer scheduled to be completed
+284     if (completion>1.0) {
+285       EOUT << "dil2al: Completion ratio exceeds 1.0 for DIL#";
+286       if (calledbyforminput) EOUT << "<A HREF=\"" << idfile << '#' << dep[i]->chars() << "\">";
+287       EOUT << dep[i]->chars();
+288       if (calledbyforminput) EOUT << "</A>";
+289       EOUT << " in DIL_Required_Task_Chunks(), continuing\n";
+290       req[i] = 0;
+291       continue;
+292     }
+293     completion = ceil(((double) req[i])*(1.0-completion)); // determine remaining time required
+294     req[i] = (long) completion;
+295     if (req[i] % c_size) req[i] = (req[i]/c_size) + 1;
+296     else req[i] /= c_size;
+297   }
+298   return req;
+299 }
+\end{verbatim}\normalsize 
+\index{alcomp.cc@{alcomp.cc}!generate_AL@{generate\_\-AL}}
+\index{generate_AL@{generate\_\-AL}!alcomp.cc@{alcomp.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool generate\_\-AL ({\bf DIL\_\-entry} $\ast$$\ast$ {\em dep}, {\bf DIL\_\-entry} $\ast$ {\em superior} = NULL)}\label{alcomp_8cc_a13}
+
+
+
+
+Definition at line 985 of file alcomp.cc.
+
+References Active\_\-List::Add\_\-Passed\_\-Target\_\-Date(), Active\_\-List::Add\_\-Target\_\-Date(), Active\_\-List::AL\_\-Head(), AL\_\-PREPARATION\_\-DELAY, Active\_\-List::AL\_\-Tail(), Active\_\-List::allocate(), Active\_\-List::allocate\_\-with\_\-value(), Active\_\-List::available\_\-before(), DIL\_\-ID::chars(), AL\_\-Day::Day\-Date(), AL\_\-Day::Day\-Maxt(), AL\_\-Day::Day\-Start(), Active\_\-List::deavail, DEFAULTALCUMULATIVEREQHEADER, DEFAULTALCUMULATIVEREQTAIL, DIL\_\-Topical\_\-List::dil, DIL\_\-Required\_\-Task\_\-Chunks(), Elipsis\_\-At(), EOUT, Active\_\-List::expand(), filetitle\_\-t::file, Active\_\-List::filestr(), PLLHandle$<$ DIL\_\-entry $>$::fulllength(), generate\_\-EPS\_\-cells(), Active\_\-List::generate\_\-focused\_\-AL(), Active\_\-List::generate\_\-wide\_\-AL(), Active\_\-List::Get\_\-Avail\_\-TC(), AL\_\-TC::Get\_\-DE(), Active\_\-List::get\_\-supstr(), Get\_\-Worked\_\-Estimate(), String::gsub(), HTML\_\-put\_\-form\_\-checkbox(), HTML\_\-put\_\-form\_\-text(), HTML\_\-put\_\-href(), HTML\_\-put\_\-table\_\-cell(), HTML\_\-put\_\-table\_\-row(), HTML\_\-remove\_\-tags(), DIL\_\-entry::Is\_\-Dependency\_\-Of(), Active\_\-List::length(), PLLHandle$<$ AL\_\-TC $>$::Next(), PLL\_\-LOOP\_\-FORWARD, RELLISTSDIR, relurl(), Active\_\-List::remove\_\-unused\_\-TCs(), Active\_\-List::set\_\-TC\_\-values(), DIL\_\-entry::Target\_\-Date(), Time(), time\_\-stamp(), filetitle\_\-t::title, DIL\_\-entry::Topics(), update\_\-main\_\-ALs(), VOUT, and write\_\-file\_\-from\_\-String().
+
+Referenced by select\_\-TL\_\-DIL\_\-refs(), stop\_\-TL\_\-chunk(), and update\_\-DIL\_\-to\_\-AL().
+
+
+
+\footnotesize\begin{verbatim}985                                                                 {
+986 // create AL from sorted array of DIL entries
+987 // if superior == NULL then the AL spans all DIL categories
+988 // if generatealtcs == 0, a complete AL will be computed, for
+989 // the completion of all DIL entries that are dependencies of
+990 // superior
+991 // if generatealmaxt > 0, the AL will be computed up to the
+992 // limit date specified
+993 // if generatealtcs > 0, the AL will be computed for that
+994 // number of Task Chunks
+995         // check parameters
+996         if (!dep) {
+997                 EOUT << "dil2al: Missing sorted DIL pointer in generate_AL()\n";
+998                 return false;
+999         }
+1000         if (!dep[0]) {
+1001                 EOUT << "dil2al: Empty DIL in generate_AL()\n";
+1002                 return false;
+1003         }
+1004         if (generatealtcs<0) {
+1005                 EOUT << "dil2al: Invalid AL interval size (" << generatealtcs << ") requested in generate_AL()\n";
+1006                 return false;
+1007         }
+1008         // prepare DIL entry data
+1009         int deplen = dep[0]->fulllength(); // *** if you supply a custom list of sorted entries, supply the length of the list as well
+1010         long * req = DIL_Required_Task_Chunks(dep,deplen);
+1011         // allocate desired AL interval
+1012         // Note: If there is ever a need for intervals beginning
+1013         // at other times than the current time, that can be
+1014         // accomplished easily by setting curtime to the desired
+1015         // start of the interval.
+1016         time_t algenhpd = ((time_t) algenregular)*3600; // seconds per day (before any expansion)
+1017         if (!superior) algenhpd = ((time_t) algenall)*3600;
+1018         else { // detect specific hpd for superior
+1019                 // *** (search up or down?)
+1020                 EOUT << "dil2al: Search for superior-specific hours-per-day parmameter not yet implemented in generate_AL()\n";
+1021         }
+1022         Get_Worked_Estimate(); // estimated time already worked on current day
+1023 #ifdef DIAGNOSTIC_OUTPUT
+1024         EOUT << "alworked = " << alworked << '\n';
+1025 #endif
+1026         #define LOCAL_CLEAN_EXIT { delete[] req; return false; }
+1027         Active_List al(req,deplen,algenhpd,superior);
+1028 #ifdef DIAGNOSTIC_OUTPUT
+1029         EOUT << "allength = " << al.length() << '\n';
+1030 #endif
+1031         if (al.length()<1) LOCAL_CLEAN_EXIT
+1032         // distribute task chunks per DIL entry with target date within AL interval
+1033         VOUT << "Distributing task chunks per DIL entry over " << al.length() << " AL task chunks\n";
+1034         float sumval=1.0, uval; double cumreq = 0.0, groupreq = 0.0; int groupnum = 0;
+1035         String cumreqstr, rowreqstr, entryexcerptcell, dstfile, relidfile; time_t grouptd = -1;
+1036         if (alshowcumulativereq) { // cumulative required time file header
+1037                 cumreqstr = DEFAULTALCUMULATIVEREQHEADER;
+1038                 cumreqstr.gsub("@SUP@",al.get_supstr());
+1039                 cumreqstr.gsub("@EPSHRS@",String((double) alepshours,"%5.2f"));
+1040                 cumreqstr.gsub("@FORMMETHOD@",htmlformmethod);
+1041                 cumreqstr.gsub("@FORMACTION@",htmlforminterface);
+1042                 dstfile = basedir+RELLISTSDIR+al.filestr()+".ctr.html";
+1043                 relidfile = relurl(dstfile,idfile);
+1044         }
+1045         time_t t_current = Time(NULL) + AL_PREPARATION_DELAY; // expected time upon completion of AL generation
+1046         time_t t_start = al.AL_Head()->DayDate()+al.AL_Head()->DayStart(); // AL start
+1047         time_t t_limit = al.AL_Tail()->DayDate()+al.AL_Tail()->DayMaxt(); // AL limit
+1048         srand(t_current);
+1049         if (superior) { // *** DIL entry specific AL
+1050                 EOUT << "dil2al: Actual dependency check for DIL entry specific AL not yet implemented in generate_AL()\n";
+1051         }
+1052         int i, cnt = 0;
+1053         VOUT << "DEs : "; VOUT.flush(); DIL_entry * prevde; // use prevde, since dep[i-1] can point to DIL entry that does not satisfy the conditionals below
+1054         #define GENERATE_AL_DEPLOOP_CONTINUE prevde = dep[i]; continue
+1055         for (i=0; ((i<deplen) && (dep[i]->Target_Date()<t_limit)); i++) if ((req[i]>0) && (dep[i]->Is_Dependency_Of(superior))) { // non-completed DIL entries
+1056 #ifdef DIAGNOSTIC_OUTPUT
+1057                 EOUT << dep[i]->chars() << " (" << req[i] << ") :\n";
+1058 #endif
+1059                 if (alshowcumulativereq) { // compute cumulative required time
+1060                         DIL_Topical_List * dtl = dep[i]->Topics(0);
+1061                         time_t curtd = dep[i]->Target_Date();
+1062                         if (grouptd>=0) { // if first row of form
+1063                                 if (curtd==grouptd) rowreqstr += HTML_put_table_cell("","@GROUPTREQ@")+HTML_put_table_cell("",HTML_put_form_checkbox(String("TDCHKBX")+prevde->chars(),"noupdate@GROUPCHECKED@","")
+1064                                         +HTML_put_form_text(String("TD")+prevde->chars(),"@GROUPEPSTD@",12)); // if in same group, add @place holders@ to row
+1065                                 else { // if not in same group complete group data up to previous entry (prevde)
+1066                                         generate_EPS_cells(grouptd,cumreqstr,rowreqstr,groupreq,cumreq,t_current,*prevde);
+1067                                         groupnum++;
+1068                                 }
+1069                                 // *** optionally remove the following cell once T_{pref} is used
+1070                                 //     to determine preferable shifts
+1071                                 rowreqstr += entryexcerptcell;
+1072                                 cumreqstr += HTML_put_table_row("",rowreqstr)+'\n';
+1073                         }
+1074                         grouptd = curtd;
+1075                         groupreq += (double) req[i];
+1076                         cumreq += (double) req[i];
+1077                         rowreqstr = HTML_put_table_cell("",dec(groupnum))+
+1078                                           HTML_put_table_cell("",HTML_put_href((relidfile+'#')+dep[i]->chars(),"DIL#" + String(dep[i]->chars())))+
+1079                                           HTML_put_table_cell("",HTML_put_href((relurl(dstfile,dtl->dil.file)+'#')+dep[i]->chars(),dtl->dil.title)+" [<A HREF=\"file:///cgi-bin/dil2al?dil2al=MEI&DILID="+dep[i]->str()+"\">edit</A>]")+
+1080                                           HTML_put_table_cell("",time_stamp("%Y%m%d%H%M",curtd))+
+1081                                           HTML_put_table_cell("",String((((double) req[i])*((double) timechunksize))/60.0,"%6.2f"))+
+1082                                           HTML_put_table_cell("",String((cumreq*((double) timechunksize))/60.0,"%6.2f"));
+1083                         if (dep[i]->Entry_Text()) entryexcerptcell = (*dep[i]->Entry_Text());
+1084                         else entryexcerptcell = "(Missing Text Content)";
+1085                         HTML_remove_tags(entryexcerptcell);
+1086                         Elipsis_At(entryexcerptcell,alcumtimereqexcerptlength);
+1087                         entryexcerptcell = HTML_put_table_cell("",entryexcerptcell);
+1088                 }
+1089                 if (dep[i]->Target_Date()<t_start) { // skip DIL entries with target date prior to current time
+1090                         al.Add_Passed_Target_Date(dep[i]); // add to list of passed target date DIL entries
+1091                         VOUT << "dil2al: Warning - Target Date of DIL entry ";
+1092                         if (calledbyforminput) VOUT << "<A HREF=\"" << idfile << '#' << dep[i]->chars() << "\">";
+1093                         VOUT << dep[i]->chars();
+1094                         if (calledbyforminput) VOUT << "</A>";
+1095                         VOUT << " precedes current time\n";
+1096                         GENERATE_AL_DEPLOOP_CONTINUE;
+1097                 }
+1098                 al.Add_Target_Date(dep[i]); // add target date reference
+1099                 // *** simplify the below by making member functions
+1100                 //     that do things like take req[i], automatically
+1101                 //     check if expansion is allowed, do the work, and
+1102                 //     return the remainder for req[i]
+1103                 long expandn = req[i] - al.available_before(dep[i]->Target_Date()); // also sets al.deavail
+1104                 if ((expandn>0) && (alautoexpand)) {
+1105                         VOUT << "Expanded for DIL entry #" << dep[i]->chars() << " (" << expandn << ")\n";
+1106                         if ((expandn -= al.expand(expandn,dep[i]->Target_Date()))!=0) {
+1107                                 VOUT << "DIL entry #";
+1108                                 if (calledbyforminput) VOUT << "<A HREF=\"" << idfile << '#' << dep[i]->chars() << "\">";
+1109                                 VOUT << dep[i]->chars();
+1110                                 if (calledbyforminput) VOUT << "</A>";
+1111                                 VOUT << " tasks cannot be completed before " << time_stamp("%Y%m%d%H%M",dep[i]->Target_Date()) << "(required: " << req[i] << ", available: " << al.deavail <<  ")\n";
+1112                         }
+1113                 }
+1114                 // *** currently only linear distribution function available
+1115                 if ((sumval=al.set_TC_values())>0.0) {
+1116                         // randomly allocate TCs for this DIL entry
+1117                         while ((req[i]>0) && (al.deavail>0)) {
+1118                                 uval = sumval*(((float) rand()) / ((float) RAND_MAX));
+1119                                 uval = al.allocate_with_value(uval,dep[i]);
+1120                                 if (uval>0.0) {
+1121                                         sumval -= uval;
+1122                                         req[i]--;
+1123 #ifdef DIAGNOSTIC_OUTPUT
+1124                                         PLL_LOOP_FORWARD(AL_Day,al.AL_Head(),1) {
+1125                                                 EOUT << '|';
+1126                                                 if (e->TC_Head()) { 
+1127                                                         for (AL_TC * etc = e->TC_Head(); (etc); etc = etc->Next())
+1128                                                                 if (etc->Get_DE()) EOUT << 'x'; else EOUT << '_';
+1129                                                 }
+1130                                         }
+1131                                         EOUT << '\n';
+1132 #endif
+1133                                 }
+1134                         }
+1135                 } else {
+1136                         if (sumval==0.0) VOUT << "No task chunks available for DIL entry #" << dep[i]->chars() << " before target date " << time_stamp("%Y%m%d%H%M",dep[i]->Target_Date()) << "(required: " << req[i] << ", available: " << al.deavail <<  ")\n";
+1137                         else EOUT << "dil2al: Negative sum of values for DIL entry #" << dep[i]->chars() << " in generate_AL(), continuing\n";
+1138                 }
+1139                 prevde = dep[i];
+1140                 cnt++;
+1141 #ifdef DEBUG
+1142                 if ((i%10)==0) { VOUT << '>'; VOUT.flush(); }
+1143 #endif
+1144         }
+1145         VOUT << "Scheduled DIL entries with target date in requested range: " << cnt << '\n';
+1146         if (alshowcumulativereq) { // cumulative required time file tail
+1147                 String cumreqtail(DEFAULTALCUMULATIVEREQTAIL);
+1148                 cumreqtail.gsub("@SUP@",al.get_supstr());
+1149                 cumreqtail.gsub("@ALFILE@",al.filestr());
+1150                 cumreqtail.gsub("@ALDATE@",time_stamp("%c"));
+1151                 generate_EPS_cells(grouptd,cumreqstr,rowreqstr,groupreq,cumreq,t_current,*prevde); // final call to complete grouop data for all entries
+1152                 rowreqstr += entryexcerptcell;
+1153                 cumreqstr += HTML_put_table_row("",rowreqstr)+'\n' + cumreqtail;
+1154                 write_file_from_String(dstfile,cumreqstr,"AL Cumulative Time Required");
+1155         }
+1156 #ifdef DIAGNOSTIC_OUTPUT
+1157         EOUT << "*\n";
+1158 #endif
+1159         // randomly pick tasks that could not be allocated entirely before their target dates
+1160         AL_TC * atc = al.Get_Avail_TC(0);
+1161         int j, k = 1; cnt = 0;
+1162         while (k>=0) {
+1163                 // random DIL entry
+1164                 j = (int) (((float) i)*((float) rand()) / ((float) RAND_MAX));
+1165                 if (j>=i) j=i-1;
+1166                 if (j<0) break; // i==0
+1167                 // find nearest DIL entry requiring task chunks
+1168                 // Note: current order of search gives partially
+1169                 // allocated DIL entries priority over DIL entries
+1170                 // with target dates prior to current time
+1171                 for (k = j; ((k<i) && (req[k]<=0)); k++);
+1172                 if (k>=i) for (k = (j-1); ((k>=0) && (req[k]<=0)); k--);
+1173                 // allocate earliest available task chunk in AL
+1174                 if (k>=0) {
+1175                         if (al.allocate(dep[k])) {
+1176                                 req[k]--;
+1177 #ifdef DIAGNOSTIC_OUTPUT
+1178                                 PLL_LOOP_FORWARD(AL_Day,al.AL_Head(),1) {
+1179                                         EOUT << '|';
+1180                                         if (e->TC_Head()) { 
+1181                                                 for (AL_TC * etc = e->TC_Head(); (etc); etc = etc->Next())
+1182                                                         if (etc->Get_DE()) EOUT << 'x'; else EOUT << '_';
+1183                                         }
+1184                                 }
+1185                                 EOUT << '\n';
+1186 #endif
+1187                         } else break;
+1188                 }
+1189 #ifdef DEBUG
+1190                 if ((cnt%10)==0) { VOUT << '+'; VOUT.flush(); }
+1191 #endif
+1192                 cnt++;
+1193         }
+1194         VOUT << "Scheduled tasks that could not be completed before target dates: " << cnt << '\n';
+1195 #ifdef DIAGNOSTIC_OUTPUT
+1196         EOUT << "*\n";
+1197 #endif
+1198         // randomly pick tasks that have target dates exceeding the AL interval
+1199         int remlen = deplen - i;
+1200         k = 0; cnt = 0;
+1201         while (k<deplen) {
+1202                 // random DIL entry
+1203                 j = (int) (((float) remlen)*((float) rand()) / ((float) RAND_MAX));
+1204                 if (j>=remlen) j=remlen-1;
+1205                 if (j<0) break;
+1206                 j += i;
+1207                 // find nearest DIL entry requiring task chunks
+1208                 for (k = j; ((k>=i) && (req[k]<=0)); k--);
+1209                 if (k<i) for (k = (j+1); ((k<deplen) && (req[k]<=0)); k++);
+1210                 // allocate earliest available task chunk in AL
+1211                 if (k<deplen) {
+1212                         if (al.allocate(dep[k])) {
+1213                                 req[k]--;
+1214 #ifdef DIAGNOSTIC_OUTPUT
+1215                                 PLL_LOOP_FORWARD(AL_Day,al.AL_Head(),1) {
+1216                                         EOUT << '|';
+1217                                         if (e->TC_Head()) { 
+1218                                                 for (AL_TC * etc = e->TC_Head(); (etc); etc = etc->Next())
+1219                                                         if (etc->Get_DE()) EOUT << 'x'; else EOUT << '_';
+1220                                         }
+1221                                 }
+1222                                 EOUT << '\n';
+1223 #endif
+1224                         } else break;
+1225                 }
+1226 #ifdef DEBUG
+1227                 if ((cnt%10)==0) { VOUT << '"'; VOUT.flush(); }
+1228 #endif
+1229         }
+1230         VOUT << "Scheduled tasks for DIL entries with target dates beyond requested range: " << cnt << '\n';
+1231         // clean up by removing unused TCs
+1232 #ifdef DIAGNOSTIC_OUTPUT
+1233         PLL_LOOP_FORWARD(AL_Day,al.AL_Head(),1) for (AL_TC * etc = e->TC_Head(); (etc); etc=etc->Next()) if (!etc->Get_DE()) cerr << '?'; cerr << '\n';
+1234 #endif
+1235         al.remove_unused_TCs();
+1236         // create visible AL
+1237         if (!al.generate_focused_AL(superior,algenhpd)) LOCAL_CLEAN_EXIT
+1238         if (!al.generate_wide_AL(superior)) LOCAL_CLEAN_EXIT
+1239         // update DIL, AL, TL main page
+1240         if (!update_main_ALs(superior)) LOCAL_CLEAN_EXIT
+1241         // clean up
+1242         delete[] req;
+1243         return true;
+1244 }
+\end{verbatim}\normalsize 
+\index{alcomp.cc@{alcomp.cc}!generate_AL_entry@{generate\_\-AL\_\-entry}}
+\index{generate_AL_entry@{generate\_\-AL\_\-entry}!alcomp.cc@{alcomp.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} generate\_\-AL\_\-entry ({\bf String} {\em dilid}, bool {\em ishighestpriority} = {\bf false})}\label{alcomp_8cc_a5}
+
+
+
+
+Definition at line 28 of file alcomp.cc.
+
+References String::after(), String::at(), String::before(), EOUT, String::gsub(), String::index(), String::length(), read\_\-file\_\-into\_\-String(), and RELLISTSDIR.
+
+Referenced by dil2al\_\-commands().
+
+
+
+\footnotesize\begin{verbatim}28                                                                        {
+29   // Note: This is currently called only when dil2al is run with the
+30   // command line argument -a. This function generates an entry for manual
+31   // modification of an AL.
+32         String idstr;
+33         if (!read_file_into_String(idfile,idstr)) return String("");
+34         int idindex;
+35         idindex = idstr.index(BigRegex("[<]TD[^>]*[>][  ]*[<]A[         ]+[^>]*[Nn][Aa][Mm][Ee][        ]*=[    ]*\""+dilid));
+36         if (idindex<0) {
+37                 EOUT << "dil2al: Unable to find " << dilid << " in " << idfile << " in generate_AL_entry()\n";
+38                 return String("");
+39         }
+40         String topdil;
+41         topdil = idstr.at(BigRegex("[<]TD[^>]*[>][      ]*[<]A[         ]+[^>]*[Hh][Rr][Ee][Ff][        ]*=[    ]*\"[^\"]+"+dilid),idindex+1);
+42         if (topdil=="") {
+43                 EOUT << "dil2al: Unable to find full reference to " << dilid << " in generate_AL_entry()\n";
+44                 return String("");
+45         }
+46         topdil = topdil.after(BigRegex("[<]TD[^>]*[>][  ]*[<]A[         ]+[^>]*[Hh][Rr][Ee][Ff][        ]*=[    ]*\""));
+47         String topdilfile = topdil;
+48         topdil = basedir+RELLISTSDIR+topdilfile.before("#");
+49         if (!read_file_into_String(topdil,idstr)) return String("");
+50         idindex = idstr.index(BigRegex("[<]TD[^>]*[>][  ]*[<]A[         ]+[^>]*[Nn][Aa][Mm][Ee][        ]*=[    ]*\""+dilid));
+51         if (idindex<0) {
+52                 EOUT << "dil2al: Unable to find " << dilid << " in " << topdil << " in generate_AL_entry()\n";
+53                 return String("");
+54         }
+55         idindex = idstr.index(BigRegex("[<]TR[^>]*[>]"),idindex+1);
+56         if (idindex<0) return String("");
+57         idindex = idstr.index(BigRegex("[<]TD[^>]*[>]"),idindex+1);
+58         if (idindex<0) return String("");
+59         topdil = idstr.at(BigRegex("[<]TD[^>]*[>]...[^\n]*"),idindex);
+60         if (topdil=="") return String("");
+61         topdil = topdil.after(BigRegex("[<]TD[^>]*[>]"));
+62         topdil.gsub(BigRegex("[<][^>]+[>]"),"");
+63         if (topdil.length()>100) {
+64                 topdil = topdil.before(100);
+65                 topdil = topdil.before(BigRegex("[      \n.,;:]"),-1);
+66                 topdil += "...";
+67         }
+68         idstr = "<TR";
+69         if (ishighestpriority) idstr += " BGCOLOR=\"#3F5F00\"";
+70         idstr += "><TD>[<A HREF=\""+topdilfile+"\"><B>"+dilid+"</B></A>][<A HREF=\"file:///cgi-bin/dil2al?dil2al=MEI&DILID="+dilid+"\">edit</A>]\n"+topdil;
+71         return idstr;
+72 }
+\end{verbatim}\normalsize 
+\index{alcomp.cc@{alcomp.cc}!generate_AL_full_entry@{generate\_\-AL\_\-full\_\-entry}}
+\index{generate_AL_full_entry@{generate\_\-AL\_\-full\_\-entry}!alcomp.cc@{alcomp.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} generate\_\-AL\_\-full\_\-entry ({\bf String} {\em dilid}, int {\em chunkfreq})}\label{alcomp_8cc_a4}
+
+
+
+
+Definition at line 23 of file alcomp.cc.
+
+References res.
+
+Referenced by dil2al\_\-commands().
+
+
+
+\footnotesize\begin{verbatim}23                                                            {
+24         String res("<LI><A HREF=\"detailed-items-by-ID.html#"+dilid+"\">"+dilid+"</A> ("+dec(chunkfreq)+")\n");
+25         return res;
+26 }
+\end{verbatim}\normalsize 
+\index{alcomp.cc@{alcomp.cc}!generate_EPS_cells@{generate\_\-EPS\_\-cells}}
+\index{generate_EPS_cells@{generate\_\-EPS\_\-cells}!alcomp.cc@{alcomp.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void generate\_\-EPS\_\-cells (time\_\-t {\em grouptd}, {\bf String} \& {\em cumreqstr}, {\bf String} \& {\em rowreqstr}, double \& {\em groupreq}, double {\em cumreq}, time\_\-t {\em t\_\-current}, {\bf DIL\_\-entry} \& {\em de})}\label{alcomp_8cc_a12}
+
+
+
+
+Definition at line 941 of file alcomp.cc.
+
+References DIL\_\-ID::chars(), String::gsub(), HTML\_\-put\_\-form\_\-checkbox(), HTML\_\-put\_\-form\_\-text(), HTML\_\-put\_\-table\_\-cell(), SECONDSPERDAY, time\_\-stamp(), time\_\-stamp\_\-time\_\-date(), and time\_\-stamp\_\-time\_\-of\_\-day().
+
+Referenced by generate\_\-AL().
+
+
+
+\footnotesize\begin{verbatim}941                                                                                                                                                     {
+942 // generate HTML table cells for the EPS method date presented
+943 // when alshowcumulativereq==true
+944 // (See <A HREF="../../doc/html/lists.html#gS1">Earliest Possible Scheduling (EPS)</A>.)
+945         double cumreqhours = (cumreq*((double) timechunksize))/60.0;
+946         double epsdays = floor(cumreqhours/alepshours);
+947         double epshours = cumreqhours - (epsdays*alepshours);
+948         time_t epsdayssec = ((time_t) epsdays)*SECONDSPERDAY;
+949         time_t epshourssec = ((time_t) rint(epshours*60.0))*60; // note: properly converts 0.33 and 0.67 hours to 20 and 40 minutes respectively
+950         time_t epsgrouptd = t_current + epsdayssec + epshourssec;
+951         String epsgrouptreq = String((groupreq*((double) timechunksize))/60.0,"%6.2f");
+952         String epsgrouptdstr = time_stamp("%Y%m%d%H%M",epsgrouptd);
+953         if (targetdatepreferences) { // determine if the calculated target date should be modified according to stated preferences
+954           if (weekdayworkendpreferences) { // preferred target times on specific days of the week
+955             //      cout << epsgrouptdstr << " --- ";
+956             int dayofweek = atoi((const char *) time_stamp("%w",epsgrouptd));
+957             if (wdworkendprefs[dayofweek]>=0) {
+958               if (time_stamp_time_of_day(epsgrouptdstr)<wdworkendprefs[dayofweek]) { // to preferred time
+959                 epsgrouptd = time_stamp_time_date(epsgrouptdstr) + wdworkendprefs[dayofweek];
+960               } else { // set to preferred time on next day
+961                 dayofweek++; if (dayofweek>6) dayofweek = 0;
+962                 if (wdworkendprefs[dayofweek] >= 0 ) epsgrouptd = time_stamp_time_date(epsgrouptdstr) + SECONDSPERDAY + wdworkendprefs[dayofweek];
+963                 else epsgrouptd = time_stamp_time_date(epsgrouptdstr) + SECONDSPERDAY + alworkdaystart + (((time_t) rint(alepshours*60.0))*60);
+964               }
+965               epsgrouptdstr = time_stamp("%Y%m%d%H%M",epsgrouptd);
+966             }
+967             //      cout << epsgrouptdstr << '\n';
+968           }
+969         }
+970         cumreqstr.gsub("@GROUPTREQ@",epsgrouptreq);
+971         cumreqstr.gsub("@GROUPEPSTD@",epsgrouptdstr);
+972         if (rapidscheduleupdating && (epsgrouptd<=grouptd)) { // option not to update target dates beyond the EPS suggested target dates
+973                 cumreqstr.gsub("@GROUPCHECKED@\"","\" checked");
+974                 rowreqstr += HTML_put_table_cell("",epsgrouptreq)+
+975                            HTML_put_table_cell("",HTML_put_form_checkbox(String("TDCHKBX")+de.chars(),"noupdate","",true)+HTML_put_form_text(String("TD")+de.chars(),epsgrouptdstr,12));
+976         } else {
+977                 cumreqstr.gsub("@GROUPCHECKED@","");
+978                 rowreqstr += HTML_put_table_cell("",epsgrouptreq)+
+979                            HTML_put_table_cell("",HTML_put_form_checkbox(String("TDCHKBX")+de.chars(),"noupdate","")+HTML_put_form_text(String("TD")+de.chars(),epsgrouptdstr,12));
+980         }
+981         groupreq = 0.0;
+982         //return epsgrouptdstr;
+983 }
+\end{verbatim}\normalsize 
+\index{alcomp.cc@{alcomp.cc}!get_AL_entry@{get\_\-AL\_\-entry}}
+\index{get_AL_entry@{get\_\-AL\_\-entry}!alcomp.cc@{alcomp.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int get\_\-AL\_\-entry ({\bf String} \& {\em alstr}, int {\em alpos}, {\bf String} \& {\em rowcontent}, int \& {\em rowstart}, int \& {\em rowend})}\label{alcomp_8cc_a14}
+
+
+
+
+Definition at line 1246 of file alcomp.cc.
+
+References String::contains(), HTML\_\-get\_\-table\_\-cell(), and HTML\_\-get\_\-table\_\-row().
+
+Referenced by remove\_\-AL\_\-TC().
+
+
+
+\footnotesize\begin{verbatim}1246                                                                                                {
+1247 // gets an entry from an AL table and returns whether that row
+1248 // is a Day (0) or a TC (1), returns -1 if row cannot be obtained
+1249         String params, cellcontent;
+1250         if ((rowend=HTML_get_table_row(alstr,alpos,params,rowcontent,&rowstart))<0) return -1;
+1251         if (HTML_get_table_cell(rowcontent,0,params,cellcontent)<0) return -1;
+1252         if (cellcontent.contains(BigRegex("[<]!--[      ]+@select_TL_DIL_refs:[         ]+SKIP ROW@[    ]+--[>][^(]*Day"))) return 0;
+1253         return 1;
+1254 }
+\end{verbatim}\normalsize 
+\index{alcomp.cc@{alcomp.cc}!get_topic_keywords@{get\_\-topic\_\-keywords}}
+\index{get_topic_keywords@{get\_\-topic\_\-keywords}!alcomp.cc@{alcomp.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int get\_\-topic\_\-keywords ()}\label{alcomp_8cc_a3}
+
+
+
+
+Definition at line 6 of file alcomp.cc.
+
+References EOUT, and find\_\-line().
+
+
+
+\footnotesize\begin{verbatim}6                          {
+7         const int LLEN = 10240;
+8         char lbuf[LLEN];
+9         ifstream dilfile;
+10         for (int i=0; i<numDILs; i++) {
+11                 dilfile.open(*(dil[i]));
+12                 if (dilfile) {
+13                         if (!find_line(&dilfile,"Topic Keywords",lbuf,LLEN)) {
+14                                 EOUT << "dil2al: Missing topic keywords in " << *(dil[i]) << " in get_topic_keywords()\n";
+15                                 return 0;
+16                         }
+17                         dilfile.close();
+18                 }
+19         }
+20         return 1;
+21 }
+\end{verbatim}\normalsize 
+\index{alcomp.cc@{alcomp.cc}!Get_Worked_Estimate@{Get\_\-Worked\_\-Estimate}}
+\index{Get_Worked_Estimate@{Get\_\-Worked\_\-Estimate}!alcomp.cc@{alcomp.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Get\_\-Worked\_\-Estimate ()}\label{alcomp_8cc_a11}
+
+
+
+
+Definition at line 301 of file alcomp.cc.
+
+References ACW\_\-ASK, ACW\_\-TIME, ACW\_\-TL, EOUT, and time\_\-stamp\_\-time\_\-of\_\-day().
+
+Referenced by generate\_\-AL().
+
+
+
+\footnotesize\begin{verbatim}301                            {
+302 // update alworked (in seconds)
+303         if (alworked<0) { // (alworked>=0) if given on command line
+304                 time_t tod;
+305                 switch (alcurdayworkedstrategy) {
+306                         case ACW_TIME: // estimate according to current time
+307                                 tod = time_stamp_time_of_day(curtime);
+308                                 tod -= alworkdaystart;
+309                                 if (tod<0) alworked = 0; else alworked = tod;
+310                                 break;
+311                         case ACW_TL: // *** obtain an estimate from task log entries
+312                                 EOUT << "dil2al: ACW_TL option not yet implemented in Get_Worked_Estimate(), setting to 0\n";
+313                                 alworked = 0;
+314                                 break;
+315                         case ACW_ASK: // *** ask for estimate
+316                                 EOUT << "dil2al: ACW_ASK option not yet implemented in Get_Worked_Estimate(), setting to 0\n";
+317                                 alworked = 0;
+318                                 break;
+319                         default: alworked = 0;
+320                 }
+321         }
+322 }
+\end{verbatim}\normalsize 
+\index{alcomp.cc@{alcomp.cc}!linear_distribution@{linear\_\-distribution}}
+\index{linear_distribution@{linear\_\-distribution}!alcomp.cc@{alcomp.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}float linear\_\-distribution (float {\em i}, float {\em i\_\-limit})}\label{alcomp_8cc_a9}
+
+
+
+
+Definition at line 268 of file alcomp.cc.
+
+Referenced by AL\_\-TC::AL\_\-TC(), and AL\_\-Day::set\_\-TC\_\-values().
+
+
+
+\footnotesize\begin{verbatim}268                                                   {
+269 // linearly distribute TC values (see TL#200006291007.2)
+270         return 1.0 - (0.9*i/i_limit);
+271 }
+\end{verbatim}\normalsize 
+\index{alcomp.cc@{alcomp.cc}!refresh_quick_load_cache@{refresh\_\-quick\_\-load\_\-cache}}
+\index{refresh_quick_load_cache@{refresh\_\-quick\_\-load\_\-cache}!alcomp.cc@{alcomp.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool refresh\_\-quick\_\-load\_\-cache ()}\label{alcomp_8cc_a17}
+
+
+
+
+Definition at line 1359 of file alcomp.cc.
+
+References EOUT, Detailed\_\-Items\_\-List::Get\_\-All\_\-DIL\_\-ID\_\-File\_\-Parameters(), and Detailed\_\-Items\_\-List::Get\_\-All\_\-Topical\_\-DIL\_\-Parameters().
+
+Referenced by dil2al\_\-commands().
+
+
+
+\footnotesize\begin{verbatim}1359                                 {
+1360   if (!usequickloadcache) {
+1361     EOUT << "dil2al: The usequickloadcache flag is not set in refresh_quick_load_cache()\n";
+1362     return false;
+1363   }
+1364   Detailed_Items_List dilist;
+1365   if (dilist.Get_All_DIL_ID_File_Parameters()<0) return false;
+1366   if (dilist.Get_All_Topical_DIL_Parameters(true)<0) return false;
+1367   return true;
+1368 }
+\end{verbatim}\normalsize 
+\index{alcomp.cc@{alcomp.cc}!remove_AL_TC@{remove\_\-AL\_\-TC}}
+\index{remove_AL_TC@{remove\_\-AL\_\-TC}!alcomp.cc@{alcomp.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool remove\_\-AL\_\-TC ({\bf String} {\em alref}, {\bf String} {\em dilid})}\label{alcomp_8cc_a15}
+
+
+
+
+Definition at line 1256 of file alcomp.cc.
+
+References String::alloc(), String::at(), DEFAULTALDAYEMPHASIS, DEFAULTALFOCUSEDEMPHASIS, String::del(), EOUT, get\_\-AL\_\-entry(), HTML\_\-get\_\-href(), HTML\_\-put\_\-table\_\-row(), String::length(), read\_\-file\_\-into\_\-String(), SECONDSPERDAY, Big\-Regex::sublen(), Big\-Regex::subpos(), time\_\-stamp\_\-GM(), time\_\-stamp\_\-time\_\-of\_\-day(), VOUT, and write\_\-file\_\-from\_\-String().
+
+Referenced by stop\_\-TL\_\-chunk().
+
+
+
+\footnotesize\begin{verbatim}1256                                               {
+1257 // removes the top task chunk if it has DIL entry ID dilid
+1258 // from the AL indicated by alref and updates the suggested
+1259 // start time of that AL day according to the assumed time
+1260 // taken to do the task chunk (desynchronization is noticed
+1261 // and taken care of in select_TL_DIL_refs())
+1262 // day rows at the top of the AL that are not followed by task
+1263 // rows are removed
+1264 // returns false if dilid did not match the DIL entry ID of
+1265 // the top task chunk, or if the visible focused AL became
+1266 // empty
+1267         String alstr, newalstr;
+1268         if (!read_file_into_String(alref,alstr)) return false;
+1269         newalstr.alloc(alstr.length());
+1270         // get day row and remove empty days at top of AL
+1271         // and find top TC to compare with dilid
+1272         StringList alentries; int numentries = 0, alpos = 0, tcsfound = 0, tcentries[2], rowstart, rowend;
+1273         while (tcsfound<2) {
+1274                 switch (get_AL_entry(alstr,alpos,alentries[numentries],rowstart,rowend)) {
+1275                         case -1:
+1276                                 // *** could detect from numentries and tcsfound
+1277                                 //     to give a different VOUT message if the
+1278                                 //     visible AL portion contained no more TCs
+1279                                 EOUT << "Missing data in AL " << alref << " after position " << alpos << " in remove_AL_TC()";
+1280                                 return false;
+1281                                 break;
+1282                         case 0: break;
+1283                         case 1:
+1284                                 if (numentries==0) {
+1285                                         EOUT << "TC without preceding Day ID in " << alref << " after position " << alpos << " in remove_AL_TC()";
+1286                                         return false;
+1287                                 }
+1288                                 if (tcsfound==0) {
+1289                                         String alhrefurl, alhreftext;
+1290                                         if (HTML_get_href(alentries[numentries],0,alhrefurl,alhreftext)<0) {
+1291                                                 EOUT << "Missing DIL ID reference in " << alref << " after position " << alpos << " in remove_AL_TC()";
+1292                                                 return false;
+1293                                         }
+1294                                         if (alhreftext!=dilid) { // different task
+1295                                                 VOUT << "Top of AL " << alref << " does not match DIL entry " << dilid << '\n';
+1296                                                 return false;
+1297                                         }
+1298                                 }
+1299                                 tcentries[tcsfound] = numentries;
+1300                                 tcsfound++;
+1301                                 break;
+1302                 }
+1303                 if (alpos==0) newalstr = alstr.at(0,rowstart); // copy head of AL
+1304                 numentries++; alpos = rowend;
+1305         }
+1306         if (tcentries[1]==(tcentries[0]+1)) { // next TC on same day, modify daystart
+1307                 BigRegex rds("(suggested start[         ]+\\([0-9][0-9]:[0-9][0-9]\\)");
+1308                 int didx = tcentries[0]-1, dstimepos;
+1309                 if ((dstimepos=alentries[didx].index(rds))<0) {
+1310                         EOUT << "Missing suggested start in AL " << alref << " at row " << didx << " in remove_AL_TC()\n";
+1311                         return false;
+1312                 }
+1313                 String daystartstr = alentries[didx].at(rds.subpos(1),rds.sublen(1));
+1314                 daystartstr.del(':');
+1315                 time_t tds = time_stamp_time_of_day(daystartstr) + ((time_t) (timechunksize*60));
+1316                 if (tds>=SECONDSPERDAY) {
+1317                         VOUT << "Updated suggested start time exceeds length of day, limiting to 23:59\n";
+1318                         tds = SECONDSPERDAY-1;
+1319                 }
+1320                 daystartstr = time_stamp_GM("%H:%M",tds);
+1321                 for (int i = 0; i<5; i++) alentries[didx][rds.subpos(1)+i] = daystartstr[i];
+1322         }
+1323         // determine day before second TC and write it
+1324         int didx = tcentries[1]-1;
+1325         if (didx==tcentries[0]) didx--;
+1326         newalstr += HTML_put_table_row(DEFAULTALDAYEMPHASIS,alentries[didx]) + '\n';
+1327         // write second TC with top TC colors
+1328         newalstr += HTML_put_table_row(DEFAULTALFOCUSEDEMPHASIS,alentries[tcentries[1]]) + '\n';
+1329         // copy remainder of AL
+1330         newalstr += alstr.at(alpos,alstr.length()-alpos);
+1331         return write_file_from_String(alref,newalstr,"AL");
+1332 }
+\end{verbatim}\normalsize 
+\index{alcomp.cc@{alcomp.cc}!update_DIL_to_AL@{update\_\-DIL\_\-to\_\-AL}}
+\index{update_DIL_to_AL@{update\_\-DIL\_\-to\_\-AL}!alcomp.cc@{alcomp.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool update\_\-DIL\_\-to\_\-AL ()}\label{alcomp_8cc_a16}
+
+
+
+
+Definition at line 1334 of file alcomp.cc.
+
+References DIL\_\-ID::chars(), PLLHandle$<$ DIL\_\-entry $>$::fulllength(), generate\_\-AL(), and Detailed\_\-Items\_\-List::Sort\_\-by\_\-Target\_\-Date().
+
+Referenced by Detect\_\-Form\_\-Input(), and dil2al\_\-commands().
+
+
+
+\footnotesize\begin{verbatim}1334                         {
+1335 // generate an updated AL from the DIL hierarchy
+1336 // uses generatealmaxt and generatealtcs
+1337         /*
+1338         When computing priorities, also parse for ALs and refresh AL parameters
+1339         for all detail items if prefixed with E (``automatic estimate'').
+1340         */
+1341         // *** can make this first part prepare in the background
+1342         //     before a TC is completed
+1343         Detailed_Items_List dilist;
+1344         DIL_entry ** dep = dilist.Sort_by_Target_Date(true);
+1345 #ifdef DEBUG
+1346         if (dep) {
+1347                 int entrynum = dep[0]->fulllength();
+1348                 for (int i = 0; i<entrynum; i++) cerr << dep[i]->chars() << '\n';
+1349         }
+1350 #endif
+1351         if (!generate_AL(dep)) {
+1352                 delete[] dep;
+1353                 return false;
+1354         }
+1355         delete[] dep; // may not be necessary here
+1356         return true;
+1357 }
+\end{verbatim}\normalsize 
+\index{alcomp.cc@{alcomp.cc}!update_main_ALs@{update\_\-main\_\-ALs}}
+\index{update_main_ALs@{update\_\-main\_\-ALs}!alcomp.cc@{alcomp.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool update\_\-main\_\-ALs ({\bf DIL\_\-entry} $\ast$ {\em superior})}\label{alcomp_8cc_a8}
+
+
+
+
+Definition at line 209 of file alcomp.cc.
+
+References String::before(), capitalize(), DIL\_\-ID::chars(), Elipsis\_\-At(), DIL\_\-entry::Entry\_\-Text(), EOUT, String::from(), HTML\_\-get\_\-href(), HTML\_\-get\_\-list(), HTML\_\-get\_\-list\_\-item(), HTML\_\-get\_\-name(), HTML\_\-put\_\-href(), HTML\_\-put\_\-list(), HTML\_\-put\_\-list\_\-item(), read\_\-file\_\-into\_\-String(), RELLISTSDIR, relurl(), VOUT, and write\_\-file\_\-from\_\-String().
+
+Referenced by generate\_\-AL().
+
+
+
+\footnotesize\begin{verbatim}209                                            {
+210 // add or modify a link to the AL referred to by superior on
+211 // the main page (NULL = AL created with all DIL entries)
+212         String mainstr, tag, text, supstr, supfilestr;
+213         if (superior) supstr = superior->chars(); else supstr = "all";
+214         supfilestr = relurl(listfile,basedir+RELLISTSDIR+("active-list."+supstr+".html"));
+215         // get main lists file
+216         if (!read_file_into_String(listfile,mainstr)) return false;
+217         int mainloc = 0;
+218         // locate list of ALs
+219         do if ((mainloc=HTML_get_name(mainstr,mainloc,tag,text))<0) {
+220                 EOUT << "dil2al: Unable to find HTML anchor ``AL'' in " << listfile << " in update_main_ALs()\n";
+221                 return false;
+222         } while (tag!="AL");
+223         // get list of ALs
+224         int liststart;
+225         if ((mainloc=HTML_get_list(mainstr,mainloc,tag,text,&liststart))<0) {
+226                 EOUT << "dil2al: Missing list of ALs in " << listfile << " in update_main_ALs()\n";
+227                 return false;
+228         }
+229         // find list item with link to AL corresponding with superior
+230         int listloc = 0; String itemtext,hreftext;
+231         do if ((listloc=HTML_get_list_item(text,listloc,tag,itemtext))>=0) 
+232                 if (HTML_get_href(itemtext,0,tag,hreftext)<0) EOUT << "dil2al: Missing HREF to AL in " << listfile << " in update_main_ALs(), continuing\n";
+233         while ((listloc>=0) && (tag!=supfilestr));
+234         if (listloc>=0) return true; // link already exists
+235         // if new, add link to AL corresponding with superior
+236         String newmainstr(mainstr.before(liststart));
+237         if (superior) {
+238                 if (superior->Entry_Text()) {
+239                         tag = *(superior->Entry_Text());
+240                         Elipsis_At(tag,100);
+241                 } else {
+242                         VOUT << "dil2al: Warning - No text content available for description of AL in update_main_ALs(), continuing as is\n";
+243                         tag = "(No description available.)";
+244                 }
+245         } else tag = "A list of tasks created with all DIL entries.";
+246         // *** perhaps don't use relaxedhtml, despite possible unexpected
+247         //     behaviour by older function that read the main lists page
+248         text += HTML_put_list_item(HTML_put_href(supfilestr,"Active List: "+capitalize(supstr))+"<BR>\n"+tag+'\n',true)+"<P>\n";
+249         newmainstr += HTML_put_list('U',text) + mainstr.from(mainloc);
+250         return write_file_from_String(listfile,newmainstr,"Main Lists");
+251 }
+\end{verbatim}\normalsize 

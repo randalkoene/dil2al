@@ -1,0 +1,1101 @@
+\section{PLLRoot$<$ PLLType $>$  Class Template Reference}
+\label{classPLLRoot}\index{PLLRoot@{PLLRoot}}
+{\tt \#include $<$templates.classic.hh$>$}
+
+\subsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf $\sim$PLLRoot} ()
+\item 
+{\bf PLLRoot} ()
+\item 
+{\bf PLLType} $\ast$ {\bf head} () const
+\item 
+{\bf PLLType} $\ast$ {\bf tail} () const
+\item 
+{\bf PLLType} $\ast$ {\bf el} (int n) const
+\item 
+{\bf PLLType} $\ast$ {\bf operator[$\,$]} (int n) const
+\item 
+int {\bf length} () const
+\item 
+void {\bf update} ()
+\item 
+bool {\bf link\_\-before} (PLLRoot $\ast${\bf succ})
+\item 
+bool {\bf link\_\-before} ({\bf PLLType} $\ast${\bf succ})
+\item 
+bool {\bf link\_\-after} (PLLRoot $\ast${\bf pred})
+\item 
+bool {\bf link\_\-after} ({\bf PLLType} $\ast${\bf pred})
+\item 
+bool {\bf insert\_\-after} ({\bf PLLType} $\ast${\bf pred}, {\bf PLLType} $\ast$inshead)
+\item 
+bool {\bf insert\_\-after} (int n, {\bf PLLType} $\ast$inshead)
+\item 
+bool {\bf insert\_\-before} ({\bf PLLType} $\ast${\bf succ}, {\bf PLLType} $\ast$inshead)
+\item 
+bool {\bf insert\_\-before} (int n, {\bf PLLType} $\ast$inshead)
+\item 
+void {\bf clear} ()
+\item 
+{\bf $\sim$PLLRoot} ()
+\item 
+{\bf PLLRoot} ()
+\item 
+{\bf PLLType} $\ast$ {\bf head} () const
+\item 
+{\bf PLLType} $\ast$ {\bf tail} () const
+\item 
+{\bf PLLType} $\ast$ {\bf el} (int n) const
+\item 
+{\bf PLLType} $\ast$ {\bf operator[$\,$]} (int n) const
+\item 
+int {\bf length} () const
+\item 
+void {\bf update} ()
+\item 
+bool {\bf link\_\-before} (PLLRoot $\ast${\bf succ})
+\item 
+bool {\bf link\_\-before} ({\bf PLLType} $\ast${\bf succ})
+\item 
+bool {\bf link\_\-after} (PLLRoot $\ast${\bf pred})
+\item 
+bool {\bf link\_\-after} ({\bf PLLType} $\ast${\bf pred})
+\item 
+bool {\bf insert\_\-after} ({\bf PLLType} $\ast${\bf pred}, {\bf PLLType} $\ast$inshead)
+\item 
+bool {\bf insert\_\-after} (int n, {\bf PLLType} $\ast$inshead)
+\item 
+bool {\bf insert\_\-before} ({\bf PLLType} $\ast${\bf succ}, {\bf PLLType} $\ast$inshead)
+\item 
+bool {\bf insert\_\-before} (int n, {\bf PLLType} $\ast$inshead)
+\item 
+void {\bf clear} ()
+\item 
+{\bf $\sim$PLLRoot} ()
+\item 
+{\bf PLLRoot} ()
+\item 
+{\bf PLLType} $\ast$ {\bf head} () const
+\item 
+{\bf PLLType} $\ast$ {\bf tail} () const
+\item 
+{\bf PLLType} $\ast$ {\bf el} (int n) const
+\item 
+{\bf PLLType} $\ast$ {\bf operator[$\,$]} (int n) const
+\item 
+int {\bf length} () const
+\item 
+void {\bf update} ()
+\item 
+bool {\bf link\_\-before} (PLLRoot $\ast${\bf succ})
+\item 
+bool {\bf link\_\-before} ({\bf PLLType} $\ast${\bf succ})
+\item 
+bool {\bf link\_\-after} (PLLRoot $\ast${\bf pred})
+\item 
+bool {\bf link\_\-after} ({\bf PLLType} $\ast${\bf pred})
+\item 
+bool {\bf insert\_\-after} ({\bf PLLType} $\ast${\bf pred}, {\bf PLLType} $\ast$inshead)
+\item 
+bool {\bf insert\_\-after} (int n, {\bf PLLType} $\ast$inshead)
+\item 
+bool {\bf insert\_\-before} ({\bf PLLType} $\ast${\bf succ}, {\bf PLLType} $\ast$inshead)
+\item 
+bool {\bf insert\_\-before} (int n, {\bf PLLType} $\ast$inshead)
+\item 
+void {\bf clear} ()
+\item 
+{\bf $\sim$PLLRoot} ()
+\item 
+{\bf PLLRoot} ()
+\item 
+{\bf PLLType} $\ast$ {\bf head} () const
+\item 
+{\bf PLLType} $\ast$ {\bf tail} () const
+\item 
+{\bf PLLType} $\ast$ {\bf el} (int n) const
+\item 
+{\bf PLLType} $\ast$ {\bf operator[$\,$]} (int n) const
+\item 
+int {\bf length} () const
+\item 
+void {\bf update} ()
+\item 
+bool {\bf link\_\-before} (PLLRoot $\ast${\bf succ})
+\item 
+bool {\bf link\_\-before} ({\bf PLLType} $\ast${\bf succ})
+\item 
+bool {\bf link\_\-after} (PLLRoot $\ast${\bf pred})
+\item 
+bool {\bf link\_\-after} ({\bf PLLType} $\ast${\bf pred})
+\item 
+bool {\bf insert\_\-after} ({\bf PLLType} $\ast${\bf pred}, {\bf PLLType} $\ast$inshead)
+\item 
+bool {\bf insert\_\-after} (int n, {\bf PLLType} $\ast$inshead)
+\item 
+bool {\bf insert\_\-before} ({\bf PLLType} $\ast${\bf succ}, {\bf PLLType} $\ast$inshead)
+\item 
+bool {\bf insert\_\-before} (int n, {\bf PLLType} $\ast$inshead)
+\item 
+void {\bf clear} ()
+\end{CompactItemize}
+\subsection*{Protected Methods}
+\begin{CompactItemize}
+\item 
+void {\bf set\_\-root} ({\bf PLLHandle}$<$ {\bf PLLType} $>$ $\ast$h)
+\item 
+void {\bf set\_\-root} ({\bf PLLHandle}$<$ {\bf PLLType} $>$ $\ast$h)
+\item 
+void {\bf set\_\-root} ({\bf PLLType} $\ast$h)
+\item 
+void {\bf set\_\-root} ({\bf PLLHandle}$<$ {\bf PLLType} $>$ $\ast$h)
+\end{CompactItemize}
+\subsection*{Protected Attributes}
+\begin{CompactItemize}
+\item 
+{\bf PLLHandle}$<$ {\bf PLLType} $>$ $\ast$ {\bf pllhead}
+\item 
+{\bf PLLHandle}$<$ {\bf PLLType} $>$ $\ast$ {\bf plltail}
+\item 
+{\bf PLLHandle}$<$ {\bf PLLType} $>$ $\ast$ {\bf pllhead}
+\item 
+{\bf PLLHandle}$<$ {\bf PLLType} $>$ $\ast$ {\bf plltail}
+\item 
+{\bf PLLType} $\ast$ {\bf pllhead}
+\item 
+{\bf PLLType} $\ast$ {\bf plltail}
+\item 
+{\bf PLLHandle}$<$ {\bf PLLType} $>$ $\ast$ {\bf pllhead}
+\item 
+{\bf PLLHandle}$<$ {\bf PLLType} $>$ $\ast$ {\bf plltail}
+\end{CompactItemize}
+\subsubsection*{template$<$class PLLType$>$ class PLLRoot$<$ PLLType $>$}
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{PLLRoot@{PLLRoot}!~PLLRoot@{$\sim$PLLRoot}}
+\index{~PLLRoot@{$\sim$PLLRoot}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ PLLRoot$<$ {\bf PLLType} $>$::$\sim$PLLRoot ()\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a0}
+
+
+
+
+Definition at line 84 of file templates.classic.hh.
+
+
+
+\footnotesize\begin{verbatim}84 { delete pllhead; } // *** perhaps also make this virtual, but delete is not usually called on a PLLRoot<PLLType> object
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!PLLRoot@{PLLRoot}}
+\index{PLLRoot@{PLLRoot}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ PLLRoot$<$ {\bf PLLType} $>$::PLLRoot ()\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a1}
+
+
+
+
+Definition at line 85 of file templates.classic.hh.
+
+
+
+\footnotesize\begin{verbatim}85 : pllhead(NULL), plltail(NULL) {} 
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!~PLLRoot@{$\sim$PLLRoot}}
+\index{~PLLRoot@{$\sim$PLLRoot}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ PLLRoot$<$ {\bf PLLType} $>$::$\sim$PLLRoot ()\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a17}
+
+
+
+
+Definition at line 84 of file templates.clean.hh.
+
+
+
+\footnotesize\begin{verbatim}84 { delete pllhead; } // *** perhaps also make this virtual, but delete is not usually called on a PLLRoot<PLLType> object
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!PLLRoot@{PLLRoot}}
+\index{PLLRoot@{PLLRoot}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ PLLRoot$<$ {\bf PLLType} $>$::PLLRoot ()\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a18}
+
+
+
+
+Definition at line 85 of file templates.clean.hh.
+
+
+
+\footnotesize\begin{verbatim}85 : pllhead(NULL), plltail(NULL) {} 
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!~PLLRoot@{$\sim$PLLRoot}}
+\index{~PLLRoot@{$\sim$PLLRoot}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ PLLRoot$<$ {\bf PLLType} $>$::$\sim$PLLRoot ()\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a34}
+
+
+
+
+Definition at line 109 of file templates.hh.
+
+
+
+\footnotesize\begin{verbatim}109                            {
+110 //cerr << "PLLR=" << (int) this << " head=" << (int) pllhead << '\n'; cerr.flush();
+111                 clear(); } // *** perhaps also make this virtual, but delete is not usually called on a PLLRoot<PLLType> object
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!PLLRoot@{PLLRoot}}
+\index{PLLRoot@{PLLRoot}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ PLLRoot$<$ {\bf PLLType} $>$::PLLRoot ()\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a35}
+
+
+
+
+Definition at line 112 of file templates.hh.
+
+
+
+\footnotesize\begin{verbatim}112 : pllhead(NULL), plltail(NULL) {}
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!~PLLRoot@{$\sim$PLLRoot}}
+\index{~PLLRoot@{$\sim$PLLRoot}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ PLLRoot$<$ {\bf PLLType} $>$::$\sim$PLLRoot ()\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a51}
+
+
+
+
+Definition at line 84 of file templates.unfixed.hh.
+
+
+
+\footnotesize\begin{verbatim}84 { delete pllhead; } // *** perhaps also make this virtual, but delete is not usually called on a PLLRoot<PLLType> object
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!PLLRoot@{PLLRoot}}
+\index{PLLRoot@{PLLRoot}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ PLLRoot$<$ {\bf PLLType} $>$::PLLRoot ()\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a52}
+
+
+
+
+Definition at line 85 of file templates.unfixed.hh.
+
+
+
+\footnotesize\begin{verbatim}85 : pllhead(NULL), plltail(NULL) {} 
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Function Documentation}
+\index{PLLRoot@{PLLRoot}!clear@{clear}}
+\index{clear@{clear}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ void PLLRoot$<$ {\bf PLLType} $>$::clear ()\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a67}
+
+
+
+
+Definition at line 104 of file templates.unfixed.hh.
+
+
+
+\footnotesize\begin{verbatim}104 { delete pllhead; pllhead = NULL; plltail = NULL; }
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!clear@{clear}}
+\index{clear@{clear}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ void PLLRoot$<$ {\bf PLLType} $>$::clear ()\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a50}
+
+
+
+
+Definition at line 131 of file templates.hh.
+
+
+
+\footnotesize\begin{verbatim}131 { if (pllhead) pllhead->pllsignal = PLLHandle<PLLType>::PLL_LIST_DESTRUCT; delete pllhead; pllhead = NULL; plltail = NULL; }
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!clear@{clear}}
+\index{clear@{clear}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ void PLLRoot$<$ {\bf PLLType} $>$::clear ()\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a33}
+
+
+
+
+Definition at line 104 of file templates.clean.hh.
+
+
+
+\footnotesize\begin{verbatim}104 { delete pllhead; pllhead = NULL; plltail = NULL; }
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!clear@{clear}}
+\index{clear@{clear}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ void PLLRoot$<$ {\bf PLLType} $>$::clear ()\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a16}
+
+
+
+
+Definition at line 104 of file templates.classic.hh.
+
+Referenced by Detailed\_\-Items\_\-List::Get\_\-All\_\-Topical\_\-DIL\_\-Parameters(), search(), search\_\-output(), and PLLRoot$<$ DIL\_\-entry\_\-Pointer $>$::$\sim$PLLRoot().
+
+
+
+\footnotesize\begin{verbatim}104 { delete pllhead; pllhead = NULL; plltail = NULL; }
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!el@{el}}
+\index{el@{el}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ {\bf PLLType}$\ast$ PLLRoot$<$ {\bf PLLType} $>$::el (int {\em n}) const\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a55}
+
+
+
+
+Definition at line 88 of file templates.unfixed.hh.
+
+
+
+\footnotesize\begin{verbatim}88 { if (pllhead) return pllhead->el(n); return NULL; } 
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!el@{el}}
+\index{el@{el}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ {\bf PLLType}$\ast$ PLLRoot$<$ {\bf PLLType} $>$::el (int {\em n}) const\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a38}
+
+
+
+
+Definition at line 115 of file templates.hh.
+
+
+
+\footnotesize\begin{verbatim}115 { if (pllhead) return pllhead->el(n); return NULL; } 
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!el@{el}}
+\index{el@{el}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ {\bf PLLType}$\ast$ PLLRoot$<$ {\bf PLLType} $>$::el (int {\em n}) const\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a21}
+
+
+
+
+Definition at line 88 of file templates.clean.hh.
+
+
+
+\footnotesize\begin{verbatim}88 { if (pllhead) return pllhead->el(n); return NULL; } 
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!el@{el}}
+\index{el@{el}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ {\bf PLLType}$\ast$ PLLRoot$<$ {\bf PLLType} $>$::el (int {\em n}) const\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a4}
+
+
+
+
+Definition at line 88 of file templates.classic.hh.
+
+Referenced by PLLRoot$<$ PLLType $>$::insert\_\-after(), PLLRoot$<$ PLLType $>$::insert\_\-before(), and PLLRoot$<$ DIL\_\-entry\_\-Pointer $>$::operator[$\,$]().
+
+
+
+\footnotesize\begin{verbatim}88 { if (pllhead) return pllhead->el(n); return NULL; } 
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!head@{head}}
+\index{head@{head}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ {\bf PLLType}$\ast$ PLLRoot$<$ {\bf PLLType} $>$::head () const\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a53}
+
+
+
+
+Definition at line 86 of file templates.unfixed.hh.
+
+
+
+\footnotesize\begin{verbatim}86 { return static_cast<PLLType *>(pllhead); } 
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!head@{head}}
+\index{head@{head}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ {\bf PLLType}$\ast$ PLLRoot$<$ {\bf PLLType} $>$::head () const\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a36}
+
+
+
+
+Definition at line 113 of file templates.hh.
+
+
+
+\footnotesize\begin{verbatim}113 { return pllhead; } 
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!head@{head}}
+\index{head@{head}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ {\bf PLLType}$\ast$ PLLRoot$<$ {\bf PLLType} $>$::head () const\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a19}
+
+
+
+
+Definition at line 86 of file templates.clean.hh.
+
+
+
+\footnotesize\begin{verbatim}86 { return static_cast<PLLType *>(pllhead); } 
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!head@{head}}
+\index{head@{head}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ {\bf PLLType}$\ast$ PLLRoot$<$ {\bf PLLType} $>$::head () const\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a2}
+
+
+
+
+Definition at line 86 of file templates.classic.hh.
+
+Referenced by Active\_\-List::AL\_\-Head(), Active\_\-List::available\_\-before(), Topical\_\-DIL\_\-Files\_\-Root::File(), financial\_\-monthly(), PLLHandle$<$ DIL\_\-entry\_\-Pointer $>$::head(), Topical\_\-DIL\_\-Files\_\-Root::Invalidate(), PLLRoot$<$ PLLType $>$::link\_\-after(), PLLRoot$<$ PLLType $>$::link\_\-before(), Financial\_\-Note::link\_\-sorted(), Topical\_\-DIL\_\-Files\_\-Root::operator[$\,$](), Topical\_\-DIL\_\-Files\_\-Root::Refresh(), search(), search\_\-output(), AL\_\-Day::TC\_\-Head(), AL\_\-Day::TD\_\-Head(), Topical\_\-DIL\_\-Files\_\-Root::Title(), Topical\_\-DIL\_\-Files\_\-Root::Topic(), PLLHandle$<$ PLLType $>$::unlink\_\-after(), PLLHandle$<$ PLLType $>$::unlink\_\-before(), update\_\-DIL\_\-entry\_\-parameter\_\-elements(), write\_\-financial\_\-notes\_\-file(), and Detailed\_\-Items\_\-List::Write\_\-Topical\_\-to\_\-Binary\_\-Cache().
+
+
+
+\footnotesize\begin{verbatim}86 { return (PLLType *)const_cast<PLLHandle<PLLType> *>(pllhead); } 
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!insert_after@{insert\_\-after}}
+\index{insert_after@{insert\_\-after}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLRoot$<$ {\bf PLLType} $>$::insert\_\-after (int {\em n}, {\bf PLLType} $\ast$ {\em inshead})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a64}
+
+
+\index{PLLRoot@{PLLRoot}!insert_after@{insert\_\-after}}
+\index{insert_after@{insert\_\-after}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLRoot$<$ {\bf PLLType} $>$::insert\_\-after ({\bf PLLType} $\ast$ {\em pred}, {\bf PLLType} $\ast$ {\em inshead})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a63}
+
+
+\index{PLLRoot@{PLLRoot}!insert_after@{insert\_\-after}}
+\index{insert_after@{insert\_\-after}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLRoot$<$ {\bf PLLType} $>$::insert\_\-after (int {\em n}, {\bf PLLType} $\ast$ {\em inshead})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a47}
+
+
+\index{PLLRoot@{PLLRoot}!insert_after@{insert\_\-after}}
+\index{insert_after@{insert\_\-after}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLRoot$<$ {\bf PLLType} $>$::insert\_\-after ({\bf PLLType} $\ast$ {\em pred}, {\bf PLLType} $\ast$ {\em inshead})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a46}
+
+
+\index{PLLRoot@{PLLRoot}!insert_after@{insert\_\-after}}
+\index{insert_after@{insert\_\-after}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLRoot$<$ {\bf PLLType} $>$::insert\_\-after (int {\em n}, {\bf PLLType} $\ast$ {\em inshead})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a30}
+
+
+\index{PLLRoot@{PLLRoot}!insert_after@{insert\_\-after}}
+\index{insert_after@{insert\_\-after}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLRoot$<$ {\bf PLLType} $>$::insert\_\-after ({\bf PLLType} $\ast$ {\em pred}, {\bf PLLType} $\ast$ {\em inshead})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a29}
+
+
+\index{PLLRoot@{PLLRoot}!insert_after@{insert\_\-after}}
+\index{insert_after@{insert\_\-after}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLRoot$<$ {\bf PLLType} $>$::insert\_\-after (int {\em n}, {\bf PLLType} $\ast$ {\em inshead})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a13}
+
+
+
+
+Definition at line 304 of file templates.classic.hh.
+
+References PLLRoot$<$ PLLType $>$::el(), PLLRoot$<$ PLLType $>$::insert\_\-after(), and pred.
+
+
+
+\footnotesize\begin{verbatim}304                                                                    {
+305 // inserts inshead after the nth element in this list
+306 // if nth element does not exist, inserts at tail of list
+307         PLLType * pred = el(n);
+308         return insert_after(pred,inshead);
+309 } 
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!insert_after@{insert\_\-after}}
+\index{insert_after@{insert\_\-after}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLRoot$<$ {\bf PLLType} $>$::insert\_\-after ({\bf PLLType} $\ast$ {\em pred}, {\bf PLLType} $\ast$ {\em inshead})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a12}
+
+
+
+
+Definition at line 291 of file templates.classic.hh.
+
+References PLLRoot$<$ PLLType $>$::link\_\-after(), PLLRoot$<$ PLLType $>$::link\_\-before(), pred, res, and PLLType$<$ PLLType $>$::unlink\_\-after().
+
+Referenced by PLLRoot$<$ PLLType $>$::insert\_\-after().
+
+
+
+\footnotesize\begin{verbatim}291                                                                             {
+292 // inserts inshead after element pred in this list
+293 // if pred==NULL or pred->Root()!=this, inserts at tail of list
+294         if (!pred) return link_before(inshead); // link inshead to tail of this
+295         if (pred->Root()!=this) return link_before(inshead); // link inshead to tail of this
+296         PLLRoot<PLLType> h;
+297         pred->unlink_after(h); // get head of list up to pred into h
+298         bool res = h.link_before(inshead); // link inshead to tail of h
+299         link_after(&h); // link h to head of this
+300         return res;
+301 } 
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!insert_before@{insert\_\-before}}
+\index{insert_before@{insert\_\-before}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLRoot$<$ {\bf PLLType} $>$::insert\_\-before (int {\em n}, {\bf PLLType} $\ast$ {\em inshead})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a66}
+
+
+\index{PLLRoot@{PLLRoot}!insert_before@{insert\_\-before}}
+\index{insert_before@{insert\_\-before}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLRoot$<$ {\bf PLLType} $>$::insert\_\-before ({\bf PLLType} $\ast$ {\em succ}, {\bf PLLType} $\ast$ {\em inshead})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a65}
+
+
+\index{PLLRoot@{PLLRoot}!insert_before@{insert\_\-before}}
+\index{insert_before@{insert\_\-before}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLRoot$<$ {\bf PLLType} $>$::insert\_\-before (int {\em n}, {\bf PLLType} $\ast$ {\em inshead})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a49}
+
+
+\index{PLLRoot@{PLLRoot}!insert_before@{insert\_\-before}}
+\index{insert_before@{insert\_\-before}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLRoot$<$ {\bf PLLType} $>$::insert\_\-before ({\bf PLLType} $\ast$ {\em succ}, {\bf PLLType} $\ast$ {\em inshead})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a48}
+
+
+\index{PLLRoot@{PLLRoot}!insert_before@{insert\_\-before}}
+\index{insert_before@{insert\_\-before}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLRoot$<$ {\bf PLLType} $>$::insert\_\-before (int {\em n}, {\bf PLLType} $\ast$ {\em inshead})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a32}
+
+
+\index{PLLRoot@{PLLRoot}!insert_before@{insert\_\-before}}
+\index{insert_before@{insert\_\-before}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLRoot$<$ {\bf PLLType} $>$::insert\_\-before ({\bf PLLType} $\ast$ {\em succ}, {\bf PLLType} $\ast$ {\em inshead})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a31}
+
+
+\index{PLLRoot@{PLLRoot}!insert_before@{insert\_\-before}}
+\index{insert_before@{insert\_\-before}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLRoot$<$ {\bf PLLType} $>$::insert\_\-before (int {\em n}, {\bf PLLType} $\ast$ {\em inshead})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a15}
+
+
+
+
+Definition at line 325 of file templates.classic.hh.
+
+References PLLRoot$<$ PLLType $>$::el(), PLLRoot$<$ PLLType $>$::insert\_\-before(), and succ.
+
+
+
+\footnotesize\begin{verbatim}325                                                                     {
+326 // inserts inshead before the nth element in this list
+327 // if nth element does not exist, inserts at head of list
+328         PLLType * succ = el(n);
+329         return insert_before(succ,inshead);
+330 } 
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!insert_before@{insert\_\-before}}
+\index{insert_before@{insert\_\-before}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLRoot$<$ {\bf PLLType} $>$::insert\_\-before ({\bf PLLType} $\ast$ {\em succ}, {\bf PLLType} $\ast$ {\em inshead})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a14}
+
+
+
+
+Definition at line 312 of file templates.classic.hh.
+
+References PLLRoot$<$ PLLType $>$::link\_\-after(), PLLRoot$<$ PLLType $>$::link\_\-before(), res, succ, and PLLType$<$ PLLType $>$::unlink\_\-before().
+
+Referenced by PLLRoot$<$ PLLType $>$::insert\_\-before(), and Financial\_\-Note::link\_\-sorted().
+
+
+
+\footnotesize\begin{verbatim}312                                                                              {
+313 // inserts inshead before element succ in this list
+314 // if succ==NULL or succ->Root()!=this, inserts at head of list
+315         if (!succ) return link_after(inshead); // link inshead to head of this
+316         if (succ->Root()!=this) return link_after(inshead); // link inshead to head of this
+317         PLLRoot<PLLType> t;
+318         succ->unlink_before(t); // get tail of list from succ into t
+319         bool res = t.link_after(inshead); // link inshead to head of t
+320         link_before(&t); // link t to tail of this
+321         return res;
+322 } 
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!length@{length}}
+\index{length@{length}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ int PLLRoot$<$ {\bf PLLType} $>$::length () const\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a57}
+
+
+
+
+Definition at line 90 of file templates.unfixed.hh.
+
+
+
+\footnotesize\begin{verbatim}90 { if (pllhead) return pllhead->length(); return 0; } 
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!length@{length}}
+\index{length@{length}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ int PLLRoot$<$ {\bf PLLType} $>$::length () const\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a40}
+
+
+
+
+Definition at line 117 of file templates.hh.
+
+
+
+\footnotesize\begin{verbatim}117 { if (pllhead) return pllhead->length(); return 0; } 
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!length@{length}}
+\index{length@{length}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ int PLLRoot$<$ {\bf PLLType} $>$::length () const\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a23}
+
+
+
+
+Definition at line 90 of file templates.clean.hh.
+
+
+
+\footnotesize\begin{verbatim}90 { if (pllhead) return pllhead->length(); return 0; } 
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!length@{length}}
+\index{length@{length}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ int PLLRoot$<$ {\bf PLLType} $>$::length () const\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a6}
+
+
+
+
+Definition at line 90 of file templates.classic.hh.
+
+Referenced by search\_\-output(), and Detailed\_\-Items\_\-List::Write\_\-Topical\_\-to\_\-Binary\_\-Cache().
+
+
+
+\footnotesize\begin{verbatim}90 { if (pllhead) return pllhead->length(); return 0; } 
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!link_after@{link\_\-after}}
+\index{link_after@{link\_\-after}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLRoot$<$ {\bf PLLType} $>$::link\_\-after ({\bf PLLType} $\ast$ {\em pred})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a62}
+
+
+\index{PLLRoot@{PLLRoot}!link_after@{link\_\-after}}
+\index{link_after@{link\_\-after}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLRoot$<$ {\bf PLLType} $>$::link\_\-after (PLLRoot$<$ {\bf PLLType} $>$ $\ast$ {\em pred})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a61}
+
+
+\index{PLLRoot@{PLLRoot}!link_after@{link\_\-after}}
+\index{link_after@{link\_\-after}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLRoot$<$ {\bf PLLType} $>$::link\_\-after ({\bf PLLType} $\ast$ {\em pred})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a45}
+
+
+\index{PLLRoot@{PLLRoot}!link_after@{link\_\-after}}
+\index{link_after@{link\_\-after}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLRoot$<$ {\bf PLLType} $>$::link\_\-after (PLLRoot$<$ {\bf PLLType} $>$ $\ast$ {\em pred})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a44}
+
+
+\index{PLLRoot@{PLLRoot}!link_after@{link\_\-after}}
+\index{link_after@{link\_\-after}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLRoot$<$ {\bf PLLType} $>$::link\_\-after ({\bf PLLType} $\ast$ {\em pred})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a28}
+
+
+\index{PLLRoot@{PLLRoot}!link_after@{link\_\-after}}
+\index{link_after@{link\_\-after}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLRoot$<$ {\bf PLLType} $>$::link\_\-after (PLLRoot$<$ {\bf PLLType} $>$ $\ast$ {\em pred})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a27}
+
+
+\index{PLLRoot@{PLLRoot}!link_after@{link\_\-after}}
+\index{link_after@{link\_\-after}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLRoot$<$ {\bf PLLType} $>$::link\_\-after ({\bf PLLType} $\ast$ {\em pred})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a11}
+
+
+
+
+Definition at line 275 of file templates.classic.hh.
+
+References PLLRoot$<$ PLLType $>$::link\_\-after(), PLLRoot$<$ PLLType $>$::pllhead, PLLType$<$ PLLType $>$::pllnext, PLLRoot$<$ PLLType $>$::plltail, pred, and PLLRoot$<$ PLLType $>$::set\_\-root().
+
+
+
+\footnotesize\begin{verbatim}275                                                        { 
+276 // when succ->Root()==NULL, this allows previously
+277 // unprotected lists or newly created PLLType elements
+278 // to be linked
+279         if (!pred) return false; 
+280         if (pred->Root()) return link_after(pred->Root()); 
+281         if (pllhead) { 
+282                 pllhead->pllprev = pred; 
+283                 pred->pllnext = pllhead; 
+284         } else plltail = pred; 
+285         pllhead = pred;  // *** this may need to be pred->seek_head(), unless lists without root cannot exist
+286         set_root(pred); 
+287         return true; 
+288 }
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!link_after@{link\_\-after}}
+\index{link_after@{link\_\-after}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLRoot$<$ {\bf PLLType} $>$::link\_\-after (PLLRoot$<$ {\bf PLLType} $>$ $\ast$ {\em pred})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a10}
+
+
+
+
+Definition at line 259 of file templates.classic.hh.
+
+References PLLRoot$<$ PLLType $>$::head(), PLLRoot$<$ PLLType $>$::pllhead, PLLType$<$ PLLType $>$::pllnext, PLLRoot$<$ PLLType $>$::plltail, pred, PLLRoot$<$ PLLType $>$::set\_\-root(), PLLRoot$<$ PLLType $>$::tail(), and PLLRoot$<$ PLLType $>$::update().
+
+Referenced by PLLRoot$<$ PLLType $>$::insert\_\-after(), PLLRoot$<$ PLLType $>$::insert\_\-before(), PLLRoot$<$ PLLType $>$::link\_\-after(), DIL\_\-entry\_\-parameters::project\_\-prepend(), and DIL\_\-entry\_\-parameters::topic\_\-prepend().
+
+
+
+\footnotesize\begin{verbatim}259                                                                 { 
+260         if (!pred) return false; 
+261         if (!pred->tail()) return false; 
+262         // *** could call update() here first to insure that pllhead and plltail
+263         //     are correct
+264         if (pllhead) { 
+265                 pllhead->pllprev = pred->tail(); 
+266                 pred->tail()->pllnext = pllhead; 
+267         } else plltail = pred->head(); 
+268         pllhead = pred->head(); 
+269         set_root(pred->head()); 
+270         pred->update(); 
+271         return true; 
+272 }
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!link_before@{link\_\-before}}
+\index{link_before@{link\_\-before}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLRoot$<$ {\bf PLLType} $>$::link\_\-before ({\bf PLLType} $\ast$ {\em succ})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a60}
+
+
+\index{PLLRoot@{PLLRoot}!link_before@{link\_\-before}}
+\index{link_before@{link\_\-before}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLRoot$<$ {\bf PLLType} $>$::link\_\-before (PLLRoot$<$ {\bf PLLType} $>$ $\ast$ {\em succ})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a59}
+
+
+\index{PLLRoot@{PLLRoot}!link_before@{link\_\-before}}
+\index{link_before@{link\_\-before}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLRoot$<$ {\bf PLLType} $>$::link\_\-before ({\bf PLLType} $\ast$ {\em succ})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a43}
+
+
+\index{PLLRoot@{PLLRoot}!link_before@{link\_\-before}}
+\index{link_before@{link\_\-before}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLRoot$<$ {\bf PLLType} $>$::link\_\-before (PLLRoot$<$ {\bf PLLType} $>$ $\ast$ {\em succ})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a42}
+
+
+\index{PLLRoot@{PLLRoot}!link_before@{link\_\-before}}
+\index{link_before@{link\_\-before}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLRoot$<$ {\bf PLLType} $>$::link\_\-before ({\bf PLLType} $\ast$ {\em succ})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a26}
+
+
+\index{PLLRoot@{PLLRoot}!link_before@{link\_\-before}}
+\index{link_before@{link\_\-before}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLRoot$<$ {\bf PLLType} $>$::link\_\-before (PLLRoot$<$ {\bf PLLType} $>$ $\ast$ {\em succ})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a25}
+
+
+\index{PLLRoot@{PLLRoot}!link_before@{link\_\-before}}
+\index{link_before@{link\_\-before}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLRoot$<$ {\bf PLLType} $>$::link\_\-before ({\bf PLLType} $\ast$ {\em succ})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a9}
+
+
+
+
+Definition at line 243 of file templates.classic.hh.
+
+References PLLRoot$<$ PLLType $>$::link\_\-before(), PLLRoot$<$ PLLType $>$::pllhead, PLLType$<$ PLLType $>$::pllprev, PLLRoot$<$ PLLType $>$::plltail, PLLRoot$<$ PLLType $>$::set\_\-root(), and succ.
+
+
+
+\footnotesize\begin{verbatim}243                                                         { 
+244 // when succ->Root()==NULL, this allows previously
+245 // unprotected lists or newly created PLLType elements
+246 // to be linked
+247         if (!succ) return false; 
+248         if (succ->Root()) return link_before(succ->Root()); 
+249         if (plltail) { 
+250                 plltail->pllnext = succ;
+251                 succ->pllprev = plltail; 
+252         } else pllhead = succ; 
+253         plltail = succ; // *** this may need to be succ->seek_tail(), unless lists without root cannot exist
+254         set_root(succ); 
+255         return true; 
+256 } 
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!link_before@{link\_\-before}}
+\index{link_before@{link\_\-before}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ bool PLLRoot$<$ {\bf PLLType} $>$::link\_\-before (PLLRoot$<$ {\bf PLLType} $>$ $\ast$ {\em succ})\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a8}
+
+
+
+
+Definition at line 227 of file templates.classic.hh.
+
+References PLLRoot$<$ PLLType $>$::head(), PLLRoot$<$ PLLType $>$::pllhead, PLLType$<$ PLLType $>$::pllprev, PLLRoot$<$ PLLType $>$::plltail, PLLRoot$<$ PLLType $>$::set\_\-root(), succ, PLLRoot$<$ PLLType $>$::tail(), and PLLRoot$<$ PLLType $>$::update().
+
+Referenced by Detailed\_\-Items\_\-List::Get\_\-All\_\-Topical\_\-DIL\_\-Parameters(), PLLRoot$<$ PLLType $>$::insert\_\-after(), PLLRoot$<$ PLLType $>$::insert\_\-before(), PLLHandle$<$ PLLType $>$::isolate(), PLLRoot$<$ PLLType $>$::link\_\-before(), Financial\_\-Note::link\_\-sorted(), modify\_\-element\_\-through\_\-FORM\_\-interface(), DIL\_\-entry\_\-parameters::project\_\-append(), PLLHandle$<$ PLLType $>$::remove(), search(), and DIL\_\-entry\_\-parameters::topic\_\-append().
+
+
+
+\footnotesize\begin{verbatim}227                                                                  { 
+228         if (!succ) return false; 
+229         if (!succ->head()) return false; 
+230         // *** could call update() here first to insure that pllhead and plltail
+231         //     are correct
+232         if (plltail) { 
+233                 plltail->pllnext = succ->head(); 
+234                 succ->head()->pllprev = plltail; 
+235         } else pllhead = succ->head(); 
+236         plltail = succ->tail(); 
+237         set_root(succ->head()); 
+238         succ->update(); 
+239         return true; 
+240 } 
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ {\bf PLLType}$\ast$ PLLRoot$<$ {\bf PLLType} $>$::operator[$\,$] (int {\em n}) const\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a56}
+
+
+
+
+Definition at line 89 of file templates.unfixed.hh.
+
+
+
+\footnotesize\begin{verbatim}89 { return el(n); } 
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ {\bf PLLType}$\ast$ PLLRoot$<$ {\bf PLLType} $>$::operator[$\,$] (int {\em n}) const\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a39}
+
+
+
+
+Definition at line 116 of file templates.hh.
+
+
+
+\footnotesize\begin{verbatim}116 { return el(n); } 
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ {\bf PLLType}$\ast$ PLLRoot$<$ {\bf PLLType} $>$::operator[$\,$] (int {\em n}) const\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a22}
+
+
+
+
+Definition at line 89 of file templates.clean.hh.
+
+
+
+\footnotesize\begin{verbatim}89 { return el(n); } 
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ {\bf PLLType}$\ast$ PLLRoot$<$ {\bf PLLType} $>$::operator[$\,$] (int {\em n}) const\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a5}
+
+
+
+
+Definition at line 89 of file templates.classic.hh.
+
+
+
+\footnotesize\begin{verbatim}89 { return el(n); } 
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!set_root@{set\_\-root}}
+\index{set_root@{set\_\-root}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ void PLLRoot$<$ {\bf PLLType} $>$::set\_\-root ({\bf PLLHandle}$<$ {\bf PLLType} $>$ $\ast$ {\em h})\hspace{0.3cm}{\tt  [inline, protected]}}\label{classPLLRoot_b3}
+
+
+\index{PLLRoot@{PLLRoot}!set_root@{set\_\-root}}
+\index{set_root@{set\_\-root}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ void PLLRoot$<$ {\bf PLLType} $>$::set\_\-root ({\bf PLLType} $\ast$ {\em h})\hspace{0.3cm}{\tt  [inline, protected]}}\label{classPLLRoot_b2}
+
+
+
+
+Definition at line 257 of file templates.hh.
+
+References PLLType$<$ PLLType $>$::Next().
+
+
+
+\footnotesize\begin{verbatim}257                                                   { 
+258         for (; (h); h = h->Next()) h->pllroot = this; 
+259 } 
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!set_root@{set\_\-root}}
+\index{set_root@{set\_\-root}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ void PLLRoot$<$ {\bf PLLType} $>$::set\_\-root ({\bf PLLHandle}$<$ {\bf PLLType} $>$ $\ast$ {\em h})\hspace{0.3cm}{\tt  [inline, protected]}}\label{classPLLRoot_b1}
+
+
+\index{PLLRoot@{PLLRoot}!set_root@{set\_\-root}}
+\index{set_root@{set\_\-root}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ void PLLRoot$<$ {\bf PLLType} $>$::set\_\-root ({\bf PLLHandle}$<$ {\bf PLLType} $>$ $\ast$ {\em h})\hspace{0.3cm}{\tt  [inline, protected]}}\label{classPLLRoot_b0}
+
+
+
+
+Definition at line 206 of file templates.classic.hh.
+
+References PLLHandle$<$ PLLType $>$::Next(), and PLLHandle$<$ PLLType $>$::pllroot.
+
+Referenced by PLLRoot$<$ PLLType $>$::link\_\-after(), PLLRoot$<$ PLLType $>$::link\_\-before(), PLLHandle$<$ PLLType $>$::unlink\_\-after(), and PLLHandle$<$ PLLType $>$::unlink\_\-before().
+
+
+
+\footnotesize\begin{verbatim}206                                                              { 
+207         for (; (h); h = h->Next()) h->pllroot = this; 
+208 } 
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!tail@{tail}}
+\index{tail@{tail}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ {\bf PLLType}$\ast$ PLLRoot$<$ {\bf PLLType} $>$::tail () const\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a54}
+
+
+
+
+Definition at line 87 of file templates.unfixed.hh.
+
+
+
+\footnotesize\begin{verbatim}87 { return static_cast<PLLType *>(plltail); } 
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!tail@{tail}}
+\index{tail@{tail}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ {\bf PLLType}$\ast$ PLLRoot$<$ {\bf PLLType} $>$::tail () const\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a37}
+
+
+
+
+Definition at line 114 of file templates.hh.
+
+
+
+\footnotesize\begin{verbatim}114 { return plltail; } 
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!tail@{tail}}
+\index{tail@{tail}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ {\bf PLLType}$\ast$ PLLRoot$<$ {\bf PLLType} $>$::tail () const\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a20}
+
+
+
+
+Definition at line 87 of file templates.clean.hh.
+
+
+
+\footnotesize\begin{verbatim}87 { return static_cast<PLLType *>(plltail); } 
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!tail@{tail}}
+\index{tail@{tail}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ {\bf PLLType}$\ast$ PLLRoot$<$ {\bf PLLType} $>$::tail () const\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a3}
+
+
+
+
+Definition at line 87 of file templates.classic.hh.
+
+Referenced by Active\_\-List::AL\_\-Tail(), PLLRoot$<$ PLLType $>$::link\_\-after(), PLLRoot$<$ PLLType $>$::link\_\-before(), PLLHandle$<$ DIL\_\-entry\_\-Pointer $>$::tail(), AL\_\-Day::TC\_\-Tail(), and AL\_\-Day::TD\_\-Tail().
+
+
+
+\footnotesize\begin{verbatim}87 { return (PLLType *)const_cast<PLLHandle<PLLType> *>(plltail); } 
+\end{verbatim}\normalsize 
+\index{PLLRoot@{PLLRoot}!update@{update}}
+\index{update@{update}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ void PLLRoot$<$ {\bf PLLType} $>$::update ()\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a58}
+
+
+\index{PLLRoot@{PLLRoot}!update@{update}}
+\index{update@{update}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ void PLLRoot$<$ {\bf PLLType} $>$::update ()\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a41}
+
+
+\index{PLLRoot@{PLLRoot}!update@{update}}
+\index{update@{update}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ void PLLRoot$<$ {\bf PLLType} $>$::update ()\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a24}
+
+
+\index{PLLRoot@{PLLRoot}!update@{update}}
+\index{update@{update}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ void PLLRoot$<$ {\bf PLLType} $>$::update ()\hspace{0.3cm}{\tt  [inline]}}\label{classPLLRoot_a7}
+
+
+
+
+Definition at line 211 of file templates.classic.hh.
+
+References PLLRoot$<$ PLLType $>$::pllhead, and PLLRoot$<$ PLLType $>$::plltail.
+
+Referenced by PLLRoot$<$ PLLType $>$::link\_\-after(), and PLLRoot$<$ PLLType $>$::link\_\-before().
+
+
+
+\footnotesize\begin{verbatim}211                                      { 
+212 // clears head and tail if elements were linked to another root
+213 // or fixes head and tail if either one pointed to an element with
+214 // a different root
+215         if (pllhead) if (pllhead->Root()!=this) pllhead = NULL; 
+216         if (plltail) { 
+217                 if (plltail->Root()!=this) { 
+218                         if (!pllhead) plltail = NULL; 
+219                         else plltail = pllhead->seek_tail(); 
+220                 } else { 
+221                         if (!pllhead) pllhead = plltail->seek_head(); 
+222                 } 
+223         } 
+224 } 
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Data Documentation}
+\index{PLLRoot@{PLLRoot}!pllhead@{pllhead}}
+\index{pllhead@{pllhead}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ {\bf PLLHandle}$<${\bf PLLType}$>$$\ast$ PLLRoot$<$ {\bf PLLType} $>$::pllhead\hspace{0.3cm}{\tt  [protected]}}\label{classPLLRoot_n6}
+
+
+
+
+Definition at line 80 of file templates.unfixed.hh.\index{PLLRoot@{PLLRoot}!pllhead@{pllhead}}
+\index{pllhead@{pllhead}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ {\bf PLLType}$\ast$ PLLRoot$<$ {\bf PLLType} $>$::pllhead\hspace{0.3cm}{\tt  [protected]}}\label{classPLLRoot_n4}
+
+
+
+
+Definition at line 101 of file templates.hh.\index{PLLRoot@{PLLRoot}!pllhead@{pllhead}}
+\index{pllhead@{pllhead}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ {\bf PLLHandle}$<${\bf PLLType}$>$$\ast$ PLLRoot$<$ {\bf PLLType} $>$::pllhead\hspace{0.3cm}{\tt  [protected]}}\label{classPLLRoot_n2}
+
+
+
+
+Definition at line 80 of file templates.clean.hh.\index{PLLRoot@{PLLRoot}!pllhead@{pllhead}}
+\index{pllhead@{pllhead}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ {\bf PLLHandle}$<${\bf PLLType}$>$$\ast$ PLLRoot$<$ {\bf PLLType} $>$::pllhead\hspace{0.3cm}{\tt  [protected]}}\label{classPLLRoot_n0}
+
+
+
+
+Definition at line 80 of file templates.classic.hh.
+
+Referenced by PLLHandle$<$ PLLType $>$::isolate(), PLLRoot$<$ PLLType $>$::link\_\-after(), PLLRoot$<$ PLLType $>$::link\_\-before(), PLLHandle$<$ PLLType $>$::unlink\_\-after(), PLLHandle$<$ PLLType $>$::unlink\_\-before(), and PLLRoot$<$ PLLType $>$::update().\index{PLLRoot@{PLLRoot}!plltail@{plltail}}
+\index{plltail@{plltail}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ {\bf PLLHandle}$<${\bf PLLType}$>$$\ast$ PLLRoot$<$ {\bf PLLType} $>$::plltail\hspace{0.3cm}{\tt  [protected]}}\label{classPLLRoot_n7}
+
+
+
+
+Definition at line 81 of file templates.unfixed.hh.\index{PLLRoot@{PLLRoot}!plltail@{plltail}}
+\index{plltail@{plltail}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ {\bf PLLType}$\ast$ PLLRoot$<$ {\bf PLLType} $>$::plltail\hspace{0.3cm}{\tt  [protected]}}\label{classPLLRoot_n5}
+
+
+
+
+Definition at line 102 of file templates.hh.\index{PLLRoot@{PLLRoot}!plltail@{plltail}}
+\index{plltail@{plltail}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ {\bf PLLHandle}$<${\bf PLLType}$>$$\ast$ PLLRoot$<$ {\bf PLLType} $>$::plltail\hspace{0.3cm}{\tt  [protected]}}\label{classPLLRoot_n3}
+
+
+
+
+Definition at line 81 of file templates.clean.hh.\index{PLLRoot@{PLLRoot}!plltail@{plltail}}
+\index{plltail@{plltail}!PLLRoot@{PLLRoot}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}template$<$class PLLType$>$ {\bf PLLHandle}$<${\bf PLLType}$>$$\ast$ PLLRoot$<$ {\bf PLLType} $>$::plltail\hspace{0.3cm}{\tt  [protected]}}\label{classPLLRoot_n1}
+
+
+
+
+Definition at line 81 of file templates.classic.hh.
+
+Referenced by PLLHandle$<$ PLLType $>$::isolate(), PLLRoot$<$ PLLType $>$::link\_\-after(), PLLRoot$<$ PLLType $>$::link\_\-before(), PLLHandle$<$ PLLType $>$::unlink\_\-after(), PLLHandle$<$ PLLType $>$::unlink\_\-before(), and PLLRoot$<$ PLLType $>$::update().
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf templates.classic.hh}\item 
+{\bf templates.clean.hh}\item 
+{\bf templates.hh}\item 
+{\bf templates.unfixed.hh}\end{CompactItemize}

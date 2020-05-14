@@ -1,0 +1,54 @@
+Notes relevant to the conversion of the DIL Hierarchy to visual graph output
+============================================================================
+
+At the moment, all of the GRAPH output types for DIL hierarchy visualization use the same class dil2al.hh:DIL_Visualize_GRAPH and there achieve different results (in functions such as Add_Connections(), Add_Abstract_Connections() and Visualize_Element()) by testing a 'graphtype' flag. Alternatively, it is possible to define a new class that inherits dil2al.hh:DIL_Visualize_GRAPH.
+
+A) Functions that contain expressions used in the production of graph output and may need to be edited when a new graph format is added:
+
+A.1) dil2al.cc:DIL_Visualize_GRAPH::Visualize_Element()
+
+Another "FORM" type (e.g. GRAPHCYTO) may need to be added to the help output for the -H option.
+
+
+A.2) diladmin.cc:DIL_Hierarchy_cmd()
+
+Another graphtype (e.g. 'C') may need to be added.
+
+
+A.3) diladmin.cc:GRAPH_DIL_Hierarchy()
+
+Will require a section with format specific output, including preamble, graph output called via dv.Output() and closing.
+
+
+A.4) diladmin.cc:DIL_Visualize_GRAPH::Add_Connections()
+
+Will require a section with format specific output to indicate shown edges between visualized nodes.
+Beware of the 'reversehierarchy' situation!
+
+
+A.5) diladmin.cc:DIL_Visualize_GRAPH::Add_Abstract_Connections()
+
+Will require a section with format specific output to indicate shown abstract edges between visualized OOP nodes.
+Beware of the 'reversehierarchy' situation!
+
+
+A.6) diladmin.cc:DIL_Visualize_GRAPH::Visualize_Element()
+
+Will require several (3) sections with format specific output.
+
+
+A.7) diladmin.cc:DIL_Visualize_GRAPH::Visualize_NotShown()
+
+
+
+A.8) diladmin.cc:DIL_Visualize_GRAPH::Visualize_BeyondWidth()
+
+
+
+B) Also involved in graph production, but (mostly) independent of graph type:
+
+B.1) diladmin.cc:Show_DIL_Hierarchy()
+
+B.2) dil2al.hh:DIL_Visualize_GRAPH::Output_Content()
+
+B.3) dil2al.hh:DIL_Visualize_GRAPH::Output()

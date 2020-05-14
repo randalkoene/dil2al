@@ -1,0 +1,979 @@
+\section{Big\-String.cc File Reference}
+\label{BigString_8cc}\index{BigString.cc@{Big\-String.cc}}
+{\tt \#include $<$limits.h$>$}\par
+{\tt \#include \char`\"{}Big\-String.hh\char`\"{}}\par
+{\tt \#include $<$new.h$>$}\par
+{\tt \#include $<$ctype.h$>$}\par
+\subsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define {\bf MAXStr\-Rep\_\-SIZE}\ ((1 $<$$<$ (sizeof({\bf \_\-BIGSTRING\_\-ALLOC}) $\ast$ CHAR\_\-BIT - 1)) - 1)
+\item 
+\#define {\bf MINStr\-Rep\_\-SIZE}\ 16
+\item 
+\#define {\bf MALLOC\_\-MIN\_\-OVERHEAD}\ 4
+\item 
+\#define {\bf RETURN}(r)\ return r
+\item 
+\#define {\bf RETURNS}(r)
+\item 
+\#define {\bf RETURN\_\-OBJECT}(TYPE, NAME)\ TYPE NAME;
+\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+{\bf Str\-Rep} $\ast$ {\bf Salloc} ({\bf Str\-Rep} $\ast$old, const char $\ast$src, {\bf \_\-BIGSTRING\_\-SIZE} srclen, {\bf \_\-BIGSTRING\_\-SIZE} newlen)
+\item 
+{\bf Str\-Rep} $\ast$ {\bf Salloc\_\-istream} ({\bf Str\-Rep} $\ast$old, istream \&src, {\bf \_\-BIGSTRING\_\-SIZE} srclen, {\bf \_\-BIGSTRING\_\-SIZE} newlen)
+\item 
+{\bf Str\-Rep} $\ast$ {\bf Scopy} ({\bf Str\-Rep} $\ast$old, const {\bf Str\-Rep} $\ast$s)
+\item 
+{\bf Str\-Rep} $\ast$ {\bf Scat} ({\bf Str\-Rep} $\ast$old, const char $\ast$s, {\bf \_\-BIGSTRING\_\-SIZE} srclen, const char $\ast$t, {\bf \_\-BIGSTRING\_\-SIZE} tlen)
+\item 
+{\bf Str\-Rep} $\ast$ {\bf Scat} ({\bf Str\-Rep} $\ast$old, const char $\ast$s, {\bf \_\-BIGSTRING\_\-SIZE} srclen, const char $\ast$t, {\bf \_\-BIGSTRING\_\-SIZE} tlen, const char $\ast$u, {\bf \_\-BIGSTRING\_\-SIZE} ulen)
+\item 
+{\bf Str\-Rep} $\ast$ {\bf Sprepend} ({\bf Str\-Rep} $\ast$old, const char $\ast$t, {\bf \_\-BIGSTRING\_\-SIZE} tlen)
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf fcompare} (const {\bf String} \&x, const {\bf String} \&y)
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf compare} (const {\bf String} \&x, const char $\ast$b)
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf compare} (const {\bf String} \&x, const {\bf String} \&y)
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf compare} (const {\bf String} \&x, const {\bf Sub\-String} \&y)
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf compare} (const {\bf Sub\-String} \&x, const {\bf String} \&y)
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf compare} (const {\bf Sub\-String} \&x, const {\bf Sub\-String} \&y)
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf compare} (const {\bf Sub\-String} \&x, const char $\ast$b)
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf split} (const {\bf String} \&src, {\bf String} results[$\,$], {\bf \_\-BIGSTRING\_\-SIZE} n, const {\bf String} \&sep)
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf split} (const {\bf String} \&src, {\bf String} results[$\,$], {\bf \_\-BIGSTRING\_\-SIZE} n, const {\bf Big\-Regex} \&r)
+\item 
+{\bf String} {\bf join} ({\bf String} src[$\,$], {\bf \_\-BIGSTRING\_\-SIZE} n, const {\bf String} \&separator) RETURNS(x)
+\item 
+{\bf Str\-Rep} $\ast$ {\bf Sreverse} (const {\bf Str\-Rep} $\ast$src, {\bf Str\-Rep} $\ast$dest)
+\item 
+{\bf Str\-Rep} $\ast$ {\bf Supcase} (const {\bf Str\-Rep} $\ast$src, {\bf Str\-Rep} $\ast$dest)
+\item 
+{\bf Str\-Rep} $\ast$ {\bf Sdowncase} (const {\bf Str\-Rep} $\ast$src, {\bf Str\-Rep} $\ast$dest)
+\item 
+{\bf Str\-Rep} $\ast$ {\bf Scapitalize} (const {\bf Str\-Rep} $\ast$src, {\bf Str\-Rep} $\ast$dest)
+\item 
+{\bf String} {\bf replicate} (char c, {\bf \_\-BIGSTRING\_\-SIZE} n)
+\item 
+{\bf String} {\bf replicate} (const {\bf String} \&y, {\bf \_\-BIGSTRING\_\-SIZE} n)
+\item 
+{\bf String} {\bf common\_\-prefix} (const {\bf String} \&x, const {\bf String} \&y, {\bf \_\-BIGSTRING\_\-SIZE} startpos)
+\item 
+{\bf String} {\bf common\_\-suffix} (const {\bf String} \&x, const {\bf String} \&y, {\bf \_\-BIGSTRING\_\-SIZE} startpos)
+\item 
+istream \& {\bf operator$>$$>$} (istream \&s, {\bf String} \&x)
+\item 
+{\bf \_\-BIGSTRING\_\-SIZE} {\bf readline} (istream \&s, {\bf String} \&x, char terminator, int discard)
+\item 
+ostream \& {\bf operator$<$$<$} (ostream \&s, const {\bf Sub\-String} \&x)
+\end{CompactItemize}
+\subsection*{Variables}
+\begin{CompactItemize}
+\item 
+{\bf Str\-Rep} {\bf \_\-nil\-Str\-Rep} = \{ 0, 1, \{ 0 \} \}
+\item 
+{\bf String} {\bf \_\-nil\-String}
+\end{CompactItemize}
+
+
+\subsection{Define Documentation}
+\index{BigString.cc@{Big\-String.cc}!MALLOC_MIN_OVERHEAD@{MALLOC\_\-MIN\_\-OVERHEAD}}
+\index{MALLOC_MIN_OVERHEAD@{MALLOC\_\-MIN\_\-OVERHEAD}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define MALLOC\_\-MIN\_\-OVERHEAD\ 4}\label{BigString_8cc_a2}
+
+
+
+
+Definition at line 134 of file Big\-String.cc.\index{BigString.cc@{Big\-String.cc}!MAXStrRep_SIZE@{MAXStrRep\_\-SIZE}}
+\index{MAXStrRep_SIZE@{MAXStrRep\_\-SIZE}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define MAXStr\-Rep\_\-SIZE\ ((1 $<$$<$ (sizeof({\bf \_\-BIGSTRING\_\-ALLOC}) $\ast$ CHAR\_\-BIT - 1)) - 1)}\label{BigString_8cc_a0}
+
+
+
+
+Definition at line 130 of file Big\-String.cc.\index{BigString.cc@{Big\-String.cc}!MINStrRep_SIZE@{MINStrRep\_\-SIZE}}
+\index{MINStrRep_SIZE@{MINStrRep\_\-SIZE}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define MINStr\-Rep\_\-SIZE\ 16}\label{BigString_8cc_a1}
+
+
+
+
+Definition at line 131 of file Big\-String.cc.\index{BigString.cc@{Big\-String.cc}!RETURN@{RETURN}}
+\index{RETURN@{RETURN}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define RETURN(r)\ return r}\label{BigString_8cc_a3}
+
+
+
+
+Definition at line 1143 of file Big\-String.cc.
+
+Referenced by join().\index{BigString.cc@{Big\-String.cc}!RETURN_OBJECT@{RETURN\_\-OBJECT}}
+\index{RETURN_OBJECT@{RETURN\_\-OBJECT}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define RETURN\_\-OBJECT(TYPE, NAME)\ TYPE NAME;}\label{BigString_8cc_a5}
+
+
+
+
+Definition at line 1145 of file Big\-String.cc.
+
+Referenced by join().\index{BigString.cc@{Big\-String.cc}!RETURNS@{RETURNS}}
+\index{RETURNS@{RETURNS}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define RETURNS(r)}\label{BigString_8cc_a4}
+
+
+
+
+Definition at line 1144 of file Big\-String.cc.
+
+\subsection{Function Documentation}
+\index{BigString.cc@{Big\-String.cc}!common_prefix@{common\_\-prefix}}
+\index{common_prefix@{common\_\-prefix}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} common\_\-prefix (const {\bf String} \& {\em x}, const {\bf String} \& {\em y}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = 0)}\label{BigString_8cc_a40}
+
+
+
+
+Definition at line 1326 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-LENGTH, \_\-BIGSTRING\_\-SIZE, String::chars(), String::length(), String::rep, and Salloc().
+
+Referenced by relurl().
+
+
+
+\footnotesize\begin{verbatim}1327 {
+1328   String r;
+1329   const char* xchars = x.chars();
+1330   const char* ychars = y.chars();
+1331   const char* xs = &(xchars[startpos]);
+1332   const char* ss = xs;
+1333   const char* topx = &(xchars[x.length()]);
+1334   const char* ys = &(ychars[startpos]);
+1335   const char* topy = &(ychars[y.length()]);
+1336   _BIGSTRING_LENGTH l;
+1337   for (l = 0; xs < topx && ys < topy && *xs++ == *ys++; ++l);
+1338   r.rep = Salloc(r.rep, ss, l, l);
+1339   return r;
+1340 }
+\end{verbatim}\normalsize 
+\index{BigString.cc@{Big\-String.cc}!common_suffix@{common\_\-suffix}}
+\index{common_suffix@{common\_\-suffix}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} common\_\-suffix (const {\bf String} \& {\em x}, const {\bf String} \& {\em y}, {\bf \_\-BIGSTRING\_\-SIZE} {\em startpos} = -1)}\label{BigString_8cc_a41}
+
+
+
+
+Definition at line 1342 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-LENGTH, \_\-BIGSTRING\_\-SIZE, String::chars(), String::length(), String::rep, and Salloc().
+
+
+
+\footnotesize\begin{verbatim}1343 {
+1344   String r;
+1345   const char* xchars = x.chars();
+1346   const char* ychars = y.chars();
+1347   const char* xs = &(xchars[x.length() + startpos]);
+1348   const char* botx = xchars;
+1349   const char* ys = &(ychars[y.length() + startpos]);
+1350   const char* boty = ychars;
+1351   _BIGSTRING_LENGTH l;
+1352   for (l = 0; xs >= botx && ys >= boty && *xs == *ys ; --xs, --ys, ++l);
+1353   r.rep = Salloc(r.rep, ++xs, l, l);
+1354   return r;
+1355 }
+\end{verbatim}\normalsize 
+\index{BigString.cc@{Big\-String.cc}!compare@{compare}}
+\index{compare@{compare}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} compare (const {\bf Sub\-String} \& {\em x}, const char $\ast$ {\em b})}\label{BigString_8cc_a30}
+
+
+
+
+Definition at line 481 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, Sub\-String::chars(), and Sub\-String::length().
+
+Referenced by operator!=(), operator$<$(), operator$<$=(), operator==(), operator$>$(), and operator$>$=().
+
+
+
+\footnotesize\begin{verbatim}482 {
+483   if (b == 0)
+484     return x.length();
+485   else
+486   {
+487     const char* a = x.chars();
+488     _BIGSTRING_SIZE n = x.length();
+489     int diff;
+490     while (n-- > 0) if ((diff = *a++ - *b++) != 0) return diff;
+491     return (*b == 0) ? 0 : -1;
+492   }
+493 }
+\end{verbatim}\normalsize 
+\index{BigString.cc@{Big\-String.cc}!compare@{compare}}
+\index{compare@{compare}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} compare (const {\bf Sub\-String} \& {\em x}, const {\bf Sub\-String} \& {\em y})}\label{BigString_8cc_a29}
+
+
+
+
+Definition at line 476 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, Sub\-String::chars(), and Sub\-String::length().
+
+
+
+\footnotesize\begin{verbatim}477 {
+478   return ncmp(x.chars(), x.length(), y.chars(), y.length());
+479 }
+\end{verbatim}\normalsize 
+\index{BigString.cc@{Big\-String.cc}!compare@{compare}}
+\index{compare@{compare}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} compare (const {\bf Sub\-String} \& {\em x}, const {\bf String} \& {\em y})}\label{BigString_8cc_a28}
+
+
+
+
+Definition at line 471 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, String::chars(), Sub\-String::chars(), String::length(), and Sub\-String::length().
+
+
+
+\footnotesize\begin{verbatim}472 {
+473   return ncmp(x.chars(), x.length(), y.chars(), y.length());
+474 }
+\end{verbatim}\normalsize 
+\index{BigString.cc@{Big\-String.cc}!compare@{compare}}
+\index{compare@{compare}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} compare (const {\bf String} \& {\em x}, const {\bf Sub\-String} \& {\em y})}\label{BigString_8cc_a27}
+
+
+
+
+Definition at line 466 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, Sub\-String::chars(), String::chars(), Sub\-String::length(), and String::length().
+
+
+
+\footnotesize\begin{verbatim}467 {
+468   return ncmp(x.chars(), x.length(), y.chars(), y.length());
+469 }
+\end{verbatim}\normalsize 
+\index{BigString.cc@{Big\-String.cc}!compare@{compare}}
+\index{compare@{compare}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} compare (const {\bf String} \& {\em x}, const {\bf String} \& {\em y})}\label{BigString_8cc_a26}
+
+
+
+
+Definition at line 461 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, and String::chars().
+
+
+
+\footnotesize\begin{verbatim}462 {
+463   return scmp(x.chars(), y.chars());
+464 }
+\end{verbatim}\normalsize 
+\index{BigString.cc@{Big\-String.cc}!compare@{compare}}
+\index{compare@{compare}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} compare (const {\bf String} \& {\em x}, const char $\ast$ {\em b})}\label{BigString_8cc_a25}
+
+
+
+
+Definition at line 456 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, and String::chars().
+
+
+
+\footnotesize\begin{verbatim}457 {
+458   return scmp(x.chars(), b);
+459 }
+\end{verbatim}\normalsize 
+\index{BigString.cc@{Big\-String.cc}!fcompare@{fcompare}}
+\index{fcompare@{fcompare}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} fcompare (const {\bf String} \& {\em x}, const {\bf String} \& {\em y})}\label{BigString_8cc_a24}
+
+
+
+
+Definition at line 428 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, String::chars(), and String::length().
+
+
+
+\footnotesize\begin{verbatim}429 {
+430   const char* a = x.chars();
+431   const char* b = y.chars();
+432   _BIGSTRING_SIZE al = x.length();
+433   _BIGSTRING_SIZE bl = y.length();
+434   _BIGSTRING_SIZE n = (al <= bl)? al : bl;
+435   int diff = 0;
+436   while (n-- > 0)
+437   {
+438     char ac = *a++;
+439     char bc = *b++;
+440     if ((diff = ac - bc) != 0)
+441     {
+442       if (ac >= 'a' && ac <= 'z')
+443         ac = ac - 'a' + 'A';
+444       if (bc >= 'a' && bc <= 'z')
+445         bc = bc - 'a' + 'A';
+446       if ((diff = ac - bc) != 0)
+447         return diff;
+448     }
+449   }
+450   return al - bl;
+451 }
+\end{verbatim}\normalsize 
+\index{BigString.cc@{Big\-String.cc}!join@{join}}
+\index{join@{join}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} join ({\bf String} {\em src}[$\,$], {\bf \_\-BIGSTRING\_\-SIZE} {\em n}, const {\bf String} \& {\em separator})}\label{BigString_8cc_a33}
+
+
+
+
+Definition at line 1148 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-ITERATOR, \_\-BIGSTRING\_\-SIZE, String::chars(), String::length(), RETURN, and RETURN\_\-OBJECT.
+
+
+
+\footnotesize\begin{verbatim}1149 {
+1150   RETURN_OBJECT(String,x)
+1151   String sep = separator;
+1152   _BIGSTRING_SIZE xlen = 0;
+1153   _BIGSTRING_ITERATOR i;
+1154   for (i = 0; i < n; ++i)
+1155     xlen += src[i].length();
+1156   xlen += (n - 1) * sep.length();
+1157 
+1158   x.rep = Sresize (x.rep, xlen);
+1159 
+1160   _BIGSTRING_ITERATOR j = 0;
+1161   
+1162   for (i = 0; i < n - 1; ++i)
+1163   {
+1164     ncopy(src[i].chars(), &(x.rep->s[j]), src[i].length());
+1165     j += src[i].length();
+1166     ncopy(sep.chars(), &(x.rep->s[j]), sep.length());
+1167     j += sep.length();
+1168   }
+1169   ncopy0(src[i].chars(), &(x.rep->s[j]), src[i].length());
+1170   RETURN(x);
+1171 }
+\end{verbatim}\normalsize 
+\index{BigString.cc@{Big\-String.cc}!operator<<@{operator$<$$<$}}
+\index{operator<<@{operator$<$$<$}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}ostream\& operator$<$$<$ (ostream \& {\em s}, const {\bf Sub\-String} \& {\em x})}\label{BigString_8cc_a44}
+
+
+
+
+Definition at line 1415 of file Big\-String.cc.
+
+References Sub\-String::chars(), and Sub\-String::length().
+
+
+
+\footnotesize\begin{verbatim}1416 { 
+1417   const char* a = x.chars();
+1418   const char* lasta = &(a[x.length()]);
+1419   while (a < lasta)
+1420     s.put(*a++);
+1421   return(s);
+1422 }
+\end{verbatim}\normalsize 
+\index{BigString.cc@{Big\-String.cc}!operator>>@{operator$>$$>$}}
+\index{operator>>@{operator$>$$>$}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}istream\& operator$>$$>$ (istream \& {\em s}, {\bf String} \& {\em x})}\label{BigString_8cc_a42}
+
+
+
+
+Definition at line 1361 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-ITERATOR, Str\-Rep::len, String::rep, Str\-Rep::s, and Str\-Rep::sz.
+
+
+
+\footnotesize\begin{verbatim}1362 {
+1363   if (!s.ipfx(0) || (!(s.flags() & ios::skipws) && !ws(s)))
+1364   {
+1365     s.clear(ios::failbit|s.rdstate()); // Redundant if using GNU iostreams.
+1366     return s;
+1367   }
+1368   int ch;
+1369   _BIGSTRING_ITERATOR i = 0;
+1370   x.rep = Sresize(x.rep, 20);
+1371   register streambuf *sb = s.rdbuf();
+1372   while ((ch = sb->sbumpc()) != EOF)
+1373   {
+1374     if (isspace(ch))
+1375       break;
+1376     if (i >= x.rep->sz - 1)
+1377       x.rep = Sresize(x.rep, i+1);
+1378     x.rep->s[i++] = ch;
+1379   }
+1380   x.rep->s[i] = 0;
+1381   x.rep->len = i;
+1382   int new_state = s.rdstate();
+1383   if (i == 0) new_state |= ios::failbit;
+1384   if (ch == EOF) new_state |= ios::eofbit;
+1385   s.clear(new_state);
+1386   return s;
+1387 }
+\end{verbatim}\normalsize 
+\index{BigString.cc@{Big\-String.cc}!readline@{readline}}
+\index{readline@{readline}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} readline (istream \& {\em s}, {\bf String} \& {\em x}, char {\em terminator} = '$\backslash$n', int {\em discard} = 1)}\label{BigString_8cc_a43}
+
+
+
+
+Definition at line 1389 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-ITERATOR, \_\-BIGSTRING\_\-SIZE, Str\-Rep::len, String::rep, Str\-Rep::s, and Str\-Rep::sz.
+
+
+
+\footnotesize\begin{verbatim}1390 {
+1391   if (!s.ipfx(0))
+1392     return 0;
+1393   int ch;
+1394   _BIGSTRING_ITERATOR i = 0;
+1395   x.rep = Sresize(x.rep, 80);
+1396   register streambuf *sb = s.rdbuf();
+1397   while ((ch = sb->sbumpc()) != EOF)
+1398   {
+1399     if (ch != terminator || !discard)
+1400     {
+1401       if (i >= x.rep->sz - 1)
+1402         x.rep = Sresize(x.rep, i+1);
+1403       x.rep->s[i++] = ch;
+1404     }
+1405     if (ch == terminator)
+1406       break;
+1407   }
+1408   x.rep->s[i] = 0;
+1409   x.rep->len = i;
+1410   if (ch == EOF) s.clear(ios::eofbit|s.rdstate());
+1411   return i;
+1412 }
+\end{verbatim}\normalsize 
+\index{BigString.cc@{Big\-String.cc}!replicate@{replicate}}
+\index{replicate@{replicate}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} replicate (const {\bf String} \& {\em y}, {\bf \_\-BIGSTRING\_\-SIZE} {\em n})}\label{BigString_8cc_a39}
+
+
+
+
+Definition at line 1311 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, String::chars(), String::length(), String::rep, and Str\-Rep::s.
+
+Referenced by search\_\-cmd(), DIL\_\-Visualize\_\-with\_\-FORM\_\-Tabs::Visualize\_\-Element(), DIL\_\-Visualize\_\-with\_\-HTML\_\-Tabs::Visualize\_\-Element(), DIL\_\-Visualize\_\-with\_\-Tabs::Visualize\_\-Element(), DIL\_\-Visualize\_\-with\_\-FORM\_\-Tabs::Visualize\_\-Not\-Shown(), DIL\_\-Visualize\_\-with\_\-HTML\_\-Tabs::Visualize\_\-Not\-Shown(), and DIL\_\-Visualize\_\-with\_\-Tabs::Visualize\_\-Not\-Shown().
+
+
+
+\footnotesize\begin{verbatim}1312 {
+1313   String w;
+1314   _BIGSTRING_SIZE len = y.length();
+1315   w.rep = Sresize(w.rep, n * len);
+1316   char* p = w.rep->s;
+1317   while (n-- > 0)
+1318   {
+1319     ncopy(y.chars(), p, len);
+1320     p += len;
+1321   }
+1322   *p = 0;
+1323   return w;
+1324 }
+\end{verbatim}\normalsize 
+\index{BigString.cc@{Big\-String.cc}!replicate@{replicate}}
+\index{replicate@{replicate}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} replicate (char {\em c}, {\bf \_\-BIGSTRING\_\-SIZE} {\em n})}\label{BigString_8cc_a38}
+
+
+
+
+Definition at line 1301 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, String::rep, and Str\-Rep::s.
+
+
+
+\footnotesize\begin{verbatim}1302 {
+1303   String w;
+1304   w.rep = Sresize(w.rep, n);
+1305   char* p = w.rep->s;
+1306   while (n-- > 0) *p++ = c;
+1307   *p = 0;
+1308   return w;
+1309 }
+\end{verbatim}\normalsize 
+\index{BigString.cc@{Big\-String.cc}!Salloc@{Salloc}}
+\index{Salloc@{Salloc}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Str\-Rep}$\ast$ Salloc ({\bf Str\-Rep} $\ast$ {\em old}, const char $\ast$ {\em src}, {\bf \_\-BIGSTRING\_\-SIZE} {\em srclen}, {\bf \_\-BIGSTRING\_\-SIZE} {\em newlen})}\label{BigString_8cc_a15}
+
+
+
+
+Definition at line 173 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, Str\-Rep::len, Str\-Rep::s, and Str\-Rep::sz.
+
+Referenced by common\_\-prefix(), common\_\-suffix(), String::operator=(), Scapitalize(), Sdowncase(), split(), Sreverse(), String::String(), and Supcase().
+
+
+
+\footnotesize\begin{verbatim}174 {
+175 #ifdef DEBUG_BIGSTRING
+176 //bool _debugop;
+177 //if (old) _debugop = old->debugop; else _debugop = true;
+178 //if (old) old->debugop = false;
+179 #endif
+180   if (old == &_nilStrRep) old = 0;
+181   if (srclen < 0) srclen = slen(src);
+182   if (newlen < srclen) newlen = srclen;
+183 #ifdef DEBUG_BIGSTRING
+184 //if (_debugop) cerr << "[Salloc] srclen = " << srclen << ", newlen = " << newlen << '\n';
+185 if (globaldebugop) cerr << "[Salloc] srclen = " << srclen << ", newlen = " << newlen << '\n';
+186 #endif
+187   StrRep* rep;
+188   if (old == 0 || newlen > old->sz)
+189     rep = Snew(newlen);
+190   else
+191     rep = old;
+192 
+193   rep->len = newlen;
+194   ncopy0(src, rep->s, srclen);
+195 
+196   if (old != rep && old != 0) delete old;
+197 
+198 #ifdef DEBUG_BIGSTRING
+199 //rep->debugop = _debugop;
+200 #endif
+201   return rep;
+202 }
+\end{verbatim}\normalsize 
+\index{BigString.cc@{Big\-String.cc}!Salloc_istream@{Salloc\_\-istream}}
+\index{Salloc_istream@{Salloc\_\-istream}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Str\-Rep}$\ast$ Salloc\_\-istream ({\bf Str\-Rep} $\ast$ {\em old}, istream \& {\em src}, {\bf \_\-BIGSTRING\_\-SIZE} {\em srclen}, {\bf \_\-BIGSTRING\_\-SIZE} {\em newlen})}\label{BigString_8cc_a16}
+
+
+
+
+Definition at line 207 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, Str\-Rep::len, Str\-Rep::s, and Str\-Rep::sz.
+
+Referenced by String::operator=().
+
+
+
+\footnotesize\begin{verbatim}208 {
+209         if (!src) return old;
+210         if (old == &_nilStrRep) old = 0;
+211         if (srclen < 0) {
+212                 src.seekg(0,ios::end);
+213                 srclen = src.tellg();
+214                 src.seekg(0);
+215         }
+216         if (newlen < srclen) newlen = srclen;
+217         StrRep* rep;
+218         if (old == 0 || newlen > old->sz) rep = Snew(newlen);
+219         else rep = old;
+220         rep->len = newlen;
+221         ncopy0_istream(src, rep->s, srclen);
+222         if (old != rep && old != 0) delete old;
+223         return rep;
+224 }
+\end{verbatim}\normalsize 
+\index{BigString.cc@{Big\-String.cc}!Scapitalize@{Scapitalize}}
+\index{Scapitalize@{Scapitalize}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Str\-Rep}$\ast$ Scapitalize (const {\bf Str\-Rep} $\ast$ {\em src}, {\bf Str\-Rep} $\ast$ {\em dest})}\label{BigString_8cc_a37}
+
+
+
+
+Definition at line 1218 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, Str\-Rep::len, Str\-Rep::s, and Salloc().
+
+Referenced by capitalize(), and String::capitalize().
+
+
+
+\footnotesize\begin{verbatim}1219 {
+1220   _BIGSTRING_SIZE n = src->len;
+1221   if (src != dest) dest = Salloc(dest, src->s, n, n);
+1222 
+1223   char* p = dest->s;
+1224   char* e = &(p[n]);
+1225   for (; p < e; ++p)
+1226   {
+1227     int at_word;
+1228     if (at_word = islower(*p))
+1229       *p = toupper(*p);
+1230     else 
+1231       at_word = isupper(*p) || isdigit(*p);
+1232 
+1233     if (at_word)
+1234     {
+1235       while (++p < e)
+1236       {
+1237         if (isupper(*p))
+1238           *p = tolower(*p);
+1239         /* A '\'' does not break a word, so that "Nathan's" stays
+1240            "Nathan's" rather than turning into "Nathan'S". */
+1241         else if (!islower(*p) && !isdigit(*p) && (*p != '\''))
+1242           break;
+1243       }
+1244     }
+1245   }
+1246   return dest;
+1247 }
+\end{verbatim}\normalsize 
+\index{BigString.cc@{Big\-String.cc}!Scat@{Scat}}
+\index{Scat@{Scat}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Str\-Rep}$\ast$ Scat ({\bf Str\-Rep} $\ast$ {\em old}, const char $\ast$ {\em s}, {\bf \_\-BIGSTRING\_\-SIZE} {\em srclen}, const char $\ast$ {\em t}, {\bf \_\-BIGSTRING\_\-SIZE} {\em tlen}, const char $\ast$ {\em u}, {\bf \_\-BIGSTRING\_\-SIZE} {\em ulen})}\label{BigString_8cc_a20}
+
+
+
+
+Definition at line 344 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, Str\-Rep::len, Str\-Rep::s, and Str\-Rep::sz.
+
+Referenced by cat().
+
+
+
+\footnotesize\begin{verbatim}346 {
+347   if (old == &_nilStrRep) old = 0;
+348   if (srclen < 0) srclen = slen(s);
+349   if (tlen < 0) tlen = slen(t);
+350   if (ulen < 0) ulen = slen(u);
+351   _BIGSTRING_SIZE newlen = srclen + tlen + ulen;
+352   StrRep* rep;
+353   if (old == 0 || newlen > old->sz || 
+354       (t >= old->s && t < &(old->s[old->len])) ||
+355       (u >= old->s && u < &(old->s[old->len])))
+356     rep = Snew(newlen);
+357   else
+358     rep = old;
+359 
+360   rep->len = newlen;
+361 
+362   ncopy(s, rep->s, srclen);
+363   ncopy(t, &(rep->s[srclen]), tlen);
+364   ncopy0(u, &(rep->s[srclen+tlen]), ulen);
+365 
+366   if (old != rep && old != 0) delete old;
+367 
+368   return rep;
+369 }
+\end{verbatim}\normalsize 
+\index{BigString.cc@{Big\-String.cc}!Scat@{Scat}}
+\index{Scat@{Scat}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Str\-Rep}$\ast$ Scat ({\bf Str\-Rep} $\ast$ {\em old}, const char $\ast$ {\em s}, {\bf \_\-BIGSTRING\_\-SIZE} {\em srclen}, const char $\ast$ {\em t}, {\bf \_\-BIGSTRING\_\-SIZE} {\em tlen})}\label{BigString_8cc_a19}
+
+
+
+
+Definition at line 293 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, Str\-Rep::len, Str\-Rep::s, and Str\-Rep::sz.
+
+
+
+\footnotesize\begin{verbatim}294 {
+295   if (old == &_nilStrRep) old = 0;
+296   if (srclen < 0) srclen = slen(s);
+297   if (tlen < 0) tlen = slen(t);
+298   _BIGSTRING_SIZE newlen = srclen + tlen;
+299   StrRep* rep;
+300 
+301   if (old == 0 || newlen > old->sz || 
+302       (t >= old->s && t < &(old->s[old->len]))) // beware of aliasing
+303     rep = Snew(newlen);
+304   else
+305     rep = old;
+306 
+307   rep->len = newlen;
+308 
+309   ncopy(s, rep->s, srclen);
+310   ncopy0(t, &(rep->s[srclen]), tlen);
+311 
+312   if (old != rep && old != 0) delete old;
+313 
+314   return rep;
+315 }
+\end{verbatim}\normalsize 
+\index{BigString.cc@{Big\-String.cc}!Scopy@{Scopy}}
+\index{Scopy@{Scopy}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Str\-Rep}$\ast$ Scopy ({\bf Str\-Rep} $\ast$ {\em old}, const {\bf Str\-Rep} $\ast$ {\em s})}\label{BigString_8cc_a18}
+
+
+
+
+Definition at line 262 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, Str\-Rep::len, Str\-Rep::s, and Str\-Rep::sz.
+
+Referenced by String::operator=().
+
+
+
+\footnotesize\begin{verbatim}263 {
+264   if (old == &_nilStrRep) old = 0;
+265   if (s == &_nilStrRep) s = 0;
+266   if (old == s) 
+267     return (old == 0)? &_nilStrRep : old;
+268   else if (s == 0)
+269   {
+270     old->s[0] = 0;
+271     old->len = 0;
+272     return old;
+273   }
+274   else 
+275   {
+276     StrRep* rep;
+277     _BIGSTRING_SIZE newlen = s->len;
+278     if (old == 0 || newlen > old->sz)
+279     {
+280       if (old != 0) delete old;
+281       rep = Snew(newlen);
+282     }
+283     else
+284       rep = old;
+285     rep->len = newlen;
+286     ncopy0(s->s, rep->s, newlen);
+287     return rep;
+288   }
+289 }
+\end{verbatim}\normalsize 
+\index{BigString.cc@{Big\-String.cc}!Sdowncase@{Sdowncase}}
+\index{Sdowncase@{Sdowncase}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Str\-Rep}$\ast$ Sdowncase (const {\bf Str\-Rep} $\ast$ {\em src}, {\bf Str\-Rep} $\ast$ {\em dest})}\label{BigString_8cc_a36}
+
+
+
+
+Definition at line 1208 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, Str\-Rep::len, Str\-Rep::s, and Salloc().
+
+Referenced by downcase(), and String::downcase().
+
+
+
+\footnotesize\begin{verbatim}1209 {
+1210   _BIGSTRING_SIZE n = src->len;
+1211   if (src != dest) dest = Salloc(dest, src->s, n, n);
+1212   char* p = dest->s;
+1213   char* e = &(p[n]);
+1214   for (; p < e; ++p) if (isupper(*p)) *p = tolower(*p);
+1215   return dest;
+1216 }
+\end{verbatim}\normalsize 
+\index{BigString.cc@{Big\-String.cc}!split@{split}}
+\index{split@{split}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} split (const {\bf String} \& {\em src}, {\bf String} {\em results}[$\,$], {\bf \_\-BIGSTRING\_\-SIZE} {\em n}, const {\bf Big\-Regex} \& {\em r})}\label{BigString_8cc_a32}
+
+
+
+
+Definition at line 1117 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-ITERATOR, \_\-BIGSTRING\_\-SIZE, String::chars(), String::length(), String::rep, Salloc(), and Big\-Regex::search().
+
+
+
+\footnotesize\begin{verbatim}1118 {
+1119   String x = src;
+1120   const char* s = x.chars();
+1121   _BIGSTRING_SIZE sl = x.length();
+1122   _BIGSTRING_ITERATOR i = 0;
+1123   _BIGSTRING_SIZE pos = 0;
+1124   _BIGSTRING_SIZE p, matchlen;
+1125   while (i < n && pos < sl)
+1126   {
+1127     p = r.search(s, sl, matchlen, pos);
+1128     if (p < 0)
+1129       p = sl;
+1130     results[i].rep = Salloc(results[i].rep, &(s[pos]), p - pos, p - pos);
+1131     i++;
+1132     pos = p + matchlen;
+1133   }
+1134   return i;
+1135 }
+\end{verbatim}\normalsize 
+\index{BigString.cc@{Big\-String.cc}!split@{split}}
+\index{split@{split}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf \_\-BIGSTRING\_\-SIZE} split (const {\bf String} \& {\em src}, {\bf String} {\em results}[$\,$], {\bf \_\-BIGSTRING\_\-SIZE} {\em n}, const {\bf String} \& {\em sep})}\label{BigString_8cc_a31}
+
+
+
+
+Definition at line 1098 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-ITERATOR, \_\-BIGSTRING\_\-SIZE, String::chars(), String::length(), String::rep, Salloc(), and String::search().
+
+
+
+\footnotesize\begin{verbatim}1099 {
+1100   String x = src;
+1101   const char* s = x.chars();
+1102   _BIGSTRING_SIZE sl = x.length();
+1103   _BIGSTRING_ITERATOR i = 0;
+1104   _BIGSTRING_SIZE pos = 0;
+1105   while (i < n && pos < sl)
+1106   {
+1107     _BIGSTRING_SIZE p = x.search(pos, sl, sep.chars(), sep.length());
+1108     if (p < 0)
+1109       p = sl;
+1110     results[i].rep = Salloc(results[i].rep, &(s[pos]), p - pos, p - pos);
+1111     i++;
+1112     pos = p + sep.length();
+1113   }
+1114   return i;
+1115 }
+\end{verbatim}\normalsize 
+\index{BigString.cc@{Big\-String.cc}!Sprepend@{Sprepend}}
+\index{Sprepend@{Sprepend}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Str\-Rep}$\ast$ Sprepend ({\bf Str\-Rep} $\ast$ {\em old}, const char $\ast$ {\em t}, {\bf \_\-BIGSTRING\_\-SIZE} {\em tlen})}\label{BigString_8cc_a21}
+
+
+
+
+Definition at line 373 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, Str\-Rep::len, Str\-Rep::s, and Str\-Rep::sz.
+
+Referenced by String::prepend().
+
+
+
+\footnotesize\begin{verbatim}374 {
+375   char* s;
+376   _BIGSTRING_SIZE srclen;
+377   if (old == &_nilStrRep || old == 0)
+378   {
+379     s = 0; old = 0; srclen = 0;
+380   }
+381   else
+382   {
+383     s = old->s; srclen = old->len;
+384   }
+385   if (tlen < 0) tlen = slen(t);
+386   _BIGSTRING_SIZE newlen = srclen + tlen;
+387   StrRep* rep;
+388   if (old == 0 || newlen > old->sz || 
+389       (t >= old->s && t < &(old->s[old->len])))
+390     rep = Snew(newlen);
+391   else
+392     rep = old;
+393 
+394   rep->len = newlen;
+395 
+396   revcopy(&(s[srclen]), &(rep->s[newlen]), srclen+1);
+397   ncopy(t, rep->s, tlen);
+398 
+399   if (old != rep && old != 0) delete old;
+400 
+401   return rep;
+402 }
+\end{verbatim}\normalsize 
+\index{BigString.cc@{Big\-String.cc}!Sreverse@{Sreverse}}
+\index{Sreverse@{Sreverse}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Str\-Rep}$\ast$ Sreverse (const {\bf Str\-Rep} $\ast$ {\em src}, {\bf Str\-Rep} $\ast$ {\em dest})}\label{BigString_8cc_a34}
+
+
+
+
+Definition at line 1178 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, Str\-Rep::len, Str\-Rep::s, and Salloc().
+
+Referenced by reverse(), and String::reverse().
+
+
+
+\footnotesize\begin{verbatim}1179 {
+1180   _BIGSTRING_SIZE n = src->len;
+1181   if (src != dest)
+1182     dest = Salloc(dest, src->s, n, n);
+1183   if (n > 0)
+1184   {
+1185     char* a = dest->s;
+1186     char* b = &(a[n - 1]);
+1187     while (a < b)
+1188     {
+1189       char t = *a;
+1190       *a++ = *b;
+1191       *b-- = t;
+1192     }
+1193   }
+1194   return dest;
+1195 }
+\end{verbatim}\normalsize 
+\index{BigString.cc@{Big\-String.cc}!Supcase@{Supcase}}
+\index{Supcase@{Supcase}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Str\-Rep}$\ast$ Supcase (const {\bf Str\-Rep} $\ast$ {\em src}, {\bf Str\-Rep} $\ast$ {\em dest})}\label{BigString_8cc_a35}
+
+
+
+
+Definition at line 1198 of file Big\-String.cc.
+
+References \_\-BIGSTRING\_\-SIZE, Str\-Rep::len, Str\-Rep::s, and Salloc().
+
+Referenced by upcase(), and String::upcase().
+
+
+
+\footnotesize\begin{verbatim}1199 {
+1200   _BIGSTRING_SIZE n = src->len;
+1201   if (src != dest) dest = Salloc(dest, src->s, n, n);
+1202   char* p = dest->s;
+1203   char* e = &(p[n]);
+1204   for (; p < e; ++p) if (islower(*p)) *p = toupper(*p);
+1205   return dest;
+1206 }
+\end{verbatim}\normalsize 
+
+
+\subsection{Variable Documentation}
+\index{BigString.cc@{Big\-String.cc}!_nilString@{\_\-nilString}}
+\index{_nilString@{\_\-nilString}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} \_\-nil\-String}\label{BigString_8cc_a7}
+
+
+
+
+Definition at line 57 of file Big\-String.cc.\index{BigString.cc@{Big\-String.cc}!_nilStrRep@{\_\-nilStrRep}}
+\index{_nilStrRep@{\_\-nilStrRep}!BigString.cc@{Big\-String.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Str\-Rep} \_\-nil\-Str\-Rep = \{ 0, 1, \{ 0 \} \}}\label{BigString_8cc_a6}
+
+
+
+
+Definition at line 55 of file Big\-String.cc.

@@ -1,0 +1,7 @@
+g++  -O3 -felide-constructors  -D__DIL2AL__ -D_ALT_REGEX_H=\"regex-gnu.h\" -D_USE_ALT_REGEX -D_CPP_REGEX -DDEFAULTHOMEDIR=\"/home/randalk\" -pedantic -Wall -Werror -D_BIGREGEX_SAFE_MATCHES -I/opt/FSFlibg++/lib/g++-include -I/home/randalk/src/include  -c utilities.cc -o utilities.o
+g++  -O3 -felide-constructors  -D__DIL2AL__ -D_ALT_REGEX_H=\"regex-gnu.h\" -D_USE_ALT_REGEX -D_CPP_REGEX -DDEFAULTHOMEDIR=\"/home/randalk\" -pedantic -Wall -Werror -D_BIGREGEX_SAFE_MATCHES -I/opt/FSFlibg++/lib/g++-include -I/home/randalk/src/include  -c tladmin.cc -o tladmin.o
+g++  -O3 -felide-constructors  -D__DIL2AL__ -D_ALT_REGEX_H=\"regex-gnu.h\" -D_USE_ALT_REGEX -D_CPP_REGEX -DDEFAULTHOMEDIR=\"/home/randalk\" -pedantic -Wall -Werror -D_BIGREGEX_SAFE_MATCHES -I/opt/FSFlibg++/lib/g++-include -I/home/randalk/src/include  -c note.cc -o note.o
+note.cc: In function `bool process_note(String, String)':
+note.cc:367: warning: comparison is always false due to limited range of data 
+   type
+make: *** [note.o] Error 1

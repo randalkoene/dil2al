@@ -1,0 +1,181 @@
+/* 
+Copyright (C) 1988 Free Software Foundation
+    written by Doug Lea (dl@rocky.oswego.edu)
+
+Modified by Randal A. Koene, 20000228
+    disabled #include <rx.h> due to unreliabilities
+    hacked problem of duplicate functions due to
+    BigString/String and BigRegex/Regex versions
+
+This file is part of the GNU C++ Library.  This library is free
+software; you can redistribute it and/or modify it under the terms of
+the GNU Library General Public License as published by the Free
+Software Foundation; either version 2 of the License, or (at your
+option) any later version.  This library is distributed in the hope
+that it will be useful, but WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE.  See the GNU Library General Public License for more details.
+You should have received a copy of the GNU Library General Public
+License along with this library; if not, write to the Free Software
+Foundation, 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+*/
+
+/* 
+  BigRegex class implementation
+ */
+
+#ifdef __GNUG__
+#pragma implementation
+#endif
+#include <std.h>
+#include <ctype.h>
+#include <new.h>
+#include <builtin.h>
+
+//*** NOTE: It seems that rx.h may be somewhat unreliable
+//*** as several segmentation faults have occurred in
+//*** Regex.h (BigRegex.hh) search() calls.
+//*** !!! NOTE THAT THIS MAY STILL BE USING rx.h FOR THE FUNCTIONS...
+//*** AT LEAST ON kenji THE regex.h DID NOT KNOW STRUCTURES SUCH AS
+//*** re_pattern_buffer OR FUNCTIONS SUCH AS re_search_2, SO THAT
+//*** COMPILATION WITH rx.h WAS NECESSARY, AND IT *MAY* BE THAT ON
+//*** aurora IT IS STILL TRANSPARANTLY USING rx.h !!!
+#ifdef _USE_RX_WRAPPERS_
+	#include "rxwrappers.hh"
+#else
+extern "C" {
+//#ifdef USE_RX
+#include "rx.h"
+//#else
+//#include "regex.h"
+//#endif
+}
+#endif
+
+#include "BigRegex.hh"
+
+BigRegex::~BigRegex()
+{
+	if (buf) { // (* SEE NOTE)
+//*** NOTE: This is a hack! Due to many other included
+//*** headers both String.h, String.cc, Regex.h and Regex.cc
+//*** are still included despite the new ``Big*'' versions.
+//*** The constant Regex variables defined below are
+//*** referenced by both versions of the functions, and
+//*** as a consequence, two versions of ~Regex() are
+//*** called on the same variables. To fix this
+//*** problem entirely, all names in the new versions
+//*** should be changed to BigString and BigRegex.
+//*** This is also an issue for BigString, since we
+//*** want to be sure that the large capacity functions
+//*** of BigString are accessed.
+//*** (This has now been done for BigRegex.)
+		if (buf->buffer) free(buf->buffer);
+		if (buf->fastmap) free(buf->fastmap);
+		if (buf->translate) free (buf->translate);
+	}
+	if (reg) {
+		if (reg->start)
+			free (reg->start);
+		if (reg->end)
+			free (reg->end);
+	}
+  if (buf) delete(buf); // this is not the way C++ code should
+  if (reg) delete(reg); // be, just extra paranoid
+}
+
+BigRegex::BigRegex(const char* t, int fast, int bufsize, 
+               const char* transtable)
+{
+  int tlen = (t == 0)? 0 : strlen(t);
+  buf = new re_pattern_buffer;
+  memset (buf, 0, sizeof(re_pattern_buffer));
+  reg = new re_registers;
+  reg->start = 0;
+  reg->end = 0;
+  if (fast)
+    buf->fastmap = (char*)malloc(256);
+  else
+    buf->fastmap = 0;
+  buf->translate = (unsigned char*)transtable;
+  if (tlen > bufsize)
+    bufsize = tlen;
+  buf->allocated = bufsize;
+  buf->buffer = (char *)malloc(buf->allocated);
+  const char* msg = re_compile_pattern((const char*)t, tlen, buf);
+  if (msg != 0)
+    (*lib_error_handler)("BigRegex", msg);
+  else if (fast)
+    re_compile_fastmap(buf);
+}
+
+int BigRegex::match_info(int& start, int& length, int nth) const
+{
+  if ((unsigned)(nth) >= RE_NREGS)
+    return 0;
+  else
+  {
+    start = reg->start[nth];
+    length = reg->end[nth] - start;
+    return start >= 0 && length >= 0;
+  }
+}
+
+int BigRegex::search(const char* s, int len, int& matchlen, int startpos) const
+{
+  int matchpos, pos, range;
+  if (startpos >= 0)
+  {
+    pos = startpos;
+    range = len - startpos;
+  }
+  else
+  {
+    pos = len + startpos;
+    range = -pos;
+  }
+  matchpos = re_search_2(buf, 0, 0, (char*)s, len, pos, range, reg, len);
+  if (matchpos >= 0)
+    matchlen = reg->end[0] - reg->start[0];
+  else
+    matchlen = 0;
+  return matchpos;
+}
+
+int BigRegex::match(const char*s, int len, int p) const
+{
+  if (p < 0)
+  {
+    p += len;
+    if (p > len)
+      return -1;
+    return re_match_2(buf, 0, 0, (char*)s, p, 0, reg, p);
+  }
+  else if (p > len)
+    return -1;
+  else
+    return re_match_2(buf, 0, 0, (char*)s, len, p, reg, len);
+}
+
+int BigRegex::OK() const
+{
+// can't verify much, since we've lost the original string
+  int v = buf != 0;             // have a regex buf
+  v &= buf->buffer != 0;        // with a pat
+  if (!v) (*lib_error_handler)("BigRegex", "invariant failure");
+  return v;
+}
+
+/*
+ some built-in Regular expressions
+*/
+
+const BigRegex BRXwhite("[ \n\t\r\v\f]+", 1);
+const BigRegex BRXint("-?[0-9]+", 1);
+const BigRegex BRXdouble("-?\\(\\([0-9]+\\.[0-9]*\\)\\|\\([0-9]+\\)\\|\\(\\.[0-9]+\\)\\)\\([eE][---+]?[0-9]+\\)?", 1, 200);
+const BigRegex BRXalpha("[A-Za-z]+", 1);
+const BigRegex BRXlowercase("[a-z]+", 1);
+const BigRegex BRXuppercase("[A-Z]+", 1);
+const BigRegex BRXalphanum("[0-9A-Za-z]+", 1);
+const BigRegex BRXidentifier("[A-Za-z_][A-Za-z0-9_]*", 1);
+

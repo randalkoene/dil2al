@@ -1,0 +1,290 @@
+\section{Novelty\_\-Marker\_\-List  Class Reference}
+\label{classNovelty__Marker__List}\index{Novelty_Marker_List@{Novelty\_\-Marker\_\-List}}
+{\tt \#include $<$dil2al.hh$>$}
+
+\subsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf $\sim$Novelty\_\-Marker\_\-List} ()
+\item 
+{\bf Novelty\_\-Marker\_\-List} ()
+\item 
+{\bf Novelty\_\-Marker\_\-List} (unsigned long n)
+\item 
+{\bf Novelty\_\-Marker\_\-List} (const {\bf Novelty\_\-Marker} cs, Novelty\_\-Marker\_\-List $\ast$cn=NULL)
+\item 
+{\bf Novelty\_\-Marker} \& {\bf operator[$\,$]} (unsigned long n)
+\item 
+Novelty\_\-Marker\_\-List $\ast$ {\bf get\_\-Next} ()
+\item 
+void {\bf append} (unsigned long n, {\bf Novelty\_\-Marker} \&ins)
+\item 
+void {\bf insert} (unsigned long n, {\bf Novelty\_\-Marker} \&ins)
+\item 
+unsigned long {\bf length} ()
+\item 
+long {\bf iselement} ({\bf Novelty\_\-Marker} \&el, unsigned long n=0)
+\item 
+void {\bf Get\_\-Context\_\-Ranks} ({\bf String\-List} \&cc, {\bf Long\-List} \&ccr)
+\end{CompactItemize}
+\subsection*{Protected Attributes}
+\begin{CompactItemize}
+\item 
+Novelty\_\-Marker\_\-List $\ast$ {\bf Next}
+\item 
+{\bf Novelty\_\-Marker} {\bf s}
+\end{CompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Novelty_Marker_List@{Novelty\_\-Marker\_\-List}!~Novelty_Marker_List@{$\sim$Novelty\_\-Marker\_\-List}}
+\index{~Novelty_Marker_List@{$\sim$Novelty\_\-Marker\_\-List}!Novelty_Marker_List@{Novelty\_\-Marker\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Novelty\_\-Marker\_\-List::$\sim$Novelty\_\-Marker\_\-List ()\hspace{0.3cm}{\tt  [inline]}}\label{classNovelty__Marker__List_a0}
+
+
+
+
+Definition at line 292 of file dil2al.hh.
+
+
+
+\footnotesize\begin{verbatim}292 { if (Next) delete Next; }
+\end{verbatim}\normalsize 
+\index{Novelty_Marker_List@{Novelty\_\-Marker\_\-List}!Novelty_Marker_List@{Novelty\_\-Marker\_\-List}}
+\index{Novelty_Marker_List@{Novelty\_\-Marker\_\-List}!Novelty_Marker_List@{Novelty\_\-Marker\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Novelty\_\-Marker\_\-List::Novelty\_\-Marker\_\-List ()\hspace{0.3cm}{\tt  [inline]}}\label{classNovelty__Marker__List_a1}
+
+
+
+
+Definition at line 293 of file dil2al.hh.
+
+Referenced by append(), insert(), Novelty\_\-Marker\_\-List(), and operator[$\,$]().
+
+
+
+\footnotesize\begin{verbatim}293 { Next=NULL; }
+\end{verbatim}\normalsize 
+\index{Novelty_Marker_List@{Novelty\_\-Marker\_\-List}!Novelty_Marker_List@{Novelty\_\-Marker\_\-List}}
+\index{Novelty_Marker_List@{Novelty\_\-Marker\_\-List}!Novelty_Marker_List@{Novelty\_\-Marker\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Novelty\_\-Marker\_\-List::Novelty\_\-Marker\_\-List (unsigned long {\em n})\hspace{0.3cm}{\tt  [inline]}}\label{classNovelty__Marker__List_a2}
+
+
+
+
+Definition at line 294 of file dil2al.hh.
+
+References Novelty\_\-Marker\_\-List().
+
+
+
+\footnotesize\begin{verbatim}294 { if (n) Next = new Novelty_Marker_List(n-1); else Next = NULL; }
+\end{verbatim}\normalsize 
+\index{Novelty_Marker_List@{Novelty\_\-Marker\_\-List}!Novelty_Marker_List@{Novelty\_\-Marker\_\-List}}
+\index{Novelty_Marker_List@{Novelty\_\-Marker\_\-List}!Novelty_Marker_List@{Novelty\_\-Marker\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Novelty\_\-Marker\_\-List::Novelty\_\-Marker\_\-List (const {\bf Novelty\_\-Marker} {\em cs}, Novelty\_\-Marker\_\-List $\ast$ {\em cn} = NULL)\hspace{0.3cm}{\tt  [inline]}}\label{classNovelty__Marker__List_a3}
+
+
+
+
+Definition at line 295 of file dil2al.hh.
+
+
+
+\footnotesize\begin{verbatim}295 { s=cs; Next=cn; }
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Function Documentation}
+\index{Novelty_Marker_List@{Novelty\_\-Marker\_\-List}!append@{append}}
+\index{append@{append}!Novelty_Marker_List@{Novelty\_\-Marker\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Novelty\_\-Marker\_\-List::append (unsigned long {\em n}, {\bf Novelty\_\-Marker} \& {\em ins})}\label{classNovelty__Marker__List_a6}
+
+
+
+
+Definition at line 463 of file utilities.cc.
+
+References Next, and Novelty\_\-Marker\_\-List().
+
+
+
+\footnotesize\begin{verbatim}463                                                                       {
+464         if (!n) Next = new Novelty_Marker_List(ins,Next);
+465         else
+466                 if (Next) Next->append(n-1,ins);
+467                 else {
+468                         Next = new Novelty_Marker_List();
+469                         Next->append(n-1,ins);
+470                 }
+471 }
+\end{verbatim}\normalsize 
+\index{Novelty_Marker_List@{Novelty\_\-Marker\_\-List}!Get_Context_Ranks@{Get\_\-Context\_\-Ranks}}
+\index{Get_Context_Ranks@{Get\_\-Context\_\-Ranks}!Novelty_Marker_List@{Novelty\_\-Marker\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Novelty\_\-Marker\_\-List::Get\_\-Context\_\-Ranks ({\bf String\-List} \& {\em cc}, {\bf Long\-List} \& {\em ccr})}\label{classNovelty__Marker__List_a10}
+
+
+
+
+Definition at line 492 of file utilities.cc.
+
+References get\_\-Next(), String\-List::iselement(), Novelty\_\-Marker::NM\_\-NOVELTY\_\-ITEM, and s.
+
+Referenced by extract\_\-paper\_\-plan\_\-to\_\-paper().
+
+
+
+\footnotesize\begin{verbatim}492                                                                            {
+493 // creates a list of concatenated contexts and a ranking according to their
+494 // average Novelty Item importance parameter values (rank 0 is highest)
+495         int cclen = 0, i; String s; LongList ccnum;
+496         for (Novelty_Marker_List * nml = this; (nml); nml=nml->get_Next()) if ((*nml)[0].nmtype==Novelty_Marker::NM_NOVELTY_ITEM) {
+497                 s = (*nml)[0].context.concatenate(", ");
+498                 if ((i=cc.iselement(s))<0) { // add new concatenated context
+499                         cc[cclen] = s; ccnum[cclen] = 0; i = cclen; cclen++;
+500                 }
+501                 ccnum[i]++;
+502                 float imp = 0.0;
+503                 for (int j = 0; j<(*nml)[0].impnum; j++) imp += (*nml)[0].imp[j];
+504                 if ((*nml)[0].impnum>1) imp /= (float) (*nml)[0].impnum; // average importance of concatenated contexts of Novelty Item
+505                 ccr[i] = (long) (imp*1000.0);
+506         }
+507         for (i=0; i<cclen; i++) ccr[i] /= ccnum[i]; // average importances of concatenated contexts
+508         long biggest, rank = 0, cctodo = cclen;
+509         while (cctodo>0) {
+510                 // find biggest
+511                 biggest = -1;
+512                 for (i=0; i<cclen; i++) if (ccr[i]>biggest) biggest = ccr[i];
+513                 if (biggest<0) break;
+514                 // set all at biggest size to next rank
+515                 for (i=0; i<cclen; i++) if (ccr[i]==biggest) {
+516                         ccnum[i] = rank; ccr[i] = -1; cctodo--;
+517                 }
+518                 rank++;
+519         }
+520         for (i=0; i<cclen; i++) ccr[i] = ccnum[i];
+521 }
+\end{verbatim}\normalsize 
+\index{Novelty_Marker_List@{Novelty\_\-Marker\_\-List}!get_Next@{get\_\-Next}}
+\index{get_Next@{get\_\-Next}!Novelty_Marker_List@{Novelty\_\-Marker\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Novelty\_\-Marker\_\-List$\ast$ Novelty\_\-Marker\_\-List::get\_\-Next ()\hspace{0.3cm}{\tt  [inline]}}\label{classNovelty__Marker__List_a5}
+
+
+
+
+Definition at line 297 of file dil2al.hh.
+
+Referenced by Get\_\-Context\_\-Ranks().
+
+
+
+\footnotesize\begin{verbatim}297 { return Next; }
+\end{verbatim}\normalsize 
+\index{Novelty_Marker_List@{Novelty\_\-Marker\_\-List}!insert@{insert}}
+\index{insert@{insert}!Novelty_Marker_List@{Novelty\_\-Marker\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Novelty\_\-Marker\_\-List::insert (unsigned long {\em n}, {\bf Novelty\_\-Marker} \& {\em ins})}\label{classNovelty__Marker__List_a7}
+
+
+
+
+Definition at line 473 of file utilities.cc.
+
+References Next, Novelty\_\-Marker\_\-List(), and s.
+
+
+
+\footnotesize\begin{verbatim}473                                                                       {
+474         if (!n) { Next = new Novelty_Marker_List(s,Next); s = ins; }
+475         else
+476                 if (Next) Next->insert(n-1,ins);
+477                 else 
+478                         if (n>1) {
+479                                 Next = new Novelty_Marker_List();
+480                                 Next->insert(n-1,ins);
+481                         } else Next = new Novelty_Marker_List(ins);
+482 }
+\end{verbatim}\normalsize 
+\index{Novelty_Marker_List@{Novelty\_\-Marker\_\-List}!iselement@{iselement}}
+\index{iselement@{iselement}!Novelty_Marker_List@{Novelty\_\-Marker\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}long Novelty\_\-Marker\_\-List::iselement ({\bf Novelty\_\-Marker} \& {\em el}, unsigned long {\em n} = 0)}\label{classNovelty__Marker__List_a9}
+
+
+
+
+Definition at line 484 of file utilities.cc.
+
+References Novelty\_\-Marker::id, Next, s, and Novelty\_\-Marker::source.
+
+Referenced by extract\_\-paper\_\-plan\_\-to\_\-paper(), and extract\_\-recursively().
+
+
+
+\footnotesize\begin{verbatim}484                                                                             {
+485         if ((el.source == s.source) && (el.id == s.id)) return n;
+486         else {
+487                 if (Next) return Next->iselement(el,n+1);
+488                 else return -1;
+489         }
+490 }
+\end{verbatim}\normalsize 
+\index{Novelty_Marker_List@{Novelty\_\-Marker\_\-List}!length@{length}}
+\index{length@{length}!Novelty_Marker_List@{Novelty\_\-Marker\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}unsigned long Novelty\_\-Marker\_\-List::length ()\hspace{0.3cm}{\tt  [inline]}}\label{classNovelty__Marker__List_a8}
+
+
+
+
+Definition at line 303 of file dil2al.hh.
+
+Referenced by extract\_\-paper\_\-plan\_\-to\_\-paper(), and extract\_\-recursively().
+
+
+
+\footnotesize\begin{verbatim}303 { if (Next) return 1+Next->length(); else return 1; }
+\end{verbatim}\normalsize 
+\index{Novelty_Marker_List@{Novelty\_\-Marker\_\-List}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!Novelty_Marker_List@{Novelty\_\-Marker\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Novelty\_\-Marker} \& Novelty\_\-Marker\_\-List::operator[$\,$] (unsigned long {\em n})}\label{classNovelty__Marker__List_a4}
+
+
+
+
+Definition at line 457 of file utilities.cc.
+
+References Next, Novelty\_\-Marker\_\-List(), and s.
+
+
+
+\footnotesize\begin{verbatim}457                                                                 {
+458         if (!n) return s;
+459         if (!Next) Next = new Novelty_Marker_List();
+460         return (*Next)[n-1];
+461 }
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Data Documentation}
+\index{Novelty_Marker_List@{Novelty\_\-Marker\_\-List}!Next@{Next}}
+\index{Next@{Next}!Novelty_Marker_List@{Novelty\_\-Marker\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Novelty\_\-Marker\_\-List$\ast$ Novelty\_\-Marker\_\-List::Next\hspace{0.3cm}{\tt  [protected]}}\label{classNovelty__Marker__List_n0}
+
+
+
+
+Definition at line 289 of file dil2al.hh.
+
+Referenced by append(), insert(), iselement(), and operator[$\,$]().\index{Novelty_Marker_List@{Novelty\_\-Marker\_\-List}!s@{s}}
+\index{s@{s}!Novelty_Marker_List@{Novelty\_\-Marker\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf Novelty\_\-Marker} Novelty\_\-Marker\_\-List::s\hspace{0.3cm}{\tt  [protected]}}\label{classNovelty__Marker__List_n1}
+
+
+
+
+Definition at line 290 of file dil2al.hh.
+
+Referenced by Get\_\-Context\_\-Ranks(), insert(), iselement(), and operator[$\,$]().
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf dil2al.hh}\item 
+{\bf utilities.cc}\end{CompactItemize}

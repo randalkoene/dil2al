@@ -1,0 +1,752 @@
+\section{Active\_\-List  Class Reference}
+\label{classActive__List}\index{Active_List@{Active\_\-List}}
+{\tt \#include $<$dil2al.hh$>$}
+
+\subsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf Active\_\-List} (long req[$\,$], long deplen, int algenwt, {\bf DIL\_\-entry} $\ast$sup=NULL)
+\item 
+{\bf String} {\bf get\_\-supstr} ()
+\item 
+{\bf String} {\bf filestr} ()
+\item 
+long {\bf length} ()
+\item 
+{\bf AL\_\-Day} $\ast$ {\bf Add\_\-Day} (int typ, time\_\-t tcsec, time\_\-t dsmin, time\_\-t dmaxt=SECONDSPERDAY)
+\item 
+long {\bf available\_\-before} (time\_\-t {\bf td})
+\item 
+long {\bf expand} (long expandn, time\_\-t {\bf td})
+\item 
+{\bf AL\_\-Day} $\ast$ {\bf AL\_\-Head} ()
+\item 
+{\bf AL\_\-Day} $\ast$ {\bf AL\_\-Tail} ()
+\item 
+float {\bf set\_\-TC\_\-values} ()
+\item 
+float {\bf allocate\_\-with\_\-value} (float uval, {\bf DIL\_\-entry} $\ast$de)
+\item 
+{\bf AL\_\-TC} $\ast$ {\bf Get\_\-Avail\_\-TC} (unsigned long n)
+\item 
+{\bf AL\_\-TC} $\ast$ {\bf allocate} ({\bf DIL\_\-entry} $\ast$de)
+\item 
+{\bf AL\_\-Day} $\ast$ {\bf Add\_\-Target\_\-Date} ({\bf DIL\_\-entry} $\ast$de)
+\item 
+{\bf AL\_\-TD} $\ast$ {\bf Add\_\-Passed\_\-Target\_\-Date} ({\bf DIL\_\-entry} $\ast$de)
+\item 
+long {\bf remove\_\-unused\_\-TCs} ()
+\item 
+bool {\bf generate\_\-focused\_\-AL} ({\bf DIL\_\-entry} $\ast${\bf superior}, time\_\-t algenwt)
+\item 
+bool {\bf generate\_\-wide\_\-AL} ({\bf DIL\_\-entry} $\ast${\bf superior})
+\end{CompactItemize}
+\subsection*{Public Attributes}
+\begin{CompactItemize}
+\item 
+{\bf PLLRoot}$<$ {\bf AL\_\-Day} $>$ {\bf al}
+\item 
+{\bf PLLRoot}$<$ {\bf AL\_\-TD} $>$ {\bf td}
+\item 
+long {\bf deavail}
+\end{CompactItemize}
+\subsection*{Protected Methods}
+\begin{CompactItemize}
+\item 
+long {\bf Initialize\_\-AL\_\-Length} (long req[$\,$], long deplen, time\_\-t algenwt, {\bf DIL\_\-entry} $\ast${\bf superior}=NULL)
+\end{CompactItemize}
+\subsection*{Protected Attributes}
+\begin{CompactItemize}
+\item 
+{\bf DIL\_\-entry} $\ast$ {\bf superior}
+\item 
+{\bf String} {\bf supstr}
+\item 
+{\bf String} {\bf alfilestr}
+\item 
+long {\bf allength}
+\end{CompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Active_List@{Active\_\-List}!Active_List@{Active\_\-List}}
+\index{Active_List@{Active\_\-List}!Active_List@{Active\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Active\_\-List::Active\_\-List (long {\em req}[$\,$], long {\em deplen}, int {\em algenwt}, {\bf DIL\_\-entry} $\ast$ {\em sup} = NULL)}\label{classActive__List_a0}
+
+
+
+
+Definition at line 736 of file alcomp.cc.
+
+References alfilestr, allength, DIL\_\-ID::chars(), Initialize\_\-AL\_\-Length(), superior, and supstr.
+
+
+
+\footnotesize\begin{verbatim}736                                                                                     : deavail(0), superior(sup), supstr("all"), alfilestr("active-list.all") {
+737         if (superior) {
+738                 supstr = superior->chars();
+739                 alfilestr = "active-list."+supstr;
+740         }
+741         allength = Initialize_AL_Length(req,deplen,algenwt,sup);
+742 }
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Function Documentation}
+\index{Active_List@{Active\_\-List}!Add_Day@{Add\_\-Day}}
+\index{Add_Day@{Add\_\-Day}!Active_List@{Active\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf AL\_\-Day} $\ast$ Active\_\-List::Add\_\-Day (int {\em typ}, time\_\-t {\em tcsec}, time\_\-t {\em dsmin}, time\_\-t {\em dmaxt} = SECONDSPERDAY)}\label{classActive__List_a4}
+
+
+
+
+Definition at line 716 of file alcomp.cc.
+
+References al, AL\_\-Day::Day\-Date(), EOUT, PLLRoot$<$ AL\_\-Day $>$::link\_\-before(), SECONDSPERDAY, PLLRoot$<$ AL\_\-Day $>$::tail(), Time(), time\_\-stamp(), time\_\-stamp\_\-time(), and time\_\-stamp\_\-time\_\-date().
+
+Referenced by Initialize\_\-AL\_\-Length().
+
+
+
+\footnotesize\begin{verbatim}716                                                                                                {
+717 // Add a day to the AL
+718         time_t dd;
+719         if (al.tail()) dd = al.tail()->DayDate() + SECONDSPERDAY; // next day
+720         else {
+721 #ifdef DIAGNOSTIC_OUTPUT
+722                 EOUT << "curtime = " << curtime << ", curtime(time_t) = " << time_stamp_time(curtime) << '\n';
+723 #endif
+724                 dd = time_stamp_time_date(curtime); // start with current day in calendar time
+725                 typ = 1; // insure start is marked
+726         }
+727 #ifdef DIAGNOSTIC_OUTPUT
+728         EOUT << "DD: " << dd << ", T: " << Time(NULL) << '\n';
+729         EOUT << "DDS: " << time_stamp("%Y%m%d%H%M",dd) << ", TS: " << time_stamp("%Y%m%d%H%M",Time(NULL)) << '\n';
+730 #endif
+731         AL_Day * ald = new AL_Day(dd,typ,tcsec,dsmin,dmaxt);
+732         al.link_before(ald);
+733         return ald;
+734 }
+\end{verbatim}\normalsize 
+\index{Active_List@{Active\_\-List}!Add_Passed_Target_Date@{Add\_\-Passed\_\-Target\_\-Date}}
+\index{Add_Passed_Target_Date@{Add\_\-Passed\_\-Target\_\-Date}!Active_List@{Active\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf AL\_\-TD} $\ast$ Active\_\-List::Add\_\-Passed\_\-Target\_\-Date ({\bf DIL\_\-entry} $\ast$ {\em de})}\label{classActive__List_a14}
+
+
+
+
+Definition at line 922 of file alcomp.cc.
+
+References PLLRoot$<$ AL\_\-TD $>$::link\_\-before(), and td.
+
+Referenced by generate\_\-AL().
+
+
+
+\footnotesize\begin{verbatim}922                                                           {
+923 // Adds a passed target date reference to the list
+924         if (!de) return NULL;
+925         AL_TD * atd = new AL_TD(*de);
+926         td.link_before(atd);
+927         return atd;
+928 }
+\end{verbatim}\normalsize 
+\index{Active_List@{Active\_\-List}!Add_Target_Date@{Add\_\-Target\_\-Date}}
+\index{Add_Target_Date@{Add\_\-Target\_\-Date}!Active_List@{Active\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf AL\_\-Day} $\ast$ Active\_\-List::Add\_\-Target\_\-Date ({\bf DIL\_\-entry} $\ast$ {\em de})}\label{classActive__List_a13}
+
+
+
+
+Definition at line 916 of file alcomp.cc.
+
+References AL\_\-Day::Add\_\-Target\_\-Date(), al, and PLLRoot$<$ AL\_\-Day $>$::head().
+
+Referenced by generate\_\-AL().
+
+
+
+\footnotesize\begin{verbatim}916                                                     {
+917 // Adds a target date reference to the day that contains it
+918         if (!al.head()) return NULL;
+919         return al.head()->Add_Target_Date(de);
+920 }
+\end{verbatim}\normalsize 
+\index{Active_List@{Active\_\-List}!AL_Head@{AL\_\-Head}}
+\index{AL_Head@{AL\_\-Head}!Active_List@{Active\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf AL\_\-Day}$\ast$ Active\_\-List::AL\_\-Head ()\hspace{0.3cm}{\tt  [inline]}}\label{classActive__List_a7}
+
+
+
+
+Definition at line 926 of file dil2al.hh.
+
+References PLLRoot$<$ PLLType $>$::head().
+
+Referenced by generate\_\-AL().
+
+
+
+\footnotesize\begin{verbatim}926 { return al.head(); }
+\end{verbatim}\normalsize 
+\index{Active_List@{Active\_\-List}!AL_Tail@{AL\_\-Tail}}
+\index{AL_Tail@{AL\_\-Tail}!Active_List@{Active\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf AL\_\-Day}$\ast$ Active\_\-List::AL\_\-Tail ()\hspace{0.3cm}{\tt  [inline]}}\label{classActive__List_a8}
+
+
+
+
+Definition at line 927 of file dil2al.hh.
+
+References PLLRoot$<$ PLLType $>$::tail().
+
+Referenced by generate\_\-AL().
+
+
+
+\footnotesize\begin{verbatim}927 { return al.tail(); }
+\end{verbatim}\normalsize 
+\index{Active_List@{Active\_\-List}!allocate@{allocate}}
+\index{allocate@{allocate}!Active_List@{Active\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf AL\_\-TC} $\ast$ Active\_\-List::allocate ({\bf DIL\_\-entry} $\ast$ {\em de})}\label{classActive__List_a12}
+
+
+
+
+Definition at line 908 of file alcomp.cc.
+
+References al, AL\_\-Day::allocate(), and PLLRoot$<$ AL\_\-Day $>$::head().
+
+Referenced by generate\_\-AL().
+
+
+
+\footnotesize\begin{verbatim}908                                             {
+909 // allocates de to the first available task chunk in the AL
+910 // returns the allocated task chunk
+911 // creates task chunks if necessary where tchead==NULL
+912         if (!al.head()) return NULL;
+913         return al.head()->allocate(de);
+914 }
+\end{verbatim}\normalsize 
+\index{Active_List@{Active\_\-List}!allocate_with_value@{allocate\_\-with\_\-value}}
+\index{allocate_with_value@{allocate\_\-with\_\-value}!Active_List@{Active\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}float Active\_\-List::allocate\_\-with\_\-value (float {\em uval}, {\bf DIL\_\-entry} $\ast$ {\em de})}\label{classActive__List_a10}
+
+
+
+
+Definition at line 891 of file alcomp.cc.
+
+References al, AL\_\-Day::allocate\_\-with\_\-value(), deavail, and PLLRoot$<$ AL\_\-Day $>$::head().
+
+Referenced by generate\_\-AL().
+
+
+
+\footnotesize\begin{verbatim}891                                                                  {
+892 // allocate a DIL entry to a task chunk according to
+893 // a random value
+894 // returns the value of the allocated task chunk
+895         if (!al.head()) return 0.0;
+896         float v = al.head()->allocate_with_value(uval,de);
+897         if (v>0.0) deavail--; // update temporary value tracking available TCs
+898         return v;
+899 }
+\end{verbatim}\normalsize 
+\index{Active_List@{Active\_\-List}!available_before@{available\_\-before}}
+\index{available_before@{available\_\-before}!Active_List@{Active\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}long Active\_\-List::available\_\-before (time\_\-t {\em td})\hspace{0.3cm}{\tt  [inline]}}\label{classActive__List_a5}
+
+
+
+
+Definition at line 924 of file dil2al.hh.
+
+References deavail, and PLLRoot$<$ PLLType $>$::head().
+
+Referenced by generate\_\-AL().
+
+
+
+\footnotesize\begin{verbatim}924 { if (al.head()) deavail=al.head()->available_before(td); else deavail=0; return deavail; }
+\end{verbatim}\normalsize 
+\index{Active_List@{Active\_\-List}!expand@{expand}}
+\index{expand@{expand}!Active_List@{Active\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}long Active\_\-List::expand (long {\em expandn}, time\_\-t {\em td})}\label{classActive__List_a6}
+
+
+
+
+Definition at line 847 of file alcomp.cc.
+
+References al, ALDAYDISTFUNCSQUARED, allength, deavail, AL\_\-Day::expand(), PLLRoot$<$ AL\_\-Day $>$::head(), AL\_\-Day::linear\_\-day\_\-distribution(), PLLHandle$<$ AL\_\-Day $>$::Next(), AL\_\-Day::squared\_\-day\_\-distribution(), td, AL\_\-Day::val, and VOUT.
+
+Referenced by generate\_\-AL().
+
+
+
+\footnotesize\begin{verbatim}847                                                 {
+848 // expand work time by adding task chunks to days prior to
+849 // the target date td
+850 // returns the number of task chunks added (-1==error)
+851         long nadded = 0;
+852         float sumval, uval;
+853         switch (aldaydistfunc) { // apply chosen AL day distribution function
+854                 case ALDAYDISTFUNCSQUARED: if ((sumval = al.head()->squared_day_distribution(td))<0) return -1; break;
+855                 default: if ((sumval = al.head()->linear_day_distribution(td))<0) return -1;
+856         }
+857 #ifdef DETAILED_AL_DIAGNOSTIC_OUTPUT
+858         VOUT << "AL: deavail =" << deavail << '\n';
+859 #endif
+860         while ((expandn>nadded) && (sumval>FLT_EPSILON)) {
+861                 // *** should this really be done randomly?
+862                 uval = sumval*(((float) rand()) / ((float) RAND_MAX));
+863                 AL_Day * e;
+864                 for (e = al.head(); (e); e = e->Next()) if (uval>e->val) uval -= e->val; else break;
+865                 if (!e) break; // no further expansion is possible
+866                 if (e->expand(1,td)>0) nadded++;
+867                 else { // day cannot expand further
+868                         sumval -= e->val;
+869                         e->val = 0.0;
+870                 }
+871         }
+872         allength += nadded; // update total number of TCs in AL
+873         deavail += nadded; // update temporary value tracking available TCs
+874 #ifdef DETAILED_AL_DIAGNOSTIC_OUTPUT
+875         VOUT << "AL: deavail =" << deavail << '\n';
+876 #endif
+877         return nadded;
+878 }
+\end{verbatim}\normalsize 
+\index{Active_List@{Active\_\-List}!filestr@{filestr}}
+\index{filestr@{filestr}!Active_List@{Active\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} Active\_\-List::filestr ()\hspace{0.3cm}{\tt  [inline]}}\label{classActive__List_a2}
+
+
+
+
+Definition at line 921 of file dil2al.hh.
+
+Referenced by generate\_\-AL(), generate\_\-focused\_\-AL(), and generate\_\-wide\_\-AL().
+
+
+
+\footnotesize\begin{verbatim}921 { return alfilestr; }
+\end{verbatim}\normalsize 
+\index{Active_List@{Active\_\-List}!generate_focused_AL@{generate\_\-focused\_\-AL}}
+\index{generate_focused_AL@{generate\_\-focused\_\-AL}!Active_List@{Active\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool Active\_\-List::generate\_\-focused\_\-AL ({\bf DIL\_\-entry} $\ast$ {\em superior}, time\_\-t {\em algenwt})}\label{classActive__List_a16}
+
+
+
+
+Definition at line 119 of file alcomp.cc.
+
+References al, AL\_\-Day\_\-Marker(), AL\_\-Passed\_\-Target\_\-Dates(), allength, DIL\_\-ID::chars(), DEFAULTALFOCUSEDEMPHASIS, DEFAULTALFOCUSEDHEADER, DEFAULTALFOCUSEDTAIL, DIL\_\-Topical\_\-List::dil, Elipsis\_\-At(), DIL\_\-entry::Entry\_\-Text(), EOUT, filetitle\_\-t::file, filestr(), AL\_\-TC::Get\_\-DE(), get\_\-supstr(), String::gsub(), PLLHandle$<$ AL\_\-TC $>$::head(), PLLRoot$<$ AL\_\-Day $>$::head(), PLLRoot$<$ AL\_\-TD $>$::head(), HTML\_\-put\_\-href(), HTML\_\-put\_\-table\_\-cell(), HTML\_\-put\_\-table\_\-row(), HTML\_\-remove\_\-tags(), PLLHandle$<$ AL\_\-TC $>$::Next(), PLL\_\-LOOP\_\-FORWARD, String::prepend(), RELLISTSDIR, relurl(), DIL\_\-ID::str(), DIL\_\-entry::Target\_\-Date(), td, time\_\-stamp(), time\_\-stamp\_\-GM(), DIL\_\-entry::Topics(), VOUT, and write\_\-file\_\-from\_\-String().
+
+Referenced by generate\_\-AL().
+
+
+
+\footnotesize\begin{verbatim}119                                                                           {
+120 // create the focused list of DIL entries according to dep
+121 // if superior==NULL then a complete AL of all DIL entries was computed
+122 // algenwt is marked at the top of the AL to indicate the
+123 // time allotted per full day prior to any expansions
+124         // determine number of task chunks to display
+125         long deplen = allength;
+126         if (alfocused<deplen) deplen = alfocused;
+127         if ((generatealmaxt==0) && (deplen>generatealtcs)) deplen = generatealtcs;
+128         // AL superior information
+129         String dstfile(basedir+RELLISTSDIR+filestr()+".html");
+130         String alstr(DEFAULTALFOCUSEDHEADER);
+131         alstr.gsub("@SUP@",get_supstr());
+132         alstr.gsub("@GENERAL-WORK-TIME@",time_stamp_GM("%H:%M",algenwt));
+133         alstr.gsub("@PASSED@",AL_Passed_Target_Dates(dstfile,td.head()));
+134         // *** perhaps catch MAXTIME_T and interpret it as "none"
+135         if (superior) alstr.gsub("@TD@",time_stamp("%Y%m%d",superior->Target_Date())); else alstr.gsub("@TD@","none");
+136         // task chunk information
+137         String diltext, dilurl; DIL_entry * de;
+138         PLL_LOOP_FORWARD(AL_Day,al.head(),(deplen>0)) {
+139                 alstr += AL_Day_Marker(dstfile,e);
+140                 for (AL_TC * atc = e->tc.head(); ((atc) && (deplen>0)); atc = atc->Next()) if (de = atc->Get_DE()) {
+141                         if (de->Entry_Text()) diltext = (*de->Entry_Text());
+142                         else {
+143                                 VOUT << "dil2al: Warning - Missing Text Content for DIL entry #" << de->chars() << " in generate_focused_AL(), continuing\n";
+144                                 diltext="";
+145                         }
+146                         HTML_remove_tags(diltext);
+147                         Elipsis_At(diltext,100);
+148                         if (de->Topics(0)) {
+149                                 dilurl = de->Topics(0)->dil.file+'#'+de->chars();
+150                                 dilurl = relurl(dstfile,dilurl);
+151                         } else {
+152                                 VOUT << "dil2al: Warning - Missing URL for DIL entry #" << de->chars() << " in generate_focused_AL(), continuing\n";
+153                                 dilurl='#'+de->chars();
+154                         }
+155                         diltext.prepend("[<A HREF=\"file:///cgi-bin/dil2al?dil2al=MEI&DILID="+de->str()+"\">edit</A>]\n");
+156                         if ((e==al.head()) && (atc==e->tc.head())) alstr += HTML_put_table_row(DEFAULTALFOCUSEDEMPHASIS,HTML_put_table_cell("",'['+HTML_put_href(dilurl,de->chars())+"]\n"+diltext)) + '\n';
+157                         else alstr += HTML_put_table_row("",HTML_put_table_cell("",'['+HTML_put_href(dilurl,de->chars())+"]\n"+diltext)) + '\n';
+158                         deplen--;
+159                 } else EOUT << "dil2al: Missing DIL entry in array at day " << time_stamp("%Y%m%d",e->DayDate()) << " in generate_focused_AL(), continuing as is\n";
+160         }
+161         String altail(DEFAULTALFOCUSEDTAIL);
+162         altail.gsub("@SUP@",get_supstr());
+163         altail.gsub("@ALFILE@",filestr());
+164         if (alshowcumulativereq) altail.gsub("@CUMULATIVE@","<LI>"+HTML_put_href(filestr()+".ctr.html","Active List - Cumulative Time Required")+'\n');
+165         else altail.gsub("@CUMULATIVE@","");
+166         altail.gsub("@ALDATE@",time_stamp("%c"));
+167         alstr += altail;
+168         return write_file_from_String(dstfile,alstr,"AL Focused");
+169 }
+\end{verbatim}\normalsize 
+\index{Active_List@{Active\_\-List}!generate_wide_AL@{generate\_\-wide\_\-AL}}
+\index{generate_wide_AL@{generate\_\-wide\_\-AL}!Active_List@{Active\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool Active\_\-List::generate\_\-wide\_\-AL ({\bf DIL\_\-entry} $\ast$ {\em superior})}\label{classActive__List_a17}
+
+
+
+
+Definition at line 171 of file alcomp.cc.
+
+References al, AL\_\-Day\_\-Marker(), allength, DIL\_\-ID::chars(), DEFAULTALWIDEHEADER, DEFAULTALWIDETAIL, Elipsis\_\-At(), DIL\_\-entry::Entry\_\-Text(), EOUT, filestr(), AL\_\-TC::Get\_\-DE(), get\_\-supstr(), String::gsub(), PLLRoot$<$ AL\_\-Day $>$::head(), HTML\_\-put\_\-href(), HTML\_\-put\_\-list\_\-item(), HTML\_\-remove\_\-tags(), PLLHandle$<$ AL\_\-TC $>$::Next(), PLL\_\-LOOP\_\-FORWARD, RELLISTSDIR, relurl(), time\_\-stamp(), VOUT, and write\_\-file\_\-from\_\-String().
+
+Referenced by generate\_\-AL().
+
+
+
+\footnotesize\begin{verbatim}171                                                        {
+172 // create the wide list of DIL entries according to dep
+173 // if superior==NULL then a complete AL of all DIL entries was computed
+174         // determine number of task chunks to display
+175         long deplen = allength;
+176         if (alwide<deplen) deplen = alwide;
+177         if ((generatealmaxt==0) && (deplen>generatealtcs)) deplen = generatealtcs;
+178         // AL superior information
+179         String dstfile(basedir+RELLISTSDIR+filestr()+".wide.html");
+180         String alstr(DEFAULTALWIDEHEADER);
+181         alstr.gsub("@SUP@",get_supstr());
+182         // task chunk information
+183         String diltext, dilurl; DIL_entry * de;
+184         PLL_LOOP_FORWARD(AL_Day,al.head(),(deplen>0)) {
+185                 alstr += "<BR>" + AL_Day_Marker(dstfile,e);
+186                 for (AL_TC * atc = e->tc.head(); ((atc) && (deplen>0)); atc = atc->Next()) if (de = atc->Get_DE()) {
+187                         if (de->Entry_Text()) diltext = (*de->Entry_Text());
+188                         else {
+189                                 VOUT << "dil2al: Warning - Missing Text Content for DIL entry #" << de->chars() << " in generate_wide_AL(), continuing\n";
+190                                 diltext="";
+191                         }
+192                         HTML_remove_tags(diltext);
+193                         Elipsis_At(diltext,50);
+194                         dilurl = relurl(dstfile,idfile)+'#'+de->chars();
+195                         alstr += HTML_put_list_item(HTML_put_href(dilurl,de->chars())+' '+diltext);
+196                         deplen--;
+197                 } else EOUT << "dil2al: Missing DIL entry in array at day " << time_stamp("%Y%m%d",e->DayDate()) << " in generate_wide_AL(), continuing as is\n";
+198         }
+199         String altail(DEFAULTALWIDETAIL);
+200         altail.gsub("@SUP@",get_supstr());
+201         altail.gsub("@ALFILE@",filestr());
+202         if (alshowcumulativereq) altail.gsub("@CUMULATIVE@","<LI>"+HTML_put_href(filestr()+".ctr.html","Active List - Cumulative Time Required")+'\n');
+203         else altail.gsub("@CUMULATIVE@","");
+204         altail.gsub("@ALDATE@",time_stamp("%c"));
+205         alstr += altail;
+206         return write_file_from_String(dstfile,alstr,"AL Wide");
+207 }
+\end{verbatim}\normalsize 
+\index{Active_List@{Active\_\-List}!Get_Avail_TC@{Get\_\-Avail\_\-TC}}
+\index{Get_Avail_TC@{Get\_\-Avail\_\-TC}!Active_List@{Active\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf AL\_\-TC} $\ast$ Active\_\-List::Get\_\-Avail\_\-TC (unsigned long {\em n})}\label{classActive__List_a11}
+
+
+
+
+Definition at line 901 of file alcomp.cc.
+
+References al, AL\_\-Day::Get\_\-Avail\_\-TC(), and PLLRoot$<$ AL\_\-Day $>$::head().
+
+Referenced by generate\_\-AL().
+
+
+
+\footnotesize\begin{verbatim}901                                                  {
+902 // returns the nth available task chunk in the AL
+903 // creates task chunks if necessary where tchead==NULL
+904         if (!al.head()) return NULL;
+905         return al.head()->Get_Avail_TC(n);
+906 }
+\end{verbatim}\normalsize 
+\index{Active_List@{Active\_\-List}!get_supstr@{get\_\-supstr}}
+\index{get_supstr@{get\_\-supstr}!Active_List@{Active\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} Active\_\-List::get\_\-supstr ()\hspace{0.3cm}{\tt  [inline]}}\label{classActive__List_a1}
+
+
+
+
+Definition at line 920 of file dil2al.hh.
+
+Referenced by generate\_\-AL(), generate\_\-focused\_\-AL(), and generate\_\-wide\_\-AL().
+
+
+
+\footnotesize\begin{verbatim}920 { return supstr; }
+\end{verbatim}\normalsize 
+\index{Active_List@{Active\_\-List}!Initialize_AL_Length@{Initialize\_\-AL\_\-Length}}
+\index{Initialize_AL_Length@{Initialize\_\-AL\_\-Length}!Active_List@{Active\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}long Active\_\-List::Initialize\_\-AL\_\-Length (long {\em req}[$\,$], long {\em deplen}, time\_\-t {\em algenwt}, {\bf DIL\_\-entry} $\ast$ {\em superior} = NULL)\hspace{0.3cm}{\tt  [protected]}}\label{classActive__List_b0}
+
+
+
+
+Definition at line 744 of file alcomp.cc.
+
+References Add\_\-Day(), al, allength, AL\_\-Day::Day\-Start(), AL\_\-Day::Day\-Start\-Min(), EOUT, PLLRoot$<$ AL\_\-Day $>$::head(), PLLHandle$<$ AL\_\-Day $>$::Next(), PLL\_\-LOOP\_\-FORWARD, SECONDSPERDAY, AL\_\-Day::set\_\-avail(), time\_\-stamp(), time\_\-stamp\_\-GM(), time\_\-stamp\_\-time\_\-date(), time\_\-stamp\_\-time\_\-of\_\-day(), and VOUT.
+
+Referenced by Active\_\-List().
+
+
+
+\footnotesize\begin{verbatim}744                                                                                                            {
+745 // returns the number of TCs allocated, data is initialized
+746         // values used on computations
+747         long tcseconds = timechunksize*60;
+748         float c_size = (float) tcseconds;
+749         long tcsperfullday = algenwt/tcseconds; // floor
+750 #ifdef DIAGNOSTIC_OUTPUT
+751         EOUT << "tcsperfullday=" << tcsperfullday << '\n';
+752 #endif
+753         // default initializations
+754         long allength = generatealtcs;
+755 #ifdef DIAGNOSTIC_OUTPUT
+756         EOUT << "allength = " << allength << '\n';
+757 #endif
+758         time_t lastdaytime = SECONDSPERDAY; // default to full day when no generatealmaxt is specified
+759         time_t allastdaylimit = -1; // *** why compute this?
+760         long aldays;
+761         // curtime data
+762         time_t curdaystart = time_stamp_time_date(curtime);
+763         time_t curdaytime = time_stamp_time_of_day(curtime);
+764 #ifdef DIAGNOSTIC_OUTPUT
+765         EOUT << "curdaytime(time_t) = " << curdaytime << '\n';
+766 #endif
+767         long curdaytcs = (long) ceil(((float) (algenwt-alworked))/c_size); // ceiling
+768         long curdaymaxtcs = (SECONDSPERDAY-curdaytime)/tcseconds; // floor, can't exceed limit
+769         if (curdaytcs>curdaymaxtcs) curdaytcs = curdaymaxtcs;
+770 #ifdef DIAGNOSTIC_OUTPUT
+771         EOUT << "curdaytcs = " << curdaytcs << '\n';
+772 #endif
+773         // determine allength and aldays
+774         VOUT << "AL request initiated with settings generatealtcs=" << generatealtcs << " and generatealmaxt=" << generatealmaxt << '\n';
+775         if (generatealtcs==0) {
+776                 if (superior) { // *** DIL entry specific AL
+777                         EOUT << "dil2al: DIL entry specific AL not yet implemented in Active_List::Initialize_AL_Length()\n";
+778                 }
+779                 if (!req) {
+780                         EOUT << "dil2al: Missing required time array, req, in Active_List::Initialize_AL_Length()\n";
+781                         return -1;
+782                 }
+783                 for (int i=0; i<deplen; i++) generatealtcs += req[i]; // complete AL
+784                 allength = generatealtcs;
+785                 aldays = (long) ceil(((float) (allength-curdaytcs))/((float) tcsperfullday)); // ceiling, to include remainder
+786         } else {
+787                 if (generatealmaxt>0) { // time limit requested
+788                         String maxtstr = time_stamp("%Y%m%d%H%M",generatealmaxt);
+789                         lastdaytime = time_stamp_time_of_day(maxtstr);
+790                         allastdaylimit = lastdaytime - alworkdaystart; // work time on last day of AL
+791                         if (allastdaylimit<0) allastdaylimit = 0;
+792                         if (allastdaylimit>algenwt) allastdaylimit = algenwt;
+793                         time_t lastdaystart = time_stamp_time_date(maxtstr);
+794                         if (curdaystart==lastdaystart) { // last day work time minus time already worked today
+795                                 time_t alrem = allastdaylimit - alworked;
+796                                 if (alrem<0) allength = 1; // this can be expanded
+797                                 else allength = alrem/tcseconds; // floor, can't exceed limit
+798                                 aldays = 0;
+799                         } else {
+800                                 long aldays = (lastdaystart-(curdaystart+SECONDSPERDAY))/SECONDSPERDAY; // full days between current and last
+801                                 if (aldays>0) allength += aldays*tcsperfullday; // chunks in those days
+802                                 else allength = 0;
+803                                 allength += allastdaylimit/tcseconds; // floor, can't exceed limit
+804                                 allength += curdaytcs;
+805                                 aldays++; // add last day for day start tags
+806                         }
+807                 } else aldays = (long) ceil(((float) (allength-curdaytcs))/((float) tcsperfullday)); // ceiling, to include remainder
+808         }
+809         // initialize data
+810 #ifdef DIAGNOSTIC_OUTPUT
+811         EOUT << "curdaytime (GM)    = " << time_stamp_GM("%H%M",curdaytime) << '\n';
+812 #endif
+813         if (!aldays) Add_Day(1,tcseconds,curdaytime,lastdaytime); // current and last day
+814         else {
+815                 Add_Day(1,tcseconds,curdaytime); // current day
+816 #ifdef DIAGNOSTIC_OUTPUT
+817                 for (int i=0; i<(aldays-1); i++) {
+818                         AL_Day * tmp = Add_Day(0,tcseconds,0); // full days
+819                         EOUT << "daystartmin = " << time_stamp_GM("%Y%m%d -- %H%M",tmp->DayStartMin()) << '\n';
+820                         EOUT << "alworkdaystart = " << time_stamp_GM("%Y%m%d -- %H%M",alworkdaystart) << '\n';
+821                         EOUT << "daystart = " << time_stamp_GM("%Y%m%d -- %H%M",tmp->DayStart()) << '\n';
+822                 }
+823 #else
+824                 for (int i=0; i<(aldays-1); i++) Add_Day(0,tcseconds,0); // full days
+825 #endif
+826                 Add_Day(2,tcseconds,0,lastdaytime); // last day
+827         }
+828 #ifdef DIAGNOSTIC_OUTPUT
+829         EOUT << "allength determined to get " << aldays << " days: " << allength << '\n';
+830 #endif
+831         if (!al.head()) {
+832                 EOUT << "dil2al: No AL days generated in Active_List::Initialize_AL_Length()\n";
+833                 return -1;
+834         }
+835 #ifdef DIAGNOSTIC_OUTPUT
+836         EOUT << "algenwt = " << algenwt << ", alworked = " << alworked << '\n';
+837 #endif
+838         allength = al.head()->set_avail(algenwt-alworked); // remaining time to work on current day (prior to any expansions)
+839         PLL_LOOP_FORWARD(AL_Day,al.head()->Next(),1) allength += e->set_avail(algenwt);
+840 #ifdef DIAGNOSTIC_OUTPUT
+841         EOUT << "Day TCs (tot,avail): "; PLL_LOOP_FORWARD(AL_Day,al.head(),1) EOUT << '(' << e->Total() << ',' << e->Avail() << "),"; EOUT << '\n';
+842         EOUT << "sum of available TCs in allocated days: allength = " << allength << '\n';
+843 #endif
+844         return allength;
+845 }
+\end{verbatim}\normalsize 
+\index{Active_List@{Active\_\-List}!length@{length}}
+\index{length@{length}!Active_List@{Active\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}long Active\_\-List::length ()\hspace{0.3cm}{\tt  [inline]}}\label{classActive__List_a3}
+
+
+
+
+Definition at line 922 of file dil2al.hh.
+
+References allength.
+
+Referenced by generate\_\-AL().
+
+
+
+\footnotesize\begin{verbatim}922 { return allength; }
+\end{verbatim}\normalsize 
+\index{Active_List@{Active\_\-List}!remove_unused_TCs@{remove\_\-unused\_\-TCs}}
+\index{remove_unused_TCs@{remove\_\-unused\_\-TCs}!Active_List@{Active\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}long Active\_\-List::remove\_\-unused\_\-TCs ()}\label{classActive__List_a15}
+
+
+
+
+Definition at line 930 of file alcomp.cc.
+
+References al, allength, PLLRoot$<$ AL\_\-Day $>$::head(), and AL\_\-Day::remove\_\-unused\_\-TCs().
+
+Referenced by generate\_\-AL().
+
+
+
+\footnotesize\begin{verbatim}930                                     {
+931 // clean up by removing unused TCs
+932 // returns remaining number of TCs in AL
+933         if (!al.head()) {
+934                 allength = 0;
+935                 return 0;
+936         }
+937         allength = al.head()->remove_unused_TCs();
+938         return allength;
+939 }
+\end{verbatim}\normalsize 
+\index{Active_List@{Active\_\-List}!set_TC_values@{set\_\-TC\_\-values}}
+\index{set_TC_values@{set\_\-TC\_\-values}!Active_List@{Active\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}float Active\_\-List::set\_\-TC\_\-values ()}\label{classActive__List_a9}
+
+
+
+
+Definition at line 880 of file alcomp.cc.
+
+References al, deavail, PLLRoot$<$ AL\_\-Day $>$::head(), and PLL\_\-LOOP\_\-FORWARD.
+
+Referenced by generate\_\-AL().
+
+
+
+\footnotesize\begin{verbatim}880                                  {
+881 // set TC values in AL
+882 // returns sum of all TC values
+883 // requires that al contains a valid deavail value
+884         if (deavail<=0) return 0.0;
+885         float sumval = 0.0;
+886         long i_start = 0;
+887         PLL_LOOP_FORWARD(AL_Day,al.head(),1) sumval += e->set_TC_values(i_start,deavail);
+888         return sumval;
+889 }
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Data Documentation}
+\index{Active_List@{Active\_\-List}!al@{al}}
+\index{al@{al}!Active_List@{Active\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf PLLRoot}$<${\bf AL\_\-Day}$>$ Active\_\-List::al}\label{classActive__List_m0}
+
+
+
+
+Definition at line 914 of file dil2al.hh.
+
+Referenced by Add\_\-Day(), Add\_\-Target\_\-Date(), allocate(), allocate\_\-with\_\-value(), expand(), generate\_\-focused\_\-AL(), generate\_\-wide\_\-AL(), Get\_\-Avail\_\-TC(), Initialize\_\-AL\_\-Length(), remove\_\-unused\_\-TCs(), and set\_\-TC\_\-values().\index{Active_List@{Active\_\-List}!alfilestr@{alfilestr}}
+\index{alfilestr@{alfilestr}!Active_List@{Active\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} Active\_\-List::alfilestr\hspace{0.3cm}{\tt  [protected]}}\label{classActive__List_n2}
+
+
+
+
+Definition at line 906 of file dil2al.hh.
+
+Referenced by Active\_\-List().\index{Active_List@{Active\_\-List}!allength@{allength}}
+\index{allength@{allength}!Active_List@{Active\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}long Active\_\-List::allength\hspace{0.3cm}{\tt  [protected]}}\label{classActive__List_n3}
+
+
+
+
+Definition at line 907 of file dil2al.hh.
+
+Referenced by Active\_\-List(), expand(), generate\_\-focused\_\-AL(), generate\_\-wide\_\-AL(), Initialize\_\-AL\_\-Length(), length(), and remove\_\-unused\_\-TCs().\index{Active_List@{Active\_\-List}!deavail@{deavail}}
+\index{deavail@{deavail}!Active_List@{Active\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}long Active\_\-List::deavail}\label{classActive__List_m2}
+
+
+
+
+Definition at line 916 of file dil2al.hh.
+
+Referenced by allocate\_\-with\_\-value(), available\_\-before(), expand(), generate\_\-AL(), and set\_\-TC\_\-values().\index{Active_List@{Active\_\-List}!superior@{superior}}
+\index{superior@{superior}!Active_List@{Active\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf DIL\_\-entry}$\ast$ Active\_\-List::superior\hspace{0.3cm}{\tt  [protected]}}\label{classActive__List_n0}
+
+
+
+
+Definition at line 904 of file dil2al.hh.
+
+Referenced by Active\_\-List().\index{Active_List@{Active\_\-List}!supstr@{supstr}}
+\index{supstr@{supstr}!Active_List@{Active\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} Active\_\-List::supstr\hspace{0.3cm}{\tt  [protected]}}\label{classActive__List_n1}
+
+
+
+
+Definition at line 905 of file dil2al.hh.
+
+Referenced by Active\_\-List().\index{Active_List@{Active\_\-List}!td@{td}}
+\index{td@{td}!Active_List@{Active\_\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf PLLRoot}$<${\bf AL\_\-TD}$>$ Active\_\-List::td}\label{classActive__List_m1}
+
+
+
+
+Definition at line 915 of file dil2al.hh.
+
+Referenced by Add\_\-Passed\_\-Target\_\-Date(), expand(), and generate\_\-focused\_\-AL().
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf dil2al.hh}\item 
+{\bf alcomp.cc}\end{CompactItemize}

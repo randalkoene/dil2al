@@ -1,0 +1,377 @@
+\section{Novelty\_\-Marker  Class Reference}
+\label{classNovelty__Marker}\index{Novelty_Marker@{Novelty\_\-Marker}}
+{\tt \#include $<$dil2al.hh$>$}
+
+\subsection*{Public Types}
+\begin{CompactItemize}
+\item 
+enum {\bf nmtype\_\-t} \{ {\bf NM\_\-NOVELTY\_\-ITEM}, 
+{\bf NM\_\-TCH\_\-DEPTH\_\-INC}, 
+{\bf NM\_\-TCH\_\-DEPTH\_\-DEC}, 
+{\bf NM\_\-STANDARD\_\-ITEM}, 
+{\bf NM\_\-PREVPAPER\_\-ITEM}, 
+{\bf NM\_\-REF\_\-CITATION}, 
+{\bf NM\_\-REQUIRED\_\-ITEM}, 
+{\bf NM\_\-CONTENT\_\-HREF}
+ \}
+\end{CompactItemize}
+\subsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf Novelty\_\-Marker} (int hdepth=0)
+\item 
+{\bf $\sim$Novelty\_\-Marker} ()
+\item 
+int {\bf Get\_\-Novelty\_\-from\_\-Paper\_\-Plan} ({\bf String} \&pptext, int startp, int starthierdepth=0)
+\end{CompactItemize}
+\subsection*{Public Attributes}
+\begin{CompactItemize}
+\item 
+{\bf String} {\bf id}
+\item 
+{\bf String} {\bf source}
+\item 
+{\bf String} {\bf marktext}
+\item 
+{\bf String} {\bf inclurl}
+\item 
+{\bf String\-List} {\bf context}
+\item 
+float $\ast$ {\bf imp}
+\item 
+int {\bf impnum}
+\item 
+float {\bf len}
+\item 
+{\bf String\-List} {\bf section}
+\item 
+int {\bf hierdepth}
+\item 
+{\bf nmtype\_\-t} {\bf nmtype}
+\end{CompactItemize}
+
+
+\subsection{Member Enumeration Documentation}
+\index{Novelty_Marker@{Novelty\_\-Marker}!nmtype_t@{nmtype\_\-t}}
+\index{nmtype_t@{nmtype\_\-t}!Novelty_Marker@{Novelty\_\-Marker}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}enum Novelty\_\-Marker::nmtype\_\-t}\label{classNovelty__Marker_s8}
+
+
+\begin{Desc}
+\item[Enumeration values:]\par
+\begin{description}
+\index{NM_NOVELTY_ITEM@{NM\_\-NOVELTY\_\-ITEM}!Novelty_Marker@{Novelty\_\-Marker}}\index{Novelty_Marker@{Novelty\_\-Marker}!NM_NOVELTY_ITEM@{NM\_\-NOVELTY\_\-ITEM}}\item[{\em 
+{\em NM\_\-NOVELTY\_\-ITEM}\label{classNovelty__Marker_s8s0}
+}]\index{NM_TCH_DEPTH_INC@{NM\_\-TCH\_\-DEPTH\_\-INC}!Novelty_Marker@{Novelty\_\-Marker}}\index{Novelty_Marker@{Novelty\_\-Marker}!NM_TCH_DEPTH_INC@{NM\_\-TCH\_\-DEPTH\_\-INC}}\item[{\em 
+{\em NM\_\-TCH\_\-DEPTH\_\-INC}\label{classNovelty__Marker_s8s1}
+}]\index{NM_TCH_DEPTH_DEC@{NM\_\-TCH\_\-DEPTH\_\-DEC}!Novelty_Marker@{Novelty\_\-Marker}}\index{Novelty_Marker@{Novelty\_\-Marker}!NM_TCH_DEPTH_DEC@{NM\_\-TCH\_\-DEPTH\_\-DEC}}\item[{\em 
+{\em NM\_\-TCH\_\-DEPTH\_\-DEC}\label{classNovelty__Marker_s8s2}
+}]\index{NM_STANDARD_ITEM@{NM\_\-STANDARD\_\-ITEM}!Novelty_Marker@{Novelty\_\-Marker}}\index{Novelty_Marker@{Novelty\_\-Marker}!NM_STANDARD_ITEM@{NM\_\-STANDARD\_\-ITEM}}\item[{\em 
+{\em NM\_\-STANDARD\_\-ITEM}\label{classNovelty__Marker_s8s3}
+}]\index{NM_PREVPAPER_ITEM@{NM\_\-PREVPAPER\_\-ITEM}!Novelty_Marker@{Novelty\_\-Marker}}\index{Novelty_Marker@{Novelty\_\-Marker}!NM_PREVPAPER_ITEM@{NM\_\-PREVPAPER\_\-ITEM}}\item[{\em 
+{\em NM\_\-PREVPAPER\_\-ITEM}\label{classNovelty__Marker_s8s4}
+}]\index{NM_REF_CITATION@{NM\_\-REF\_\-CITATION}!Novelty_Marker@{Novelty\_\-Marker}}\index{Novelty_Marker@{Novelty\_\-Marker}!NM_REF_CITATION@{NM\_\-REF\_\-CITATION}}\item[{\em 
+{\em NM\_\-REF\_\-CITATION}\label{classNovelty__Marker_s8s5}
+}]\index{NM_REQUIRED_ITEM@{NM\_\-REQUIRED\_\-ITEM}!Novelty_Marker@{Novelty\_\-Marker}}\index{Novelty_Marker@{Novelty\_\-Marker}!NM_REQUIRED_ITEM@{NM\_\-REQUIRED\_\-ITEM}}\item[{\em 
+{\em NM\_\-REQUIRED\_\-ITEM}\label{classNovelty__Marker_s8s6}
+}]\index{NM_CONTENT_HREF@{NM\_\-CONTENT\_\-HREF}!Novelty_Marker@{Novelty\_\-Marker}}\index{Novelty_Marker@{Novelty\_\-Marker}!NM_CONTENT_HREF@{NM\_\-CONTENT\_\-HREF}}\item[{\em 
+{\em NM\_\-CONTENT\_\-HREF}\label{classNovelty__Marker_s8s7}
+}]\end{description}
+\end{Desc}
+
+
+
+Definition at line 274 of file dil2al.hh.
+
+
+
+\footnotesize\begin{verbatim}274 { NM_NOVELTY_ITEM, NM_TCH_DEPTH_INC, NM_TCH_DEPTH_DEC, NM_STANDARD_ITEM, NM_PREVPAPER_ITEM, NM_REF_CITATION, NM_REQUIRED_ITEM, NM_CONTENT_HREF };
+\end{verbatim}\normalsize 
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Novelty_Marker@{Novelty\_\-Marker}!Novelty_Marker@{Novelty\_\-Marker}}
+\index{Novelty_Marker@{Novelty\_\-Marker}!Novelty_Marker@{Novelty\_\-Marker}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Novelty\_\-Marker::Novelty\_\-Marker (int {\em hdepth} = 0)}\label{classNovelty__Marker_a0}
+
+
+
+
+Definition at line 322 of file utilities.cc.
+
+References context, and section.
+
+
+
+\footnotesize\begin{verbatim}322                                             : id(""), marktext(""), inclurl(""), imp(NULL), impnum(0), len(0.0), hierdepth(hdepth), nmtype(NM_NOVELTY_ITEM) {
+323         context[0] = "";
+324         section[0] = "";
+325 }
+\end{verbatim}\normalsize 
+\index{Novelty_Marker@{Novelty\_\-Marker}!~Novelty_Marker@{$\sim$Novelty\_\-Marker}}
+\index{~Novelty_Marker@{$\sim$Novelty\_\-Marker}!Novelty_Marker@{Novelty\_\-Marker}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Novelty\_\-Marker::$\sim$Novelty\_\-Marker ()\hspace{0.3cm}{\tt  [inline]}}\label{classNovelty__Marker_a1}
+
+
+
+
+Definition at line 260 of file dil2al.hh.
+
+References imp.
+
+
+
+\footnotesize\begin{verbatim}260 { if (imp) delete[] imp; }
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Function Documentation}
+\index{Novelty_Marker@{Novelty\_\-Marker}!Get_Novelty_from_Paper_Plan@{Get\_\-Novelty\_\-from\_\-Paper\_\-Plan}}
+\index{Get_Novelty_from_Paper_Plan@{Get\_\-Novelty\_\-from\_\-Paper\_\-Plan}!Novelty_Marker@{Novelty\_\-Marker}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Novelty\_\-Marker::Get\_\-Novelty\_\-from\_\-Paper\_\-Plan ({\bf String} \& {\em pptext}, int {\em startp}, int {\em starthierdepth} = 0)}\label{classNovelty__Marker_a2}
+
+
+
+
+Definition at line 327 of file utilities.cc.
+
+References String::after(), String::at(), String::before(), String::contains(), context, String::del(), EOUT, String::gsub(), hierdepth, id, imp, impnum, String::index(), len, String\-List::length(), String::length(), marktext, NM\_\-NOVELTY\_\-ITEM, NM\_\-REQUIRED\_\-ITEM, NM\_\-TCH\_\-DEPTH\_\-DEC, NM\_\-TCH\_\-DEPTH\_\-INC, nmtype, section, and source.
+
+
+
+\footnotesize\begin{verbatim}327                                                                                                    {
+328 // searches for Novelty marker data in a paper plan, returns the location at
+329 // which one was found and sets all object variables to match, returns -1 if
+330 // none was found, starts searching at character number startp in pptext
+331         int nmidx, hierstart, hierend = -1;
+332 //      if (starthierdepth>0) {
+333         hierdepth = starthierdepth; // set to current depth
+334         hierend = pptext.index("</UL>",startp);
+335 //      }
+336         nmidx = pptext.index(BigRegex("[<]B[>][         ]*Section[      ]*[<]/B[>][     ]*:"),startp);
+337         hierstart = pptext.index(BigRegex("[<]!--[      ]*@TOPICAL CONTEXT@[    ]*--[>]"),startp);
+338         if ((hierend<0) && (nmidx<0) && (hierstart<0)) return -1;
+339         if (((unsigned int) nmidx < (unsigned int) hierstart) && ((unsigned int) nmidx < (unsigned int) hierend)) { // get item
+340 #ifdef DEBUG_NOVELTYMARKER
+341                 cout << '!';
+342 #endif
+343                 nmtype = NM_NOVELTY_ITEM;
+344                 int nmend = pptext.index(")",nmidx);
+345 #ifdef DEBUG_NOVELTYMARKER
+346                 if (nmend<0) cout << '>';
+347 #endif
+348                 if (nmend<0) return -1;
+349                 nmidx = pptext.index("<LI>",nmidx-pptext.length());
+350 #ifdef DEBUG_NOVELTYMARKER
+351                 if (nmidx<startp) cout << '<';
+352 #endif
+353                 if (nmidx<startp) return -1;
+354                 String nmexcerpt = pptext.at(nmidx,(nmend-nmidx)+1);
+355                 // get marked text
+356                 marktext = nmexcerpt.before("(",-1);
+357                 marktext.gsub("<BR>\n","");
+358                 // identify REQUIRED item
+359                 if (marktext.contains(BigRegex("[<]LI[>][       ]*\\([<][^>]*[>]\\)?[   ]*REQUIRE[      ]*:"))) {
+360                         nmtype = NM_REQUIRED_ITEM;
+361                         marktext.del(BigRegex("[<]LI[>][        ]*\\([<][^>]*[>]\\)?[   ]*REQUIRE[      ]*:[    ]*\\([<][^>]*[>]\\)?[   ]*"));
+362                 } else {
+363                         // get source file
+364                         source = marktext.at(BigRegex("[<]A[    ]+[^>]*[Hh][Rr][Ee][Ff][^\"]*\"[^\"]+\""));
+365                         source.del(BigRegex("[<]A[      ]+[^>]*[Hh][Rr][Ee][Ff][^\"]*\""));
+366                         source.del("\"");
+367                         // get NOVELTY ID
+368                         id = source.after("#");
+369 //cout << "NMID=" << id << '\n'; cout.flush();
+370                         // clean up source file
+371                         if (id!="") source = source.before("#");
+372                         // clean up marked text
+373                         marktext.gsub(BigRegex("[[][^]]*NOVELTY-[^]]*[]]"),"");
+374                 }
+375                 // clean up marked text
+376                 marktext.gsub(BigRegex("[<][^>]*[>]"),"");
+377                 // get contexts
+378                 nmexcerpt = nmexcerpt.after(BigRegex("([^C]*Context[^:]*:[      ]*"),-1);
+379                 String c = nmexcerpt.before(BigRegex("\\([<][^>]*[>]\\)?[       ]*Importance[   ]*\\([<][^>]*[>]\\)?[   ]*:"));
+380                 int cidx = 0; String cc;
+381                 while ((cc = c.at(BigRegex("[^  ][^,]*")))!="") {
+382                         cc.del(BigRegex("[      ]*$"));
+383                         context[cidx] = cc;
+384                         cidx++;
+385                         c = c.after(BigRegex("[^        ][^,]*,?"));
+386                 }
+387                 // get importances
+388                 nmexcerpt = nmexcerpt.after(BigRegex("\\([<][^>]*[>]\\)?[       ]*Importance[   ]*\\([<][^>]*[>]\\)?[   ]*:[    ]*"));
+389                 c = nmexcerpt.before(BigRegex("\\([<][^>]*[>]\\)?[      ]*Length[       ]*\\([<][^>]*[>]\\)?[   ]*:"));
+390                 if (imp) delete[] imp;
+391                 impnum = context.length();
+392                 imp = new float[impnum];
+393                 for (int i=0; i<impnum; i++) imp[i] = 0.0;
+394                 cidx = 0;
+395                 while ((cc = c.at(BigRegex("[^  ][^,]*")))!="") {
+396                         cc.del(BigRegex("[      ]*$"));
+397                         imp[cidx] = (float) atof((const char *) cc);
+398                         cidx++;
+399                         c = c.after(BigRegex("[^        ][^,]*,?"));
+400                 }
+401                 if (!cidx) {
+402                         delete[] imp;
+403                         imp = NULL;
+404                         impnum = 0;
+405                 }
+406                 if (cidx==1) {
+407                         float * impone = new float[1];
+408                         impone[0] = imp[0];
+409                         delete[] imp;
+410                         imp = impone;
+411                         impnum = 1;
+412                 }
+413                 // get length
+414                 nmexcerpt = nmexcerpt.after(BigRegex("\\([<][^>]*[>]\\)?[       ]*Length[       ]*\\([<][^>]*[>]\\)?[   ]*:[    ]*"));
+415                 c = nmexcerpt.before(BigRegex("\\([<][^>]*[>]\\)?[      ]*Section[      ]*\\([<][^>]*[>]\\)?[   ]*:"));
+416                 if ((cc = c.at(BigRegex("[^     ][^,]*")))!="") {
+417                         cc.del(BigRegex("[      ]*$"));
+418                         len = (float) atof((const char *) cc);
+419                 }
+420                 // get sections
+421                 nmexcerpt = nmexcerpt.after(BigRegex("\\([<][^>]*[>]\\)?[       ]*Section[      ]*\\([<][^>]*[>]\\)?[   ]*:[    ]*"));
+422                 c = nmexcerpt.before(")");
+423                 cidx = 0;
+424                 while ((cc = c.at(BigRegex("[^  ][^,]*")))!="") {
+425                         cc.del(BigRegex("[      ]*$"));
+426                         section[cidx] = cc;
+427                         cidx++;
+428                         c = c.after(BigRegex("[^        ][^,]*,?"));
+429                 }
+430                 return nmend;
+431         } else if ((unsigned int) hierstart < (unsigned int) hierend) { // increase hierarchy depth
+432 #ifdef DEBUG_NOVELTYMARKER
+433                 cout << '^';
+434 #endif
+435                 nmtype = NM_TCH_DEPTH_INC;
+436                 String nmexcerpt = pptext.at(BigRegex("[>][^\n]+"),hierstart);
+437                 if (nmexcerpt=="") {
+438                         EOUT << "dil2al: Incomplete @TOPICAL CONTEXT@ detected in Novelty_Marker::Get_Novelty_from_Paper_Plan()\n";
+439                         return -1;
+440                 }
+441                 nmexcerpt.del(">");
+442                 nmexcerpt.gsub(BigRegex("[<][^>]*[>]"),"");
+443                 context[0] = nmexcerpt;
+444                 hierdepth++;
+445                 return hierstart+nmexcerpt.length()+1;
+446         } else { // decrease hierarchy depth
+447 #ifdef DEBUG_NOVELTYMARKER
+448                 cout << 'v';
+449 #endif
+450                 nmtype = NM_TCH_DEPTH_DEC;
+451                 hierdepth--;
+452                 if (hierdepth<0) return -1;     // beyond end of TCH
+453                 return hierend+4;
+454         }
+455 }
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Data Documentation}
+\index{Novelty_Marker@{Novelty\_\-Marker}!context@{context}}
+\index{context@{context}!Novelty_Marker@{Novelty\_\-Marker}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String\-List} Novelty\_\-Marker::context}\label{classNovelty__Marker_m4}
+
+
+
+
+Definition at line 267 of file dil2al.hh.
+
+Referenced by extract\_\-hierarchy\_\-depth\_\-increase\_\-to\_\-paper(), extract\_\-recursively(), extract\_\-required\_\-item\_\-to\_\-paper(), Get\_\-Novelty\_\-from\_\-Paper\_\-Plan(), and Novelty\_\-Marker().\index{Novelty_Marker@{Novelty\_\-Marker}!hierdepth@{hierdepth}}
+\index{hierdepth@{hierdepth}!Novelty_Marker@{Novelty\_\-Marker}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Novelty\_\-Marker::hierdepth}\label{classNovelty__Marker_m9}
+
+
+
+
+Definition at line 273 of file dil2al.hh.
+
+Referenced by extract\_\-hierarchy\_\-depth\_\-decrease\_\-to\_\-paper(), extract\_\-hierarchy\_\-depth\_\-increase\_\-to\_\-paper(), and Get\_\-Novelty\_\-from\_\-Paper\_\-Plan().\index{Novelty_Marker@{Novelty\_\-Marker}!id@{id}}
+\index{id@{id}!Novelty_Marker@{Novelty\_\-Marker}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} Novelty\_\-Marker::id}\label{classNovelty__Marker_m0}
+
+
+
+
+Definition at line 262 of file dil2al.hh.
+
+Referenced by extract\_\-recursively(), Get\_\-Novelty\_\-from\_\-Paper\_\-Plan(), Novelty\_\-Marker\_\-List::iselement(), and item\_\-content\_\-between\_\-range\_\-tags().\index{Novelty_Marker@{Novelty\_\-Marker}!imp@{imp}}
+\index{imp@{imp}!Novelty_Marker@{Novelty\_\-Marker}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}float$\ast$ Novelty\_\-Marker::imp}\label{classNovelty__Marker_m5}
+
+
+
+
+Definition at line 268 of file dil2al.hh.
+
+Referenced by extract\_\-recursively(), extract\_\-required\_\-item\_\-to\_\-paper(), Get\_\-Novelty\_\-from\_\-Paper\_\-Plan(), and $\sim$Novelty\_\-Marker().\index{Novelty_Marker@{Novelty\_\-Marker}!impnum@{impnum}}
+\index{impnum@{impnum}!Novelty_Marker@{Novelty\_\-Marker}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int Novelty\_\-Marker::impnum}\label{classNovelty__Marker_m6}
+
+
+
+
+Definition at line 269 of file dil2al.hh.
+
+Referenced by extract\_\-recursively(), extract\_\-required\_\-item\_\-to\_\-paper(), and Get\_\-Novelty\_\-from\_\-Paper\_\-Plan().\index{Novelty_Marker@{Novelty\_\-Marker}!inclurl@{inclurl}}
+\index{inclurl@{inclurl}!Novelty_Marker@{Novelty\_\-Marker}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} Novelty\_\-Marker::inclurl}\label{classNovelty__Marker_m3}
+
+
+
+
+Definition at line 265 of file dil2al.hh.\index{Novelty_Marker@{Novelty\_\-Marker}!len@{len}}
+\index{len@{len}!Novelty_Marker@{Novelty\_\-Marker}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}float Novelty\_\-Marker::len}\label{classNovelty__Marker_m7}
+
+
+
+
+Definition at line 270 of file dil2al.hh.
+
+Referenced by extract\_\-recursively(), extract\_\-required\_\-item\_\-to\_\-paper(), and Get\_\-Novelty\_\-from\_\-Paper\_\-Plan().\index{Novelty_Marker@{Novelty\_\-Marker}!marktext@{marktext}}
+\index{marktext@{marktext}!Novelty_Marker@{Novelty\_\-Marker}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} Novelty\_\-Marker::marktext}\label{classNovelty__Marker_m2}
+
+
+
+
+Definition at line 264 of file dil2al.hh.
+
+Referenced by extract\_\-novelty\_\-item\_\-to\_\-paper(), extract\_\-required\_\-item\_\-to\_\-paper(), and Get\_\-Novelty\_\-from\_\-Paper\_\-Plan().\index{Novelty_Marker@{Novelty\_\-Marker}!nmtype@{nmtype}}
+\index{nmtype@{nmtype}!Novelty_Marker@{Novelty\_\-Marker}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf nmtype\_\-t} Novelty\_\-Marker::nmtype}\label{classNovelty__Marker_m10}
+
+
+
+
+Definition at line 282 of file dil2al.hh.
+
+Referenced by extract\_\-recursively(), and Get\_\-Novelty\_\-from\_\-Paper\_\-Plan().\index{Novelty_Marker@{Novelty\_\-Marker}!section@{section}}
+\index{section@{section}!Novelty_Marker@{Novelty\_\-Marker}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String\-List} Novelty\_\-Marker::section}\label{classNovelty__Marker_m8}
+
+
+
+
+Definition at line 271 of file dil2al.hh.
+
+Referenced by Get\_\-Novelty\_\-from\_\-Paper\_\-Plan(), and Novelty\_\-Marker().\index{Novelty_Marker@{Novelty\_\-Marker}!source@{source}}
+\index{source@{source}!Novelty_Marker@{Novelty\_\-Marker}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} Novelty\_\-Marker::source}\label{classNovelty__Marker_m1}
+
+
+
+
+Definition at line 263 of file dil2al.hh.
+
+Referenced by extract\_\-novelty\_\-item\_\-to\_\-paper(), extract\_\-recursively(), Get\_\-Novelty\_\-from\_\-Paper\_\-Plan(), and Novelty\_\-Marker\_\-List::iselement().
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf dil2al.hh}\item 
+{\bf utilities.cc}\end{CompactItemize}

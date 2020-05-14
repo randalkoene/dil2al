@@ -1,0 +1,337 @@
+\section{Long\-List  Class Reference}
+\label{classLongList}\index{LongList@{Long\-List}}
+{\tt \#include $<$dil2al.hh$>$}
+
+\subsection*{Public Methods}
+\begin{CompactItemize}
+\item 
+{\bf $\sim$Long\-List} ()
+\item 
+{\bf Long\-List} ()
+\item 
+{\bf Long\-List} (unsigned long n)
+\item 
+{\bf Long\-List} (const long cs, Long\-List $\ast$cn=NULL)
+\item 
+{\bf Long\-List} ({\bf String} cs, const char sep)
+\item 
+long \& {\bf operator[$\,$]} (unsigned long n)
+\item 
+Long\-List $\ast$ {\bf get\_\-Next} ()
+\item 
+void {\bf append} (unsigned long n, long \&ins)
+\item 
+void {\bf insert} (unsigned long n, long \&ins)
+\item 
+unsigned long {\bf length} ()
+\item 
+long {\bf iselement} (long el, unsigned long n=0)
+\item 
+long {\bf contains} (long substr, unsigned long n=0)
+\item 
+unsigned long {\bf split} (unsigned long n, {\bf String} cs, const char sep='$\backslash$n')
+\item 
+{\bf String} {\bf concatenate} ({\bf String} sepstr=\char`\"{}\char`\"{})
+\end{CompactItemize}
+\subsection*{Protected Attributes}
+\begin{CompactItemize}
+\item 
+Long\-List $\ast$ {\bf Next}
+\item 
+long {\bf s}
+\end{CompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{LongList@{Long\-List}!~LongList@{$\sim$LongList}}
+\index{~LongList@{$\sim$LongList}!LongList@{Long\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Long\-List::$\sim$Long\-List ()\hspace{0.3cm}{\tt  [inline]}}\label{classLongList_a0}
+
+
+
+
+Definition at line 135 of file dil2al.hh.
+
+
+
+\footnotesize\begin{verbatim}135 { if (Next) delete Next; }
+\end{verbatim}\normalsize 
+\index{LongList@{Long\-List}!LongList@{LongList}}
+\index{LongList@{LongList}!LongList@{Long\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Long\-List::Long\-List ()\hspace{0.3cm}{\tt  [inline]}}\label{classLongList_a1}
+
+
+
+
+Definition at line 136 of file dil2al.hh.
+
+References LONGLIST\_\-INITIAL\_\-VALUE, and s.
+
+Referenced by append(), insert(), Long\-List(), and operator[$\,$]().
+
+
+
+\footnotesize\begin{verbatim}136 { Next=NULL; s = LONGLIST_INITIAL_VALUE; }
+\end{verbatim}\normalsize 
+\index{LongList@{Long\-List}!LongList@{LongList}}
+\index{LongList@{LongList}!LongList@{Long\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Long\-List::Long\-List (unsigned long {\em n})\hspace{0.3cm}{\tt  [inline]}}\label{classLongList_a2}
+
+
+
+
+Definition at line 137 of file dil2al.hh.
+
+References Long\-List(), LONGLIST\_\-INITIAL\_\-VALUE, and s.
+
+
+
+\footnotesize\begin{verbatim}137 { s = LONGLIST_INITIAL_VALUE; if (n) Next = new LongList(n-1); else Next = NULL; }
+\end{verbatim}\normalsize 
+\index{LongList@{Long\-List}!LongList@{LongList}}
+\index{LongList@{LongList}!LongList@{Long\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Long\-List::Long\-List (const long {\em cs}, Long\-List $\ast$ {\em cn} = NULL)\hspace{0.3cm}{\tt  [inline]}}\label{classLongList_a3}
+
+
+
+
+Definition at line 138 of file dil2al.hh.
+
+References s.
+
+
+
+\footnotesize\begin{verbatim}138 { s=cs; Next=cn; }
+\end{verbatim}\normalsize 
+\index{LongList@{Long\-List}!LongList@{LongList}}
+\index{LongList@{LongList}!LongList@{Long\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Long\-List::Long\-List ({\bf String} {\em cs}, const char {\em sep})}\label{classLongList_a4}
+
+
+
+
+Definition at line 115 of file utilities.cc.
+
+References Next, and split().
+
+
+
+\footnotesize\begin{verbatim}115                                             {
+116 // initialize list from a string with a specified separator
+117 // (Note: In the current implementation this leaves an unused
+118 // list element at the end of the list.)
+119         Next=NULL;
+120         split(0,cs,sep);
+121 }
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Function Documentation}
+\index{LongList@{Long\-List}!append@{append}}
+\index{append@{append}!LongList@{Long\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Long\-List::append (unsigned long {\em n}, long \& {\em ins})}\label{classLongList_a7}
+
+
+
+
+Definition at line 129 of file utilities.cc.
+
+References Long\-List(), and Next.
+
+
+
+\footnotesize\begin{verbatim}129                                                  {
+130         if (!n) Next = new LongList(ins,Next);
+131         else
+132                 if (Next) Next->append(n-1,ins);
+133                 else {
+134                         Next = new LongList();
+135                         Next->append(n-1,ins);
+136                 }
+137 }
+\end{verbatim}\normalsize 
+\index{LongList@{Long\-List}!concatenate@{concatenate}}
+\index{concatenate@{concatenate}!LongList@{Long\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}{\bf String} Long\-List::concatenate ({\bf String} {\em sepstr} = \char`\"{}\char`\"{})}\label{classLongList_a13}
+
+
+
+
+Definition at line 174 of file utilities.cc.
+
+References Next, and s.
+
+
+
+\footnotesize\begin{verbatim}174                                                {
+175         if (Next) return String(s)+sepstr+Next->concatenate(sepstr);
+176         else return String(s);
+177 }
+\end{verbatim}\normalsize 
+\index{LongList@{Long\-List}!contains@{contains}}
+\index{contains@{contains}!LongList@{Long\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}long Long\-List::contains (long {\em substr}, unsigned long {\em n} = 0)}\label{classLongList_a11}
+
+
+
+
+Definition at line 158 of file utilities.cc.
+
+References iselement().
+
+
+
+\footnotesize\begin{verbatim}158                                                         {
+159         return iselement(substr,n);
+160 }
+\end{verbatim}\normalsize 
+\index{LongList@{Long\-List}!get_Next@{get\_\-Next}}
+\index{get_Next@{get\_\-Next}!LongList@{Long\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Long\-List$\ast$ Long\-List::get\_\-Next ()\hspace{0.3cm}{\tt  [inline]}}\label{classLongList_a6}
+
+
+
+
+Definition at line 141 of file dil2al.hh.
+
+
+
+\footnotesize\begin{verbatim}141 { return Next; }
+\end{verbatim}\normalsize 
+\index{LongList@{Long\-List}!insert@{insert}}
+\index{insert@{insert}!LongList@{Long\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void Long\-List::insert (unsigned long {\em n}, long \& {\em ins})}\label{classLongList_a8}
+
+
+
+
+Definition at line 139 of file utilities.cc.
+
+References Long\-List(), Next, and s.
+
+Referenced by split().
+
+
+
+\footnotesize\begin{verbatim}139                                                  {
+140         if (!n) { Next = new LongList(s,Next); s = ins; }
+141         else
+142                 if (Next) Next->insert(n-1,ins);
+143                 else 
+144                         if (n>1) {
+145                                 Next = new LongList();
+146                                 Next->insert(n-1,ins);
+147                         } else Next = new LongList(ins);
+148 }
+\end{verbatim}\normalsize 
+\index{LongList@{Long\-List}!iselement@{iselement}}
+\index{iselement@{iselement}!LongList@{Long\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}long Long\-List::iselement (long {\em el}, unsigned long {\em n} = 0)}\label{classLongList_a10}
+
+
+
+
+Definition at line 150 of file utilities.cc.
+
+References Next, and s.
+
+Referenced by contains().
+
+
+
+\footnotesize\begin{verbatim}150                                                      {
+151         if (el == s) return n;
+152         else {
+153                 if (Next) return Next->iselement(el,n+1);
+154                 else return -1;
+155         }
+156 }
+\end{verbatim}\normalsize 
+\index{LongList@{Long\-List}!length@{length}}
+\index{length@{length}!LongList@{Long\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}unsigned long Long\-List::length ()\hspace{0.3cm}{\tt  [inline]}}\label{classLongList_a9}
+
+
+
+
+Definition at line 147 of file dil2al.hh.
+
+Referenced by split().
+
+
+
+\footnotesize\begin{verbatim}147 { if (Next) return 1+Next->length(); else return 1; }
+\end{verbatim}\normalsize 
+\index{LongList@{Long\-List}!operator[]@{operator[]}}
+\index{operator[]@{operator[]}!LongList@{Long\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}long \& Long\-List::operator[$\,$] (unsigned long {\em n})}\label{classLongList_a5}
+
+
+
+
+Definition at line 123 of file utilities.cc.
+
+References Long\-List(), Next, and s.
+
+
+
+\footnotesize\begin{verbatim}123                                            {
+124         if (!n) return s;
+125         if (!Next) Next = new LongList();
+126         return (*Next)[n-1];
+127 }
+\end{verbatim}\normalsize 
+\index{LongList@{Long\-List}!split@{split}}
+\index{split@{split}!LongList@{Long\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}unsigned long Long\-List::split (unsigned long {\em n}, {\bf String} {\em cs}, const char {\em sep} = '$\backslash$n')}\label{classLongList_a12}
+
+
+
+
+Definition at line 162 of file utilities.cc.
+
+References String::after(), String::before(), String::chars(), String::index(), insert(), length(), and String::length().
+
+Referenced by Long\-List().
+
+
+
+\footnotesize\begin{verbatim}162                                                                                {
+163 // insert list elements from a string with a specified separator
+164         if (cs.length()<=0) return length();
+165         String el;
+166         if (cs.index(sep)>=0) el = cs.before(sep); else el = cs;
+167         // *** this is not a speed optimized implementation
+168         long elval = atol(el.chars());
+169         insert(n,elval);
+170         split(n+1,cs.after(sep),sep);
+171         return length();
+172 }
+\end{verbatim}\normalsize 
+
+
+\subsection{Member Data Documentation}
+\index{LongList@{Long\-List}!Next@{Next}}
+\index{Next@{Next}!LongList@{Long\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}Long\-List$\ast$ Long\-List::Next\hspace{0.3cm}{\tt  [protected]}}\label{classLongList_n0}
+
+
+
+
+Definition at line 132 of file dil2al.hh.
+
+Referenced by append(), concatenate(), insert(), iselement(), Long\-List(), and operator[$\,$]().\index{LongList@{Long\-List}!s@{s}}
+\index{s@{s}!LongList@{Long\-List}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}long Long\-List::s\hspace{0.3cm}{\tt  [protected]}}\label{classLongList_n1}
+
+
+
+
+Definition at line 133 of file dil2al.hh.
+
+Referenced by concatenate(), insert(), iselement(), Long\-List(), and operator[$\,$]().
+
+The documentation for this class was generated from the following files:\begin{CompactItemize}
+\item 
+{\bf dil2al.hh}\item 
+{\bf utilities.cc}\end{CompactItemize}

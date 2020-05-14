@@ -1,0 +1,27 @@
+Parsing paper outline section INTRODUCTION
+dil2al:  not found in source file in extract_paper_plan_to_paper(), continuing as is
+dil2al: Missing Novelty item source reference for item with text ``JLI weights max 0.55'' in extract_paper_plan_to_paper(), continuing as is
+dil2al:  not found in source file in extract_paper_plan_to_paper(), continuing as is
+dil2al: Missing Novelty item source reference for item with text ``variations in $\Vth$, A_AMPA, A_NMDA, etc. in cells participating in the representation of a memory pattern'' in extract_paper_plan_to_paper(), continuing as is
+dil2al: Avoiding repetition of /home/randalk/doc/html/techrep/thesis-log.html#JLI-reverse-Hebb in extract_recursively(), continuing as is
+dil2al: CaM-KII-phosphorylation not found in source file in extract_paper_plan_to_paper(), continuing as is
+Parsing paper outline section MATERIALS AND METHODS
+dil2al: Avoiding repetition of /home/randalk/doc/html/techrep/thesis-log.html#NOVELTY-20000306073904-1 in extract_recursively(), continuing as is
+dil2al:  not found in source file in extract_paper_plan_to_paper(), continuing as is
+dil2al: Unable to open /home/randalk/src/nnmodels/synapse\_AMPA\_NMDA.hh in read_file_into_String()
+dil2al: Unable to load source document /home/randalk/src/nnmodels/synapse\_AMPA\_NMDA.hh in extract_recursively(), continuing as is
+dil2al:  not found in source file in extract_paper_plan_to_paper(), continuing as is
+dil2al: Avoiding repetition of /home/randalk/doc/html/techrep/thesis-log.html#JLI-reverse-Hebb in extract_recursively(), continuing as is
+dil2al: Missing Novelty item source reference for item with text ``overlap size M in cues rather than JLI pattern size'' in extract_paper_plan_to_paper(), continuing as is
+Parsing paper outline section RESULTS
+dil2al:  not found in source file in extract_paper_plan_to_paper(), continuing as is
+dil2al: Unable to open /home/randalk/src/nnmodels/synapse\_AMPA\_NMDA.hh in read_file_into_String()
+dil2al: Unable to load source document /home/randalk/src/nnmodels/synapse\_AMPA\_NMDA.hh in extract_recursively(), continuing as is
+dil2al:  not found in source file in extract_paper_plan_to_paper(), continuing as is
+dil2al:  not found in source file in extract_paper_plan_to_paper(), continuing as is
+Parsing paper outline section DISCUSSION
+dil2al:  not found in source file in extract_paper_plan_to_paper(), continuing as is
+dil2al: Avoiding repetition of /home/randalk/doc/html/lists/task-log.20000204.html#200002162153.2 in extract_recursively(), continuing as is
+dil2al: Avoiding repetition of /home/randalk/doc/html/lists/task-log.20000204.html#200002162153.2 in extract_recursively(), continuing as is
+Add automatic call to add Context items to plan-plans.html file here...
+Old Paper Draft file moved to /home/randalk/doc/tex/jliltm/jliltm.tex.20000324.bak

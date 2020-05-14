@@ -1,0 +1,692 @@
+\section{note.cc File Reference}
+\label{note_8cc}\index{note.cc@{note.cc}}
+{\tt \#include \char`\"{}dil2al.hh\char`\"{}}\par
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+void {\bf process\_\-HTML} ({\bf String} \&notestr)
+\item 
+int {\bf pre\_\-process\_\-note} ({\bf String} notefile, {\bf String} notedst, {\bf String} typestr, {\bf String} \&notestr, {\bf String} \&notedststr, bool \&isnew)
+\item 
+int {\bf post\_\-process\_\-note} ({\bf String} notedst, {\bf String} \&notestr, {\bf String} \&notedststr, int insertindex, bool isnew)
+\item 
+int {\bf process\_\-note\_\-TL} ({\bf String} notefile, {\bf String} notedst)
+\item 
+int {\bf process\_\-note\_\-HTML} ({\bf String} notefile, {\bf String} notedst)
+\item 
+int {\bf process\_\-note\_\-Te\-X} ({\bf String} notefile, {\bf String} notedst)
+\item 
+int {\bf process\_\-note\_\-CC} ({\bf String} notefile, {\bf String} notedst)
+\item 
+int {\bf process\_\-note\_\-generic} ({\bf String} notefile, {\bf String} notedst)
+\item 
+bool {\bf process\_\-note} ({\bf String} notefile, {\bf String} notedst)
+\item 
+bool {\bf make\_\-note} ()
+\end{CompactItemize}
+
+
+\subsection{Function Documentation}
+\index{note.cc@{note.cc}!make_note@{make\_\-note}}
+\index{make_note@{make\_\-note}!note.cc@{note.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool make\_\-note ()}\label{note_8cc_a9}
+
+
+
+
+Definition at line 384 of file note.cc.
+
+References String::after(), ANSI\_\-BOLD\_\-OFF, ANSI\_\-BOLD\_\-ON, ANSI\_\-UNDERLINE\_\-OFF, ANSI\_\-UNDERLINE\_\-ON, String::before(), copy\_\-until\_\-line(), String::del(), EOUT, find\_\-line(), get\_\-TL\_\-head(), String::gsub(), String::matches(), prepare\_\-temporary\_\-file(), String::prepend(), process\_\-note(), relurl(), res, time\_\-stamp(), and VOUT.
+
+Referenced by chunk\_\-controller(), and dil2al\_\-commands().
+
+
+
+\footnotesize\begin{verbatim}384                  {
+385         const int LLEN = 65525; // was 10240
+386         char lbuf[LLEN];
+387         int q,res;
+388         // open an editor for a plain text entry
+389         String noteinit;
+390         if (suggestnameref) {
+391                 noteinit = "<A NAME=\"TL-ref-" + curtime + "\" HREF=\"@TLURL@#@TLNEXTENTRY@\">_</A>";
+392                 if (verbose) VOUT << "Note: If destination is Task Log and suggested reference is not altered,\nthen " << noteinit << " will be cleaned up automatically.\n";
+393         }
+394         if (!prepare_temporary_file(notetmpfile,noteinit)) return false;
+395         if (system(editor+" "+notetmpfile)<0) return false;
+396         // refresh curtime to avoid misrepresentations due to constantly open note editing window
+397         curtime = time_stamp("%Y%m%d%H%M");
+398         // request destination of note
+399         if (useansi) cout << ANSI_UNDERLINE_ON; // underline on
+400         cout << "Destination of note (default = Task Log)\n";
+401         if (useansi) cout << ANSI_UNDERLINE_OFF; // underline off
+402         // get quick-chooser options from configuration file
+403         for (int i=0; i<quicknotedstnum; i++) cout << i << ' ' << quicknotedsttitle[i] << quicknotedescr[i] << '\n';
+404         if (useansi) cout << ANSI_BOLD_ON; // bold on
+405         cout << "or enter file path: ";
+406         if (useansi) cout << ANSI_BOLD_OFF; // bold off
+407         cin.getline(lbuf,LLEN);
+408         String notedst = lbuf;
+409         if (notedst == "") {
+410                 notedst = tasklog;
+411                 cout << "notedst = " << notedst << '\n';
+412                 if (suggestnameref) {
+413                         // clean up unnecessary (self-)reference NAME tag
+414                         ifstream ntf(notetmpfile);
+415                         if (!ntf) EOUT << "dil2al: Unable to open " << notetmpfile << " for removal of spurious NAME tag in make_note(), continuing as is\n";
+416                         else {
+417                                 ofstream ntfnew(notetmpfile+".tlref_cleaned");
+418                                 if (!ntfnew) {
+419                                         EOUT << "dil2al: Unable to create " << notetmpfile << ".tlref_cleaned in make_note(), continuing as is\n";
+420                                         ntf.close();
+421                                 } else {
+422                                         if ((res=copy_until_line(&ntf,&ntfnew,noteinit,lbuf,LLEN))==1) {
+423                                                 String noteline(lbuf); noteline.del(noteinit);
+424                                                 ntfnew << noteline << '\n';
+425                                                 ntfnew << ntf.rdbuf();
+426                                                 ntf.close(); ntfnew.close();
+427                                                 if (rename(notetmpfile+".tlref_cleaned",notetmpfile)<0) EOUT << "dil2al: Unable to rename " << notetmpfile << ".tlref_cleaned to " << notetmpfile << "\nin make_note(), continuing as is\n";
+428                                         } else {
+429                                                 ntf.close(); ntfnew.close();
+430                                                 if (res<0) EOUT << "dil2al: Unable to remove unnecessary NAME tag in make_note(), continuing as is\n";
+431                                                 if (unlink(notetmpfile+".tlref_cleaned")<0) EOUT << "dil2al: Unable to remove " << notetmpfile << ".tlref_cleaned in make_note(), continuing as is\n";
+432                                         }
+433                                 }
+434                         }
+435                 }
+436         } else {
+437                 // default destination document title is file name
+438                 String notedsttitle = notedst; notedsttitle.gsub(BigRegex(".*/"),"");
+439                 // obtain quick-chooser destinations
+440                 if (notedst.matches(BRXint)) {
+441                         q = atoi((const char *) notedst);
+442                         if ((q>=0) && (q<quicknotedstnum)) {
+443                                 notedst = quicknotedst[q];
+444                                 notedsttitle = quicknotedsttitle[q];
+445                         } else {
+446                                 EOUT << "dil2al: Selection " << q << " is not a predefined note destination\n";
+447                                 return false;
+448                         }
+449                 }
+450                 // if not task log, request task log reference line, suggest reference to note
+451                 if (notedst[0]!='/') notedst.prepend(homedir);
+452                 if (verbose) VOUT << "Note destination to process: " << notedst << '\n';
+453                 String tlentryinit = "<A HREF=\""+relurl(get_TL_head(),notedst);
+454                 ifstream ntf(notetmpfile);
+455                 if (!ntf) { EOUT << "dil2al: Unable to open " << notetmpfile << " in make_note()\n"; return false; }
+456                 // this NAME could be the suggested one, or one modified/set manually
+457                 if (find_line(&ntf,"[<][Aa][    ]+[^>]*[Nn][As][Mm][Ee]=[       ]*\"[^>]+[>]",lbuf,LLEN)) {
+458                         String tlref(lbuf); tlref = tlref.after(BigRegex("[<][Aa][      ]+[^>]*[Nn][As][Mm][Ee]=[       ]*\""));
+459                         tlentryinit = tlentryinit + '#' +tlref.before("\"");
+460                 }
+461                 ntf.close();
+462                 tlentryinit +="\">("+notedsttitle+")</A>";
+463                 if (!prepare_temporary_file(tlentrytmpfile,tlentryinit)) return false;
+464                 if (verbose) VOUT << "Task Log entry referring to note (if any)...\n";
+465                 if (system(editor+" "+tlentrytmpfile)<0) return false;
+466                 newTLID = ""; // clear to test if properly generated
+467                 if (!process_note(tlentrytmpfile,tasklog)) return false;
+468                 if (newTLID=="") {
+469                         if (verbose) VOUT << "No new Task Log entry ID, perhaps entry was empty (removing @TLURL@ and\n@TLNEXTENTRY@ references)\n";
+470                         // remove HREF="@TLURL@#@TLNEXTENTRY@" references from notedst
+471                         ntf.open(notetmpfile);
+472                         if (!ntf) EOUT << "dil2al: Unable to remove spurious @TLURL@ and @TLNEXTENTRY@ references in\nmake_note(), continuing as is\n";
+473                         else {
+474                                 ofstream ntfnew(notetmpfile+".tlurl_cleaned");
+475                                 if (!ntfnew) EOUT << "dil2al: Unable to creaete " << notetmpfile << ".tlurl_cleaned in make_note(),\ncontinuing as is\n";
+476                                 else {
+477                                         while (ntf) {
+478                                                 if ((res=copy_until_line(&ntf,&ntfnew,"@TLURL@|@TLNEXTENTRY@",lbuf,LLEN))==1) {
+479                                                         tlentryinit = lbuf;
+480                                                         tlentryinit.gsub(BigRegex("[<][Aa][     ]+[Hh][Rr][Ee][Ff][     ]*=[    ]*\"[^\"]*\\(@TLURL@\\|@TLNEXTENTRY@\\)[^\"]*\"[        ]*[>][^<]*[<]/[Aa][>]"),"");
+481                                                         tlentryinit.gsub(BigRegex("[    ]+[Hh][Rr][Ee][Ff][     ]*=[    ]*\"[^\"]*\\(@TLURL@\\|@TLNEXTENTRY@\\)[^\"]*\"[        ]*"),"");
+482                                                         ntfnew << tlentryinit << '\n';
+483                                                 } else break;
+484                                         }
+485                                         ntfnew.close();
+486                                         if (res<0) EOUT << "dil2al: Unable to remove spurious @TLURL@ and @TLNEXTENTRY@ references in\nmake_note(), continuing as is\n";
+487                                         else if (rename(notetmpfile+".tlurl_cleaned",notetmpfile)<0) EOUT << "dil2al: Unable to rename " << notetmpfile << ".tlurl_cleaned to " << notetmpfile << "\nin make_note(), continuing as is\n";
+488                                 }
+489                                 ntf.close();
+490                         }
+491                 } else {
+492                         // parse notedst to fill in @TLURL@ and @TLNEXTENTRY@
+493                         ntf.open(notetmpfile);
+494                         if (!ntf) EOUT << "dil2al: Unable to fill in @TLURL@ and @TLNEXTENTRY@ references in\nmake_note(), continuing as is\n";
+495                         else {
+496                                 ofstream ntfnew(notetmpfile+".tlurl");
+497                                 if (!ntfnew) EOUT << "dil2al: Unable to create " << notetmpfile << ".tlurl in make_note(),\ncontinuing as is\n";
+498                                 else {
+499                                         String tlurl(relurl(notedst,get_TL_head()));
+500                                         while (ntf) {
+501                                                 if ((res=copy_until_line(&ntf,&ntfnew,"@TLURL@|@TLNEXTENTRY@",lbuf,LLEN))==1) {
+502                                                         tlentryinit = lbuf;
+503                                                         tlentryinit.gsub("@TLURL@",tlurl);
+504                                                         tlentryinit.gsub("@TLNEXTENTRY@",newTLID);
+505                                                         ntfnew << tlentryinit << '\n';
+506                                                 } else break;
+507                                         }
+508                                         ntfnew.close();
+509                                         if (res<0) EOUT << "dil2al: Unable to fill in @TLURL@ and @TLNEXTENTRY@ references in\nmake_note(), continuing as is\n";
+510                                         else if (rename(notetmpfile+".tlurl",notetmpfile)<0) EOUT << "dil2al: Unable to rename " << notetmpfile << ".tlurl to " << notetmpfile << "\nin make_note(), continuing as is\n";
+511                                 }
+512                                 ntf.close();
+513                         }
+514                 }
+515         }
+516         return process_note(notetmpfile,notedst);
+517 }
+\end{verbatim}\normalsize 
+\index{note.cc@{note.cc}!post_process_note@{post\_\-process\_\-note}}
+\index{post_process_note@{post\_\-process\_\-note}!note.cc@{note.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int post\_\-process\_\-note ({\bf String} {\em notedst}, {\bf String} \& {\em notestr}, {\bf String} \& {\em notedststr}, int {\em insertindex}, bool {\em isnew})}\label{note_8cc_a2}
+
+
+
+
+Definition at line 66 of file note.cc.
+
+References String::at(), String::length(), and write\_\-file\_\-from\_\-String().
+
+Referenced by process\_\-note\_\-CC(), process\_\-note\_\-generic(), process\_\-note\_\-HTML(), and process\_\-note\_\-Te\-X().
+
+
+
+\footnotesize\begin{verbatim}66                                                                                                           {
+67         // insert note into notedst
+68         if (insertindex>=0) {
+69                 String c = notedststr.at(insertindex,1);
+70                 notedststr.at(insertindex,1) = notestr+c;
+71         } else {
+72                 insertindex = notedststr.length();
+73                 notedststr += notestr;
+74         }
+75         // store and backup
+76         if (!write_file_from_String(notedst,notedststr,"Note destination",isnew)) return -1;
+77         return insertindex;
+78 }
+\end{verbatim}\normalsize 
+\index{note.cc@{note.cc}!pre_process_note@{pre\_\-process\_\-note}}
+\index{pre_process_note@{pre\_\-process\_\-note}!note.cc@{note.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int pre\_\-process\_\-note ({\bf String} {\em notefile}, {\bf String} {\em notedst}, {\bf String} {\em typestr}, {\bf String} \& {\em notestr}, {\bf String} \& {\em notedststr}, bool \& {\em isnew})}\label{note_8cc_a1}
+
+
+
+
+Definition at line 53 of file note.cc.
+
+References process\_\-HTML(), read\_\-file\_\-into\_\-String(), and VOUT.
+
+Referenced by process\_\-note\_\-CC(), process\_\-note\_\-generic(), process\_\-note\_\-HTML(), process\_\-note\_\-Te\-X(), and process\_\-note\_\-TL().
+
+
+
+\footnotesize\begin{verbatim}53                                                                                                                            {
+54         if (!read_file_into_String(notefile,notestr)) return -1;
+55         if (notestr=="") { // if note is empty, don't do anything, but return true
+56                 if (verbose) VOUT << "Note is empty, no change\n";
+57                 return 0;
+58         }
+59         if (verbose) VOUT << "Processing destination file as " << typestr << '\n';
+60         process_HTML(notestr);
+61         // read note destination into memory
+62         if (!read_file_into_String(isnew,notedst,notedststr)) return -1;
+63         return 1;
+64 }
+\end{verbatim}\normalsize 
+\index{note.cc@{note.cc}!process_HTML@{process\_\-HTML}}
+\index{process_HTML@{process\_\-HTML}!note.cc@{note.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void process\_\-HTML ({\bf String} \& {\em notestr})}\label{note_8cc_a0}
+
+
+
+
+Definition at line 6 of file note.cc.
+
+References String::after(), String::at(), String::before(), String::contains(), EOUT, String::gsub(), String::index(), and String::length().
+
+Referenced by pre\_\-process\_\-note(), and process\_\-note\_\-TL().
+
+
+
+\footnotesize\begin{verbatim}6                                     {
+7 // Process note shorthand codes to HTML and fill in @tags@
+8         // line breaks
+9         notestr.gsub("\n","<BR>\n");
+10         // paragraphs
+11         notestr.gsub(BigRegex("<BR>\n\\(<BR>\n\\)+"),"\n<P>\n");
+12         // lists with `-' or `*' item indicators
+13         notestr.gsub(BigRegex("^[       ]*-[    ]+"),"<LI>");
+14         int lstart, lend;
+15         while ((lstart=notestr.index(BigRegex("^[       ]*[*][  ]+")))>=0) {
+16                 notestr.at(BigRegex("^[         ]*[*][  ]+"),lstart)="<UL>\n<LI>";
+17                 while ((lend=notestr.index("\n",lstart))>=0) {
+18                         lstart = lend+1;
+19                         if (notestr.contains(BigRegex("\n\\([   ]+[^    ]+\\|[  ]*[*][  ]+\\)"),lend)) {
+20                                 notestr.at(BigRegex("\n[        ]*[*][  ]+"),lend) = "\n<LI>";
+21                         } else break;
+22                 }
+23                 if (lend<0) { lend = notestr.length(); notestr += "\n"; }
+24                 notestr.at("\n",lend) = "\n</UL>\n";
+25         }
+26         // note that HTML references are already correct
+27         // tag definitions
+28         // NOVELTY tags
+29         int novcount = 0;
+30         lstart = -1;
+31         while ((lstart=notestr.index("@NOV@",lstart+1))>=0) {
+32                 if ((lend=notestr.index("@/NOV@",lstart))>=0) {
+33                         String tmp1,tmp2;
+34                         novcount++;
+35                         tmp1 = notestr.at(lstart+5,lend-(lstart+4));
+36                         tmp2 = notestr.after(lend+6);
+37                         notestr = notestr.before(lstart) + "<A NAME=\"NOVELTY-"+((curtime+'-')+dec(novcount))+"\">[<B>N</B>]</A> "
+38                                         + tmp1 + "<!-- @NOVELTY-"+((curtime+'-')+dec(novcount))+"@ -->" + tmp2;
+39                 } else EOUT << "dil2al: @NOV@ without matching @/NOV@ in process_HTML(), continuing as is\n";
+40         }
+41 //*** add code here to replace @tags@ and tags defined in the configuration file
+42         // clean up
+43         notestr.gsub("<BR><BR>","<BR>");
+44         notestr.gsub("<BR><P>","<P>");
+45         notestr.gsub("<P><BR>","<P>");
+46         notestr.gsub("<BR>\n<P>","\n<P>");
+47         notestr.gsub("<P>\n<P>","<P>");
+48         notestr.gsub("<BR>\n<UL>","\n<UL>");
+49         notestr.gsub("<BR>\n<LI>","\n<LI>");
+50         notestr.gsub("<BR>\n</UL>","\n</UL>");
+51 }
+\end{verbatim}\normalsize 
+\index{note.cc@{note.cc}!process_note@{process\_\-note}}
+\index{process_note@{process\_\-note}!note.cc@{note.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool process\_\-note ({\bf String} {\em notefile}, {\bf String} {\em notedst})}\label{note_8cc_a8}
+
+
+
+
+Definition at line 330 of file note.cc.
+
+References EOUT, get\_\-TL\_\-head(), String::gsub(), String::matches(), process\_\-note\_\-CC(), process\_\-note\_\-generic(), process\_\-note\_\-HTML(), process\_\-note\_\-Te\-X(), process\_\-note\_\-TL(), res, and UNIE\_\-ASK.
+
+Referenced by make\_\-note().
+
+
+
+\footnotesize\begin{verbatim}330                                                    {
+331         const int LLEN = 10240;
+332         char lbuf[LLEN];
+333         // determine destination file type
+334         int filetype = 0; // generic type
+335         if (notedst==tasklog) {
+336                 filetype = 1; // Task Log type
+337                 if ((notedst = get_TL_head())=="") return false;
+338         } else if (notedst.matches(BigRegex(".*[.][Hh][Tt][Mm][Ll]?\\([---_.].*\\)?"))) filetype = 2; // HTML type
+339         else if (notedst.matches(BigRegex(".*[.][Tt][Ee][Xx]\\([---_.].*\\)?"))) filetype = 3; // TeX type
+340         else if (notedst.matches(BigRegex(".*[.]\\([Cc][Cc]|[Hh][Hh]\\)\\([---_.].*\\)?"))) filetype = 4; // C++ type
+341         else if (askprocesstype) {
+342                 filetype = -1;
+343                 while ((filetype<0) || (filetype>4)) {
+344                         cout << "Destination file type (0=generic,1=Task Log,2=HTML,3=TeX,4=C++): ";
+345                         cin.getline(lbuf,LLEN);
+346                         String ftstr = lbuf;
+347                         if (ftstr.matches(BRXint)) filetype = atoi((const char *) ftstr);
+348                 }
+349         }
+350         // process and insert note in destination file
+351         int res;
+352         switch (filetype) {
+353                 case 0: res=process_note_generic(notefile,notedst); break;
+354                 case 1: res=process_note_TL(notefile,notedst); break;
+355                 case 2: res=process_note_HTML(notefile,notedst); break;
+356                 case 3: res=process_note_TeX(notefile,notedst); break;
+357                 case 4: res=process_note_CC(notefile,notedst); break;
+358                 default: {
+359                                 EOUT << "dil2al: Unknown destination file type in process_note()\n";
+360                                 return false;
+361                         }
+362         }
+363         if (res<0) {
+364                 EOUT << "dil2al: Unable to process destination file in process_note()\n";
+365                 return false;
+366         }
+367         // update and open notedst in an editor
+368         bool updateineditor = updatenoteineditor;
+369         if (updateineditor==UNIE_ASK) {
+370                 cout << "\nUpdate and open " << notedst << " in editor? (Y/n) ";
+371                 cin.getline(lbuf,LLEN);
+372                 updateineditor = (!((lbuf[0]=='n') || (lbuf[0]=='N')));
+373         }
+374         if (updateineditor) {
+375                 String uniecmd = updatenoteineditorcmd;
+376                 uniecmd.gsub("@res@",dec(res));
+377                 if (filetype==1) notedst=tasklog; // revert to symbolic link in case new Task Log section was added
+378                 uniecmd.gsub("@notedst@",notedst);
+379                 if (system(uniecmd)<0) EOUT << "dil2al: Unable to update and open " << notedst << " in editor in process_note(), continuing\n";
+380         }
+381         return true;
+382 }
+\end{verbatim}\normalsize 
+\index{note.cc@{note.cc}!process_note_CC@{process\_\-note\_\-CC}}
+\index{process_note_CC@{process\_\-note\_\-CC}!note.cc@{note.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int process\_\-note\_\-CC ({\bf String} {\em notefile}, {\bf String} {\em notedst})}\label{note_8cc_a6}
+
+
+
+
+Definition at line 220 of file note.cc.
+
+References String::after(), String::at(), String::before(), String::gsub(), String::index(), String::length(), post\_\-process\_\-note(), pre\_\-process\_\-note(), res, and VOUT.
+
+Referenced by process\_\-note().
+
+
+
+\footnotesize\begin{verbatim}220                                                      {
+221         String notestr, notedststr; bool isnew; int res;
+222         if ((res = pre_process_note(notefile,notedst,"C++",notestr,notedststr,isnew))<=0) return res;
+223         // find a possible // <!-- @INSERT-AT:<tag>@ -->
+224         int insertindex = -1;
+225         String inserttag = notestr.at(BigRegex("[<]!--[         ]*@INSERT-AT:[^@]+@[    ]*--[>]"));
+226         if (inserttag!="") {
+227                 inserttag = inserttag.after("INSERT-AT:");
+228                 inserttag = inserttag.before("@",-1);
+229                 insertindex = notedststr.index(BigRegex("//[\n]*[<]!--[         ]*@"+inserttag+"@[      ]*--[>]"));
+230         }
+231         // find a possible // <!-- @INSERT-TL-NOTE@ -->
+232         if (insertindex<0) insertindex = notedststr.index(BigRegex("//[\n]*[<]!--[      ]*@INSERT-TL-NOTE@[     ]*--[>]"));
+233         if ((insertindex<0) && (verbose))  VOUT << "No specific insertion location in " << notedst << ", appending note to end\n";
+234         // convert to C++
+235         notestr.gsub(BigRegex("[<][Bb][Rr][     ]*[^>][>]\n?"),"\n"); // <BR>
+236         notestr.gsub(BigRegex("\n?[<][Pp][      ]*[^>]*[>]\n?"),"\n\n"); // <P>
+237         notestr.gsub(BigRegex("[<][Uu][Ll][     ]*[^>]*[>]"),""); // <UL>
+238         notestr.gsub(BigRegex("[<]/[Uu][Ll][    ]*[^>]*[>]"),""); // </UL>
+239         notestr.gsub(BigRegex("[<][Oo][Ll][     ]*[^>]*[>]"),""); // <OL>
+240         notestr.gsub(BigRegex("[<]/[Oo][Ll][    ]*[^>]*[>]"),""); // </OL>
+241         notestr.gsub(BigRegex("[<][Ll][Ii][     ]*[^>]*[>]"),"- "); // <LI>
+242         // <A HREF="http://the-reference-url/">the-reference-text</A>
+243         // <A NAME="the-reference-name-tag">the-reference-anchor</A>
+244         int i = 0, j = 0, k;
+245         while (i>=0) {
+246                 i = notestr.index(BigRegex("[<][Aa][    ]+[^>]*\\([Hh][Rr][Ee][Ff]\\|[Nn][Aa][Mm][Ee]\\)[       ]*=[    ]*[^>]*[>].*[<]/[Aa][   ]*[^>]*[>]"),j);
+247                 if (i>=0) {
+248                         j = notestr.index(BigRegex("//[^\n]*"),i-notestr.length()); // check if already // commented
+249                         if (j<0) {
+250                                 j = notestr.index("/*",i-notestr.length());
+251                                 if (j>=0) {
+252                                         k = notestr.index("*/",i-notestr.length());
+253                                         if (k>j) j = -1;
+254                                 }
+255                         }
+256                         if (j<0) {
+257                                 j = notestr.index(BigRegex("[<]/[Aa][   ]*[^>]*[>]"),i);
+258                                 j = notestr.index(">",j);
+259                                 String tmpstr = "/* "+notestr.at(i,(j-i)+1)+" */"+notestr.after(j);
+260                                 notestr = notestr.before(i)+tmpstr;
+261                                 //notestr.at(j,1) = "> */";
+262                                 //notestr.at(i,1) = "/* <";
+263                         }
+264                 }
+265         }
+266         // other <...> tags
+267         i = 0; j = 0;
+268         while (i>=0) {
+269                 i = notestr.index(BigRegex("[<][^>]*[>]"),j);
+270                 if (i>=0) {
+271                         j = notestr.index(BigRegex("//[^\n]*"),i-notestr.length()); // check if already // commented
+272                         if (j<0) {
+273                                 j = notestr.index("/*",i-notestr.length());
+274                                 if (j>=0) {
+275                                         k = notestr.index("*/",i-notestr.length());
+276                                         if (k>j) j = -1;
+277                                 }
+278                         }
+279                         if (j<0) { // convert tag to comment
+280                                 j = notestr.index(">",i);
+281                                 String tmpstr = "/* "+notestr.at(i,(j-i)+1)+" */"+notestr.after(j);
+282                                 notestr = notestr.before(i)+tmpstr;
+283                                 //notestr.at(j,1) = "> */";
+284                                 //notestr.at(i,1) = "/* <";
+285                         }
+286                 }
+287         }
+288         notestr.gsub("&lt;","<"); // &lt;
+289         notestr.gsub("&gt;",">"); // &gt;
+290         notestr.gsub("&amp;","&"); // &amp;
+291         notestr.gsub("&nbsp;"," "); // &nbsp;
+292         // clean up
+293         notestr.gsub(BigRegex("[        ]+\n"),"\n");
+294         // insert note into notedst
+295         return post_process_note(notedst,notestr,notedststr,insertindex,isnew);
+296 }
+\end{verbatim}\normalsize 
+\index{note.cc@{note.cc}!process_note_generic@{process\_\-note\_\-generic}}
+\index{process_note_generic@{process\_\-note\_\-generic}!note.cc@{note.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int process\_\-note\_\-generic ({\bf String} {\em notefile}, {\bf String} {\em notedst})}\label{note_8cc_a7}
+
+
+
+
+Definition at line 298 of file note.cc.
+
+References String::after(), String::at(), String::before(), String::gsub(), String::index(), post\_\-process\_\-note(), pre\_\-process\_\-note(), res, and VOUT.
+
+Referenced by process\_\-note().
+
+
+
+\footnotesize\begin{verbatim}298                                                           {
+299         String notestr, notedststr; bool isnew; int res;
+300         if ((res = pre_process_note(notefile,notedst,"generic text",notestr,notedststr,isnew))<=0) return res;
+301         // find a possible <!-- @INSERT-AT:<tag>@ -->
+302         int insertindex = -1;
+303         String inserttag = notestr.at(BigRegex("[<]!--[         ]*@INSERT-AT:[^@]+@[    ]*--[>]"));
+304         if (inserttag!="") {
+305                 inserttag = inserttag.after("INSERT-AT:");
+306                 inserttag = inserttag.before("@",-1);
+307                 insertindex = notedststr.index(BigRegex("[<]!--[        ]*@"+inserttag+"@[      ]*--[>]"));
+308         }
+309         // find a possible <!-- @INSERT-TL-NOTE@ -->
+310         if (insertindex<0) insertindex = notedststr.index(BigRegex("[<]!--[     ]*@INSERT-TL-NOTE@[     ]*--[>]"));
+311         if ((insertindex<0) && (verbose))  VOUT << "No specific insertion location in " << notedst << ", appending note to end\n";
+312         // convert to generic text
+313         notestr.gsub(BigRegex("[<][Bb][Rr][     ]*[^>][>]\n?"),"\n"); // <BR>
+314         notestr.gsub(BigRegex("\n?[<][Pp][      ]*[^>]*[>]\n?"),"\n\n"); // <P>
+315         notestr.gsub(BigRegex("[<][Uu][Ll][     ]*[^>]*[>]"),""); // <UL>
+316         notestr.gsub(BigRegex("[<]/[Uu][Ll][    ]*[^>]*[>]"),""); // </UL>
+317         notestr.gsub(BigRegex("[<][Oo][Ll][     ]*[^>]*[>]"),""); // <OL>
+318         notestr.gsub(BigRegex("[<]/[Oo][Ll][    ]*[^>]*[>]"),""); // </OL>
+319         notestr.gsub(BigRegex("[<][Ll][Ii][     ]*[^>]*[>]"),"- "); // <LI>
+320         notestr.gsub("&lt;","<"); // &lt;
+321         notestr.gsub("&gt;",">"); // &gt;
+322         notestr.gsub("&amp;","&"); // &amp;
+323         notestr.gsub("&nbsp;"," "); // &nbsp;
+324         // clean up
+325         notestr.gsub(BigRegex("[        ]+\n"),"\n");
+326         // insert note into notedst
+327         return post_process_note(notedst,notestr,notedststr,insertindex,isnew);
+328 }
+\end{verbatim}\normalsize 
+\index{note.cc@{note.cc}!process_note_HTML@{process\_\-note\_\-HTML}}
+\index{process_note_HTML@{process\_\-note\_\-HTML}!note.cc@{note.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int process\_\-note\_\-HTML ({\bf String} {\em notefile}, {\bf String} {\em notedst})}\label{note_8cc_a4}
+
+
+
+
+Definition at line 108 of file note.cc.
+
+References String::after(), String::at(), String::before(), EOUT, String::index(), post\_\-process\_\-note(), pre\_\-process\_\-note(), and res.
+
+Referenced by process\_\-note().
+
+
+
+\footnotesize\begin{verbatim}108                                                        {
+109         String notestr, notedststr; bool isnew; int res;
+110         if ((res = pre_process_note(notefile,notedst,"HTML",notestr,notedststr,isnew))<=0) return res;
+111         // find a possible <!-- @INSERT-AT:<tag>@ -->
+112         int insertindex = -1;
+113         String inserttag = notestr.at(BigRegex("[<]!--[         ]*@INSERT-AT:[^@]+@[    ]*--[>]"));
+114         if (inserttag!="") {
+115                 inserttag = inserttag.after("INSERT-AT:");
+116                 inserttag = inserttag.before("@",-1);
+117                 insertindex = notedststr.index(BigRegex("[<]!--[        ]*@"+inserttag+"@[      ]*--[>]"));
+118         }
+119         // find a possible <!-- @INSERT-TL-NOTE@ -->
+120         if (insertindex<0) insertindex = notedststr.index(BigRegex("[<]!--[     ]*@INSERT-TL-NOTE@[     ]*--[>]"));
+121         // find </BODY>
+122         if (insertindex<0) insertindex = notedststr.index("</BODY>");
+123         if (insertindex<0) EOUT << "dil2al: Note destination " << notedst << " missing </BODY> tag, continuing\n";
+124         // insert note into notedst
+125         return post_process_note(notedst,notestr,notedststr,insertindex,isnew);
+126 }
+\end{verbatim}\normalsize 
+\index{note.cc@{note.cc}!process_note_TeX@{process\_\-note\_\-TeX}}
+\index{process_note_TeX@{process\_\-note\_\-TeX}!note.cc@{note.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int process\_\-note\_\-Te\-X ({\bf String} {\em notefile}, {\bf String} {\em notedst})}\label{note_8cc_a5}
+
+
+
+
+Definition at line 128 of file note.cc.
+
+References String::after(), String::at(), String::before(), EOUT, String::from(), String::gsub(), String::index(), post\_\-process\_\-note(), pre\_\-process\_\-note(), and res.
+
+Referenced by process\_\-note().
+
+
+
+\footnotesize\begin{verbatim}128                                                       {
+129         String notestr, notedststr; bool isnew; int res;
+130         if ((res = pre_process_note(notefile,notedst,"TeX",notestr,notedststr,isnew))<=0) return res;
+131         // find a possible % <!-- @INSERT-AT:<tag>@ -->
+132         int insertindex = -1;
+133         String inserttag = notestr.at(BigRegex("[<]!--[         ]*@INSERT-AT:[^@]+@[    ]*--[>]"));
+134         if (inserttag!="") {
+135                 inserttag = inserttag.after("INSERT-AT:");
+136                 inserttag = inserttag.before("@",-1);
+137                 insertindex = notedststr.index(BigRegex("%[\n]*[<]!--[  ]*@"+inserttag+"@[      ]*--[>]"));
+138         }
+139         // find a possible % <!-- @INSERT-TL-NOTE@ -->
+140         if (insertindex<0) insertindex = notedststr.index(BigRegex("%[\n]*[<]!--[       ]*@INSERT-TL-NOTE@[     ]*--[>]"));
+141         // find \end{document}
+142         if (insertindex<0) insertindex = notedststr.index("\\end{document}");
+143         // find \endinput
+144         if (insertindex<0) insertindex = notedststr.index("\\endinput");
+145         if (insertindex<0) EOUT << "dil2al: Note destination " << notedst << " missing \\end{document} and \\endinput tags, continuing\n";
+146         // convert to TeX
+147         notestr.gsub(BigRegex("[<][Bb][Rr]\\([  ]+[^>][>]\\|[>]\\)"),"\\\\"); // <BR>
+148         notestr.gsub(BigRegex("[<][Pp]\\([      ]+[^>]*[>]\\|[>]\\)"),"\n\n"); // <P>
+149         notestr.gsub(BigRegex("[<][Uu][Ll]\\([  ]+[^>]*[>]\\|[>]\\)"),"\\begin{itemize}"); // <UL>
+150         notestr.gsub(BigRegex("[<]/[Uu][Ll]\\([         ]+[^>]*[>]\\|[>]\\)"),"\\end{itemize}"); // </UL>
+151         notestr.gsub(BigRegex("[<][Oo][Ll]\\([  ]+[^>]*[>]\\|[>]\\)"),"\\begin{enumerate}"); // <OL>
+152         notestr.gsub(BigRegex("[<]/[Oo][Ll]\\([         ]+[^>]*[>]\\|[>]\\)"),"\\end{enumerate}"); // </OL>
+153         notestr.gsub(BigRegex("[<][Ll][Ii]\\([  ]+[^>]*[>]\\|[>]\\)"),"\\item "); // <LI>
+154         notestr.gsub(BigRegex("[<][Hh]1\\([     ]+[^>]*[>]\\|[>]\\)"),"\\section{"); // <H1>
+155         notestr.gsub(BigRegex("[<][Hh]2\\([     ]+[^>]*[>]\\|[>]\\)"),"\\subsection{"); // <H2>
+156         notestr.gsub(BigRegex("[<][Hh]3\\([     ]+[^>]*[>]\\|[>]\\)"),"\\subsubsection{"); // <H3>
+157         notestr.gsub(BigRegex("[<][Hh]4\\([     ]+[^>]*[>]\\|[>]\\)"),"\\paragraph{"); // <H3>
+158         notestr.gsub(BigRegex("[<]/[Hh][1-4]\\([        ]+[^>]*[>]\\|[>]\\)"),"}"); // </H1>,</H2>,</H3>,</H4>
+159         notestr.gsub(BigRegex("[<][Hh][Rr]\\([  ]+[^>]*[>]\\|[>]\\)"),"\\hline "); // <HR>
+160         notestr.gsub(BigRegex("[<]!--"),"% <!--"); // <!-- -->
+161         notestr.gsub(BigRegex("[<][Tt][Aa][Bb][Ll][Ee][         ]*[^>]*[>]"),"\\begin{tabular}{???}"); // <TABLE>
+162         notestr.gsub(BigRegex("[<]/[Tt][Aa][Bb][Ll][Ee][        ]*[^>]*[>]"),"\\end{tabular}"); // </TABLE>
+163         notestr.gsub(BigRegex("[<][Tt][Rr][     ]*[^>]*[>]"),"\\\\\n"); // <TR>
+164         notestr.gsub(BigRegex("[<]/[Tt][Rr][    ]*[^>]*[>]"),""); // <TR>
+165         notestr.gsub(BigRegex("[<][Tt][Dd][     ]*[^>]*[>]")," & "); // <TD>
+166         notestr.gsub(BigRegex("[<]/[Tt][Dd][    ]*[^>]*[>]"),""); // <TD>
+167         notestr.gsub(BigRegex("[<][Tt][Hh][     ]*[^>]*[>]")," & {\\bf "); // <TH>
+168         notestr.gsub(BigRegex("[<]/[Tt][Hh][    ]*[^>]*[>]"),"}"); // <TH>
+169         notestr.gsub(BigRegex("[<][Bb]\\([      ]+[^>]*[>]\\|[>]\\)"),"{\\bf "); // <B>
+170         notestr.gsub(BigRegex("[<][Ii]\\([      ]+[^>]*[>]\\|[>]\\)"),"{\\em "); // <I>
+171         notestr.gsub(BigRegex("[<][Uu]\\([      ]+[^>]*[>]\\|[>]\\)"),"\\underline{"); // <U>
+172         notestr.gsub(BigRegex("[<]/[BbIiUu]\\([         ]+[^>]*[>]\\|[>]\\)"),"}"); // </B>,</I>,</U>
+173         notestr.gsub(BigRegex("[<][Ee][Mm]\\([  ]+[^>]*[>]\\|[>]\\)"),"{\\em "); // <EM>
+174         notestr.gsub(BigRegex("[<]/[Ee][Mm]\\([         ]+[^>]*[>]\\|[>]\\)"),"}"); // </EM>
+175         notestr.gsub(BigRegex("[<][Ss][Tt][Rr][Oo][Nn][Gg][     ]*[^>]*[>]"),"{\\bf "); // <STRONG>
+176         notestr.gsub(BigRegex("[<]/[Ss][Tt][Rr][Oo][Nn][Gg][    ]*[^>]*[>]"),"}"); // </STRONG>
+177         // <A HREF="http://the-reference-url/">the-reference-text</A>
+178         // <A NAME="the-reference-name-tag">the-reference-anchor</A>
+179         int i = 0, j = 0, k;
+180         while (i>=0) {
+181                 i = notestr.index(BigRegex("[<][Aa][    ]+[^>]*\\([Hh][Rr][Ee][Ff]\\|[Nn][Aa][Mm][Ee]\\)[       ]*=[    ]*[^>]*[>].*[<]/[Aa][   ]*[^>]*[>]"),j);
+182                 if (i>=0) {
+183                         k = notestr.index(">",i) + 1;
+184                         j = notestr.index(BigRegex("[<]/[Aa][   ]*[^>]*[>]"),i);
+185                         if (k<j) {
+186                                 String tmpstr = "</A><!--\n"+notestr.at(k,j-k)+'\n'+notestr.after(BigRegex("[<]/[Aa][   ]*[^>]*[>]"),j);
+187                                 notestr = notestr.before(BigRegex("[<]/[Aa][    ]*[^>]*[>]"),j);
+188                                 notestr += tmpstr;
+189                                 //notestr.at(BigRegex("[<]/[Aa][        ]*[^>]*[>]"),j)="</A><!--\n"+notestr.at(k,j-k)+'\n';
+190                         }
+191                         String tmpstr = "% -->"+notestr.from(i);
+192                         notestr = notestr.before(i);
+193                         notestr += tmpstr;
+194                         //notestr.at(i,1)="% --><";
+195                 }
+196         }
+197         // other <...> tags
+198         i = 0; j = 0;
+199         while (i>=0) {
+200                 i = notestr.index(BigRegex("[<][^>]*[>]"),j);
+201                 if (i>=0) {
+202                         j = notestr.index(">",i);
+203                         String tmpstr = "% "+notestr.at(i,(j-i)+1)+"\n"+notestr.after(j);
+204                         notestr = notestr.before(i)+tmpstr;
+205                         //notestr.at(j,1) = ">\n";
+206                         //notestr.at(i,1) = "% <";
+207                 }
+208         }
+209         notestr.gsub("&lt;","<"); // &lt;
+210         notestr.gsub("&gt;",">"); // &gt;
+211         notestr.gsub("&amp;","\\&"); // &amp;
+212         notestr.gsub("&nbsp;","\\relax"); // &nbsp;
+213         // clean up
+214         notestr.gsub("\n\n","\n");
+215         notestr.gsub(BigRegex("[        ]+\n"),"\n");
+216         // insert note into notedst
+217         return post_process_note(notedst,notestr,notedststr,insertindex,isnew);
+218 }
+\end{verbatim}\normalsize 
+\index{note.cc@{note.cc}!process_note_TL@{process\_\-note\_\-TL}}
+\index{process_note_TL@{process\_\-note\_\-TL}!note.cc@{note.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int process\_\-note\_\-TL ({\bf String} {\em notefile}, {\bf String} {\em notedst})}\label{note_8cc_a3}
+
+
+
+
+Definition at line 80 of file note.cc.
+
+References add\_\-TL\_\-chunk\_\-or\_\-entry(), decide\_\-add\_\-TL\_\-chunk(), EOUT, String::index(), String::length(), pre\_\-process\_\-note(), process\_\-HTML(), and res.
+
+Referenced by process\_\-note().
+
+
+
+\footnotesize\begin{verbatim}80                                                      {
+81 // A task log entry will be added to the current TL chunk, or to the TL chunk
+82 // immediately preceding a @INSERT-TL-NOTE@ tag, or optionally to a new TL chunk,
+83 // possibly in a new TL section.
+84         String notestr, tl; bool isnew; int res;
+85         if ((res = pre_process_note(notefile,notedst,"Task Log",notestr,tl,isnew))<=0) return res;
+86         const int LLEN = 10240;
+87         char lbuf[LLEN];
+88         // search for <!-- @INSERT-TL-NOTE@ --> in TL
+89         int tlinsertloc; bool comparetimes = true;
+90         if ((tlinsertloc = tl.index("<!-- @INSERT-TL-NOTE@ -->"))>=0) {
+91                 tlinsertloc -= tl.length();
+92                 comparetimes = false;
+93         }
+94         // determine whether to add a new Task Log chunk
+95         String chunkid;
+96         if ((chunkid=decide_add_TL_chunk(tl,tlinsertloc,comparetimes))=="") return -1;
+97         // HTML process entry (and fill in @tag@ codes)
+98         process_HTML(notestr);
+99         // add entry to Task Log chunk
+100         newTLID = add_TL_chunk_or_entry(tl,notestr,false,chunkid,tlinsertloc);
+101         if (newTLID=="") {
+102                 EOUT << "dil2al: Unable to add new Task Log entry in process_note_TL()\n";
+103                 return -1;
+104         }
+105         return tlinsertloc;
+106 }
+\end{verbatim}\normalsize 

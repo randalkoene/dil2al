@@ -1,0 +1,113 @@
+\section{Big\-Regex.cc File Reference}
+\label{BigRegex_8cc}\index{BigRegex.cc@{Big\-Regex.cc}}
+{\tt \#include \char`\"{}Big\-Regex.hh\char`\"{}}\par
+\subsection*{Defines}
+\begin{CompactItemize}
+\item 
+\#define {\bf USE\_\-FASTER}
+\item 
+\#define {\bf TALLOC}(n, t)\ new t[n]
+\item 
+\#define {\bf TFREE}(p)\ delete[$\,$] p
+\item 
+\#define {\bf DEBUG\_\-OUT}(dtxt)
+\end{CompactItemize}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+const {\bf Big\-Regex} {\bf BRXwhite} (\char`\"{}[$\backslash$n$\backslash$t$\backslash$r$\backslash$v$\backslash$f]+\char`\"{}, 1)
+\item 
+const {\bf Big\-Regex} {\bf BRXint} (\char`\"{}-?[0-9]+\char`\"{}, 1)
+\item 
+const {\bf Big\-Regex} {\bf BRXdouble} (\char`\"{}-?$\backslash$$\backslash$($\backslash$$\backslash$([0-9]+$\backslash$$\backslash$.[0-9]$\ast$$\backslash$$\backslash$)$\backslash$$\backslash$$|$$\backslash$$\backslash$([0-9]+$\backslash$$\backslash$)$\backslash$$\backslash$$|$$\backslash$$\backslash$($\backslash$$\backslash$.[0-9]+$\backslash$$\backslash$)$\backslash$$\backslash$)$\backslash$$\backslash$([e\-E][---+]?[0-9]+$\backslash$$\backslash$)?\char`\"{}, 1, 200)
+\item 
+const {\bf Big\-Regex} {\bf BRXalpha} (\char`\"{}[A-Za-z]+\char`\"{}, 1)
+\item 
+const {\bf Big\-Regex} {\bf BRXlowercase} (\char`\"{}[a-z]+\char`\"{}, 1)
+\item 
+const {\bf Big\-Regex} {\bf BRXuppercase} (\char`\"{}[A-Z]+\char`\"{}, 1)
+\item 
+const {\bf Big\-Regex} {\bf BRXalphanum} (\char`\"{}[0-9A-Za-z]+\char`\"{}, 1)
+\item 
+const {\bf Big\-Regex} {\bf BRXidentifier} (\char`\"{}[A-Za-z\_\-][A-Za-z0-9\_\-]$\ast$\char`\"{}, 1)
+\end{CompactItemize}
+
+
+\subsection{Define Documentation}
+\index{BigRegex.cc@{Big\-Regex.cc}!DEBUG_OUT@{DEBUG\_\-OUT}}
+\index{DEBUG_OUT@{DEBUG\_\-OUT}!BigRegex.cc@{Big\-Regex.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define DEBUG\_\-OUT(dtxt)}\label{BigRegex_8cc_a3}
+
+
+
+
+Definition at line 51 of file Big\-Regex.cc.
+
+Referenced by Big\-Regex::search().\index{BigRegex.cc@{Big\-Regex.cc}!TALLOC@{TALLOC}}
+\index{TALLOC@{TALLOC}!BigRegex.cc@{Big\-Regex.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define TALLOC(n, t)\ new t[n]}\label{BigRegex_8cc_a1}
+
+
+
+
+Definition at line 42 of file Big\-Regex.cc.
+
+Referenced by Big\-Regex::search().\index{BigRegex.cc@{Big\-Regex.cc}!TFREE@{TFREE}}
+\index{TFREE@{TFREE}!BigRegex.cc@{Big\-Regex.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define TFREE(p)\ delete[$\,$] p}\label{BigRegex_8cc_a2}
+
+
+
+
+Definition at line 43 of file Big\-Regex.cc.
+
+Referenced by Big\-Regex::search().\index{BigRegex.cc@{Big\-Regex.cc}!USE_FASTER@{USE\_\-FASTER}}
+\index{USE_FASTER@{USE\_\-FASTER}!BigRegex.cc@{Big\-Regex.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}\#define USE\_\-FASTER}\label{BigRegex_8cc_a0}
+
+
+
+
+Definition at line 36 of file Big\-Regex.cc.
+
+\subsection{Function Documentation}
+\index{BigRegex.cc@{Big\-Regex.cc}!BRXalpha@{BRXalpha}}
+\index{BRXalpha@{BRXalpha}!BigRegex.cc@{Big\-Regex.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}const {\bf Big\-Regex} BRXalpha (\char`\"{}+\char`\"{}[A-Za-z], 1)}\label{BigRegex_8cc_a7}
+
+
+\index{BigRegex.cc@{Big\-Regex.cc}!BRXalphanum@{BRXalphanum}}
+\index{BRXalphanum@{BRXalphanum}!BigRegex.cc@{Big\-Regex.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}const {\bf Big\-Regex} BRXalphanum (\char`\"{}+\char`\"{}[0-9A-Za-z], 1)}\label{BigRegex_8cc_a10}
+
+
+\index{BigRegex.cc@{Big\-Regex.cc}!BRXdouble@{BRXdouble}}
+\index{BRXdouble@{BRXdouble}!BigRegex.cc@{Big\-Regex.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}const {\bf Big\-Regex} BRXdouble (\char`\"{}-?$\backslash$$\backslash$($\backslash$$\backslash$([0-9]+$\backslash$$\backslash$.[0-9]$\ast$$\backslash$$\backslash$)$\backslash$$\backslash$$|$$\backslash$$\backslash$([0-9]+$\backslash$$\backslash$)$\backslash$$\backslash$$|$$\backslash$$\backslash$($\backslash$$\backslash$.[0-9]+$\backslash$$\backslash$)$\backslash$$\backslash$)$\backslash$$\backslash$([e\-E][---+]?[0-9]+$\backslash$$\backslash$)?\char`\"{}, 1, 200)}\label{BigRegex_8cc_a6}
+
+
+\index{BigRegex.cc@{Big\-Regex.cc}!BRXidentifier@{BRXidentifier}}
+\index{BRXidentifier@{BRXidentifier}!BigRegex.cc@{Big\-Regex.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}const {\bf Big\-Regex} BRXidentifier (\char`\"{}$\ast$\char`\"{}[A-Za-z\_\-][A-Za-z0-9\_\-], 1)}\label{BigRegex_8cc_a11}
+
+
+\index{BigRegex.cc@{Big\-Regex.cc}!BRXint@{BRXint}}
+\index{BRXint@{BRXint}!BigRegex.cc@{Big\-Regex.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}const {\bf Big\-Regex} BRXint (\char`\"{}-?+\char`\"{}[0-9], 1)}\label{BigRegex_8cc_a5}
+
+
+\index{BigRegex.cc@{Big\-Regex.cc}!BRXlowercase@{BRXlowercase}}
+\index{BRXlowercase@{BRXlowercase}!BigRegex.cc@{Big\-Regex.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}const {\bf Big\-Regex} BRXlowercase (\char`\"{}+\char`\"{}[a-z], 1)}\label{BigRegex_8cc_a8}
+
+
+\index{BigRegex.cc@{Big\-Regex.cc}!BRXuppercase@{BRXuppercase}}
+\index{BRXuppercase@{BRXuppercase}!BigRegex.cc@{Big\-Regex.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}const {\bf Big\-Regex} BRXuppercase (\char`\"{}+\char`\"{}[A-Z], 1)}\label{BigRegex_8cc_a9}
+
+
+\index{BigRegex.cc@{Big\-Regex.cc}!BRXwhite@{BRXwhite}}
+\index{BRXwhite@{BRXwhite}!BigRegex.cc@{Big\-Regex.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}const {\bf Big\-Regex} BRXwhite (\char`\"{}+\char`\"{}[$\backslash$n$\backslash$t$\backslash$r$\backslash$v$\backslash$f], 1)}\label{BigRegex_8cc_a4}
+
+

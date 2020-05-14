@@ -1,0 +1,923 @@
+\section{ppfilter.pre-blank.cc File Reference}
+\label{ppfilter_8pre-blank_8cc}\index{ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}}
+{\tt \#include \char`\"{}dil2al.hh\char`\"{}}\par
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+int {\bf get\_\-file\_\-in\_\-list} ({\bf String} \&fname, {\bf String\-List} \&srcf, {\bf String\-List} \&srcfname, int \&srcfnum)
+\item 
+void {\bf get\_\-figure\_\-data} ({\bf String} \&figfile, {\bf String} \&figlabel, {\bf String} \&figcaption, {\bf String} \&psconversions, {\bf String\-List} \&srcf, {\bf String\-List} \&srcfname, int \&srcfnum)
+\item 
+bool {\bf get\_\-Paper\_\-Plans\_\-Section\_\-IDs} ({\bf String\-List} \&ppsectionids, {\bf String\-List} \&ppsectiontitles)
+\item 
+bool {\bf clean\_\-paper\_\-outline} ({\bf String} \&pouttext)
+\item 
+void {\bf extract\_\-required\_\-item\_\-to\_\-paper} ({\bf String} \&ostrtext, {\bf String} refurl, {\bf Novelty\_\-Marker} \&nm, {\bf String} \&sectitle, {\bf String} \&requireditems, {\bf String} \&pprevtext)
+\item 
+void {\bf extract\_\-hierarchy\_\-depth\_\-increase\_\-to\_\-paper} ({\bf String} \&ostrtext, {\bf Novelty\_\-Marker} \&nm)
+\item 
+void {\bf extract\_\-hierarchy\_\-depth\_\-decrease\_\-to\_\-paper} ({\bf String} \&ostrtext, {\bf Novelty\_\-Marker} \&nm)
+\item 
+bool {\bf item\_\-content\_\-between\_\-range\_\-tags} ({\bf Novelty\_\-Marker} \&nm, int nidx, {\bf String} \&src, {\bf String} \&ic)
+\item 
+bool {\bf item\_\-content\_\-within\_\-TL\_\-chunk} (int nidx, {\bf String} \&src, {\bf String} \&ic)
+\item 
+bool {\bf item\_\-content\_\-within\_\-DIL\_\-entry} (int nidx, {\bf String} \&src, {\bf String} \&ic)
+\item 
+bool {\bf item\_\-content\_\-within\_\-paragraph} (int nidx, {\bf String} \&src, {\bf String} \&ic)
+\item 
+void {\bf convert\_\-item\_\-content\_\-to\_\-Te\-X} ({\bf String} \&itemcontent)
+\item 
+void {\bf extract\_\-recursively} ({\bf String} \&ostrtext, {\bf Novelty\_\-Marker} \&nm, {\bf String\-List} \&srcf, {\bf String\-List} \&srcfname, int \&srcfnum, int depth, {\bf Novelty\_\-Marker\_\-List} \&visited, {\bf String} \&poutline, {\bf String} \&pprevtext)
+\item 
+void {\bf extract\_\-novelty\_\-item\_\-to\_\-paper} ({\bf String} \&ostrtext, {\bf Novelty\_\-Marker} \&nm, {\bf String\-List} \&srcf, {\bf String\-List} \&srcfname, int \&srcfnum, {\bf String} \&poutline, {\bf String} \&pprevtext)
+\item 
+bool {\bf extract\_\-paper\_\-plan\_\-to\_\-paper} ({\bf String} ppname, {\bf String} poutline, {\bf String} pprevious)
+\item 
+bool {\bf cmdline\_\-extract\_\-paper\_\-plan\_\-to\_\-paper} ({\bf String} ppfile)
+\end{CompactItemize}
+
+
+\subsection{Function Documentation}
+\index{ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}!clean_paper_outline@{clean\_\-paper\_\-outline}}
+\index{clean_paper_outline@{clean\_\-paper\_\-outline}!ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool clean\_\-paper\_\-outline ({\bf String} \& {\em pouttext})}\label{ppfilter_8pre-blank_8cc_a3}
+
+
+
+
+Definition at line 104 of file ppfilter.pre-blank.cc.
+
+References String::at(), EOUT, String::from(), String::gsub(), String::index(), String::length(), String::SEARCH\_\-END, and VOUT.
+
+
+
+\footnotesize\begin{verbatim}104                                             {
+105 // removes content from previous paper extractions to make room for a possible
+106 // new subsection hierarchy
+107 //*** removal of sections may be added if sections are automatically placed by
+108 //*** checking Section qualifiers in Novelty items (see extract_paper_plan_to_paper
+109 //*** usage comments)
+110 //*** How about positioning protected parts in places other than at the top of
+111 //*** a section? How about manually added subtopics or subtopics without tags?
+112         String poutold(pouttext);
+113         pouttext = "";
+114         int nextextr, nextreq, nextsubstart, nextsubend, nextprot, p = 0, pp = 0, x = 0, r = 0, h = 0, t = 0, P = 0, depth = 0;
+115         if (verbose) { VOUT << "Cleaning outline: "; VOUT.flush(); }
+116         while (pp>=0) {
+117                 // find nearest identifier
+118                 nextextr = poutold.index(BigRegex("\n[  ]*%[    ]*@Begin[       ]+\\(REWRITTEN[         ]+\\)?EXTRACTED[^@]*:[^@]*@"),p);
+119                 pp = nextextr;
+120                 nextreq = poutold.index(BigRegex("\n[   ]*%[    ]*@Begin[       ]+\\(REWRITTEN[         ]+\\)?REQUIRED[^@]*@"),p);
+121                 if ((nextreq>=0) && ((nextreq<pp) || (pp<0))) pp = nextreq;
+122                 nextsubstart = poutold.index(BigRegex("\n[      ]*%[    ]*@Begin[       ]+SUBTOPIC[^@]*:[^@]*@"),p);
+123                 if ((nextsubstart>=0) && ((nextsubstart<pp) || (pp<0))) pp = nextsubstart;
+124                 nextsubend = poutold.index(BigRegex("\n[        ]*%[    ]*@End[         ]+\\([^         \n]*SUBSECTION[         ]+CONTENT\\|SUBTOPIC[^@]*:\\)[^@]*@"),p);
+125                 if ((nextsubend>=0) && ((nextsubend<pp) || (pp<0))) pp = nextsubend;
+126                 nextprot = poutold.index(BigRegex("\n[  ]*%[    ]*@Begin[       ]+PROTECTED[^@]*@"),p);
+127                 if ((nextprot>=0) && ((nextprot<pp) || (pp<0))) pp = nextprot;
+128                 if (pp>=0) {
+129                         // copy up to identifier location
+130                         if (pp>p) pouttext += poutold.at(p,pp-p);
+131                         // process identifier
+132                         if (pp==nextextr) { // clean up EXTRACTED
+133                                 int endextr;
+134                                 if ((endextr = poutold.index(BigRegex("\n[      ]*%[    ]*@End[         ]+\\(REWRITTEN[         ]+\\)?EXTRACTED[^@]*:[^@]*@"),String::SEARCH_END,pp))<0) {
+135                                         EOUT << "dil2al: @End EXTRACTED...@ not found in clean_paper_outline()\n";
+136                                         return false;
+137                                 }
+138                                 p = endextr; x++;
+139                                 if (verbose) { VOUT << "-x"; VOUT.flush(); }
+140                         } else if (pp==nextreq) { // clean up REQUIRED
+141                                 int endreq;
+142                                 if ((endreq = poutold.index(BigRegex("\n[       ]*%[    ]*@End[         ]+\\(REWRITTEN[         ]+\\)?REQUIRED[^@]*@"),String::SEARCH_END,pp))<0) {
+143                                         EOUT << "dil2al: @End REQUIRED@ not found in clean_paper_outline()\n";
+144                                         return false;
+145                                 }
+146                                 p = endreq; r++;
+147                                 if (verbose) { VOUT << "-r"; VOUT.flush(); }
+148                         } else if (pp==nextsubstart) { // clean up SUBTOPIC head
+149                                 int headeridx;
+150 //*** no subtopic begins or ends allowed between begin and this line... how about
+151 //*** other codes?
+152 /*
+153 - have to be able to rewrite topic headers as well, in which case you somehow have
+154   to make sure that the old header with its template content is reused, both at
+155   the head and the tail
+156 - when cleaning, make sure the head and tail of a template are removed, but make
+157   sure they really belong to the topic begin or topic end
+158 - why bother cleaning if you clean away basically everything before filling everything
+159   back in again??? Why not start blank and fill in all the rewritten information?
+160   
+161 YES: start blank, use all available templates, place what is indicated by sections,
+162 topics and items, before placing something (anything) check if a rewritten version
+163 is already available (make sure the indicators are very clear, i.e. section+context
+164 and begin and end markers with IDs), add in arbitrary text that was marked protected
+165 
+166 1. add section title to each extracted ID
+167 2. add subtopic context and section to the End markers of all subtopics
+168 3. add section to the Begin markers of all subtopics
+169 4. add tests for REWRITTEN versions of *everything* to the functions that place parts
+170 5. add section detection from paper plan
+171 6. add clear IDs to templates
+172 7. add placement functions for file header and footer
+173 
+174 */
+175                                 if ((headeridx = poutold.index(BigRegex("\n[    ]*%[    ]*@Begin[       ]+[^    ]*SUBSECTION[   ]+CONTENT[^@]*@[^)]*)"),String::SEARCH_END,pp))<0)
+176                                         if ((headeridx = poutold.index(BigRegex("\n[\\][^       \n]*\\(subsection\\|paragraph\\)[{][^\n]*[}]\n"),String::SEARCH_END,pp))<0) {
+177                                                 EOUT << "dil2al: Subtopic header not found in clean_paper_outline()\n";
+178                                                 return false;
+179                                         }
+180 cerr << ">>>" << poutold.at(pp,headeridx-pp) << "<<<\n";
+181                                 p = headeridx; h++; depth++;
+182                                 if (verbose) { VOUT << "-h"; VOUT.flush(); }
+183                         } else if (pp==nextsubend) { // clean up SUBTOPIC tail
+184                                 int tailidx;
+185 //*** no subtopic begins allowed between the lines
+186                                 if ((tailidx = poutold.index(BigRegex("\n[      ]*%[    ]*@End[         ]+SUBTOPIC[^@]*:[^@]*@"),String::SEARCH_END,pp))<0) {
+187                                         EOUT << "dil2al: Subtopic tail not found in clean_paper_outline()\n";
+188                                         return false;
+189                                 }
+190 cerr << ">>>" << poutold.at(pp,tailidx-pp) << "<<<\n";
+191                                 p = tailidx; t++; depth--;
+192                                 if (verbose) { VOUT << "-t"; VOUT.flush(); }
+193                         } else { // retain PROTECTED
+194                                 int endprot;
+195                                 if ((endprot = poutold.index(BigRegex("\n[      ]*%[    ]*@End[         ]+PROTECTED[^@]*@"),String::SEARCH_END,pp))<0) {
+196                                         EOUT << "dil2al: @End PROTECTED@ not found in clean_paper_outline(), continuing as is\n";
+197                                         endprot = poutold.length();
+198                                 }
+199                                 pouttext += poutold.at(pp,endprot-pp);
+200                                 p = endprot; P++;
+201                                 if (verbose) { VOUT << "+P"; VOUT.flush(); }
+202                         }
+203                 } else pouttext += poutold.from(p); // copy remaining text
+204         }
+205         pouttext.gsub(BigRegex("\n[     ]*\n[   \n]+[   ]*\n"),"\n\n\n"); // clean up spurious '\n'
+206         if (verbose) VOUT << ", (x=" << x << ",r=" << r << ",h=" << h << ",t=" << t << ",P=" << P << ",h-t=" << depth << ") done\n";
+207         return true;
+208 }
+\end{verbatim}\normalsize 
+\index{ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}!cmdline_extract_paper_plan_to_paper@{cmdline\_\-extract\_\-paper\_\-plan\_\-to\_\-paper}}
+\index{cmdline_extract_paper_plan_to_paper@{cmdline\_\-extract\_\-paper\_\-plan\_\-to\_\-paper}!ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool cmdline\_\-extract\_\-paper\_\-plan\_\-to\_\-paper ({\bf String} {\em ppfile})}\label{ppfilter_8pre-blank_8cc_a15}
+
+
+
+
+Definition at line 633 of file ppfilter.pre-blank.cc.
+
+References String::after(), String::before(), EOUT, extract\_\-paper\_\-plan\_\-to\_\-paper(), and String::prepend().
+
+Referenced by dil2al\_\-commands().
+
+
+
+\footnotesize\begin{verbatim}633                                                         {
+634 // Commandline interface to extract_paper_plan_to_paper()
+635         String ppname, poutline, pprevious;
+636         ppname = ppfile.before("+");
+637         if (ppname == "") {
+638                 ppname = ppfile;
+639                 EOUT << "dil2al: Paper extraction without specific paper outline not yet supported\n";
+640                 return false;
+641         } else {
+642                 poutline = ppfile.after("+");
+643                 if (poutline == "") {
+644                         EOUT << "dil2al: Paper extraction without specific paper outline not yet supported\n";
+645                         return false;
+646                 } else {
+647                         pprevious = poutline.after("+");
+648                         if (pprevious != "") {
+649                                 poutline = poutline.before("+");
+650                                 if (pprevious[0]!='/') pprevious.prepend(homedir);
+651                         }
+652                         if (ppfile[0]!='/') ppfile.prepend(homedir);
+653                         if (poutline[0]!='/') poutline.prepend(homedir);
+654                         return extract_paper_plan_to_paper(ppname,poutline,pprevious);
+655                 }
+656         }
+657 }
+\end{verbatim}\normalsize 
+\index{ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}!convert_item_content_to_TeX@{convert\_\-item\_\-content\_\-to\_\-TeX}}
+\index{convert_item_content_to_TeX@{convert\_\-item\_\-content\_\-to\_\-TeX}!ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void convert\_\-item\_\-content\_\-to\_\-Te\-X ({\bf String} \& {\em itemcontent})}\label{ppfilter_8pre-blank_8cc_a11}
+
+
+
+
+Definition at line 328 of file ppfilter.pre-blank.cc.
+
+References String::gsub().
+
+Referenced by extract\_\-recursively().
+
+
+
+\footnotesize\begin{verbatim}328                                                        {
+329         // conversions to TeX
+330         //      - remove Novelty Marker tags
+331         itemcontent.gsub(BigRegex("[<]A[        ]+[Nn][Aa][Mm][Ee][     ]*=[    ]*\"NOVELTY-[^>]*[>][[][^]]*N[^]]*[]]"),"");
+332         //      - identify content hyperlink references
+333         itemcontent.gsub(BigRegex("[<]A[        ]+[^>]*[Hh][Rr][Ee][Ff][        ]*=[    ]*\"\\([^\"]+\\)\"[^>]*[>]"),"@HRef::_1@",'_');
+334         //      - cite, but do not recurse into bibliography references
+335         itemcontent.gsub(BigRegex("\\([[][^]]*\\)?@HRef::[^@]*"+bibindexfilename+"#\\([^@]+:[^@]+\\)@\\([^]]*[]]\\)?"),"",'_');
+336         //      - convert paragraph and line-break codes
+337         itemcontent.gsub("\n<P>\n","\n\n");
+338         itemcontent.gsub("<P>","\n");
+339         itemcontent.gsub(BigRegex("\\([^\n]\\)[\n]?[<][Bb][Rr][>]"),"_1\\\\",'_');
+340 //*** the following two lines can be removed when Thesis Log has been converted to the Task Log format
+341         itemcontent.gsub(BigRegex("[<]!--[      ]*entry Begin[  ]*--[>][^]]+[]][        ]*[<]/FONT[>]"),"");
+342         itemcontent.gsub(BigRegex("[<]!--[      ]*chunk End[    ]*--[>][        ]*[<][Ii][>][^<]+[<]/[Ii][>]"),"");
+343 //*** possibly remove the following conversions
+344         //      - convert text attribute codes
+345         itemcontent.gsub(BigRegex("[<]\\([Bb]\\|[Ss][Tt][Rr][Oo][Nn][Gg]\\)[>]"),"{\\bf ");
+346         itemcontent.gsub(BigRegex("[<]\\([Ii]\\|[Ee][Mm]\\)[>]"),"{\\em ");
+347         itemcontent.gsub(BigRegex("[<]/\\([Bb]\\|[Ss][Tt][Rr][Oo][Nn][Gg]\\|[Ii]\\|[Ee][Mm]\\)[>]"),"}");
+348 //*** possibly remove conversions above
+349         //      - remove remaining HTML tags
+350         itemcontent.gsub(BigRegex("[<][^>]*[>]"),"");
+351         //      - convert HTML character codes
+352         itemcontent.gsub("&lt;","<");
+353         itemcontent.gsub("&gt;",">");
+354         itemcontent.gsub("&amp;","\\&");
+355         //      - escape LaTeX special characters
+356         itemcontent.gsub(BigRegex("\\([^\\]\\)\\([#&_]\\)"),"_1\\_2",'_');
+357 //*** convert GESNlib variable names to GESN convention standard labels as found in nse.label-equivalence.tex
+358 //*** could do that to the source once instead
+359 }
+\end{verbatim}\normalsize 
+\index{ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}!extract_hierarchy_depth_decrease_to_paper@{extract\_\-hierarchy\_\-depth\_\-decrease\_\-to\_\-paper}}
+\index{extract_hierarchy_depth_decrease_to_paper@{extract\_\-hierarchy\_\-depth\_\-decrease\_\-to\_\-paper}!ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void extract\_\-hierarchy\_\-depth\_\-decrease\_\-to\_\-paper ({\bf String} \& {\em ostrtext}, {\bf Novelty\_\-Marker} \& {\em nm})}\label{ppfilter_8pre-blank_8cc_a6}
+
+
+
+
+Definition at line 271 of file ppfilter.pre-blank.cc.
+
+References Novelty\_\-Marker::hierdepth.
+
+Referenced by extract\_\-paper\_\-plan\_\-to\_\-paper().
+
+
+
+\footnotesize\begin{verbatim}271                                                                                        {
+272 // generates output for a Topical Context Hierarchy depth decrease, suggesting
+273 // subtopics and indicating the TCH title in .TeX comments
+274                 ostrtext = ostrtext + "\n% @End SUBTOPIC: [depth " + dec(nm.hierdepth+1) + "]@\n\n";
+275 }
+\end{verbatim}\normalsize 
+\index{ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}!extract_hierarchy_depth_increase_to_paper@{extract\_\-hierarchy\_\-depth\_\-increase\_\-to\_\-paper}}
+\index{extract_hierarchy_depth_increase_to_paper@{extract\_\-hierarchy\_\-depth\_\-increase\_\-to\_\-paper}!ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void extract\_\-hierarchy\_\-depth\_\-increase\_\-to\_\-paper ({\bf String} \& {\em ostrtext}, {\bf Novelty\_\-Marker} \& {\em nm})}\label{ppfilter_8pre-blank_8cc_a5}
+
+
+
+
+Definition at line 254 of file ppfilter.pre-blank.cc.
+
+References String\-List::concatenate(), Novelty\_\-Marker::context, EOUT, and Novelty\_\-Marker::hierdepth.
+
+Referenced by extract\_\-paper\_\-plan\_\-to\_\-paper().
+
+
+
+\footnotesize\begin{verbatim}254                                                                                        {
+255 // generates output for a Topical Context Hierarchy depth increase, suggesting
+256 // subtopics and indicating the TCH title in .TeX comments
+257         ostrtext += "\n% @Begin SUBTOPIC: [depth " + (dec(nm.hierdepth) + ("] " + nm.context.concatenate(", ") + "@\n"));
+258         switch (nm.hierdepth) {
+259                 case 0: ostrtext += "% (Unexpected hierarchy depth at ``\\section'' level.)\n\n";
+260                                 EOUT << "dil2al: Unexpected hierarchy depth at ``\\section'' level in extract_hierarchy_depth_increase_to_paper(), continuing\n";
+261                                 break;
+262                 case 1: ostrtext += "\\subsection{" + nm.context.concatenate(", ") + "}\n\n"; break;
+263                 case 2: ostrtext += "\\subsubsection{" + nm.context.concatenate(", ") + "}\n\n"; break;
+264                 case 3: ostrtext += "\\paragraph{" + nm.context.concatenate(", ") + "}\n\n"; break;
+265                 case 4: ostrtext += "\\\\\n\n"; break;
+266                 default:        ostrtext += "% (Hierarchy depth exceeds all \\LaTeX subsection levels.)\n\n";
+267                                 EOUT << "dil2al: Hierarchy depth exceeds all \\LaTeX subsection levels in extract_hierarchy_depth_increase_to_paper(), continuing\n";
+268         }
+269 }
+\end{verbatim}\normalsize 
+\index{ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}!extract_novelty_item_to_paper@{extract\_\-novelty\_\-item\_\-to\_\-paper}}
+\index{extract_novelty_item_to_paper@{extract\_\-novelty\_\-item\_\-to\_\-paper}!ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void extract\_\-novelty\_\-item\_\-to\_\-paper ({\bf String} \& {\em ostrtext}, {\bf Novelty\_\-Marker} \& {\em nm}, {\bf String\-List} \& {\em srcf}, {\bf String\-List} \& {\em srcfname}, int \& {\em srcfnum}, {\bf String} \& {\em poutline}, {\bf String} \& {\em pprevtext})}\label{ppfilter_8pre-blank_8cc_a13}
+
+
+
+
+Definition at line 475 of file ppfilter.pre-blank.cc.
+
+References EOUT, extract\_\-recursively(), Novelty\_\-Marker::marktext, and Novelty\_\-Marker::source.
+
+Referenced by extract\_\-paper\_\-plan\_\-to\_\-paper().
+
+
+
+\footnotesize\begin{verbatim}475                                                                                                                                                                            {
+476         if (nm.source=="") {
+477                 EOUT << "dil2al: Missing Novelty item source reference for item with text ``" << nm.marktext << "'' in extract_paper_plan_to_paper(), continuing as is\n";
+478                 return;
+479         }
+480         Novelty_Marker_List visited;
+481         extract_recursively(ostrtext,nm,srcf,srcfname,srcfnum,0,visited,poutline,pprevtext);
+482 }
+\end{verbatim}\normalsize 
+\index{ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}!extract_paper_plan_to_paper@{extract\_\-paper\_\-plan\_\-to\_\-paper}}
+\index{extract_paper_plan_to_paper@{extract\_\-paper\_\-plan\_\-to\_\-paper}!ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool extract\_\-paper\_\-plan\_\-to\_\-paper ({\bf String} {\em ppname}, {\bf String} {\em poutline}, {\bf String} {\em pprevious})}\label{ppfilter_8pre-blank_8cc_a14}
+
+
+
+
+Definition at line 484 of file ppfilter.pre-blank.cc.
+
+References absurl(), String::after(), String::at(), backup\_\-and\_\-rename(), String::before(), String::del(), EOUT, extract\_\-hierarchy\_\-depth\_\-decrease\_\-to\_\-paper(), extract\_\-hierarchy\_\-depth\_\-increase\_\-to\_\-paper(), extract\_\-novelty\_\-item\_\-to\_\-paper(), extract\_\-required\_\-item\_\-to\_\-paper(), String::from(), get\_\-Paper\_\-Plans\_\-Section\_\-IDs(), String::gsub(), String::index(), Novelty\_\-Marker\_\-List::iselement(), String\-List::iselement(), String::length(), Novelty\_\-Marker::NM\_\-NOVELTY\_\-ITEM, Novelty\_\-Marker::NM\_\-REQUIRED\_\-ITEM, Novelty\_\-Marker::NM\_\-TCH\_\-DEPTH\_\-DEC, Novelty\_\-Marker::NM\_\-TCH\_\-DEPTH\_\-INC, read\_\-file\_\-into\_\-String(), relurl(), String::SEARCH\_\-END, String::upcase, and VOUT.
+
+Referenced by cmdline\_\-extract\_\-paper\_\-plan\_\-to\_\-paper().
+
+
+
+\footnotesize\begin{verbatim}484                                                                                    {
+485 // uses information in a paper plan to generate paper content in a paper outline
+486 // (see DIL#20000315155709.1)
+487 // preparation:
+488 // - a sorted paper plan including required items
+489 // - a paper outline including paper-type specific background
+490 //   templates (content that is not added during extraction
+491 //   may already be included)
+492 // - outline contains sections designated to items in
+493 //   the paper plan (can be automatically created by parsing
+494 //   paper plan and using section template)
+495 // - an optional previous (version of the) paper, containing
+496 //   stylistically rewritten items
+497         String pptext, pprevtext, ostrtext;
+498         if (!read_file_into_String(ppname,pptext)) return false;
+499         if (pprevious!="") if (!read_file_into_String(pprevious,pprevtext)) return false; // safe in case new paper draft would overwrite pprevious
+500         ofstream ostr(poutline+".new");
+501         if (!ostr) {
+502                 EOUT << "dil2al: Unable to create " << poutline << ".new in extract_paper_plan_to_paper()\n";
+503                 return false;
+504         }
+505         String istr; int iread = 0;
+506         if (!read_file_into_String(poutline,istr)) return false;
+507 //WE NOW START BLANK!   if (!clean_paper_outline(istr)) return false; // clean paper outline
+508         // read all Novelty items from paper plan into list
+509         Novelty_Marker_List nml; int nmend = 0, nmnum = 0, hdepth = 0;
+510         if ((nmend = pptext.index(BigRegex("[<]A[       ]*[Nn][Aa][Mm][Ee][     ]*=[    ]*\"tch\""),nmend))<0) {
+511                 EOUT << "dil2al: No Topical Context Hierarchy found in Paper Plan in extract_paper_plan_to_paper()\n";
+512                 return false;
+513         }
+514         while ((nmend = nml[nmnum].Get_Novelty_from_Paper_Plan(pptext,nmend,hdepth))>=0) {
+515                 hdepth = nml[nmnum].hierdepth; // track Topical Context Hierarchy depth
+516                 if (hdepth<0) break;
+517                 if (nml[nmnum].source!="") nml[nmnum].source = absurl(ppname,nml[nmnum].source);
+518                 nmnum++;
+519         }
+520         // read Section IDs
+521         StringList ppsectionids, ppsectiontitles;
+522         if (!get_Paper_Plans_Section_IDs(ppsectionids,ppsectiontitles)) return false;
+523 //*** generate tentative Abstract, as specified in
+524 //*** DIL#20000315155709.1
+525         // per section
+526         // read outline, find section headings that match Section IDs
+527         int secidx, srcfnum = 0; StringList srcf, srcfname; String requireditems;
+528         while ((secidx = istr.index("\\section",iread))>=0) {
+529                 // get section title
+530                 String sectitle = istr.at(BigRegex("[^}]+"),secidx+8);
+531                 sectitle = sectitle.after(BigRegex("[   ]*[{][  ]*"));
+532                 sectitle.del(BigRegex("[        ]*$"));
+533                 sectitle.upcase();
+534                 if (verbose) VOUT << "Parsing paper outline section " << sectitle << '\n';
+535                 // copy outline up to \section command
+536                 ostrtext += istr.at(iread,secidx-iread); iread = secidx;
+537                 // copy section header
+538                 if ((secidx = istr.index(BigRegex("%[^\n]*@[    ]*End[  ]+SECTION[      ]+CONTENT[      ]*@"),iread))>=0) {
+539                         ostrtext += istr.at(iread,secidx-iread); iread = secidx;
+540                 } else {
+541                         EOUT << "dil2al: Missing @End SECTION CONTENT@ tag in extract_paper_plan_to_paper(), content placement may be incorrect, continuing\n";
+542                         secidx = istr.index("\n",iread); secidx++;
+543                         ostrtext += istr.at(iread,secidx-iread); iread = secidx;
+544                 }
+545                 // parse items in section
+546                 int seclistidx; String refurl = relurl(poutline,ppname);
+547                 if ((sectitle!="") && ((seclistidx = ppsectiontitles.iselement(sectitle))>=0)) {
+548                         for (int i=0; i<nmnum; i++)
+549                          if ((nml[i].nmtype==Novelty_Marker::NM_TCH_DEPTH_INC)
+550                           || (nml[i].nmtype==Novelty_Marker::NM_TCH_DEPTH_DEC)
+551                           || (nml[i].section.iselement(ppsectionids[seclistidx])>=0)) {
+552                                 if (nml[i].nmtype==Novelty_Marker::NM_REQUIRED_ITEM) extract_required_item_to_paper(ostrtext,refurl,nml[i],sectitle,requireditems,pprevtext);
+553                                 else if (nml[i].nmtype==Novelty_Marker::NM_TCH_DEPTH_INC) extract_hierarchy_depth_increase_to_paper(ostrtext,nml[i]);
+554                                 else if (nml[i].nmtype==Novelty_Marker::NM_TCH_DEPTH_DEC) extract_hierarchy_depth_decrease_to_paper(ostrtext,nml[i]);
+555                                 else if (nml[i].nmtype==Novelty_Marker::NM_NOVELTY_ITEM) extract_novelty_item_to_paper(ostrtext,nml[i],srcf,srcfname,srcfnum,poutline,pprevtext);
+556                         }
+557                 }
+558         }
+559         // add \figureloose commands
+560         int ofigidx;
+561         if ((ofigidx = ostrtext.index(BigRegex("[\\][A-Za-z]*figurehere[{]")))>=0) {
+562                 // find loose figures location in outline and copy to there
+563                 int iloosefigidx, ifigend;
+564                 if (((iloosefigidx = istr.index(BigRegex("\n%[  ]*@Begin FIGURES AT END@"),iread))>=0)
+565                  && ((ifigend = istr.index(BigRegex("\n%[       ]*@End FIGURES AT END@[^\n]*\n"),String::SEARCH_END,iread))>=0)) {
+566                         ostrtext += istr.at(iread,iloosefigidx-iread); iread = ifigend;
+567                 } else {
+568                         if ((iloosefigidx = istr.index("\\end{document}",iread))>=0) {
+569                                 ostrtext += istr.at(iread,iloosefigidx-iread); iread = iloosefigidx;
+570                         } else {
+571                                 EOUT << "dil2al: No \\end{document} found in outline in extract_paper_plan_to_paper(), continuing as is\n";
+572                                 ostrtext += istr.from(iread); iread = istr.length();
+573                         }
+574                 }
+575                 // copy \figurehere data to \figureloose commands
+576                 ostrtext += "\n% @Begin FIGURES AT END@\n\n";
+577                 while (ofigidx>=0) {
+578                         if ((ifigend = ostrtext.index("\n",ofigidx))<0) ifigend = ostrtext.length();
+579                         String figdata = ostrtext.at(ofigidx,ifigend-ofigidx);
+580                         figdata.gsub(BigRegex("^\\([\\][A-Za-z]*\\)figurehere[{]"),"_1figureloose{",'_');
+581                         ostrtext += figdata + "\n\n";
+582                         ofigidx = ostrtext.index(BigRegex("[\\][A-Za-z]*figurehere[{]"),ifigend);
+583                 }
+584                 ostrtext += "% @End FIGURES AT END@\n";
+585         }
+586         // copy remainder of outline
+587         if (iread<istr.length()) ostrtext += istr.from(iread);
+588 //*** add new Context items to plan-plans.html file here
+589 cerr << "Add automatic call to add Context items to plan-plans.html file here...\n";
+590         ostr << ostrtext; // write paper draft file
+591         ostr.close();
+592 #ifndef DEBUG_DO_NOT_CREATE_NEW_OUTLINE
+593         if (!backup_and_rename(poutline,"Paper Draft")) return false;
+594         // find required items list in paper plan, create if not found
+595         int riidx;
+596         if ((riidx = pptext.index(BigRegex("[<]!--[     ]*@Begin REQUIRED ITEMS@[       ]*--[>]\n"),String::SEARCH_END))<0) {
+597                 // create list of required items
+598                 if ((riidx = pptext.index(BigRegex("\\([<][Pp][>][      ]*\n[<][Hh][Rr][>].*\\)?[<]/[Bb][Oo][Dd][Yy][>]")))<0)
+599                         EOUT << "dil2al: Unable to create list of required items in extract_paper_plan_to_paper(), continuing as is\n";
+600                 else {
+601                         String pptextrest = pptext.at(riidx,pptext.length()-riidx);
+602                         pptext = pptext.before(riidx)
+603                                         + "<H2><A HNAME=\"required-items\">Required Items</A></H2>\n\n<UL>\n<!-- @Begin REQUIRED ITEMS@ -->\n<!-- @End REQUIRED ITEMS@ -->\n</UL>\n\n"
+604                                         + pptextrest;
+605                         riidx += 92; // move index to start of <!-- @End REQUIRED ITEMS@ --> tag
+606                 }
+607         }
+608         if (riidx>=0) {
+609                 // update required items list
+610                 int riend;
+611                 if ((riend = pptext.index(BigRegex("[<]!--[     ]*@End REQUIRED ITEMS@[         ]*--[>]"),riidx))<0) {
+612                         EOUT << "dil2al: Missing @End REQUIRED ITEMS@ tag in extract_paper_plan_to_paper(), placing tag\n";
+613                         String pptextrest = pptext.at(riidx,pptext.length()-riidx);
+614                         pptext = pptext.before(riidx) + "<!-- @End REQUIRED ITEMS@ -->\n" + pptextrest;
+615                         riend = riidx;
+616                 }
+617                 String pptextrest = pptext.at(riend,pptext.length()-riend);
+618                 pptext = pptext.before(riidx) + requireditems + pptextrest;
+619                 // store, backup and rename updated paper plan
+620                 ostr.open(ppname+".new");
+621                 if (!ostr) {
+622                         EOUT << "dil2al: Unable to create " << ppname << ".new to update required items list in extract_paper_plan_to_paper(), continuing as is\n";
+623                         return false;
+624                 }
+625                 ostr << pptext;
+626                 if (!backup_and_rename(ppname,"Paper Plan"))
+627                         EOUT << "dil2al: Unable to update required items list extract_paper_plan_to_paper(), continuing as is\n";
+628         }
+629         return true;
+630 #endif
+631 }
+\end{verbatim}\normalsize 
+\index{ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}!extract_recursively@{extract\_\-recursively}}
+\index{extract_recursively@{extract\_\-recursively}!ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void extract\_\-recursively ({\bf String} \& {\em ostrtext}, {\bf Novelty\_\-Marker} \& {\em nm}, {\bf String\-List} \& {\em srcf}, {\bf String\-List} \& {\em srcfname}, int \& {\em srcfnum}, int {\em depth}, {\bf Novelty\_\-Marker\_\-List} \& {\em visited}, {\bf String} \& {\em poutline}, {\bf String} \& {\em pprevtext})}\label{ppfilter_8pre-blank_8cc_a12}
+
+
+
+
+Definition at line 361 of file ppfilter.pre-blank.cc.
+
+References absurl(), String::after(), String::at(), String::before(), String\-List::concatenate(), String::contains(), Novelty\_\-Marker::context, convert\_\-item\_\-content\_\-to\_\-Te\-X(), EOUT, String::from(), get\_\-figure\_\-data(), get\_\-file\_\-in\_\-list(), Novelty\_\-Marker::id, Novelty\_\-Marker::imp, Novelty\_\-Marker::impnum, String::index(), Novelty\_\-Marker\_\-List::iselement(), item\_\-content\_\-between\_\-range\_\-tags(), item\_\-content\_\-within\_\-DIL\_\-entry(), item\_\-content\_\-within\_\-paragraph(), item\_\-content\_\-within\_\-TL\_\-chunk(), Novelty\_\-Marker::len, String::length(), Novelty\_\-Marker\_\-List::length(), MAX\_\-RECURSIVE\_\-PP2PD\_\-EXTRACTION\_\-DEPTH, Novelty\_\-Marker::NM\_\-CONTENT\_\-HREF, Novelty\_\-Marker::NM\_\-NOVELTY\_\-ITEM, Novelty\_\-Marker::nmtype, relurl(), Novelty\_\-Marker::source, and String::through().
+
+Referenced by extract\_\-novelty\_\-item\_\-to\_\-paper(), and extract\_\-recursively().
+
+
+
+\footnotesize\begin{verbatim}361                                                                                                                                                                                                            {
+362         // keep track of places already visited to avoid infinite loops
+363         if (visited.iselement(nm)>=0) {
+364                 EOUT << "dil2al: Avoiding repetition of " << nm.source << '#' << nm.id << " in extract_recursively(), continuing as is\n";
+365                 ostrtext += "% @WARNING: Repeated recursion into " + nm.source + '#' + nm.id + "avoided@\n";
+366                 return;
+367         }
+368         int visitedidx = visited.length();
+369         if (nm.nmtype==Novelty_Marker::NM_NOVELTY_ITEM) visitedidx--; // use first list element
+370         visited[visitedidx].source = nm.source;
+371         visited[visitedidx].id = nm.id;
+372         visited[visitedidx].nmtype = nm.nmtype;
+373         // keep track of depth
+374         depth++;
+375         if (depth>MAX_RECURSIVE_PP2PD_EXTRACTION_DEPTH) {
+376                 EOUT << "dil2al: Maximum extraction recursion depth (" << MAX_RECURSIVE_PP2PD_EXTRACTION_DEPTH << ")exceeded in extract_recursively(), continuing as is\n";
+377                 ostrtext = ostrtext + "% @WARNING: Maximum extraction recursion depth (" + dec(MAX_RECURSIVE_PP2PD_EXTRACTION_DEPTH) + ")exceeded@\n";
+378                 return;
+379         }
+380         // load source document if not already loaded
+381         int srcidx;
+382         if ((srcidx = get_file_in_list(nm.source,srcf,srcfname,srcfnum))<0) {
+383                 EOUT << "continuing as is\n";
+384                 ostrtext += "% @WARNING: Recursion was unable to load source document " + nm.source + "@\n";
+385                 return;
+386         }
+387         // include content in outline
+388         String srcref = relurl(poutline,nm.source)+'#'+nm.id;
+389         if (nm.nmtype==Novelty_Marker::NM_NOVELTY_ITEM) {
+390 //*** detect if REWRITTEN, if so copy from rewritten version and optionally
+391 //*** ask if new extraction should be concatenated with a marker
+392 //*** if (askextractconcat)
+393                 ostrtext += "% @Begin EXTRACTED: " + srcref + "@\n% Context: ";
+394                 ostrtext += nm.context.concatenate(", ");
+395                 char fc[10];
+396                 if (nm.imp) {
+397                         sprintf(fc,"%4.2f",nm.imp[0]);
+398                         ostrtext += fc;
+399                         for (int j=1; j<nm.impnum; j++) {
+400                                 sprintf(fc,"%4.2f",nm.imp[j]);
+401                                 ostrtext += ", "; ostrtext += fc;
+402                         }
+403                 }
+404                 sprintf(fc,"%4.2f",nm.len);
+405                 ostrtext = ostrtext + "\n% Intended length: " + fc + " pages\n";
+406         } else ostrtext += "\n% @Begin CONTENT HREF: (depth " + (dec(depth) + (") " + srcref + "@\n"));
+407         int nidx;
+408         if ((nidx = srcf[srcidx].index(BigRegex("[<]A[  ]+[Nn][Aa][Mm][Ee][     ]*=[    ]*\""+nm.id+'"')))>=0) {
+409                 // content range detection (independent of file type)
+410 //*** add remaining rules for content ranges
+411                 String itemcontent;
+412                 if (!item_content_between_range_tags(nm,nidx,srcf[srcidx],itemcontent))
+413                  if (!item_content_within_TL_chunk(nidx,srcf[srcidx],itemcontent))
+414                   if (!item_content_within_DIL_entry(nidx,srcf[srcidx],itemcontent))
+415                    item_content_within_paragraph(nidx,srcf[srcidx],itemcontent);
+416                 if (nm.source.contains(BigRegex("[.][Tt][Ee][Xx]$"))) {
+417                         // TeX files require no conversion but can contain \input{} references
+418                         int inputidx = -1;
+419                         while ((inputidx = itemcontent.index("\\input{",inputidx+1))>=0) {
+420                                 String inputref = itemcontent.at(BigRegex("[^ }]*"),inputidx+7);
+421                                 inputref = absurl(nm.source,inputref);
+422                                 inputref = relurl(poutline,inputref);
+423                                 String afterinput = itemcontent.from("}",inputidx+7);
+424                                 itemcontent = itemcontent.before(inputidx+7) + inputref + afterinput;
+425                         }
+426                 } else convert_item_content_to_TeX(itemcontent);
+427                 // locate content hyperlink references
+428                 int istart=0, iend=0; Novelty_Marker nmhref;
+429                 while (iend<itemcontent.length()) {
+430                         if ((iend = itemcontent.index("@HRef::",istart))<0) {
+431                                 iend = itemcontent.length();
+432                                 ostrtext += itemcontent.at(istart,iend-istart) + '\n';
+433                         } else {
+434                                 ostrtext += itemcontent.at(istart,iend-istart); //*** could add a `\n` here
+435                                 // recurse content extraction for @HREF: <document>@ codes
+436                                 //*** perhaps recursively extracted content should be placed
+437                                 //*** after the following punctuation mark
+438                                 //*** buglets:
+439                                 //*** getting content from C++ files, file names
+440                                 //*** such as synapse_AMPA_NMDA.hh affected by
+441                                 //*** conversions
+442                                 nmhref.source = itemcontent.at(BigRegex("[^@]+"),iend+7);
+443                                 nmhref.id = nmhref.source.after('#');
+444                                 if (nmhref.id!="") nmhref.source = nmhref.source.before("\\#");
+445                                 nmhref.source = absurl(srcfname[srcidx],nmhref.source);
+446                                 // recognize figures
+447                                 if (nmhref.source.contains(BigRegex("[.]\\([Ff][Ii][Gg]\\|[Ee]?[Pp][Ss]\\)$"))) {
+448                                         nmhref.source = nmhref.source.through('.',-1) + "eps"; // use .eps not .fig
+449                                         // obtain label, caption and psfrag conversions
+450                                         String figlabel, figcaption, psconversions;
+451                                         get_figure_data(nmhref.source,figlabel,figcaption,psconversions,srcf,srcfname,srcfnum);
+452                                         // include figure
+453 //*** perhaps use a template here
+454 //*** intelligently choose type of figure command
+455                                         ostrtext += "\n\\figurehere";
+456                                         if (psconversions!="") ostrtext += "{psconversions}";
+457                                         ostrtext += '{' + figlabel + "}{" + relurl(poutline,nmhref.source) + "}{"+figcaption+"}\n";
+458                                 } else {
+459                                         nmhref.nmtype = Novelty_Marker::NM_CONTENT_HREF;
+460                                         extract_recursively(ostrtext,nmhref,srcf,srcfname,srcfnum,depth,visited,poutline,pprevtext);
+461                                 }
+462                                 if ((istart = itemcontent.index("@",iend+1))<0) istart = iend;
+463                                 else istart++;
+464 // *** There are some references without ID
+465                         }
+466                 }
+467         } else {
+468                 EOUT << "dil2al: " << nm.id << " not found in source file in extract_paper_plan_to_paper(), continuing as is\n";
+469                 ostrtext += "% (Item ID " + nm.id + " not found in content source file " + relurl(poutline,nm.source) + ") \n";
+470         }
+471         if (nm.nmtype==Novelty_Marker::NM_NOVELTY_ITEM) ostrtext += "% @End EXTRACTED: " + srcref + "@\n\n";
+472         else ostrtext += "% @End CONTENT HREF: " + srcref + "@\n";
+473 }
+\end{verbatim}\normalsize 
+\index{ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}!extract_required_item_to_paper@{extract\_\-required\_\-item\_\-to\_\-paper}}
+\index{extract_required_item_to_paper@{extract\_\-required\_\-item\_\-to\_\-paper}!ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void extract\_\-required\_\-item\_\-to\_\-paper ({\bf String} \& {\em ostrtext}, {\bf String} {\em refurl}, {\bf Novelty\_\-Marker} \& {\em nm}, {\bf String} \& {\em sectitle}, {\bf String} \& {\em requireditems}, {\bf String} \& {\em pprevtext})}\label{ppfilter_8pre-blank_8cc_a4}
+
+
+
+
+Definition at line 210 of file ppfilter.pre-blank.cc.
+
+References String\-List::concatenate(), Novelty\_\-Marker::context, Novelty\_\-Marker::imp, Novelty\_\-Marker::impnum, Novelty\_\-Marker::len, Novelty\_\-Marker::marktext, and String::prepend().
+
+Referenced by extract\_\-paper\_\-plan\_\-to\_\-paper().
+
+
+
+\footnotesize\begin{verbatim}210                                                                                                                                                           {
+211 // generates output for a Required item with HTML tagged .TeX comments
+212 // indicating item qualifiers, quantifiers and additional marked text
+213 // additionally keeps track of a list of required items to be updated
+214 // in the paper plan and used for AL priority DIL entries
+215         String contextconcat = nm.context.concatenate(", ");
+216         String impconcat;
+217         char fc[10];
+218         if (nm.imp) {
+219                 sprintf(fc,"%4.2f",nm.imp[0]);
+220                 impconcat = fc;
+221                 for (int i=1; i<nm.impnum; i++) {
+222                         sprintf(fc,"%4.2f",nm.imp[i]);
+223                         impconcat += ", "; impconcat += fc;
+224                 }
+225         }
+226 //*** check if in pprevtext
+227 //*** - some novelty items were extracted to multiple sections, but may have
+228 //***   been rewritten in several ways, while perhaps not having been rewritten
+229 //***   in some sections, so that it is important to know that the right section
+230 //***   is being addressed when a rewritten version is found
+231 //***
+232 //*** * fix clean up... find extra tail removed by outputting cleaned up version
+233 //***   and comparing with version generated from jliltm.tex.outline
+234 //*** * figure out how to differentiate between same-id novelty items in multiple
+235 //***   sections
+236 //*** * add use of pprevtext for extracted novelty and required items
+237         ostrtext += "% @Begin REQUIRED@\n% Context: ";
+238         ostrtext += contextconcat;
+239         if (nm.imp) ostrtext += "\n% Importance: " + impconcat;
+240         sprintf(fc,"%4.2f",nm.len);
+241         ostrtext += "\n% Intended length: " + (fc + (" pages\n% Section: " + sectitle));
+242         ostrtext += "\n% [" + refurl + "]";
+243         ostrtext += "\n\\editnote{REQUIRED: " + contextconcat;
+244         if (nm.marktext!="") {
+245                 ostrtext += " (" + nm.marktext + ')';
+246                 contextconcat.prepend("<I>"+nm.marktext+";</I> ");
+247         }
+248         ostrtext += "}\n% @End REQUIRED@\n\n";
+249         // collect required items for addition to paper plan
+250         sprintf(fc,"%5.2f",nm.len);
+251         requireditems += "<LI>["+sectitle+"] "+contextconcat+" (imp: "+((impconcat+", len: ")+fc)+")\n";
+252 }
+\end{verbatim}\normalsize 
+\index{ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}!get_figure_data@{get\_\-figure\_\-data}}
+\index{get_figure_data@{get\_\-figure\_\-data}!ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}void get\_\-figure\_\-data ({\bf String} \& {\em figfile}, {\bf String} \& {\em figlabel}, {\bf String} \& {\em figcaption}, {\bf String} \& {\em psconversions}, {\bf String\-List} \& {\em srcf}, {\bf String\-List} \& {\em srcfname}, int \& {\em srcfnum})}\label{ppfilter_8pre-blank_8cc_a1}
+
+
+
+
+Definition at line 21 of file ppfilter.pre-blank.cc.
+
+References String::after(), String::at(), EOUT, get\_\-file\_\-in\_\-list(), String::index(), relurl(), and String::SEARCH\_\-END.
+
+Referenced by extract\_\-recursively(), and extraction\_\-put\_\-figure().
+
+
+
+\footnotesize\begin{verbatim}21                                                                                                                                                                 {
+22 // obtains missing figure data from the Figures Directory
+23         int srcidx;
+24         if ((srcidx = get_file_in_list(figuresdirectory,srcf,srcfname,srcfnum))<0)
+25                 EOUT << "dil2al: Some figure data may be missing in get_figure_data(), continuing as is\n";
+26         else {
+27                 // find figure data
+28                 String findid;
+29                 if (figfile!="") findid = relurl(figuresdirectory,figfile);
+30                 else if (figlabel!="") findid = figlabel;
+31                 else EOUT << "dil2al: No figure file or label, some figure data may be missing in get_figure_data(), continuing as is\n";
+32                 if (findid!="") {
+33                         int figididx;
+34                         if ((figididx = srcf[srcidx].index(BigRegex("[<]!--[    ]@Begin FIGURE DATA:[^@]*"+findid+"[^@]*@[      ]*--[>]")))<0)
+35                                 EOUT << "dil2al: Figure " << findid << " not found in get_figure_data(), continuing as is\n";
+36                         else {
+37                                 int figidend;
+38                                 if ((figidend = srcf[srcidx].index(BigRegex("[<]!--[    ]*@End FIGURE DATA@[    ]*--[>]"),figididx))<0)
+39                                         EOUT << "dil2al: Figure " << findid << " End marker missing in get_figure_data(), continuing as is\n";
+40                                 else {
+41                                         String figdata = srcf[srcidx].at(figididx,figidend-figididx);
+42                                         figlabel = figdata.at(BigRegex("[<]!--[         ]*@Figure label@[       ]*--[>][        ]*[^]<  \n]+"));
+43                                         figlabel = figlabel.after(BigRegex("[<]!--[     ]*@Figure label@[       ]*--[>][        ]*"));
+44                                         figfile = figdata.at(BigRegex("[<]!--[  ]*@Figure file@[        ]*--[>][        ]*[^<   \n]+"));
+45                                         figfile = figfile.after(BigRegex("[<]!--[       ]*@Figure file@[        ]*--[>][        ]*"));
+46                                         figcaption = figdata.at(BigRegex("[<]!--[       ]*@Figure caption@[     ]*--[>][        ]*[^<   \n]+"));
+47                                         figcaption = figcaption.after(BigRegex("[<]!--[         ]*@Figure caption@[     ]*--[>][        ]*"));
+48                                         int pscidx;
+49                                         if ((pscidx = figdata.index(BigRegex("[<]!--[   ]*@Begin Figure psconversions@[         ]*--[>][        ]*"),String::SEARCH_END))>=0) {
+50                                                 int pscend;
+51                                                 if ((pscend = figdata.index(BigRegex("[<]!--[   ]*@End Figure psconversions@[   ]*--[>]"),pscidx))>=0)
+52                                                         psconversions = figdata.at(pscidx,pscend-pscidx);
+53                                                         if (psconversions=="\n") psconversions = "";
+54                                         }
+55                                 }
+56                         }
+57                 }
+58         }
+59         if (figfile=="") figfile = homedir+"doc/tex/common-eps/placeholder.eps";
+60         if (figlabel=="") figlabel = "fig:unknown";
+61         if (figcaption=="") figcaption = "\\relax";
+62 }
+\end{verbatim}\normalsize 
+\index{ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}!get_file_in_list@{get\_\-file\_\-in\_\-list}}
+\index{get_file_in_list@{get\_\-file\_\-in\_\-list}!ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}int get\_\-file\_\-in\_\-list ({\bf String} \& {\em fname}, {\bf String\-List} \& {\em srcf}, {\bf String\-List} \& {\em srcfname}, int \& {\em srcfnum})}\label{ppfilter_8pre-blank_8cc_a0}
+
+
+
+
+Definition at line 6 of file ppfilter.pre-blank.cc.
+
+References EOUT, String\-List::iselement(), and read\_\-file\_\-into\_\-String().
+
+
+
+\footnotesize\begin{verbatim}6                                                                                              {
+7 // load a file if it is not already in a list of file-strings
+8         int srcidx;
+9         if ((srcidx = srcfname.iselement(fname))<0) {
+10                 if (!read_file_into_String(fname,srcf[srcfnum])) {
+11                         EOUT << "dil2al: Unable to load source document " << fname << " in get_file_in_list()\n";
+12                         return -1;
+13                 }
+14                 srcfname[srcfnum] = fname;
+15                 srcidx = srcfnum;
+16                 srcfnum++;
+17         }
+18         return srcidx;
+19 }
+\end{verbatim}\normalsize 
+\index{ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}!get_Paper_Plans_Section_IDs@{get\_\-Paper\_\-Plans\_\-Section\_\-IDs}}
+\index{get_Paper_Plans_Section_IDs@{get\_\-Paper\_\-Plans\_\-Section\_\-IDs}!ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool get\_\-Paper\_\-Plans\_\-Section\_\-IDs ({\bf String\-List} \& {\em ppsectionids}, {\bf String\-List} \& {\em ppsectiontitles})}\label{ppfilter_8pre-blank_8cc_a2}
+
+
+
+
+Definition at line 64 of file ppfilter.pre-blank.cc.
+
+References String::after(), String::at(), String::del(), EOUT, String::gsub(), String::index(), read\_\-file\_\-into\_\-String(), and String::upcase.
+
+Referenced by extract\_\-paper\_\-plan\_\-to\_\-paper().
+
+
+
+\footnotesize\begin{verbatim}64                                                                                           {
+65 /* obtain registered IDs of paper Sections as
+66    listed in the
+67    <A HREF="../../doc/html/lists/paper-plans.html#PST">
+68    Paper Plans
+69    </A> file */
+70         String ppfstr;
+71         if (!read_file_into_String(paperplansfile,ppfstr)) return false;
+72         int pstidx;
+73         if ((pstidx = ppfstr.index(BigRegex("[<]A[      ]+[Nn][Aa][Mm][Ee][     ]*=[    ]*\"PST\"")))<0) {
+74                 EOUT << "dil2al: Unable to find Paper Section Titles in Paper Plans document in get_Paper_Plans_Section_IDs()\n";
+75                 return false;
+76         }
+77         if ((pstidx = ppfstr.index("<UL>",pstidx))<0) {
+78                 EOUT << "dil2al: Section IDs list not found in Paper Plans document in get_Paper_Plans_Section_IDs()\n";
+79                 return false;
+80         }
+81         int pstend = ppfstr.index("</UL>",pstidx);
+82         int pstnum = 0;
+83         String pstid, psttitle;
+84         while ((pstidx = ppfstr.index("<LI>",pstidx+1))>=0) {
+85                 if ((unsigned int) pstidx < (unsigned int) pstend) {
+86                         if ((pstid = ppfstr.at(BigRegex("[[]\\([<][^>]*[>]\\)?[^]]+"),pstidx))!="") {
+87                                 pstid.del("["); pstid.gsub(BigRegex("[<][^>]*[>]"),""); pstid.gsub(BigRegex("[  ]+"),"");
+88                                 if ((psttitle = ppfstr.at(BigRegex("[]][^\n]+"),pstidx))!="") {
+89                                         psttitle = psttitle.after(BigRegex("[]][        ]*"));
+90                                         psttitle.del(BigRegex("[        ]*$"));
+91                                         psttitle.upcase();
+92                                         ppsectionids[pstnum] = pstid;
+93                                         ppsectiontitles[pstnum] = psttitle;
+94                                         pstnum++;
+95                                 }
+96                         }
+97                 } else break;
+98         }
+99         return true;
+100 }
+\end{verbatim}\normalsize 
+\index{ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}!item_content_between_range_tags@{item\_\-content\_\-between\_\-range\_\-tags}}
+\index{item_content_between_range_tags@{item\_\-content\_\-between\_\-range\_\-tags}!ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool item\_\-content\_\-between\_\-range\_\-tags ({\bf Novelty\_\-Marker} \& {\em nm}, int {\em nidx}, {\bf String} \& {\em src}, {\bf String} \& {\em ic})}\label{ppfilter_8pre-blank_8cc_a7}
+
+
+
+
+Definition at line 282 of file ppfilter.pre-blank.cc.
+
+References String::at(), Novelty\_\-Marker::id, String::index(), and String::length().
+
+Referenced by extract\_\-recursively().
+
+
+
+\footnotesize\begin{verbatim}282                                                                                                {
+283         // 1. search for content range tags
+284         int nstartidx, nendidx;
+285         if (((nstartidx = src.index(BigRegex("[<]!--[   ]*@Begin[       ]+"+nm.id+"@[   ]*--[>]"),nidx-src.length()))<0)
+286          || ((nendidx = src.index(BigRegex("[<]!--[     ]*@End[         ]+"+nm.id+"@[   ]*--[>]"),nidx))<0)) return false;
+287         ic = src.at(nstartidx,nendidx-nstartidx);
+288         return true;
+289 }
+\end{verbatim}\normalsize 
+\index{ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}!item_content_within_DIL_entry@{item\_\-content\_\-within\_\-DIL\_\-entry}}
+\index{item_content_within_DIL_entry@{item\_\-content\_\-within\_\-DIL\_\-entry}!ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool item\_\-content\_\-within\_\-DIL\_\-entry (int {\em nidx}, {\bf String} \& {\em src}, {\bf String} \& {\em ic})}\label{ppfilter_8pre-blank_8cc_a9}
+
+
+
+
+Definition at line 305 of file ppfilter.pre-blank.cc.
+
+References String::at(), String::contains(), String::index(), and String::length().
+
+Referenced by extract\_\-recursively().
+
+
+
+\footnotesize\begin{verbatim}305                                                                         {
+306         // 5. content range when within DIL entry
+307         int nstartidx, nendidx;
+308         if ((!src.contains(BigRegex("[<]!--[    ]*dil2al:[      ]*DIL begin[    ]*--[>]")))
+309          || ((nstartidx = src.index(BigRegex("[<]TR[^>]*[>]"),nidx-src.length()))<0)) return false;
+310         if ((nstartidx = src.index(BigRegex("[<]TD COLSPAN[^>]*[>]"),nstartidx))<0) return false;
+311         if ((nendidx = src.index(BigRegex("\\([<]TR[^>]*[>]\\|[<]!--[   ]*dil2al:[      ]*DIL end[      ]*--[>]\\)"),nstartidx))<0) return false;
+312         ic = src.at(nstartidx,nendidx-nstartidx);
+313         return true;
+314 }
+\end{verbatim}\normalsize 
+\index{ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}!item_content_within_paragraph@{item\_\-content\_\-within\_\-paragraph}}
+\index{item_content_within_paragraph@{item\_\-content\_\-within\_\-paragraph}!ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool item\_\-content\_\-within\_\-paragraph (int {\em nidx}, {\bf String} \& {\em src}, {\bf String} \& {\em ic})}\label{ppfilter_8pre-blank_8cc_a10}
+
+
+
+
+Definition at line 316 of file ppfilter.pre-blank.cc.
+
+References String::at(), String::index(), and String::length().
+
+Referenced by extract\_\-recursively().
+
+
+
+\footnotesize\begin{verbatim}316                                                                         {
+317         // 6. content range between <P>, empty lines, beginning and end of file
+318         int nstartidx, nendidx;
+319         if ((nstartidx = src.index(BigRegex("\\(\n\n\\|[<][Pp][>]\\)"),nidx-src.length()))>=0) {
+320                 if (src[nstartidx]=='<') nstartidx+=3;
+321                 else nstartidx+=2;
+322         } else nstartidx=0; // from empty line or beginning
+323         if ((nendidx = src.index(BigRegex("\\(\n\n\\|[<][Pp][>]\\)"),nidx))<0) nendidx = src.length(); // to empty line or end
+324         ic = src.at(nstartidx,nendidx-nstartidx);
+325         return true;
+326 }
+\end{verbatim}\normalsize 
+\index{ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}!item_content_within_TL_chunk@{item\_\-content\_\-within\_\-TL\_\-chunk}}
+\index{item_content_within_TL_chunk@{item\_\-content\_\-within\_\-TL\_\-chunk}!ppfilter.pre-blank.cc@{ppfilter.pre-blank.cc}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}bool item\_\-content\_\-within\_\-TL\_\-chunk (int {\em nidx}, {\bf String} \& {\em src}, {\bf String} \& {\em ic})}\label{ppfilter_8pre-blank_8cc_a8}
+
+
+
+
+Definition at line 291 of file ppfilter.pre-blank.cc.
+
+References String::at(), String::contains(), String::gsub(), String::index(), and String::length().
+
+Referenced by extract\_\-recursively().
+
+
+
+\footnotesize\begin{verbatim}291                                                                        {
+292         // 4. content range when within Task Log chunk
+293         int nstartidx, nendidx;
+294         if ((!src.contains(BigRegex("[<]TITLE[>]Task Log ([^)]*)[<]/TITLE[>]")))
+295          || ((nstartidx = src.index(BigRegex("[<]!--[   ]*chunk Begin[  ]*--[>]"),nidx-src.length()))<0)
+296          || ((nendidx = src.index(BigRegex("[<]!--[     ]*chunk End[    ]*--[>]"),nidx))<0)) return false;
+297         if ((nstartidx = src.index("<P>",nstartidx))<0) return false;
+298         nstartidx+=3;
+299         ic = src.at(nstartidx,nendidx-nstartidx);
+300         // remove TL entry headers
+301         ic.gsub(BigRegex("[<]!--[       ]*entry [^      ]+[     ]*--[>][^\n]*\n"),"");
+302         return true;
+303 }
+\end{verbatim}\normalsize 
