@@ -26,6 +26,7 @@ Usage: dil2al [-s] [-o <owner>] [-c <DIL-filename>] [-n <DIL-filename>]\n\
               [-e[@f@][type]<DIL ID>[cContentFile][#expressions]] [-P]\n\
               [-D<diagnostic>] [-g <+search-key+target>]\n\
               [-b <DIL ID>@<output file>] [-z[label]] [-1] [-2]\n\
+              [-j <DIL ID>]\n\
        dil2al [-s] [-o <owner>] [-c <DIL-filename>] [-d <DIL-filename>]\n\
               [-D<diagnostic>]\n\
               [-t<tag-id>] [-N] [-i[tc|te] [-I]] [-f <data-file>]\n\
@@ -38,6 +39,7 @@ Usage: dil2al [-s] [-o <owner>] [-c <DIL-filename>] [-n <DIL-filename>]\n\
               [-e[@f@][type]<DIL ID>[cContentFile][#expressions]] [-P]\n\
               [-D<diagnostic>] [-g <+search-key+target>]\n\
               [-b <DIL ID>@<output file>] [-z[label]] [-1] [-2]\n\
+              [-j <DIL ID>]\n\
        dil2al -h|-?\n\
                       -s = silent, run non-verbosely\n\
                       -o = specify DIL owner\n\
@@ -110,6 +112,7 @@ Usage: dil2al [-s] [-o <owner>] [-c <DIL-filename>] [-n <DIL-filename>]\n\
                       -D = diagnostic test\n\
                              cache = test caching\n\
                              test  = test code\n\
+                      -j = JSON request API, return Node data for <DIL ID>\n\
 \n\
 More information at ~/doc/html/lists.html and ~/doc/html/style-guide.html.\n\
 Further information is currently only provided by the in-source comments for\n\

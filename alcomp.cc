@@ -2501,6 +2501,7 @@ void generate_AL_CRT(Active_List &al, int deplen, DIL_entry **dep, long req[], t
   group_td = -1;
   long group_number = -1;
   String group_td_str;
+  double daycumulative = 0.0;
   int i;
   for (i = 0; ((i < deplen) && (ALCRT_continue_condition(DEPEL, t_limit))); i++)
     if ((REQEL > 0) && (DEPEL->Is_Dependency_Of(superior)))
@@ -2520,8 +2521,11 @@ void generate_AL_CRT(Active_List &al, int deplen, DIL_entry **dep, long req[], t
         //isnewday=is_newday(group_td_str);
         //      if (i>=18689) {cout << "CHKC-"; cout.flush();}
         if (is_newday(group_td_str))
+        {
           daydivstr = "____________<BR>";
-        //      if (i>=18689) {cout << "CHKD-"; cout.flush();}
+          daycumulative = 0.0;
+          //      if (i>=18689) {cout << "CHKD-"; cout.flush();}
+        }
       }
       String rowreqstr;
       //      if (i>=18689) {cout << "CHK0-"; cout.flush();}
@@ -2531,12 +2535,19 @@ void generate_AL_CRT(Active_List &al, int deplen, DIL_entry **dep, long req[], t
       else
         rowreqstr = HTML_put_table_cell("", "FXD");
       rowreqstr += HTML_put_table_cell("", HTML_put_href((relidfile + '#') + depstr, "DIL#" + depstr));
-      rowreqstr += HTML_put_table_cell(" WIDTH=240", HTML_put_href((relurl(dstfile, dtl->dil.file) + '#') + depstr, dtl->dil.title) + " [<A HREF=\"file:///cgi-bin/dil2al?dil2al=MEI&DILID=" + depstr + "\">edit</A>]");
+      if (ctrshowdaycumulative) rowreqstr += HTML_put_table_cell(" WIDTH=180", HTML_put_href((relurl(dstfile, dtl->dil.file) + '#') + depstr, dtl->dil.title) + " [<A HREF=\"file:///cgi-bin/dil2al?dil2al=MEI&DILID=" + depstr + "\">edit</A>]");
+      else rowreqstr += HTML_put_table_cell(" WIDTH=240", HTML_put_href((relurl(dstfile, dtl->dil.file) + '#') + depstr, dtl->dil.title) + " [<A HREF=\"file:///cgi-bin/dil2al?dil2al=MEI&DILID=" + depstr + "\">edit</A>]");
       if (DEPEL->tdfixed())
         rowreqstr += HTML_put_table_cell("", daydivstr + "<B>" + group_td_str + "</B>");
       else
         rowreqstr += HTML_put_table_cell("", daydivstr + group_td_str);
-      rowreqstr += HTML_put_table_cell("", String((((double)REQEL) * ((double)timechunksize)) / 60.0, "%6.2f"));
+      if (ctrshowdaycumulative) {
+        double eltreq = (((double)REQEL) * ((double)timechunksize)) / 60.0;
+        daycumulative += eltreq;
+        rowreqstr += HTML_put_table_cell("", String(daycumulative, "%6.2f | ") + String(eltreq, "%6.2f"));
+      } else {
+        rowreqstr += HTML_put_table_cell("", String((((double)REQEL) * ((double)timechunksize)) / 60.0, "%6.2f"));
+      }
       String entryexcerptcell;
       if (DEPEL->Entry_Text())
         entryexcerptcell = (*DEPEL->Entry_Text());

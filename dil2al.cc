@@ -124,6 +124,7 @@ float alCTRGoogleCalendarvaluationcriterion = 3.0;
 float alCTRGoogleCalendartimecriterion = 5.0;
 time_t alCTRGoogleCalendardaysextent = 0;
 time_t alCTRGCtimezoneadjust = 0;
+bool ctrshowdaycumulative = false; // if true then show a column with the cumulative time for the day
 bool ctrshowall = false;
 int alperiodictasksincludedayslimit = -1; // if positive, limit the number of days for which periodic tasks are included in AL generation
 bool periodicautoupdate = false; // automatically update completion ratios and target dates of periodic tasks
@@ -566,6 +567,7 @@ void Set_Parameter(char * lbuf) {
 	if (pattern_in_line("^[ 	]*noperiodicautoupdate[ 	]*",lbuf)) periodicautoupdate=false;
 	if (pattern_in_line("^[ 	]*alCTRGoogleCalendar[ 	]*",lbuf)) alCTRGoogleCalendar=true;
 	if (pattern_in_line("^[ 	]*noalCTRGoogleCalendar[ 	]*",lbuf)) alCTRGoogleCalendar=false;
+  if (pattern_in_line("^[ 	]*ctrshowdaycumulative[ 	]*",lbuf)) ctrshowdaycumulative=true;
 	if (pattern_in_line("^[ 	]*ctrshowall[ 	]*",lbuf)) ctrshowall=true;
 	if (pattern_in_line("^[ 	]*noctrshowall[ 	]*",lbuf)) ctrshowall=false;
 	if (substring_from_line("^[ 	]*alCTRGoogleCalendarvaluationcriterion[ 	]*=[ 	]*(.+)$",2,confdefs,lbuf)) alCTRGoogleCalendarvaluationcriterion=atof((const char *) confdefs[1]);
@@ -959,13 +961,22 @@ void dil2al_commands(int argc, char * argv[]) {
   String dilfile, newdilfile, tlfile, initializecmd, controllercmd, dilid, ppfile, grepinfo, taskhistoryfile, labelid;
   char quanassessmenttype = '\0';
   opterr=0;
+#ifdef INCLUDE_API
+  bool JSONapi = false;
+  while ((c=getopt(argc,argv,"12hj:c:d:n:f:O:so:t::i::INQA::Pm::E:C::S::u:V::a:l:x:X:F:q:p:T:M:UH:e:g:z::b:D:")) != EOF) {
+#else
   while ((c=getopt(argc,argv,"12hc:d:n:f:O:so:t::i::INQA::Pm::E:C::S::u:V::a:l:x:X:F:q:p:T:M:UH:e:g:z::b:D:")) != EOF) {
+#endif
     switch (c) {
     case '1':
       makefirstcallpage=true;
       break;
     case '2':
       makesecondcallpage=true;
+      break;
+    case 'j':
+      JSONapi = true;
+      dilid = optarg;
       break;
     case 'c':
       createnewdilfile=true;
@@ -1173,6 +1184,15 @@ void dil2al_commands(int argc, char * argv[]) {
       Exit_Now(1);
     }
   }
+#ifdef INCLUDE_API
+  if (JSONapi) {
+    rcmd_set(": JSON API");
+    if (!cmd_api_JSON(dilid)) {
+      ERROR << "dil2al_commands(): Unable to complete JSON API request for DIL#" << dilid << ".\n";
+      Exit_Now(1);
+    }
+  }
+#endif
   if (createnewdilfile) {
     rcmd_set(": new DIL file");
     if (!create_new_DIL(newdilfile)) {

@@ -19,7 +19,8 @@ CC=gcc
 CCPP=g++ 
 ##########################################################
 
-INCLUDES= -I$(HOME)/src/include
+#INCLUDES= -I$(HOME)/src/include
+INCLUDES= -I$(CPATH)
 
 ##########################################################
 ## Machine selection
@@ -136,6 +137,9 @@ CPPFLAGS= $(COMPOPT) $(CPPOPT) $(MACHSPEC) $(CPPXTRA) $(SAFEREGEX) $(INCLUDES)
 
 all: dil2al
 
+api.o: api.cc dil2al.hh BigString.hh BigRegex.hh rx.h regex.h regex-gnu.h
+	$(CCPP) $(CPPFLAGS) $(COLORS) -c api.cc -o api.o
+
 dil2al.o: dil2al.cc dil2al.hh BigString.hh BigRegex.hh rx.h regex.h regex-gnu.h
 	$(CCPP) $(CPPFLAGS) $(COLORS) -c dil2al.cc -o dil2al.o
 
@@ -199,8 +203,8 @@ regex-gnu.o: regex-gnu.c regex-gnu.h
 rx.o: rx.c rx.h
 	$(CC) $(RXCFLAGS) $(COLORS) -c rx.c -o rx.o
 
-dil2al: dil2al.o alcomp.o diladmin.o utilities.o interface.o tladmin.o note.o controller.o tlfilter.o ppfilter.o search.o finances.o wizard.o testcode.o cksum.o usage.o BigString.o BigRegex.o regex-gnu.o regex.o rx.o
-	$(CCPP) $(CPPFLAGS) dil2al.o alcomp.o diladmin.o utilities.o interface.o tladmin.o note.o controller.o tlfilter.o ppfilter.o search.o finances.o wizard.o testcode.o cksum.o usage.o $(ALT_REGEX) BigString.o BigRegex.o -o dil2al $(LIB_PATH)
+dil2al: api.o dil2al.o alcomp.o diladmin.o utilities.o interface.o tladmin.o note.o controller.o tlfilter.o ppfilter.o search.o finances.o wizard.o testcode.o cksum.o usage.o BigString.o BigRegex.o regex-gnu.o regex.o rx.o
+	$(CCPP) $(CPPFLAGS) api.o dil2al.o alcomp.o diladmin.o utilities.o interface.o tladmin.o note.o controller.o tlfilter.o ppfilter.o search.o finances.o wizard.o testcode.o cksum.o usage.o $(ALT_REGEX) BigString.o BigRegex.o -o dil2al $(LIB_PATH)
 
 clean:
 	cp -f dil2al dil2al.bak

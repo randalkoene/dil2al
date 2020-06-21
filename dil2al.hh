@@ -149,6 +149,8 @@ extern String debug_time_stamp_time_caller;
 #endif
 #define INCLUDE_POOL_PLANNING_METHOD
 
+#define INCLUDE_API
+
 //#define UI_JOINED_YAD_LIST_STRINGLISTS
 #define UI_JOINED_YAD_NOTEBOOK
 
@@ -2520,6 +2522,7 @@ extern float alCTRGoogleCalendarvaluationcriterion;
 extern float alCTRGoogleCalendartimecriterion;
 extern time_t alCTRGoogleCalendardaysextent;
 extern time_t alCTRGCtimezoneadjust;
+extern bool ctrshowdaycumulative; // if true then show a column with the cumulative time for the day
 extern bool ctrshowall;
 extern int alperiodictasksincludedayslimit; // if positive, limit the number of days for which periodic tasks are included in AL generation
 extern bool periodicautoupdate; // automatically update completion ratios and target dates of periodic tasks
@@ -2611,6 +2614,13 @@ extern int IDOpassed;
 //     their own .hh header files, which could be included in dil2al.hh.
 //     On the other hand... it can be useful to have one place that
 //     lists all function declarations for overview.
+
+#ifdef INCLUDE_API
+Detailed_Items_List *get_Graph();
+DIL_entry * get_Node(DIL_ID nodeID);
+bool get_Node_JSON(String str_nodeID, String & json_nodedata);
+bool cmd_api_JSON(String str_nodeID);
+#endif
 
 // dil2al (dil2al.cc)
 void rcmd_set(const char * cmdlabel);

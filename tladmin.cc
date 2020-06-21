@@ -498,6 +498,7 @@ String select_TL_DIL_refs(String & tl, bool newchunk, String newalref) {
   // For use of a preset, see how ~/local/bin/personentry attempts to use this option.
   // A preset put into a ~/.dil2al-DILidpreset file should be of the form:
   // [*]someDILfile.html#DILID:[!]
+  // Note that the colon ':' is essential!
   // If preprended by * then the preset file will not be erased after use.
   // If followed by ! then the preset value overrides even in the case where no new Chunk is created.
   // Otherwise, no new Chunk would result in no DIL reference in the default case.
@@ -537,6 +538,7 @@ String select_TL_DIL_refs(String & tl, bool newchunk, String newalref) {
   // some options from recent TL entries
   get_options_from_TL(tl,diloptions,numdiloptions);
 
+  // *** maybe this should also automatically happen when there is a preset
   // optionally immediately pick the default
   if (!askALDILref) return select_TL_DIL_refs_default(newchunk,diloptions);
 
